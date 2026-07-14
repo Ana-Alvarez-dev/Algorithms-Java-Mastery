@@ -31,7 +31,7 @@ Technology decisions are based on the following criteria:
 
 The project distinguishes between:
 
-```text
+```
 Core Language
       ↓
 Java
@@ -77,7 +77,7 @@ The repository uses Java to translate algorithmic reasoning into executable impl
 
 The role of Java is:
 
-```text
+```
 Algorithmic Strategy
         ↓
 Pseudocode
@@ -205,7 +205,7 @@ For example, an algorithm should not be compressed into a highly abstract functi
 
 Prefer code whose algorithmic behaviour can be traced.
 
-```java
+```text
 for (int index = 1; index < values.length; index++) {
     if (values[index] > maximum) {
         maximum = values[index];
@@ -574,13 +574,13 @@ Its role is to express expected test outcomes using readable assertion APIs.
 
 For example:
 
-```java
+```text
 assertThat(result).isEqualTo(15);
 ```
 
 or:
 
-```java
+```text
 assertThat(values)
         .containsExactly(2, 4, 7, 9, 15);
 ```
@@ -617,13 +617,13 @@ AssertJ was selected because expressive assertions improve test readability.
 
 Compare:
 
-```java
+```text
 assertEquals(15, result);
 ```
 
 with:
 
-```java
+```text
 assertThat(result).isEqualTo(15);
 ```
 
@@ -635,7 +635,7 @@ For collections and arrays, expressive assertions may become particularly useful
 
 For example:
 
-```java
+```text
 assertThat(result)
         .isNotNull()
         .hasSize(5)
@@ -696,7 +696,7 @@ Naive Java timing techniques can produce misleading results.
 
 For example:
 
-```java
+```text
 long start = System.nanoTime();
 
 algorithm.execute();

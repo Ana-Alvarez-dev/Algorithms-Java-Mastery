@@ -1176,7 +1176,7 @@ may be interpreted as different filenames.
 
 Java class names and source filenames should remain consistent.
 
-```java
+```text
 public class BinarySearch
 ```
 
