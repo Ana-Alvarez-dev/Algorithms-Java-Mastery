@@ -465,33 +465,274 @@ It should not become a list of tool names without technical justification.
 
 ---
 
-# 6. `docs/01-foundations/`
+# 6. docs/01-foundations/
 
-The `01-foundations/` directory contains the conceptual foundations required before studying individual algorithms in depth.
+The `01-foundations/` directory establishes the theoretical and methodological foundations required before studying specific algorithms and data structures.
 
-Topics may include:
+Its responsibility is to develop disciplined algorithmic reasoning independently of any programming language.
 
-- definition of an algorithm;
-- input and output;
-- preconditions;
-- postconditions;
-- algorithmic state;
-- correctness;
-- edge cases;
-- invariants;
-- problem decomposition;
-- algorithmic problem-solving methodology.
-
-A principal document may be:
+The current structure is:
 
 ```text
-problem-solving-method.md
+01-foundations/
+├── README.md
+├── algorithm-definition.md
+├── problem-specification.md
+├── preconditions-and-postconditions.md
+├── edge-cases.md
+├── correctness.md
+├── invariants.md
+├── problem-decomposition.md
+└── problem-solving-method.md
 ```
 
-The purpose of this module is to establish disciplined reasoning before implementation.
+These documents introduce the fundamental concepts that will be reused throughout the repository.
+
+They define how computational problems should be analysed before implementation.
+
+The primary objective of this module is to encourage the learner to think algorithmically rather than syntactically.
+
+The expected progression is:
+
+Computational Problem
+↓
+Formal Specification
+↓
+Algorithmic Reasoning
+↓
+Strategy Design
+↓
+Pseudocode
+↓
+Java Implementation
+
+This module intentionally postpones programming.
 
 The learner should progressively stop beginning with Java syntax and instead begin with the computational problem.
 
+---
+
+## 6.1 README.md
+
+The local `README.md` acts as the entry point to the Foundations documentation.
+
+It introduces the purpose of the module, explains the relationship between the documents, and provides navigation through the theoretical foundations.
+
+Its responsibilities include:
+
+- introducing the Foundations module;
+- presenting the learning sequence;
+- describing the purpose of each document;
+- explaining how this module connects to later algorithm implementations.
+
+It does not replace the repository README or the `00-project` documentation.
+
+Repository README
+↓
+Introduces the complete repository.
+
+00-project/README.md
+↓
+Introduces the project documentation.
+
+01-foundations/README.md
+↓
+Introduces the theoretical foundations of algorithmic reasoning.
+
+---
+
+## 6.2 algorithm-definition.md
+
+Defines the concept of an algorithm from a computational perspective.
+
+It answers:
+
+> What is an algorithm?
+
+Its responsibilities include:
+
+- formal definition;
+- algorithm characteristics;
+- finite execution;
+- determinism;
+- correctness objectives;
+- relationship between problems and algorithms;
+- distinction between algorithms and programs.
+
+The learner should understand that an algorithm exists independently of its implementation language.
+
+---
+
+## 6.3 problem-specification.md
+
+Defines how computational problems should be specified before implementation.
+
+It answers:
+
+> What problem are we trying to solve?
+
+Its responsibilities include:
+
+- problem definition;
+- input;
+- output;
+- domain assumptions;
+- constraints;
+- formal specification;
+- examples of valid and invalid inputs.
+
+The document establishes the habit of describing the problem before designing the solution.
+
+---
+
+## 6.4 preconditions-and-postconditions.md
+
+Introduces the concept of software contracts.
+
+It answers:
+
+> Under which conditions may an algorithm execute, and what must be true after it finishes?
+
+Its responsibilities include:
+
+- preconditions;
+- postconditions;
+- valid execution assumptions;
+- result guarantees;
+- behavioural contracts.
+
+The learner should understand that every algorithm operates under explicit assumptions that should be documented.
+
+---
+
+## 6.5 edge-cases.md
+
+Defines the importance of analysing exceptional and boundary situations.
+
+It answers:
+
+> Which inputs are most likely to expose incorrect algorithm behaviour?
+
+Its responsibilities include:
+
+- boundary values;
+- empty inputs;
+- single-element cases;
+- duplicated values;
+- invalid inputs;
+- exceptional situations.
+
+The document establishes the connection between edge-case analysis and automated testing.
+
+Edge Case
+↓
+Expected Behaviour
+↓
+Test Case
+
+---
+
+## 6.6 algorithm-correctness.md
+
+Introduces reasoning about algorithm correctness.
+
+It answers:
+
+> Why does the algorithm always produce the correct result?
+
+Its responsibilities include:
+
+- correctness reasoning;
+- partial correctness;
+- total correctness;
+- termination;
+- logical argumentation.
+
+The learner should understand that successful execution alone does not constitute proof of correctness.
+
+Correctness requires formal reasoning in addition to testing.
+
+---
+
+## 6.7 invariants.md
+
+Introduces the concept of algorithmic invariants.
+
+It answers:
+
+> Which property remains true during every iteration or recursive step?
+
+Its responsibilities include:
+
+- loop invariants;
+- recursive invariants;
+- state preservation;
+- correctness support;
+- invariant-based reasoning.
+
+Invariants will become increasingly important when analysing searching algorithms, sorting algorithms, graph traversal, and dynamic programming.
+
+---
+
+## 6.8 problem-decomposition.md
+
+Defines systematic problem decomposition.
+
+It answers:
+
+> How can a complex computational problem be divided into manageable subproblems?
+
+Its responsibilities include:
+
+- decomposition strategies;
+- abstraction;
+- subproblem identification;
+- sequential reasoning;
+- divide-before-implement philosophy.
+
+The learner should understand that software complexity is reduced by solving smaller problems with clearly defined responsibilities.
+
+---
+
+## 6.9 problem-solving-method.md
+
+Defines the standard methodology used throughout the repository for studying algorithms.
+
+It answers:
+
+> How should an algorithm be analysed before implementation?
+
+It establishes the progression:
+
+Problem Understanding
+↓
+Input and Output Identification
+↓
+Formal Specification
+↓
+Preconditions
+↓
+Postconditions
+↓
+Edge-Case Analysis
+↓
+Strategy Design
+↓
+Pseudocode
+↓
+Manual Execution
+↓
+Correctness Reasoning
+↓
+Complexity Preview
+↓
+Java Implementation
+
+This document becomes the methodological reference for every algorithm implemented in the repository.
+
+All future modules should apply this study process consistently.
+
+The objective is to develop disciplined algorithmic thinking rather than immediate coding habits.
 ---
 
 # 7. `docs/02-complexity/`
