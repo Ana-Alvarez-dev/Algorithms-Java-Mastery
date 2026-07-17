@@ -733,37 +733,285 @@ This document becomes the methodological reference for every algorithm implement
 All future modules should apply this study process consistently.
 
 The objective is to develop disciplined algorithmic thinking rather than immediate coding habits.
+
 ---
 
-# 7. `docs/02-complexity/`
+# 7. docs/02-complexity/
 
-The `02-complexity/` directory contains computational complexity analysis.
+The `02-complexity/` directory introduces the mathematical and conceptual foundations required to analyse algorithm efficiency.
 
-Topics include:
+Unlike the Foundations module, which focuses on reasoning about algorithm correctness, this module focuses on measuring computational cost and understanding how algorithms scale as input size increases.
 
-- input size;
+The objective is to develop the ability to analyse an algorithm before comparing alternative implementations or selecting appropriate data structures.
+
+The current structure is:
+
+```text
+02-complexity/
+├── README.md
+├── computational-complexity.md
+├── input-size.md
+├── operation-counting.md
+├── growth-functions.md
+├── asymptotic-notation.md
+├── time-complexity.md
+├── space-complexity.md
+├── time-space-tradeoffs.md
+└── complexity-analysis-method.md
+```
+
+These documents progressively introduce the principles of computational complexity analysis, moving from concrete operation counting to formal asymptotic reasoning.
+
+The learner should understand that complexity analysis is a mathematical model used to predict algorithm scalability rather than measure execution time on a particular computer.
+
+The expected progression is:
+
+Computational Problem
+↓
+Algorithm
+↓
+Input Size Identification
+↓
+Operation Counting
+↓
+Growth Function
+↓
+Asymptotic Analysis
+↓
+Time Complexity
+↓
+Space Complexity
+↓
+Algorithm Comparison
+
+Complexity analysis should always be justified mathematically and conceptually.
+
+The repository intentionally avoids unsupported statements such as:
+
+> Complexity: O(n)
+
+Every complexity claim should explain:
+
+- which operation is analysed;
+- how often it executes;
+- how the number of executions depends on input size;
+- why the resulting growth corresponds to the stated asymptotic notation.
+
+---
+
+## 7.1 README.md
+
+The local `README.md` acts as the entry point to the Computational Complexity module.
+
+It introduces the purpose of complexity analysis, explains the relationship between the documents, and provides navigation through the study sequence.
+
+Its responsibilities include:
+
+- introducing computational complexity;
+- presenting the learning progression;
+- describing the purpose of each document;
+- explaining how complexity analysis supports algorithm comparison throughout the repository.
+
+---
+
+## 7.2 computational-complexity.md
+
+Defines the concept of computational complexity.
+
+It answers:
+
+> What does algorithm complexity measure?
+
+Its responsibilities include:
+
+- definition of computational complexity;
+- computational resources;
+- time versus space;
+- scalability;
+- theoretical versus practical performance;
+- why complexity analysis matters.
+
+The learner should understand that complexity analysis predicts behaviour as problem size increases rather than measuring elapsed execution time.
+
+---
+
+## 7.3 input-size.md
+
+Defines the concept of input size.
+
+It answers:
+
+> What does **n** represent?
+
+Its responsibilities include:
+
+- definition of input size;
+- choosing the appropriate input parameter;
+- multiple input variables;
+- examples for arrays, strings, trees and graphs;
+- influence of input size on scalability.
+
+The document establishes that every complexity analysis begins by identifying the variable that characterises problem size.
+
+---
+
+## 7.4 operation-counting.md
+
+Introduces systematic operation counting.
+
+It answers:
+
+> Which operations determine algorithm cost?
+
+Its responsibilities include:
+
 - significant operations;
-- operation counting;
-- growth functions;
-- asymptotic notation;
+- primitive operations;
+- counting loop iterations;
+- nested loops;
+- recursive calls;
+- deriving operation counts.
+
+The learner should understand that complexity is derived from analysing dominant operations rather than counting every instruction equally.
+
+---
+
+## 7.5 growth-functions.md
+
+Introduces growth functions.
+
+It answers:
+
+> How does computational cost evolve as input size increases?
+
+Its responsibilities include:
+
+- mathematical growth;
+- constant, logarithmic, linear, quadratic and exponential functions;
+- comparing growth rates;
+- dominant terms;
+- ignoring constants.
+
+The document prepares the learner for asymptotic notation.
+
+---
+
+## 7.6 asymptotic-notation.md
+
+Defines asymptotic notation.
+
+It answers:
+
+> How can algorithm growth be expressed mathematically?
+
+Its responsibilities include:
+
 - Big O;
 - Big Omega;
 - Big Theta;
+- upper and lower bounds;
+- asymptotic reasoning;
+- formal interpretation.
+
+The learner should understand the meaning of each notation instead of treating them as interchangeable labels.
+
+---
+
+## 7.7 time-complexity.md
+
+Focuses on time complexity analysis.
+
+It answers:
+
+> How much computational work does the algorithm perform?
+
+Its responsibilities include:
+
 - best case;
 - average case;
 - worst case;
+- deriving time complexity;
+- practical examples;
+- comparing algorithms by execution cost.
+
+The document emphasises analytical reasoning instead of memorising complexity values.
+
+---
+
+## 7.8 space-complexity.md
+
+Introduces memory complexity.
+
+It answers:
+
+> How much additional memory does the algorithm require?
+
+Its responsibilities include:
+
 - auxiliary space;
-- time-space trade-offs.
+- input space versus extra space;
+- recursive stack usage;
+- temporary variables;
+- memory growth.
 
-Complexity analysis should be justified mathematically and conceptually.
+The learner should understand that efficient algorithms optimise both execution time and memory usage.
 
-The repository avoids unsupported statements such as:
+---
 
-```text
-Complexity: O(n)
-```
+## 7.9 time-space-tradeoffs.md
 
-A complexity claim should explain why the algorithm exhibits the stated growth behaviour.
+Introduces trade-offs between computational resources.
+
+It answers:
+
+> When is it beneficial to exchange memory for execution time?
+
+Its responsibilities include:
+
+- memory versus performance;
+- caching;
+- lookup tables;
+- preprocessing;
+- algorithm design decisions;
+- practical examples.
+
+The document establishes that optimisation usually requires balancing multiple computational resources rather than minimising only one.
+
+---
+
+## 7.10 complexity-analysis-method.md
+
+Defines the standard methodology used throughout the repository for analysing algorithm complexity.
+
+It answers:
+
+> How should algorithm complexity be analysed systematically?
+
+It establishes the progression:
+
+Problem Identification
+↓
+Input Size Definition
+↓
+Significant Operation Identification
+↓
+Operation Counting
+↓
+Growth Function Derivation
+↓
+Asymptotic Classification
+↓
+Time Complexity
+↓
+Space Complexity
+↓
+Trade-off Evaluation
+↓
+Algorithm Comparison
+
+This document becomes the methodological reference for every complexity analysis included in the repository.
+
+Every algorithm implemented in later modules should justify its complexity by following this methodology instead of simply stating an asymptotic notation.
 
 ---
 
