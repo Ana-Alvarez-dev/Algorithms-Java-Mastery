@@ -391,8 +391,35 @@ The documentation can be understood in five broad stages.
 The repository therefore progresses from theoretical reasoning to implementation and engineering practice.
 
 ---
+## 6.## Development Environment Philosophy
 
-## 6. Repository Architecture
+Algorithms Java Mastery is developed using a hybrid Windows/Linux environment.
+
+The primary operating system is Windows 11, with Linux integrated through Windows Subsystem for Linux 2 (WSL 2).
+
+The development workflow follows:
+
+Windows 11
+↓
+PowerShell Terminal
+↓
+WSL 2
+↓
+Ubuntu Linux
+↓
+Java Development Environment
+↓
+Maven Build System
+↓
+Automated Validation
+
+Linux is not included only as an additional tool.
+
+It represents an essential component of professional software engineering because modern backend systems, cloud environments, containers, and continuous integration pipelines commonly execute on Linux-based infrastructure.
+
+---
+
+## 7. Repository Architecture
 
 The project separates academic documentation, Java source code, tests, exercises, references, and automation.
 
@@ -444,7 +471,7 @@ Automation
 
 ---
 
-## 7. Java Package Organisation
+## 8. Java Package Organisation
 
 The Java source code is organised under the base package:
 
@@ -509,9 +536,15 @@ The project uses technologies selected according to their role in the learning a
 | Ubuntu Linux   | Linux validation environment                        |
 | WSL 2          | Local Linux environment while developing on Windows |
 
-The project intentionally does not use Spring Boot.
+Although this repository does not use Spring Boot or backend frameworks, Linux knowledge is considered a fundamental backend engineering skill.
 
-The objective is to study algorithms and data structures without introducing an application framework that could obscure the computational concepts being analysed.
+The environment prepares future projects involving:
+
+- Spring Boot applications;
+- Docker containers;
+- cloud deployments;
+- Linux servers;
+- CI/CD pipelines.
 
 ---
 
