@@ -1,710 +1,295 @@
-# Project Documentation
+# Learning Objectives
 
-## Algorithms Java Mastery
+## Purpose
 
-This directory contains the foundational project documentation for **Algorithms Java Mastery**, an academic and practical study repository focused on algorithmic reasoning, data structures, computational complexity, correctness, automated testing, and experimental performance analysis using Java.
+This document defines the educational objectives and expected learning outcomes
+of **Algorithms Java Mastery**.
 
-The purpose of this documentation is to define the project's academic direction, learning objectives, study methodology, repository organisation, and technical environment before addressing individual algorithms and data structures.
+The repository is designed as an academic study project whose primary purpose is
+to develop algorithmic reasoning through the systematic study of recognised
+Computer Science literature, practical Java implementation, automated testing,
+and experimental analysis.
 
-The project is based on a fundamental principle:
+The project is inspired primarily by **Introduction to Algorithms**
+(Cormen, Leiserson, Rivest, and Stein) and is complemented by official Java
+documentation and modern engineering practices.
 
-> **An algorithm should be understood, specified, reasoned about, analysed, implemented, tested, and experimentally evaluated.**
-
-Therefore, this repository is not intended to be a collection of isolated algorithm implementations or programming exercises. It documents a structured learning process designed to develop rigorous algorithmic reasoning and professional Java engineering practices.
+Its objective is not to memorise algorithms, but to understand how they are
+designed, analysed, implemented, validated, and communicated.
 
 ---
 
-## 1. Project Direction
+# Educational Philosophy
 
-**Algorithms Java Mastery** is designed as a progressive study project that connects computer science foundations with modern Java development practices.
+This repository adopts a competency-based learning model.
 
-The project follows the general progression:
+Learning progresses from theoretical understanding to practical engineering.
+
+Every topic follows the same progression:
 
 ```text
-Problem Understanding
+Academic Theory
         ↓
-Formal Specification
+Conceptual Understanding
         ↓
 Algorithmic Reasoning
-        ↓
-Strategy Design
-        ↓
-Pseudocode
-        ↓
-Correctness Reasoning
-        ↓
-Complexity Analysis
         ↓
 Java Implementation
         ↓
 Automated Testing
         ↓
 Experimental Evaluation
-```
-
-Each stage addresses a different engineering question.
-
-| Stage                   | Central Question                                                 |
-| ----------------------- | ---------------------------------------------------------------- |
-| Problem Understanding   | What problem must be solved?                                     |
-| Formal Specification    | What are the input, output, and conditions?                      |
-| Algorithmic Reasoning   | What information is relevant to the solution?                    |
-| Strategy Design         | How can the problem be solved systematically?                    |
-| Pseudocode              | How can the solution be expressed independently of Java syntax?  |
-| Correctness Reasoning   | Why does the algorithm produce the expected result?              |
-| Complexity Analysis     | How does resource usage grow with the input size?                |
-| Java Implementation     | How is the algorithm expressed clearly in Java?                  |
-| Automated Testing       | Does the implementation satisfy the expected behaviour?          |
-| Experimental Evaluation | How does the implementation behave under controlled measurement? |
-
-This progression defines the academic and technical direction of the repository.
-
----
-
-## 2. Academic Purpose
-
-The central purpose of the project is to develop the ability to **reason about algorithms before implementing them**.
-
-Writing syntactically correct Java code is not sufficient to demonstrate algorithmic understanding.
-
-A developer studying algorithms should be able to explain:
-
-* what computational problem is being solved;
-* what constitutes a valid input;
-* what output must be produced;
-* which preconditions must hold;
-* which postconditions must be guaranteed;
-* which edge cases affect the problem;
-* why the selected strategy works;
-* which properties remain invariant during execution;
-* how execution cost grows with the input size;
-* how much auxiliary memory is required;
-* how theoretical analysis relates to experimental observations.
-
-For this reason, implementations in this repository are treated as the final expression of a prior reasoning process.
-
-```text
-Understand
-    ↓
-Specify
-    ↓
-Reason
-    ↓
-Design
-    ↓
-Justify
-    ↓
-Analyse
-    ↓
-Implement
-    ↓
-Test
-    ↓
-Measure
-```
-
-The objective is not to memorise algorithm implementations.
-
-The objective is to develop the capacity to **derive, analyse, explain, and evaluate algorithmic solutions**.
-
----
-
-## 3. Learning Objectives
-
-By progressing through this project, the following competencies are expected to be developed.
-
-### Algorithmic reasoning
-
-* Decompose computational problems into explicit components.
-* Identify inputs, outputs, constraints, and assumptions.
-* Design systematic solution strategies.
-* Express algorithms using precise pseudocode.
-* Perform manual execution traces.
-* Identify and analyse edge cases.
-
-### Correctness reasoning
-
-* Distinguish an example that works from a generally correct algorithm.
-* Define preconditions and postconditions.
-* Identify loop invariants.
-* Reason through initialisation, maintenance, and termination.
-* Explain why an algorithm satisfies its specification.
-
-### Complexity analysis
-
-* Identify the relevant input size.
-* Count significant operations.
-* Analyse temporal and spatial cost.
-* Distinguish best, average, and worst-case behaviour when applicable.
-* Use asymptotic notation appropriately.
-* Compare algorithms according to their order of growth.
-
-### Data structures and algorithms
-
-The project progressively studies:
-
-* arrays;
-* searching algorithms;
-* sorting algorithms;
-* algorithmic problem-solving patterns;
-* recursion;
-* divide and conquer;
-* hashing;
-* stacks;
-* queues;
-* trees;
-* heaps;
-* graphs;
-* backtracking;
-* dynamic programming.
-
-The purpose is not only to implement these structures and algorithms, but to understand the design decisions and computational trade-offs associated with them.
-
-### Java engineering practices
-
-* Organise code using coherent Java packages.
-* Maintain separation of responsibilities.
-* Use meaningful names and explicit APIs.
-* Compare academic implementations with relevant Java standard library abstractions.
-* Use Maven as the project build system.
-* Maintain a reproducible project environment.
-
-### Software testing
-
-* Design tests from algorithm specifications.
-* Translate edge cases into automated test cases.
-* Structure tests with JUnit Jupiter.
-* Express expectations using AssertJ.
-* Distinguish correctness testing from performance measurement.
-
-### Performance analysis
-
-* Compare theoretical complexity with observed behaviour.
-* Understand the limitations of naive timing techniques.
-* Design controlled microbenchmarks.
-* Use Java Microbenchmark Harness when appropriate.
-* Interpret benchmark results without replacing theoretical analysis with empirical measurements.
-
----
-
-## 4. Study Methodology
-
-Every algorithm studied in this repository follows a common analytical process.
-
-### Step 1 — Define the problem
-
-State precisely what computational problem must be solved.
-
-The initial question is not:
-
-> What Java code should be written?
-
-The initial question is:
-
-> What must the algorithm guarantee?
-
-### Step 2 — Identify the input
-
-Document:
-
-* the input data;
-* its representation;
-* its domain;
-* the relevant input size.
-
-For an array algorithm, the input size may be represented as:
-
-```text
-n = number of elements
-```
-
-The definition of input size is essential for later complexity analysis.
-
-### Step 3 — Define the output
-
-Specify the expected result precisely.
-
-The output definition should be sufficiently clear to determine whether a proposed result is correct or incorrect.
-
-### Step 4 — Establish preconditions
-
-Identify the conditions that must hold before the algorithm executes.
-
-Examples include:
-
-```text
-The array must not be empty.
-
-The input must be sorted.
-
-The graph must contain valid vertices.
-
-The search range must be valid.
-```
-
-Preconditions define the valid domain of the algorithm.
-
-### Step 5 — Establish postconditions
-
-Describe the property guaranteed after successful termination.
-
-The relationship can be represented as:
-
-```text
-Precondition
-      ↓
- Algorithm
-      ↓
-Postcondition
-```
-
-Correctness reasoning connects these elements.
-
-### Step 6 — Analyse edge cases
-
-Identify minimal, extreme, repeated, empty, ordered, reversed, or otherwise structurally significant inputs.
-
-Edge cases are analysed before implementation because they may reveal incorrect assumptions in the proposed strategy.
-
-### Step 7 — Design the strategy
-
-Explain the central solution idea using natural language.
-
-At this stage, Java syntax should not determine the reasoning process.
-
-### Step 8 — Express the algorithm in pseudocode
-
-Translate the strategy into a precise sequence of computational steps.
-
-Pseudocode acts as a bridge between reasoning and implementation:
-
-```text
-Strategy
-    ↓
-Pseudocode
-    ↓
-Java
-```
-
-### Step 9 — Reason about correctness
-
-Determine why the algorithm satisfies its specification.
-
-When iterative algorithms are studied, loop invariants may be analysed through:
-
-```text
-Initialisation
-      ↓
-Maintenance
-      ↓
-Termination
-```
-
-The purpose is to explain why the desired property remains valid throughout execution and implies the postcondition when the algorithm terminates.
-
-### Step 10 — Analyse computational cost
-
-Study:
-
-```text
-Time Complexity
-Space Complexity
-```
-
-The analysis considers how resource usage grows as the input size increases.
-
-The project distinguishes theoretical complexity analysis from direct execution-time measurements.
-
-### Step 11 — Implement in Java
-
-Only after the algorithm has been understood and analysed is it translated into Java.
-
-The implementation should preserve the clarity of the previously documented strategy.
-
-### Step 12 — Test the implementation
-
-Automated tests verify whether the Java implementation satisfies the expected behaviour.
-
-Tests should be derived from:
-
-* the specification;
-* preconditions;
-* postconditions;
-* representative cases;
-* edge cases.
-
-### Step 13 — Experiment and measure
-
-When performance analysis is relevant, controlled experiments may be performed.
-
-Experimental observations complement theoretical analysis.
-
-They do not replace it.
-
----
-
-## 5. Repository Documentation Structure
-
-The `docs` directory is organised as a progressive academic path.
-
-```text
-docs/
-├── 00-project/
-├── 01-foundations/
-├── 02-complexity/
-├── 03-arrays/
-├── 04-searching/
-├── 05-sorting/
-├── 06-algorithmic-patterns/
-├── 07-recursion/
-├── 08-divide-and-conquer/
-├── 09-hashing/
-├── 10-stacks-and-queues/
-├── 11-trees/
-├── 12-heaps/
-├── 13-graphs/
-├── 14-backtracking/
-├── 15-dynamic-programming/
-├── 16-testing/
-├── 17-benchmarking/
-├── 18-linux-environment/
-├── 19-ci-cd/
-└── 20-conclusions/
-```
-
-The numerical prefixes represent the intended learning progression.
-
-They are organisational elements of the documentation and do not represent Maven modules or Java packages.
-
-### Documentation stages
-
-The documentation can be understood in five broad stages.
-
-| Stage                | Documentation Areas                     | Purpose                                      |
-| -------------------- | --------------------------------------- | -------------------------------------------- |
-| Project Definition   | `00-project`                            | Define project direction and methodology     |
-| Foundations          | `01-foundations` to `02-complexity`     | Develop algorithmic reasoning and analysis   |
-| Core Algorithms      | `03-arrays` to `15-dynamic-programming` | Study structures, algorithms, and strategies |
-| Engineering Practice | `16-testing` to `19-ci-cd`              | Validate, measure, and automate the project  |
-| Synthesis            | `20-conclusions`                        | Consolidate findings and learning outcomes   |
-
-The repository therefore progresses from theoretical reasoning to implementation and engineering practice.
-
----
-## 6.## Development Environment Philosophy
-
-Algorithms Java Mastery is developed using a hybrid Windows/Linux environment.
-
-The primary operating system is Windows 11, with Linux integrated through Windows Subsystem for Linux 2 (WSL 2).
-
-The development workflow follows:
-
-Windows 11
-↓
-PowerShell Terminal
-↓
-WSL 2
-↓
-Ubuntu Linux
-↓
-Java Development Environment
-↓
-Maven Build System
-↓
-Automated Validation
-
-Linux is not included only as an additional tool.
-
-It represents an essential component of professional software engineering because modern backend systems, cloud environments, containers, and continuous integration pipelines commonly execute on Linux-based infrastructure.
-
----
-
-## 7. Repository Architecture
-
-The project separates academic documentation, Java source code, tests, exercises, references, and automation.
-
-```text
-Algorithms-Java-Mastery/
-│
-├── .github/
-├── .mvn/
-├── docs/
-├── diagrams/
-├── exercises/
-├── notes/
-├── references/
-├── src/
-├── benchmarks/
-├── README.md
-├── CONTRIBUTING.md
-├── CHANGELOG.md
-├── LICENSE
-├── mvnw
-├── mvnw.cmd
-└── pom.xml
-```
-
-Each area has a specific responsibility.
-
-| Directory        | Responsibility                                             |
-| ---------------- | ---------------------------------------------------------- |
-| `.github/`       | Repository automation and continuous integration workflows |
-| `.mvn/`          | Maven Wrapper configuration                                |
-| `docs/`          | Structured academic documentation                          |
-| `diagrams/`      | Visual representations and technical diagrams              |
-| `exercises/`     | Progressive algorithmic practice                           |
-| `notes/`         | Complementary study notes                                  |
-| `references/`    | Academic and technical reference organisation              |
-| `src/main/java/` | Java algorithm and data structure implementations          |
-| `src/test/java/` | Automated tests                                            |
-| `benchmarks/`    | Performance measurement resources and JMH benchmarks       |
-
-The separation of these directories reflects the distinction between:
-
-```text
-Study
-Implementation
-Verification
-Experimentation
-Automation
-```
-
----
-
-## 8. Java Package Organisation
-
-The Java source code is organised under the base package:
-
-```text
-io.github.anaalvarezdev.algorithms
-```
-
-The package structure reflects the algorithmic domain.
-
-```text
-io.github.anaalvarezdev.algorithms
-├── application
-├── arrays
-├── searching
-├── sorting
-├── patterns
-├── recursion
-├── hashing
-├── stack
-├── queue
-├── tree
-├── heap
-├── graph
-├── backtracking
-├── dynamicprogramming
-└── shared
-```
-
-The test source tree should reflect the relevant production package structure.
-
-Example:
-
-```text
-src/main/java/
-└── io/github/anaalvarezdev/algorithms/searching/
-    └── BinarySearch.java
-
-src/test/java/
-└── io/github/anaalvarezdev/algorithms/searching/
-    └── BinarySearchTest.java
-```
-
-This organisation makes the relationship between an implementation and its associated tests explicit.
-
----
-
-## 8. Technology Stack
-
-The project uses technologies selected according to their role in the learning and engineering process.
-
-| Technology     | Role                                                |
-| -------------- | --------------------------------------------------- |
-| Java 21        | Primary implementation language                     |
-| Maven          | Build and dependency management                     |
-| Maven Wrapper  | Reproducible Maven execution                        |
-| JUnit Jupiter  | Test structure and execution                        |
-| AssertJ        | Fluent and expressive assertions                    |
-| JMH            | Java microbenchmarking                              |
-| Git            | Distributed version control                         |
-| GitHub         | Repository hosting and collaboration workflow       |
-| GitHub Actions | Continuous integration automation                   |
-| Ubuntu Linux   | Linux validation environment                        |
-| WSL 2          | Local Linux environment while developing on Windows |
-
-Although this repository does not use Spring Boot or backend frameworks, Linux knowledge is considered a fundamental backend engineering skill.
-
-The environment prepares future projects involving:
-
-- Spring Boot applications;
-- Docker containers;
-- cloud deployments;
-- Linux servers;
-- CI/CD pipelines.
-
----
-
-## 9. Academic and Technical References
-
-The project distinguishes between academic references and platform-specific technical documentation.
-
-### Algorithmic foundations
-
-The primary theoretical reference is:
-
-**Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C. — Introduction to Algorithms.**
-
-The reference is used to support the study of:
-
-* algorithmic reasoning;
-* correctness;
-* loop invariants;
-* asymptotic analysis;
-* fundamental algorithms;
-* data structures;
-* algorithm design techniques.
-
-The book is treated as a theoretical foundation rather than as a source of Java implementations.
-
-### Java implementation context
-
-Java-specific decisions are contrasted with official Java documentation and the Java Collections Framework when relevant.
-
-The objective is to distinguish:
-
-```text
-Algorithmic concept
         ↓
-Academic implementation
-        ↓
-Java standard abstractions
-        ↓
-Engineering trade-offs
+Technical Communication
 ```
 
-A custom implementation is therefore not assumed to replace a standard Java collection in production software.
-
-Its purpose is to expose the underlying structure and algorithmic behaviour for study.
-
-### Tool documentation
-
-Official project documentation should be prioritised for:
-
-* Java;
-* Maven;
-* JUnit;
-* AssertJ;
-* JMH;
-* Git;
-* GitHub Actions;
-* Linux and WSL.
-
-This distinction between academic literature and official technical documentation is maintained throughout the repository.
+Implementation is therefore considered the consequence of understanding rather
+than the starting point of learning.
 
 ---
 
-## 10. Project Scope
+# Educational Goals
 
-The project includes:
+The project pursues four complementary educational goals.
 
-* algorithmic problem-solving methodology;
-* complexity analysis;
-* fundamental data structures;
-* searching and sorting algorithms;
-* algorithm design patterns;
-* recursion;
-* divide and conquer;
-* hashing;
-* trees and heaps;
-* graph algorithms;
-* backtracking;
-* dynamic programming;
-* automated testing;
-* microbenchmarking;
-* Linux-based project validation;
-* continuous integration.
+## 1. Build Strong Computer Science Foundations
 
-The project is not intended to be:
+Develop a rigorous understanding of the principles that govern algorithms and
+data structures.
 
-* a Spring Boot application;
-* a web application;
-* a REST API;
-* a microservices system;
-* a production replacement for the Java Collections Framework;
-* a collection of copied interview solutions.
+Topics include:
 
-These topics may belong to other portfolio projects with different architectural objectives.
+- algorithm specification;
+- correctness;
+- asymptotic analysis;
+- algorithm design;
+- computational complexity;
+- data structures;
+- mathematical reasoning.
 
-The scope of **Algorithms Java Mastery** is deliberately focused on algorithmic foundations and the engineering practices required to implement, validate, analyse, and explain them.
+These concepts provide the theoretical foundation for professional software
+development.
 
 ---
 
-## 11. Expected Project Outcome
+## 2. Transform Theory into Java Implementations
 
-At the conclusion of the project, the expected result is not simply a repository containing Java classes.
+Every important concept should be translated into working Java code.
 
-The repository should demonstrate a documented progression from problem analysis to engineering validation.
+The objective is to understand how theoretical algorithms become reliable
+software through:
 
-For each major topic, the project should provide evidence of the ability to:
+- clear implementation;
+- modular organisation;
+- automated testing;
+- reproducible builds;
+- maintainable source code.
+
+Java is used as the implementation language rather than the object of study.
+
+---
+
+## 3. Develop Algorithmic Decision-Making
+
+Professional software engineers evaluate alternative solutions instead of
+searching for a single universal algorithm.
+
+Throughout the project the learner should progressively develop the ability to
+compare solutions according to:
+
+- time complexity;
+- space complexity;
+- implementation simplicity;
+- scalability;
+- maintainability;
+- engineering trade-offs.
+
+The objective is to support evidence-based technical decisions.
+
+---
+
+## 4. Prepare for Technical Interviews
+
+The repository is also intended as structured preparation for technical
+interviews.
+
+The learner should progressively become able to:
+
+- explain algorithms clearly;
+- justify complexity analyses;
+- reason about correctness;
+- compare alternative solutions;
+- implement algorithms without relying on memorisation;
+- communicate technical decisions confidently.
+
+---
+
+# Academic Competencies
+
+Upon completing the repository, the learner should be able to:
+
+- understand computational problems;
+- define precise algorithm specifications;
+- identify appropriate design strategies;
+- reason about correctness;
+- analyse computational complexity;
+- recognise common algorithmic patterns;
+- relate theory to implementation.
+
+These competencies represent the academic core of the repository.
+
+---
+
+# Engineering Competencies
+
+The learner should progressively demonstrate the ability to:
+
+- implement maintainable Java solutions;
+- organise source code professionally;
+- validate behaviour through automated tests;
+- benchmark implementations responsibly;
+- use standard Java development tools effectively;
+- document engineering decisions clearly.
+
+These competencies connect Computer Science theory with professional software
+engineering.
+
+---
+
+# Professional Competencies
+
+Beyond programming, the repository develops transferable professional skills.
+
+These include:
+
+- analytical thinking;
+- systematic problem solving;
+- structured documentation;
+- technical communication;
+- evidence-based reasoning;
+- continuous learning;
+- engineering discipline.
+
+These competencies remain valuable independently of any programming language.
+
+---
+
+# General Learning Objectives
+
+By the end of the project, the learner should be able to:
+
+1. Understand an algorithm before implementing it.
+2. Explain the reasoning behind a solution.
+3. Justify correctness.
+4. Analyse computational complexity.
+5. Implement algorithms clearly in Java.
+6. Validate implementations through automated testing.
+7. Compare different algorithmic strategies.
+8. Interpret benchmark results responsibly.
+9. Produce clear technical documentation.
+10. Explain algorithmic decisions during technical interviews.
+
+---
+
+# Expected Learning Outcomes
+
+Successful completion of the repository should change the learner's perspective
+from asking:
+
+> *"How do I implement this algorithm?"*
+
+to asking:
+
+- Which computational problem is being solved?
+- Which design strategy applies?
+- Why is this algorithm correct?
+- What assumptions does it require?
+- How does its complexity grow?
+- Which trade-offs exist?
+- How should it be tested?
+- How should it be explained?
+
+This change in reasoning represents the principal educational outcome of the
+project.
+
+---
+
+# Competency Matrix
+
+| Competency | Understand | Apply | Analyse | Justify | Evaluate |
+|------------|:---------:|:-----:|:-------:|:-------:|:--------:|
+| Problem Analysis | ✓ | ✓ | ✓ | ✓ | |
+| Algorithm Design | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Correctness | ✓ | ✓ | ✓ | ✓ | |
+| Complexity Analysis | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Java Implementation | ✓ | ✓ | ✓ | | ✓ |
+| Automated Testing | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Benchmarking | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Technical Communication | ✓ | ✓ | ✓ | ✓ | ✓ |
+
+---
+
+# Completion Criteria
+
+The repository is not considered complete because algorithms have been
+implemented.
+
+Completion requires evidence that the learner can:
+
+- understand the computational problem;
+- explain the selected strategy;
+- justify correctness;
+- analyse computational complexity;
+- implement the solution professionally;
+- validate behaviour through testing;
+- interpret benchmark results;
+- communicate technical reasoning effectively.
+
+Implementation alone is not considered sufficient evidence of learning.
+
+---
+
+# Conclusion
+
+Algorithms Java Mastery is an academic repository built upon recognised Computer
+Science literature and modern Java engineering practices.
+
+Its objective is to transform theoretical knowledge into practical competence
+through disciplined study, implementation, testing, experimentation, and
+technical communication.
+
+The repository is intended to prepare the learner not only to write algorithms,
+but also to understand, justify, explain, and defend them in both professional
+software development and technical interview environments.
+
+---
+
+# Related Documents
+
+
+The documents in this directory should be read in the following order.
+
+| Order | Document | Purpose |
+|------:|----------|---------|
+| **01** | `01-project-overview.md` | Introduces the project's vision, academic foundation, scope, and objectives. |
+| **02** | `02-learning-objectives.md` | Defines the knowledge, competencies, and expected learning outcomes. |
+| **03** | `03-study-methodology.md` | Describes the structured methodology followed throughout the repository. |
+| **04** | `04-repository-architecture.md` | Explains the organisation of the repository and the purpose of each module. |
+| **05** | `05-technology-stack.md` | Presents the technologies and tools used to support the learning process. |
+| **06** | `06-documentation-architecture.md` | Explains the structure, conventions, and organisation of the project documentation. |
+| **07** | `07-java-project-structure.md` | Describes the organisation of the Java source code and project layout. |
+| **08** | `08-engineering-standards.md` | Defines the engineering principles, coding standards, and quality guidelines followed in the repository. |
+| **09** | `09-development-workflow.md` | Describes the development workflow used when studying and implementing algorithms. |
+| **10** | `10-references.md` | Lists the academic, technical, and official references used throughout the project. |
+---
+
+# Next Document
 
 ```text
-Understand the problem
-        ↓
-Specify expected behaviour
-        ↓
-Design an algorithmic strategy
-        ↓
-Express the strategy in pseudocode
-        ↓
-Reason about correctness
-        ↓
-Analyse computational complexity
-        ↓
-Implement the solution in Java
-        ↓
-Validate behaviour with automated tests
-        ↓
-Evaluate performance when relevant
-        ↓
-Document conclusions
+03-study-methodology.md
 ```
 
-The final repository is intended to function simultaneously as:
-
-* an academic study record;
-* an algorithmic reasoning laboratory;
-* a Java implementation project;
-* a testing and performance analysis environment;
-* a documented portfolio artefact.
-
----
-
-## Documentation Index
-
-The detailed definition of the project is divided into the following documents:
-
-| Document                     | Purpose                                                   |
-| ---------------------------- | --------------------------------------------------------- |
-| `project-overview.md`        | Defines the project, context, scope, and central purpose  |
-| `learning-objectives.md`     | Defines the competencies developed throughout the project |
-| `study-methodology.md`       | Defines the analytical process applied to each algorithm  |
-| `repository-architecture.md` | Documents and justifies the repository organisation       |
-| `technology-stack.md`        | Defines the technologies and their responsibilities       |
-
-The next stage of the documentation begins in:
-
-```text
-docs/01-foundations/
-```
-
-where the project moves from **defining the study framework** to **developing algorithmic problem-solving foundations**.
-
----
-
-## Project Principle
-
-> **Understand before implementing. Justify before optimising. Test before trusting. Measure before concluding.**
+The next document defines the academic methodology applied throughout the
+repository, describing how every topic progresses from research and theoretical
+study to Java implementation, automated testing, benchmarking, and technical
+documentation.
