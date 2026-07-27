@@ -67,23 +67,13 @@ Every algorithm should be studied using the following sequence.
 ```text
 Problem Understanding
         ↓
-Input and Output Identification
-        ↓
 Formal Specification
         ↓
-Preconditions
-        ↓
-Postconditions
+Preconditions and Postconditions
         ↓
 Edge-Case Analysis
         ↓
-Problem Decomposition
-        ↓
-Strategy Design
-        ↓
-Pseudocode
-        ↓
-Manual Execution
+Algorithmic Strategy
         ↓
 Correctness Reasoning
         ↓
@@ -92,10 +82,6 @@ Complexity Analysis
 Java Implementation
         ↓
 Automated Testing
-        ↓
-Benchmarking
-        ↓
-Technical Conclusions
 ```
 
 Each stage has a specific responsibility and should not be skipped.

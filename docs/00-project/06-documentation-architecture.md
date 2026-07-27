@@ -396,7 +396,7 @@ Example:
 
 ```markdown
 For the formal definition of asymptotic notation, see
-[Asymptotic Notations](../02-complexity/asymptotic-notations.md).
+[Asymptotic Notations](../02-complexity/04-asymptotic-notations.md).
 ```
 
 A concept should be explained fully in its primary document and summarised only

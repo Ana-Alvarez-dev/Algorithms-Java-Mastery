@@ -293,3 +293,11 @@ The next document defines the academic methodology applied throughout the
 repository, describing how every topic progresses from research and theoretical
 study to Java implementation, automated testing, benchmarking, and technical
 documentation.
+
+# Academic Foundation
+
+This module is primarily supported by the academic references listed in:
+
+```text
+docs/00-project/10-references.md
+```
