@@ -5,18 +5,14 @@
 This document defines the development workflow adopted by
 **Algorithms Java Mastery**.
 
-The repository follows a structured and evidence-based process for transforming
-a computational topic into documented, executable, verified, and maintainable
-project knowledge.
+Algorithms Java Mastery is inspired primarily by
+Introduction to Algorithms
+(Thomas H. Cormen, Charles E. Leiserson,
+Ronald L. Rivest and Clifford Stein).
 
-Every contribution begins with academic study and problem understanding before
-progressing to specification, algorithm design, correctness reasoning,
-complexity analysis, Java implementation, automated testing, optional
-benchmarking, review, and repository integration.
-
-The workflow ensures that theoretical understanding precedes implementation
-while allowing every stage to be revised when new evidence reveals an error,
-limitation, or improvement opportunity.
+This document defines the development workflow through which the concepts
+studied throughout the book are progressively transformed into documented,
+implemented, verified and professionally engineered Java solutions.
 
 ---
 
@@ -24,6 +20,9 @@ limitation, or improvement opportunity.
 
 This document defines the contribution lifecycle followed throughout the
 repository.
+The workflow provides a repeatable engineering process for transforming
+Computer Science knowledge into professional Java implementations supported by
+objective evidence.
 
 It establishes:
 
@@ -106,8 +105,43 @@ algorithmic strategy have been examined.
 
 The guiding principle is:
 
-> **A contribution should move from understanding to evidence, not merely from
-> an idea to code.**
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
+
+Problem Understanding
+
+↓
+
+Specification
+
+↓
+
+Algorithmic Reasoning
+
+↓
+
+Java Implementation
+
+↓
+
+Automated Testing
+
+↓
+
+Benchmarking
+
+↓
+
+Engineering Evidence
+
+↓
+
+Professional Engineering Knowledge
 
 The workflow therefore connects several forms of project knowledge:
 
@@ -162,39 +196,43 @@ The workflow provides structure without preventing justified adaptation.
 A complete algorithm contribution normally follows this lifecycle:
 
 ```text
-1. Contribution Selection
+1. Introduction to Algorithms (CLRS)
         ↓
-2. Academic Research
+2. Computer Science Foundations
         ↓
-3. Problem Understanding
+3. Contribution Selection
         ↓
-4. Formal Specification
+4. Academic Research
         ↓
-5. Strategy Design
+5. Problem Understanding
         ↓
-6. Correctness Reasoning
+6. Formal Specification
         ↓
-7. Complexity Analysis
+7. Strategy Design
         ↓
-8. Java Implementation
+8. Correctness Reasoning
         ↓
-9. Automated Testing
+9. Complexity Analysis
         ↓
-10. Performance Evaluation
+10. Java Implementation
         ↓
-11. Documentation Consolidation
+11. Automated Testing
         ↓
-12. Local Validation
+12. Performance Evaluation
         ↓
-13. Version-Control Preparation
+13. Documentation Consolidation
         ↓
-14. Pull Request and Review
+14. Local Validation
         ↓
-15. Continuous Integration
+15. Version-Control Preparation
         ↓
-16. Repository Integration
+16. Pull Request and Review
         ↓
-17. Reflection and Improvement
+17. Continuous Integration
+        ↓
+18. Repository Integration
+        ↓
+19. Reflection and Improvement
 ```
 
 Performance evaluation is included only when benchmarking is relevant to the
@@ -271,6 +309,12 @@ A defined task with a clear purpose and repository location.
 # Stage 2 — Academic Research
 
 The subject is studied using recognised and verifiable sources.
+Research begins with the systematic study of
+Introduction to Algorithms,
+which provides the principal academic reference for the repository.
+
+Additional sources complement, clarify or extend the concepts introduced
+throughout the book.
 
 Research may include:
 
@@ -681,13 +725,27 @@ The documentation should identify corresponding source files when useful.
 For example:
 
 ```text
-Documentation Module
-        ↓
-Production Class
-        ↓
-Test Class
-        ↓
-Benchmark Class
+Introduction to Algorithms
+
+↓
+
+Documentation
+
+↓
+
+Implementation
+
+↓
+
+Testing
+
+↓
+
+Benchmarking
+
+↓
+
+Engineering Evidence
 ```
 
 Documentation must remain consistent with the final implemented behaviour.
@@ -978,33 +1036,27 @@ improvement.
 A complete algorithm contribution may produce the following artefacts:
 
 ```text
-docs/<module>/
-        ↓
-Problem, theory, reasoning, complexity, and conclusions
+Introduction to Algorithms
 
-src/main/java/
-        ↓
-Java implementation
+↓
 
-src/test/java/
-        ↓
-Automated behavioural verification
+Documentation
 
-src/jmh/java/
-        ↓
-Optional experimental evaluation
+↓
 
-pom.xml
-        ↓
-Build and dependency configuration when required
+Java Implementation
 
-.github/workflows/
-        ↓
-Repository automation when required
+↓
 
-Git History
-        ↓
-Traceable project evolution
+Automated Tests
+
+↓
+
+Benchmarks
+
+↓
+
+Engineering Knowledge
 ```
 
 Not every contribution produces every artefact.
@@ -1277,6 +1329,10 @@ improved.
 This approach ensures that the repository records not only executable solutions
 but also the reasoning, evidence, and engineering discipline required to
 understand and maintain them.
+
+The workflow provides the engineering process through which the concepts
+studied in Introduction to Algorithms become documented, executable,
+experimentally evaluated and professionally maintainable Java software.
 
 ---
 

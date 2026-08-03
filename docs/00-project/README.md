@@ -2,30 +2,48 @@
 
 ## Purpose
 
-This document defines the educational objectives and expected learning outcomes
-of **Algorithms Java Mastery**.
+This document defines the educational objectives, competencies, and expected
+learning outcomes developed throughout **Algorithms Java Mastery**.
 
-The repository is designed as an academic study project whose primary purpose is
-to develop algorithmic reasoning through the systematic study of recognised
-Computer Science literature, practical Java implementation, automated testing,
-and experimental analysis.
+The repository is inspired primarily by **Introduction to Algorithms**
+(Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein),
+whose systematic study provides the academic foundation for every learning
+module.
 
-The project is inspired primarily by **Introduction to Algorithms**
-(Cormen, Leiserson, Rivest, and Stein) and is complemented by official Java
-documentation and modern engineering practices.
+Rather than studying algorithms as isolated programming exercises, the
+repository extends the concepts presented throughout the book by combining
+their theoretical foundations with modern Java implementation, automated
+testing, empirical benchmarking, Linux development environments, and
+professional software engineering practices.
 
-Its objective is not to memorise algorithms, but to understand how they are
-designed, analysed, implemented, validated, and communicated.
+Learning therefore progresses from conceptual understanding to practical
+engineering competence.
 
+Its purpose is to develop the ability to:
+
+- understand computational problems;
+- formulate precise specifications;
+- design algorithmic strategies;
+- justify algorithm correctness;
+- analyse computational complexity;
+- implement reliable Java solutions;
+- validate behaviour through automated testing;
+- evaluate performance through responsible benchmarking;
+- apply professional engineering practices;
+- communicate technical reasoning clearly through structured documentation.
+
+Rather than measuring progress by the number of completed implementations, the
+repository evaluates learning through the learner's ability to analyse,
+justify, implement, validate, benchmark, and communicate the concepts studied
+throughout *Introduction to Algorithms* using modern Java engineering
+practices.
 ---
 
 # Educational Philosophy
 
-This repository adopts a competency-based learning model.
+This repository follows a competency-based learning model in which understanding always precedes implementation.
 
-Learning progresses from theoretical understanding to practical engineering.
-
-Every topic follows the same progression:
+Every topic progresses through the same engineering lifecycle.
 
 ```text
 Academic Theory
@@ -34,93 +52,123 @@ Conceptual Understanding
         ↓
 Algorithmic Reasoning
         ↓
+Correctness Reasoning
+        ↓
+Complexity Analysis
+        ↓
 Java Implementation
         ↓
 Automated Testing
         ↓
 Experimental Evaluation
         ↓
+Engineering Automation
+        ↓
 Technical Communication
 ```
 
-Implementation is therefore considered the consequence of understanding rather
-than the starting point of learning.
+Implementation is therefore considered the consequence of understanding rather than the starting point of learning.
+
+The learner is expected to justify every engineering decision using objective reasoning instead of memorisation.
 
 ---
 
 # Educational Goals
 
-The project pursues four complementary educational goals.
+The repository pursues five complementary educational goals.
+
+---
 
 ## 1. Build Strong Computer Science Foundations
 
-Develop a rigorous understanding of the principles that govern algorithms and
-data structures.
+Develop a rigorous understanding of the principles that govern algorithms and data structures.
 
 Topics include:
 
-- algorithm specification;
-- correctness;
+- computational problem solving;
+- formal specifications;
+- correctness reasoning;
 - asymptotic analysis;
-- algorithm design;
+- algorithm design techniques;
 - computational complexity;
 - data structures;
 - mathematical reasoning.
 
-These concepts provide the theoretical foundation for professional software
-development.
+These concepts provide the theoretical foundation of Computer Science.
 
 ---
 
-## 2. Transform Theory into Java Implementations
+## 2. Transform Theory into Professional Java Software
 
-Every important concept should be translated into working Java code.
+Every theoretical concept should eventually become reliable Java software.
 
-The objective is to understand how theoretical algorithms become reliable
-software through:
+The learner progressively develops the ability to produce software through:
 
-- clear implementation;
-- modular organisation;
+- modular implementation;
+- clean code;
+- maintainable architecture;
 - automated testing;
 - reproducible builds;
-- maintainable source code.
+- professional project organisation.
 
-Java is used as the implementation language rather than the object of study.
+Java serves as the implementation language through which Computer Science concepts become executable software.
 
 ---
 
 ## 3. Develop Algorithmic Decision-Making
 
-Professional software engineers evaluate alternative solutions instead of
-searching for a single universal algorithm.
+Professional software engineers compare alternative solutions rather than searching for a single universal algorithm.
 
-Throughout the project the learner should progressively develop the ability to
-compare solutions according to:
+Throughout the repository the learner progressively develops the ability to evaluate solutions according to:
 
 - time complexity;
 - space complexity;
-- implementation simplicity;
-- scalability;
+- correctness;
 - maintainability;
+- scalability;
+- implementation complexity;
 - engineering trade-offs.
 
-The objective is to support evidence-based technical decisions.
+The objective is to support evidence-based technical decision making.
 
 ---
 
-## 4. Prepare for Technical Interviews
+## 4. Develop Professional Software Engineering Practices
 
-The repository is also intended as structured preparation for technical
-interviews.
+The repository extends beyond algorithms by introducing the engineering practices used throughout modern Java development.
 
-The learner should progressively become able to:
+Topics include:
 
-- explain algorithms clearly;
-- justify complexity analyses;
+- automated testing;
+- benchmarking;
+- Linux development environments;
+- Git workflows;
+- Maven builds;
+- Continuous Integration;
+- Continuous Delivery;
+- technical documentation;
+- software quality.
+
+These practices demonstrate how professional software is developed, validated, maintained, and delivered.
+
+---
+
+## 5. Prepare for Professional Technical Interviews
+
+The repository also serves as structured preparation for software engineering interviews.
+
+The learner progressively becomes able to:
+
+- explain computational problems;
+- justify algorithmic choices;
 - reason about correctness;
-- compare alternative solutions;
-- implement algorithms without relying on memorisation;
-- communicate technical decisions confidently.
+- analyse complexity;
+- explain engineering decisions;
+- discuss testing strategies;
+- interpret benchmark results;
+- communicate technical concepts confidently.
+
+The objective is not only to solve problems, but to explain them professionally.
 
 ---
 
@@ -128,15 +176,15 @@ The learner should progressively become able to:
 
 Upon completing the repository, the learner should be able to:
 
-- understand computational problems;
-- define precise algorithm specifications;
-- identify appropriate design strategies;
-- reason about correctness;
+- analyse computational problems;
+- write precise specifications;
+- identify suitable algorithmic paradigms;
+- reason formally about correctness;
 - analyse computational complexity;
 - recognise common algorithmic patterns;
-- relate theory to implementation.
+- relate mathematical reasoning to software implementation.
 
-These competencies represent the academic core of the repository.
+These competencies represent the Computer Science foundation of the repository.
 
 ---
 
@@ -144,73 +192,84 @@ These competencies represent the academic core of the repository.
 
 The learner should progressively demonstrate the ability to:
 
-- implement maintainable Java solutions;
-- organise source code professionally;
-- validate behaviour through automated tests;
+- implement maintainable Java software;
+- design modular solutions;
+- validate behaviour through automated testing;
 - benchmark implementations responsibly;
-- use standard Java development tools effectively;
+- configure professional Java environments;
+- work efficiently in Linux;
+- manage projects with Maven;
+- use Git professionally;
+- automate validation through CI/CD pipelines;
 - document engineering decisions clearly.
 
-These competencies connect Computer Science theory with professional software
-engineering.
+These competencies bridge Computer Science with Software Engineering.
 
 ---
 
 # Professional Competencies
 
-Beyond programming, the repository develops transferable professional skills.
+Beyond programming, the repository develops transferable engineering skills.
 
 These include:
 
 - analytical thinking;
 - systematic problem solving;
-- structured documentation;
-- technical communication;
+- engineering discipline;
 - evidence-based reasoning;
+- technical communication;
+- documentation;
+- automation;
 - continuous learning;
-- engineering discipline.
+- professional collaboration.
 
-These competencies remain valuable independently of any programming language.
+These competencies remain valuable independently of any programming language or technology stack.
 
 ---
 
 # General Learning Objectives
 
-By the end of the project, the learner should be able to:
+By the end of the repository, the learner should be able to:
 
-1. Understand an algorithm before implementing it.
-2. Explain the reasoning behind a solution.
-3. Justify correctness.
+1. Understand a computational problem before implementing a solution.
+2. Explain the reasoning behind every algorithm.
+3. Justify correctness formally.
 4. Analyse computational complexity.
-5. Implement algorithms clearly in Java.
-6. Validate implementations through automated testing.
-7. Compare different algorithmic strategies.
-8. Interpret benchmark results responsibly.
-9. Produce clear technical documentation.
-10. Explain algorithmic decisions during technical interviews.
+5. Compare multiple solution strategies.
+6. Implement maintainable Java software.
+7. Validate behaviour through automated testing.
+8. Evaluate performance through benchmarking.
+9. Configure a professional Linux-based Java development environment.
+10. Build reproducible Maven projects.
+11. Manage source code professionally with Git.
+12. Automate validation using GitHub Actions.
+13. Understand Continuous Integration and Continuous Delivery.
+14. Produce high-quality technical documentation.
+15. Communicate engineering decisions confidently.
 
 ---
 
 # Expected Learning Outcomes
 
-Successful completion of the repository should change the learner's perspective
-from asking:
+Successful completion of the repository should transform the learner's perspective from asking:
 
 > *"How do I implement this algorithm?"*
 
 to asking:
 
 - Which computational problem is being solved?
-- Which design strategy applies?
-- Why is this algorithm correct?
-- What assumptions does it require?
-- How does its complexity grow?
-- Which trade-offs exist?
-- How should it be tested?
-- How should it be explained?
+- Which algorithmic paradigm is most appropriate?
+- Why is the solution correct?
+- Which assumptions are required?
+- How does complexity evolve?
+- Which engineering trade-offs exist?
+- How should the implementation be tested?
+- How should performance be evaluated?
+- How should validation be automated?
+- How should the solution be documented?
+- How should it be communicated professionally?
 
-This change in reasoning represents the principal educational outcome of the
-project.
+This evolution in reasoning represents the principal educational outcome of the repository.
 
 ---
 
@@ -220,30 +279,36 @@ project.
 |------------|:---------:|:-----:|:-------:|:-------:|:--------:|
 | Problem Analysis | ✓ | ✓ | ✓ | ✓ | |
 | Algorithm Design | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Correctness | ✓ | ✓ | ✓ | ✓ | |
+| Correctness Reasoning | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Complexity Analysis | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Java Implementation | ✓ | ✓ | ✓ | | ✓ |
+| Java Development | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Automated Testing | ✓ | ✓ | ✓ | ✓ | ✓ |
 | Benchmarking | ✓ | ✓ | ✓ | ✓ | ✓ |
-| Technical Communication | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Linux Development | ✓ | ✓ | ✓ | | ✓ |
+| Git & Maven | ✓ | ✓ | ✓ | ✓ | ✓ |
+| CI/CD | ✓ | ✓ | ✓ | ✓ | ✓ |
+| Technical Documentation | ✓ | ✓ | ✓ | ✓ | ✓ |
 
 ---
 
 # Completion Criteria
 
-The repository is not considered complete because algorithms have been
-implemented.
+The repository is not considered complete because algorithms have been implemented.
 
 Completion requires evidence that the learner can:
 
-- understand the computational problem;
-- explain the selected strategy;
-- justify correctness;
+- understand computational problems;
+- justify algorithmic choices;
+- prove correctness;
 - analyse computational complexity;
-- implement the solution professionally;
-- validate behaviour through testing;
-- interpret benchmark results;
-- communicate technical reasoning effectively.
+- implement maintainable Java software;
+- validate behaviour through automated testing;
+- evaluate performance through benchmarking;
+- configure a professional development environment;
+- manage projects with Git and Maven;
+- automate validation through CI/CD pipelines;
+- document engineering decisions clearly;
+- communicate technical reasoning confidently.
 
 Implementation alone is not considered sufficient evidence of learning.
 
@@ -251,53 +316,8 @@ Implementation alone is not considered sufficient evidence of learning.
 
 # Conclusion
 
-Algorithms Java Mastery is an academic repository built upon recognised Computer
-Science literature and modern Java engineering practices.
+Algorithms Java Mastery is a structured academic programme that integrates Computer Science theory with modern Software Engineering practices.
 
-Its objective is to transform theoretical knowledge into practical competence
-through disciplined study, implementation, testing, experimentation, and
-technical communication.
+Its objective is to transform theoretical knowledge into professional competence through disciplined study, Java implementation, automated testing, benchmarking, Linux development, version control, build automation, Continuous Integration, Continuous Delivery, and technical communication.
 
-The repository is intended to prepare the learner not only to write algorithms,
-but also to understand, justify, explain, and defend them in both professional
-software development and technical interview environments.
-
----
-
-# Related Documents
-
-
-The documents in this directory should be read in the following order.
-
-| Order | Document | Purpose |
-|------:|----------|---------|
-| **01** | `01-project-overview.md` | Introduces the project's vision, academic foundation, scope, and objectives. |
-| **02** | `02-learning-objectives.md` | Defines the knowledge, competencies, and expected learning outcomes. |
-| **03** | `03-study-methodology.md` | Describes the structured methodology followed throughout the repository. |
-| **04** | `04-repository-architecture.md` | Explains the organisation of the repository and the purpose of each module. |
-| **05** | `05-technology-stack.md` | Presents the technologies and tools used to support the learning process. |
-| **06** | `06-documentation-architecture.md` | Explains the structure, conventions, and organisation of the project documentation. |
-| **07** | `07-java-project-structure.md` | Describes the organisation of the Java source code and project layout. |
-| **08** | `08-engineering-standards.md` | Defines the engineering principles, coding standards, and quality guidelines followed in the repository. |
-| **09** | `09-development-workflow.md` | Describes the development workflow used when studying and implementing algorithms. |
-| **10** | `10-references.md` | Lists the academic, technical, and official references used throughout the project. |
----
-
-# Next Document
-
-```text
-03-study-methodology.md
-```
-
-The next document defines the academic methodology applied throughout the
-repository, describing how every topic progresses from research and theoretical
-study to Java implementation, automated testing, benchmarking, and technical
-documentation.
-
-# Academic Foundation
-
-This module is primarily supported by the academic references listed in:
-
-```text
-docs/00-project/10-references.md
-```
+The repository prepares the learner not only to implement algorithms, but also to understand, justify, validate, automate, document, and defend engineering decisions in professional software development and technical interview environments.

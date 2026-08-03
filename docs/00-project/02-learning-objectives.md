@@ -2,26 +2,40 @@
 
 ## Algorithms Java Mastery
 
-This document defines the learning objectives and expected competencies developed throughout **Algorithms Java Mastery**.
+This document defines the educational objectives and expected competencies
+developed throughout **Algorithms Java Mastery**.
 
-The project adopts a competency-based approach to algorithmic study. Progress is not measured exclusively by the number of algorithms implemented or exercises completed.
+The repository is inspired primarily by **Introduction to Algorithms**
+(Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein),
+whose systematic study provides the academic foundation for every learning
+module.
 
-Instead, learning is evaluated through the ability to:
+Rather than studying algorithms as isolated programming exercises, the
+repository extends the concepts presented throughout the book by combining
+their theoretical foundations with modern Java implementation, automated
+testing, empirical benchmarking, and professional software engineering
+practices.
 
-* understand computational problems;
-* formulate precise specifications;
-* design algorithmic strategies;
-* reason about correctness;
-* analyse computational cost;
-* implement solutions clearly in Java;
-* verify behaviour through automated testing;
-* evaluate performance experimentally when appropriate;
-* communicate technical reasoning through structured documentation.
+Learning therefore progresses from conceptual understanding to practical
+engineering competence.
+
+The project adopts a competency-based educational approach in which progress is
+measured not by the number of algorithms implemented or exercises completed,
+but by the learner's ability to:
+
+- understand computational problems;
+- formulate precise specifications;
+- design algorithmic strategies;
+- justify algorithm correctness;
+- analyse computational complexity;
+- implement solutions clearly in Java;
+- validate behaviour through automated testing;
+- evaluate performance through responsible benchmarking when appropriate;
+- communicate technical reasoning through structured documentation.
 
 The central learning objective is:
 
-> **Develop the ability to analyse, design, justify, implement, test, and evaluate algorithmic solutions using rigorous computer science foundations and professional Java engineering practices.**
-
+> **Develop the ability to analyse, design, justify, implement, validate, benchmark, and communicate algorithmic solutions by extending the study of _Introduction to Algorithms_ through modern Java engineering practices.**
 ---
 
 # 1. Learning Philosophy

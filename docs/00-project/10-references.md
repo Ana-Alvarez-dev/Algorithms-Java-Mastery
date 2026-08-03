@@ -5,23 +5,25 @@
 This document identifies the principal academic, technical, and official
 references used throughout **Algorithms Java Mastery**.
 
-The repository is grounded in recognised Computer Science literature, Java
-language specifications, official tool documentation, and reproducible
-engineering practices.
+Algorithms Java Mastery is inspired primarily by
+Introduction to Algorithms
+(Thomas H. Cormen,
+Charles E. Leiserson,
+Ronald L. Rivest,
+Clifford Stein).
 
-References support conceptual study, algorithmic reasoning, Java
-implementation, automated testing, benchmarking, version control, and
-continuous integration.
-
-They provide an academic and technical foundation for the repository but do not
-replace original analysis, independent reasoning, implementation, or
-experimental validation.
+This document defines the academic and technical references that support the
+systematic study of the concepts presented throughout the book and their
+extension through modern Java engineering practices.
 
 ---
 
 # Purpose
 
 This document establishes the reference framework of the project.
+The reference framework preserves the academic integrity of the repository by
+identifying the principal sources that support both theoretical Computer
+Science and professional Java engineering practices.
 
 It defines:
 
@@ -46,19 +48,39 @@ not as substitutes for learning.
 The project follows this progression:
 
 ```text
-Reliable Source
-        ↓
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
+
 Critical Reading
-        ↓
+
+↓
+
 Conceptual Understanding
-        ↓
-Independent Explanation
-        ↓
-Algorithmic Reasoning
-        ↓
+
+↓
+
+Independent Reasoning
+
+↓
+
 Java Implementation
-        ↓
-Verification and Evaluation
+
+↓
+
+Testing
+
+↓
+
+Benchmarking
+
+↓
+
+Engineering Evidence
 ```
 
 A source may define a concept, present a theorem, describe an algorithm, or
@@ -240,7 +262,14 @@ Cormen, Thomas H.; Leiserson, Charles E.; Rivest, Ronald L.; Stein, Clifford.
 
 *Introduction to Algorithms*. Fourth Edition. MIT Press, 2022.
 
-This book is one of the principal academic references of the repository.
+This book is the principal academic reference adopted throughout the
+repository.
+
+All learning modules originate from the systematic study of the concepts
+presented in this work.
+
+The remaining references complement, extend, or specialise particular areas
+of study without replacing its central role.
 
 It supports the study of:
 
@@ -1556,29 +1585,31 @@ their relevance becomes project-wide.
 Different sources of evidence serve different purposes.
 
 ```text
-Academic Literature
-        ↓
-Supports theory and algorithmic reasoning
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
 
 Official Documentation
-        ↓
-Defines language and tool behaviour
+
+↓
 
 Java Implementation
-        ↓
-Produces executable behaviour
 
-Automated Tests
-        ↓
-Verify documented expectations
+↓
 
-JMH Benchmarks
-        ↓
-Produce controlled performance observations
+Automated Testing
 
-Git History
-        ↓
-Preserves project evolution
+↓
+
+Benchmarking
+
+↓
+
+Engineering Evidence
 ```
 
 A reference supports a claim, but project-specific behaviour should also be
@@ -1651,6 +1682,12 @@ controlled experiments, and engineering conclusions.
 By maintaining clear source-selection, attribution, verification, and
 maintenance practices, the repository preserves academic integrity,
 traceability, and long-term technical reliability.
+
+The reference framework ensures that the concepts studied throughout
+Introduction to Algorithms are supported by recognised academic literature,
+implemented through modern Java engineering practices, verified through
+automated testing, evaluated through controlled experimentation, and preserved
+through disciplined technical documentation.
 
 ---
 

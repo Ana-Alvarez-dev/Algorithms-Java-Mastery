@@ -5,19 +5,21 @@
 This document defines the Java project structure adopted by
 **Algorithms Java Mastery**.
 
-The repository organises source code according to computational domains and
-academic study modules.
+Algorithms Java Mastery is inspired primarily by
+Introduction to Algorithms
+(Cormen, Leiserson, Rivest and Stein).
 
-Java implementations represent the executable result of algorithmic analysis,
-formal specification, correctness reasoning, and complexity evaluation.
-
-The project structure therefore connects theoretical knowledge with
-implementation, automated verification, and experimental performance analysis
-while remaining clear, maintainable, and scalable.
+This document explains how the Java project structure has been designed to
+support the systematic study of the concepts presented throughout the book.
 
 ---
 
 # Purpose
+
+The Java project structure transforms the theoretical concepts studied
+throughout Introduction to Algorithms into executable Java software while
+preserving traceability between documentation, implementation, testing,
+benchmarking and engineering evidence.
 
 This document establishes:
 
@@ -43,15 +45,31 @@ Source code is organised around computational concepts rather than business
 features or application layers.
 
 ```text
-Academic Module
-        ↓
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
+
 Computational Domain
-        ↓
+
+↓
+
 Java Implementation
-        ↓
-Automated Verification
-        ↓
-Experimental Evaluation
+
+↓
+
+Automated Testing
+
+↓
+
+Benchmarking
+
+↓
+
+Engineering Evidence
 ```
 
 Each package represents a defined area of algorithmic study.
@@ -188,13 +206,23 @@ The Java package hierarchy should remain traceable to the academic documentation
 For example:
 
 ```text
-docs/05-sorting/
-        ↓
-src/main/java/org/anaalvarez/algorithms/sorting/
-        ↓
-src/test/java/org/anaalvarez/algorithms/sorting/
-        ↓
-src/jmh/java/org/anaalvarez/algorithms/sorting/
+Introduction to Algorithms
+
+↓
+
+Documentation
+
+↓
+
+Java Implementation
+
+↓
+
+Automated Tests
+
+↓
+
+Benchmarks
 ```
 
 The relationship does not require identical file names.
@@ -435,7 +463,7 @@ Test names should communicate the behaviour being verified.
 
 Examples:
 
-```java
+```text
 returnsExpectedIndexWhenTargetExists()
 returnsNotFoundWhenTargetIsAbsent()
 handlesEmptyInput()
@@ -523,14 +551,19 @@ A faster execution result does not prove correctness.
 The project maintains a simple dependency direction.
 
 ```text
+Introduction to Algorithms
+
+↓
+
 Documentation
-        ↓
-Explains production implementations
+
+↓
 
 Production Code
-        ↑                 ↑
-        │                 │
-Automated Tests      JMH Benchmarks
+
+↑          ↑
+
+Tests   Benchmarks
 ```
 
 The dependency rules are:
@@ -648,7 +681,7 @@ of a specific data type.
 
 For example:
 
-```java
+```text
 public static <T extends Comparable<? super T>> void sort(T[] values)
 ```
 
@@ -805,25 +838,31 @@ These principles guide future structural decisions.
 The Java project structure is one part of the complete repository architecture.
 
 ```text
+Introduction to Algorithms
+
+↓
+
 Documentation
-        ↓
-Explains theory, contracts, and decisions
+
+↓
 
 Production Source
-        ↓
-Implements algorithms and data structures
 
-Test Source
-        ↓
-Verifies documented behaviour
+↓
 
-Benchmark Source
-        ↓
-Evaluates practical performance
+Testing
+
+↓
+
+Benchmarking
+
+↓
 
 Continuous Integration
-        ↓
-Validates the build and automated tests
+
+↓
+
+Engineering Knowledge
 ```
 
 Each area has a distinct responsibility while contributing to the same learning
@@ -867,6 +906,11 @@ application-oriented layers or unnecessary abstractions.
 This approach allows the repository to grow progressively while maintaining
 clarity, cohesion, testability, and a direct relationship between theory,
 implementation, verification, and experimental evaluation.
+
+The Java project structure enables the systematic study of
+Introduction to Algorithms by providing a maintainable organisation
+through which theoretical Computer Science concepts become executable,
+verifiable and experimentally evaluated Java software.
 
 ---
 
