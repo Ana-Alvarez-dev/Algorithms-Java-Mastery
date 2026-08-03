@@ -5,17 +5,13 @@
 This document defines the engineering standards adopted by
 **Algorithms Java Mastery**.
 
-The repository applies a consistent set of academic and engineering conventions
-to documentation, Java source code, automated testing, benchmarking, version
-control, repository organisation, and continuous integration.
+Algorithms Java Mastery is inspired primarily by
+Introduction to Algorithms
+(Cormen, Leiserson, Rivest and Stein).
 
-These standards ensure that every contribution remains understandable,
-verifiable, maintainable, and aligned with the learning objectives of the
-project.
-
-The objective is not to introduce unnecessary rules or enterprise-level
-complexity, but to establish disciplined practices that support rigorous
-algorithmic study and professional Java engineering.
+This document defines the engineering standards adopted throughout the
+repository to transform the systematic study of the concepts presented in the
+book into reliable, maintainable and professionally validated Java software.
 
 ---
 
@@ -23,6 +19,8 @@ algorithmic study and professional Java engineering.
 
 This document establishes the quality standards applied throughout the
 repository.
+These standards support the transformation of theoretical Computer Science
+knowledge into professional engineering practice.
 
 It defines expectations for:
 
@@ -65,8 +63,31 @@ It is demonstrated through:
 
 The guiding principle is:
 
-> **Engineering quality emerges when theory, implementation, verification, and
-> evidence remain consistent with one another.**
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
+
+Algorithmic Reasoning
+
+↓
+
+Java Implementation
+
+↓
+
+Automated Testing
+
+↓
+
+Benchmarking
+
+↓
+
+Engineering Evidence
 
 Every technical decision should improve one or more of the following:
 
@@ -144,27 +165,39 @@ Quality is not a final stage added after implementation.
 It is applied throughout the complete study process.
 
 ```text
-Academic Study
-        ↓
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
+
 Problem Understanding
-        ↓
-Formal Specification
-        ↓
-Algorithmic Design
-        ↓
-Correctness Reasoning
-        ↓
-Complexity Analysis
-        ↓
+
+↓
+
+Specification
+
+↓
+
+Algorithm Design
+
+↓
+
 Java Implementation
-        ↓
-Automated Verification
-        ↓
-Performance Evaluation
-        ↓
+
+↓
+
+Testing
+
+↓
+
+Benchmarking
+
+↓
+
 Engineering Conclusions
-        ↓
-Revision and Improvement
 ```
 
 Documentation records and connects the evidence produced during every stage.
@@ -251,25 +284,27 @@ Important claims should be connected to supporting evidence.
 Examples include:
 
 ```text
-Complexity Claim
-        ↓
-Documented Analysis
+Introduction to Algorithms
 
-Behavioural Contract
-        ↓
-Automated Tests
+↓
 
-Algorithm Description
-        ↓
-Java Implementation
+Documentation
 
-Performance Observation
-        ↓
-JMH Benchmark
+↓
+
+Implementation
+
+↓
+
+Testing
+
+↓
+
+Benchmarking
+
+↓
 
 Engineering Decision
-        ↓
-Documentation or Pull Request
 ```
 
 Traceability allows the reader to understand where a conclusion originated and
@@ -1434,21 +1469,43 @@ The repository defines engineering quality through the interaction of several
 forms of evidence.
 
 ```text
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
+
 Conceptual Understanding
-        ↓
-Explicit Specification
-        ↓
-Correct Implementation
-        ↓
-Automated Verification
-        ↓
-Complexity Analysis
-        ↓
-Controlled Experimentation
-        ↓
-Documented Conclusions
-        ↓
-Review and Improvement
+
+↓
+
+Problem Analysis
+
+↓
+
+Algorithm Design
+
+↓
+
+Java Implementation
+
+↓
+
+Automated Testing
+
+↓
+
+Benchmarking
+
+↓
+
+Engineering Evidence
+
+↓
+
+Professional Knowledge
 ```
 
 No single activity establishes quality by itself.
@@ -1494,6 +1551,10 @@ and maintainability over unnecessary abstraction or technological complexity.
 By applying these standards consistently, the project can evolve through new
 study modules and implementations without losing its academic direction,
 structural coherence, or engineering quality.
+
+These engineering standards provide the framework through which the concepts
+studied in Introduction to Algorithms are transformed into reliable,
+maintainable, verifiable and professionally engineered Java implementations.
 
 ---
 
