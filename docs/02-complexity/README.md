@@ -16,6 +16,14 @@ this module asks:
 
 > **How efficiently does the algorithm solve the problem?**
 
+The concepts developed throughout this module are primarily based on
+*Introduction to Algorithms* (Cormen, Leiserson, Rivest and Stein) and are
+complemented by recognised Computer Science literature and the official
+references listed in:
+```text
+docs/00-project/10-references.md
+```
+
 ---
 
 # Purpose
@@ -49,6 +57,9 @@ After completing this module, the learner should be able to:
 - distinguish between theoretical analysis and experimental measurement;
 - select appropriate algorithms based on efficiency;
 - interpret complexity notations correctly.
+- identify the dominant operation of an algorithm;
+- estimate algorithm scalability before implementation;
+- relate theoretical analysis to experimental observations.
 
 These competencies are essential for designing scalable and maintainable software systems.
 
@@ -61,16 +72,16 @@ The current structure of this module is:
 ```text
 02-complexity/
 ├── README.md
-├── computational-complexity.md
-├── asymptotic-analysis.md
-├── time-complexity.md
-├── space-complexity.md
-├── asymptotic-notations.md
-├── algorithm-growth.md
-├── best-average-worst-case.md
-├── amortized-analysis.md
-├── complexity-examples.md
-└── complexity-cheat-sheet.md
+├── 01-computational-complexity.md
+├── 02-algorithm-growth.md
+├── 03-asymptotic-analysis.md
+├── 04-asymptotic-notations.md
+├── 05-best-average-worst-case.md
+├── 06-time-complexity.md
+├── 07-space-complexity.md
+├── 08-amortized-analysis.md
+├── 09-complexity-examples.md
+└── 10-complexity-cheat-sheet.md
 ```
 
 Each document explores a specific aspect of computational complexity while progressively building a complete understanding of algorithm analysis.
@@ -79,31 +90,28 @@ Each document explores a specific aspect of computational complexity while progr
 
 # Document Overview
 
-## computational-complexity.md
+## 01-computational-complexity.md
 
 Introduces the concept of computational complexity and explains why algorithm efficiency is one of the central concerns of Computer Science.
 
 ---
 
-## asymptotic-analysis.md
+
+
+## 02-algorithm-growth.md
+
+Compares the most common growth rates observed in algorithms, from constant time to factorial complexity.
+
+Visual comparisons and growth curves are introduced to improve intuition.
+
+---
+## 03-asymptotic-analysis.md
 
 Explains how algorithm behaviour is analysed as the input size approaches infinity, allowing objective comparisons independently of hardware.
 
 ---
 
-## time-complexity.md
-
-Studies the growth of execution time according to input size and introduces methods for counting algorithmic operations.
-
----
-
-## space-complexity.md
-
-Examines how algorithms use memory and explains the trade-offs between execution time and memory consumption.
-
----
-
-## asymptotic-notations.md
+## 04-asymptotic-notations.md
 
 Introduces the mathematical notation used to describe algorithm growth, including:
 
@@ -115,15 +123,7 @@ Introduces the mathematical notation used to describe algorithm growth, includin
 
 ---
 
-## algorithm-growth.md
-
-Compares the most common growth rates observed in algorithms, from constant time to factorial complexity.
-
-Visual comparisons and growth curves are introduced to improve intuition.
-
----
-
-## best-average-worst-case.md
+## 05-best-average-worst-case.md
 
 Explains how algorithm performance varies depending on the characteristics of the input.
 
@@ -135,7 +135,21 @@ The document distinguishes between:
 
 ---
 
-## amortized-analysis.md
+
+## 06-time-complexity.md
+
+Studies the growth of execution time according to input size and introduces methods for counting algorithmic operations.
+
+
+---
+
+## 07-space-complexity.md
+
+Examines how algorithms use memory and explains the trade-offs between execution time and memory consumption.
+
+---
+
+## 08-amortized-analysis.md
 
 Introduces amortized analysis and explains why certain expensive operations remain efficient when evaluated over long execution sequences.
 
@@ -143,7 +157,7 @@ Examples include dynamic arrays and hash tables.
 
 ---
 
-## complexity-examples.md
+## 09-complexity-examples.md
 
 Applies theoretical concepts to real algorithms.
 
@@ -161,7 +175,7 @@ The objective is to connect mathematical analysis with practical algorithm behav
 
 ---
 
-## complexity-cheat-sheet.md
+## 10-complexity-cheat-sheet.md
 
 Provides a concise summary of the entire module.
 
@@ -176,11 +190,13 @@ This module extends the concepts introduced in **Foundations**.
 The learning progression becomes:
 
 ```text
-Project
+Project Foundations
         ↓
-Foundations
+Algorithmic Reasoning
         ↓
-Complexity
+Computational Complexity
+        ↓
+Algorithm Implementation
 ```
 
 Where:
@@ -192,6 +208,20 @@ Both modules together establish the theoretical basis required before implementi
 
 ---
 
+# Core Principles
+
+The Complexity module is organised around four complementary principles.
+
+- Analyse algorithms independently of hardware.
+- Predict growth before measuring execution.
+- Distinguish theoretical analysis from experimental evaluation.
+- Support engineering decisions through mathematical reasoning.
+
+These principles are applied throughout every subsequent implementation in the
+repository.
+
+---
+
 # Relationship with Later Modules
 
 Every subsequent module will apply the concepts introduced here.
@@ -199,18 +229,16 @@ Every subsequent module will apply the concepts introduced here.
 ```text
 Complexity
         ↓
+Algorithm Analysis
+
+        ↓
+
 Arrays
-        ↓
 Searching
-        ↓
 Sorting
-        ↓
-Recursion
-        ↓
+Hashing
 Trees
-        ↓
 Graphs
-        ↓
 Dynamic Programming
 ```
 
@@ -220,7 +248,8 @@ Each implemented algorithm will include:
 - complexity analysis;
 - Java implementation;
 - automated testing;
-- benchmarking.
+- Java Implementation
+- Experimental Benchmarking (when appropriate)
 
 ---
 
@@ -245,24 +274,40 @@ Every document in this module should be studied using the methodology establishe
 The recommended progression is:
 
 ```text
-Concept
+Computational Problem
         ↓
-Mathematical Definition
-        ↓
-Visual Interpretation
-        ↓
-Worked Examples
+Algorithmic Strategy
         ↓
 Complexity Analysis
         ↓
+Asymptotic Classification
+        ↓
 Java Implementation
         ↓
-Benchmarking (JMH)
+Automated Testing
         ↓
-Technical Conclusions
+Experimental Benchmarking
+        ↓
+Engineering Conclusions
 ```
 
 This methodology ensures that theoretical knowledge is progressively transformed into practical engineering skills.
+
+---
+
+# Academic Perspective
+
+Computational complexity is one of the central analytical tools of Computer
+Science.
+
+Rather than measuring execution time directly, complexity analysis studies how
+resource consumption grows as the input size increases.
+
+This perspective allows algorithms to be compared independently of hardware,
+programming language, compiler optimisations, or execution environment.
+
+The concepts introduced in this module become part of the reasoning process
+applied before every Java implementation developed throughout the repository.
 
 ---
 
@@ -278,3 +323,17 @@ The learner should remember the following principles:
 - Understanding complexity is essential before studying advanced algorithms.
 
 The **Complexity** module therefore provides the analytical framework that supports every algorithm explored throughout the **Algorithms Java Mastery** repository, connecting mathematical reasoning, software engineering, and empirical performance evaluation.
+---
+
+---
+# Academic Foundation
+
+The principal academic reference for this module is:
+
+- Cormen, Leiserson, Rivest and Stein.
+  *Introduction to Algorithms* (Fourth Edition).
+
+Additional references are listed in:
+
+```text
+docs/00-project/10-references.md
