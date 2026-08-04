@@ -121,32 +121,42 @@ Every topic is approached as an engineering problem whose solution requires theo
 Learning therefore progresses through a structured sequence that connects academic theory with professional engineering practice.
 
 ```text
-Academic Theory
-        ↓
+Introduction to Algorithms (CLRS)
+
+↓
+
+Computer Science Foundations
+
+↓
+
 Research
-        ↓
+
+↓
+
 Conceptual Understanding
-        ↓
+
+↓
+
 Problem Analysis
-        ↓
-Formal Specification
-        ↓
-Algorithmic Reasoning
-        ↓
-Correctness Reasoning
-        ↓
-Complexity Analysis
-        ↓
+
+↓
+
+Specification
+
+↓
+
 Java Implementation
-        ↓
-Automated Testing
-        ↓
-Experimental Benchmarking
-        ↓
-Engineering Automation
-        ↓
-Technical Documentation
-        ↓
+
+↓
+
+Testing
+
+↓
+
+Benchmarking
+
+↓
+
 Engineering Conclusions
 ```
 

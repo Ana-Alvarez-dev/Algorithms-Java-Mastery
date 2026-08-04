@@ -1,9 +1,9 @@
 # Learning Objectives
 
-## Algorithms Java Mastery
+## Purpose
 
-This document defines the educational objectives and expected competencies
-developed throughout **Algorithms Java Mastery**.
+This document defines the educational objectives, competencies, and expected
+learning outcomes developed throughout **Algorithms Java Mastery**.
 
 The repository is inspired primarily by **Introduction to Algorithms**
 (Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein),
@@ -13,29 +13,30 @@ module.
 Rather than studying algorithms as isolated programming exercises, the
 repository extends the concepts presented throughout the book by combining
 their theoretical foundations with modern Java implementation, automated
-testing, empirical benchmarking, and professional software engineering
-practices.
+testing, empirical benchmarking, Linux development environments, and
+professional software engineering practices.
 
 Learning therefore progresses from conceptual understanding to practical
 engineering competence.
 
-The project adopts a competency-based educational approach in which progress is
-measured not by the number of algorithms implemented or exercises completed,
-but by the learner's ability to:
+Its purpose is to develop the ability to:
 
 - understand computational problems;
 - formulate precise specifications;
 - design algorithmic strategies;
 - justify algorithm correctness;
 - analyse computational complexity;
-- implement solutions clearly in Java;
+- implement reliable Java solutions;
 - validate behaviour through automated testing;
-- evaluate performance through responsible benchmarking when appropriate;
-- communicate technical reasoning through structured documentation.
+- evaluate performance through responsible benchmarking;
+- apply professional engineering practices;
+- communicate technical reasoning clearly through structured documentation.
 
-The central learning objective is:
-
-> **Develop the ability to analyse, design, justify, implement, validate, benchmark, and communicate algorithmic solutions by extending the study of _Introduction to Algorithms_ through modern Java engineering practices.**
+Rather than measuring progress by the number of completed implementations, the
+repository evaluates learning through the learner's ability to analyse,
+justify, implement, validate, benchmark, and communicate the concepts studied
+throughout *Introduction to Algorithms* using modern Java engineering
+practices.
 ---
 
 # 1. Learning Philosophy
