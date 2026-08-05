@@ -214,25 +214,29 @@ workflow while interacting with the remaining components of the stack.
 Conceptually, the technology ecosystem can be represented as follows.
 
 ```text
-Computer Science
-        ↓
+Introduction to Algorithms (CLRS)
+                ↓
+Computer Science Foundations
+                ↓
 Java 21
-        ↓
-Maven
-        ↓
+                ↓
 JUnit Jupiter
-        ↓
+                ↓
 AssertJ
-        ↓
+                ↓
 JMH
-        ↓
+                ↓
+Linux
+                ↓
 Git
-        ↓
+                ↓
+Maven
+                ↓
 GitHub
-        ↓
+                ↓
 GitHub Actions
-        ↓
-Professional Engineering
+                ↓
+Professional Software Engineering
 ```
 
 This progression mirrors the educational methodology adopted throughout the
@@ -686,7 +690,10 @@ every component supports the remaining technologies.
 The relationships between the principal technologies are illustrated below.
 
 ```text
-Computer Science
+Introduction to Algorithms (CLRS)
+        │
+        ▼
+Computer Science Foundations
         │
         ▼
 Java
@@ -710,13 +717,15 @@ and experimental evaluation.
 Engineering technologies extend this workflow.
 
 ```text
+Linux
+                ↓
 Git
-        │
-        ▼
+                ↓
 GitHub
-        │
-        ▼
+                ↓
 GitHub Actions
+                ↓
+Engineering Evidence
 ```
 
 Version control enables collaboration.
@@ -822,11 +831,13 @@ academically justified.
 The evolution of the technology stack follows three complementary dimensions.
 
 ```text
-Computer Science
-        ↓
+Introduction to Algorithms (CLRS)
+                ↓
+Computer Science Foundations
+                ↓
 Professional Java Development
-        ↓
-Software Engineering
+                ↓
+Software Engineering Practices
 ```
 
 Every future technology should strengthen one or more of these dimensions while
@@ -905,18 +916,20 @@ technologies.
 
 The relationship can be summarised as follows.
 
-| Learning Stage | Supporting Technologies |
-|----------------|-------------------------|
-| Academic Study | Computer Science literature |
-| Java Implementation | Java 21 |
-| Build Management | Maven |
-| Automated Testing | JUnit Jupiter · AssertJ |
-| Performance Evaluation | JMH |
-| Development Environment | Linux · Terminal |
-| Version Control | Git |
-| Repository Management | GitHub |
-| Continuous Integration | GitHub Actions |
-| Technical Documentation | Markdown |
+| Learning Stage                          | Supporting Technologies |
+| --------------------------------------- | ----------------------- |
+| **Study of Introduction to Algorithms** | CLRS                    |
+| Computer Science Foundations            | Academic references     |
+| Java Implementation                     | Java 21                 |
+| Build Management                        | Maven                   |
+| Automated Testing                       | JUnit Jupiter · AssertJ |
+| Performance Evaluation                  | JMH                     |
+| Development Environment                 | Linux · Terminal        |
+| Version Control                         | Git                     |
+| Repository Management                   | GitHub                  |
+| Continuous Integration                  | GitHub Actions          |
+| Technical Documentation                 | Markdown                |
+
 
 This mapping demonstrates that technologies are introduced progressively as the
 learner advances through the repository.
@@ -935,7 +948,7 @@ Each architectural layer relies upon a different subset of technologies.
 | Architectural Layer | Primary Technologies |
 |---------------------|----------------------|
 | Academic Layer | Computer Science references |
-| Documentation Layer | Markdown |
+| Academic Foundation| Markdown |
 | Implementation Layer | Java 21 |
 | Validation Layer | JUnit Jupiter · AssertJ |
 | Experimental Layer | JMH |
@@ -992,10 +1005,7 @@ knowledge into professionally engineered Java software through:
 Each technology therefore represents a specific engineering responsibility
 rather than an isolated development tool.
 
-Together, the technologies adopted throughout the repository establish a
-professional environment in which learners progressively acquire not only
-technical knowledge, but also the engineering discipline expected from modern
-Java backend developers.
+The technology ecosystem adopted throughout Algorithms Java Mastery has been deliberately designed to extend the systematic study of Introduction to Algorithms through modern Java engineering practices. Every technology contributes to transforming theoretical Computer Science concepts into reliable, verifiable, experimentally evaluated, and professionally engineered software.
 
 ---
 
