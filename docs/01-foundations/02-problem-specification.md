@@ -2,41 +2,61 @@
 
 ## Algorithms Java Mastery
 
-This document introduces the formal specification of computational problems.
+This document introduces the formal specification of computational problems
+within the **Foundations** module.
 
-Before designing an algorithm, it is necessary to understand precisely **what problem must be solved**.
+**Algorithms Java Mastery** is inspired primarily by *Introduction to
+Algorithms* (Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
+Clifford Stein), which provides the principal academic foundation for the
+systematic study of algorithms throughout the repository.
 
-A poorly specified problem cannot produce a correct algorithm, regardless of the programming language or implementation quality.
+Before designing an algorithm, it is necessary to understand precisely **what
+problem must be solved**.
+
+A poorly specified problem may lead to an incorrect algorithm even when the
+implementation itself is syntactically valid and technically well written.
+
+Problem specification therefore separates the computational problem from the
+algorithmic strategy that will later solve it.
 
 The central question addressed throughout this document is:
 
-> **How should a computational problem be formally specified before designing an algorithm?**
+> **How should a computational problem be specified before designing an
+> algorithm?**
 
 ---
 
 # Purpose
 
-The purpose of this document is to establish a disciplined methodology for analysing computational problems before proposing solutions.
+The purpose of this document is to establish a disciplined method for describing
+computational problems before proposing algorithmic solutions.
 
-Many implementation errors originate from an incomplete understanding of the problem rather than incorrect programming.
+Many implementation errors originate from incomplete or ambiguous problem
+understanding rather than from programming syntax.
 
-For this reason, problem specification becomes the first technical activity in algorithm design.
+For this reason, specification becomes one of the first formal activities in
+algorithmic problem solving.
 
-The expected progression is:
+The progression is:
 
 ```text
 Computational Problem
+        ↓
+Problem Understanding
         ↓
 Problem Specification
         ↓
 Algorithm Design
         ↓
-Pseudocode
+Correctness Reasoning
+        ↓
+Complexity Analysis
         ↓
 Implementation
 ```
 
-A correct solution always begins with a correct understanding of the problem.
+A correct solution begins with a precise understanding of the problem that the
+solution is expected to solve.
 
 ---
 
@@ -44,184 +64,370 @@ A correct solution always begins with a correct understanding of the problem.
 
 After studying this document, the learner should be able to:
 
-- distinguish between a problem and its solution;
-- formally specify computational problems;
-- identify inputs and outputs;
-- recognise assumptions and constraints;
-- define the objective of an algorithm independently of its implementation;
-- analyse examples before designing a solution.
+- distinguish between a computational problem and an algorithmic solution;
+- describe a computational problem precisely;
+- identify inputs and expected outputs;
+- distinguish assumptions from constraints;
+- identify valid and invalid problem instances;
+- define the objective independently of implementation details;
+- use examples to clarify the specification;
+- recognise ambiguity in incomplete problem descriptions;
+- understand how specifications support later correctness reasoning, testing,
+  and implementation.
 
-These competencies will be applied throughout every module of the repository.
+These competencies will be reused throughout every subsequent module of the
+repository.
 
 ---
 
-# What Is a Computational Problem?
+# Computational Problems
 
-A computational problem is a task that can be solved through a finite sequence of computational operations.
+A **computational problem** describes a general relationship between valid
+inputs and the outputs that should be produced.
 
-The problem describes **what must be achieved**, not **how it should be achieved**.
+The problem defines **what must be achieved**.
+
+It does not prescribe the procedure used to achieve it.
 
 For example:
 
-Problem:
+> Determine the largest value contained in a finite array of integers.
 
-> Find the largest value contained in an array.
+This problem describes the required result.
 
-The problem does not specify:
+It does not specify:
 
-- programming language;
-- data structures;
-- loops;
-- variables;
-- implementation strategy.
+- which programming language should be used;
+- whether iteration or recursion should be used;
+- which variables should exist;
+- how values should be compared;
+- how the implementation should be organised.
 
-Those decisions belong to the algorithm.
+Those decisions belong to the design and implementation of an algorithm.
 
-The relationship is:
+Conceptually:
 
 ```text
-Problem
-      ↓
+Computational Problem
+        ↓
+Defines Required Behaviour
+        ↓
 Algorithm
-      ↓
-Implementation
+        ↓
+Provides a Solution
 ```
+
+---
+
+# Problem Instances
+
+A computational problem represents a general class of related cases.
+
+A concrete set of input values represents a **problem instance**.
+
+For example, consider the problem:
+
+> Determine the largest value contained in a finite array of integers.
+
+Possible instances include:
+
+```text
+[7, 2, 15, 4, 9]
+
+[5]
+
+[-8, -3, -12]
+
+[4, 4, 4, 4]
+```
+
+Each instance belongs to the same general computational problem.
+
+This distinction becomes important because an algorithm is expected to solve
+every valid instance covered by the problem specification, not merely a few
+examples.
 
 ---
 
 # Why Specification Matters
 
-Before designing an algorithm, the problem must be completely understood.
+Algorithm design requires a precise understanding of the required behaviour.
 
-A formal specification reduces ambiguity and establishes a common understanding between the problem and its solution.
-
-Without specification:
+Without a specification, the development process may become:
 
 ```text
-Problem
-      ↓
+Problem Description
+        ↓
+Assumptions Made Implicitly
+        ↓
 Guessing
-      ↓
+        ↓
 Implementation
 ```
 
-With specification:
+This creates several risks:
+
+- different interpretations of the same problem;
+- incorrect assumptions;
+- incomplete handling of valid inputs;
+- missing edge cases;
+- inconsistent tests;
+- incorrect correctness arguments.
+
+A disciplined process instead follows:
 
 ```text
-Problem
-      ↓
+Problem Description
+        ↓
 Analysis
-      ↓
+        ↓
 Specification
-      ↓
-Algorithm
-      ↓
-Implementation
+        ↓
+Algorithm Design
+        ↓
+Verification
 ```
 
-Specification therefore becomes the foundation of algorithmic reasoning.
+Specification reduces ambiguity by making the relevant properties of the
+problem explicit.
 
 ---
 
 # Elements of a Problem Specification
 
-Every computational problem should define several essential elements.
+A computational problem specification should identify the information necessary
+to understand the problem independently of any implementation.
+
+Typical elements include:
+
+- problem statement;
+- input;
+- output;
+- constraints;
+- assumptions;
+- valid problem instances;
+- invalid situations when relevant;
+- representative examples.
+
+These elements collectively define the boundaries of the problem.
 
 ---
 
-## Problem Statement
+# Problem Statement
 
-The first step is to describe the objective clearly and concisely.
+The **problem statement** describes the objective clearly and concisely.
 
 Example:
 
-> Determine the largest value contained in an integer array.
+> Determine the largest value contained in a non-empty array of integers.
 
-The statement should describe the goal without suggesting an implementation.
+The problem statement should describe the required result without prescribing a
+solution strategy.
+
+A good problem statement answers:
+
+> **What must be computed?**
+
+It should not answer:
+
+> **How should it be computed?**
 
 ---
 
-## Input
+# Input
 
-The specification must identify the information received by the algorithm.
+The specification must define the information provided to the problem.
 
-Examples include:
+Examples of algorithmic inputs include:
 
-- integer arrays;
+- arrays;
+- numerical values;
 - strings;
-- graphs;
-- trees;
 - matrices;
-- numerical values.
+- linked structures;
+- trees;
+- graphs.
 
-Example:
+For the maximum-value problem:
 
 ```text
 Input
 
-An array of integers.
+A finite array of integers containing at least one element.
 ```
+
+A useful input definition should make the valid input domain understandable.
 
 ---
 
-## Output
+# Output
 
-The specification must describe the expected result.
+The specification must define the result that should be produced.
 
-Example:
+For the same problem:
 
 ```text
 Output
 
-The largest integer contained in the array.
+The largest integer contained in the input array.
 ```
 
-The output should represent the solution to the problem.
+The output describes the required relationship between the problem instance and
+its solution.
+
+It should remain independent of implementation details.
 
 ---
 
-## Constraints
+# Constraints
 
-Constraints define the valid limits of the problem.
+**Constraints** define limitations inherent to the computational problem.
+
+They may restrict:
+
+- input size;
+- allowed value ranges;
+- ordering;
+- uniqueness;
+- available resources;
+- structural properties.
 
 Examples include:
-
-- maximum array size;
-- allowed value ranges;
-- memory restrictions;
-- execution time requirements.
-
-Example:
 
 ```text
 The array contains at least one element.
 ```
 
-Constraints influence the selection of appropriate algorithms.
+```text
+The input values are integers.
+```
+
+```text
+The array contains at most n elements.
+```
+
+Constraints may affect which algorithmic strategies are valid or appropriate.
+
+They should therefore be identified before algorithm selection.
 
 ---
 
-## Assumptions
+# Assumptions
 
-Assumptions describe conditions considered true during execution.
+**Assumptions** describe conditions treated as true within the problem model or
+execution context.
+
+Examples include:
+
+```text
+The supplied array exists.
+```
+
+```text
+All elements can be represented by the selected numeric type.
+```
+
+```text
+The graph representation satisfies the documented structural contract.
+```
+
+Assumptions should be explicit rather than silently inferred.
+
+This prevents later disagreement between documentation, implementation, and
+tests.
+
+---
+
+# Constraints vs Assumptions
+
+Constraints and assumptions are related but should not be treated as identical.
+
+A **constraint** restricts the valid problem space.
+
+An **assumption** states a condition accepted as true for the analysis.
+
+Conceptually:
+
+```text
+Constraint
+    ↓
+Defines the Limits of Valid Instances
+```
+
+```text
+Assumption
+    ↓
+Defines a Condition Accepted During Reasoning
+```
 
 For example:
 
 ```text
-The input array has already been created.
-
-The elements are valid integers.
+Constraint:
+The array contains at least one element.
 ```
 
-Assumptions simplify problem analysis by explicitly defining the expected environment.
+```text
+Assumption:
+Each array element is a valid integer value.
+```
+
+Making this distinction explicit improves later specification and contract
+design.
 
 ---
 
-## Examples
+# Valid and Invalid Problem Instances
 
-Examples improve understanding by illustrating valid scenarios.
+A specification should make it possible to determine whether a given input
+belongs to the valid problem domain.
 
-Example:
+For example, if the problem states:
+
+```text
+Input
+
+A non-empty array of integers.
+```
+
+then:
+
+```text
+[3, 8, 1]
+```
+
+is a valid problem instance.
+
+However:
+
+```text
+[]
+```
+
+does not satisfy the specification.
+
+Whether invalid instances should be rejected, transformed, or handled in a
+specific way belongs to the behavioural contract developed in the following
+document.
+
+This distinction prepares the learner for the study of:
+
+```text
+Preconditions
+        ↓
+Postconditions
+        ↓
+Error Behaviour
+```
+
+---
+
+# Representative Examples
+
+Examples help clarify a specification by showing concrete problem instances and
+their expected results.
+
+For example:
 
 ```text
 Input
@@ -233,77 +439,148 @@ Output
 15
 ```
 
-Additional examples should include boundary situations.
+Additional examples may reveal important characteristics of the problem.
+
+```text
+Input
+
+[-8, -3, -12]
+
+Output
+
+-3
+```
+
+```text
+Input
+
+[5]
+
+Output
+
+5
+```
+
+Examples support understanding, but they do not replace the formal
+specification.
+
+A finite set of examples cannot define every possible valid instance.
+
+---
+
+# Edge-Oriented Examples
+
+When appropriate, examples should include situations that expose the boundaries
+of the specification.
+
+Examples may include:
+
+- minimum valid input;
+- repeated values;
+- negative values;
+- already ordered data;
+- maximum permitted size;
+- structurally unusual but valid inputs.
+
+These examples later contribute to systematic edge-case analysis.
+
+Edge cases are studied in greater detail in:
+
+```text
+04-edge-cases.md
+```
 
 ---
 
 # Separating the Problem from the Solution
 
-One of the most common mistakes is describing the solution instead of the problem.
+A common mistake is to describe an algorithm while attempting to specify the
+problem.
 
-Incorrect specification:
+Consider the following statement:
 
-> Traverse the array using a loop and compare every element.
+> Traverse the array using a loop and compare every element while maintaining a
+> current maximum.
 
-This already describes an algorithm.
+This is not a problem specification.
 
-Correct specification:
+It already describes a strategy.
 
-> Find the largest value contained in the array.
+A correct problem statement is:
 
-The implementation remains intentionally undefined.
+> Determine the largest value contained in the array.
 
-The relationship should always be:
+The difference is fundamental.
+
+```text
+Problem Specification
+        ↓
+Defines What Must Be Solved
+```
+
+```text
+Algorithm Design
+        ↓
+Defines How It Will Be Solved
+```
+
+The repository therefore preserves the progression:
 
 ```text
 Problem
-      ↓
+        ↓
 Specification
-      ↓
+        ↓
 Algorithm Design
 ```
 
-Never:
+rather than:
 
 ```text
 Problem
-      ↓
+        ↓
 Java Code
 ```
 
 ---
 
-# Example of a Complete Specification
+# Example of a Complete Problem Specification
 
-Problem:
+Consider the following computational problem.
 
-> Find the largest value in an array.
+## Problem Statement
 
-Specification:
+Determine the largest value contained in a finite non-empty array of integers.
+
+## Input
 
 ```text
-Problem
+A finite array of integers containing at least one element.
+```
 
-Determine the largest value contained in an integer array.
+## Output
 
-Input
+```text
+The largest integer contained in the input array.
+```
 
-An array of integers.
+## Constraints
 
-Output
+```text
+The array contains at least one element.
 
-The largest integer stored in the array.
+Every element belongs to the integer domain supported by the problem model.
+```
 
-Constraints
+## Assumptions
 
-The array must contain at least one element.
+```text
+The input satisfies the declared problem constraints.
+```
 
-Assumptions
+## Example 1
 
-The input is valid.
-
-Examples
-
+```text
 Input:
 [7, 2, 15, 4, 9]
 
@@ -311,98 +588,354 @@ Output:
 15
 ```
 
-Notice that no implementation details have been introduced.
+## Example 2
+
+```text
+Input:
+[-10, -4, -20]
+
+Output:
+-4
+```
+
+## Example 3
+
+```text
+Input:
+[6]
+
+Output:
+6
+```
+
+No loop, variable, class, method, or Java-specific mechanism appears in this
+specification.
+
+The implementation remains intentionally undefined.
 
 ---
 
-# Relationship with Algorithm Design
+# Specification Before Algorithm Design
 
-Problem specification naturally leads to algorithm design.
+Once the problem has been specified, algorithmic design may begin.
+
+Conceptually:
 
 ```text
-Problem
-      ↓
-Specification
-      ↓
-Strategy
-      ↓
+Computational Problem
+        ↓
+Problem Specification
+        ↓
+Algorithmic Strategy
+        ↓
 Algorithm
-      ↓
+        ↓
+Correctness Reasoning
+        ↓
+Complexity Analysis
+        ↓
 Implementation
 ```
 
-The algorithm answers:
-
-> **How should the problem be solved?**
-
 The specification answers:
 
-> **What problem must be solved?**
+> **What behaviour is required?**
 
-Both responsibilities are different and should never be confused.
+The algorithm answers:
+
+> **How can that behaviour be produced computationally?**
+
+These responsibilities should remain separate.
 
 ---
 
-# Relationship with Later Modules
+# Relationship with Preconditions and Postconditions
 
-Problem specification supports every later activity in the repository.
+Problem specification provides the information required to formulate explicit
+behavioural contracts.
+
+The specification identifies:
+
+```text
+Input Domain
+        ↓
+Preconditions
+
+Required Result
+        ↓
+Postconditions
+```
+
+For example:
+
+```text
+Problem:
+Find the maximum element.
+```
+
+may later lead to:
+
+```text
+Precondition:
+The input contains at least one valid element.
+```
+
+```text
+Postcondition:
+The returned value is greater than or equal to every element in the input.
+```
+
+These concepts are developed systematically in:
+
+```text
+03-preconditions-and-postconditions.md
+```
+
+---
+
+# Relationship with Correctness
+
+Correctness can only be reasoned about relative to a specification.
+
+An algorithm cannot meaningfully be described as correct unless the expected
+behaviour has first been defined.
+
+Conceptually:
 
 ```text
 Problem Specification
-          ↓
-Preconditions
-
-Problem Specification
-          ↓
-Postconditions
-
-Problem Specification
-          ↓
-Edge Cases
-
-Problem Specification
-          ↓
-Correctness
-
-Problem Specification
-          ↓
-Testing
+        ↓
+Defines Required Behaviour
+        ↓
+Algorithm
+        ↓
+Correctness Reasoning
 ```
 
-A poorly specified problem produces incorrect tests, incorrect algorithms, and unreliable conclusions.
+Correctness asks whether the algorithm satisfies the documented specification
+for every valid input covered by its assumptions.
+
+This topic is developed further in:
+
+```text
+05-correctness.md
+```
+
+---
+
+# Relationship with Automated Testing
+
+Problem specifications later provide the foundation for automated test design.
+
+For example:
+
+```text
+Specification
+        ↓
+Input Categories
+        ↓
+Expected Behaviour
+        ↓
+Test Cases
+```
+
+Tests can therefore be derived from:
+
+- valid input classes;
+- boundaries;
+- invalid situations;
+- documented outputs;
+- contractual guarantees.
+
+Automated testing is developed formally in:
+
+```text
+docs/16-testing/
+```
+
+Testing does not replace the specification.
+
+It provides executable evidence that selected problem instances behave
+according to it.
+
+---
+
+# Relationship with Complexity Analysis
+
+Constraints identified during specification may influence later complexity
+analysis and algorithm selection.
+
+For example:
+
+```text
+Small Input Domain
+        ↓
+One Strategy May Be Sufficient
+```
+
+```text
+Very Large Input Domain
+        ↓
+Algorithmic Efficiency Becomes More Significant
+```
+
+However, the specification itself should not select an algorithm merely because
+of anticipated performance.
+
+Formal complexity analysis is developed in:
+
+```text
+docs/02-complexity/
+```
 
 ---
 
 # Best Practices
 
-Every problem specification should:
+A disciplined problem specification should:
 
-- define the objective clearly;
-- identify inputs;
-- identify outputs;
-- document assumptions;
-- document constraints;
+- state the computational objective clearly;
+- distinguish the problem from the algorithm;
+- identify the input domain;
+- define the expected output;
+- make important constraints explicit;
+- document relevant assumptions;
+- distinguish valid from invalid instances;
 - include representative examples;
-- avoid implementation details;
-- remain independent of any programming language.
+- include boundary-oriented examples when useful;
+- remain independent of Java or any other implementation language;
+- provide enough information to support later correctness reasoning and
+  testing.
 
-These principles improve both algorithm design and software quality.
+The specification should be precise without introducing unnecessary
+implementation detail.
+
+---
+
+# Common Specification Mistakes
+
+Several mistakes frequently weaken algorithmic problem descriptions.
+
+## Describing the Algorithm Instead of the Problem
+
+Incorrect:
+
+> Iterate through every element and update the current maximum.
+
+Correct:
+
+> Determine the largest value contained in the input.
+
+---
+
+## Leaving the Input Domain Undefined
+
+Weak:
+
+> Find a value.
+
+Better:
+
+> Find a target integer within a finite array of integers.
+
+---
+
+## Leaving Invalid Situations Ambiguous
+
+If empty input is not valid, this should be stated explicitly rather than left
+to the implementation to decide accidentally.
+
+---
+
+## Using Examples as the Entire Specification
+
+Examples illustrate behaviour but do not define the complete problem domain.
+
+---
+
+## Introducing Java Details Too Early
+
+A specification should not depend on:
+
+```text
+for loops
+ArrayList
+methods
+exceptions
+classes
+interfaces
+```
+
+unless those elements are themselves part of the problem being specified.
+
+In this repository, algorithmic problems should generally remain
+language-independent at the specification stage.
 
 ---
 
 # Key Takeaways
 
-The learner should remember the following principles:
+After completing this document, the learner should understand that:
 
-- Every algorithm begins with a computational problem.
-- Problems should be specified before they are solved.
-- Specification describes **what**, not **how**.
-- Inputs and outputs define the behaviour of the problem.
-- Constraints influence algorithm selection.
-- Examples improve understanding.
-- Implementation should never appear inside the specification.
-- A precise specification reduces ambiguity and improves software quality.
+- every algorithm begins with a computational problem;
+- a computational problem describes required behaviour;
+- a specification defines that behaviour precisely;
+- the specification describes **what**, not **how**;
+- problem instances represent concrete cases of the general problem;
+- inputs and outputs define the fundamental problem relationship;
+- constraints define the limits of valid instances;
+- assumptions make the reasoning context explicit;
+- examples clarify a specification but do not replace it;
+- correctness depends upon a previously defined specification;
+- tests should later derive from the documented behaviour;
+- implementation details should remain outside the problem specification.
 
-Problem specification therefore represents the first formal step of disciplined algorithm development.
+Problem specification therefore represents one of the first formal stages of
+disciplined algorithmic reasoning.
 
-It provides the foundation upon which every algorithm in the **Algorithms Java Mastery** repository will be designed, implemented, tested, and analysed.
+It establishes the foundation upon which algorithm design, correctness
+reasoning, complexity analysis, Java implementation, and automated validation
+will later be developed.
+
+---
+
+# Next Document
+
+```text
+03-preconditions-and-postconditions.md
+```
+
+The next document introduces explicit behavioural contracts.
+
+It examines how **preconditions** define the conditions required before an
+algorithm executes and how **postconditions** describe the guarantees that must
+hold after successful execution.
+
+These concepts transform the problem specification into a more precise basis
+for correctness reasoning, implementation, and automated testing.
+
+---
+
+# Academic Foundation
+
+This document is inspired primarily by:
+
+> **Introduction to Algorithms**
+>
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
+> Fourth Edition  
+> MIT Press
+
+The book provides the principal academic foundation for the systematic
+description and analysis of computational problems throughout **Algorithms Java
+Mastery**.
+
+Additional academic and technical references supporting the repository are
+documented in:
+
+```text
+docs/00-project/10-references.md
+```
+
+Complementary references may be introduced when a topic requires additional
+formal treatment of specifications, contracts, or program correctness.

@@ -14,15 +14,6 @@ The central principle of this module is:
 
 Programming is therefore considered the consequence of algorithmic reasoning rather than its starting point.
 
-The concepts presented throughout this module are primarily based on recognised
-Computer Science literature, particularly *Introduction to Algorithms*
-(Cormen, Leiserson, Rivest and Stein), and are complemented by other
-authoritative academic and technical references listed in
-`docs/00-project/10-references.md`.
-
-Rather than reproducing textbook content, this repository transforms those
-foundations into original explanations, Java implementations, automated tests,
-and engineering-oriented documentation.
 ---
 
 # Purpose
@@ -38,19 +29,15 @@ The expected progression is:
 ```text
 Computational Problem
         ↓
-Problem Understanding
-        ↓
 Formal Specification
         ↓
-Algorithmic Strategy
+Algorithmic Reasoning
         ↓
-Correctness Reasoning
+Strategy Design
         ↓
-Complexity Analysis
+Pseudocode
         ↓
 Java Implementation
-        ↓
-Automated Testing
 ```
 
 The concepts introduced here will be reused throughout every subsequent module of the repository.
@@ -76,35 +63,22 @@ These competencies form the basis for every algorithm studied later in the repos
 
 ---
 
-# Core Principles
-
-The Foundations module is organised around four complementary principles.
-
-- Understand the computational problem before implementation.
-- Define explicit behavioural contracts.
-- Justify algorithm correctness through reasoning.
-- Treat implementation as the consequence of analysis rather than intuition.
-
-These principles are applied throughout every subsequent module in the
-repository.
-
----
-
 # Module Structure
 
-The module follows this progressive organisation:
+The current structure is:
 
 ```text
 01-foundations/
 ├── README.md
-├── 01-algorithm-definition.md
-├── 02-problem-specification.md
-├── 03-preconditions-and-postconditions.md
-├── 04-edge-cases.md
-├── 05-correctness.md
-├── 06-invariants.md
-├── 07-problem-decomposition.md
-└── 08-problem-solving-method.md
+├── algorithm-definition.md
+├── problem-specification.md
+├── preconditions-and-postconditions.md
+├── edge-cases.md
+├── correctness.md
+├── invariants.md
+├── problem-decomposition.md
+└── problem-solving-method.md
+```
 
 Each document addresses one essential concept of algorithmic reasoning.
 
@@ -299,11 +273,3 @@ Instead, each problem should first be analysed, specified, and reasoned about be
 The objective is to establish disciplined algorithmic thinking that remains applicable regardless of the programming language or technology used.
 
 This methodology becomes the intellectual foundation of the entire **Algorithms Java Mastery** repository.
-
-The principal reference for this module is:
-
-Cormen, Leiserson, Rivest and Stein.
-Introduction to Algorithms (Fourth Edition, MIT Press).
-
-Additional references may be included in individual documents when a topic
-requires more specialised literature.
