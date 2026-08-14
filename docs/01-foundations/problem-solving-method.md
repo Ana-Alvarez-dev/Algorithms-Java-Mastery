@@ -2,41 +2,80 @@
 
 ## Algorithms Java Mastery
 
-This document defines the standard methodology used throughout the **Algorithms Java Mastery** repository for studying, designing, implementing, and analysing algorithms.
+This document defines the standard problem-solving methodology adopted
+throughout **Algorithms Java Mastery** for studying, reasoning about,
+implementing, validating, and evaluating algorithms.
 
-Rather than beginning with programming, the methodology establishes a disciplined reasoning process that starts with understanding the computational problem and concludes with experimental evaluation.
+**Algorithms Java Mastery** is inspired primarily by *Introduction to
+Algorithms* (Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
+Clifford Stein), which provides the principal academic foundation for the
+systematic study of algorithms throughout the repository.
 
-Every algorithm implemented in this repository should follow the same study procedure.
+Rather than beginning with programming, the methodology establishes a
+disciplined reasoning process that begins with understanding the computational
+problem and progressively develops toward specification, algorithm design,
+correctness reasoning, complexity analysis, Java implementation, automated
+validation, and experimental evaluation when appropriate.
+
+The methodology consolidates the concepts introduced throughout the
+**Foundations** module into a repeatable study process.
 
 The central question addressed throughout this document is:
 
-> **How should an algorithm be studied before it is implemented?**
+> **How should an algorithmic problem be studied before, during, and after
+> implementation?**
 
 ---
 
 # Purpose
 
-The purpose of this document is to establish a systematic and repeatable methodology for algorithmic study.
+The purpose of this document is to establish a systematic and repeatable
+methodology for algorithmic problem solving.
 
-Instead of treating each algorithm as an isolated implementation, the learner follows a structured process that develops analytical thinking, software engineering practices, and professional problem-solving skills.
+Instead of treating each algorithm as an isolated implementation exercise, the
+learner follows a structured process that connects:
 
-The expected progression is:
+* problem understanding;
+* formal specification;
+* behavioural contracts;
+* edge-case analysis;
+* problem decomposition;
+* strategy design;
+* pseudocode;
+* manual reasoning;
+* correctness;
+* computational complexity;
+* Java implementation;
+* automated testing;
+* empirical evaluation;
+* technical conclusions.
+
+The conceptual progression is:
 
 ```text
 Computational Problem
         ↓
+Problem Understanding
+        ↓
 Formal Specification
         ↓
-Algorithm Design
+Algorithmic Reasoning
         ↓
-Implementation
+Correctness
         ↓
-Validation
+Complexity Analysis
         ↓
-Experimental Evaluation
+Java Implementation
+        ↓
+Automated Validation
+        ↓
+Experimental Evaluation When Appropriate
+        ↓
+Engineering Conclusions
 ```
 
-This methodology transforms algorithm study into an engineering process rather than a programming exercise.
+This methodology transforms algorithm study from a syntax-oriented activity
+into a disciplined Computer Science and engineering process.
 
 ---
 
@@ -44,25 +83,167 @@ This methodology transforms algorithm study into an engineering process rather t
 
 After studying this document, the learner should be able to:
 
-- analyse computational problems systematically;
-- define formal specifications;
-- identify contracts and boundary conditions;
-- design algorithmic strategies;
-- write language-independent pseudocode;
-- validate solutions through manual execution;
-- reason about correctness;
-- analyse computational complexity;
-- implement algorithms in Java;
-- verify implementations through automated testing;
-- evaluate performance using benchmarking.
+* analyse computational problems systematically;
+* identify inputs, outputs, assumptions, and constraints;
+* formulate precise problem specifications;
+* define preconditions and postconditions;
+* identify valid edge cases and invalid inputs;
+* decompose complex problems when decomposition improves reasoning;
+* design language-independent algorithmic strategies;
+* express solutions through pseudocode;
+* manually trace algorithm execution;
+* formulate and use invariants when appropriate;
+* reason about partial and total correctness;
+* analyse theoretical time and auxiliary-space complexity;
+* implement algorithms faithfully in Java;
+* verify implementation behaviour through automated testing;
+* evaluate performance experimentally when benchmarking provides meaningful
+  evidence;
+* interpret results without confusing empirical measurements with theoretical
+  complexity;
+* document technical conclusions and limitations.
 
-These competencies define the complete learning cycle adopted throughout this repository.
+These competencies define the complete learning cycle applied throughout the
+repository.
 
 ---
 
-# The Algorithmic Study Process
+# Methodology Overview
 
-Every algorithm should be studied using the following sequence.
+A complete algorithm study generally follows this progression:
+
+```text
+1. Problem Understanding
+        ↓
+2. Input and Output Identification
+        ↓
+3. Formal Specification
+        ↓
+4. Preconditions and Postconditions
+        ↓
+5. Edge-Case Analysis
+        ↓
+6. Problem Decomposition When Useful
+        ↓
+7. Strategy Design
+        ↓
+8. Pseudocode
+        ↓
+9. Manual Execution
+        ↓
+10. Correctness Reasoning
+        ↓
+11. Complexity Analysis
+        ↓
+12. Java Implementation
+        ↓
+13. Automated Testing
+        ↓
+14. Benchmarking When Appropriate
+        ↓
+15. Technical Conclusions
+```
+
+The sequence is intentionally progressive.
+
+Later stages may reveal errors or assumptions that require returning to earlier
+ones.
+
+The process should therefore be understood as **structured but iterative**.
+
+---
+
+# Stage 1 — Problem Understanding
+
+The first stage consists of understanding the computational problem without
+considering Java syntax or implementation details.
+
+Questions include:
+
+* What must be solved?
+* What information is provided?
+* What result is required?
+* What conditions define valid input?
+* Which constraints exist?
+* Which assumptions are already part of the problem?
+* Which aspects remain ambiguous?
+
+The objective is to understand the problem before attempting to solve it.
+
+Implementation should not begin while the computational objective remains
+unclear.
+
+## Expected Result
+
+A precise conceptual understanding of the problem and its boundaries.
+
+---
+
+# Stage 2 — Input and Output Identification
+
+The learner identifies the observable relationship between the information
+received and the result required.
+
+Conceptually:
+
+```text
+Input
+    ↓
+Computational Problem
+    ↓
+Output
+```
+
+Inputs may include:
+
+* arrays;
+* values;
+* strings;
+* matrices;
+* trees;
+* graphs;
+* structured collections.
+
+Outputs may include:
+
+* a value;
+* an index;
+* a boolean result;
+* an ordered structure;
+* a transformed structure;
+* a path;
+* an optimal solution.
+
+The objective is to define what enters the computational problem and what must
+be produced.
+
+## Expected Result
+
+Explicitly identified inputs and outputs.
+
+---
+
+# Stage 3 — Formal Specification
+
+Problem understanding is transformed into a precise specification.
+
+The specification should identify, when applicable:
+
+* the problem statement;
+* input domain;
+* expected output;
+* constraints;
+* assumptions;
+* valid problem instances;
+* representative examples.
+
+The specification answers:
+
+> **What behaviour is required?**
+
+It should remain independent of Java and algorithmic strategy.
+
+Conceptually:
 
 ```text
 Problem Understanding
@@ -71,6 +252,7 @@ Input and Output Identification
         ↓
 Formal Specification
         ↓
+<<<<<<< Updated upstream:docs/01-foundations/problem-solving-method.md
 Preconditions
         ↓
 Postconditions
@@ -96,176 +278,241 @@ Automated Testing
 Benchmarking
         ↓
 Technical Conclusions
+=======
+Required Behaviour
+>>>>>>> Stashed changes:docs/01-foundations/08-problem-solving-method.md
 ```
 
-Each stage has a specific responsibility and should not be skipped.
+## Expected Result
+
+A precise, implementation-independent description of the computational problem.
 
 ---
 
-# Stage 1 — Problem Understanding
+# Stage 4 — Preconditions and Postconditions
 
-The first step consists of understanding the computational problem.
+The learner refines the specification through explicit behavioural contracts.
 
-Questions include:
+## Preconditions
 
-- What must be solved?
-- What information is available?
-- What result is expected?
-- Which constraints exist?
+Preconditions define conditions that must hold before the algorithm is expected
+to satisfy its guarantees.
 
-Implementation must not begin during this stage.
-
-The objective is complete comprehension of the problem.
-
----
-
-# Stage 2 — Input and Output Identification
-
-Every computational problem receives information and produces a result.
-
-The learner should explicitly identify:
+Examples include:
 
 ```text
-Input
-    ↓
+The input array contains at least one element.
+```
+
+```text
+The search input is ordered.
+```
+
+```text
+The supplied index belongs to the valid range.
+```
+
+## Postconditions
+
+Postconditions define what must hold after successful execution.
+
+Examples include:
+
+```text
+The returned value belongs to the input.
+```
+
+```text
+Every element in the output satisfies the required ordering.
+```
+
+Conceptually:
+
+```text
+Preconditions
+        ↓
 Algorithm
-    ↓
-Output
+        ↓
+Postconditions
 ```
 
-This simple model defines the observable behaviour of the algorithm.
+## Expected Result
+
+A clear behavioural contract that later guides correctness reasoning,
+implementation, and testing.
 
 ---
 
-# Stage 3 — Formal Specification
+# Stage 5 — Edge-Case Analysis
 
-The computational problem is transformed into a precise specification.
+The learner identifies important boundaries of the valid problem domain.
 
-The specification should define:
+Examples may include:
 
-- problem statement;
-- inputs;
-- outputs;
-- assumptions;
-- constraints;
-- examples.
+* minimum valid input;
+* single-element structures;
+* duplicated values;
+* negative values;
+* numeric extremes;
+* already ordered input;
+* reverse-ordered input;
+* structurally degenerate cases.
 
-A correct specification eliminates ambiguity before implementation begins.
-
----
-
-# Stage 4 — Preconditions
-
-Execution assumptions are documented.
-
-Examples include:
+The learner should also distinguish:
 
 ```text
-Array is not null.
-
-Array contains at least one element.
-
-Index belongs to the valid range.
+Valid Edge Cases
 ```
 
-The algorithm is only expected to behave correctly when these conditions are satisfied.
-
----
-
-# Stage 5 — Postconditions
-
-Expected guarantees are documented.
-
-Examples include:
+from:
 
 ```text
-Returned value belongs to the array.
-
-No value is greater than the returned value.
+Invalid Inputs
 ```
 
-These guarantees define the expected behaviour after execution.
+An empty collection, for example, may be valid for one problem and invalid for
+another.
+
+Edge-case analysis should therefore begin from the specification and contract.
+
+Conceptually:
+
+```text
+Specification
+        ↓
+Valid Input Domain
+        ↓
+Boundary Analysis
+        ↓
+Edge Cases
+```
+
+## Expected Result
+
+A documented set of boundary conditions and expected behaviours relevant to the
+problem.
 
 ---
 
-# Stage 6 — Edge-Case Analysis
+# Stage 6 — Problem Decomposition
 
-Boundary situations are identified before implementation.
+When the problem is sufficiently complex, it may be decomposed into smaller
+responsibilities or subproblems.
 
-Typical examples include:
-
-- empty collections;
-- single-element inputs;
-- duplicated values;
-- negative values;
-- maximum and minimum values.
-
-Every identified edge case should later become an automated test.
-
----
-
-# Stage 7 — Problem Decomposition
-
-The computational problem is divided into smaller responsibilities.
-
-General progression:
+Conceptually:
 
 ```text
 Complex Problem
         ↓
-Subproblems
+Identify Structure
         ↓
-Algorithm Design
+Responsibilities or Subproblems
+        ↓
+Reason About Each Part
+        ↓
+Complete Solution
 ```
 
-Each subproblem becomes easier to understand and solve.
+Decomposition should be used when it improves understanding.
+
+Not every problem requires explicit decomposition.
+
+The learner should distinguish:
+
+* conceptual responsibilities;
+* genuine computational subproblems;
+* execution steps.
+
+Problem decomposition should not automatically determine Java classes,
+interfaces, methods, or packages.
+
+## Expected Result
+
+A clearer representation of the internal structure of the computational
+problem.
 
 ---
 
-# Stage 8 — Strategy Design
+# Stage 7 — Strategy Design
 
-Only after understanding the problem should the learner design a solution strategy.
+Only after the problem has been understood and specified should the learner
+select or design an algorithmic strategy.
 
-Possible strategies include:
+Possible strategy families may include:
 
-- sequential processing;
-- divide and conquer;
-- recursion;
-- dynamic programming;
-- greedy algorithms;
-- hashing.
+* sequential processing;
+* iterative reduction;
+* recursion;
+* divide and conquer;
+* greedy reasoning;
+* dynamic programming;
+* hashing;
+* graph traversal;
+* exhaustive search;
+* backtracking.
 
-The strategy should remain independent of Java.
+The strategy should be selected because it fits the computational structure of
+the problem.
+
+It should remain independent of Java syntax.
+
+Conceptually:
+
+```text
+Specification
+        ↓
+Problem Structure
+        ↓
+Candidate Strategies
+        ↓
+Selected Algorithmic Strategy
+```
+
+## Expected Result
+
+A justified, language-independent solution strategy.
 
 ---
 
-# Stage 9 — Pseudocode
+# Stage 8 — Pseudocode
 
-The algorithm is described using language-independent notation.
+The selected strategy is expressed in structured pseudocode.
 
-Example:
+Pseudocode should make the algorithmic logic visible without introducing
+unnecessary programming-language syntax.
+
+For example:
 
 ```text
 Set maximum to the first element.
 
-For every remaining element:
+For each remaining element:
 
-    If current element is greater:
+    If the current element is greater than maximum:
 
         Update maximum.
 
 Return maximum.
 ```
 
-Pseudocode focuses on logic rather than syntax.
+Pseudocode should:
+
+* preserve the strategy;
+* make control flow understandable;
+* use meaningful conceptual operations;
+* avoid Java-specific constructs unless necessary for explanation.
+
+## Expected Result
+
+A clear representation of the algorithm before implementation.
 
 ---
 
-# Stage 10 — Manual Execution
+# Stage 9 — Manual Execution
 
-The learner executes the algorithm manually.
+The learner manually traces the algorithm using representative inputs.
 
-Example:
+For example:
 
 ```text
 Input
@@ -273,233 +520,821 @@ Input
 [7, 2, 15, 4, 9]
 ```
 
-Execution:
+A manual trace may examine:
 
 ```text
-Maximum = 7
+Initial maximum = 7
 
-↓
+Process 2
+maximum = 7
 
-Compare 2
+Process 15
+maximum = 15
 
-↓
+Process 4
+maximum = 15
 
-Compare 15
-
-↓
-
-Compare 4
-
-↓
-
-Compare 9
-
-↓
+Process 9
+maximum = 15
 
 Return 15
 ```
 
-Manual tracing validates the reasoning before programming.
+Manual tracing helps reveal:
+
+* incorrect assumptions;
+* missing conditions;
+* incorrect boundaries;
+* flawed strategy transitions;
+* candidate invariants.
+
+However, manual execution does not prove general correctness.
+
+It is a reasoning aid.
+
+## Expected Result
+
+Evidence that the proposed strategy behaves as expected for selected examples.
 
 ---
 
-# Stage 11 — Correctness Reasoning
+# Stage 10 — Correctness Reasoning
 
-The learner explains why the algorithm always produces the correct result.
+The learner explains why the algorithm satisfies its specification for every
+valid problem instance covered by its contract.
 
-Topics include:
+Correctness reasoning may involve:
 
-- invariants;
-- contracts;
-- logical arguments;
-- termination.
+* preconditions;
+* postconditions;
+* loop invariants;
+* structural invariants;
+* termination arguments;
+* mathematical induction;
+* recursive reasoning;
+* decomposition-based arguments.
 
-Correctness precedes optimisation.
+Conceptually:
 
----
+```text
+Specification
+        ↓
+Algorithmic Strategy
+        ↓
+Correctness Argument
+        ↓
+Required Postconditions
+```
 
-# Stage 12 — Complexity Analysis
+The level of formalism should remain proportional to the algorithm and the
+learning objective.
 
-The computational cost is analysed.
+Correctness reasoning should answer:
 
-Topics include:
+> **Why should this algorithm work?**
 
-- time complexity;
-- space complexity;
-- asymptotic growth;
-- Big O notation.
+## Expected Result
 
-This stage evaluates efficiency independently of hardware.
-
----
-
-# Stage 13 — Java Implementation
-
-Only now is the algorithm implemented.
-
-Implementation should respect:
-
-- clean code;
-- object-oriented principles;
-- package organisation;
-- project architecture.
-
-Java becomes the implementation language rather than the design language.
+A documented argument supporting partial or total correctness as appropriate.
 
 ---
 
-# Stage 14 — Automated Testing
+# Stage 11 — Complexity Analysis
 
-Every implementation should be validated using automated tests.
+Once the algorithmic strategy has been established, its theoretical
+computational cost is analysed.
 
-Testing should include:
+The learner should consider, when applicable:
 
-- ordinary cases;
-- edge cases;
-- invalid inputs;
-- contract verification.
+* input size;
+* significant operations;
+* operation counting;
+* growth functions;
+* best-case behaviour;
+* average-case behaviour;
+* worst-case behaviour;
+* time complexity;
+* auxiliary-space complexity;
+* recursion depth;
+* time-space trade-offs.
 
-Testing will be implemented using:
+Conceptually:
 
-- JUnit Jupiter;
-- AssertJ.
+```text
+Algorithm
+        ↓
+Input Size
+        ↓
+Significant Operations
+        ↓
+Growth Analysis
+        ↓
+Asymptotic Complexity
+```
 
-Automated tests provide confidence that the implementation satisfies its specification.
+Complexity analysis belongs to the algorithmic level.
+
+It should not be inferred from a single benchmark execution.
+
+Formal complexity analysis is developed in:
+
+```text
+docs/02-complexity/
+```
+
+## Expected Result
+
+A justified theoretical analysis of computational resource growth.
 
 ---
 
-# Stage 15 — Benchmarking
+# Stage 12 — Java Implementation
 
-Performance is evaluated experimentally.
+Only after the algorithm has been understood, specified, designed, and analysed
+is it translated into Java.
 
-Topics include:
+Production code belongs under:
 
-- execution time;
-- scalability;
-- comparison between algorithms.
+```text
+src/main/java/org/anaalvarez/algorithms/
+```
 
-Benchmarking will be performed using **Java Microbenchmark Harness (JMH)**.
+The implementation should:
 
-Experimental evaluation complements theoretical complexity analysis.
+* preserve the algorithmic strategy;
+* respect the documented contract;
+* use meaningful names;
+* make mutation explicit;
+* remain readable;
+* avoid unnecessary abstraction;
+* remain independently testable;
+* follow the Java project structure and engineering standards.
+
+Java is therefore the **implementation language**, not the reasoning language.
+
+Conceptually:
+
+```text
+Algorithmic Knowledge
+        ↓
+Java Translation
+        ↓
+Executable Implementation
+```
+
+## Expected Result
+
+A compilable Java implementation faithful to the documented algorithm.
 
 ---
 
-# Stage 16 — Technical Conclusions
+# Stage 13 — Automated Testing
 
-Every algorithm should conclude with a technical evaluation.
+The Java implementation is verified through automated tests.
 
-Possible questions include:
+Tests should derive primarily from:
 
-- Is the algorithm correct?
-- Is it efficient?
-- Can it be improved?
-- Which situations favour its use?
-- Which design pattern best represents its behaviour?
+* the specification;
+* preconditions;
+* postconditions;
+* equivalence classes;
+* important edge cases;
+* invalid-input policy;
+* structural invariants when observable.
 
-The objective is to encourage critical thinking rather than simple implementation.
+Testing may include:
+
+* ordinary cases;
+* selected edge cases;
+* invalid inputs when behaviour is defined;
+* repeated values;
+* mutation behaviour;
+* regression scenarios.
+
+Not every identified edge case necessarily requires a unique test.
+
+Test selection should remain proportional to the contract and known failure
+risks.
+
+The repository uses:
+
+```text
+JUnit Jupiter
+        +
+AssertJ
+```
+
+Automated testing provides executable evidence that the Java implementation
+behaves consistently with its specification for selected problem instances.
+
+It does not replace correctness reasoning.
+
+Formal testing practices are developed in:
+
+```text
+docs/16-testing/
+```
+
+## Expected Result
+
+A deterministic and readable automated test suite validating relevant
+implementation behaviour.
+
+---
+
+# Stage 14 — Benchmarking When Appropriate
+
+Benchmarking is introduced only when empirical performance evaluation provides
+meaningful educational or engineering value.
+
+The repository uses:
+
+```text
+Java Microbenchmark Harness (JMH)
+```
+
+Benchmarking may be useful when comparing:
+
+* algorithm variants;
+* implementation strategies;
+* input sizes;
+* input distributions;
+* iterative and recursive solutions;
+* theoretical expectations and observed behaviour.
+
+A benchmark should define:
+
+* the implementation being measured;
+* input size;
+* data distribution;
+* benchmark state;
+* setup;
+* warm-up;
+* measurement;
+* environmental limitations.
+
+Benchmarking answers:
+
+> **How did this implementation perform under these defined experimental
+> conditions?**
+
+It does not answer:
+
+> **What is the algorithm's asymptotic complexity?**
+
+That question belongs to theoretical analysis.
+
+Benchmarking is developed formally in:
+
+```text
+docs/17-benchmarking/
+```
+
+## Expected Result
+
+Controlled empirical evidence when performance measurement is relevant.
+
+---
+
+# When Benchmarking Is Not Required
+
+Not every algorithm needs a benchmark.
+
+Benchmarking may be omitted when:
+
+* the topic is conceptual;
+* performance comparison is not part of the learning objective;
+* correctness has not yet been established;
+* the implementation is too simple for meaningful comparison;
+* environmental variation would make the result uninformative;
+* theoretical analysis already answers the relevant educational question.
+
+Benchmarking exists to provide evidence, not to satisfy a procedural checklist.
+
+---
+
+# Stage 15 — Technical Conclusions
+
+The final stage consolidates the knowledge developed throughout the study
+process.
+
+Relevant questions may include:
+
+* What computational problem was solved?
+* Which assumptions were required?
+* Why is the algorithm correct?
+* What is its computational complexity?
+* Which edge cases were important?
+* Which trade-offs exist?
+* Did the implementation preserve the documented strategy?
+* Did automated tests reveal important defects?
+* Did benchmark observations align with theoretical expectations?
+* Which limitations remain?
+* In which situations is the algorithm appropriate?
+* Which alternative strategies could also solve the problem?
+
+Technical conclusions should distinguish:
+
+```text
+Theoretical Evidence
+```
+
+from:
+
+```text
+Implementation Evidence
+```
+
+and:
+
+```text
+Experimental Evidence
+```
+
+A design pattern should only be discussed when an actual implementation or
+structural problem justifies its use.
+
+It should not be treated as a mandatory conclusion for every algorithm.
+
+## Expected Result
+
+A concise technical evaluation connecting theory, implementation, validation,
+and evidence.
+
+---
+
+# The Methodology Is Iterative
+
+Although the methodology defines a recommended progression, algorithm study is
+not strictly linear.
+
+Later stages may reveal problems in earlier reasoning.
+
+Examples include:
+
+```text
+Failed Test
+        ↓
+Revisit Specification or Implementation
+```
+
+```text
+Incorrect Invariant
+        ↓
+Revisit Correctness Reasoning
+```
+
+```text
+Unexpected Complexity
+        ↓
+Revisit Algorithmic Strategy
+```
+
+```text
+Unexpected Benchmark Result
+        ↓
+Revisit Experimental Design or Assumptions
+```
+
+Returning to an earlier stage is part of disciplined problem solving.
+
+It does not represent failure.
+
+---
+
+# Evidence Produced by the Methodology
+
+Each stage produces a different form of knowledge or evidence.
+
+| Stage                 | Principal Evidence                                    |
+| --------------------- | ----------------------------------------------------- |
+| Problem Understanding | Clear computational objective                         |
+| Specification         | Defined inputs, outputs, constraints, and assumptions |
+| Contracts             | Preconditions and postconditions                      |
+| Edge-Case Analysis    | Boundary understanding                                |
+| Decomposition         | Problem structure                                     |
+| Strategy Design       | Algorithmic reasoning                                 |
+| Pseudocode            | Language-independent procedure                        |
+| Manual Execution      | Example-based reasoning                               |
+| Correctness           | Logical justification                                 |
+| Complexity            | Theoretical resource analysis                         |
+| Java Implementation   | Executable solution                                   |
+| Automated Testing     | Behavioural evidence                                  |
+| Benchmarking          | Experimental evidence                                 |
+| Technical Conclusions | Consolidated engineering knowledge                    |
+
+No single form of evidence replaces the others.
 
 ---
 
 # Applying the Methodology Throughout the Repository
 
-Every future module should apply the same methodology.
+The methodology remains consistent across later modules, although its emphasis
+changes according to the topic.
 
 For example:
 
 ```text
 Arrays
         ↓
-Problem Understanding
+Understand Representation
         ↓
-Specification
+Specify Operation
         ↓
-Implementation
-
-Searching
+Design Algorithm
         ↓
-Problem Understanding
+Analyse
         ↓
-Specification
-        ↓
-Implementation
-
-Sorting
-        ↓
-Problem Understanding
-        ↓
-Specification
-        ↓
-Implementation
-
-Trees
-        ↓
-Problem Understanding
-        ↓
-Specification
-        ↓
-Implementation
-
-Graphs
-        ↓
-Problem Understanding
-        ↓
-Specification
-        ↓
-Implementation
+Implement and Test
 ```
 
-The methodology remains constant regardless of the algorithm being studied.
+```text
+Searching
+        ↓
+Define Search Contract
+        ↓
+Design Strategy
+        ↓
+Reason About Correctness
+        ↓
+Analyse Complexity
+        ↓
+Implement and Test
+```
+
+```text
+Sorting
+        ↓
+Define Ordering Requirements
+        ↓
+Identify Invariants
+        ↓
+Analyse Complexity
+        ↓
+Implement Variants
+        ↓
+Compare When Appropriate
+```
+
+```text
+Trees and Graphs
+        ↓
+Define Structural Invariants
+        ↓
+Design Traversal or Modification
+        ↓
+Reason About Correctness
+        ↓
+Analyse Complexity
+        ↓
+Implement and Validate
+```
+
+```text
+Dynamic Programming
+        ↓
+Identify Subproblem Structure
+        ↓
+Define Recurrence
+        ↓
+Reason About Correctness
+        ↓
+Analyse Complexity
+        ↓
+Implement and Compare Variants
+```
+
+The reasoning framework remains stable while individual techniques evolve.
+
+---
+
+# Relationship with the Study Methodology
+
+This document defines the practical algorithm-level method used throughout the
+repository.
+
+It operates within the broader methodology defined in:
+
+```text
+docs/00-project/03-study-methodology.md
+```
+
+Conceptually:
+
+```text
+Project Study Methodology
+        ↓
+Defines the Overall Learning Process
+        ↓
+Foundations Problem-Solving Method
+        ↓
+Defines the Algorithm-Level Reasoning Process
+```
+
+The two documents are complementary rather than redundant.
 
 ---
 
 # Relationship with Software Engineering
 
-The study process aligns algorithmic reasoning with professional software development practices.
+The problem-solving method begins in Computer Science reasoning and later
+connects naturally with professional engineering practices.
 
-It integrates:
+Conceptually:
 
-- problem analysis;
-- software contracts;
-- design patterns;
-- testing;
-- benchmarking;
-- continuous integration.
+```text
+Problem Understanding
+        ↓
+Algorithmic Reasoning
+        ↓
+Correctness
+        ↓
+Complexity
+        ↓
+Java Implementation
+        ↓
+Testing
+        ↓
+Benchmarking
+        ↓
+Versioned and Reproducible Engineering
+```
 
-This approach prepares the learner not only to implement algorithms but also to justify architectural and technical decisions in professional environments.
+Later repository modules introduce:
+
+* Java project organisation;
+* Maven;
+* Git;
+* Linux development environments;
+* automated testing;
+* benchmarking;
+* Continuous Integration.
+
+These technologies support the methodology.
+
+They do not define it.
+
+---
+
+# Relationship with Design Patterns
+
+Design patterns are not part of the foundational algorithmic method itself.
+
+They belong to implementation and software-design decisions.
+
+A pattern may later become useful when several Java implementations expose a
+genuine shared responsibility.
+
+For example:
+
+```text
+Several Interchangeable Algorithms
+        ↓
+Meaningful Shared Contract
+        ↓
+Possible Strategy Pattern
+```
+
+However:
+
+```text
+Multiple Algorithms
+```
+
+does not automatically imply:
+
+```text
+Strategy Pattern
+```
+
+Patterns should therefore be introduced only when they improve the actual Java
+design or provide clear educational value.
 
 ---
 
 # Best Practices
 
-Every algorithm should:
+When applying the problem-solving method:
 
-- begin with the problem;
-- avoid immediate implementation;
-- document assumptions;
-- analyse edge cases;
-- justify correctness;
-- evaluate complexity;
-- implement only after reasoning;
-- verify behaviour through automated tests;
-- compare performance experimentally;
-- document technical conclusions.
+* begin with the computational problem;
+* keep problem reasoning independent of Java initially;
+* make assumptions and constraints explicit;
+* define preconditions and postconditions;
+* distinguish valid edge cases from invalid inputs;
+* decompose only when decomposition improves reasoning;
+* justify strategy selection;
+* use pseudocode before implementation when useful;
+* manually trace representative cases;
+* reason about correctness explicitly;
+* analyse theoretical complexity before interpreting performance measurements;
+* implement only after the algorithm is sufficiently understood;
+* derive tests from the specification and failure risks;
+* benchmark only when experimental evaluation provides meaningful evidence;
+* separate theoretical, implementation, and empirical conclusions;
+* revisit earlier stages when new evidence reveals an inconsistency.
 
-Following this methodology promotes disciplined, reproducible, and professional algorithm development.
+The methodology should create discipline without becoming a mechanical
+checklist.
+
+---
+
+# Common Mistakes
+
+## Starting with Java
+
+Writing code before understanding the problem often hides incorrect assumptions.
+
+---
+
+## Treating Examples as a Specification
+
+Examples clarify behaviour but do not define the complete valid problem domain.
+
+---
+
+## Skipping Contracts
+
+Without explicit preconditions and postconditions, correctness and test
+expectations may become ambiguous.
+
+---
+
+## Treating Every Unusual Input as an Edge Case
+
+Some inputs lie outside the declared contract.
+
+Valid edge cases and invalid inputs should remain distinct.
+
+---
+
+## Decomposing Every Problem
+
+Simple problems may not benefit from additional decomposition.
+
+---
+
+## Using Manual Execution as Proof
+
+Manual traces provide useful examples but do not establish correctness across
+the complete valid domain.
+
+---
+
+## Testing Before Clarifying Behaviour
+
+Tests should derive from a sufficiently precise specification rather than define
+the specification accidentally.
+
+---
+
+## Measuring Before Analysing
+
+Benchmark results do not replace theoretical complexity analysis.
+
+---
+
+## Benchmarking Incorrect Implementations
+
+Correctness must be established before performance comparisons become
+meaningful.
+
+---
+
+## Introducing Design Patterns Mechanically
+
+A pattern should solve a recognised design problem rather than be added because
+it appears in a checklist.
 
 ---
 
 # Key Takeaways
 
-The learner should remember the following principles:
+After completing this document, the learner should understand that:
 
-- Algorithms should be understood before they are implemented.
-- Specification precedes programming.
-- Correctness precedes optimisation.
-- Complexity analysis precedes benchmarking.
-- Testing validates implementations but does not replace formal reasoning.
-- Benchmarking complements theoretical analysis.
-- Every algorithm should follow the same systematic methodology.
+* algorithms should be understood before they are implemented;
+* problem understanding precedes specification;
+* specifications define required behaviour;
+* preconditions and postconditions define contractual boundaries;
+* edge cases expose important boundaries of the valid domain;
+* decomposition is used when it improves reasoning;
+* algorithmic strategies should remain independent of Java initially;
+* pseudocode and manual tracing support understanding;
+* correctness reasoning explains why an algorithm should work;
+* complexity analysis examines theoretical computational growth;
+* Java implementation translates the algorithm into executable software;
+* testing provides implementation evidence but does not replace reasoning;
+* benchmarking provides empirical evidence but does not replace complexity
+  analysis;
+* technical conclusions should distinguish theoretical, implementation, and
+  experimental evidence;
+* the methodology is iterative and may require revisiting earlier stages.
 
-The **Problem-Solving Method** therefore becomes the methodological foundation of the entire **Algorithms Java Mastery** repository.
+The **Problem-Solving Method** therefore becomes the algorithm-level
+methodological foundation of **Algorithms Java Mastery**.
 
-It unifies the concepts introduced throughout the **Foundations** module and establishes the standard workflow that will be applied consistently in every subsequent module, from Arrays and Searching to Graphs and Dynamic Programming.
+It consolidates the concepts introduced throughout the **Foundations** module
+and establishes the reasoning process that will be applied progressively to
+arrays, searching, sorting, recursion, trees, graphs, algorithm design
+paradigms, and later Java implementations.
+
+---
+
+# Module Completion
+
+With this document, the **Foundations** module establishes the principal
+conceptual tools required before beginning formal complexity analysis.
+
+The module progression is now:
+
+```text
+01-algorithm-definition.md
+        ↓
+02-problem-specification.md
+        ↓
+03-preconditions-and-postconditions.md
+        ↓
+04-edge-cases.md
+        ↓
+05-correctness.md
+        ↓
+06-invariants.md
+        ↓
+07-problem-decomposition.md
+        ↓
+08-problem-solving-method.md
+```
+
+Together, these documents establish a transition from:
+
+```text
+"What code should I write?"
+```
+
+toward:
+
+```text
+"What problem am I solving,
+which conditions define it,
+why should the strategy work,
+and how should I analyse it before implementation?"
+```
+
+That transition represents the principal educational outcome of the
+**Foundations** module.
+
+---
+
+# Next Module
+
+```text
+docs/02-complexity/
+```
+
+The next module introduces the formal analysis of computational cost.
+
+It develops the concepts required to study:
+
+* input size;
+* significant operations;
+* operation counting;
+* algorithm growth;
+* asymptotic notation;
+* Big O;
+* Big Omega;
+* Big Theta;
+* best, average, and worst cases;
+* auxiliary space;
+* time-space trade-offs.
+
+The next major question becomes:
+
+> **Once an algorithm is understood and its correctness can be reasoned about,
+> how do the computational resources required by that algorithm grow as the
+> problem size increases?**
+
+---
+
+# Academic Foundation
+
+This document is inspired primarily by:
+
+> **Introduction to Algorithms**
+>
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Fourth Edition
+> MIT Press
+
+The systematic progression from problem understanding to algorithm design,
+correctness reasoning, and complexity analysis provides the principal academic
+foundation for the methodology adopted throughout **Algorithms Java Mastery**.
+
+Complementary academic and technical references supporting problem solving,
+formal reasoning, Java implementation, testing, and engineering practices are
+documented in:
+
+```text
+docs/00-project/10-references.md
+```
+
+Later modules introduce specialised references when individual topics require
+additional theoretical or technical depth.

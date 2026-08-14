@@ -2,41 +2,69 @@
 
 ## Algorithms Java Mastery
 
-This document introduces the concept of **edge cases**, also known as **boundary cases**, in algorithm design.
+This document introduces the analysis of **edge cases** and **boundary cases**
+within the **Foundations** module.
 
-Edge-case analysis is a fundamental step in disciplined software engineering because algorithms frequently fail at the limits of their expected input rather than during ordinary execution.
+**Algorithms Java Mastery** is inspired primarily by *Introduction to
+Algorithms* (Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
+Clifford Stein), which provides the principal academic foundation for the
+systematic study of algorithms throughout the repository.
 
-Understanding these situations before implementation improves correctness, testing, and software reliability.
+After a computational problem has been specified and its contractual conditions
+have been identified, the next step is to analyse the situations most likely to
+expose incomplete assumptions, incorrect reasoning, or fragile algorithmic
+behaviour.
+
+Edge-case analysis therefore examines the boundaries of the problem domain
+before implementation begins.
 
 The central question addressed throughout this document is:
 
-> **Which inputs are most likely to expose incorrect algorithm behaviour?**
+> **Which problem instances are most likely to expose incorrect or incomplete
+> algorithmic behaviour?**
 
 ---
 
 # Purpose
 
-The purpose of this document is to establish the importance of analysing exceptional and boundary situations before implementing an algorithm.
+The purpose of this document is to establish a disciplined method for analysing
+boundary, unusual, and contract-sensitive problem instances before designing or
+implementing an algorithm.
 
-Many software defects are not caused by the main algorithmic idea but by situations that were never considered during design.
+Many defects do not originate from the central algorithmic idea itself.
 
-The expected progression is:
+They appear because the problem analysis failed to consider:
+
+- minimum valid inputs;
+- maximum relevant values;
+- unusual but valid structures;
+- repeated values;
+- degenerate cases;
+- inputs near contractual boundaries;
+- invalid inputs outside the declared domain.
+
+The progression is:
 
 ```text
 Problem Specification
         ↓
-Contracts
+Preconditions and Postconditions
         ↓
-Edge-Case Analysis
+Input-Domain Analysis
+        ↓
+Edge Cases and Boundary Cases
         ↓
 Algorithm Design
         ↓
+Correctness Reasoning
+        ↓
 Implementation
         ↓
-Testing
+Automated Testing
 ```
 
-Edge cases should therefore be identified before writing code.
+Edge cases should therefore be identified during analysis rather than discovered
+accidentally after implementation.
 
 ---
 
@@ -44,121 +72,234 @@ Edge cases should therefore be identified before writing code.
 
 After studying this document, the learner should be able to:
 
-- define an edge case;
-- distinguish ordinary inputs from boundary situations;
-- identify common categories of edge cases;
-- analyse algorithm behaviour under exceptional conditions;
-- relate edge cases to correctness;
-- transform edge cases into automated test cases.
+- define edge cases and boundary cases;
+- distinguish ordinary valid inputs from boundary valid inputs;
+- distinguish edge cases from invalid inputs;
+- identify common categories of algorithmic boundary conditions;
+- analyse behaviour near the limits of a problem specification;
+- recognise assumptions that may fail at boundaries;
+- connect edge-case analysis with correctness reasoning;
+- derive meaningful test scenarios from identified boundaries;
+- determine when an input lies outside the algorithmic contract.
 
-These competencies become essential for designing reliable software.
+These competencies will be reused throughout every algorithm and data structure
+studied later in the repository.
 
 ---
 
 # What Is an Edge Case?
 
-An edge case is an input scenario that occurs at the limits of the valid problem domain.
+An **edge case** is a valid problem instance located at or near an important
+boundary of the specified input domain.
 
-Although these situations may be less frequent than ordinary inputs, they often reveal defects that remain hidden during normal execution.
+Such cases are often more likely to reveal incorrect assumptions than ordinary
+inputs.
 
-Examples include:
+Examples may include:
 
-- empty collections;
-- single-element inputs;
+- the smallest valid collection;
+- the largest relevant value;
 - duplicated values;
-- minimum values;
-- maximum values;
-- null references;
-- extremely large inputs.
+- all values being equal;
+- already ordered input;
+- reverse-ordered input;
+- highly unbalanced structures;
+- values near numeric limits.
 
-Edge cases are not exceptional because they are rare.
+Edge cases are not important because they are necessarily rare.
 
-They are exceptional because they exercise the boundaries of the specification.
+They are important because they exercise the **boundaries of the specification
+or algorithmic reasoning**.
 
 ---
 
-# Why Edge Cases Matter
+# Edge Cases vs Invalid Inputs
 
-Algorithms are usually designed using typical examples.
+Edge cases and invalid inputs should not be treated as identical.
 
-For example:
+An **edge case** is normally still inside the valid problem domain.
+
+An **invalid input** violates the specification or one of the algorithm's
+preconditions.
+
+Conceptually:
 
 ```text
-Input
+Input Domain
+        │
+        ├── Ordinary Valid Inputs
+        │
+        └── Edge Valid Inputs
 
-[7, 2, 15, 4, 9]
+Outside Contract
+        ↓
+Invalid Inputs
 ```
 
-This input is useful for understanding the algorithm.
+For example, consider the problem:
 
-However, it does not answer questions such as:
+> Determine the largest value contained in a non-empty integer array.
 
-- What happens if the array is empty?
-- What happens if there is only one element?
-- What happens if every value is identical?
-- What happens if all values are negative?
-
-Ignoring these situations frequently produces incorrect software.
-
----
-
-# Ordinary Cases vs Edge Cases
-
-A computational problem normally contains two categories of inputs.
+Then:
 
 ```text
-Valid Inputs
-│
-├── Ordinary Cases
-│
-└── Edge Cases
+[5]
 ```
 
-Both categories belong to the specification and therefore require analysis.
+is a valid edge case because it is the smallest permitted array.
 
-A correct algorithm must behave correctly for every valid input.
-
----
-
-# Common Categories of Edge Cases
-
-## Empty Input
-
-Many algorithms receive collections.
-
-An empty collection is often the first situation that should be analysed.
-
-Example:
+However:
 
 ```text
 []
 ```
 
-Questions include:
+is not an edge case under that specification.
 
-- Is the input valid?
-- Should an exception be thrown?
-- Should a default value be returned?
+It violates the non-empty precondition and therefore lies outside the valid
+problem domain.
+
+This distinction is essential for correct contract reasoning.
 
 ---
 
-## Single Element
+# Why Edge Cases Matter
 
-Collections containing one element frequently simplify the problem.
+Algorithms are often first understood using ordinary examples.
 
-Example:
+For example:
+
+```text
+[7, 2, 15, 4, 9]
+```
+
+This input may help demonstrate the central strategy.
+
+However, it does not reveal whether the reasoning also holds for situations
+such as:
 
 ```text
 [8]
 ```
 
-The learner should determine whether the algorithm still behaves correctly.
+```text
+[5, 5, 5, 5]
+```
+
+```text
+[-9, -2, -15]
+```
+
+```text
+[Integer.MIN_VALUE, Integer.MAX_VALUE]
+```
+
+Boundary-oriented inputs may expose:
+
+- incorrect initialisation;
+- off-by-one errors;
+- invalid stopping conditions;
+- hidden assumptions;
+- incorrect comparisons;
+- failure to preserve invariants;
+- overflow-related behaviour;
+- contract inconsistencies.
+
+Edge-case analysis therefore strengthens both specification and algorithm
+design.
+
+---
+
+# Ordinary Cases and Boundary Cases
+
+Valid problem instances may be classified conceptually as:
+
+```text
+Valid Problem Instances
+        │
+        ├── Ordinary Cases
+        │
+        └── Boundary or Edge Cases
+```
+
+Ordinary cases demonstrate expected central behaviour.
+
+Boundary cases test whether the same reasoning remains valid near important
+limits of the problem domain.
+
+A correct algorithm must satisfy its specification for both.
+
+---
+
+# Common Categories of Edge Cases
+
+Different computational problems expose different boundaries.
+
+The following categories are common but should not be treated as a universal
+checklist.
+
+---
+
+## Minimum Valid Input
+
+Many problems define a smallest valid instance.
+
+For example:
+
+```text
+[8]
+```
+
+for a problem requiring a non-empty array.
+
+Questions include:
+
+- Does the algorithm terminate correctly?
+- Is initialisation valid?
+- Does the result satisfy the postcondition?
+- Are unnecessary operations performed?
+
+Minimum valid inputs frequently expose incorrect assumptions about iteration or
+indexing.
+
+---
+
+## Empty Input
+
+An empty structure may be either:
+
+- a valid edge case; or
+- an invalid input.
+
+The distinction depends entirely on the specification.
+
+For example:
+
+```text
+[]
+```
+
+may be valid for:
+
+> Sort an array.
+
+but invalid for:
+
+> Return the maximum value in a non-empty array.
+
+Therefore, the correct question is not:
+
+> Is empty input an edge case?
+
+but:
+
+> **Does the specification include empty input in the valid domain?**
 
 ---
 
 ## Duplicate Values
 
-Algorithms should be analysed when identical values appear.
+Repeated values often expose hidden assumptions.
 
 Example:
 
@@ -166,35 +307,62 @@ Example:
 [5, 5, 5, 5]
 ```
 
-Questions include:
+Questions may include:
 
-- Does the algorithm still terminate?
-- Is the result deterministic?
-- Does the presence of duplicates affect correctness?
+- Does the algorithm remain correct?
+- Does it terminate?
+- Does it preserve required multiplicity?
+- Does duplicate handling affect which result is valid?
+
+For searching algorithms, duplicates may also affect which matching index is
+permitted by the specification.
 
 ---
 
-## Minimum and Maximum Values
+## Single Distinct Value
 
-Numerical algorithms should consider extreme values.
+A collection may contain many elements while representing only one distinct
+value.
 
-Examples include:
+Example:
+
+```text
+[4, 4, 4, 4, 4]
+```
+
+This may challenge assumptions about ordering, comparison, or progress.
+
+---
+
+## Minimum and Maximum Numeric Values
+
+Numerical algorithms should consider the limits of the declared numeric domain.
+
+In Java-oriented implementations, examples may later include:
 
 ```text
 Integer.MIN_VALUE
-
 Integer.MAX_VALUE
 ```
 
-These situations may expose overflow or comparison errors.
+These values may expose:
+
+- overflow;
+- underflow-related assumptions;
+- incorrect arithmetic;
+- comparison errors;
+- sentinel-value conflicts.
+
+The conceptual problem should first be understood independently of Java-specific
+numeric limits, while the implementation stage later examines how the selected
+type represents that domain.
 
 ---
 
 ## Negative Values
 
-Many beginner implementations assume positive numbers.
-
-Algorithms should instead be analysed using values from the complete valid domain.
+If negative values belong to the valid input domain, they should be considered
+explicitly.
 
 Example:
 
@@ -202,96 +370,294 @@ Example:
 [-9, -2, -15]
 ```
 
+Such cases frequently expose incorrect initialisation.
+
+For example, initialising a maximum value to zero would fail for an input
+containing only negative values.
+
 ---
 
-## Large Inputs
+## Already Ordered Input
 
-Algorithms should also be analysed using large datasets.
+For algorithms involving ordering, an already ordered sequence may represent an
+important boundary-oriented scenario.
 
-Although correctness remains the primary objective, large inputs later become important when studying complexity and benchmarking.
+Example:
+
+```text
+[1, 2, 3, 4, 5]
+```
+
+Questions may include:
+
+- Does the algorithm preserve correctness?
+- Does the control flow still terminate?
+- Does the algorithm perform unnecessary work?
+
+The performance consequences belong to later complexity or benchmarking
+analysis.
+
+---
+
+## Reverse-Ordered Input
+
+Reverse ordering may expose different algorithmic behaviour.
+
+Example:
+
+```text
+[5, 4, 3, 2, 1]
+```
+
+This becomes particularly relevant when later studying sorting algorithms.
+
+---
+
+## Structural Boundaries
+
+Data structures may have structural edge cases.
+
+Examples include:
+
+```text
+Tree with one node
+```
+
+```text
+Graph with one vertex
+```
+
+```text
+Graph with disconnected components
+```
+
+```text
+Highly unbalanced tree
+```
+
+The relevant boundaries depend upon the structure's formal specification.
+
+---
+
+## Large Valid Inputs
+
+Large inputs may also represent an important boundary when the specification
+defines a maximum practical or theoretical size.
+
+However, two different questions should remain separated:
+
+```text
+Does the algorithm remain correct?
+```
+
+and:
+
+```text
+How does the algorithm perform as input size grows?
+```
+
+The first belongs to correctness reasoning.
+
+The second belongs to complexity analysis and later empirical evaluation.
 
 ---
 
 # Edge Cases and Problem Specification
 
-Edge-case analysis begins during problem specification.
+Edge-case analysis begins from the problem specification.
 
-The progression becomes:
+The specification defines the valid domain.
+
+Edge-case analysis examines its boundaries.
+
+Conceptually:
 
 ```text
-Problem
-      ↓
-Specification
-      ↓
+Problem Specification
+        ↓
+Valid Input Domain
+        ↓
+Boundary Analysis
+        ↓
 Edge Cases
-      ↓
-Algorithm
 ```
 
-Boundary situations should never be discovered accidentally during implementation.
+A boundary cannot be identified correctly without first knowing what counts as a
+valid problem instance.
 
-They should be anticipated during analysis.
+For this reason, edge-case analysis follows:
+
+```text
+02-problem-specification.md
+```
+
+and:
+
+```text
+03-preconditions-and-postconditions.md
+```
+
+within the Foundations module.
 
 ---
 
 # Edge Cases and Preconditions
 
-Some edge cases violate algorithm preconditions.
+Preconditions help determine whether a boundary input belongs inside or outside
+the algorithmic contract.
 
-Example:
-
-Problem:
-
-> Find the largest value in an array.
-
-Precondition:
+Consider:
 
 ```text
-The array contains at least one element.
+Precondition
+
+The input array contains at least one element.
 ```
 
-Edge case:
+Then:
+
+```text
+[7]
+```
+
+is a valid minimum edge case.
+
+But:
 
 ```text
 []
 ```
 
-The learner should recognise that this input violates the contract.
+violates the precondition.
 
-The algorithm is therefore not required to produce a valid result.
+Conceptually:
+
+```text
+Precondition
+        ↓
+Defines Valid Domain
+        ↓
+Edge-Case Analysis
+```
+
+This distinction prevents invalid inputs from being incorrectly classified as
+cases the algorithm must solve.
+
+---
+
+# Edge Cases and Postconditions
+
+Edge cases must still satisfy the same postconditions as ordinary valid inputs.
+
+For example, suppose the postcondition for a maximum-value algorithm states:
+
+```text
+The returned value belongs to the input array.
+
+No input element is greater than the returned value.
+```
+
+For:
+
+```text
+[8]
+```
+
+the result must still satisfy both properties.
+
+Edge cases therefore provide useful situations for examining whether the
+postconditions have been specified strongly enough.
 
 ---
 
 # Edge Cases and Correctness
 
-Correctness requires analysing every valid input.
+Correctness requires the algorithm to satisfy its specification for every valid
+problem instance.
 
-Edge-case analysis strengthens correctness reasoning by examining situations where incorrect assumptions frequently occur.
+That includes valid edge cases.
 
-The relationship becomes:
+Conceptually:
 
 ```text
-Contracts
+Valid Domain
         ↓
-Edge Cases
+Ordinary Cases + Edge Cases
         ↓
-Correctness
+Correctness Reasoning
+```
+
+Edge-case analysis therefore helps reveal where a correctness argument may rely
+on assumptions that are not universally valid.
+
+For example:
+
+```text
+"there is always another element"
+```
+
+may be false for a single-element input.
+
+Likewise:
+
+```text
+"the initial maximum can be zero"
+```
+
+may be false when all valid values are negative.
+
+Correctness is developed systematically in:
+
+```text
+05-correctness.md
 ```
 
 ---
 
-# Edge Cases and Testing
+# Edge Cases and Invariants
 
-Every identified edge case should later become an automated test.
+Boundary cases may also help evaluate whether an invariant has been formulated
+correctly.
 
-The progression is:
+If an invariant only appears to hold for ordinary inputs, it may be too weak,
+incorrect, or based on an implicit assumption.
+
+For example:
 
 ```text
-Edge Case
+Initial State
+        ↓
+Invariant
+        ↓
+Boundary Input
+        ↓
+Does the invariant still hold?
+```
+
+Invariant reasoning is developed in:
+
+```text
+06-invariants.md
+```
+
+---
+
+# Edge Cases and Automated Testing
+
+Edge-case analysis later becomes an important input to automated test design.
+
+The relationship is:
+
+```text
+Specification
+        ↓
+Boundary Analysis
+        ↓
+Selected Edge Cases
         ↓
 Expected Behaviour
         ↓
-Automated Test
+Automated Tests
 ```
 
 For example:
@@ -301,75 +667,403 @@ Edge Case
 
 Single-element array
 
-↓
+        ↓
 
 Expected Behaviour
 
-Return the only element.
+Return the only value.
 
-↓
+        ↓
 
-JUnit Test
+Automated Test
 
-Verify that the returned value equals the single value stored in the array.
+Verify that the algorithm returns that value.
 ```
 
-This methodology creates a direct connection between algorithm analysis and software testing.
+However, not every theoretically imaginable boundary requires a separate test.
+
+Tests should be selected according to:
+
+- the contract;
+- known failure risks;
+- equivalence classes;
+- boundary conditions;
+- implementation behaviour worth verifying.
+
+Automated testing is developed formally in:
+
+```text
+docs/16-testing/
+```
 
 ---
 
-# Relationship with Later Modules
+# Edge Cases and Invalid-Input Testing
 
-Edge-case analysis supports multiple areas of the repository.
+Invalid inputs may also require tests, but they belong to a different category.
+
+Conceptually:
 
 ```text
-Edge Cases
+Valid Edge Case
         ↓
-Correctness
-
-Edge Cases
-        ↓
-Testing
-
-Edge Cases
-        ↓
-Benchmarking
-
-Edge Cases
-        ↓
-Algorithm Design
+Verify Correct Result
 ```
 
-Every future implementation should explicitly identify its boundary situations before coding begins.
+versus:
+
+```text
+Invalid Input
+        ↓
+Verify Defined Failure Behaviour
+```
+
+For example:
+
+```text
+[5]
+```
+
+may test the minimum valid input.
+
+Whereas:
+
+```text
+[]
+```
+
+may test contract enforcement if the public API rejects empty arrays.
+
+Keeping these categories distinct improves test design and documentation.
+
+---
+
+# Relationship with Complexity Analysis
+
+Edge cases and complexity analysis may intersect, but they answer different
+questions.
+
+Edge-case analysis asks:
+
+> **Does the algorithm behave correctly near the boundaries of the valid
+> problem domain?**
+
+Complexity analysis asks:
+
+> **How do required computational resources grow with input size?**
+
+Certain inputs may later represent:
+
+- best-case behaviour;
+- worst-case behaviour;
+- particular structural configurations.
+
+However, those classifications should be justified by formal complexity
+analysis rather than by edge-case terminology alone.
+
+Complexity is developed systematically in:
+
+```text
+docs/02-complexity/
+```
+
+---
+
+# Relationship with Benchmarking
+
+Edge cases may occasionally become useful benchmark scenarios, but benchmarking
+is not a primary purpose of edge-case analysis.
+
+The correct progression is:
+
+```text
+Specification
+        ↓
+Edge-Case Analysis
+        ↓
+Algorithm Design
+        ↓
+Correctness Reasoning
+        ↓
+Java Implementation
+        ↓
+Automated Testing
+        ↓
+Benchmarking When Appropriate
+```
+
+Benchmarking should evaluate implementations whose contracts and correctness
+have already been established.
+
+Performance evaluation is developed in:
+
+```text
+docs/17-benchmarking/
+```
+
+---
+
+# Systematic Edge-Case Analysis
+
+A useful analysis process is:
+
+```text
+1. Define the valid input domain.
+        ↓
+2. Identify contractual boundaries.
+        ↓
+3. Determine minimum and maximum valid instances.
+        ↓
+4. Identify unusual but valid structures or values.
+        ↓
+5. Separate valid edge cases from invalid inputs.
+        ↓
+6. Determine expected behaviour.
+        ↓
+7. Use the analysis during correctness reasoning.
+        ↓
+8. Select relevant cases for automated testing.
+```
+
+This process should remain proportional to the computational problem.
+
+Simple algorithms may require only a few cases.
+
+Complex data structures may require significantly deeper boundary analysis.
+
+---
+
+# Example — Maximum Element
+
+Consider:
+
+> Determine the largest value contained in a finite non-empty integer array.
+
+## Contract Boundary
+
+```text
+Minimum valid array size = 1
+```
+
+## Representative Ordinary Case
+
+```text
+[7, 2, 15, 4, 9]
+```
+
+Expected result:
+
+```text
+15
+```
+
+## Minimum Valid Edge Case
+
+```text
+[8]
+```
+
+Expected result:
+
+```text
+8
+```
+
+## Duplicate-Value Case
+
+```text
+[5, 5, 5]
+```
+
+Expected result:
+
+```text
+5
+```
+
+## Negative-Value Case
+
+```text
+[-9, -2, -15]
+```
+
+Expected result:
+
+```text
+-2
+```
+
+## Extreme Numeric Case
+
+At the Java implementation stage, a relevant case may include:
+
+```text
+[Integer.MIN_VALUE, Integer.MAX_VALUE]
+```
+
+Expected result:
+
+```text
+Integer.MAX_VALUE
+```
+
+## Invalid Input
+
+Under the declared non-empty contract:
+
+```text
+[]
+```
+
+does not belong to the valid domain.
+
+Its runtime treatment depends upon the Java API contract selected later.
+
+This analysis distinguishes valid boundaries from contract violations.
 
 ---
 
 # Best Practices
 
-Every algorithm should:
+When analysing edge cases:
 
-- identify boundary situations;
-- analyse exceptional inputs;
-- distinguish valid from invalid inputs;
-- document expected behaviour;
-- transform edge cases into automated tests;
-- avoid making implicit assumptions.
+- begin from the formal problem specification;
+- identify the valid input domain first;
+- distinguish valid edge cases from invalid inputs;
+- analyse minimum valid instances;
+- examine repeated or structurally unusual values when relevant;
+- consider numeric boundaries for numeric problems;
+- identify implicit assumptions exposed by boundary cases;
+- define expected behaviour before implementation;
+- use edge cases during correctness reasoning;
+- derive relevant tests from the analysis;
+- avoid treating every unusual input as an edge case;
+- avoid mixing correctness questions with performance conclusions.
 
-Following these practices significantly improves software quality.
+Edge-case analysis should improve precision rather than become a mechanical
+checklist.
+
+---
+
+# Common Mistakes
+
+## Treating Every Invalid Input as an Edge Case
+
+An input outside the contract is not automatically an edge case.
+
+First determine whether it belongs to the valid problem domain.
+
+---
+
+## Testing Only Ordinary Inputs
+
+A successful ordinary example does not demonstrate behaviour at the boundaries
+of the specification.
+
+---
+
+## Assuming Empty Input Is Always Valid
+
+Whether an empty collection is valid depends entirely on the problem
+specification.
+
+---
+
+## Assuming Edge Cases Are Only Small Inputs
+
+Large values, duplicate values, structural degeneracy, or unusual ordering may
+also represent important boundaries.
+
+---
+
+## Using Edge Cases as Performance Conclusions
+
+A boundary input does not automatically represent a worst-case complexity
+scenario.
+
+Formal complexity analysis is required.
+
+---
+
+## Discovering Boundaries Only During Coding
+
+Edge cases should be identified during analysis whenever possible.
+
+Implementation may reveal additional cases, but it should not be the first time
+the problem boundaries are considered.
 
 ---
 
 # Key Takeaways
 
-The learner should remember the following principles:
+After completing this document, the learner should understand that:
 
-- Edge cases are part of the problem specification.
-- Boundary situations should be analysed before implementation.
-- Every edge case represents an opportunity to validate algorithm correctness.
-- Edge cases naturally become automated test cases.
-- Correct software behaves correctly for both ordinary and boundary inputs.
-- Reliable algorithms are designed with edge cases in mind from the beginning.
+- edge cases represent important boundaries of the valid problem domain;
+- invalid inputs and edge cases are not the same concept;
+- the specification determines whether a boundary instance is valid;
+- preconditions define important contractual boundaries;
+- valid edge cases must still satisfy the required postconditions;
+- edge-case analysis strengthens correctness reasoning;
+- boundary analysis may reveal hidden assumptions;
+- selected edge cases later become valuable automated test scenarios;
+- invalid-input tests verify contract enforcement rather than ordinary
+  algorithmic behaviour;
+- complexity analysis and benchmarking answer different questions from
+  edge-case analysis.
 
-Edge-case analysis therefore becomes an essential component of disciplined algorithm design.
+Edge-case analysis therefore provides a systematic bridge between **problem
+specification**, **algorithmic contracts**, **correctness reasoning**, and
+**automated testing**.
 
-It connects **problem specification**, **algorithm contracts**, **correctness reasoning**, and **automated testing**, providing a systematic approach to building robust and reliable software throughout the **Algorithms Java Mastery** repository.
+It helps ensure that algorithms are designed for the complete valid problem
+domain rather than only for convenient examples.
+
+---
+
+# Next Document
+
+```text
+05-correctness.md
+```
+
+The next document introduces systematic reasoning about whether an algorithm
+satisfies its specification.
+
+It examines the relationship between:
+
+- preconditions;
+- postconditions;
+- termination;
+- partial correctness;
+- total correctness;
+- logical reasoning about algorithm behaviour.
+
+Correctness provides the formal basis for answering:
+
+> **Why should the algorithm produce the required result for every valid
+> problem instance?**
+
+---
+
+# Academic Foundation
+
+This document is inspired primarily by:
+
+> **Introduction to Algorithms**
+>
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
+> Fourth Edition  
+> MIT Press
+
+The systematic analysis of valid inputs, boundary conditions, correctness, and
+algorithm behaviour provides the principal academic context for this document.
+
+Additional academic and technical references supporting the Foundations module
+are documented in:
+
+```text
+docs/00-project/10-references.md
+```
+
+Complementary references may be introduced when a topic requires additional
+formal treatment of software contracts, boundary analysis, or testing theory.
