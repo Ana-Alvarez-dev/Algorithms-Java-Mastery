@@ -2,39 +2,72 @@
 
 ## Algorithms Java Mastery
 
-This document introduces the concept of **computational complexity**, one of the fundamental disciplines of Computer Science.
+This document introduces **computational complexity** as the analytical study of
+the computational resources required by algorithms.
 
-Algorithms are not evaluated solely by whether they produce the correct result.
+**Algorithms Java Mastery** is inspired primarily by *Introduction to
+Algorithms* (Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
+Clifford Stein), which provides the principal academic foundation for the
+systematic analysis of algorithms developed throughout this repository.
 
-They are also evaluated by **how efficiently they use computational resources**.
+Algorithms are not evaluated solely by whether they produce the required
+result.
 
-Computational complexity provides a mathematical framework for analysing algorithm efficiency independently of hardware, operating systems, or programming languages.
+Once correctness has been established, an additional question becomes
+important:
 
-The central question addressed throughout this document is:
+> **How do the computational resources required by the algorithm grow as the
+> input size increases?**
 
-> **How can the efficiency of an algorithm be objectively measured?**
+Computational complexity provides the mathematical framework used to answer that
+question.
+
+Rather than focusing on exact execution time on a particular machine,
+complexity analysis studies resource growth independently of a specific
+processor, operating system, programming language, or benchmark execution.
+
+This distinction makes it possible to compare algorithms according to their
+underlying computational behaviour.
 
 ---
 
 # Purpose
 
-The purpose of this document is to establish the theoretical foundations of computational complexity.
+The purpose of this document is to establish the conceptual foundations
+required to analyse computational cost.
 
-Instead of comparing execution times on a particular computer, computational complexity studies how algorithms behave as the size of the input increases.
+The learner should move from thinking about performance as:
 
-The expected progression is:
+```text
+How many milliseconds did the program require?
+```
+
+toward thinking about:
+
+```text
+How does the required computation grow
+as the problem size increases?
+```
+
+The general progression is:
 
 ```text
 Algorithm
         ↓
-Resource Consumption
+Define Input Size
         ↓
-Complexity Analysis
+Identify Computational Resources
         ↓
-Algorithm Comparison
+Model Resource Usage
+        ↓
+Analyse Growth
+        ↓
+Compare Algorithms
 ```
 
-Complexity therefore becomes a scientific method for evaluating algorithms rather than a measurement of execution speed.
+Computational complexity therefore provides a theoretical model of algorithmic
+resource consumption rather than a direct measurement of wall-clock execution
+time.
 
 ---
 
@@ -42,351 +75,1281 @@ Complexity therefore becomes a scientific method for evaluating algorithms rathe
 
 After studying this document, the learner should be able to:
 
-- define computational complexity;
-- identify the computational resources consumed by algorithms;
-- explain why efficiency matters;
-- distinguish correctness from efficiency;
-- understand why complexity analysis is hardware independent;
-- recognise the relationship between complexity and scalability;
-- explain why theoretical analysis precedes benchmarking.
+* define computational complexity;
+* explain the relationship between correctness and efficiency;
+* identify relevant computational resources;
+* distinguish theoretical complexity from empirical performance;
+* define an appropriate input-size parameter;
+* recognise that some problems require multiple size parameters;
+* explain why operation growth matters more than exact execution time in
+  asymptotic analysis;
+* identify significant operations in simple algorithms;
+* relate resource growth to scalability;
+* explain why complexity analysis precedes benchmarking;
+* understand why algorithms solving the same problem may have different
+  computational costs.
 
-These competencies provide the analytical foundation required for every subsequent algorithm studied in this repository.
+These competencies provide the analytical foundation for the remaining
+documents in the **Complexity** module.
 
 ---
 
 # What Is Computational Complexity?
 
-Computational complexity is the study of **how many computational resources an algorithm requires to solve a problem**.
+**Computational complexity** studies the computational resources required to
+solve problems as a function of problem size.
 
-Rather than measuring seconds or milliseconds, complexity measures how resource consumption changes as the input size grows.
-
-The two principal resources are:
-
-- execution time;
-- memory consumption.
-
-The relationship can be represented as:
+At the algorithmic level, the most commonly analysed resources are:
 
 ```text
-Algorithm
-      ↓
-Execution Time
-
-Algorithm
-      ↓
-Memory Usage
+Computational Resources
+        │
+        ├── Time
+        │
+        └── Space
 ```
 
-These two dimensions define the efficiency of an algorithm.
+Time analysis models the amount of computational work performed.
+
+Space analysis models the amount of memory required.
+
+The purpose is not necessarily to determine exact values.
+
+Instead, the learner develops mathematical models describing how these resource
+requirements change as the input grows.
+
+Conceptually:
+
+```text
+Input Size
+        ↓
+Algorithm
+        ↓
+Resource Usage
+        ↓
+Function of Input Size
+```
 
 ---
 
-# Why Computational Complexity Matters
+# Correctness and Complexity
 
-Different algorithms can solve the same problem while consuming very different amounts of computational resources.
+Correctness and complexity describe different properties of an algorithm.
 
-Consider two algorithms that both locate an element in a collection.
+Correctness asks:
+
+> **Does the algorithm satisfy the specification?**
+
+Complexity asks:
+
+> **How do the computational resources required by the algorithm grow?**
+
+The repository therefore follows the progression:
 
 ```text
-Algorithm A
+Problem Specification
         ↓
-Correct Result
-
-Algorithm B
+Algorithm Design
         ↓
-Correct Result
+Correctness Reasoning
+        ↓
+Complexity Analysis
 ```
 
-Although both algorithms are correct, one may require significantly fewer operations.
+An algorithm must first solve the intended computational problem.
 
-Complexity analysis allows these algorithms to be compared objectively.
+Only then does it become meaningful to compare its resource requirements with
+those of alternative correct algorithms.
 
 ---
 
-# Correctness vs Efficiency
+# Correctness Does Not Imply Efficiency
 
-Correctness and efficiency are different properties.
+Two algorithms may both satisfy the same specification while requiring very
+different amounts of computation.
 
-An algorithm should first be correct.
-
-Only then should its efficiency be analysed.
-
-The relationship becomes:
+For example:
 
 ```text
-Problem
-      ↓
-Correctness
-      ↓
-Efficiency
+Same Computational Problem
+        │
+        ├── Algorithm A
+        │       ↓
+        │   Correct Result
+        │
+        └── Algorithm B
+                ↓
+            Correct Result
 ```
 
-An incorrect algorithm has no practical value regardless of how fast it executes.
+Correctness alone does not tell us which algorithm scales more effectively.
+
+Complexity analysis introduces the additional information required to compare
+their growth behaviour.
+
+---
+
+# Efficiency Does Not Replace Correctness
+
+The reverse is also true.
+
+An implementation may appear fast while producing the wrong result.
+
+Therefore:
+
+```text
+Fast
+        ≠
+Correct
+```
+
+and:
+
+```text
+Correct
+        ≠
+Efficient
+```
+
+Correctness and efficiency must be evaluated separately.
+
+A complete engineering analysis requires both when efficiency is relevant.
 
 ---
 
 # Computational Resources
 
-Algorithms consume different computational resources during execution.
+Algorithms may consume several forms of computational resources.
 
-The most important are:
+The primary resources studied in this repository are:
 
-```text
-Algorithm
-│
-├── Time
-│
-└── Memory
-```
+* computational work;
+* auxiliary memory.
 
-These resources are analysed independently because improving one may increase the consumption of the other.
+These are commonly modelled through **time complexity** and **space
+complexity**.
 
 ---
 
-# Hardware Independence
+# Time as Computational Work
 
-A fundamental objective of computational complexity is to compare algorithms independently of the computer used.
+In theoretical algorithm analysis, time does not initially mean seconds or
+milliseconds.
 
-For example:
+Instead, time is typically represented through a model of computational work.
+
+For example, an analysis may count:
+
+* comparisons;
+* array accesses;
+* assignments;
+* arithmetic operations;
+* recursive calls;
+* data-structure operations.
+
+Conceptually:
 
 ```text
-Computer A
-
-Fast Processor
-
-↓
-
-Execution Time
-
-Computer B
-
-Slow Processor
-
-↓
-
-Execution Time
+Algorithm
+        ↓
+Relevant Operations
+        ↓
+Count as Function of Input Size
+        ↓
+Growth Behaviour
 ```
 
-Directly comparing execution times would produce misleading conclusions.
+This abstraction allows the learner to reason about algorithmic cost without
+depending on a particular machine.
 
-Complexity analysis instead studies how the number of operations grows as the input size increases.
+---
 
-This makes comparisons objective and reproducible.
+# Space as Computational Memory
+
+Algorithms may also require additional memory while executing.
+
+Examples include:
+
+* local variables;
+* temporary arrays;
+* stacks;
+* queues;
+* hash structures;
+* recursion call stacks.
+
+Conceptually:
+
+```text
+Algorithm
+        ↓
+Auxiliary Structures
+        ↓
+Memory Requirement
+        ↓
+Growth with Input Size
+```
+
+Space complexity is developed in greater detail later in this module.
 
 ---
 
 # Input Size
 
-Complexity analysis studies how algorithms behave when the input becomes larger.
+Complexity analysis requires a definition of **problem size**.
 
-The input size is commonly represented by:
+The symbol:
 
 ```text
 n
 ```
 
-Where:
+is frequently used, but its meaning depends on the computational problem.
+
+For an array:
 
 ```text
-n
-
-↓
-
-Number of elements
-
-↓
-
-Problem Size
+n = number of elements
 ```
 
-The value of **n** becomes the primary variable throughout algorithm analysis.
+For a string:
+
+```text
+n = number of characters
+```
+
+For a graph, multiple parameters may be required:
+
+```text
+V = number of vertices
+E = number of edges
+```
+
+For a matrix:
+
+```text
+r = number of rows
+c = number of columns
+```
+
+Therefore:
+
+> **The input-size parameter must be defined before a meaningful complexity
+> statement can be made.**
 
 ---
 
-# Growth Rather Than Time
+# Input Size Is Problem-Dependent
 
-Complexity does not measure execution time directly.
+A common beginner mistake is to treat `n` automatically as the size of every
+problem.
 
-Instead, it studies the growth of computational work.
+That is not always appropriate.
+
+Consider:
+
+```text
+Graph Algorithm
+```
+
+Its computational behaviour may depend on both:
+
+```text
+V
+```
+
+and:
+
+```text
+E
+```
+
+Likewise, an algorithm involving two independent collections may depend on:
+
+```text
+n = size of first collection
+m = size of second collection
+```
+
+Complexity analysis should preserve these distinctions when they materially
+affect the algorithm.
+
+---
+
+# Significant Operations
+
+Not every low-level machine operation must be counted individually.
+
+Instead, algorithm analysis often identifies one or more **significant
+operations** that represent the principal work performed.
+
+For example, in a searching algorithm, the significant operation may be:
+
+```text
+comparison with the target
+```
+
+In a sorting algorithm:
+
+```text
+element comparison
+```
+
+or:
+
+```text
+element movement
+```
+
+In a graph traversal:
+
+```text
+vertex or edge processing
+```
+
+The appropriate operation depends on the algorithm and the question being
+analysed.
+
+---
+
+# Example — Linear Search
+
+Consider a linear search through an array containing `n` elements.
+
+A natural significant operation is:
+
+```text
+Compare current element with target
+```
+
+In a favourable input, the target may be found immediately.
+
+In an unfavourable input, the algorithm may inspect every element.
+
+Conceptually:
+
+```text
+Input Size = n
+        ↓
+At Most n Relevant Comparisons
+        ↓
+Linear Growth
+```
+
+This example illustrates how algorithm structure can be translated into a
+resource-growth model.
+
+Formal asymptotic classification is developed later in the module.
+
+---
+
+# Growth Rather Than Exact Time
+
+Suppose an algorithm performs approximately:
+
+```text
+n
+```
+
+relevant operations.
+
+Another performs approximately:
+
+```text
+n²
+```
+
+operations.
+
+For small values of `n`, both may appear practical.
+
+As `n` increases, however, their growth becomes increasingly different.
 
 For example:
 
 ```text
-Small Input
+n = 10
 
-↓
-
-Few Operations
-
-↓
-
-Large Input
-
-↓
-
-Many Operations
+n   = 10
+n²  = 100
 ```
 
-The important question is not:
+```text
+n = 1,000
 
-> "How long does the algorithm take today?"
+n   = 1,000
+n²  = 1,000,000
+```
 
-Instead, it is:
+The important insight is not the exact number of nanoseconds required.
 
-> **"How does the algorithm behave as the problem becomes larger?"**
+It is the **difference in growth behaviour**.
+
+---
+
+# Algorithm Growth
+
+The cost of an algorithm can often be represented by a function:
+
+```text
+T(n)
+```
+
+where:
+
+```text
+n = input size
+T(n) = computational work associated with input size n
+```
+
+For example:
+
+```text
+T(n) = n
+```
+
+or:
+
+```text
+T(n) = n² + n
+```
+
+or:
+
+```text
+T(n) = log n
+```
+
+Complexity analysis examines how such functions behave as `n` becomes large.
+
+The next documents develop this reasoning in greater mathematical detail.
+
+---
+
+# Hardware Independence
+
+A major advantage of theoretical complexity analysis is that it abstracts away
+many machine-specific details.
+
+Consider two computers:
+
+```text
+Computer A
+Fast processor
+
+Computer B
+Slower processor
+```
+
+The same implementation may require different wall-clock times on each machine.
+
+However, if the underlying algorithm requires work that grows proportionally to
+`n`, that growth pattern remains conceptually the same.
+
+Complexity analysis therefore supports comparisons at the **algorithmic level**
+rather than the machine-specific execution level.
+
+---
+
+# Hardware Independence Is an Abstraction
+
+The phrase **hardware-independent** should not be interpreted as meaning that
+hardware never matters.
+
+Real execution performance is influenced by:
+
+* processor architecture;
+* caches;
+* memory latency;
+* compiler behaviour;
+* JVM optimisation;
+* garbage collection;
+* operating-system scheduling;
+* data representation.
+
+Complexity analysis deliberately abstracts many of these factors so that the
+underlying growth of the algorithm can be studied.
+
+Thus:
+
+```text
+Theoretical Complexity
+        ↓
+Abstracts Machine Details
+```
+
+while:
+
+```text
+Observed Performance
+        ↓
+Includes Machine and Runtime Effects
+```
+
+Both perspectives are useful for different purposes.
 
 ---
 
 # Scalability
 
-Scalability describes the ability of an algorithm to remain efficient as the input size increases.
+**Scalability** in algorithm analysis refers to how resource requirements change
+as problem size increases.
 
-The relationship becomes:
+Conceptually:
 
 ```text
-Input Size
+Increasing Input Size
         ↓
-Algorithm Growth
+Resource Growth
         ↓
-Scalability
+Practical Consequences
 ```
 
-Highly scalable algorithms remain practical even for very large datasets.
+An algorithm with slower growth in required resources may remain practical for
+larger inputs than an alternative with faster growth.
 
-Poorly scalable algorithms become increasingly inefficient.
+However, scalability should not be reduced to a single complexity label.
+
+Practical scalability may also depend on:
+
+* constant factors;
+* available memory;
+* data distribution;
+* implementation overhead;
+* hardware;
+* concurrency;
+* external systems.
+
+Complexity provides an essential analytical foundation, but real software
+performance requires broader engineering interpretation.
 
 ---
 
-# Complexity Throughout This Repository
+# Complexity as a Function
 
-Every algorithm implemented in this repository will be analysed from two complementary perspectives.
+A useful conceptual model is:
 
 ```text
-Correctness
-        ↓
-Complexity
-        ↓
-Implementation
-        ↓
-Testing
-        ↓
-Benchmarking
+Resource Requirement = f(Input Size)
 ```
 
-Complexity analysis therefore becomes a permanent component of algorithm development.
+For time:
+
+```text
+T(n)
+```
+
+For auxiliary space:
+
+```text
+S(n)
+```
+
+The goal is to understand the behaviour of these functions.
+
+For example:
+
+```text
+T(n) = 3n + 2
+```
+
+describes different growth from:
+
+```text
+T(n) = n² + 4n + 1
+```
+
+Later asymptotic analysis focuses on the dominant behaviour of these functions.
+
+---
+
+# Exact Cost vs Growth Model
+
+Complexity analysis may begin with a more detailed operation count.
+
+For example:
+
+```text
+T(n) = 2n + 3
+```
+
+The exact constants may help explain where the cost originates.
+
+Later, when studying asymptotic growth, the analysis may focus on the dominant
+term.
+
+Conceptually:
+
+```text
+Detailed Cost Model
+        ↓
+Growth Analysis
+        ↓
+Asymptotic Description
+```
+
+The repository therefore avoids skipping directly to a memorised Big O label
+without first understanding the underlying cost structure.
+
+---
+
+# Complexity and Case Analysis
+
+The cost of an algorithm may vary among different inputs having the same size.
+
+Therefore, complexity analysis may consider:
+
+* best case;
+* average case;
+* worst case.
+
+For example, a search in an array of size `n` may require:
+
+```text
+1 comparison
+```
+
+for one input and:
+
+```text
+n comparisons
+```
+
+for another.
+
+The input size is the same.
+
+The input arrangement differs.
+
+This distinction is developed formally in:
+
+```text
+05-best-average-worst-case.md
+```
+
+---
+
+# Complexity and Asymptotic Analysis
+
+As input size becomes large, complexity analysis increasingly focuses on the
+growth of cost functions.
+
+This leads to **asymptotic analysis**.
+
+Conceptually:
+
+```text
+Cost Function
+        ↓
+Growth as Input Increases
+        ↓
+Asymptotic Behaviour
+```
+
+Asymptotic analysis provides the foundation for notation such as:
+
+```text
+O
+Ω
+Θ
+o
+ω
+```
+
+These concepts are developed in later documents.
+
+---
+
+# Complexity Is Not Big O
+
+A common mistake is to use the terms:
+
+```text
+Complexity
+```
+
+and:
+
+```text
+Big O
+```
+
+as if they were equivalent.
+
+They are not.
+
+Computational complexity is the broader study of resource requirements.
+
+Big O is one form of asymptotic notation used to describe an upper bound on
+growth.
+
+Conceptually:
+
+```text
+Computational Complexity
+        ↓
+Asymptotic Analysis
+        ↓
+Asymptotic Notations
+        │
+        ├── O
+        ├── Ω
+        ├── Θ
+        ├── o
+        └── ω
+```
+
+This distinction is essential for precise algorithm analysis.
+
+---
+
+# Time and Space Trade-Offs
+
+Algorithms may improve one resource by consuming more of another.
+
+For example:
+
+```text
+Additional Memory
+        ↓
+Avoid Repeated Computation
+        ↓
+Potentially Lower Time Cost
+```
+
+or:
+
+```text
+Minimal Auxiliary Memory
+        ↓
+Additional Recomputation
+        ↓
+Potentially Higher Time Cost
+```
+
+Therefore, algorithm efficiency should not always be reduced to a single
+dimension.
+
+The appropriate trade-off depends on the computational problem and its
+constraints.
+
+---
+
+# Computational Complexity and Algorithm Comparison
+
+Once cost models have been established, alternative algorithms can be compared
+under equivalent assumptions.
+
+Conceptually:
+
+```text
+Same Problem
+        ↓
+Algorithm A
+        ↓
+Cost Function A
+
+Same Problem
+        ↓
+Algorithm B
+        ↓
+Cost Function B
+```
+
+The comparison should consider:
+
+* the same problem specification;
+* compatible input-size definitions;
+* relevant resource dimensions;
+* equivalent case assumptions.
+
+Only then is the comparison meaningful.
+
+---
+
+# Example — Linear Search and Binary Search
+
+Consider the problem:
+
+> Determine whether a target exists in a collection.
+
+A linear-search strategy may examine elements sequentially.
+
+A binary-search strategy may repeatedly reduce the search interval.
+
+However, binary search requires an important precondition:
+
+```text
+The input is ordered.
+```
+
+Therefore, a meaningful comparison must preserve the different assumptions.
+
+Conceptually:
+
+```text
+Linear Search
+        ↓
+Sequential Reduction
+
+Binary Search
+        ↓
+Halving Search Space
+```
+
+The resulting growth behaviour differs.
+
+Later searching modules derive these complexities formally.
+
+---
+
+# Complexity and Preconditions
+
+Complexity claims depend on the same contracts used in correctness reasoning.
+
+For example:
+
+```text
+Binary Search
+```
+
+assumes ordered input.
+
+Its complexity should therefore be interpreted under that condition.
+
+Likewise, data-structure operations may have complexity claims that depend on:
+
+* structural invariants;
+* load factors;
+* balance conditions;
+* representation choices.
+
+Complexity should never be detached from the assumptions under which the
+algorithm operates.
+
+---
+
+# Complexity and Algorithm Design
+
+Complexity analysis can influence algorithm design decisions.
+
+The progression may be:
+
+```text
+Correct Candidate Algorithms
+        ↓
+Complexity Analysis
+        ↓
+Compare Resource Growth
+        ↓
+Select Appropriate Strategy
+```
+
+However, complexity is not the only criterion.
+
+Engineering decisions may also consider:
+
+* implementation simplicity;
+* maintainability;
+* memory constraints;
+* input characteristics;
+* stability requirements;
+* readability;
+* expected workload.
+
+Complexity supports engineering judgement rather than replacing it.
+
+---
+
+# Theoretical Complexity and Java Implementation
+
+The theoretical analysis belongs primarily to the algorithm.
+
+Java provides an implementation of that algorithm.
+
+Conceptually:
+
+```text
+Algorithm
+        ↓
+Theoretical Complexity
+        ↓
+Java Implementation
+        ↓
+Observed Runtime Behaviour
+```
+
+The Java implementation may introduce additional practical effects.
+
+Examples include:
+
+* object allocation;
+* boxing;
+* collection implementation;
+* JVM warm-up;
+* JIT compilation;
+* garbage collection.
+
+These factors matter when evaluating real implementation performance but should
+not be confused with asymptotic algorithmic complexity.
+
+---
+
+# Complexity and Automated Testing
+
+Automated testing answers behavioural questions.
+
+For example:
+
+> Does this implementation return the correct result for the selected input?
+
+Complexity analysis answers analytical questions.
+
+For example:
+
+> How does the required computational work grow as input size increases?
+
+Therefore:
+
+```text
+Testing
+        ≠
+Complexity Analysis
+```
+
+JUnit Jupiter and AssertJ validate implementation behaviour.
+
+They do not establish asymptotic complexity.
 
 ---
 
 # Complexity and Benchmarking
 
-Complexity analysis and benchmarking answer different questions.
+Complexity analysis and benchmarking provide different forms of evidence.
 
-Complexity asks:
+## Complexity Analysis
 
-```text
-How does the algorithm grow?
-```
-
-Benchmarking asks:
+Examines:
 
 ```text
-How fast does the implementation execute on this machine?
-```
-
-The relationship is:
-
-```text
-Theoretical Analysis
+Algorithmic Structure
         ↓
-Complexity
-
-Experimental Analysis
+Mathematical Resource Model
         ↓
-JMH Benchmark
+Growth Behaviour
 ```
 
-Neither replaces the other.
+## Benchmarking
 
-Both are necessary.
+Examines:
+
+```text
+Concrete Implementation
+        ↓
+Defined Execution Environment
+        ↓
+Observed Measurements
+```
+
+The repository uses **JMH** when Java microbenchmarking is appropriate.
+
+Benchmarking may help investigate:
+
+* implementation constants;
+* JVM behaviour;
+* input distributions;
+* practical crossover points;
+* differences between implementation strategies.
+
+However:
+
+> **Observed timing results do not establish asymptotic complexity.**
 
 ---
 
-# Complexity and Software Engineering
+# Benchmarking Is Not Always Required
 
-Computational complexity influences many software engineering decisions.
+Not every algorithm requires experimental benchmarking.
 
-Examples include:
+Benchmarking should be used when it provides meaningful educational or
+engineering evidence.
 
-- selecting appropriate data structures;
-- choosing search algorithms;
-- designing scalable systems;
-- optimising backend services;
-- reducing infrastructure costs.
+For example, benchmarking may be valuable when:
 
-Understanding complexity therefore extends beyond algorithm design.
+* comparing multiple implementations;
+* studying JVM behaviour;
+* examining input-size effects;
+* investigating implementation trade-offs.
 
-It directly affects software architecture and system performance.
+It may be unnecessary when:
+
+* the topic is primarily conceptual;
+* no meaningful implementation comparison exists;
+* theoretical analysis already answers the learning question.
+
+Therefore, complexity analysis is fundamental.
+
+Benchmarking is conditional.
 
 ---
 
-# Relationship with Later Modules
+# Computational Complexity Throughout the Repository
 
-The concepts introduced here will be applied throughout the repository.
+Complexity analysis becomes a recurring activity in later modules.
 
 ```text
 Computational Complexity
+        ↓
+Arrays
         ↓
 Searching
-
-Computational Complexity
         ↓
 Sorting
-
-Computational Complexity
+        ↓
+Linked Structures
+        ↓
+Hash Tables
         ↓
 Trees
-
-Computational Complexity
         ↓
 Graphs
-
-Computational Complexity
+        ↓
+Recursion
+        ↓
+Divide and Conquer
+        ↓
+Greedy Algorithms
         ↓
 Dynamic Programming
 ```
 
-Every future algorithm will include a formal complexity analysis before experimental evaluation.
+Each module may require different analytical models.
+
+Examples include:
+
+* linear analysis;
+* nested-loop analysis;
+* logarithmic reduction;
+* recurrence relations;
+* graph parameters;
+* amortized analysis;
+* auxiliary-space analysis.
+
+The concepts introduced here provide the common foundation for those later
+analyses.
+
+---
+
+# Standard Complexity Questions
+
+When analysing an algorithm, the learner should progressively ask:
+
+```text
+What is the computational problem?
+        ↓
+What defines input size?
+        ↓
+Which resource is being analysed?
+        ↓
+Which operations represent the work?
+        ↓
+How many times can those operations occur?
+        ↓
+What function describes the cost?
+        ↓
+How does that function grow?
+        ↓
+Which asymptotic statement can be justified?
+```
+
+This sequence is more valuable than memorising complexity labels.
 
 ---
 
 # Best Practices
 
-When analysing an algorithm:
+When beginning a complexity analysis:
 
-- verify correctness before analysing efficiency;
-- identify the computational resources consumed;
-- analyse growth rather than execution time;
-- compare algorithms using objective criteria;
-- distinguish theoretical analysis from benchmarking;
-- consider scalability during algorithm selection.
+* establish correctness first;
+* define the input-size parameter explicitly;
+* identify the resource being analysed;
+* identify meaningful operations;
+* derive the cost from algorithm structure;
+* preserve multiple parameters when required;
+* state relevant assumptions;
+* distinguish exact cost models from asymptotic simplification;
+* distinguish case analysis from asymptotic notation;
+* analyse time and auxiliary space separately;
+* avoid interpreting theoretical complexity as measured runtime;
+* compare algorithms under equivalent assumptions;
+* use benchmarking only as complementary empirical evidence.
 
-Following these principles encourages disciplined and scientifically grounded algorithm analysis.
+These practices encourage rigorous and reproducible algorithm analysis.
+
+---
+
+# Common Mistakes
+
+## Treating Execution Time as Complexity
+
+Incorrect:
+
+```text
+The algorithm took 20 ms,
+therefore its complexity is 20 ms.
+```
+
+Execution time is an empirical measurement.
+
+Complexity describes resource growth.
+
+---
+
+## Assuming `n` Always Means Number of Elements
+
+The meaning of input size depends on the problem.
+
+It must be defined explicitly.
+
+---
+
+## Ignoring Multiple Input Parameters
+
+A graph may depend on both `V` and `E`.
+
+Reducing every problem to one variable may hide important structure.
+
+---
+
+## Counting Everything Mechanically
+
+The purpose of analysis is to model relevant computational work.
+
+Not every machine-level operation needs to be counted individually.
+
+---
+
+## Jumping Directly to Big O
+
+A complexity label without reasoning provides little evidence of understanding.
+
+The learner should first identify the algorithmic structure and derive the
+growth model.
+
+---
+
+## Confusing Big O with Exact Complexity
+
+Big O is an asymptotic upper-bound notation.
+
+It is not a synonym for every complexity statement.
+
+---
+
+## Confusing Worst Case with Big O
+
+Worst-case analysis and Big O describe different concepts.
+
+Worst case identifies a cost function over a class of inputs.
+
+Big O describes an asymptotic upper bound on a function.
+
+---
+
+## Ignoring Space
+
+Time efficiency may be improved by additional memory use.
+
+Relevant analyses should consider both resources.
+
+---
+
+## Treating Benchmarking as Proof
+
+Benchmark observations cannot prove an asymptotic complexity class.
 
 ---
 
 # Key Takeaways
 
-The learner should remember the following principles:
+After completing this document, the learner should understand that:
 
-- Computational complexity studies algorithm efficiency.
-- Efficiency is measured through resource consumption.
-- Time and memory are the primary computational resources.
-- Correctness always precedes efficiency.
-- Complexity analysis is independent of hardware.
-- Scalability is determined by algorithm growth.
-- Complexity analysis complements experimental benchmarking.
-- Every algorithm should be evaluated both theoretically and experimentally.
+* computational complexity studies the resources required by algorithms;
+* correctness and efficiency are separate properties;
+* complexity analysis begins only after the computational problem and algorithm
+  are sufficiently understood;
+* input size must be defined explicitly;
+* not every problem uses a single parameter `n`;
+* significant operations provide a useful model of computational work;
+* complexity analyses growth rather than exact wall-clock execution time;
+* time and auxiliary space are distinct computational resources;
+* complexity provides an abstract model that intentionally ignores many
+  machine-specific effects;
+* scalability is related to resource growth but also requires engineering
+  interpretation;
+* computational complexity is broader than Big O notation;
+* theoretical analysis and experimental benchmarking provide different forms
+  of evidence;
+* benchmarking complements complexity analysis but does not replace it.
 
-Computational complexity therefore provides the mathematical language used to compare algorithms objectively.
+Computational complexity therefore establishes the mathematical foundation for
+reasoning about algorithm efficiency.
 
-It establishes the analytical foundation for asymptotic analysis, time complexity, space complexity, algorithm growth, and benchmarking, becoming one of the central pillars of Computer Science and the **Algorithms Java Mastery** repository.
+It provides the conceptual bridge between **correctness**, **algorithm growth**,
+**asymptotic analysis**, **resource trade-offs**, and later empirical evaluation
+throughout **Algorithms Java Mastery**.
+
+---
+
+# Next Document
+
+```text
+02-algorithm-growth.md
+```
+
+The next document examines how different computational cost functions grow as
+input size increases.
+
+It introduces common growth behaviours and develops the intuition required to
+compare functions such as:
+
+```text
+1
+log n
+n
+n log n
+n²
+n³
+2ⁿ
+n!
+```
+
+The next central question becomes:
+
+> **How quickly do different resource functions grow as the problem size
+> increases?**
+
+---
+
+# Academic Foundation
+
+This document is inspired primarily by:
+
+> **Introduction to Algorithms**
+>
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Fourth Edition
+> MIT Press
+
+The analysis of computational resources, input size, running-time models, and
+algorithm efficiency throughout *Introduction to Algorithms* provides the
+principal academic foundation for this document.
+
+Complementary academic and technical references are documented in:
+
+```text
+docs/00-project/10-references.md
+```
+
+Additional specialised references may be introduced later when asymptotic
+analysis, amortized analysis, recurrence relations, or experimental performance
+evaluation require further treatment.
