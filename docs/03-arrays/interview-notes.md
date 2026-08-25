@@ -2,45 +2,95 @@
 
 ## Algorithms Java Mastery
 
-This document connects the theoretical study of arrays with their practical application in technical interviews.
+This document connects the theoretical study of arrays with their practical
+application in technical interviews.
 
-Arrays are among the first data structures discussed during software engineering interviews because they evaluate fundamental skills such as algorithmic reasoning, computational complexity, problem decomposition and code quality.
+**Algorithms Java Mastery** is inspired primarily by *Introduction to
+Algorithms* (Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and
+Clifford Stein), which provides the principal academic foundation for the
+algorithmic reasoning developed throughout this repository.
 
-The purpose of this document is not to memorise answers but to understand the concepts that interview questions are designed to evaluate.
+The previous Arrays documents established:
+
+- array fundamentals;
+- memory organisation;
+- Java array semantics;
+- multidimensional arrays;
+- fundamental operations;
+- common algorithms;
+- complexity analysis;
+- problem-solving methodology;
+- common implementation mistakes.
+
+This document consolidates those concepts from an interview-oriented
+perspective.
+
+The objective is not to memorise predefined answers.
+
+Instead, the learner should be able to:
+
+```text
+Understand
+        ↓
+Analyse
+        ↓
+Design
+        ↓
+Justify
+        ↓
+Implement
+        ↓
+Communicate
+```
 
 The central question addressed throughout this document is:
 
-> **What knowledge about arrays is expected from a software engineer during a technical interview?**
+> **What array knowledge and reasoning should a software engineer be able to
+> explain clearly during a technical interview?**
 
 ---
 
 # Purpose
 
-The purpose of this document is to relate the concepts studied throughout this module to the expectations commonly found in technical interviews.
+The purpose of this document is to connect the theoretical and practical array
+knowledge developed throughout the module with common technical-interview
+expectations.
 
-Rather than focusing on programming syntax, interviewers usually assess:
+Technical interviews may evaluate much more than whether a candidate can write
+syntactically valid Java.
 
-- analytical thinking;
-- problem-solving methodology;
+Relevant competencies include:
+
+- problem understanding;
+- algorithmic reasoning;
+- data-structure selection;
+- correctness;
 - computational complexity;
-- data structure selection;
-- communication skills.
+- edge-case analysis;
+- code quality;
+- technical communication.
 
-The expected progression is:
+The interview process can therefore be represented as:
 
 ```text
-Concept
+Problem
         ↓
-Interview Question
+Clarification
         ↓
-Reasoning
+Analysis
         ↓
-Solution
+Strategy
         ↓
-Discussion
+Complexity
+        ↓
+Implementation
+        ↓
+Verification
+        ↓
+Communication
 ```
 
-Understanding this process enables candidates to explain *why* an algorithm works rather than simply presenting code.
+The emphasis should remain on reasoning rather than memorisation.
 
 ---
 
@@ -48,319 +98,1021 @@ Understanding this process enables candidates to explain *why* an algorithm work
 
 After studying this document, the learner should be able to:
 
-- explain array concepts clearly;
-- justify algorithmic decisions;
-- analyse computational complexity;
-- compare arrays with other data structures;
-- communicate technical reasoning confidently.
+- explain fundamental array concepts clearly;
+- distinguish array properties from Java-specific implementation details;
+- justify the selection of arrays for a computational problem;
+- compare arrays with alternative data structures;
+- explain time and auxiliary-space complexity;
+- identify appropriate traversal patterns;
+- discuss edge cases before implementation;
+- communicate algorithmic reasoning in a structured manner;
+- explain trade-offs between alternative solutions.
 
 ---
 
-# What Interviewers Evaluate
+# What Technical Interviews Evaluate
 
-When discussing arrays, interviewers are generally interested in assessing the following competencies.
+Array problems are useful because they expose several foundational engineering
+skills.
+
+---
 
 ## Problem Understanding
 
-Can the candidate correctly interpret the problem before writing code?
+The candidate should demonstrate the ability to understand the problem before
+writing code.
 
-Professional engineers first analyse the requirements and identify constraints.
+Relevant questions include:
+
+- What exactly must be computed?
+- What are the inputs?
+- What is the expected output?
+- What constraints apply?
+- Is the input ordered?
+- Is mutation allowed?
+- What are the relevant edge cases?
+
+A strong solution begins with a precise problem model.
 
 ---
 
 ## Algorithmic Reasoning
 
-Can the candidate design an algorithm independently?
+The candidate should be able to move from:
 
-Interviewers usually value the reasoning process more than immediate implementation.
+```text
+Problem
+```
+
+to:
+
+```text
+Algorithmic Strategy
+```
+
+without relying on immediate code.
+
+For an array problem, possible strategies may include:
+
+- sequential traversal;
+- two pointers;
+- sliding window;
+- binary search;
+- auxiliary hashing;
+- sorting;
+- prefix processing.
+
+The chosen strategy should be justified according to the problem constraints.
+
+---
+
+## Correctness Reasoning
+
+The candidate should be able to explain why the proposed algorithm works.
+
+For example, a maximum-search algorithm may maintain the invariant:
+
+> After processing the first `i` elements, the current maximum is the largest
+> value among those processed elements.
+
+The level of formal reasoning required depends on the interview, but the
+candidate should be able to explain the logical basis of the solution.
 
 ---
 
 ## Complexity Analysis
 
-Can the candidate explain:
+The candidate should be prepared to discuss:
 
-- Time Complexity
-- Space Complexity
-- Best Case
-- Worst Case
+- time complexity;
+- auxiliary space;
+- relevant best case;
+- relevant worst case;
+- average case when assumptions are available.
 
-Every implementation should include a complexity discussion.
+For example:
+
+```text
+Linear Search
+
+Best Case: Θ(1)
+Worst Case: Θ(n)
+Auxiliary Space: Θ(1)
+```
+
+The complexity should be derived rather than recited.
+
+---
+
+## Data-Structure Selection
+
+The candidate should understand that the problem determines the appropriate
+structure.
+
+For example:
+
+```text
+Frequent Indexed Access
+        ↓
+Array may be appropriate
+```
+
+while:
+
+```text
+Frequent Key-Based Lookup
+        ↓
+Hash-Based Structure may be preferable
+```
+
+and:
+
+```text
+Ordered Dynamic Operations
+        ↓
+Another structure may be more appropriate
+```
+
+The correct answer depends on the workload.
 
 ---
 
 ## Communication
 
-Can the candidate explain the solution clearly?
+Technical communication is part of software engineering.
 
-Strong communication is an essential engineering skill.
+A candidate should be able to explain:
+
+- what the algorithm does;
+- why it works;
+- why it was selected;
+- its complexity;
+- its limitations;
+- alternative approaches.
+
+A correct solution that cannot be explained clearly is harder to review and
+maintain.
 
 ---
 
 ## Code Quality
 
-Interviewers expect code that is:
+Interview code should generally be:
 
 - readable;
-- maintainable;
 - logically organised;
-- correctly named;
-- easy to review.
+- appropriately named;
+- reasonably concise;
+- consistent;
+- easy to verify.
+
+The objective is not to demonstrate how much syntax the candidate knows.
+
+It is to demonstrate that the candidate can produce understandable software.
 
 ---
 
-# Frequently Asked Questions
+# Fundamental Array Questions
 
-The following questions are commonly asked during interviews.
+The following questions should be answerable without relying on memorised
+phrasing.
 
 ---
 
 ## What Is an Array?
 
-Expected discussion:
+A strong explanation should include the main properties:
 
-- contiguous memory;
-- fixed size;
-- indexed access;
-- random access in constant time.
+- linear data structure;
+- indexed organisation;
+- fixed length in Java;
+- direct positional access;
+- classical contiguous-storage model;
+- operation-specific complexity.
 
----
-
-## Why Is Array Access O(1)?
-
-Expected explanation:
-
-The address of every element can be calculated directly using its index.
-
-No sequential search is required.
+The distinction between the abstract structure and Java's implementation
+should also be understood.
 
 ---
 
-## Why Is Insertion O(n)?
+## Why Is Indexed Array Access Θ(1)?
 
-Expected explanation:
+The key reasoning is:
 
-Elements must be shifted to create space.
+```text
+Known Index
+        ↓
+Direct Positional Calculation
+        ↓
+Element Access
+        ↓
+Θ(1)
+```
 
-The cost grows proportionally to the number of affected elements.
+No sequential inspection of preceding elements is required under the standard
+array model.
 
----
+A useful clarification is:
 
-## Why Is Binary Search Faster Than Linear Search?
+```text
+Θ(1) asymptotic access
+        ≠
+identical physical latency on every machine
+```
 
-Expected discussion:
-
-Binary Search repeatedly halves the search space.
-
-Linear Search examines elements one by one.
-
-The difference is reflected in their computational complexity.
-
----
-
-## Difference Between Array and ArrayList
-
-Expected comparison:
-
-| Array | ArrayList |
-|--------|-----------|
-| Fixed size | Dynamic size |
-| Primitive support | Objects only (generic types) |
-| Lower overhead | Greater flexibility |
-| Faster direct access | Additional resizing mechanisms |
-
-Interviewers expect the candidate to explain not only the differences but also when each structure should be used.
+Concrete runtime behaviour can vary with the runtime and hardware.
 
 ---
 
-## What Is the Difference Between an Index and a Position?
+## Why Is Traversal Θ(n)?
 
-Expected explanation:
+A full traversal processes every element.
 
-An index identifies the location of an element.
+If:
+
+```text
+n = number of elements
+```
+
+and each iteration performs constant work:
+
+```text
+n × constant work
+        ↓
+Θ(n)
+```
+
+The result follows from the number of processed elements.
+
+---
+
+## Why Can Insertion Be Θ(n)?
+
+When logical order must be preserved, elements after the insertion position may
+need to shift.
+
+For example:
+
+```text
+[A][B][C][D][ ]
+```
+
+inserting into the beginning may require several elements to move.
+
+Therefore:
+
+```text
+Number of affected elements
+        ↓
+Can Grow With n
+        ↓
+Θ(n)
+```
+
+The exact result depends on the operation model and where insertion occurs.
+
+---
+
+## Why Can Deletion Be Θ(n)?
+
+For the same reason, removing an element while preserving order may require
+later elements to shift toward the deleted position.
+
+Worst-case shifting can therefore be:
+
+```text
+Θ(n)
+```
+
+---
+
+# Array vs ArrayList
+
+A common interview comparison is between a Java array and `ArrayList`.
+
+| Property | Array | `ArrayList` |
+|---|---|---|
+| Length | Fixed | Dynamic logical size |
+| Indexed access | `Θ(1)` | Typically `Θ(1)` |
+| Primitive component type | Yes | Generic type parameters require reference types |
+| Automatic growth | No | Yes, through internal capacity management |
+| API flexibility | Lower | Higher |
+| Resizing behaviour | Not applicable to fixed length | May involve reallocation and copying |
+
+The key engineering distinction is:
+
+```text
+Array
+        ↓
+Fixed-Length Structure
+```
+
+versus:
+
+```text
+ArrayList
+        ↓
+Dynamic Collection Abstraction
+        ↓
+May Reallocate Internal Storage
+```
+
+The exact implementation details of library classes should be verified against
+the Java version being used.
+
+---
+
+# What Is the Difference Between an Index and a Position?
+
+An index is the value used to identify a position in the array.
 
 In Java, indexing begins at zero.
 
-Understanding indexing prevents many implementation errors.
+For an array of length `n`:
+
+```text
+Valid Index Range
+
+0 ≤ i < n
+```
+
+Therefore:
+
+```text
+First Index = 0
+Last Index  = n - 1
+```
+
+This distinction is fundamental to avoiding off-by-one errors.
 
 ---
 
-## Why Do Arrays Start at Zero?
+# Why Do Java Arrays Use Zero-Based Indexing?
 
-Expected explanation:
+A useful technical explanation is that zero-based indexing aligns naturally with
+offset-based addressing.
 
-Zero-based indexing simplifies address calculations because the first element is located exactly at the base memory address.
+Conceptually:
 
-This convention is widely adopted in systems programming languages.
+```text
+Address
+    =
+Base
+    +
+Index × Element Size
+```
+
+For the first element:
+
+```text
+Index = 0
+```
+
+so its offset is:
+
+```text
+0
+```
+
+This provides a natural representation of the first position.
+
+However, the historical and language-design reasons for zero-based indexing are
+broader than this simple address formula.
+
+The essential interview point is that Java defines arrays with zero-based
+indexes.
 
 ---
 
-# Typical Practical Problems
+# Why Is an Array's Last Index `length - 1`?
 
-Interview questions often involve problems such as:
+If an array contains:
 
-- finding the maximum element;
-- finding the minimum element;
-- reversing an array;
-- rotating an array;
-- removing duplicates;
-- merging sorted arrays;
-- finding the second largest element;
-- checking whether an array is sorted;
-- counting occurrences;
-- searching for a target value.
+```text
+n positions
+```
 
-These problems evaluate algorithmic reasoning rather than language-specific syntax.
+and indexing begins at:
+
+```text
+0
+```
+
+then the indexes are:
+
+```text
+0, 1, 2, ..., n - 1
+```
+
+Therefore:
+
+```text
+Last Valid Index = length - 1
+```
+
+This is one of the most common sources of off-by-one errors.
 
 ---
 
-# Interview Strategy
+# What Is the Difference Between Access and Search?
 
-A recommended approach is:
+This is an important distinction.
+
+### Access
+
+The index is already known:
+
+```text
+A[i]
+        ↓
+Direct Access
+```
+
+Typical time:
+
+```text
+Θ(1)
+```
+
+### Search
+
+The desired value is known, but the position is not:
+
+```text
+Find value x
+        ↓
+Search required
+```
+
+For an unsorted array, linear search has:
+
+```text
+Worst Case: Θ(n)
+```
+
+This distinction demonstrates why complexity belongs to an operation rather than
+to a data structure as a whole.
+
+---
+
+# When Should an Array Be Used?
+
+Arrays are strong candidates when:
+
+- indexed access is important;
+- the number of positions is naturally fixed;
+- sequential traversal dominates;
+- a simple positional structure is sufficient;
+- low structural complexity is desirable.
+
+They may be less appropriate when:
+
+- frequent dynamic growth is required;
+- frequent order-preserving insertion dominates;
+- key-based lookup is more important than positional access;
+- another data structure better matches the workload.
+
+The choice should follow the computational problem.
+
+---
+
+# Common Practical Array Problems
+
+A candidate should be comfortable approaching problems such as:
+
+- find the maximum;
+- find the minimum;
+- calculate a sum;
+- calculate an average;
+- count occurrences;
+- reverse an array;
+- rotate an array;
+- verify sortedness;
+- perform linear search;
+- perform binary search on ordered data;
+- find the second largest value;
+- merge sorted arrays;
+- detect duplicates.
+
+The important skill is not memorising implementations.
+
+It is recognising the underlying strategy.
+
+---
+
+# Array Problem-Solving Strategy
+
+A structured interview approach is:
 
 ```text
 Read the Problem
-
-↓
-
-Ask Clarifying Questions
-
-↓
-
-Identify Inputs
-
-↓
-
-Identify Outputs
-
-↓
-
+        ↓
+Clarify Requirements
+        ↓
+Identify Inputs and Outputs
+        ↓
+State Preconditions
+        ↓
 Discuss Edge Cases
-
-↓
-
-Propose an Algorithm
-
-↓
-
+        ↓
+Propose a Simple Correct Approach
+        ↓
 Analyse Complexity
-
-↓
-
+        ↓
+Discuss Possible Improvements
+        ↓
 Implement
-
-↓
-
-Review the Solution
+        ↓
+Test
+        ↓
+Review
 ```
 
-This structured process demonstrates engineering discipline.
+This approach mirrors the **Problem-Solving Guide** developed earlier in the
+repository.
+
+---
+
+# Clarifying Questions
+
+Before coding, useful questions may include:
+
+- Can the array be empty?
+- Can the array contain duplicates?
+- Are negative values allowed?
+- Is the array sorted?
+- Should the original array be modified?
+- Is extra memory allowed?
+- Are there constraints on the input size?
+- Does the output require an index or a value?
+- What should happen if the requested result does not exist?
+
+The purpose of clarification is to eliminate ambiguity from the specification.
+
+---
+
+# Example — Find Maximum
+
+A structured interview explanation could be:
+
+```text
+Problem
+    ↓
+Find the maximum value.
+
+Strategy
+    ↓
+Single traversal while maintaining the largest value seen so far.
+
+Correctness
+    ↓
+After processing each prefix, the maintained value
+is the maximum of that prefix.
+
+Complexity
+    ↓
+Time Θ(n)
+Auxiliary Space Θ(1)
+```
+
+Only after this reasoning should the Java implementation be written.
+
+---
+
+# Example — Detect Duplicates
+
+Two common strategies can be compared.
+
+### Pairwise Comparison
+
+```text
+Time: Θ(n²)
+Auxiliary Space: Θ(1)
+```
+
+### Hash-Based Approach
+
+Under suitable hashing assumptions:
+
+```text
+Expected Time: Θ(n)
+Auxiliary Space: Θ(n)
+```
+
+The trade-off is:
+
+```text
+Less Memory
+        ↔
+More Computation
+```
+
+versus:
+
+```text
+More Memory
+        ↔
+Lower Expected Computation
+```
+
+The appropriate choice depends on constraints.
+
+---
+
+# Example — Binary Search
+
+Before proposing binary search, confirm:
+
+```text
+Is the input ordered?
+```
+
+If yes:
+
+```text
+Search Space
+        ↓
+Repeated Halving
+        ↓
+Worst-Case Time Θ(log n)
+```
+
+If no:
+
+```text
+Binary Search
+        ↓
+Invalid Strategy for the Given Preconditions
+```
+
+This demonstrates why algorithm selection begins with problem analysis.
+
+---
+
+# Whiteboard / Communication Strategy
+
+During an interview, it can be useful to communicate in the following order:
+
+```text
+1. Restate the Problem
+        ↓
+2. State Assumptions
+        ↓
+3. Describe the Approach
+        ↓
+4. Explain Why It Works
+        ↓
+5. State Complexity
+        ↓
+6. Implement
+        ↓
+7. Test an Example
+        ↓
+8. Discuss Improvements
+```
+
+This gives the interviewer visibility into the reasoning process.
+
+---
+
+# Manual Testing During an Interview
+
+After implementation, test a small example manually.
+
+For example:
+
+```text
+Input
+
+[7, 2, 15, 4, 9]
+```
+
+Then trace the relevant state:
+
+```text
+maximum = 7
+        ↓
+maximum = 7
+        ↓
+maximum = 15
+        ↓
+maximum = 15
+        ↓
+maximum = 15
+```
+
+Also consider at least one boundary case when appropriate.
+
+---
+
+# Complexity Questions to Expect
+
+Be prepared to answer:
+
+```text
+What is the time complexity?
+```
+
+```text
+What is the auxiliary-space complexity?
+```
+
+```text
+What is the worst case?
+```
+
+```text
+Can the algorithm be improved?
+```
+
+```text
+What would change if the input were sorted?
+```
+
+```text
+Can you reduce memory usage?
+```
+
+The explanation should connect the answer to actual work performed by the
+algorithm.
 
 ---
 
 # Common Interview Mistakes
 
-Candidates should avoid the following behaviours.
-
----
-
 ## Starting to Code Immediately
 
-Implementation should never begin before understanding the problem.
+This can hide ambiguity and lead to the wrong strategy.
 
 ---
 
-## Ignoring Complexity
+## Giving a Complexity Label Without Explanation
 
-Every solution should include a complexity analysis.
+Avoid:
+
+```text
+O(n)
+```
+
+without explaining:
+
+```text
+One constant-work operation per element
+        ↓
+n operations
+        ↓
+Θ(n)
+```
 
 ---
 
-## Forgetting Edge Cases
+## Ignoring Edge Cases
 
-Interviewers frequently ask about:
+Typical cases may not expose defects.
 
-- empty arrays;
-- duplicate values;
-- negative numbers;
-- single-element arrays.
+Always consider relevant cases such as:
+
+```text
+Empty
+Single Element
+Duplicate Values
+Negative Values
+Already Sorted
+Reverse Sorted
+```
+
+when valid for the problem.
 
 ---
 
-## Memorising Solutions
+## Memorising Complete Solutions
 
-Interviewers usually recognise memorised answers.
+Memorised code is less useful when the problem changes.
 
-Understanding the underlying reasoning is far more valuable.
+Understanding patterns makes adaptation easier.
+
+---
+
+## Choosing the Most Complex Solution Immediately
+
+Start with a clear correct approach.
+
+Then analyse whether improvement is necessary.
+
+The preferred progression is:
+
+```text
+Correct Solution
+        ↓
+Complexity Analysis
+        ↓
+Optimisation if Justified
+```
+
+---
+
+## Ignoring Space Complexity
+
+A faster algorithm may use substantially more memory.
+
+That trade-off should be discussed.
 
 ---
 
 ## Remaining Silent
 
-Explain every design decision.
+Technical interviews evaluate communication as well as implementation.
 
-Technical communication is evaluated alongside programming ability.
+Explain important decisions while solving the problem.
 
 ---
 
 # Engineering Perspective
 
-Professional software engineers rarely solve interview problems by remembering complete solutions.
+Interview problems are simplified models of broader engineering skills.
 
-Instead, they:
+The same process applies in professional development:
 
-- analyse the problem;
-- identify familiar patterns;
-- select an appropriate data structure;
-- justify computational complexity;
-- communicate their reasoning.
+```text
+Requirement
+        ↓
+Analysis
+        ↓
+Design
+        ↓
+Implementation
+        ↓
+Testing
+        ↓
+Evaluation
+```
 
-This mirrors real software development.
+The interview environment therefore provides an opportunity to demonstrate the
+same problem-solving discipline expected in software engineering.
 
 ---
 
-# Preparation Recommendations
+# Preparation Method
 
-To prepare effectively:
+A practical study routine is:
 
-- solve problems manually before programming;
-- explain your reasoning aloud;
-- analyse computational complexity for every solution;
-- implement algorithms in Java;
-- write automated tests;
-- review previous mistakes.
+```text
+Understand the Problem
+        ↓
+Solve Manually
+        ↓
+Write Pseudocode
+        ↓
+Explain the Approach
+        ↓
+Implement in Java
+        ↓
+Analyse Complexity
+        ↓
+Write Automated Tests
+        ↓
+Review Mistakes
+        ↓
+Repeat with Variations
+```
 
-Consistent practice is more valuable than memorising large numbers of problems.
+Variation is important.
+
+For example, after solving a linear-search problem, change:
+
+- the required output;
+- the input constraints;
+- whether duplicates are allowed;
+- whether ordering is available;
+- whether mutation is permitted.
+
+This develops adaptability rather than memorisation.
+
+---
+
+# Relationship with Previous Modules
+
+This document integrates the preceding modules.
+
+```text
+Foundations
+        ↓
+Problem Specification
+        ↓
+Contracts
+        ↓
+Correctness
+```
+
+```text
+Complexity
+        ↓
+Time
+        ↓
+Space
+        ↓
+Asymptotic Growth
+```
+
+```text
+Arrays
+        ↓
+Indexed Operations
+        ↓
+Traversal Patterns
+        ↓
+Common Algorithms
+```
+
+```text
+Java
+        ↓
+Implementation
+```
+
+```text
+Testing
+        ↓
+Validation
+```
+
+The interview perspective therefore consolidates the complete learning process.
 
 ---
 
 # Relationship with Future Modules
 
-The interview methodology presented here will continue throughout the repository.
-
-Future modules will introduce interview questions involving:
+The same interview methodology will be applied to later topics:
 
 ```text
 Searching
-
+        ↓
 Sorting
-
-Stacks
-
-Queues
-
-Trees
-
-Graphs
-
+        ↓
 Recursion
-
+        ↓
+Stacks and Queues
+        ↓
+Trees
+        ↓
+Heaps
+        ↓
+Graphs
+        ↓
 Backtracking
-
+        ↓
 Dynamic Programming
 ```
 
-Although the data structures become more advanced, the same reasoning process remains applicable.
+As the structures become more advanced, the same core reasoning process remains
+applicable:
+
+```text
+Understand
+        ↓
+Specify
+        ↓
+Design
+        ↓
+Justify
+        ↓
+Analyse
+        ↓
+Implement
+        ↓
+Test
+        ↓
+Communicate
+```
+
+---
+
+# Interview Review Checklist
+
+Before considering array preparation complete, the learner should be able to
+answer:
+
+```text
+□ What is an array?
+□ Why is indexed access Θ(1)?
+□ What is the difference between access and search?
+□ Why is traversal Θ(n)?
+□ Why can insertion be Θ(n)?
+□ Why can deletion be Θ(n)?
+□ What is the difference between an array and ArrayList?
+□ What is the difference between an index and a position?
+□ Why is the last valid index length - 1?
+□ What are the main array edge cases?
+□ How does binary search differ from linear search?
+□ What is the auxiliary-space cost of common algorithms?
+□ How do references differ from copies?
+□ How should array mutation be handled?
+□ What traversal patterns are commonly used?
+□ How would you test an array algorithm?
+□ Can you explain your complexity rather than only naming it?
+```
+
+The objective is fluent reasoning rather than memorised definitions.
 
 ---
 
@@ -369,23 +1121,220 @@ Although the data structures become more advanced, the same reasoning process re
 During technical interviews:
 
 - understand the problem before coding;
-- communicate your reasoning clearly;
-- justify every algorithmic decision;
-- analyse computational complexity;
-- discuss trade-offs between alternative solutions;
-- verify edge cases before presenting the final solution.
+- clarify assumptions;
+- state important edge cases;
+- propose the simplest correct approach first;
+- explain why the algorithm works;
+- derive the complexity;
+- discuss space trade-offs;
+- implement readable Java code;
+- test representative and boundary cases;
+- discuss alternative approaches when useful;
+- communicate continuously but concisely.
+
+Strong interview performance should reflect the same disciplined engineering
+process practised throughout **Algorithms Java Mastery**.
+
+---
+
+# Expected Outcome
+
+After completing this document, the learner should be able to approach common
+array interview problems using a consistent methodology:
+
+```text
+Understand
+        ↓
+Clarify
+        ↓
+Model
+        ↓
+Design
+        ↓
+Justify
+        ↓
+Analyse
+        ↓
+Implement
+        ↓
+Test
+        ↓
+Communicate
+```
+
+The learner should not depend on memorised solutions.
+
+Instead, the expected competency is:
+
+> **Recognise the computational pattern, select an appropriate strategy,
+> justify its correctness, analyse its complexity, implement it clearly, and
+> communicate the reasoning.**
+
+This is the principal interview skill developed by the Arrays module.
 
 ---
 
 # Key Takeaways
 
-The learner should remember the following principles:
+After studying this document, the learner should remember that:
 
-- Technical interviews evaluate reasoning more than memorisation.
-- Arrays are used to assess fundamental algorithmic skills.
-- Correctness and complexity are equally important.
-- Communication is an essential engineering competency.
-- Structured problem solving demonstrates professional maturity.
-- Every algorithm should be justified, analysed and explained.
+- technical interviews evaluate reasoning as well as implementation;
+- array questions test foundational algorithmic skills;
+- problem clarification should precede coding;
+- data-structure selection should follow the problem's dominant operations;
+- correctness and complexity should both be explained;
+- edge cases should be considered before finalising the algorithm;
+- communication is part of technical engineering competency;
+- simple correct solutions should generally be preferred before optimisation;
+- alternative solutions should be compared through explicit trade-offs;
+- Java implementation is the final expression of previously established
+  algorithmic reasoning;
+- automated testing strengthens confidence in the implementation.
 
-Mastering these interview concepts prepares the learner not only to solve array problems but also to demonstrate sound engineering practices throughout technical interviews and professional software development.
+---
+
+# Completion of the Arrays Module
+
+With this document, the principal conceptual and practical study of arrays is
+complete.
+
+The module progression is:
+
+```text
+03-arrays/
+│
+├── 01-array-fundamentals.md
+│
+├── 02-memory-layout.md
+│
+├── 03-java-arrays.md
+│
+├── 04-multidimensional-arrays.md
+│
+├── 05-array-operations.md
+│
+├── 06-traversal-patterns.md
+│
+├── 07-common-algorithms.md
+│
+├── 08-complexity-analysis.md
+│
+├── 09-problem-solving-guide.md
+│
+├── 10-common-mistakes.md
+│
+└── 11-interview-notes.md
+```
+
+The complete learning progression is:
+
+```text
+Array Abstraction
+        ↓
+Memory Organisation
+        ↓
+Java Representation
+        ↓
+Multidimensional Structures
+        ↓
+Fundamental Operations
+        ↓
+Traversal Patterns
+        ↓
+Common Algorithms
+        ↓
+Complexity Analysis
+        ↓
+Problem Solving
+        ↓
+Error Prevention
+        ↓
+Interview Application
+```
+
+This progression establishes the first complete application of the repository's
+learning methodology to a concrete data structure.
+
+---
+
+# Next Module
+
+The next stage of **Algorithms Java Mastery** should build upon this array
+foundation by applying the same reasoning methodology to another algorithmic
+domain.
+
+The repository progression includes topics such as:
+
+```text
+Searching
+        ↓
+Sorting
+        ↓
+Algorithmic Patterns
+        ↓
+Recursion
+        ↓
+Divide and Conquer
+        ↓
+Hashing
+        ↓
+Stacks and Queues
+        ↓
+Trees
+        ↓
+Heaps
+        ↓
+Graphs
+        ↓
+Backtracking
+        ↓
+Dynamic Programming
+```
+
+Regardless of the data structure or algorithmic paradigm, the methodology
+remains:
+
+```text
+Problem
+        ↓
+Specification
+        ↓
+Correctness
+        ↓
+Complexity
+        ↓
+Implementation
+        ↓
+Testing
+        ↓
+Engineering Evaluation
+```
+
+---
+
+# Academic Foundation
+
+The principal academic reference for this module is:
+
+> **Introduction to Algorithms**
+>
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
+> Fourth Edition  
+> MIT Press
+
+The interview preparation developed in this document is derived from the
+concepts studied throughout the **Foundations**, **Complexity**, and **Arrays**
+modules.
+
+Java-specific examples follow the Java language and standard library model.
+
+Complementary academic, mathematical, and technical references are documented
+in:
+
+```text
+docs/00-project/10-references.md
+```
+
+This document should be treated as a review resource. The detailed module
+documents remain the primary study material for understanding the underlying
+concepts rigorously.
