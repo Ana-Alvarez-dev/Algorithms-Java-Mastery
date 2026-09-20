@@ -29,7 +29,7 @@ public class ArrayAccess {
      * - Θ(1)
      */
 
-    public final class ArrayAccess {
+
 
         private ArrayAccess() {
 
@@ -45,6 +45,6 @@ public class ArrayAccess {
              */
             return array[index];
         }
-    }
+
 
 }
