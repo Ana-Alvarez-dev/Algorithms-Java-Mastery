@@ -1,6 +1,11 @@
 package org.anaalvarezdev.algorithms.arrays;
 
-public class ArrayAccess {
+public class AccessArrays {
+
+    public AccessArrays() {
+
+    }
+
     /**
      * Problem:
      * Given an integer array and a valid index,
@@ -27,24 +32,20 @@ public class ArrayAccess {
      *
      * Space Complexity:
      * - Θ(1)
+     *
+     * Benchmarking:
+     * - Not required
+     * - Direct indexed access is a constant-time primitive operation,
+     *   so empirical benchmarking would provide little algorithmic insight.
      */
-
-    public final class ArrayAccess {
-
-        private ArrayAccess() {
-
-        }
-
-        public static int get(int[] array, int index) {
-            /**
-             * This method accesses an array and returns the value stored at the specified index.
-             *
-             * @param array The integer array to access.
-             * @param index The valid index of the element to retrieve.
-             * @return The value stored at the specified index.
-             */
+    public static int get(int[] array, int index) {
+        /**
+         * This method accesses an array and returns the value stored at the specified index.
+         *
+         * @param array The integer array to access.
+         * @param index The valid index of the element to retrieve.
+         * @return The value stored at the specified index.
+         */
             return array[index];
-        }
     }
-
 }
