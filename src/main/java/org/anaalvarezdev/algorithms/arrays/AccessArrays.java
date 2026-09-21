@@ -38,14 +38,17 @@ public class AccessArrays {
      * - Direct indexed access is a constant-time primitive operation,
      *   so empirical benchmarking would provide little algorithmic insight.
      */
-    public static int get(int[] array, int index) {
-        /**
-         * This method accesses an array and returns the value stored at the specified index.
-         *
-         * @param array The integer array to access.
-         * @param index The valid index of the element to retrieve.
-         * @return The value stored at the specified index.
-         */
+
+
+        public static int get(int[] array, int index) {
+            /**
+             * This method accesses an array and returns the value stored at the specified index.
+             *
+             * @param array The integer array to access.
+             * @param index The valid index of the element to retrieve.
+             * @return The value stored at the specified index.
+             */
             return array[index];
-    }
+        }
+
 }
