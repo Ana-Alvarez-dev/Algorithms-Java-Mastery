@@ -1,6 +1,11 @@
 package org.anaalvarezdev.algorithms.arrays;
 
-public class ArrayAccess {
+public class AccessArrays {
+
+    public AccessArrays() {
+
+    }
+
     /**
      * Problem:
      * Given an integer array and a valid index,
@@ -27,13 +32,13 @@ public class ArrayAccess {
      *
      * Space Complexity:
      * - Θ(1)
+     *
+     * Benchmarking:
+     * - Not required
+     * - Direct indexed access is a constant-time primitive operation,
+     *   so empirical benchmarking would provide little algorithmic insight.
      */
 
-
-
-        private ArrayAccess() {
-
-        }
 
         public static int get(int[] array, int index) {
             /**
@@ -45,6 +50,5 @@ public class ArrayAccess {
              */
             return array[index];
         }
-
 
 }
