@@ -34,10 +34,13 @@ import java.util.function.IntConsumer;
  * - Θ(1)
  *
  * Benchmarking:
- * - Optional.
- * - Traversal time grows linearly with the number of elements,
- *   but benchmarking is not required at this stage because the
- *   primary objective is to understand linear iteration.
+ * - Required.
+ * - Benchmarking is used to experimentally observe how traversal
+ *   time changes as the input size increases.
+ * - The expected behavior is approximately linear growth because
+ *   every array element must be visited exactly once.
+ * - JMH should be used to reduce JVM warm-up, JIT compilation,
+ *   and measurement-noise problems associated with manual timing.
  */
 
 public class ArrayTraversal {
