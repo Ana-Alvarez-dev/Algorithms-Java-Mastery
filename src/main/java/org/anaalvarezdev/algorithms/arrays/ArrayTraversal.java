@@ -57,6 +57,8 @@ public class ArrayTraversal {
     public static void traverse(int[] array, IntConsumer action) {
 
         for (int index = 0; index < array.length; index++) {
+            //action.accept is a int consumer.It takes an int
+            //but doesn't return a value
             action.accept(array[index]);
         }
     }
