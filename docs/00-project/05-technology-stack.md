@@ -814,6 +814,50 @@ The technology stack therefore reflects the engineering lifecycle introduced
 throughout the repository while remaining consistent with the study
 methodology defined in **03-study-methodology.md** and the repository
 architecture defined in **04-repository-architecture.md**.
+## Cross-Platform Execution and Reproducibility
+
+The repository should remain buildable and testable through the Maven Wrapper without depending on IDE-specific execution.
+
+The standard verification entry points are:
+
+```text
+Windows
+.\mvnw.cmd clean verify
+
+Linux
+./mvnw clean verify
+```
+
+This creates a reproducibility boundary between local development and later CI automation.
+
+The expected engineering invariant is:
+
+```text
+Same repository
+        +
+Same Maven configuration
+        +
+Same Java contracts
+        ↓
+Equivalent build and test expectations
+```
+
+Concrete benchmark values may vary across operating systems, JVM states, and hardware. Asymptotic complexity classifications do not change because of those environmental differences.
+
+Testing and benchmarking remain complementary forms of evidence:
+
+```text
+Maven
+   ├── JUnit + AssertJ → Behavioural Evidence
+   └── JMH            → Performance Evidence
+```
+
+Linux and Windows are execution environments for the same Maven project. Linux additionally provides explicit practice with shell-based development, permissions, processes, environment variables, and automation.
+
+GitHub Actions belongs to the target engineering stack for Continuous Integration, but documentation must distinguish architectural intent from features that are actually implemented in the repository.
+
+---
+
 # 16. Technology Evolution
 
 The technology stack adopted by Algorithms Java Mastery is expected to evolve
