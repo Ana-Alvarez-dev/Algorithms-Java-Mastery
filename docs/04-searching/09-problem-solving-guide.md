@@ -309,6 +309,101 @@ Testing confirms that the implementation satisfies its specification.
 
 ---
 
+# Repository Implementation Traceability
+
+The methodology in this document is now represented by concrete implementations
+inside the Searching package.
+
+```text
+Problem Definition
+        ↓
+Contract
+        ↓
+Search Pattern
+        ↓
+Correctness Argument
+        ↓
+Complexity Analysis
+        ↓
+Java Implementation
+        ↓
+JUnit + AssertJ
+        ↓
+JMH when justified
+```
+
+Representative traces include:
+
+| Problem Type | Implementation | Test Evidence | Benchmark |
+|---|---|---|---|
+| Exact sequential search | `LinearSearch` | `LinearSearchTest` | `LinearSearchBenchmark` |
+| Exact ordered search | `BinarySearch` | `BinarySearchTest` | `BinarySearchBenchmark` |
+| Recursive ordered search | `RecursiveBinarySearch` | `RecursiveBinarySearchTest` | `BinarySearchVariantsBenchmark` |
+| First boundary | `FirstOccurrence` | `FirstOccurrenceTest` | Not required |
+| Last boundary | `LastOccurrence` | `LastOccurrenceTest` | Not required |
+| Lower-bound insertion point | `SearchInsertPosition` | `SearchInsertPositionTest` | Not required |
+| Complete duplicate range | `SearchRange` | `SearchRangeTest` | Not required |
+| Nearest value | `ClosestValueSearch` | `ClosestValueSearchTest` | Not required |
+
+The table is intended to demonstrate methodology, not to require one
+implementation for every possible search problem.
+
+---
+
+# Worked Methodology Example — First Occurrence
+
+A first-occurrence problem can be solved through the repository workflow.
+
+```text
+Problem
+Return the smallest index containing target
+        ↓
+Input Property
+Array is sorted
+        ↓
+Contract
+Return first matching index or -1
+        ↓
+Pattern
+Boundary Binary Search
+        ↓
+Correctness Property
+A recorded match remains valid while the search continues left
+        ↓
+Complexity
+Θ(log n) time, Θ(1) auxiliary space
+        ↓
+Implementation
+FirstOccurrence.java
+        ↓
+Tests
+Repeated target, absent target, boundaries, empty array, null input
+```
+
+This example shows why code should be the consequence of the analysis rather
+than its starting point.
+
+---
+
+# Verification Boundary
+
+Automated tests provide execution evidence for selected inputs.
+
+They do not replace the correctness argument.
+
+Likewise, JMH provides empirical performance evidence but does not prove
+asymptotic complexity.
+
+The repository therefore preserves:
+
+```text
+Correctness Proof      ≠ Unit Test
+Complexity Analysis    ≠ Benchmark Result
+Implementation         ≠ Specification
+```
+
+---
+
 # Common Mistakes During Problem Solving
 
 Software engineers frequently make mistakes before implementation even begins.

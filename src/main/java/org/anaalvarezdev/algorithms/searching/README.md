@@ -42,7 +42,10 @@ Linear Search was first introduced while studying array traversal. Its canonical
 implementation now belongs to this package so that Searching owns search
 behaviour without duplicating code.
 
-Future implementations should be added only when their contracts, correctness
+The currently approved implementation scope is complete.
+
+Future implementations should be added only when they introduce a distinct
+search problem or reasoning pattern and when their contracts, correctness
 arguments, and complexity analyses are already defined in the module
 documentation.
 
@@ -53,3 +56,18 @@ class requires a benchmark.
 
 Implementation and empirical evaluation should exist only when they add clear
 learning or engineering value.
+
+
+## Verification Status
+
+Every implementation in this package has a corresponding JUnit + AssertJ test
+class.
+
+Benchmark coverage is intentionally selective.
+
+At this stage, repository documentation records the expected verification
+commands, but this README does not claim that Maven or JMH execution has been
+performed for the current branch.
+
+The implementation should be verified with the Maven Wrapper before final
+integration.

@@ -896,28 +896,26 @@ docs/04-searching/
 
 # Current Implementation Status
 
-The Searching documentation is now beginning to produce dedicated Java
-implementation evidence.
+The Searching module now contains dedicated Java implementation, automated-test,
+and selected benchmark evidence.
 
-The first dedicated implementation migrated into the Searching package is
-`LinearSearch`, together with its automated tests and JMH benchmark.
+The implementation layer now covers the core search algorithms, boundary-search
+patterns, and selected representative search problems defined by this module.
 
 The implementation phase therefore now follows:
 
 ```text
 Academic Documentation
         ↓
-Linear Search Implementation
+Core Search Implementations
         ↓
-Binary Search Implementation
+Boundary Search Patterns
         ↓
-Recursive Binary Search Implementation
+Representative Search Problems
         ↓
 Automated Tests
         ↓
-JMH Evidence
-        ↓
-Search Patterns
+Selected JMH Evidence
 ```
 
 The first implementation trace is now:
@@ -948,9 +946,9 @@ owns the search behaviour.
 | `06-search-complexity.md` | Compare linear/logarithmic time and auxiliary space | Complexity statements + later benchmark interpretation |
 | `07-search-patterns.md` | Identify reusable search forms | `FirstOccurrence`, `LastOccurrence`, `SearchInsertPosition` + tests |
 | `08-common-search-problems.md` | Apply search reasoning to representative problems | `SearchRange`, `ClosestValueSearch` + tests |
-| `09-problem-solving-guide.md` | Apply repository methodology to search problems | Design workflow |
-| `10-common-mistakes.md` | Prevent boundary, contract, and termination errors | Test-case design |
-| `11-interview-notes.md` | Technical review and communication | Assessment preparation |
+| `09-problem-solving-guide.md` | Apply repository methodology to search problems | Traceability across current implementations/tests/benchmarks |
+| `10-common-mistakes.md` | Prevent boundary, contract, termination, and complexity errors | Mapped to current source/test countermeasures |
+| `11-interview-notes.md` | Technical review and communication | Implementation-aware assessment preparation |
 
 The table records responsibility, not an obligation to create one Java class
 for every document.
@@ -1066,6 +1064,42 @@ Potential implementation topics include:
 
 Only concepts already documented and justified should enter the implementation
 scope.
+
+---
+
+# Engineering Completion Status
+
+The current Searching implementation set is:
+
+```text
+LinearSearch
+BinarySearch
+RecursiveBinarySearch
+FirstOccurrence
+LastOccurrence
+SearchInsertPosition
+SearchRange
+ClosestValueSearch
+```
+
+Automated tests exist for every implementation.
+
+JMH is intentionally limited to empirical questions that justify measurement:
+
+```text
+LinearSearchBenchmark
+BinarySearchBenchmark
+BinarySearchVariantsBenchmark
+```
+
+No additional benchmark is required merely for symmetry.
+
+Therefore the module is structurally complete for its currently approved
+implementation scope.
+
+This statement does **not** claim that Maven verification or benchmarks were
+executed as part of this documentation update. Build and runtime evidence must
+come from an actual local or CI execution.
 
 ---
 
