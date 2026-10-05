@@ -770,18 +770,29 @@ At minimum, local validation should confirm:
 - no unintended generated files are included;
 - the Maven build remains successful.
 
-The primary validation command is:
+The repository should be validated through the Maven Wrapper so that local
+verification does not depend on a separately installed Maven version.
 
-```bash
-mvn clean verify
+Use the command appropriate to the local environment:
+
+```text
+Windows
+.\mvnw.cmd clean verify
+
+Linux
+./mvnw clean verify
 ```
 
 Additional commands may be used according to the contribution.
 
 For example:
 
-```bash
-mvn test
+```text
+Windows
+.\mvnw.cmd test
+
+Linux
+./mvnw test
 ```
 
 JMH benchmarks should be executed through the Maven configuration defined by the
@@ -914,9 +925,15 @@ repository consistency.
 
 # Stage 16 — Continuous Integration
 
-GitHub Actions validates the contribution in a clean environment.
+Continuous Integration is the automation target that follows successful local
+validation.
 
-Continuous integration should verify at least:
+At the current repository stage, the CI/CD documentation defines the intended
+workflow, while an executable GitHub Actions workflow should only be treated as
+implementation evidence once a workflow file exists under `.github/workflows/`.
+
+When configured, Continuous Integration should validate the contribution in a
+clean environment and verify at least:
 
 ```text
 Repository Checkout
@@ -932,9 +949,22 @@ Automated Testing
 Build Completion
 ```
 
-A successful local build is required before pushing, but CI provides additional
-evidence that the contribution does not depend on the developer's local
-environment.
+A successful local build is required before pushing.
+
+Once CI is implemented, it provides additional evidence that the contribution
+does not depend on one developer's workstation configuration.
+
+The local-to-CI handoff should preserve the same build intent:
+
+```text
+Local Maven Wrapper Verification
+        ↓
+Push / Pull Request
+        ↓
+Clean CI Environment
+        ↓
+Equivalent Maven Verification
+```
 
 Standard CI should not execute long or unstable benchmarks unless benchmark
 automation is explicitly designed for that purpose.
@@ -953,8 +983,9 @@ A contribution may be integrated into `main` after:
 - review requirements are satisfied;
 - requested corrections are addressed;
 - automated tests pass;
-- continuous integration succeeds;
-- repository consistency is preserved.
+- repository consistency is preserved;
+- Continuous Integration succeeds when an executable CI workflow is configured
+  for the repository.
 
 Integration should include all artefacts required to understand and verify the
 change:
@@ -1103,6 +1134,34 @@ Performance observations are produced by benchmarks
 
 Traceability allows a reader to understand how project conclusions were reached
 and how they can be reproduced.
+
+---
+
+## Environment Traceability
+
+Local execution and Continuous Integration belong to the engineering-verification layer.
+
+They do not change the academic reasoning that produced the algorithm.
+
+```text
+CLRS
+ ↓
+Specification
+ ↓
+Correctness
+ ↓
+Complexity
+ ↓
+Java Implementation
+ ↓
+Local Maven Verification
+   ├── Windows
+   └── Linux
+ ↓
+CI Verification when configured
+```
+
+This distinction prevents environment configuration from being confused with algorithmic proof or complexity analysis.
 
 ---
 
