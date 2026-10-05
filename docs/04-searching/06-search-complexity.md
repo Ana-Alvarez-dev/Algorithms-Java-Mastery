@@ -59,6 +59,50 @@ The difference becomes increasingly important as collections continue to grow.
 
 ---
 
+# Analytical Assumptions
+
+Complexity statements should identify the assumptions under which they hold.
+
+For this module:
+
+- `n` denotes the number of searchable elements;
+- element comparison is treated as constant-time under the adopted model;
+- iterative Binary Search assumes efficient indexed access;
+- Binary Search assumes sorted input according to the same comparison relation
+  used by the search;
+- average-case results require an explicit probability model.
+
+Therefore the module should not treat:
+
+```text
+Average Case = Θ(...)
+```
+
+as meaningful without stating what is being averaged.
+
+---
+
+# Tight Bounds and Upper Bounds
+
+When the work performed by the studied algorithm is known tightly, this module
+prefers `Θ` notation.
+
+Examples:
+
+```text
+Linear Search worst case        Θ(n)
+Binary Search worst case        Θ(log n)
+Iterative Binary Search space   Θ(1)
+Recursive Binary Search space   Θ(log n)
+```
+
+`O` remains useful when only an asymptotic upper bound is being asserted.
+
+This distinction follows the notation discipline established in
+`docs/02-complexity/`.
+
+---
+
 # Time Complexity
 
 Time complexity describes how the number of operations performed by an algorithm grows as the input size increases.
@@ -207,9 +251,9 @@ Although this additional memory is relatively small, it should still be consider
 
 | Algorithm | Best | Average | Worst | Auxiliary Space |
 |-----------|------|----------|--------|-----------------|
-| Linear Search | O(1) | O(n) | O(n) | O(1) |
-| Binary Search (Iterative) | O(1) | O(log n) | O(log n) | O(1) |
-| Binary Search (Recursive) | O(1) | O(log n) | O(log n) | O(log n) |
+| Linear Search | Θ(1) | Θ(n) under stated position/success assumptions | Θ(n) | Θ(1) |
+| Binary Search (Iterative) | Θ(1) | Θ(log n) under a stated search model | Θ(log n) | Θ(1) |
+| Binary Search (Recursive) | Θ(1) | Θ(log n) under a stated search model | Θ(log n) | Θ(log n) |
 
 ---
 
