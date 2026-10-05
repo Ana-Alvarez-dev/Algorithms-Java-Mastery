@@ -296,6 +296,186 @@ Mastering Linux enables developers to work efficiently in local environments, re
 
 ---
 
+# Role Within the Repository
+
+The Linux module belongs to the engineering layer of **Algorithms Java Mastery**.
+
+The project remains academically inspired by **Introduction to Algorithms (CLRS)**, but Linux knowledge is not derived from CLRS.
+
+Its responsibility is different:
+
+```text
+CLRS
+        ↓
+Algorithmic Knowledge
+        ↓
+Java Implementation
+        ↓
+Testing / Benchmarking
+        ↓
+Maven
+        ↓
+Execution Environment
+        ↓
+Linux
+```
+
+Linux provides the environment in which the learner practises reproducible command-line execution, permissions, processes, environment variables, Java tooling, Maven, and Git.
+
+It supports the engineering lifecycle without redefining the algorithmic theory.
+
+---
+
+# Repository Execution on Linux
+
+The repository should be usable without depending exclusively on an IDE.
+
+From the repository root, the principal verification command is:
+
+```bash
+./mvnw clean verify
+```
+
+This command uses the Maven Wrapper committed to the project.
+
+A typical Linux workflow is:
+
+```text
+Clone / Update Repository
+        ↓
+Verify Java Environment
+        ↓
+Check Wrapper Permission
+        ↓
+./mvnw clean verify
+        ↓
+Inspect Test Result
+        ↓
+Commit / Push
+```
+
+The engineering objective is to understand why the command works, not merely to copy it.
+
+---
+
+# Cross-Platform Equivalence
+
+Windows remains a valid local development environment.
+
+The repository therefore uses equivalent Maven Wrapper entry points:
+
+```text
+Windows
+.\mvnw.cmd clean verify
+
+Linux
+./mvnw clean verify
+```
+
+The command syntax differs because the operating environments differ.
+
+The project contract does not.
+
+Expected invariants include:
+
+- the same source code is compiled;
+- the same Maven project model is used;
+- the same automated tests express the same behavioural contracts;
+- the same algorithmic correctness expectations apply.
+
+Environment-specific differences may still affect:
+
+- shell syntax;
+- path syntax;
+- filesystem permissions;
+- environment variables;
+- process management;
+- concrete benchmark measurements.
+
+---
+
+# Linux Traceability
+
+The Linux module connects the executable repository with the broader engineering workflow.
+
+```text
+docs/<algorithm-module>/
+        ↓
+src/main/
+        ↓
+src/test/
+        ↓
+src/jmh/ when relevant
+        ↓
+pom.xml + Maven Wrapper
+        ↓
+docs/18-linux-environment/
+        ↓
+Linux Terminal Execution
+        ↓
+docs/19-ci-cd/
+```
+
+This relationship prepares the learner to understand how a locally reproducible command later becomes an automated CI step.
+
+---
+
+# Technical Review Questions
+
+The following questions are intentionally limited to concepts studied in this module and directly connected with repository execution.
+
+1. What is the difference between an absolute path and a relative path?
+2. Why can `./mvnw` require execution permission on Linux?
+3. What is the purpose of `PATH`?
+4. What is the purpose of `JAVA_HOME`?
+5. How can you verify which Java version is being used from the terminal?
+6. What is the difference between a program and a running process?
+7. Why can environment variables change the behaviour of a Java build?
+8. What does the Maven Wrapper provide compared with relying on a globally installed Maven version?
+9. Why should this repository be buildable from the terminal rather than only from IntelliJ IDEA?
+10. Which project properties should remain unchanged when moving from Windows to Linux, and which environment details may legitimately differ?
+
+The objective is explanation and reasoning, not command memorisation.
+
+---
+
+# Module Completion Criteria
+
+This module can be considered complete when the learner can:
+
+- navigate to the repository from a Linux terminal;
+- explain absolute and relative paths;
+- inspect and correct file execution permissions when necessary;
+- inspect `PATH` and `JAVA_HOME`;
+- verify the active Java version;
+- explain basic process concepts;
+- execute the repository through `./mvnw clean verify`;
+- use Git from the command line for normal repository work;
+- explain the relationship between local Linux verification and future CI automation;
+- distinguish environment-dependent behaviour from algorithmic correctness and asymptotic complexity.
+
+---
+
+# References
+
+Linux-specific knowledge should be supported by the official and technical sources centralised in:
+
+```text
+docs/00-project/10-references.md
+```
+
+The principal academic inspiration for the algorithmic content of the repository remains CLRS; Linux documentation serves a complementary engineering role.
+
+---
+
+# Navigation
+
+**Previous:** `docs/17-benchmarking/`
+
+**Next:** `docs/19-ci-cd/`
+
+---
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:
