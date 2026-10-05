@@ -61,7 +61,7 @@ src/
                 └── algorithms/
                     └── arrays/
                         ├── README.md
-                        ├── ArrayAccess.java
+                        ├── AccessArrays.java
                         ├── ArrayUpdate.java
                         ├── ArrayTraversal.java
                         ├── ArrayAggregation.java
@@ -173,7 +173,7 @@ Each stage introduces a new form of reasoning while reusing concepts from the pr
 
 # 1. Indexed Access
 
-## `ArrayAccess.java`
+## `AccessArrays.java`
 
 Introduces direct access to an element through its index.
 
@@ -805,7 +805,8 @@ the aggregate of the required prefix
 Correctness reasoning should be developed in conjunction with:
 
 ```text
-docs/02-correctness-and-formal-reasoning/
+docs/01-foundations/05-correctness.md
+docs/01-foundations/06-invariants.md
 ```
 
 The objective is not merely to produce working implementations, but to understand why their state transitions preserve the required properties.
@@ -891,15 +892,15 @@ The purpose is to identify cases systematically rather than mechanically test ev
 Every relevant implementation should have a corresponding test class under:
 
 ```text
-src/test/java/org/anaalvarez/algorithms/arrays/
+src/test/java/org/anaalvarezdev/algorithms/arrays/
 ```
 
 Expected correspondence:
 
 ```text
-ArrayAccess.java
+AccessArrays.java
         ↓
-ArrayAccessTest.java
+AccessArraysTest.java
 
 ArrayUpdate.java
         ↓
@@ -1032,7 +1033,7 @@ prefix-sum preprocessing
 Relevant benchmarks should be located under:
 
 ```text
-src/jmh/java/org/anaalvarez/algorithms/benchmarks/arrays/
+src/jmh/java/org/anaalvarezdev/algorithms/arrays/
 ```
 
 JMH should be used for empirical performance evaluation rather than ad-hoc timing with `System.nanoTime()`.
@@ -1047,15 +1048,14 @@ The conceptual foundation for these implementations belongs to the documentation
 docs/
 │
 ├── 01-foundations/
-├── 02-correctness-and-formal-reasoning/
-├── 03-complexity/
-└── 04-arrays/
+├── 02-complexity/
+└── 03-arrays/
 ```
 
 Their responsibilities are different.
 
 ```text
-docs/04-arrays/
+docs/03-arrays/
         ↓
 What is the structure?
 How does it behave?
