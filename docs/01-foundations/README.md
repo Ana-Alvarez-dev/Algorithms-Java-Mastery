@@ -273,3 +273,133 @@ Instead, each problem should first be analysed, specified, and reasoned about be
 The objective is to establish disciplined algorithmic thinking that remains applicable regardless of the programming language or technology used.
 
 This methodology becomes the intellectual foundation of the entire **Algorithms Java Mastery** repository.
+
+---
+
+# Academic Traceability
+
+The principal academic foundation for this module is:
+
+> **Introduction to Algorithms (CLRS)**  
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.
+
+The module does not reproduce the book. It uses the algorithmic reasoning
+framework developed in CLRS as the primary academic reference and transforms it
+into original explanations and a reusable engineering study method.
+
+Repository-wide complementary references are maintained in:
+
+```text
+docs/00-project/10-references.md
+```
+
+---
+
+# Traceability Map
+
+Foundations is the first conceptual layer in the repository traceability chain.
+
+```text
+CLRS / Academic Source
+        ↓
+01-foundations
+        ↓
+Problem Specification
+        ↓
+Preconditions / Postconditions
+        ↓
+Edge Cases
+        ↓
+Correctness / Invariants
+        ↓
+Problem-Solving Method
+        ↓
+02-complexity
+        ↓
+Concrete Algorithm Module
+        ↓
+Java Implementation
+        ↓
+Automated Tests
+        ↓
+Benchmark when justified
+```
+
+The module is intentionally transversal. It does not require an artificial
+`foundations` package under `src/main`.
+
+Its evidence appears in the quality of later specifications, correctness
+arguments, implementations, tests, and engineering decisions.
+
+| Foundations Document | Downstream Evidence |
+|---|---|
+| `01-algorithm-definition.md` | Clear distinction between problem, algorithm, and program |
+| `02-problem-specification.md` | Explicit input, output, assumptions, and constraints |
+| `03-preconditions-and-postconditions.md` | Java contracts and test expectations |
+| `04-edge-cases.md` | Boundary and invalid-input test cases |
+| `05-correctness.md` | Correctness arguments before implementation |
+| `06-invariants.md` | Loop and structural reasoning in later modules |
+| `07-problem-decomposition.md` | Recursion, divide and conquer, and dynamic programming |
+| `08-problem-solving-method.md` | Repository-wide algorithm development workflow |
+
+A concrete example appears in the Arrays module:
+
+```text
+Problem Specification
+        ↓
+Find Maximum
+        ↓
+Precondition: valid non-empty input
+        ↓
+Invariant: maximum is the greatest processed value
+        ↓
+Postcondition: returned value is the maximum
+        ↓
+src/main/.../arrays/FindMaximum.java
+        ↓
+src/test/.../arrays/FindMaximumTest.java
+```
+
+---
+
+# Module Completion Criteria
+
+The module can be considered complete when the learner can:
+
+- analyse an unfamiliar problem before writing Java;
+- define inputs, outputs, assumptions, and constraints;
+- formulate preconditions and postconditions;
+- identify relevant edge cases;
+- explain partial and total correctness;
+- formulate a simple invariant when appropriate;
+- perform a manual trace;
+- decompose a problem into smaller parts;
+- produce language-independent pseudocode;
+- derive later tests from the specification;
+- apply the complete problem-solving method without relying on memorised code.
+
+Completion means the reasoning can be reused in later modules.
+
+---
+
+# References
+
+Primary academic foundation:
+
+- Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C.
+  *Introduction to Algorithms*. MIT Press.
+
+Complementary repository-wide references:
+
+```text
+docs/00-project/10-references.md
+```
+
+---
+
+# Navigation
+
+**Previous:** `docs/00-project/`
+
+**Next:** `docs/02-complexity/`
+

@@ -166,6 +166,247 @@ Arrays therefore represent the first practical application of the algorithmic st
 
 ---
 
+---
+
+# Traceability Architecture
+
+Arrays is the first module that demonstrates the complete repository
+traceability chain with executable evidence.
+
+```text
+CLRS / Academic Source
+        ↓
+01-foundations
+        ↓
+02-complexity
+        ↓
+03-arrays
+        ↓
+src/main/java/org/anaalvarezdev/algorithms/arrays/
+        ↓
+src/test/java/org/anaalvarezdev/algorithms/arrays/
+        ↓
+src/jmh/java/org/anaalvarezdev/algorithms/arrays/
+```
+
+Not every document requires a Java class.
+
+Not every Java class requires a benchmark.
+
+Traceability means that each artefact has a justified conceptual source and a
+clear engineering responsibility.
+
+---
+
+# Document-to-Evidence Traceability
+
+| Arrays Document | Main Responsibility | Primary Evidence |
+|---|---|---|
+| `01-array-fundamentals.md` | Indexed structure, fixed length, basic properties | Access and update implementations |
+| `02-memory-layout.md` | Classical contiguous-memory model and locality | Conceptual support for indexed access |
+| `03-java-arrays.md` | Java-specific semantics, references, bounds | Java source and validation behaviour |
+| `04-multidimensional-arrays.md` | Arrays of arrays and multidimensional traversal | Future matrix/grid exercises |
+| `05-array-operations.md` | Access, update, copy, insertion, deletion | Core operation classes and tests |
+| `06-traversal-patterns.md` | Sequential, reverse, two-pointer, stateful traversal | Traversal, reverse, duplicate-removal classes |
+| `07-common-algorithms.md` | Representative array algorithms | Minimum, maximum, search, prefix sum |
+| `08-complexity-analysis.md` | Time and auxiliary-space analysis | Complexity statements and JMH interpretation |
+| `09-problem-solving-guide.md` | Apply the repository methodology | Design workflow before code |
+| `10-common-mistakes.md` | Prevent conceptual and implementation errors | Edge-case and invalid-input tests |
+| `11-interview-notes.md` | Technical-review and communication practice | Technical-assessment preparation |
+
+The interview document is a review layer and must remain bounded by concepts
+actually developed in the module.
+
+---
+
+# Implementation Traceability
+
+The current implementation package is:
+
+```text
+src/main/java/org/anaalvarezdev/algorithms/arrays/
+├── AccessArrays.java
+├── ArrayUpdate.java
+├── ArrayTraversal.java
+├── ArrayAggregation.java
+├── FindMinimum.java
+├── FindMaximum.java
+├── FindMinimumAndMaximum.java
+├── LinearSearch.java
+├── ArrayReverse.java
+├── ArrayCopy.java
+├── InsertAtIndex.java
+├── DeleteAtIndex.java
+├── RemoveDuplicatesSorted.java
+└── PrefixSum.java
+```
+
+The current evidence mapping is:
+
+| Implementation | Main Documentation Source | Test Evidence | Benchmark Evidence |
+|---|---|---|---|
+| `AccessArrays.java` | `01-array-fundamentals.md`, `05-array-operations.md` | `AccessArraysTest.java` | Not required |
+| `ArrayUpdate.java` | `03-java-arrays.md`, `05-array-operations.md` | `ArrayUpdateTest.java` | Not required |
+| `ArrayTraversal.java` | `06-traversal-patterns.md` | `ArrayTraversalTest.java` | `ArrayTraversalBenchmark.java` |
+| `ArrayAggregation.java` | `06-traversal-patterns.md`, `07-common-algorithms.md` | `ArrayAggregationTest.java` | `ArrayAggregationBenchmark.java` |
+| `FindMinimum.java` | `07-common-algorithms.md` | `FindMinimumTest.java` | `FindMinimumBenchmark.java` |
+| `FindMaximum.java` | `07-common-algorithms.md` | `FindMaximumTest.java` | `FindMaximumBenchmark.java` |
+| `FindMinimumAndMaximum.java` | `07-common-algorithms.md` | `FindMinimumAndMaximumTest.java` | `FindMinimumAndMaximumBenchmark.java` |
+| `LinearSearch.java` | `07-common-algorithms.md`, `08-complexity-analysis.md` | `LinearSearchTest.java` | `LinearSearchBenchmark.java` |
+| `ArrayReverse.java` | `06-traversal-patterns.md`, `07-common-algorithms.md` | `ArrayReverseTest.java` | `ArrayReverseBenchmark.java` |
+| `ArrayCopy.java` | `05-array-operations.md` | `ArrayCopyTest.java` | `ArrayCopyBenchmark.java` |
+| `InsertAtIndex.java` | `05-array-operations.md` | `InsertAtIndexTest.java` | `InsertAtIndexBenchmark.java` |
+| `DeleteAtIndex.java` | `05-array-operations.md` | `DeleteAtIndexTest.java` | `DeleteAtIndexBenchmark.java` |
+| `RemoveDuplicatesSorted.java` | `06-traversal-patterns.md`, `07-common-algorithms.md` | `RemoveDuplicatesSortedTest.java` | `RemoveDuplicatesSortedBenchmark.java` |
+| `PrefixSum.java` | `07-common-algorithms.md`, `08-complexity-analysis.md` | `PrefixSumTest.java` | `PrefixSumBenchmark.java` |
+
+This table records the current state of the repository and should be updated
+when the implementation package evolves.
+
+---
+
+# Correctness Traceability
+
+Correctness concepts are sourced from Foundations rather than duplicated.
+
+```text
+docs/01-foundations/05-correctness.md
+        +
+docs/01-foundations/06-invariants.md
+        ↓
+Array Algorithm
+        ↓
+Invariant / Contract
+        ↓
+Java Implementation
+        ↓
+JUnit Evidence
+```
+
+Example:
+
+```text
+FindMaximum
+        ↓
+Invariant:
+maximum is the greatest value
+among the processed elements
+        ↓
+Termination:
+all elements have been processed
+        ↓
+Postcondition:
+the returned value is the maximum
+```
+
+---
+
+# Complexity Traceability
+
+Complexity concepts are sourced from `docs/02-complexity/` and applied in
+`08-complexity-analysis.md`.
+
+Examples include:
+
+| Operation / Algorithm | Expected Analysis |
+|---|---:|
+| Indexed access | Θ(1) |
+| Indexed update | Θ(1) |
+| Complete traversal | Θ(n) |
+| Minimum / maximum scan | Θ(n) |
+| Linear search | Θ(1) best, Θ(n) worst |
+| Reverse in place | Θ(n) time, Θ(1) auxiliary space |
+| Copy | Θ(n) time and storage for the new array |
+| Insert/delete with shifting or copying | O(n) worst case |
+| Prefix-sum construction | Θ(n) preprocessing |
+
+The learner should derive these results from the operations performed rather
+than memorise the table.
+
+---
+
+# Testing and Benchmarking Traceability
+
+Tests are derived from the contract:
+
+```text
+Specification
+        ↓
+Preconditions / Postconditions
+        ↓
+Edge Cases
+        ↓
+Implementation
+        ↓
+JUnit Jupiter + AssertJ
+```
+
+Benchmarks are derived from an empirical question:
+
+```text
+Theoretical Expectation
+        ↓
+Java Implementation
+        ↓
+JMH Experiment
+        ↓
+Interpretation
+```
+
+A benchmark is not required simply because a class exists.
+
+---
+
+# Technical Review Boundary
+
+The module already contains:
+
+```text
+11-interview-notes.md
+```
+
+It includes technical questions and reasoning prompts specifically related to
+arrays.
+
+The purpose is to verify understanding and communication, not to introduce
+unrelated interview material.
+
+Future module reviews should follow the same rule:
+
+> **Technical-review questions must remain traceable to the academic concepts
+> and engineering artefacts actually studied in that module.**
+
+---
+
+# Module Completion Criteria
+
+The Arrays module can be considered complete when the learner can:
+
+- explain the abstract array model;
+- distinguish the abstract structure from Java-specific semantics;
+- justify constant-time indexed access;
+- explain linear traversal;
+- reason about insertion and deletion costs;
+- implement and test the current array algorithms;
+- formulate relevant loop invariants;
+- derive time and auxiliary-space complexity;
+- distinguish copying from aliasing;
+- explain the sorted-input precondition used by duplicate compaction;
+- explain prefix-sum preprocessing and its trade-off;
+- run the relevant automated tests;
+- interpret JMH evidence without confusing it with asymptotic analysis;
+- answer the questions in `11-interview-notes.md` using reasoning rather than
+  memorised responses.
+
+---
+
+# Navigation
+
+**Previous:** `docs/02-complexity/`
+
+**Next:** `docs/04-searching/`
+
+
 # Expected Outcome
 
 Upon completing this module, the learner will possess a solid understanding of arrays as both a programming construct and a fundamental computational abstraction.
