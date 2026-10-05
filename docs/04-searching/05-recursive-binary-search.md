@@ -584,6 +584,28 @@ Understanding recursive Binary Search makes later recursive algorithms much easi
 
 ---
 
+# Repository Traceability
+
+The executable evidence for this document is:
+
+```text
+docs/04-searching/05-recursive-binary-search.md
+        ↓
+src/main/java/org/anaalvarezdev/algorithms/searching/RecursiveBinarySearch.java
+        ↓
+src/test/java/org/anaalvarezdev/algorithms/searching/RecursiveBinarySearchTest.java
+        ↓
+src/jmh/java/org/anaalvarezdev/algorithms/searching/BinarySearchVariantsBenchmark.java
+```
+
+The benchmark is comparative rather than redundant.
+
+It evaluates iterative and recursive Binary Search under equivalent inputs so
+that empirical differences can be interpreted without confusing measurement
+with asymptotic proof.
+
+---
+
 # Key Takeaways
 
 Recursive Binary Search demonstrates how recursion naturally represents the Divide and Conquer paradigm.
