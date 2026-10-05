@@ -331,6 +331,68 @@ Boundary Search
 
 ---
 
+# Implemented Boundary Patterns
+
+Three representative Binary Search variants are implemented from this document:
+
+- `FirstOccurrence`: returns the smallest matching index.
+- `LastOccurrence`: returns the largest matching index.
+- `SearchInsertPosition`: returns the lower-bound insertion position.
+
+Their traceability is:
+
+```text
+docs/04-searching/07-search-patterns.md
+        ↓
+FirstOccurrence.java
+LastOccurrence.java
+SearchInsertPosition.java
+        ↓
+FirstOccurrenceTest.java
+LastOccurrenceTest.java
+SearchInsertPositionTest.java
+```
+
+All three require sorted input and preserve logarithmic running time:
+
+```text
+Time:  Θ(log n)
+Space: Θ(1)
+```
+
+No dedicated JMH benchmark is added because these methods are boundary variants
+of the Binary Search strategy already covered by the existing binary-search
+benchmarks. A benchmark should answer a new empirical question rather than be
+created merely for structural symmetry.
+
+---
+
+# Correctness Traceability
+
+The three implementations refine the same search-interval reasoning used by
+Binary Search.
+
+For `FirstOccurrence`, a match is recorded and the search continues left.
+
+For `LastOccurrence`, a match is recorded and the search continues right.
+
+For `SearchInsertPosition`, the algorithm searches for the first index whose
+value is greater than or equal to the target.
+
+Conceptually:
+
+```text
+Sorted Input
+        ↓
+Binary Search Interval
+        ↓
+Boundary Preservation
+        ↓
+First / Last / Lower-Bound Result
+```
+
+---
+
 # Engineering Perspective
 
 Experienced software engineers rarely begin by selecting an algorithm.
