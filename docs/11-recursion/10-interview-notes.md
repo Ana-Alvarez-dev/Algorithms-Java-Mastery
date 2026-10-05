@@ -1,696 +1,428 @@
-# Common Mistakes
+# Interview Notes — Recursion
 
 ## Algorithms Java Mastery
 
-Recursion is one of the most elegant algorithmic techniques in Computer Science, but it is also one of the easiest to implement incorrectly.
+This document consolidates technical-interview questions and reasoning prompts
+related to recursion.
 
-Unlike iterative algorithms, recursive algorithms depend on several conditions being satisfied simultaneously:
+Its purpose is not to encourage memorised answers. The questions are designed
+to verify whether the learner can explain recursive behaviour, correctness,
+termination, and complexity using the same reasoning developed throughout the
+module.
 
-- a correct base case;
-- a correct recursive case;
-- guaranteed progress toward termination;
-- valid recursive reasoning;
-- controlled recursion depth.
-
-If any of these conditions is violated, the algorithm may produce incorrect results, fail to terminate, or consume excessive computational resources.
-
-Understanding these mistakes is essential because recursive defects are often more difficult to identify than iterative ones. A recursive algorithm may appear correct for small inputs while failing for larger or unexpected cases.
-
-This document presents the most common conceptual, algorithmic, and implementation mistakes encountered when designing recursive algorithms.
+The module remains academically grounded in the concepts studied through
+**Introduction to Algorithms (CLRS)** and complementary Java engineering
+practice.
 
 ---
 
-# 1. Purpose
+# 1. What Is Recursion?
 
-The purpose of this document is to:
+**Question**
 
-- identify common recursion mistakes;
-- explain why these mistakes occur;
-- establish good recursive design practices;
-- improve recursive debugging skills;
-- reinforce correct algorithmic reasoning.
+What is recursion in algorithm design?
+
+**Expected reasoning**
+
+Recursion is a problem-solving technique in which a problem is expressed in
+terms of smaller instances of the same problem.
+
+A valid recursive algorithm normally requires:
+
+- one or more base cases;
+- a recursive case;
+- progress toward a base case;
+- a way to combine or propagate recursive results.
+
+A recursive implementation is therefore not defined merely by a method calling
+itself.
 
 ---
 
-# 2. Missing Base Case
+# 2. Why Is a Base Case Necessary?
 
-The most common recursion error is omitting the base case entirely.
+**Question**
 
-Conceptually:
+What happens if a recursive algorithm does not define a reachable base case?
 
-```text
-Problem
+**Expected reasoning**
 
-↓
+The recursive calls may continue indefinitely until the runtime exhausts the
+available call-stack space.
 
-Smaller Problem
-
-↓
-
-Smaller Problem
-
-↓
-
-...
-```
-
-Since no stopping condition exists, recursion never terminates.
-
-Eventually:
+In Java, this typically results in:
 
 ```text
 StackOverflowError
 ```
 
-Every recursive algorithm must define at least one reachable base case.
+A base case is therefore part of both the functional definition and the
+termination argument.
 
 ---
 
-# 3. Incorrect Base Case
+# 3. Base Case vs Recursive Case
 
-A base case may exist but still be incorrect.
+**Question**
 
-Example:
+What is the difference between the base case and the recursive case?
+
+**Expected reasoning**
+
+The base case solves a sufficiently small instance directly.
+
+The recursive case reduces the current problem to one or more smaller
+subproblems and uses their results to construct the current result.
+
+---
+
+# 4. How Do You Prove That Recursion Terminates?
+
+**Question**
+
+A recursive method has a base case. Is that sufficient to guarantee
+termination?
+
+**Expected reasoning**
+
+No.
+
+The recursive calls must also make measurable progress toward that base case.
+
+A useful termination argument identifies a decreasing measure, such as:
+
+```text
+n
+n - 1
+n - 2
+...
+0
+```
+
+or:
+
+```text
+n
+n / 2
+n / 4
+...
+1
+```
+
+The measure must move toward a well-founded terminal condition.
+
+---
+
+# 5. Recursion and Mathematical Induction
+
+**Question**
+
+Why are recursive correctness arguments often related to mathematical
+induction?
+
+**Expected reasoning**
+
+Both techniques reason from smaller instances toward larger instances.
+
+A common recursive correctness argument contains:
 
 ```text
 Base Case
-
-↓
-
-Returns Wrong Value
+        ↓
+Inductive Hypothesis
+        ↓
+Recursive Step
+        ↓
+Correct Result
 ```
 
-Even though recursion terminates, every larger recursive solution becomes incorrect.
-
-Since recursive algorithms build larger solutions from smaller ones, an incorrect base case propagates errors throughout the entire computation.
+The inductive hypothesis assumes correctness for smaller subproblems, and the
+inductive step explains why the current problem is therefore solved correctly.
 
 ---
 
-# 4. Unreachable Base Case
+# 6. Recursion vs Recurrence Relation
 
-Sometimes the base case exists but can never be reached.
+**Question**
 
-Example:
+Is a recursive algorithm the same thing as a recurrence relation?
+
+**Expected reasoning**
+
+No.
+
+A recursive algorithm describes how a solution is computed.
+
+A recurrence relation commonly describes how a quantity such as running time
+depends on smaller input sizes.
+
+For example:
 
 ```text
-Problem(n)
-
-↓
-
-Problem(n + 1)
-
-↓
-
-Problem(n + 2)
-
-↓
-
-...
+T(n) = 2T(n / 2) + Θ(n)
 ```
 
-The recursive calls move away from the stopping condition instead of toward it.
+may model the running time of Merge Sort.
 
-This produces infinite recursion despite having a defined base case.
+It does not by itself prove that Merge Sort produces a correctly sorted
+sequence.
 
 ---
 
-# 5. No Progress Toward the Base Case
+# 7. What Is Stored on the Java Call Stack?
 
-Every recursive call must simplify the problem.
+**Question**
 
-Correct reduction:
+What information is conceptually associated with each recursive call?
 
-```text
-n
+**Expected reasoning**
 
-↓
+Each invocation requires an execution frame containing information needed to
+resume that invocation, such as:
 
-n − 1
-```
+- method parameters;
+- local variables;
+- return information;
+- intermediate execution state.
 
-Incorrect reduction:
-
-```text
-n
-
-↓
-
-n
-```
-
-or
-
-```text
-n
-
-↓
-
-n + 1
-```
-
-Without measurable progress, recursion cannot terminate.
+Recursive depth therefore contributes to space complexity.
 
 ---
 
-# 6. Changing the Problem
+# 8. Recursive Time and Space Complexity
 
-Recursive calls should solve **the same problem** on a smaller input.
+**Question**
 
-Incorrect reasoning:
+Why can a recursive algorithm have good time complexity but significant space
+cost?
 
-```text
-Original Problem
+**Expected reasoning**
 
-↓
+Even if the number of operations grows efficiently, active recursive calls may
+remain on the call stack.
 
-Different Problem
-```
-
-Changing the meaning of the problem breaks recursive correctness.
-
-Every recursive invocation must preserve the original specification.
-
----
-
-# 7. Forgetting the Recursive Case
-
-Some implementations correctly handle the base case but never continue solving larger inputs.
-
-Conceptually:
-
-```text
-Base Case
-
-↓
-
-Return
-```
-
-No recursive reduction exists.
-
-The algorithm simply stops instead of solving the complete problem.
-
-Both the base case and recursive case are essential.
-
----
-
-# 8. Incorrect Recursive Reduction
-
-A recursive algorithm may reduce the problem incorrectly.
-
-Example:
-
-Correct:
-
-```text
-Search Remaining Elements
-```
-
-Incorrect:
-
-```text
-Skip Elements
-```
-
-The recursive call executes successfully but solves the wrong subproblem.
-
-The reduction itself must preserve correctness.
-
----
-
-# 9. Incorrect Combination of Results
-
-Many recursive algorithms perform work after recursive calls return.
-
-Example:
-
-```text
-Recursive Result
-
-↓
-
-Combine
-
-↓
-
-Return
-```
-
-If the combination step is incorrect, the entire algorithm becomes incorrect even when the recursive calls themselves are correct.
-
-Examples include:
-
-- Merge Sort;
-- tree traversals;
-- divide and conquer algorithms.
-
----
-
-# 10. Infinite Recursion
-
-Infinite recursion occurs when recursive execution never reaches a stopping condition.
-
-Conceptually:
-
-```text
-Problem
-
-↓
-
-Recursive Call
-
-↓
-
-Recursive Call
-
-↓
-
-Recursive Call
-
-↓
-
-...
-```
-
-Eventually the Call Stack is exhausted.
-
-Infinite recursion is one of the most frequent implementation errors.
-
----
-
-# 11. Excessive Recursion Depth
-
-Some recursive algorithms terminate correctly but still exceed available stack memory.
-
-Example:
-
-```text
-Very Large Input
-
-↓
-
-Very Deep Recursion
-
-↓
-
-StackOverflowError
-```
-
-Correctness alone does not guarantee practical execution.
-
-Recursion depth should always be considered.
-
----
-
-# 12. Ignoring Stack Memory
-
-Every recursive call creates a new stack frame.
-
-Conceptually:
-
-```text
-Recursive Call
-
-↓
-
-New Stack Frame
-```
-
-Deep recursion consumes additional stack memory.
-
-Ignoring stack usage may cause runtime failures even for correct algorithms.
-
----
-
-# 13. Assuming Tail Recursion Is Optimized
-
-Some developers assume:
-
-```text
-Tail Recursion
-
-↓
-
-Automatic Optimization
-```
-
-This assumption is incorrect in Java.
-
-The JVM does **not** guarantee Tail Call Optimization.
-
-Tail-recursive methods may still produce:
-
-```text
-StackOverflowError
-```
-
-for sufficiently deep recursion.
-
----
-
-# 14. Duplicating Work
-
-Some recursive algorithms repeatedly solve identical subproblems.
-
-Example:
-
-```text
-Problem
-
-↓
-
-Subproblem A
-
-↓
-
-Repeated Again
-```
-
-Naïve Fibonacci is the classic example.
-
-Repeated computation produces exponential execution time.
-
-Dynamic Programming solves this problem through memoization or tabulation.
-
----
-
-# 15. Ignoring Overlapping Subproblems
-
-When recursive calls repeatedly solve the same subproblem, unnecessary computation occurs.
-
-Conceptually:
-
-```text
-Problem
-
-↓
-
-Repeated Recursive Calls
-
-↓
-
-Repeated Work
-```
-
-Recognizing overlapping subproblems is essential before applying Dynamic Programming.
-
----
-
-# 16. Confusing Recursion with Iteration
-
-Recursion is not simply a loop written differently.
-
-Recursion:
-
-```text
-Problem Reduction
-```
-
-Iteration:
-
-```text
-Repeated Execution
-```
-
-Although equivalent for many problems, they represent different reasoning models.
-
----
-
-# 17. Choosing Recursion for Every Problem
-
-Not every problem benefits from recursion.
-
-Simple sequential tasks often become unnecessarily complex when implemented recursively.
-
-Examples include:
-
-- counting;
-- simple array traversal;
-- repetitive numeric calculations.
-
-Recursion should simplify the problem, not complicate it.
-
----
-
-# 18. Avoiding Recursion Completely
-
-The opposite mistake is refusing to use recursion even when it naturally models the problem.
-
-Examples:
-
-- trees;
-- recursive file systems;
-- expression parsing;
-- backtracking.
-
-Replacing naturally recursive algorithms with complicated iterative logic may reduce readability.
-
----
-
-# 19. Ignoring Input Size
-
-A recursive solution that works for:
-
-```text
-100 Elements
-```
-
-may fail for:
-
-```text
-10,000,000 Elements
-```
-
-Algorithm selection should consider expected recursion depth.
-
-Production software often requires iterative alternatives for very large inputs.
-
----
-
-# 20. Forgetting Preconditions
-
-Recursive algorithms frequently assume:
-
-- valid input;
-- legal arguments;
-- decreasing problem size.
-
-If these assumptions are violated, recursion may fail unexpectedly.
-
-Every recursive algorithm should define and respect its preconditions.
-
----
-
-# 21. Ignoring Edge Cases
-
-Common edge cases include:
-
-- empty input;
-- single-element input;
-- null references;
-- zero values;
-- negative values;
-- already solved problems.
-
-These situations often correspond to base cases.
-
-Failing to test them frequently produces incorrect recursive behavior.
-
----
-
-# 22. Misunderstanding Time Complexity
-
-A common misconception is:
-
-```text
-Recursive
-
-↓
-
-Slow
-```
-
-Incorrect.
-
-Recursive complexity depends on:
-
-- recursive reduction;
-- branching factor;
-- work performed per call.
-
-Binary Search remains:
+For example, a logarithmic recursive search may use:
 
 ```text
 O(log n)
 ```
 
-whether implemented recursively or iteratively.
+stack space even when no explicit auxiliary collection is created.
 
 ---
 
-# 23. Misunderstanding Space Complexity
+# 9. Recursive Binary Search
 
-Some developers analyse only execution time.
+**Question**
 
-Recursive algorithms also require:
+What must be true before recursive binary search can be applied correctly?
+
+**Expected reasoning**
+
+The searched sequence must satisfy the ordering precondition required by binary
+search.
+
+Each recursive call must also reduce the search interval.
+
+The correctness argument therefore depends on both:
+
+- the sorted-input precondition;
+- preservation of the valid search interval.
+
+---
+
+# 10. Recursion vs Iteration
+
+**Question**
+
+When should an iterative solution be preferred over a recursive one?
+
+**Expected reasoning**
+
+The decision depends on the problem structure, readability, stack depth,
+language/runtime behaviour, and resource requirements.
+
+Iteration may be preferable when:
+
+- recursion depth can become large;
+- the iterative state is simple;
+- avoiding call-stack growth is important.
+
+Recursion is often natural when the problem or data structure is inherently
+recursive, such as tree traversal or divide-and-conquer algorithms.
+
+---
+
+# 11. Tail Recursion in Java
+
+**Question**
+
+Does Java guarantee tail-call optimisation?
+
+**Expected reasoning**
+
+No.
+
+A tail-recursive Java method should not be assumed to execute in constant stack
+space.
+
+This is a language/runtime consideration that may influence the choice between
+recursive and iterative implementations.
+
+---
+
+# 12. Common Recursive Failure Modes
+
+A technical discussion should recognise mistakes such as:
+
+- missing base case;
+- unreachable base case;
+- no progress toward termination;
+- incorrect reduction of the problem;
+- losing or incorrectly combining recursive results;
+- excessive recursion depth;
+- exponential recomputation;
+- incorrect complexity assumptions.
+
+These problems are developed in:
 
 ```text
-Stack Memory
+09-common-mistakes.md
 ```
-
-Additional space depends primarily on recursion depth.
-
-Ignoring auxiliary space leads to incomplete complexity analysis.
 
 ---
 
-# 24. Forgetting the Call Stack
+# 13. Reasoning Exercise — Factorial
 
-Recursive execution is controlled by the JVM Call Stack.
+**Prompt**
 
-Ignoring this execution model makes debugging much more difficult.
-
-Instead of thinking:
+Given:
 
 ```text
-Method Calls Itself
+factorial(n) = n × factorial(n - 1)
+factorial(0) = 1
 ```
 
-think:
+Explain:
+
+1. the base case;
+2. the recursive case;
+3. why execution terminates for non-negative integers;
+4. the time complexity;
+5. the call-stack space complexity.
+
+**Expected direction**
+
+A complete answer should connect the contract, decreasing input size,
+correctness reasoning, and computational cost rather than only reproducing the
+formula.
+
+---
+
+# 14. Reasoning Exercise — Fibonacci
+
+**Prompt**
+
+Why is the direct recursive Fibonacci implementation often inefficient?
+
+**Expected direction**
+
+The recursion tree contains repeated subproblems.
+
+The learner should distinguish:
 
 ```text
-New Stack Frame
-
-↓
-
-Later Returns
+Correct recursive definition
+        ≠
+Efficient implementation
 ```
 
-This mental model simplifies recursive reasoning.
+This observation prepares the transition toward memoisation and dynamic
+programming.
 
 ---
 
-# 25. Testing Only Small Inputs
+# 15. Reasoning Exercise — Tree Traversal
 
-Recursive algorithms often appear correct for small examples.
+**Prompt**
 
-Example:
+Why is recursion a natural technique for traversing a binary tree?
+
+**Expected direction**
+
+A binary tree is recursively structured:
 
 ```text
-factorial(5)
+Node
+├── Left Subtree
+└── Right Subtree
 ```
 
-works correctly.
+A recursive traversal mirrors the structure of the data.
 
-Later:
+The answer should still consider base cases, correctness, and recursion depth.
+
+---
+
+# 16. Technical Interview Checklist
+
+Before considering the recursion module complete, the learner should be able to
+explain without reading notes:
+
+- what recursion is;
+- what makes a recursive definition valid;
+- the role of the base case;
+- why progress is required for termination;
+- how the Java call stack relates to recursive execution;
+- how to analyse recursive time complexity;
+- how to analyse recursive auxiliary space;
+- how induction supports correctness reasoning;
+- why a recurrence relation is not a correctness proof;
+- when iteration may be preferable;
+- why Java tail recursion should not be assumed to use constant stack space;
+- how recursion prepares the learner for divide and conquer, trees,
+  backtracking, and dynamic programming.
+
+---
+
+# 17. Interview Strategy
+
+A strong technical answer should usually follow this sequence:
 
 ```text
-factorial(50000)
+Define the concept
+        ↓
+State the preconditions
+        ↓
+Explain the recursive reduction
+        ↓
+Identify the base case
+        ↓
+Explain termination
+        ↓
+Discuss correctness
+        ↓
+Analyse time
+        ↓
+Analyse auxiliary space
+        ↓
+Mention relevant Java considerations
 ```
 
-may fail because of stack limitations.
-
-Testing should include:
-
-- small inputs;
-- edge cases;
-- large inputs;
-- invalid inputs.
+The objective is to demonstrate reasoning, not vocabulary.
 
 ---
 
-# 26. Debugging by Guessing
+# References
 
-Recursive debugging should follow a systematic process.
+The recursion module is primarily inspired by the recursive reasoning and
+algorithm-analysis framework developed in:
+
+- Cormen, T. H., Leiserson, C. E., Rivest, R. L., and Stein, C.
+  *Introduction to Algorithms*. MIT Press.
+
+Additional repository-wide references are maintained in:
 
 ```text
-Verify Base Case
-        ↓
-Verify Recursive Reduction
-        ↓
-Verify Progress
-        ↓
-Trace Recursive Calls
-        ↓
-Verify Returned Values
+docs/00-project/10-references.md
 ```
-
-Random code modifications rarely solve recursive problems.
-
----
-
-# 27. Better Recursive Design
-
-A disciplined recursive design process is:
-
-```text
-Understand Problem
-        ↓
-Identify Base Case
-        ↓
-Identify Recursive Case
-        ↓
-Verify Progress
-        ↓
-Prove Correctness
-        ↓
-Analyse Complexity
-        ↓
-Implement
-        ↓
-Test
-```
-
-Following this sequence significantly reduces recursion errors.
-
----
-
-# 28. Engineering Perspective
-
-Professional software engineers evaluate recursive algorithms from multiple perspectives.
-
-They verify:
-
-- correctness;
-- termination;
-- recursion depth;
-- stack usage;
-- readability;
-- maintainability;
-- algorithmic complexity.
-
-The objective is not simply to make recursion work, but to produce algorithms that remain correct, efficient, and maintainable in real-world software systems.
-
----
-
-# 29. Relationship with the Next Document
-
-This document reviewed the conceptual and implementation mistakes commonly encountered when designing recursive algorithms.
-
-The next document, **Interview Notes**, summarizes the complete module by reviewing:
-
-- core recursion concepts;
-- recursive reasoning;
-- complexity analysis;
-- recursion versus iteration;
-- common interview questions;
-- practical engineering considerations.
-
-It serves as a concise review for technical interviews and revision.
-
----
-
-# 30. Key Takeaways
-
-After completing this document, the learner should understand that:
-
-- every recursive algorithm requires a correct and reachable base case;
-- recursive calls must always make measurable progress toward termination;
-- recursive reduction must preserve the original problem;
-- recursion consumes stack memory proportional to recursion depth;
-- Java does not guarantee Tail Call Optimization;
-- duplicated recursive work may produce exponential complexity;
-- recursive algorithms should be analysed for both time and space complexity;
-- recursion should be selected only when it naturally models the problem;
-- systematic reasoning is more effective than trial-and-error debugging;
-- disciplined recursive design produces algorithms that are both mathematically correct and suitable for professional software engineering.

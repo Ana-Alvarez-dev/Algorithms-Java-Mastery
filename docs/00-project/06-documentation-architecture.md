@@ -429,7 +429,6 @@ docs/
 ├── 17-benchmarking/
 ├── 18-linux-environment/
 ├── 19-ci-cd/
-└── 20-conclusion/
 ```
 
 This organisation allows learners to progress from fundamental Computer
@@ -520,7 +519,6 @@ For example:
 17-benchmarking
 18-linux-environment
 19-ci-cd
-20-conclusion
 ```
 
 Within each module, individual documents also follow a numerical sequence.
@@ -533,7 +531,6 @@ For example:
 03-complexity.md
 04-implementation.md
 05-common-mistakes.md
-06-references.md
 ```
 
 This convention provides several advantages.
@@ -947,6 +944,22 @@ Academic references should support original explanation rather than replace it.
 
 Documentation should demonstrate understanding through original reasoning and
 technical communication.
+
+## Module Reference Convention
+
+Repository-wide references are maintained centrally in:
+
+```text
+docs/00-project/10-references.md
+```
+
+Study modules do not create a separate `references.md` file.
+
+Instead, references that are specific to a module should be listed in the
+module's `README.md`.
+
+This convention preserves academic traceability without fragmenting the
+reference structure across unnecessary files.
 
 ---
 

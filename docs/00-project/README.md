@@ -144,7 +144,6 @@ docs/
 ├── 17-benchmarking/
 ├── 18-linux-environment/
 ├── 19-ci-cd/
-└── 20-conclusion/
 ```
 
 Readers are encouraged to complete the Project Documentation module before
