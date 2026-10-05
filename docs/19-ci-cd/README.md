@@ -291,6 +291,190 @@ Understanding CI/CD is therefore essential for professional backend development 
 
 ---
 
+# Current Repository Status
+
+The CI/CD module defines the engineering concepts and target automation model for **Algorithms Java Mastery**.
+
+At the time of this documentation update, the repository does not yet contain an executable workflow under:
+
+```text
+.github/workflows/
+```
+
+This distinction is intentional and important:
+
+```text
+Concept Studied
+        ≠
+Feature Implemented
+```
+
+The documentation may define the desired CI architecture before the workflow is implemented.
+
+Implementation evidence should only be claimed after the corresponding workflow file exists and runs successfully.
+
+For the current repository, **Continuous Integration is the priority**.
+
+Continuous Delivery is studied conceptually, but the project does not require a production deployment target in order to satisfy its present academic purpose.
+
+---
+
+# CI Scope for Algorithms Java Mastery
+
+The initial CI pipeline should remain focused.
+
+Its responsibility is to reproduce the validated build process in a clean environment.
+
+```text
+Push / Pull Request
+        ↓
+Repository Checkout
+        ↓
+Java Setup
+        ↓
+Maven Wrapper
+        ↓
+Compilation
+        ↓
+JUnit + AssertJ Tests
+        ↓
+Maven Verification
+        ↓
+CI Result
+```
+
+Long-running or unstable benchmarks should not automatically become part of the standard CI gate merely because JMH exists in the repository.
+
+Benchmark automation requires a separate experimental objective.
+
+---
+
+# Local-to-CI Traceability
+
+A reliable CI pipeline should automate a workflow that is already understood locally.
+
+```text
+Windows
+.\mvnw.cmd clean verify
+
+or
+
+Linux
+./mvnw clean verify
+        ↓
+Known Local Build Contract
+        ↓
+GitHub Actions Workflow
+        ↓
+Equivalent Clean-Environment Verification
+```
+
+This establishes the engineering principle:
+
+> **Automation should reproduce a known and validated build process rather than invent a different one.**
+
+The relationship with the Linux module is therefore direct:
+
+```text
+docs/18-linux-environment/
+        ↓
+Terminal-Based Maven Execution
+        ↓
+Reproducible Local Verification
+        ↓
+docs/19-ci-cd/
+        ↓
+Automated Verification
+```
+
+---
+
+# Relationship with the Academic Architecture
+
+CI/CD does not alter the algorithmic source of truth.
+
+The complete traceability chain is:
+
+```text
+CLRS
+ ↓
+Foundations
+ ↓
+Complexity
+ ↓
+Algorithm / Data Structure Module
+ ↓
+Java Implementation
+ ↓
+Automated Tests
+ ↓
+Benchmark when justified
+ ↓
+Local Maven Verification
+ ↓
+Linux / Windows Environment
+ ↓
+Continuous Integration
+```
+
+Each layer has a distinct responsibility.
+
+Continuous Integration validates repository integration and reproducibility.
+
+It does not prove algorithm correctness and it does not establish asymptotic complexity.
+
+---
+
+# Technical Review Questions
+
+The following questions are limited to the responsibilities of this module:
+
+1. What problem does Continuous Integration solve?
+2. What is the difference between local validation and CI validation?
+3. Why should CI use the Maven Wrapper?
+4. Why should the CI pipeline reproduce the same build intent used locally?
+5. What events commonly trigger a CI workflow?
+6. Why should automated tests run before a pull request is integrated?
+7. Why should JMH benchmarks not automatically be treated as standard CI tests?
+8. What is the difference between Continuous Integration and Continuous Delivery?
+9. Why does this repository prioritise CI before deployment automation?
+10. What evidence would demonstrate that CI is actually implemented rather than merely documented?
+
+The objective is to evaluate engineering reasoning rather than memorised YAML.
+
+---
+
+# Module Completion Criteria
+
+This module can be considered complete at the conceptual level when the learner can:
+
+- explain CI and Continuous Delivery;
+- describe the responsibility of a GitHub Actions workflow;
+- explain triggers, jobs, and steps;
+- describe a Maven-based validation pipeline;
+- explain how JUnit and AssertJ become CI evidence;
+- distinguish local verification from clean-environment automation;
+- explain why benchmark automation requires separate design;
+- identify the expected build artefacts;
+- distinguish documented CI architecture from implemented workflow evidence.
+
+Implementation completion requires an actual workflow under
+`.github/workflows/` that executes successfully against the repository.
+
+---
+
+# References
+
+CI/CD-specific sources should be drawn from the official technical references centralised in:
+
+```text
+docs/00-project/10-references.md
+```
+
+CLRS remains the principal academic inspiration for the algorithmic content of the repository; CI/CD provides complementary engineering automation.
+
+---
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:
