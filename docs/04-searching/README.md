@@ -947,7 +947,7 @@ owns the search behaviour.
 | `05-recursive-binary-search.md` | Base cases, recursive reduction, stack cost | `RecursiveBinarySearch.java` + `RecursiveBinarySearchTest.java` + comparative JMH evidence |
 | `06-search-complexity.md` | Compare linear/logarithmic time and auxiliary space | Complexity statements + later benchmark interpretation |
 | `07-search-patterns.md` | Identify reusable search forms | `FirstOccurrence`, `LastOccurrence`, `SearchInsertPosition` + tests |
-| `08-common-search-problems.md` | Apply search reasoning to representative problems | Practice implementations when selected |
+| `08-common-search-problems.md` | Apply search reasoning to representative problems | `SearchRange`, `ClosestValueSearch` + tests |
 | `09-problem-solving-guide.md` | Apply repository methodology to search problems | Design workflow |
 | `10-common-mistakes.md` | Prevent boundary, contract, and termination errors | Test-case design |
 | `11-interview-notes.md` | Technical review and communication | Assessment preparation |

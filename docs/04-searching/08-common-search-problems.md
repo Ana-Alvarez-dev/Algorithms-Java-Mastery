@@ -246,6 +246,152 @@ These algorithms are studied in the Graphs module.
 
 ---
 
+# Selected Implemented Problems
+
+This repository intentionally implements only representative problems that add
+a distinct reasoning pattern.
+
+The objective is not to convert the module into a catalogue of interview
+exercises.
+
+---
+
+## Search Range
+
+The problem is:
+
+> Given a sorted array and a target, return the first and last indices occupied
+> by that target.
+
+This problem composes two previously established boundary searches:
+
+```text
+FirstOccurrence
+        +
+LastOccurrence
+        ↓
+Complete Target Range
+```
+
+Implementation:
+
+```text
+src/main/java/org/anaalvarezdev/algorithms/searching/SearchRange.java
+```
+
+Test evidence:
+
+```text
+src/test/java/org/anaalvarezdev/algorithms/searching/SearchRangeTest.java
+```
+
+Complexity:
+
+```text
+Θ(log n) + Θ(log n) = Θ(log n)
+```
+
+No additional JMH benchmark is required because the method composes already
+analysed logarithmic boundary searches.
+
+---
+
+## Closest Value Search
+
+The problem is:
+
+> Given a sorted array and a target, return the index whose value is closest to
+> the target.
+
+If two values are equally close, the implementation returns the lower index.
+
+The strategy is:
+
+```text
+Binary Search
+        ↓
+Exact Match?
+   ├── Yes → return immediately
+   └── No
+        ↓
+Search Terminates Between Two Boundaries
+        ↓
+Compare Lower and Upper Candidate
+        ↓
+Return Closest Index
+```
+
+Implementation:
+
+```text
+src/main/java/org/anaalvarezdev/algorithms/searching/ClosestValueSearch.java
+```
+
+Test evidence:
+
+```text
+src/test/java/org/anaalvarezdev/algorithms/searching/ClosestValueSearchTest.java
+```
+
+Complexity:
+
+```text
+Time:  Θ(log n)
+Space: Θ(1)
+```
+
+Distance comparison uses a wider numeric representation so that extreme integer
+values do not cause overflow during absolute-distance calculation.
+
+No dedicated benchmark is added because the dominant search process remains the
+same logarithmic interval reduction already studied experimentally.
+
+---
+
+# Implementation Boundary
+
+The following problem families remain intentionally outside the current
+Searching implementation scope:
+
+- duplicate detection through hashing;
+- tree search;
+- graph search;
+- multidimensional search;
+- search over advanced indexing structures.
+
+Those topics belong more naturally to later modules where their data structures
+and correctness properties can be studied directly.
+
+This preserves the repository principle:
+
+```text
+Problem Recognition
+        ↓
+Appropriate Module
+        ↓
+Focused Implementation
+```
+
+rather than implementing every possible search-related problem in one package.
+
+---
+
+# Repository Traceability
+
+```text
+docs/04-searching/08-common-search-problems.md
+        ↓
+SearchRange.java
+ClosestValueSearch.java
+        ↓
+SearchRangeTest.java
+ClosestValueSearchTest.java
+        ↓
+No additional JMH benchmark required
+```
+
+---
+
 # Choosing the Appropriate Strategy
 
 Selecting the correct algorithm depends on the characteristics of the problem.

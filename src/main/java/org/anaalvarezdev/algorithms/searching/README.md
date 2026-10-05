@@ -35,6 +35,8 @@ src/jmh/java/org/anaalvarezdev/algorithms/searching/
 | `FirstOccurrence` | `07-search-patterns.md` | `FirstOccurrenceTest` | Not required |
 | `LastOccurrence` | `07-search-patterns.md` | `LastOccurrenceTest` | Not required |
 | `SearchInsertPosition` | `07-search-patterns.md` | `SearchInsertPositionTest` | Not required |
+| `SearchRange` | `08-common-search-problems.md` | `SearchRangeTest` | Not required |
+| `ClosestValueSearch` | `08-common-search-problems.md` | `ClosestValueSearchTest` | Not required |
 
 Linear Search was first introduced while studying array traversal. Its canonical
 implementation now belongs to this package so that Searching owns search
