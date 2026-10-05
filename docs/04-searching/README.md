@@ -946,7 +946,7 @@ owns the search behaviour.
 | `04-binary-search.md` | Sorted-input precondition, interval invariant, halving | `BinarySearch.java` + `BinarySearchTest.java` + `BinarySearchBenchmark.java` |
 | `05-recursive-binary-search.md` | Base cases, recursive reduction, stack cost | `RecursiveBinarySearch.java` + `RecursiveBinarySearchTest.java` + comparative JMH evidence |
 | `06-search-complexity.md` | Compare linear/logarithmic time and auxiliary space | Complexity statements + later benchmark interpretation |
-| `07-search-patterns.md` | Identify reusable search forms | Later exercises and variants |
+| `07-search-patterns.md` | Identify reusable search forms | `FirstOccurrence`, `LastOccurrence`, `SearchInsertPosition` + tests |
 | `08-common-search-problems.md` | Apply search reasoning to representative problems | Practice implementations when selected |
 | `09-problem-solving-guide.md` | Apply repository methodology to search problems | Design workflow |
 | `10-common-mistakes.md` | Prevent boundary, contract, and termination errors | Test-case design |
