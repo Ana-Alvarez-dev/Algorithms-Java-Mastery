@@ -232,7 +232,6 @@ src/main/java/org/anaalvarezdev/algorithms/arrays/
 ├── FindMinimum.java
 ├── FindMaximum.java
 ├── FindMinimumAndMaximum.java
-├── LinearSearch.java
 ├── ArrayReverse.java
 ├── ArrayCopy.java
 ├── InsertAtIndex.java
@@ -252,7 +251,6 @@ The current evidence mapping is:
 | `FindMinimum.java` | `07-common-algorithms.md` | `FindMinimumTest.java` | `FindMinimumBenchmark.java` |
 | `FindMaximum.java` | `07-common-algorithms.md` | `FindMaximumTest.java` | `FindMaximumBenchmark.java` |
 | `FindMinimumAndMaximum.java` | `07-common-algorithms.md` | `FindMinimumAndMaximumTest.java` | `FindMinimumAndMaximumBenchmark.java` |
-| `LinearSearch.java` | `07-common-algorithms.md`, `08-complexity-analysis.md` | `LinearSearchTest.java` | `LinearSearchBenchmark.java` |
 | `ArrayReverse.java` | `06-traversal-patterns.md`, `07-common-algorithms.md` | `ArrayReverseTest.java` | `ArrayReverseBenchmark.java` |
 | `ArrayCopy.java` | `05-array-operations.md` | `ArrayCopyTest.java` | `ArrayCopyBenchmark.java` |
 | `InsertAtIndex.java` | `05-array-operations.md` | `InsertAtIndexTest.java` | `InsertAtIndexBenchmark.java` |
@@ -262,6 +260,28 @@ The current evidence mapping is:
 
 This table records the current state of the repository and should be updated
 when the implementation package evolves.
+
+---
+
+## Searching Ownership
+
+Linear Search was introduced during the Arrays learning progression because it
+builds directly on sequential traversal.
+
+Its canonical implementation now belongs to the dedicated Searching module:
+
+```text
+docs/03-arrays/
+        ↓
+Traversal foundation
+        ↓
+docs/04-searching/
+        ↓
+src/main/java/org/anaalvarezdev/algorithms/searching/LinearSearch.java
+```
+
+This preserves the conceptual relationship without duplicating the Java
+implementation.
 
 ---
 

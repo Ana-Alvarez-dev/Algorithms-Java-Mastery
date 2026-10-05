@@ -430,36 +430,24 @@ Two algorithms can both be `Θ(n)` while performing different numbers of signifi
 
 ---
 
-# 8. Linear Search
+# 8. Linear Search — Moved to Searching
 
-## `LinearSearch.java`
-
-Searches sequentially for a target value.
-
-Conceptually:
+Linear Search is still conceptually related to array traversal, but its canonical
+implementation now belongs to:
 
 ```text
-A[0] → A[1] → A[2] → ... → A[n - 1]
+src/main/java/org/anaalvarezdev/algorithms/searching/LinearSearch.java
 ```
 
-The algorithm stops when:
-
-* the target is found; or
-* all elements have been examined.
-
-This is an important example for distinguishing different cases.
-
-Expected complexity:
+See:
 
 ```text
-Best case:       Θ(1)
-Worst case:      Θ(n)
-Auxiliary space: Θ(1)
+docs/04-searching/03-linear-search.md
 ```
 
-Depending on the assumptions about the input and target distribution, average-case analysis may also be studied separately.
+The Arrays module retains the traversal foundation without duplicating the
+search implementation.
 
-This implementation prepares the transition to the dedicated **Searching** module.
 
 ---
 

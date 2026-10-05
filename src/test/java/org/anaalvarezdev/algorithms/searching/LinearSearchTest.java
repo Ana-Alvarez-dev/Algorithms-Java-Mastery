@@ -1,4 +1,4 @@
-package org.anaalvarezdev.algorithms.arrays;
+package org.anaalvarezdev.algorithms.searching;
 
 import org.junit.jupiter.api.Test;
 

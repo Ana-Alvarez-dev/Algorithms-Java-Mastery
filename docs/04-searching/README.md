@@ -896,50 +896,39 @@ docs/04-searching/
 
 # Current Implementation Status
 
-The Searching documentation is currently ahead of the dedicated Java
-implementation package.
+The Searching documentation is now beginning to produce dedicated Java
+implementation evidence.
 
-At the time of this audit, the repository does **not** yet contain:
+The first dedicated implementation migrated into the Searching package is
+`LinearSearch`, together with its automated tests and JMH benchmark.
 
-```text
-src/main/java/org/anaalvarezdev/algorithms/searching/
-src/test/java/org/anaalvarezdev/algorithms/searching/
-src/jmh/java/org/anaalvarezdev/algorithms/searching/
-```
-
-This is not treated as an inconsistency in the academic documentation.
-
-It means that the module is currently in the following state:
+The implementation phase therefore now follows:
 
 ```text
 Academic Documentation
         ↓
-Ready for Implementation Planning
-        ↓
-Dedicated Searching Package
+Linear Search Implementation
         ↓
 Automated Tests
         ↓
-Benchmarks when justified
+JMH Evidence
+        ↓
+Binary Search and Search Patterns
 ```
 
-One important precursor already exists:
+The first implementation trace is now:
 
 ```text
-src/main/java/org/anaalvarezdev/algorithms/arrays/LinearSearch.java
+src/main/java/org/anaalvarezdev/algorithms/searching/LinearSearch.java
         ↓
-src/test/java/org/anaalvarezdev/algorithms/arrays/LinearSearchTest.java
+src/test/java/org/anaalvarezdev/algorithms/searching/LinearSearchTest.java
         ↓
-src/jmh/java/org/anaalvarezdev/algorithms/arrays/LinearSearchBenchmark.java
+src/jmh/java/org/anaalvarezdev/algorithms/searching/LinearSearchBenchmark.java
 ```
 
-That implementation belongs to the Arrays learning progression and provides
-executable evidence for sequential search over arrays.
-
-When the dedicated Searching implementation phase begins, the project should
-avoid creating duplicate implementations without a clear educational purpose.
-The package design should decide explicitly whether an existing implementation
-is reused, moved, generalized, or complemented by a new variant.
+The algorithm was originally introduced while studying Arrays and has now been
+moved to the dedicated Searching package so that one canonical implementation
+owns the search behaviour.
 
 ---
 
@@ -949,7 +938,7 @@ is reused, moved, generalized, or complemented by a new variant.
 |---|---|---|
 | `01-search-fundamentals.md` | Define searching, keys, results, and search-space concepts | Conceptual prerequisite |
 | `02-search-problem-definition.md` | Formalize input, output, absence, duplicates, and assumptions | Contracts for implementations and tests |
-| `03-linear-search.md` | Sequential search, invariant, correctness, linear cost | Existing Arrays `LinearSearch` evidence |
+| `03-linear-search.md` | Sequential search, invariant, correctness, linear cost | Dedicated `searching/LinearSearch` + test + JMH evidence |
 | `04-binary-search.md` | Sorted-input precondition, interval invariant, halving | Future iterative binary-search implementation |
 | `05-recursive-binary-search.md` | Base cases, recursive reduction, stack cost | Future recursive implementation |
 | `06-search-complexity.md` | Compare linear/logarithmic time and auxiliary space | Complexity statements + later benchmark interpretation |
