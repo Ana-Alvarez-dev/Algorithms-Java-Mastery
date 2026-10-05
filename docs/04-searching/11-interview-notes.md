@@ -60,10 +60,10 @@ Linear Search is appropriate when:
 
 | Case | Complexity |
 |------|------------|
-| Best | O(1) |
-| Average | O(n) |
-| Worst | O(n) |
-| Auxiliary Space | O(1) |
+| Best | Θ(1) |
+| Average | Θ(n) under stated assumptions |
+| Worst | Θ(n) |
+| Auxiliary Space | Θ(1) |
 
 ---
 
@@ -99,11 +99,11 @@ Binary Search is appropriate when:
 
 | Case | Complexity |
 |------|------------|
-| Best | O(1) |
-| Average | O(log n) |
-| Worst | O(log n) |
-| Auxiliary Space (Iterative) | O(1) |
-| Auxiliary Space (Recursive) | O(log n) |
+| Best | Θ(1) |
+| Average | Θ(log n) under a stated search model |
+| Worst | Θ(log n) |
+| Auxiliary Space (Iterative) | Θ(1) |
+| Auxiliary Space (Recursive) | Θ(log n) |
 
 ---
 
@@ -127,8 +127,8 @@ Binary Search is appropriate when:
 | Feature | Linear Search | Binary Search |
 |---------|---------------|---------------|
 | Sorted Collection Required | No | Yes |
-| Time Complexity | O(n) | O(log n) |
-| Auxiliary Space | O(1) | O(1) Iterative / O(log n) Recursive |
+| Time Complexity | Θ(n) worst case | Θ(log n) worst case |
+| Auxiliary Space | Θ(1) | O(1) Iterative / O(log n) Recursive |
 | Implementation | Very Simple | Moderate |
 | Scalability | Low | High |
 
@@ -301,6 +301,112 @@ Search?
 
 No. Compare the preprocessing cost with the expected number of future searches
 and updates.
+
+---
+
+# Implementation-Aware Technical Questions
+
+The module now contains executable implementations, so technical review should
+also connect reasoning with concrete repository artefacts.
+
+## First vs Any Occurrence
+
+**Question**
+
+Why does `BinarySearch` not guarantee the first duplicate, while
+`FirstOccurrence` does?
+
+**Expected direction**
+
+A conventional Binary Search terminates as soon as it finds a match.
+`FirstOccurrence` records that match and continues searching the left
+subinterval.
+
+---
+
+## Search Range
+
+**Question**
+
+How can the full range occupied by a duplicate target be found in logarithmic
+time?
+
+**Expected direction**
+
+Run two boundary searches: one for the first occurrence and one for the last.
+Two logarithmic searches still compose to `Θ(log n)`.
+
+---
+
+## Lower Bound
+
+**Question**
+
+What does `SearchInsertPosition` compute?
+
+**Expected direction**
+
+It computes the first index whose value is greater than or equal to the target.
+This is the lower-bound position and is a valid insertion point that preserves
+nondecreasing order.
+
+---
+
+## Closest Value
+
+**Question**
+
+Why is it sufficient to compare only two candidates after an unsuccessful
+Binary Search in a sorted array?
+
+**Expected direction**
+
+At termination, the insertion boundary separates values below and above the
+target. The nearest possible value must therefore be one of the two adjacent
+boundary candidates.
+
+---
+
+## Contract vs Validation
+
+**Question**
+
+Why does the repository document sorted input as a precondition instead of
+checking the entire array before every Binary Search?
+
+**Expected direction**
+
+A full sortedness check costs `Θ(n)`, which would dominate the intended
+`Θ(log n)` search operation.
+
+---
+
+## Testing vs Correctness
+
+**Question**
+
+If all JUnit tests pass, has Binary Search been proven correct?
+
+**Expected direction**
+
+No. Tests provide evidence for selected executions. General correctness comes
+from the invariant, safe interval elimination, termination, and the
+postcondition.
+
+---
+
+## Benchmark Interpretation
+
+**Question**
+
+If iterative Binary Search is faster than recursive Binary Search in one JMH
+run, does that mean the iterative version has better asymptotic time
+complexity?
+
+**Expected direction**
+
+No. Both remain `Θ(log n)`. A benchmark measures concrete implementation and
+environment effects; it does not change the asymptotic model.
 
 ---
 

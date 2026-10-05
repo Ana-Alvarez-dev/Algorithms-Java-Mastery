@@ -255,6 +255,85 @@ Automated testing significantly improves implementation reliability.
 
 ---
 
+# Mistakes Mapped to Repository Evidence
+
+The implemented Searching package provides concrete examples of how these
+mistakes are prevented.
+
+| Mistake | Repository Countermeasure |
+|---|---|
+| Unclear unsuccessful result | Search contracts define `-1` or `{-1, -1}` explicitly |
+| Assuming duplicate policy | `BinarySearch` allows any match; `FirstOccurrence` and `LastOccurrence` define exact boundaries |
+| Incorrect midpoint | Binary-search implementations use `low + (high - low) / 2` |
+| Infinite loop | Every iterative search strictly reduces its active interval |
+| Infinite recursion | `RecursiveBinarySearch` defines an empty-interval base case |
+| Incorrect boundary semantics | `SearchInsertPosition` uses the half-open interval `[low, high)` |
+| Overflow in distance comparison | `ClosestValueSearch` widens arithmetic to `long` |
+| Mutation without contract | Tests verify that search operations leave input arrays unchanged |
+| Missing null behaviour | Public search methods define and test null-input behaviour |
+| Confusing test evidence with proof | Documentation keeps correctness reasoning separate from JUnit evidence |
+
+These countermeasures are traceable to both source code and automated tests.
+
+---
+
+# Additional Mistake — Validating Sortedness Inside Every Binary Search
+
+A tempting implementation is to scan the array before every Binary Search call
+to confirm that it is sorted.
+
+That validation requires:
+
+```text
+Θ(n)
+```
+
+time.
+
+If performed on every call, it dominates the intended logarithmic search:
+
+```text
+Θ(n) validation
+        +
+Θ(log n) search
+        =
+Θ(n)
+```
+
+For this repository, sorted input is therefore documented as an algorithmic
+precondition rather than checked by a full traversal inside each search method.
+
+This is an important example of how defensive validation can alter an
+algorithm's computational contract.
+
+---
+
+# Additional Mistake — Assuming Any Match Is a Boundary Match
+
+A conventional Binary Search may return any matching duplicate.
+
+For example:
+
+```text
+[10, 20, 20, 20, 30]
+```
+
+Searching for `20` does not imply that the returned index is the first or last
+occurrence.
+
+When the problem requires an exact boundary, use a boundary-search contract such
+as:
+
+```text
+FirstOccurrence
+LastOccurrence
+SearchRange
+```
+
+The requested output determines the algorithmic variant.
+
+---
+
 # Best Practices
 
 Professional software engineers typically follow these recommendations:
