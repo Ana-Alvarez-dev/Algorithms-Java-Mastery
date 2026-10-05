@@ -31,6 +31,7 @@ src/jmh/java/org/anaalvarezdev/algorithms/searching/
 |---|---|---|---|
 | `LinearSearch` | `03-linear-search.md` | `LinearSearchTest` | `LinearSearchBenchmark` |
 | `BinarySearch` | `04-binary-search.md` | `BinarySearchTest` | `BinarySearchBenchmark` |
+| `RecursiveBinarySearch` | `05-recursive-binary-search.md` | `RecursiveBinarySearchTest` | `BinarySearchVariantsBenchmark` |
 
 Linear Search was first introduced while studying array traversal. Its canonical
 implementation now belongs to this package so that Searching owns search
