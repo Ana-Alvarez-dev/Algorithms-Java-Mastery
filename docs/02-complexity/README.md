@@ -326,6 +326,144 @@ The **Complexity** module therefore provides the analytical framework that suppo
 ---
 
 ---
+
+---
+
+# Traceability Map
+
+Complexity is the second theoretical layer in the repository.
+
+```text
+CLRS / Academic Source
+        ↓
+01-foundations
+        ↓
+Specification + Correctness
+        ↓
+02-complexity
+        ↓
+Time / Space / Growth Analysis
+        ↓
+03-arrays and later modules
+        ↓
+src/main
+        ↓
+src/test
+        ↓
+src/jmh when empirically meaningful
+```
+
+The module provides the analytical vocabulary reused throughout every later
+algorithmic topic.
+
+| Complexity Document | Downstream Evidence |
+|---|---|
+| `01-computational-complexity.md` | Input-size and resource models |
+| `02-algorithm-growth.md` | Comparison of growth classes |
+| `03-asymptotic-analysis.md` | Machine-independent growth reasoning |
+| `04-asymptotic-notations.md` | O, Ω, Θ, o, and ω statements |
+| `05-best-average-worst-case.md` | Case analysis in search, sorting, and hashing |
+| `06-time-complexity.md` | Operation-count reasoning in implementations |
+| `07-space-complexity.md` | Auxiliary-memory analysis |
+| `08-amortized-analysis.md` | Dynamic arrays and later hash-table analysis |
+| `09-complexity-examples.md` | Worked applications used by later modules |
+| `10-complexity-cheat-sheet.md` | Review reference, not a substitute for derivation |
+
+---
+
+# Traceability Example — Linear Search
+
+```text
+01-foundations
+        ↓
+Define the search problem and contract
+        ↓
+02-complexity/05-best-average-worst-case.md
+        ↓
+Distinguish target-position cases
+        ↓
+02-complexity/06-time-complexity.md
+        ↓
+Count inspected elements
+        ↓
+03-arrays/07-common-algorithms.md
+        ↓
+src/main/.../arrays/LinearSearch.java
+        ↓
+src/test/.../arrays/LinearSearchTest.java
+        ↓
+src/jmh/.../arrays/LinearSearchBenchmark.java
+```
+
+This traceability keeps three forms of evidence separate:
+
+```text
+Correctness Reasoning
+        ≠
+Complexity Analysis
+        ≠
+Benchmark Result
+```
+
+---
+
+# Theoretical Analysis vs Benchmarking
+
+Complexity analysis predicts how resource usage grows with input size.
+
+JMH evaluates the behaviour of a particular Java implementation under a
+controlled experimental setup.
+
+The repository therefore follows:
+
+```text
+Theory
+    ↓
+Implementation
+    ↓
+JMH Experiment
+    ↓
+Interpretation
+```
+
+and not:
+
+```text
+Timing
+    ↓
+Guess the complexity
+```
+
+A benchmark is added only when it answers a meaningful empirical question.
+
+---
+
+# Module Completion Criteria
+
+The module can be considered complete when the learner can:
+
+- identify an appropriate input-size parameter;
+- identify the significant operation;
+- derive costs from loops and nested loops;
+- use O, Ω, and Θ correctly;
+- distinguish best, average, and worst cases;
+- analyse time and auxiliary space separately;
+- explain a time-space trade-off;
+- explain the purpose of amortized analysis;
+- distinguish asymptotic growth from wall-clock execution time;
+- justify the complexity of the array implementations already present in the
+  repository;
+- explain when benchmarking adds useful evidence.
+
+---
+
+# Navigation
+
+**Previous:** `docs/01-foundations/`
+
+**Next:** `docs/03-arrays/`
+
+
 # Academic Foundation
 
 The principal academic reference for this module is:
@@ -337,3 +475,4 @@ Additional references are listed in:
 
 ```text
 docs/00-project/10-references.md
+```
