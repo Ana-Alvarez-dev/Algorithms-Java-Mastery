@@ -909,11 +909,13 @@ Academic Documentation
         ↓
 Linear Search Implementation
         ↓
+Binary Search Implementation
+        ↓
 Automated Tests
         ↓
 JMH Evidence
         ↓
-Binary Search and Search Patterns
+Recursive Binary Search and Search Patterns
 ```
 
 The first implementation trace is now:
@@ -939,7 +941,7 @@ owns the search behaviour.
 | `01-search-fundamentals.md` | Define searching, keys, results, and search-space concepts | Conceptual prerequisite |
 | `02-search-problem-definition.md` | Formalize input, output, absence, duplicates, and assumptions | Contracts for implementations and tests |
 | `03-linear-search.md` | Sequential search, invariant, correctness, linear cost | Dedicated `searching/LinearSearch` + test + JMH evidence |
-| `04-binary-search.md` | Sorted-input precondition, interval invariant, halving | Future iterative binary-search implementation |
+| `04-binary-search.md` | Sorted-input precondition, interval invariant, halving | `BinarySearch.java` + `BinarySearchTest.java` + `BinarySearchBenchmark.java` |
 | `05-recursive-binary-search.md` | Base cases, recursive reduction, stack cost | Future recursive implementation |
 | `06-search-complexity.md` | Compare linear/logarithmic time and auxiliary space | Complexity statements + later benchmark interpretation |
 | `07-search-patterns.md` | Identify reusable search forms | Later exercises and variants |
