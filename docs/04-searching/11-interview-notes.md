@@ -190,6 +190,120 @@ This formulation prevents integer overflow while producing the correct midpoint.
 
 ---
 
+# Technical Reasoning Questions
+
+These questions remain deliberately bounded by concepts developed in this
+module.
+
+## Linear Search Correctness
+
+**Question**
+
+What loop invariant could be used to justify Linear Search?
+
+**Expected direction**
+
+Explain what is known about the already examined prefix before each iteration,
+then connect initialization, maintenance, and termination to the search
+postcondition.
+
+---
+
+## Binary Search Preconditions
+
+**Question**
+
+Why is sorted input a correctness requirement rather than merely a performance
+optimization?
+
+**Expected direction**
+
+Explain that the comparison with the midpoint is only sufficient to eliminate
+one half when ordering guarantees that all values in that half are on the wrong
+side of the target.
+
+---
+
+## Binary Search Invariant
+
+**Question**
+
+What property should remain true about the current interval during Binary
+Search?
+
+**Expected direction**
+
+If the target exists, it must remain inside the active interval.
+
+---
+
+## Termination
+
+**Question**
+
+Why does Binary Search terminate?
+
+**Expected direction**
+
+The active interval becomes strictly smaller whenever the target is not found.
+
+---
+
+## Complexity
+
+**Question**
+
+Why is Binary Search worst-case Θ(log n)?
+
+**Expected direction**
+
+Repeated halving means the number of reductions needed to reach a constant-size
+interval grows logarithmically with `n`.
+
+---
+
+## Iterative vs Recursive
+
+**Question**
+
+Why do iterative and recursive Binary Search have the same asymptotic running
+time but different auxiliary-space costs?
+
+**Expected direction**
+
+They perform the same search-space reductions, but the recursive version keeps
+a stack frame for each active call.
+
+---
+
+## Average-Case Precision
+
+**Question**
+
+Why should an engineer be careful when stating the average-case complexity of a
+search algorithm?
+
+**Expected direction**
+
+Average-case analysis depends on assumptions about successful searches, target
+distribution, and input probabilities.
+
+---
+
+## Sorting Before Searching
+
+**Question**
+
+Is it always worthwhile to sort an unsorted collection before using Binary
+Search?
+
+**Expected direction**
+
+No. Compare the preprocessing cost with the expected number of future searches
+and updates.
+
+---
+
 # Interview Reasoning Process
 
 Candidates are expected to explain their reasoning rather than immediately writing code.
@@ -329,10 +443,24 @@ Understanding searching algorithms therefore provides the conceptual foundation 
 
 ---
 
-# Next Document
+# Module Completion
 
-```
-12-references.md
+This document completes the review layer of the Searching module.
+
+The detailed academic references for the module are maintained in:
+
+```text
+docs/04-searching/README.md
 ```
 
-The final document of this module presents the primary academic references, textbooks and official documentation that support the concepts, algorithms and engineering practices discussed throughout the Searching module.
+and the repository-wide bibliography is maintained in:
+
+```text
+docs/00-project/10-references.md
+```
+
+The next repository module is:
+
+```text
+docs/05-sorting/
+```

@@ -245,6 +245,89 @@ Therefore, the algorithm always produces the correct result.
 
 ---
 
+# CLRS Connection and Formal Correctness
+
+Linear Search is one of the earliest searching problems used in CLRS to connect
+formal problem specification with loop-invariant reasoning.
+
+The problem can be expressed as:
+
+```text
+Input:
+A finite sequence A of n values
+A target value key
+
+Output:
+An index i such that A[i] = key
+or a defined NOT FOUND result when key is absent
+```
+
+For this repository, the exact absence representation must be defined by the
+implementation contract.
+
+A useful loop invariant is:
+
+> Before examining the element at the current index, the target has not been
+> found in the portion of the sequence already examined.
+
+A complete correctness argument follows the repository-wide structure.
+
+## Initialization
+
+Before the first element is examined, no positions have been processed.
+
+The invariant therefore holds.
+
+## Maintenance
+
+Assume the invariant holds before examining the current element.
+
+- If the current element equals the target, returning its index satisfies the
+  successful-search postcondition.
+- Otherwise, that position can be added to the examined prefix while preserving
+  the statement that the target has not appeared in any processed position.
+
+The invariant is maintained.
+
+## Termination
+
+If the loop finishes without returning, every valid position has been examined.
+
+Combined with the invariant, this implies that the target does not occur in the
+sequence.
+
+The unsuccessful-search result therefore satisfies the postcondition.
+
+This reasoning connects directly with:
+
+```text
+docs/01-foundations/05-correctness.md
+docs/01-foundations/06-invariants.md
+```
+
+---
+
+# Repository Traceability
+
+The current executable evidence for Linear Search exists in the Arrays package:
+
+```text
+docs/04-searching/03-linear-search.md
+        ↓
+src/main/java/org/anaalvarezdev/algorithms/arrays/LinearSearch.java
+        ↓
+src/test/java/org/anaalvarezdev/algorithms/arrays/LinearSearchTest.java
+        ↓
+src/jmh/java/org/anaalvarezdev/algorithms/arrays/LinearSearchBenchmark.java
+```
+
+This implementation was introduced during the Arrays learning progression.
+
+The dedicated Searching implementation phase should reuse, move, generalize,
+or complement it deliberately rather than duplicating it accidentally.
+
+---
+
 # Computational Complexity
 
 The running time depends on the position of the target.
@@ -277,15 +360,21 @@ Every element must be inspected.
 
 ## Average Case
 
-On average,
+Average-case analysis requires assumptions about where the target may occur and
+whether the search is successful.
 
-approximately half of the collection is examined.
+Under common models in which a successful target position is distributed across
+the sequence, the expected number of inspected elements remains proportional to
+`n`.
+
+Therefore the average growth is linear under those assumptions:
 
 ```text
-O(n)
+Θ(n)
 ```
 
-Linear growth remains the dominant behaviour.
+The assumptions should be stated rather than treating an average-case result as
+unconditional.
 
 ---
 

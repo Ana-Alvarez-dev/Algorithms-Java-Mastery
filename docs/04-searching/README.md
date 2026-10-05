@@ -728,7 +728,7 @@ Benchmarking is not required for every search implementation.
 When used, JMH benchmarks belong under:
 
 ```text
-src/jmh/java/org/anaalvarez/algorithms/searching/
+src/jmh/java/org/anaalvarezdev/algorithms/searching/
 ```
 
 Benchmark conclusions must remain limited to the documented environment and
@@ -837,6 +837,266 @@ docs/00-project/10-references.md
 
 Official Java documentation should be consulted according to the Java version
 configured in `pom.xml`.
+
+---
+
+---
+
+# CLRS Traceability
+
+Searching is directly connected with the reasoning model used throughout
+**Introduction to Algorithms (CLRS)**.
+
+The academic relationship used by this module is:
+
+```text
+General Search Problem
+        ↓
+Linear Search
+        ↓
+Loop Invariant / Correctness
+        ↓
+Sorted Input
+        ↓
+Binary Search
+        ↓
+Repeated Search-Space Reduction
+        ↓
+Logarithmic Worst-Case Growth
+```
+
+CLRS uses the linear-search problem as an early exercise in formal problem
+specification and loop-invariant reasoning, and uses binary search to illustrate
+how sorted input allows half of the remaining search space to be eliminated at
+each step.
+
+This module preserves those ideas while expressing them through original
+documentation, Java-oriented contracts, automated-testing plans, and later
+implementation evidence.
+
+The module should therefore remain traceable to:
+
+```text
+docs/01-foundations/
+        ↓
+Specification + Preconditions + Correctness + Invariants
+        ↓
+docs/02-complexity/
+        ↓
+Asymptotic Analysis
+        ↓
+docs/03-arrays/
+        ↓
+Indexed Access + Traversal
+        ↓
+docs/04-searching/
+```
+
+---
+
+# Current Implementation Status
+
+The Searching documentation is currently ahead of the dedicated Java
+implementation package.
+
+At the time of this audit, the repository does **not** yet contain:
+
+```text
+src/main/java/org/anaalvarezdev/algorithms/searching/
+src/test/java/org/anaalvarezdev/algorithms/searching/
+src/jmh/java/org/anaalvarezdev/algorithms/searching/
+```
+
+This is not treated as an inconsistency in the academic documentation.
+
+It means that the module is currently in the following state:
+
+```text
+Academic Documentation
+        ↓
+Ready for Implementation Planning
+        ↓
+Dedicated Searching Package
+        ↓
+Automated Tests
+        ↓
+Benchmarks when justified
+```
+
+One important precursor already exists:
+
+```text
+src/main/java/org/anaalvarezdev/algorithms/arrays/LinearSearch.java
+        ↓
+src/test/java/org/anaalvarezdev/algorithms/arrays/LinearSearchTest.java
+        ↓
+src/jmh/java/org/anaalvarezdev/algorithms/arrays/LinearSearchBenchmark.java
+```
+
+That implementation belongs to the Arrays learning progression and provides
+executable evidence for sequential search over arrays.
+
+When the dedicated Searching implementation phase begins, the project should
+avoid creating duplicate implementations without a clear educational purpose.
+The package design should decide explicitly whether an existing implementation
+is reused, moved, generalized, or complemented by a new variant.
+
+---
+
+# Module Traceability Matrix
+
+| Searching Document | Primary Responsibility | Current / Future Evidence |
+|---|---|---|
+| `01-search-fundamentals.md` | Define searching, keys, results, and search-space concepts | Conceptual prerequisite |
+| `02-search-problem-definition.md` | Formalize input, output, absence, duplicates, and assumptions | Contracts for implementations and tests |
+| `03-linear-search.md` | Sequential search, invariant, correctness, linear cost | Existing Arrays `LinearSearch` evidence |
+| `04-binary-search.md` | Sorted-input precondition, interval invariant, halving | Future iterative binary-search implementation |
+| `05-recursive-binary-search.md` | Base cases, recursive reduction, stack cost | Future recursive implementation |
+| `06-search-complexity.md` | Compare linear/logarithmic time and auxiliary space | Complexity statements + later benchmark interpretation |
+| `07-search-patterns.md` | Identify reusable search forms | Later exercises and variants |
+| `08-common-search-problems.md` | Apply search reasoning to representative problems | Practice implementations when selected |
+| `09-problem-solving-guide.md` | Apply repository methodology to search problems | Design workflow |
+| `10-common-mistakes.md` | Prevent boundary, contract, and termination errors | Test-case design |
+| `11-interview-notes.md` | Technical review and communication | Assessment preparation |
+
+The table records responsibility, not an obligation to create one Java class
+for every document.
+
+---
+
+# Correctness Traceability
+
+Searching reuses the formal reasoning introduced in Foundations.
+
+For linear search, the central loop-invariant shape is:
+
+> Before examining the next unprocessed position, the target does not occur in
+> the already examined prefix unless the algorithm has already returned a
+> matching position.
+
+The proof structure remains:
+
+```text
+Initialization
+        ↓
+Maintenance
+        ↓
+Termination
+        ↓
+Postcondition
+```
+
+For iterative binary search, a useful invariant is:
+
+> If the target occurs in the array, then before each iteration it occurs within
+> the current search interval.
+
+Each comparison preserves that property while strictly reducing the interval.
+
+Recursive binary search uses the same interval property, combined with:
+
+- a base case;
+- a strictly smaller recursive subproblem;
+- termination when the interval becomes empty.
+
+These arguments should remain connected to:
+
+```text
+docs/01-foundations/05-correctness.md
+docs/01-foundations/06-invariants.md
+```
+
+rather than being treated as unrelated proofs.
+
+---
+
+# Complexity Traceability
+
+Searching applies the framework developed in `docs/02-complexity/`.
+
+The principal results studied in this module are:
+
+| Algorithm | Best Case | Worst Case | Auxiliary Space |
+|---|---:|---:|---:|
+| Linear Search | Θ(1) | Θ(n) | Θ(1) |
+| Iterative Binary Search | Θ(1) | Θ(log n) | Θ(1) |
+| Recursive Binary Search | Θ(1) | Θ(log n) | Θ(log n) |
+
+Average-case claims require an explicit probability model or assumptions about
+target position and search success.
+
+The learner should therefore distinguish:
+
+```text
+Worst-Case Bound
+        ↓
+Derived from algorithm structure
+
+Average-Case Result
+        ↓
+Depends on an input / probability model
+```
+
+---
+
+# Implementation Boundary
+
+The Searching module should not claim implementation evidence that does not yet
+exist.
+
+The implementation phase should follow:
+
+```text
+Documentation Approved
+        ↓
+Contract Selected
+        ↓
+Package / Class Design
+        ↓
+Java Implementation
+        ↓
+JUnit + AssertJ
+        ↓
+Maven Verification
+        ↓
+JMH only for a defined empirical question
+```
+
+Potential implementation topics include:
+
+- iterative binary search;
+- recursive binary search;
+- first occurrence;
+- last occurrence;
+- lower-bound / insertion-position search;
+- search over monotonic predicates.
+
+Only concepts already documented and justified should enter the implementation
+scope.
+
+---
+
+# Module Completion Criteria
+
+The Searching documentation can be considered academically complete when the
+learner can:
+
+- define the general search problem precisely;
+- specify successful and unsuccessful results;
+- explain duplicate-value policies;
+- derive linear-search correctness using a loop invariant;
+- state the sorted-input precondition for binary search;
+- explain and preserve the binary-search interval invariant;
+- explain binary-search termination;
+- distinguish iterative and recursive auxiliary-space costs;
+- derive linear and logarithmic complexity rather than merely quote it;
+- identify cases in which sorting before searching is or is not worthwhile;
+- explain relevant technical-interview questions using reasoning;
+- identify which claims already have repository implementation evidence and
+  which remain planned.
+
+Engineering completion requires the selected Searching implementations, tests,
+and any justified benchmarks to exist and remain traceable to these documents.
 
 ---
 

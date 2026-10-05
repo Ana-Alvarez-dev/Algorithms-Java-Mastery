@@ -297,6 +297,111 @@ The search interval becomes progressively smaller until:
 
 ---
 
+# Search-Interval Invariant
+
+Binary Search depends on a preserved search-space property.
+
+A useful invariant is:
+
+> If the target exists in the array, then before each iteration it occurs within
+> the current interval `[low, high]`.
+
+This invariant explains why discarding half of the array is safe.
+
+## Initialization
+
+Initially:
+
+```text
+low  = first valid index
+high = last valid index
+```
+
+Therefore the current interval contains every possible array position.
+
+## Maintenance
+
+Let `middle` be a valid midpoint.
+
+- If `A[middle] == key`, the successful-search postcondition is satisfied.
+- If `key < A[middle]`, sorted order implies that positions to the right of
+  `middle` cannot contain the target.
+- If `key > A[middle]`, sorted order implies that positions to the left of
+  `middle` cannot contain the target.
+
+Updating the interval therefore preserves every still-valid target position.
+
+## Termination
+
+The loop ends when:
+
+```text
+low > high
+```
+
+At that point the search interval is empty.
+
+By the invariant, if the target had existed it would still have had to occur
+inside that interval.
+
+Therefore the target is absent.
+
+This argument connects Binary Search to the correctness framework introduced in
+Foundations.
+
+---
+
+# Termination Argument
+
+Correctness also requires showing that the loop cannot continue indefinitely.
+
+Whenever the target is not found:
+
+```text
+high = middle - 1
+```
+
+or:
+
+```text
+low = middle + 1
+```
+
+The size of the valid search interval strictly decreases.
+
+A finite interval cannot be reduced forever.
+
+Therefore the iterative algorithm terminates.
+
+---
+
+# CLRS Traceability
+
+The academic connection for this module is the observation that sorted input
+allows the midpoint to be compared with the target and one half of the
+remaining sequence to be eliminated.
+
+Repeated halving explains the logarithmic worst-case growth studied in the
+Complexity module.
+
+The repository preserves this relationship as:
+
+```text
+Sorted-Input Precondition
+        ↓
+Search-Interval Invariant
+        ↓
+Safe Elimination of One Half
+        ↓
+Strict Interval Reduction
+        ↓
+Correctness + Termination
+        ↓
+Θ(log n) Worst-Case Time
+```
+
+---
+
 # Computational Complexity
 
 ## Best Case
@@ -304,7 +409,7 @@ The search interval becomes progressively smaller until:
 The middle element is the target.
 
 ```text
-O(1)
+Θ(1)
 ```
 
 Only one comparison.
@@ -316,7 +421,7 @@ Only one comparison.
 The search interval is repeatedly halved.
 
 ```text
-O(log n)
+Θ(log n)
 ```
 
 ---
@@ -326,7 +431,7 @@ O(log n)
 Binary Search also exhibits logarithmic behaviour.
 
 ```text
-O(log n)
+Θ(log n)
 ```
 
 ---
@@ -336,7 +441,7 @@ O(log n)
 The iterative implementation requires only a few variables.
 
 ```text
-O(1)
+Θ(1)
 ```
 
 The recursive version will be analysed separately.
@@ -385,10 +490,10 @@ Binary Search is widely used in:
 | Property | Linear Search | Binary Search |
 |-----------|--------------|---------------|
 | Sorted Data Required | No | Yes |
-| Best Case | O(1) | O(1) |
-| Average Case | O(n) | O(log n) |
-| Worst Case | O(n) | O(log n) |
-| Space Complexity | O(1) | O(1) |
+| Best Case | Θ(1) | Θ(1) |
+| Average Case | O(n) | Θ(log n) |
+| Worst Case | O(n) | Θ(log n) |
+| Space Complexity | Θ(1) | Θ(1) |
 | Suitable for Unsorted Data | Yes | No |
 
 ---

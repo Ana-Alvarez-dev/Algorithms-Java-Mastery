@@ -282,6 +282,105 @@ the algorithm always produces the correct result.
 
 ---
 
+# Recursive Correctness Structure
+
+Recursive Binary Search uses the same sorted-input and search-interval
+properties as the iterative version.
+
+The correctness argument is expressed recursively.
+
+## Recursive Contract
+
+For a call over `[low, high]`:
+
+> Return a valid matching index if the target occurs within the interval;
+> otherwise return the defined NOT FOUND result.
+
+## Base Cases
+
+Two terminal cases are relevant.
+
+### Target Found
+
+If:
+
+```text
+A[middle] == key
+```
+
+the method returns a valid matching position.
+
+### Empty Interval
+
+If:
+
+```text
+low > high
+```
+
+no candidate positions remain.
+
+The unsuccessful-search postcondition is satisfied.
+
+## Recursive Step
+
+Assume the target has not been found at `middle`.
+
+Sorted order determines which half can still contain the target.
+
+The recursive call is made only on that half.
+
+The remaining interval is strictly smaller than the current interval.
+
+Therefore the recursive call solves a smaller instance of the same search
+problem while preserving every valid target position.
+
+## Termination
+
+The size of the interval is a decreasing measure.
+
+Each recursive call reduces it.
+
+Eventually one of the base cases must be reached.
+
+This connects recursive correctness with the reasoning later developed in:
+
+```text
+docs/11-recursion/
+docs/12-divide-and-conquer/
+```
+
+---
+
+# Recurrence and Complexity
+
+For the worst case, recursive Binary Search reduces a problem of size `n` to
+one subproblem of approximately half the size while performing constant
+additional work.
+
+Conceptually:
+
+```text
+T(n) = T(n / 2) + Θ(1)
+```
+
+which yields logarithmic growth:
+
+```text
+T(n) = Θ(log n)
+```
+
+The recursion depth is also logarithmic, producing:
+
+```text
+Auxiliary stack space = Θ(log n)
+```
+
+This is distinct from the iterative version, which maintains constant auxiliary
+state.
+
+---
+
 # Computational Complexity
 
 ## Best Case
@@ -289,7 +388,7 @@ the algorithm always produces the correct result.
 The middle element is the target.
 
 ```text
-O(1)
+Θ(1)
 ```
 
 ---
@@ -297,7 +396,7 @@ O(1)
 ## Average Case
 
 ```text
-O(log n)
+Θ(log n)
 ```
 
 ---
@@ -305,7 +404,7 @@ O(log n)
 ## Worst Case
 
 ```text
-O(log n)
+Θ(log n)
 ```
 
 The same number of comparisons as the iterative implementation.
@@ -323,7 +422,7 @@ Therefore,
 its auxiliary memory complexity is:
 
 ```text
-O(log n)
+Θ(log n)
 ```
 
 This additional memory is consumed by the call stack.
@@ -370,8 +469,8 @@ Each recursive invocation remains on the stack until the deepest call completes.
 
 | Property | Iterative | Recursive |
 |-----------|-----------|-----------|
-| Running Time | O(log n) | O(log n) |
-| Extra Memory | O(1) | O(log n) |
+| Running Time | Θ(log n) | Θ(log n) |
+| Extra Memory | Θ(1) | Θ(log n) |
 | Readability | High | Very High |
 | Stack Usage | None | Yes |
 | Risk of Stack Overflow | No | Very Small |
