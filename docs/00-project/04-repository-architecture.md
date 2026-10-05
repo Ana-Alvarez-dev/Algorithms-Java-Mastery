@@ -512,7 +512,65 @@ These distinctions are essential to the learning methodology.
 
 ---
 
-# 17. Expected Outcome
+# 17. Execution Environment Architecture
+
+The execution environment belongs to the engineering layer of the repository.
+
+It does not redefine the algorithm, its correctness argument, or its asymptotic complexity.
+
+The intended relationship is:
+
+```text
+CLRS / Academic Source
+        ↓
+Algorithmic Reasoning
+        ↓
+Java Implementation
+        ↓
+Maven Wrapper
+        ↓
+Local Execution Environment
+   ├── Windows
+   └── Linux
+        ↓
+Git / GitHub
+        ↓
+Continuous Integration
+        ↓
+Engineering Evidence
+```
+
+The same source code and Maven project should remain verifiable from supported local environments.
+
+```text
+Windows
+.\mvnw.cmd clean verify
+
+Linux
+./mvnw clean verify
+```
+
+The operating system can affect command syntax, filesystem behaviour, permissions, process handling, environment variables, and concrete benchmark measurements. It should not change the algorithmic contract.
+
+Therefore:
+
+```text
+Algorithm Correctness    ≠ Operating System
+Complexity Analysis      ≠ Execution Environment
+Automated Testing        ≠ Formal Proof
+Benchmarking             ≠ Complexity Proof
+Local Validation         ≠ Continuous Integration
+```
+
+Linux is used as an explicit learning environment because it exposes command-line development, permissions, processes, environment variables, and automation concepts relevant to backend and CI workflows.
+
+Windows remains a valid local development environment.
+
+The architectural objective is reproducibility across environments rather than dependence on one workstation configuration.
+
+---
+
+# 18. Expected Outcome
 
 The repository architecture should allow a learner or reviewer to answer:
 
