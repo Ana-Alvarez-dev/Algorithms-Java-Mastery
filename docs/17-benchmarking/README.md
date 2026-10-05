@@ -291,6 +291,95 @@ Benchmarking therefore represents a disciplined engineering practice that comple
 
 ---
 
+# Execution Environment and Reproducibility
+
+Benchmark results are empirical observations produced under a particular execution environment.
+
+They should therefore record or control relevant conditions such as:
+
+- JDK version;
+- operating system;
+- hardware;
+- JVM warm-up;
+- JMH configuration;
+- forks;
+- measurement iterations;
+- benchmark parameters.
+
+The repository may execute benchmarks from Windows or Linux.
+
+The expected relationship is:
+
+```text
+Complexity Analysis
+        ↓
+Theoretical Growth Expectation
+        ↓
+Correct Java Implementation
+        ↓
+Automated Tests
+        ↓
+Controlled JMH Experiment
+        ↓
+Environment-Aware Interpretation
+```
+
+A change in operating system or hardware may change concrete measurements such as throughput or nanoseconds per operation.
+
+It does not by itself change an asymptotic result such as:
+
+```text
+Θ(n)
+```
+
+This preserves the boundary:
+
+```text
+Asymptotic Model
+        ≠
+Empirical Measurement
+```
+
+The Maven Wrapper should be used to build the benchmark profile.
+
+```text
+Windows
+.\mvnw.cmd -Pbenchmark clean package
+
+Linux
+./mvnw -Pbenchmark clean package
+```
+
+The benchmark artefact is then executed according to the JMH configuration defined by the project.
+
+---
+
+# Traceability with the Engineering Environment
+
+```text
+docs/02-complexity/
+        ↓
+Algorithmic Expectation
+        ↓
+src/main/
+        ↓
+src/test/
+        ↓
+src/jmh/
+        ↓
+Maven Benchmark Profile
+        ↓
+Windows / Linux Execution
+        ↓
+Measured Result
+        ↓
+Engineering Interpretation
+```
+
+Linux is therefore relevant to benchmarking as an execution environment, not as a source of algorithmic complexity.
+
+---
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:
