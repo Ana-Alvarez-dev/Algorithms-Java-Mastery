@@ -375,6 +375,12 @@ Interpretation
 
 A benchmark is not required simply because a class exists.
 
+The [Arrays empirical research report](../17-benchmarking/results/arrays/README.md)
+consolidates 105 recorded means from 11 benchmark templates, along with an
+extracted CSV, source provenance and preliminary interpretation. The report
+distinguishes operation-count reasoning from timing evidence and documents
+missing error margins, state reuse and contract-invalid aggregation inputs.
+
 ---
 
 # Technical Review Boundary

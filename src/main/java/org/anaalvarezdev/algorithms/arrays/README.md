@@ -1026,6 +1026,13 @@ src/jmh/java/org/anaalvarezdev/algorithms/arrays/
 
 JMH should be used for empirical performance evaluation rather than ad-hoc timing with `System.nanoTime()`.
 
+Recorded benchmark means are consolidated in the
+[Arrays empirical research report](../../../../../../../docs/17-benchmarking/results/arrays/README.md).
+It includes all 105 values extracted from the 11 templates, preliminary
+interpretation and limitations. Error margins and original run metadata were
+not preserved. The source audit also identifies contract-invalid aggregation
+inputs and evolving state in mutating benchmarks; these remain follow-up work.
+
 ---
 
 # Relationship with Documentation

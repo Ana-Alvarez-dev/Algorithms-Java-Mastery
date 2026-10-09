@@ -60,6 +60,13 @@ import java.util.concurrent.TimeUnit;
  * The benchmark provides empirical evidence consistent with
  * the theoretical Θ(n) analysis, but it does not constitute
  * a mathematical proof of asymptotic complexity.
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

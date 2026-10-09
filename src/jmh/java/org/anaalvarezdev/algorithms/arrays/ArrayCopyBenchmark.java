@@ -57,6 +57,14 @@ import java.util.concurrent.TimeUnit;
  * Therefore, the empirical results are consistent with the
  * theoretical Θ(n) analysis while also showing the practical
  * advantage of the optimized platform implementation.
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Both paths allocate their destination inside the measured operation.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 
 @BenchmarkMode(Mode.AverageTime)
