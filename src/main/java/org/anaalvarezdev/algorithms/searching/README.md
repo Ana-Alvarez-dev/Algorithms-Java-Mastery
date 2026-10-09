@@ -65,9 +65,17 @@ class.
 
 Benchmark coverage is intentionally selective.
 
-At this stage, repository documentation records the expected verification
-commands, but this README does not claim that Maven or JMH execution has been
-performed for the current branch.
+On 2026-10-09, the LinearSearch correction was verified with Java 21 and Maven:
+188 tests passed, including all 9 LinearSearch tests. The JMH executable was
+also built successfully and discovered all four Searching benchmark methods.
+That verification applies to the correction integrated through PR #63.
 
-The implementation should be verified with the Maven Wrapper before final
-integration.
+The author subsequently supplied a complete first JMH summary with 65
+configurations. The benchmark templates now record the reported results and
+preliminary interpretation. The full transcription, provenance and limitations
+are available in the
+[Searching benchmark evidence](../../../../../../../docs/17-benchmarking/results/searching/README.md).
+
+Wide error margins in several cases and incomplete run metadata limit precision.
+A more stable follow-up run remains useful; the current evidence can already
+support the research documentation with those limits stated explicitly.

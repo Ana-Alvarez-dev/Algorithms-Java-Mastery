@@ -63,10 +63,25 @@ import java.util.concurrent.TimeUnit;
  *   interval reduction.
  *
  * Result:
- * To be completed after benchmark execution.
+ * First reported run, 2026-10-09; average time, ns/op, 5 measurements per case.
+ * - MIDDLE: reported means range from 1.041 to 1.067 ns/op across all sizes.
+ * - LAST: 9.539 +/- 0.823 at n = 100;
+ *   36.672 +/- 4.698 at n = 1,000,000.
+ * - ABSENT: 6.854 +/- 5.328 at n = 100;
+ *   25.181 +/- 14.063 at n = 1,000,000.
+ * Full means and reported errors are preserved in:
+ * docs/17-benchmarking/results/searching/2026-10-09-first-run-transcribed.csv
  *
  * Interpretation:
- * To be completed after analysing the experimental results.
+ * - MIDDLE succeeds at the first midpoint and shows near-constant timing.
+ * - LAST and ABSENT show slow growth consistent with interval halving.
+ * - The input is already sorted; array construction and sorting are not timed.
+ * - ABSENT uses -1, below every array value; it is one unsuccessful-search
+ *   workload, not an average over all absent targets.
+ * - Large reported errors in some ABSENT cases limit timing precision.
+ * These are preliminary observations, not a proof of asymptotic complexity
+ * or a universal performance guarantee. Run provenance and limitations are
+ * documented in docs/17-benchmarking/results/searching/README.md.
  *
  * Limitations:
  * Results depend on the JVM, JIT compiler, hardware, cache behaviour,

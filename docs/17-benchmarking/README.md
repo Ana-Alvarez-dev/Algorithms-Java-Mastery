@@ -52,6 +52,12 @@ After completing this module, the learner should be able to:
 
 # Module Contents
 
+The module includes a concrete
+[Searching benchmark evidence record](results/searching/README.md), with the
+first reported execution, all 65 transcribed means and errors, preliminary
+interpretation, provenance and limitations. It connects the concepts below
+to an observed experiment without treating timing as a complexity proof.
+
 ## 01. Benchmarking Fundamentals
 
 Introduces benchmarking as a software engineering discipline.

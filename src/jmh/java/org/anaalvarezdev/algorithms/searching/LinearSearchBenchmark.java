@@ -69,10 +69,28 @@ import java.util.concurrent.TimeUnit;
  * - ABSENT should grow approximately linearly.
  *
  * Result:
- * To be completed after benchmark execution.
+ * First reported run, 2026-10-09; average time, ns/op, 5 measurements per case.
+ * - FIRST: reported means range from 1.192 to 7.170 ns/op, with large errors
+ *   in several cases; these timings do not resolve a stable constant cost.
+ * - MIDDLE: 16.039 +/- 23.802 at n = 100;
+ *   111,668.343 +/- 106,955.736 at n = 1,000,000.
+ * - LAST: 21.865 +/- 16.310 at n = 100;
+ *   239,040.976 +/- 192,867.402 at n = 1,000,000.
+ * - ABSENT: 23.987 +/- 22.751 at n = 100;
+ *   253,917.128 +/- 223,768.756 at n = 1,000,000.
+ * Full means and reported errors are preserved in:
+ * docs/17-benchmarking/results/searching/2026-10-09-first-run-transcribed.csv
  *
  * Interpretation:
- * To be completed after analyzing experimental results.
+ * - MIDDLE, LAST and ABSENT means show growth compatible with linear traversal.
+ * - FIRST returns after one comparison regardless of input size, but this
+ *   first run is too uncertain to estimate its cost precisely.
+ * - Large errors also limit precise ratios and comparisons for longer scans.
+ * - The input and target are fixed within each trial; the results describe
+ *   repeated searches of that array, not a randomly varying workload.
+ * These are preliminary observations, not a proof of asymptotic complexity
+ * or a universal performance guarantee. Run provenance and limitations are
+ * documented in docs/17-benchmarking/results/searching/README.md.
  *
  * Limitations:
  * Results depend on JVM/JIT optimization, CPU architecture,
