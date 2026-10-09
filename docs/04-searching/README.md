@@ -1116,6 +1116,13 @@ complexity arguments.
 
 # Module Completion Criteria
 
+The [Searching documentation analysis](documentation-review.md) reviews all
+eleven documents against the current implementations, tests, CLRS source, and
+recorded benchmark evidence. It identifies open contract and documentation
+findings, including the closest-value duplicate tie policy, and gives a
+prioritized correction order. Structural completion and passing tests do not
+resolve those findings automatically.
+
 The Searching documentation can be considered academically complete when the
 learner can:
 
