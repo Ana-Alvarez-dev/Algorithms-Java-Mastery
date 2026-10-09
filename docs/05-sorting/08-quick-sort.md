@@ -4374,6 +4374,21 @@ Its main trade-off is the lack of a guaranteed `O(n log n)` worst case in the ba
 
 ---
 
+# Implemented Repository Evidence
+
+[`QuickSort`](../../src/main/java/org/anaalvarezdev/algorithms/sorting/QuickSort.java)
+selects the middle element's value and uses **Hoare**, not Lomuto, partitioning.
+The returned boundary separates `[left, boundary]` from `[boundary + 1, right]`.
+The smaller region is processed recursively and the larger through a loop,
+bounding stack growth by `O(log n)` even for unbalanced partitions. Quadratic
+worst-case time remains possible; the pivot is deterministic and stability is
+not guaranteed.
+[`QuickSortTest`](../../src/test/java/org/anaalvarezdev/algorithms/sorting/QuickSortTest.java)
+covers the shared contract plus large sorted, reverse, equal, random, and
+repeated-key inputs. `EfficientSortingBenchmark.quickSort` measures copy plus sort.
+See the [implementation guide](implementation-and-benchmark-guide.md) for the
+variant-specific correctness and complexity interpretation.
+
 # Next Document
 
 ```text

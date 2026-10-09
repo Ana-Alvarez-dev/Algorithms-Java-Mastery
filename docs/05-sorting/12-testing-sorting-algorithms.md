@@ -335,6 +335,17 @@ Both are necessary for professional software development.
 
 ---
 
+# Current Repository Evidence
+
+The five implemented sorts share the observable `int[]` contract exercised by
+`SortingContractTest`. Each concrete test class inherits its thirteen tests,
+including exhaustive small duplicate inputs and seeded comparisons against
+`Arrays.sort`. Merge and Quick Sort add large-input checks. The resulting
+69 Sorting tests passed on Java 21 as part of the 257-test repository suite.
+See the [implementation guide](implementation-and-benchmark-guide.md) for
+coverage and limits, including why primitive arrays cannot expose object
+identity stability.
+
 # Key Takeaways
 
 - Every sorting algorithm should be tested automatically.

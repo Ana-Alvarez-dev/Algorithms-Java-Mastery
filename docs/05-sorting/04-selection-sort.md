@@ -2083,6 +2083,18 @@ Selection Sort is valuable for studying correctness, loop invariants, operation 
 
 ---
 
+# Implemented Repository Evidence
+
+The selected integer-array version is
+[`SelectionSort`](../../src/main/java/org/anaalvarezdev/algorithms/sorting/SelectionSort.java),
+verified by
+[`SelectionSortTest`](../../src/test/java/org/anaalvarezdev/algorithms/sorting/SelectionSortTest.java).
+It sorts the supplied array ascending, rejects null input, preserves duplicates,
+and avoids self-exchanges. It is unstable and retains quadratic comparison work.
+`ElementarySortingBenchmark.selectionSort` measures copy plus sort. See the
+[implementation guide](implementation-and-benchmark-guide.md) for the complete
+contract, shared test coverage, and experiment protocol.
+
 # Next Document
 
 ```text

@@ -2276,6 +2276,17 @@ Bubble Sort is valuable for studying adjacent comparisons, inversions, stability
 
 ---
 
+# Implemented Repository Evidence
+
+[`BubbleSort`](../../src/main/java/org/anaalvarezdev/algorithms/sorting/BubbleSort.java)
+implements a shrinking active prefix and exits after a pass without exchanges.
+[`BubbleSortTest`](../../src/test/java/org/anaalvarezdev/algorithms/sorting/BubbleSortTest.java)
+verifies the shared ascending, mutating, duplicate-preserving `int[]` contract.
+Only strictly greater adjacent values are exchanged. Sorted input has linear
+best-case work. `ElementarySortingBenchmark.bubbleSort` measures copy plus sort.
+See the [implementation guide](implementation-and-benchmark-guide.md) for
+coverage, stability-testing limits, and execution commands.
+
 # Next Document
 
 ```text

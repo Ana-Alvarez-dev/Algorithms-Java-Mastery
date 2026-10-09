@@ -391,6 +391,16 @@ Linux is therefore relevant to benchmarking as an execution environment, not as 
 
 ---
 
+# Sorting Experiments
+
+Sorting now provides two comparative JMH groups, covering five academic
+algorithms, a Java library reference, and copy-only controls. They measure copy
+plus sorting on five deterministic distributions. Quadratic algorithms are
+limited to 10,000 elements; Merge, Quick, and the library reference extend to
+1,000,000. The [Sorting implementation and benchmark guide](../05-sorting/implementation-and-benchmark-guide.md)
+defines the complete protocol, Windows commands, and evidence-recording rules.
+Controlled research results remain pending.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:
