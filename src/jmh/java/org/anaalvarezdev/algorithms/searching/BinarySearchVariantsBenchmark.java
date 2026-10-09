@@ -65,10 +65,26 @@ import java.util.concurrent.TimeUnit;
  *   and stack-management effects.
  *
  * Result:
- * To be completed after benchmark execution.
+ * First reported run, 2026-10-09; average time, ns/op, 5 measurements per case.
+ * - Iterative MIDDLE: reported means range from 1.026 to 1.053 ns/op.
+ * - LAST, n = 1,000,000:
+ *   iterative = 36.159 +/- 0.871; recursive = 43.996 +/- 3.979 ns/op.
+ * - Recursive MIDDLE, n = 10,000: 4.108 +/- 14.074 ns/op.
+ * - Recursive ABSENT, n = 1,000,000: 66.355 +/- 116.612 ns/op.
+ * Full means and reported errors are preserved in:
+ * docs/17-benchmarking/results/searching/2026-10-09-first-run-transcribed.csv
  *
  * Interpretation:
- * To be completed after analysing the experimental results.
+ * - Iterative LAST has a lower reported mean than recursive LAST at each size.
+ * - At n = 1,000,000, recursive LAST has an approximately 21.7% higher mean;
+ *   this descriptive ratio is specific to the reported run and workload.
+ * - Recursive MIDDLE and ABSENT include highly uncertain measurements;
+ *   no reliable fine-grained ranking follows from those cases.
+ * - The summary does not establish which JVM or hardware effect caused a
+ *   difference, nor does it measure auxiliary stack space.
+ * - Both strategies retain their theoretical worst-case logarithmic time.
+ * These are preliminary observations. Run provenance and limitations are
+ * documented in docs/17-benchmarking/results/searching/README.md.
  *
  * Limitations:
  * Results depend on the JVM, JIT compiler, hardware, cache behaviour,

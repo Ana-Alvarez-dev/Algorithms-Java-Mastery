@@ -1097,9 +1097,20 @@ No additional benchmark is required merely for symmetry.
 Therefore the module is structurally complete for its currently approved
 implementation scope.
 
-This statement does **not** claim that Maven verification or benchmarks were
-executed as part of this documentation update. Build and runtime evidence must
-come from an actual local or CI execution.
+The LinearSearch correction integrated through PR #63 was verified on
+2026-10-09 with Java 21: 188 tests passed, and the JMH executable built and
+discovered all four Searching benchmark methods.
+
+The author subsequently supplied the first complete JMH summary, covering
+65 configurations. Results and preliminary interpretation are recorded in
+the three benchmark templates and the
+[Searching benchmark evidence](../17-benchmarking/results/searching/README.md).
+
+The evidence supports continuing the research documentation. It includes wide
+error margins in several measurements and incomplete environment metadata;
+precise performance conclusions require a more stable follow-up execution.
+Execution evidence must remain separate from mathematical correctness and
+complexity arguments.
 
 ---
 
