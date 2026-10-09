@@ -41,6 +41,13 @@ import java.util.concurrent.TimeUnit;
  *
  * Benchmarking provides empirical observations and does not replace
  * the mathematical analysis of asymptotic complexity.
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

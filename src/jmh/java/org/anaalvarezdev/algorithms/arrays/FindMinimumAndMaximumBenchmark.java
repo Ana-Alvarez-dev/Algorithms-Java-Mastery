@@ -48,8 +48,9 @@ import java.util.concurrent.TimeUnit;
  * For small inputs, the pairwise strategy performs competitively
  * and is faster for n = 100 in this experiment.
  *
- * For larger inputs, the two independent passes are considerably
- * faster in the measured environment.
+ * For larger inputs, the two independent passes have considerably
+ * lower recorded means. Statistical significance cannot be assessed
+ * without the original errors and samples.
  *
  * One possible explanation is that the pairwise implementation
  * introduces more complex branching. The comparison between two
@@ -72,6 +73,14 @@ import java.util.concurrent.TimeUnit;
  * The benchmark does not invalidate the theoretical comparison
  * analysis. Instead, it complements it by showing that the RAM
  * model intentionally abstracts hardware-level execution effects.
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Runtime causes and statistical significance are not established by means.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

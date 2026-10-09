@@ -76,6 +76,14 @@ import java.util.concurrent.TimeUnit;
  * The benchmark provides empirical evidence consistent with
  * the theoretical analysis but does not replace the formal
  * asymptotic reasoning.
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Calls reuse a mutated array while passing the original logical size.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

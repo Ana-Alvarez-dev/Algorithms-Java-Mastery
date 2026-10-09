@@ -82,6 +82,15 @@ import java.util.concurrent.TimeUnit;
  * Different duplicate distributions change constant factors
  * and runtime behavior but do not change the asymptotic
  * complexity of the algorithm.
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Invocation-level restoration preserves input distributions but affects
+ * memory state and measurement mechanics; fixture effects remain unaudited.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)

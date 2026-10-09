@@ -48,6 +48,14 @@ import java.util.concurrent.TimeUnit;
  * Therefore, the benchmark supports the theoretical expectation
  * of linear growth, but it does not constitute a mathematical proof
  * of Θ(n); that classification follows from algorithmic analysis.
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Traversal includes per-element callback and Blackhole consumption costs.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 
 @BenchmarkMode(Mode.AverageTime)

@@ -52,6 +52,11 @@ After completing this module, the learner should be able to:
 
 # Module Contents
 
+The [Arrays empirical research report](results/arrays/README.md) consolidates
+105 recorded means from 11 JMH templates. It includes the extracted CSV,
+methodology, theoretical comparisons, preliminary conclusions and limitations.
+Error margins were not retained in the source tables and remain unknown.
+
 The module includes a concrete
 [Searching benchmark evidence record](results/searching/README.md), with the
 first reported execution, all 65 transcribed means and errors, preliminary

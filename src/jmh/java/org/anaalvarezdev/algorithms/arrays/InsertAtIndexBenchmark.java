@@ -64,7 +64,7 @@ import java.util.concurrent.TimeUnit;
  *
  * T(n) = Θ(1)
  *
- * Except for the noisy measurement at n = 100, the END
+ * Except for the atypical recorded point at n = 100, the END
  * scenario remains approximately constant as the input size
  * grows from 1,000 to 1,000,000 elements.
  *
@@ -79,6 +79,15 @@ import java.util.concurrent.TimeUnit;
  * matters. Preparing the array once per trial avoids repeatedly
  * introducing O(n) setup work around an operation whose END case
  * is theoretically Θ(1).
+ *
+ * Evidence and limitations:
+ * These are existing recorded means, not results of a new execution here.
+ * Reported errors, measurement counts and original run headers are unknown.
+ * Calls reuse a mutated array while passing the original logical size.
+ * The END result at n = 100 is atypical; its cause is not established.
+ * Full extracted data and preliminary research interpretation:
+ * docs/17-benchmarking/results/arrays/arrays-template-results.csv
+ * docs/17-benchmarking/results/arrays/README.md
  */
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
