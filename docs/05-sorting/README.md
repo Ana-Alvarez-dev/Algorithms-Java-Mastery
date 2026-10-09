@@ -439,6 +439,13 @@ input assumptions justify them.
 
 # Algorithms Studied
 
+The five algorithms now have dedicated Java 21 implementations, JUnit Jupiter
+and AssertJ tests, and comparative JMH benchmarks. See the
+[implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for the exact contracts, selected variants, verification evidence, and Windows
+execution commands. Benchmark measurements cover copying plus sorting;
+controlled research results remain pending.
+
 The module studies five classical comparison-based sorting algorithms.
 
 | Algorithm | Principal Strategy | Best Case | Average Case | Worst Case | Typical Auxiliary Space |

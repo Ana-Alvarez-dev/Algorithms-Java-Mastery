@@ -2510,6 +2510,17 @@ Insertion Sort is academically important and also has practical value as a compo
 
 ---
 
+# Implemented Repository Evidence
+
+[`InsertionSort`](../../src/main/java/org/anaalvarezdev/algorithms/sorting/InsertionSort.java)
+saves each key, shifts only greater values, and inserts into the ordered prefix.
+[`InsertionSortTest`](../../src/test/java/org/anaalvarezdev/algorithms/sorting/InsertionSortTest.java)
+verifies the shared ascending, mutating, duplicate-preserving `int[]` contract.
+The implementation rejects null input and accepts empty arrays. Sorted input
+has linear best-case work. `ElementarySortingBenchmark.insertionSort` measures
+copy plus sort. See the [implementation guide](implementation-and-benchmark-guide.md)
+for coverage, stability-testing limits, and execution commands.
+
 # Next Document
 
 ```text

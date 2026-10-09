@@ -3138,6 +3138,18 @@ Its primary trade-off is the auxiliary memory required for merging.
 
 ---
 
+# Implemented Repository Evidence
+
+[`MergeSort`](../../src/main/java/org/anaalvarezdev/algorithms/sorting/MergeSort.java)
+uses top-down recursion and one reusable auxiliary array per public call.
+[`MergeSortTest`](../../src/test/java/org/anaalvarezdev/algorithms/sorting/MergeSortTest.java)
+verifies the shared contract and a large odd-length input. Equal merge heads
+select the left value first. The caller's array is modified, but auxiliary space
+is linear. No ordered-halves shortcut is used. `EfficientSortingBenchmark.mergeSort`
+includes the input copy and workspace allocation. See the
+[implementation guide](implementation-and-benchmark-guide.md) for exact costs,
+coverage, and experiment protocol.
+
 # Next Document
 
 ```text

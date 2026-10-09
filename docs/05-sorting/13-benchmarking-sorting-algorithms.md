@@ -498,6 +498,18 @@ The methodology introduced here will also be reused when evaluating searching al
 
 ---
 
+# Current Repository Experiments
+
+`ElementarySortingBenchmark` compares Selection, Bubble, and Insertion Sort up
+to 10,000 elements. `EfficientSortingBenchmark` compares Merge, Quick, and
+`Arrays.sort` up to 1,000,000 elements. Both include a copy-only control and the
+same five deterministic distributions. Every operation clones a preserved
+source, and copying is included in the measured time. The full default matrix
+contains 160 configurations across eight methods. See the
+[implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for commands, experiment definitions, and limitations. Recorded research
+results remain pending; harness smoke checks are not performance conclusions.
+
 # Key Takeaways
 
 - Complexity analysis predicts algorithm growth.
