@@ -445,6 +445,17 @@ throughout every operation.
 
 ---
 
+# Repository Traceability
+
+The selected API implements endpoint/indexed changes, first-match search, value
+replacement, reversal, copying append and ownership-transferring split. Null
+values, duplicates, invalid indices and empty endpoints have explicit contracts.
+
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for contracts, evidence and the selected scope.
+
+---
+
 # Key Takeaways
 
 After studying this document, the learner should understand that:

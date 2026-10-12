@@ -344,6 +344,17 @@ repetitive or cyclic behaviour.
 
 ---
 
+# Repository Traceability
+
+`CircularLinkedList<E>` is a singly linked ring with a cached size. Iteration
+visits exactly one lap; singleton nodes link to themselves. Tests check finite
+iteration, endpoint repair and independent rings after splitting.
+
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for contracts, evidence and the selected scope.
+
+---
+
 # Key Takeaways
 
 After studying this document, the learner should understand that:

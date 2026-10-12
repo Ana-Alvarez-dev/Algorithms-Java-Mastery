@@ -288,9 +288,10 @@ O(1)
 
 ## Average Case
 
-The desired element is expected to appear somewhere within the collection.
-
-Traversal typically visits approximately half of the nodes.
+An average requires a probability model. For a successful search with a unique
+target uniformly distributed over the n node positions, the expected number
+of inspected nodes is (n + 1) / 2. Unsuccessful searches inspect all n nodes;
+other target/success distributions can change the expected work.
 
 Although fewer nodes are examined than in the worst case, the asymptotic
 complexity remains:
@@ -416,6 +417,18 @@ meet application requirements.
 ---
 
 # Engineering Considerations
+
+## Implemented Representation Costs
+
+The repository implementations maintain both endpoints and a cached size.
+`addLast` and `size` are therefore constant-time, while singly linked tail removal
+still needs its predecessor. Doubly linked indexed operations start at the nearer
+endpoint. Copying append is linear in the source size; transferring a split
+requires locating its boundary. See the
+[exact implementation cost table](implementation-and-benchmark-guide.md)
+to distinguish these choices from the head-only analysis above. Circular
+iteration makes one finite lap, and structural diagnostics are not automatically
+scanned inside every mutation.
 
 Software engineers should avoid selecting data structures solely because they
 are familiar.

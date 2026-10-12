@@ -404,6 +404,16 @@ complete 48-configuration subset, JMH metadata, and all 480 raw iteration
 averages. The run used JDK 25.0.1 and completes both templates' result sections.
 Interpretation remains preliminary because of wide errors and fork variation.
 
+# Linked Lists Experiment
+
+`LinkedListOperationsBenchmark` compares three manual generic topologies,
+`ArrayList` and the executing JDK's `LinkedList` for traversal, fixed middle
+access, and a prepend/remove pair that restores the original state. The default
+matrix has fifteen methods and four sizes. The
+[Linked Lists implementation and benchmark guide](../06-linked-lists/implementation-and-benchmark-guide.md)
+defines timed work, setup exclusions, checksums, scope and Windows run commands.
+Result and Interpretation remain pending a controlled run with complete metadata.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

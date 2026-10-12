@@ -341,6 +341,17 @@ implementation convenience.
 
 ---
 
+# Repository Traceability
+
+`DoublyLinkedList<E>` preserves reciprocal links, searches from the nearer
+endpoint, and provides backward iteration. `DoublyLinkedListTest` checks both
+directions after insertion, removal, reversal and splitting.
+
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for contracts, evidence and the selected scope.
+
+---
+
 # Key Takeaways
 
 After studying this document, the learner should understand that:

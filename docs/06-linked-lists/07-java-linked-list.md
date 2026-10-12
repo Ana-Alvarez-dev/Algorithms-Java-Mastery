@@ -272,6 +272,13 @@ during traversal is required.
 
 # Iterators
 
+The custom containers support finite forward iteration; the doubly linked
+container also supports backward iteration. Their iterator `remove` operation
+is intentionally unsupported, and structural changes invalidate existing
+iterators. `set` replaces a value without structural invalidation. These are
+selected educational contracts, not the complete `java.util.LinkedList` API.
+See the [implementation guide](implementation-and-benchmark-guide.md) for details.
+
 An iterator provides sequential access without exposing the internal structure.
 
 Conceptually:
@@ -283,8 +290,9 @@ Iterator<String> iterator = cities.iterator();
 Iterators improve abstraction and reduce coupling between algorithms and data
 structures.
 
-They also support safe element removal during traversal through the iterator
-interface.
+Standard-library iterators may support element removal during traversal.
+Removal is optional in the `Iterator` contract; the custom iterators in this
+module use its default unsupported-operation behavior.
 
 ---
 

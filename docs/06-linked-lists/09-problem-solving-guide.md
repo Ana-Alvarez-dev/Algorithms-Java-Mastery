@@ -398,6 +398,17 @@ repository.
 
 ---
 
+# Repository Traceability
+
+The three structure tests execute the shared contract and 2,000 seeded model
+operations each, checking topology after mutations. Separate node-algorithm
+tests verify identity reuse, stable merging, genuine cycles and invalid inputs.
+
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for contracts, evidence and the selected scope.
+
+---
+
 # Key Takeaways
 
 After studying this document, the learner should understand that:

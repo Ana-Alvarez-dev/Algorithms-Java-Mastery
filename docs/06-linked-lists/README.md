@@ -209,6 +209,13 @@ The appropriate choice depends on the computational problem being solved.
 
 # Data Structures Studied
 
+The three structures now have dedicated generic Java implementations, shared
+contract tests and structural-invariant checks. Representative node algorithms
+and a fifteen-method JMH comparison are also implemented. See the
+[implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for exact contracts, ownership, complexity, validation evidence and Windows
+execution commands. Measured performance results remain pending a controlled run.
+
 The module studies three classical linked-list structures.
 
 | Structure | Characteristics |
@@ -270,7 +277,8 @@ documents.
 ├── 08-common-algorithms.md
 ├── 09-problem-solving-guide.md
 ├── 10-common-mistakes.md
-└── 11-interview-notes.md
+├── 11-interview-notes.md
+└── implementation-and-benchmark-guide.md
 ```
 
 The sequence progresses from conceptual understanding to implementation,

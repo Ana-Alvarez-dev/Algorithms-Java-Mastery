@@ -1,6 +1,9 @@
-# Singly Linked Lists
+# Linked List Fundamentals
 
 ## Algorithms Java Mastery
+
+This introduction uses a singly linked chain as its first concrete model.
+The following documents extend it to doubly linked and circular topologies.
 
 A **singly linked list** is a dynamic linear data structure composed of individual
 nodes connected through references.
@@ -30,7 +33,7 @@ The concepts presented in this document are primarily based on the study of
 elementary data structures presented in *Introduction to Algorithms* by
 Cormen, Leiserson, Rivest and Stein, where linked lists are introduced as a
 dynamic representation for ordered collections within the broader study of data
-structures. :contentReference[oaicite:0]{index=0}
+structures.
 
 The explanations contained in this repository are intentionally original and are
 supported by additional references documented in:
@@ -298,6 +301,17 @@ contiguous storage.
 
 Selecting the appropriate representation is therefore an engineering decision
 based on computational requirements.
+
+---
+
+# Repository Traceability
+
+The executable foundation is the `LinkedSequence<E>` contract implemented by
+three private-node containers. The guide connects representation, ownership,
+correctness, tests and selected benchmarks.
+
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for contracts, evidence and the selected scope.
 
 ---
 
