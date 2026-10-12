@@ -14,7 +14,7 @@ This organisation differs fundamentally from arrays.
 
 Arrays determine their order through indices, whereas linked lists determine
 their order through explicit references between nodes. This distinction changes
-how algorithms traverse, modify, and analyse the structure. :contentReference[oaicite:1]{index=1}
+how algorithms traverse, modify, and analyse the structure.
 
 Understanding singly linked lists establishes the conceptual basis required for
 studying more advanced dynamic structures, including stacks, queues, hash
@@ -28,7 +28,7 @@ The concepts developed throughout this document are primarily based on the study
 of linked lists presented in **Chapter 10 — Elementary Data Structures** of
 *Introduction to Algorithms* by Cormen, Leiserson, Rivest and Stein, where
 linked lists are introduced as a flexible representation for dynamic sets and
-their principal variants are discussed. :contentReference[oaicite:2]{index=2}
+their principal variants are discussed.
 
 The explanations provided in this repository are intentionally original and are
 supported by the academic references maintained in:
@@ -554,6 +554,17 @@ The decision should therefore be guided by:
 
 Selecting the appropriate data structure requires understanding both its
 advantages and its limitations.
+
+---
+
+# Repository Traceability
+
+`SinglyLinkedList<E>` maintains head, tail and cached size. Tail append is
+constant-time; tail removal still traverses to its predecessor. Its private
+nodes are checked by `SinglyLinkedListTest` and the common contract suite.
+
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for contracts, evidence and the selected scope.
 
 ---
 

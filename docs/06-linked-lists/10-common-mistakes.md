@@ -477,6 +477,17 @@ software quality.
 
 ---
 
+# Repository Traceability
+
+Concrete countermeasures include saved successor links, endpoint repair,
+reciprocal-link checks, finite circular iteration, cycle rejection in acyclic
+algorithms, and overlap validation before destructive merging.
+
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for contracts, evidence and the selected scope.
+
+---
+
 # Key Takeaways
 
 After studying this document, the learner should understand that:

@@ -412,6 +412,16 @@ because of recursive function calls.
 
 # Algorithm Comparison
 
+The current executable selection is cycle detection, middle-node discovery,
+reversal, stable sorted merging and sorted duplicate removal in
+`LinkedListAlgorithms`, using independent `LinkedNode` chains. Their contracts
+reject unsupported cycles and validate sorted input; merging also rejects shared
+nodes before mutation. These linear validation passes are included in their
+complexity bounds. The middle policy selects the second middle for an even
+length, and destructive methods reuse element nodes. See the
+[implementation guide](implementation-and-benchmark-guide.md) for source/test
+traceability and the explicit boundary between implemented and later topics.
+
 | Algorithm | Time | Space |
 |-----------|-----:|------:|
 | Traversal | O(n) | O(1) |
