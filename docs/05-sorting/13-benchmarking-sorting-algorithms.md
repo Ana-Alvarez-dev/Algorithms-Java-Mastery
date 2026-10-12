@@ -507,8 +507,11 @@ same five deterministic distributions. Every operation clones a preserved
 source, and copying is included in the measured time. The full default matrix
 contains 160 configurations across eight methods. See the
 [implementation and benchmark guide](implementation-and-benchmark-guide.md)
-for commands, experiment definitions, and limitations. Recorded research
-results remain pending; harness smoke checks are not performance conclusions.
+for commands, experiment definitions, and limitations. The
+[first reported run](../17-benchmarking/results/sorting/README.md) contains
+48 configurations and 480 iteration averages on JDK 25.0.1. Both templates now
+record the supplied results and preliminary interpretation. The full default
+matrix is not covered, and wide reported errors limit precise rankings.
 
 # Key Takeaways
 

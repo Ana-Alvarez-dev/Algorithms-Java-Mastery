@@ -38,7 +38,7 @@ All production and test files use the package
 | [Insertion Sort](06-insertion-sort.md) | `InsertionSort` | `InsertionSortTest` | `ElementarySortingBenchmark.insertionSort` |
 | [Merge Sort](07-merge-sort.md) | `MergeSort` | `MergeSortTest` | `EfficientSortingBenchmark.mergeSort` |
 | [Quick Sort](08-quick-sort.md) | `QuickSort` | `QuickSortTest` | `EfficientSortingBenchmark.quickSort` |
-| Java 21 library reference | `Arrays.sort(int[])` | Reference oracle in the contract suite | `EfficientSortingBenchmark.javaArraysSort` |
+| Executing JDK's library reference | `Arrays.sort(int[])` | Reference oracle in the contract suite | `EfficientSortingBenchmark.javaArraysSort` |
 
 The [source package README](../../src/main/java/org/anaalvarezdev/algorithms/sorting/README.md)
 provides the implementation inventory. Tests live under `src/test/java/` and
@@ -182,8 +182,18 @@ On Linux, build with `bash mvnw -Pbenchmark clean package` and use
 
 ## Recording and Interpretation
 
-The benchmark templates intentionally leave `Result` and `Interpretation`
-pending a recorded controlled execution. For each research run, retain:
+The benchmark templates now record the
+[first reported Sorting subset](../17-benchmarking/results/sorting/README.md):
+48 configurations, two forks with five measurement iterations each, and all
+480 raw iteration averages. It covers sizes 100 and 1,000 on RANDOM, SORTED,
+and REVERSE_SORTED input. The complete default matrix remains unmeasured in
+this record. Wide errors in several cases limit performance conclusions.
+
+The project targets Java 21, but the supplied execution used JDK 25.0.1. The
+library reference measures that runtime's `Arrays.sort`; it is not Java 21
+runtime evidence. The exports and log retain that environment distinction.
+
+For each research run, retain:
 
 - the complete JMH JSON and log, including headers and reported uncertainty;
 - the source commit (`git rev-parse HEAD`) and exact command;

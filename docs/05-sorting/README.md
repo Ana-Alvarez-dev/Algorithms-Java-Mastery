@@ -444,7 +444,9 @@ and AssertJ tests, and comparative JMH benchmarks. See the
 [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 for the exact contracts, selected variants, verification evidence, and Windows
 execution commands. Benchmark measurements cover copying plus sorting;
-controlled research results remain pending.
+the [first reported Sorting run](../17-benchmarking/results/sorting/README.md)
+records a complete 48-configuration subset on JDK 25.0.1. Interpretation remains
+preliminary because several measurements and copy controls have wide errors.
 
 The module studies five classical comparison-based sorting algorithms.
 
