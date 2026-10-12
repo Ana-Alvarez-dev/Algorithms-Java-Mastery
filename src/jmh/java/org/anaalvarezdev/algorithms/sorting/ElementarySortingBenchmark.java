@@ -31,11 +31,31 @@ import java.util.concurrent.TimeUnit;
  * Size is capped at 10,000 because these algorithms can perform quadratic work.
  *
  * Result:
- * Pending a recorded controlled run; smoke checks are not research results.
+ * First complete subset supplied on 2026-10-12: JMH 1.37, JDK 25.0.1,
+ * 2 forks x 5 measurements, average time in us/op. This group has 24 results:
+ * sizes 100 and 1,000; RANDOM, SORTED and REVERSE_SORTED.
+ * At n = 1,000, reported means +/- errors:
+ * - RANDOM: insertion 75.763 +/- 10.892; selection 320.550 +/- 98.867;
+ *   bubble 923.241 +/- 175.611 us/op.
+ * - SORTED: insertion 1.781 +/- 2.007; bubble 2.736 +/- 5.653;
+ *   selection 103.916 +/- 17.889 us/op.
+ * - REVERSE_SORTED: selection 2339.062 +/- 6286.460 us/op.
+ * The full JSON retains every result and all per-fork iteration averages:
+ * docs/17-benchmarking/results/sorting/2026-10-12-first-reported-run.json.
  *
  * Interpretation:
- * Pending. Compare identical size/distribution pairs and retain JMH errors.
- * copyOnly is a control, not a baseline to subtract mechanically.
+ * - Bubble and insertion have lower reported means on sorted input than on
+ *   random/reverse input, consistent with their adaptive movement rules.
+ * - Selection still scans every suffix; different timings do not change its
+ *   distribution-independent comparison count.
+ * - Wide errors, fork differences and iteration spikes limit precise rankings.
+ *   All original values are retained; none are removed as outliers.
+ * - Sorted copyOnly at n = 1,000 is 8.836 +/- 31.165 us/op. This unstable
+ *   control must not be subtracted to manufacture an isolated sorting cost.
+ * - Only two sizes and three distributions were measured. Larger sizes and
+ *   NEARLY_SORTED/DUPLICATE_HEAVY are not results of this run.
+ * Interpretation is preliminary; provenance and limits are recorded in
+ * docs/17-benchmarking/results/sorting/README.md.
  *
  * Limitations:
  * One deterministic dataset per pair; repeated cloned inputs; GC, JVM, hardware

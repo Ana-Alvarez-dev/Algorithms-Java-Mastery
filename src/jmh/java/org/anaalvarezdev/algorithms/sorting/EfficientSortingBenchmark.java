@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * Merge: Θ(n log n), with Θ(n) auxiliary storage allocated inside the sort call.
  * Quick: balanced/expected Θ(n log n), Θ(n²) worst case, O(log n) stack here.
  * The expectation assumes an input model; structured cases are specific data.
- * Arrays.sort is the Java 21 library reference, not another handwritten variant.
+ * Arrays.sort is the executing JDK's library reference, not a handwritten variant.
  *
  * Measured Operation:
  * Clone the immutable trial source, sort the clone, and return it to JMH.
@@ -34,11 +34,33 @@ import java.util.concurrent.TimeUnit;
  * MergeSort's own workspace allocation is also measured.
  *
  * Result:
- * Pending a recorded controlled run; smoke checks are not research results.
+ * First complete subset supplied on 2026-10-12: JMH 1.37, JDK 25.0.1,
+ * 2 forks x 5 measurements, average time in us/op. This group has 24 results:
+ * sizes 100 and 1,000; RANDOM, SORTED and REVERSE_SORTED.
+ * At n = 1,000, reported means +/- errors:
+ * - RANDOM: Arrays.sort 14.921 +/- 1.309; merge 40.193 +/- 16.990;
+ *   quick 87.551 +/- 158.007 us/op.
+ * - SORTED: Arrays.sort 1.298 +/- 0.315; merge 53.682 +/- 66.156;
+ *   quick 11.806 +/- 1.879 us/op.
+ * - REVERSE_SORTED: Arrays.sort 2.367 +/- 2.075; merge 30.058 +/- 2.503;
+ *   quick 12.740 +/- 4.516 us/op.
+ * The full JSON retains every result and all per-fork iteration averages:
+ * docs/17-benchmarking/results/sorting/2026-10-12-first-reported-run.json.
  *
  * Interpretation:
- * Pending. Compare identical size/distribution pairs and retain JMH errors.
- * copyOnly is a control, not a baseline to subtract mechanically.
+ * - Arrays.sort has the lowest sorting mean within this group in each measured
+ *   size/distribution pair. This is a descriptive observation, not a universal
+ *   ranking; some errors are wide.
+ * - Quick RANDOM at n = 1,000 has fork means 149.892 and 25.211 us/op;
+ *   its pooled result does not support a precise comparison with merge.
+ * - Merge SORTED at n = 1,000 is also highly uncertain. The data do not establish
+ *   which runtime or hardware effect caused the variability.
+ * - The project targets Java 21 bytecode, but this experiment used JDK 25.0.1:
+ *   the library reference is that JDK's Arrays.sort, not a Java 21 measurement.
+ * - copyOnly is an allocation/copy control, not a quantity to subtract.
+ * - Two sizes and three distributions cannot establish asymptotic growth.
+ * Interpretation is preliminary; provenance and limits are recorded in
+ * docs/17-benchmarking/results/sorting/README.md.
  *
  * Limitations:
  * One deterministic dataset per pair; repeated cloned inputs; GC, JVM, hardware

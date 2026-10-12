@@ -399,7 +399,10 @@ plus sorting on five deterministic distributions. Quadratic algorithms are
 limited to 10,000 elements; Merge, Quick, and the library reference extend to
 1,000,000. The [Sorting implementation and benchmark guide](../05-sorting/implementation-and-benchmark-guide.md)
 defines the complete protocol, Windows commands, and evidence-recording rules.
-Controlled research results remain pending.
+The [first reported Sorting results](results/sorting/README.md) preserve the
+complete 48-configuration subset, JMH metadata, and all 480 raw iteration
+averages. The run used JDK 25.0.1 and completes both templates' result sections.
+Interpretation remains preliminary because of wide errors and fork variation.
 
 # Key Takeaways
 

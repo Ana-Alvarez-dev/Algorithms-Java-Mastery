@@ -27,5 +27,9 @@ do not expose identity, so these tests do not claim to verify object stability.
 
 The two JMH groups measure **copy plus sort**, use deterministic fresh inputs,
 and include copy-only controls; the efficient group also includes `Arrays.sort`.
-The benchmark profile builds `target/benchmarks.jar`. Research results remain
-pending a controlled run with complete metadata.
+The benchmark profile builds `target/benchmarks.jar`. The
+[first Sorting evidence record](../../../../../../../docs/17-benchmarking/results/sorting/README.md)
+preserves 48 configurations and all 480 measurement-iteration averages supplied
+on 2026-10-12. The runtime was JDK 25.0.1, while the project targets Java 21.
+Interpretation is preliminary because several cases and copy controls have
+wide uncertainty. The supplied subset does not cover the full default matrix.
