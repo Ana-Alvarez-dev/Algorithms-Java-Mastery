@@ -38,11 +38,29 @@ import java.util.concurrent.TimeUnit;
  * isolated transfer latency, allocation rate or resizing experiment is claimed.
  *
  * Result:
- * Pending an author-supplied measurement run. Harness smoke scores are excluded.
+ * First subset supplied on 2026-10-19: JMH 1.37, JDK 21.0.9, one thread,
+ * 2 forks x 5 measurements of 500 ms after 3 x 500 ms warmup; average ns/op.
+ * Author-reported source: 804f69f32b0da715ed41f390034523890c24bca5.
+ * This group has twelve configurations, Cnt = 10 each. Means +/- errors:
+ * Method                  n = 100              n = 1000
+ * boundedDequeRotate      3.776 +/- 0.541       3.593 +/- 0.634
+ * circularRotate          3.893 +/- 0.549       3.496 +/- 0.234
+ * javaArrayDequeRotate    3.943 +/- 0.278       3.600 +/- 0.241
+ * javaLinkedListRotate    15.107 +/- 0.709      14.982 +/- 0.602
+ * linkedRotate            13.553 +/- 1.098      14.982 +/- 4.263
+ * twoStacksRotate         9.017 +/- 2.828       8.463 +/- 2.339
+ * All reported means/errors and per-fork iteration averages are retained in
+ * docs/17-benchmarking/results/stacks-and-queues/README.md. Smoke is excluded.
  *
  * Interpretation:
- * Pending. Retain means/errors, source SHA, actual JDK/JMH and complete header.
- * Measured time does not prove amortised bounds or explain hardware causes.
+ * The array-backed rings have similar means with overlapping uncertainty in
+ * several comparisons. Two-stack means are about 8.5-9.0 ns/op, including
+ * transfers, and linked means about 13.6-15.1 ns/op. These observations do not
+ * isolate allocation or cache causes. Manual and JDK linked queues both round
+ * to 14.982 ns/op at 1000 with different errors; no precise winner is claimed.
+ * Size-stable rotation averages periodic transfers rather than measuring their
+ * worst latency. Two sizes cannot prove amortised bounds. Interpretation is
+ * preliminary and remains limited to the matched workload/runtime/settings.
  * Protocol: docs/07-stacks-and-queues/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

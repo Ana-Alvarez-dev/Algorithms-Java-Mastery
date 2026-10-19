@@ -8,6 +8,11 @@ transition to **07 — Stacks and Queues**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
+An empirical follow-up supplied on the same date records the author's Stacks
+and Queues execution from commit `804f69f32b0da715ed41f390034523890c24bca5`
+(PR #71's merge). That source identity is distinct from the review's initial
+base above and from the later commits documenting its results.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -30,7 +35,7 @@ helpers. The matrix includes the Stacks and Queues contribution in this branch.
 | Searching | 8 | 85 | 4 | [65 means/errors](../17-benchmarking/results/searching/README.md) and [documentation review](../04-searching/documentation-review.md); closest-value duplicate tie mismatch remains |
 | Sorting | 5 | 69 | 8 | [Implementation guide](../05-sorting/implementation-and-benchmark-guide.md), [48 reported configurations](../17-benchmarking/results/sorting/README.md); JDK 25.0.1, substantial uncertainty, execution SHA unknown |
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
-| Stacks and Queues | 15 | 80 | 10 | [Selected scope and traceability](../07-stacks-and-queues/implementation-and-benchmark-guide.md); implementation/tests/harness verified; research results pending a measured run |
+| Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
 | 08–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are **418 passing repository tests** after this contribution, compared
@@ -98,8 +103,9 @@ an actual workflow remains future work. No CI result was inferred from tests.
   the preceding module's null-permitting linked sequences.
 - Fixed-array stacks, other deque variants and advanced parsing/traversal remain
   explicit extensions. They are not counted as implemented.
-- Benchmark templates contain questions, expectations, timed work and limitations;
-  their Result/Interpretation fields remain pending. Smoke times are excluded.
+- Benchmark templates contain questions, expectations, timed work and limitations.
+  The empirical follow-up completes their Result/Interpretation fields with
+  20 configurations and their errors; smoke times remain excluded.
 
 ## Verification Performed
 
@@ -125,8 +131,10 @@ scanning oracle. Expression tests include malformed arity, operand order,
 overflow, division by zero and Java whitespace; delimiter tests include deep
 iterative input. These are functional checks, not statistical experiments.
 
-No new research timing results are claimed. The author's JDK 21.0.9 machine
-is a separate environment from this verification host.
+The implementation verification produced no research timing results. The
+subsequent author-supplied run records 20 configurations, 200 measurement and
+120 warmup averages. Its JDK 21.0.9 machine is a separate environment from the
+OpenJDK verification host above; no fresh local test run is inferred from it.
 
 ## Evidence Policy and Next Action
 
@@ -135,11 +143,14 @@ transcriptions where already present. JSON/log exports were removed by PR #70
 at the author's request; Git history is not rewritten. A final table can retain
 means/errors but cannot reconstruct unavailable per-fork observations.
 
-After reviewing/merging this contribution, build on local main and follow the
-[20-configuration initial run](../07-stacks-and-queues/implementation-and-benchmark-guide.md#windows-execution-and-evidence).
-Supply the source SHA, actual JVM/JMH header, full final table and completion
-marker as text or legible captures. A subsequent results contribution can then
-complete the empirical stage without fabricating evidence.
+The [20-configuration initial run](../17-benchmarking/results/stacks-and-queues/README.md)
+now records source SHA, headers, final table, completion marker and all printed
+warmup/measurement iterations in Markdown. Eleven errors reach at least 25%
+of their means; CPU details and an intact command line remain unavailable.
+Future runs should follow the
+[evidence protocol](../07-stacks-and-queues/implementation-and-benchmark-guide.md#windows-execution-and-evidence)
+and remain distinct from this initial subset. Larger sizes, growth and isolated
+transfer latency remain separate research questions.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

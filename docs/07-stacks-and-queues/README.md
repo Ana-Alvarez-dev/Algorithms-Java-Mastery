@@ -913,8 +913,11 @@ src/main/java/org/anaalvarezdev/algorithms/stacksandqueues/
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 defines the selected contracts, pseudocode, traces, invariants, proofs, costs,
 tests and Windows commands. Fixed-array stacks and other conceptual extensions
-are explicitly distinguished from the executable scope. Benchmark Result and
-Interpretation sections remain pending a measured author-supplied run.
+are explicitly distinguished from the executable scope. Both benchmark templates
+now include Result and Interpretation from the
+[first reported measurement subset](../17-benchmarking/results/stacks-and-queues/README.md):
+20 configurations on JDK 21.0.9/JMH 1.37, with all printed measurement/warmup
+values preserved in Markdown. Conclusions remain preliminary and retain errors.
 
 The final package structure may evolve as the implementation grows, but it
 should preserve:

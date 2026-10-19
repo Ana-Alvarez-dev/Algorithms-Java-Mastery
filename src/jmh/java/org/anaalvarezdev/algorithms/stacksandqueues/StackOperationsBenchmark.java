@@ -36,11 +36,28 @@ import java.util.concurrent.TimeUnit;
  * and use separate profiling before making allocation or causal claims.
  *
  * Result:
- * Pending an author-supplied measurement run. Harness smoke scores are excluded.
+ * First subset supplied on 2026-10-19: JMH 1.37, JDK 21.0.9, one thread,
+ * 2 forks x 5 measurements of 500 ms after 3 x 500 ms warmup; average ns/op.
+ * Author-reported source: 804f69f32b0da715ed41f390034523890c24bca5.
+ * This group has eight configurations, Cnt = 10 each. Means +/- errors:
+ * Method                 n = 100              n = 1000
+ * arrayPushPop           3.234 +/- 1.066       3.271 +/- 1.154
+ * javaArrayDequePushPop  4.746 +/- 1.495       4.811 +/- 1.543
+ * javaLinkedListPushPop  17.527 +/- 5.992      17.104 +/- 4.945
+ * linkedPushPop          9.410 +/- 2.827       9.609 +/- 3.309
+ * All reported means/errors, intervals, 200 measurement and 120 warmup values
+ * across both groups are preserved in Markdown. Smoke scores are excluded.
  *
  * Interpretation:
- * Pending. Compare matched size, runtime and blackhole mode; retain errors.
- * No asymptotic, memory-footprint or worst-case latency conclusion follows.
+ * The manual array stack has the lowest mean at both sizes, followed by JDK
+ * ArrayDeque, manual linked stack and JDK LinkedList. This describes these
+ * means, not a universal ranking. Every stack error exceeds 25% of its mean;
+ * array and JDK ArrayDeque confidence intervals overlap. Precise speedups
+ * and formal significance are not established by these comparisons.
+ * Similar means across two sizes do not prove asymptotic or amortised bounds.
+ * Reserved capacity excludes growth; allocation and hardware causes were not
+ * profiled. Interpretation is preliminary; paired scores are not isolated ops.
+ * Evidence: docs/17-benchmarking/results/stacks-and-queues/README.md.
  * Protocol: docs/07-stacks-and-queues/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

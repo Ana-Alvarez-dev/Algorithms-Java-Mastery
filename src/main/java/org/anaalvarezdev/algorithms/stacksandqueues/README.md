@@ -25,7 +25,12 @@ No iterator or thread-safety contract is added.
 Verification on 2026-10-19 with OpenJDK 21 passed **418 repository tests**,
 including **80 module tests**. Both JMH classes built, all ten methods were
 discovered and smoke-checked, and a separate probe checked all 40 method/size
-combinations. Result and Interpretation remain pending an author-supplied run.
+combinations. The
+[first reported results](../../../../../../../docs/17-benchmarking/results/stacks-and-queues/README.md)
+complete both templates' Result and Interpretation sections: 20 configurations,
+200 measurement and 120 warmup averages, JDK 21.0.9/JMH 1.37, author-reported
+source `804f69f32b0da715ed41f390034523890c24bca5`. Interpretation is preliminary;
+eleven errors reach at least 25% of their means. Smoke scores are excluded.
 
 The [project traceability review](../../../../../../../docs/00-project/11-traceability-review.md)
 records the current chain and unresolved earlier-module limitations.
