@@ -21,6 +21,8 @@ Binary Trees
         ↓
 Binary Search Trees
         ↓
+Tree Operations
+        ↓
 Tree Traversals
         ↓
 Balanced Trees
@@ -66,14 +68,32 @@ After completing this module, the learner should be able to:
 | **02-tree-terminology.md** | Defines the fundamental terminology used when working with trees. |
 | **03-binary-trees.md** | Explains binary trees, their properties, and common classifications. |
 | **04-binary-search-trees.md** | Introduces Binary Search Trees and their ordering property. |
-| **05-tree-traversals.md** | Describes depth-first and breadth-first traversal algorithms. |
-| **06-balanced-trees.md** | Explains balanced trees and why maintaining balance improves efficiency. |
-| **07-heaps.md** | Introduces heap data structures and their relationship to priority queues. |
-| **08-java-priority-queue.md** | Examines Java's `PriorityQueue` implementation and its practical usage. |
-| **09-complexity-analysis.md** | Analyses the computational complexity of tree operations. |
-| **10-common-algorithms.md** | Presents common algorithms and practical applications involving trees. |
-| **11-common-mistakes.md** | Identifies frequent implementation errors and engineering best practices. |
-| **12-interview-notes.md** | Summarizes essential concepts commonly discussed in technical interviews. |
+| **05-tree-operations.md** | Explains search, keyed updates, extrema and neighbour concepts. |
+| **06-tree-traversals.md** | Describes depth-first and breadth-first traversal algorithms. |
+| **07-balanced-trees.md** | Explains logarithmic height and AVL/other balancing techniques. |
+| **08-heaps.md** | Introduces heap ordering, construction and priority operations. |
+| **09-java-priority-queue.md** | Relates heap concepts to Java's PriorityQueue. |
+| **10-complexity-analysis.md** | Distinguishes height, full traversal, growth and output costs. |
+| **11-common-algorithms.md** | Presents applications and explicitly selected implementations. |
+| **12-common-mistakes.md** | Reviews contract, representation and complexity mistakes. |
+| **13-interview-notes.md** | Summarises essential concepts and qualifications. |
+
+---
+
+# Current Executable Scope
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+connects the required methodology to an unbalanced BST, an AVL ordered int set,
+a dynamic min-heap, four iterative traversals, tree metrics, in-place Heap Sort
+and copied-heap k-smallest selection. The package contains 11 production files,
+59 module tests and 12 JMH methods in two classes. Verification passed 524
+repository tests. Result and Interpretation await measured author evidence;
+24 smoke cases and a 72-combination harness probe are functional checks.
+
+Contracts explicitly define unique versus duplicate values, empty results,
+edge-height, proper-tree ownership, inclusive floor/ceiling, independent output
+and capacity/growth costs. Red-black/B-trees, tries, LCA, graph algorithms and
+scheduling systems remain conceptual extensions. They are not counted as implemented.
 
 ---
 

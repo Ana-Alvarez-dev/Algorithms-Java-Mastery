@@ -303,10 +303,18 @@ are distinguished in the implementation guide.
 - [Linked Lists scope and evidence](docs/06-linked-lists/implementation-and-benchmark-guide.md)
 - [Stacks and Queues scope, contracts and run commands](docs/07-stacks-and-queues/implementation-and-benchmark-guide.md)
 - [Hash Tables scope, contracts and run commands](docs/08-hash-tables/implementation-and-benchmark-guide.md)
+- [Trees scope, contracts and run commands](docs/09-trees/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
 passing tests from known contract gaps, and local builds from CI evidence.
+
+Trees adds an iterative unbalanced BST, AVL ordered int set, dynamic min-heap,
+standalone tree traversals/metrics and heap applications. Its 59 tests bring
+repository verification to 524 tests; twelve JMH methods have functional/harness
+evidence. Author performance measurements remain pending, distinct from smoke.
+The guide records edge-height, duplicate/absence policies, output/growth costs
+and all selected scope limits.
 
 ## Technology Stack
 

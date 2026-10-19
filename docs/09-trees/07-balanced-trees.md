@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 The efficiency of a Binary Search Tree depends directly on its height. When the tree remains balanced, searching, insertion, and deletion require relatively few comparisons. However, if nodes are inserted in an unfavorable order, a Binary Search Tree may become highly unbalanced, causing its height to approach the number of stored elements and reducing its performance to that of a linked list.
 
 To overcome this limitation, computer scientists developed **Balanced Trees**. These data structures automatically maintain a relatively small height as elements are inserted and removed, ensuring that the fundamental operations continue to execute efficiently regardless of insertion order.
@@ -61,7 +65,9 @@ A balanced tree minimizes the number of nodes visited during each operation.
 
 A **Balanced Tree** is a tree whose height remains close to the minimum possible as nodes are inserted and removed.
 
-The objective is to keep the tree approximately symmetrical so that operations continue to require a logarithmic number of comparisons.
+The objective is logarithmic height, not visual symmetry. The selected AVL
+invariant requires each node's left/right subtree heights to differ by at most
+one; cached heights are updated after each repair.
 
 Conceptually:
 
@@ -98,7 +104,9 @@ Keeping the height logarithmic is the primary goal of every self-balancing tree.
 
 # 5. Tree Rotations
 
-Balanced trees maintain their structure using **rotations**.
+AVL and red-black search trees use **rotations**. Multiway B-trees instead
+manage occupancy with operations such as splits and merges; rotation-based
+binary repair is not a universal implementation of every balanced tree.
 
 A rotation reorganizes a small portion of the tree without changing the ordering of its elements.
 
@@ -116,7 +124,9 @@ Rotate
 Balanced Structure
 ```
 
-Rotations preserve the Binary Search Tree property while reducing tree height.
+Rotations preserve in-order key order. Appropriate local repairs restore AVL
+balance; deletion can require repair at multiple ancestors and can encounter a
+heavy child whose balance is zero. A complete traversal remains linear.
 
 ---
 
@@ -171,7 +181,7 @@ Characteristics:
 
 - uses node colors;
 - slightly less strict balancing;
-- fewer rotations during insertion and deletion;
+- different balancing and rotation trade-offs, depending on the update;
 - widely used in standard libraries.
 
 Examples include:

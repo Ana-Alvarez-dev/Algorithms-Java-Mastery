@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 Tree-based data structures are among the most powerful tools in computer science, but they are also a frequent source of implementation errors. Many of these mistakes arise from misunderstanding the properties of different tree structures or applying the wrong data structure to a particular problem.
 
 Some errors affect correctness, while others significantly reduce performance. Understanding these common mistakes helps developers write more reliable algorithms and make better engineering decisions.

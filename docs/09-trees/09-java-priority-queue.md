@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 Java provides a built-in implementation of a **priority queue** through the `PriorityQueue` class, which is part of the **Java Collections Framework**. Unlike traditional queues that process elements according to their insertion order, a priority queue processes elements according to their priority.
 
 Internally, Java's `PriorityQueue` is implemented using a **binary heap**, allowing efficient insertion and removal while ensuring that the highest-priority element is always accessible. By default, it behaves as a **Min-Heap**, meaning the smallest element has the highest priority.
@@ -199,7 +203,11 @@ For a priority queue containing **n** elements:
 | `remove(Object)` | O(n) |
 | `contains()` | O(n) |
 
-The logarithmic complexity is achieved because the internal heap maintains a height proportional to **log n**.
+These are the Java API's documented operation bounds. When accounting for
+actual backing-array work, an individual growth event also copies the array;
+reserved-capacity JMH pairs exclude growth. The selected manual heap documents
+that event separately. remove(Object) searches for an arbitrary object, unlike
+root poll. Primitive OptionalInt results and JDK boxed/null results differ.
 
 ---
 
@@ -259,6 +267,6 @@ After completing this document, the learner should understand that:
 - Java's `PriorityQueue` is implemented internally using a binary heap;
 - by default, it behaves as a Min-Heap;
 - custom ordering can be achieved through `Comparable` or `Comparator`;
-- insertion and removal require **O(log n)** time, while accessing the next element requires **O(1)** time;
+- insertion/root removal sift along a logarithmic path, while peek is constant; backing-array growth is an additional individual copying event;
 - `PriorityQueue` is the preferred Java collection for implementing priority-based processing;
 - understanding heaps provides the theoretical foundation for effectively using `PriorityQueue` in real-world software systems.

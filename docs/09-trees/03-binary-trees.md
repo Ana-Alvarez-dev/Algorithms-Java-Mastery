@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 A **Binary Tree** is one of the most fundamental tree structures in computer science. It extends the general concept of a tree by restricting each node to at most two children. This seemingly simple constraint leads to efficient algorithms for searching, traversing, representing expressions, managing hierarchical data, and implementing numerous advanced data structures.
 
 Binary Trees form the foundation for Binary Search Trees (BSTs), AVL Trees, Red-Black Trees, Heaps, Expression Trees, Huffman Trees, and many other structures used throughout software engineering.

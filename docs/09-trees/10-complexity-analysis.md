@@ -1,205 +1,119 @@
-# Complexity Analysis
+# Tree Complexity Analysis
 
 ## Algorithms Java Mastery
 
-Selecting an appropriate tree data structure requires understanding not only its functionality but also its computational cost. Different tree structures are designed to optimize different operations. Some prioritize fast searching, others provide efficient access to the highest-priority element, while some guarantee predictable performance regardless of insertion order.
-
-Complexity analysis allows software engineers to compare these structures objectively and determine which one best fits a particular problem. Rather than asking which tree is "better," the correct question is **which tree is most appropriate for the required operations**.
-
-This document compares the computational complexity of the principal tree structures studied in this module and explains the trade-offs involved in their practical use.
-
----
-
-# 1. Purpose
-
-The purpose of this document is to:
-
-- compare the computational complexity of tree-based data structures;
-- analyze the cost of common tree operations;
-- understand how tree height affects performance;
-- identify the strengths and weaknesses of each structure.
-
----
-
-# 2. Why Complexity Matters
-
-The performance of a tree depends primarily on its height.
-
-As the height increases, operations require more comparisons.
-
-Conceptually:
-
-```text
-Greater Height
-
-↓
-
-More Comparisons
-
-↓
-
-Slower Operations
-```
-
-Balanced structures minimize tree height, leading to more efficient algorithms.
-
----
-
-# 3. Binary Tree
-
-A general Binary Tree does not enforce any ordering among its elements.
-
-Searching requires visiting nodes until the desired value is found.
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Search | O(n) |
-| Insert | O(n)* |
-| Delete | O(n) |
-
-\*Insertion complexity depends on the specific implementation because Binary Trees do not define a unique insertion strategy.
-
----
-
-# 4. Binary Search Tree
-
-A Binary Search Tree (BST) maintains an ordering property that enables efficient searching.
-
-### Balanced BST
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Search | O(log n) |
-| Insert | O(log n) |
-| Delete | O(log n) |
-
-### Unbalanced BST
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Search | O(n) |
-| Insert | O(n) |
-| Delete | O(n) |
-
-The performance of a BST depends entirely on its height.
-
----
-
-# 5. Balanced Trees
-
-Self-balancing trees automatically maintain logarithmic height.
-
-Examples include:
-
-- AVL Trees;
-- Red-Black Trees;
-- B-Trees.
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Search | O(log n) |
-| Insert | O(log n) |
-| Delete | O(log n) |
-
-These guarantees remain valid regardless of insertion order.
-
----
-
-# 6. Heaps
-
-Heaps are optimized for priority-based processing rather than searching.
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Peek Root | O(1) |
-| Insert | O(log n) |
-| Extract Root | O(log n) |
-| Search | O(n) |
-
-Searching is inefficient because heaps do not maintain global ordering.
-
----
-
-# 7. Java PriorityQueue
-
-Java's `PriorityQueue` is implemented internally as a binary heap.
-
-| Operation | Complexity |
-|-----------|-----------:|
-| `peek()` | O(1) |
-| `add()` | O(log n) |
-| `offer()` | O(log n) |
-| `poll()` | O(log n) |
-| `contains()` | O(n) |
-| `remove(Object)` | O(n) |
-
-Its complexity characteristics are therefore identical to those of a binary heap.
-
----
-
-# 8. Overall Comparison
-
-| Data Structure | Search | Insert | Delete / Remove | Root Access |
-|---------------|-------:|-------:|----------------:|------------:|
-| Binary Tree | O(n) | O(n)* | O(n) | O(1) |
-| Binary Search Tree (Balanced) | O(log n) | O(log n) | O(log n) | O(1) |
-| Binary Search Tree (Worst Case) | O(n) | O(n) | O(n) | O(1) |
-| Balanced Tree | O(log n) | O(log n) | O(log n) | O(1) |
-| Heap | O(n) | O(log n) | O(log n) | O(1) |
-| Java `PriorityQueue` | O(n) | O(log n) | O(log n) | O(1) |
-
-This comparison illustrates that no single structure is optimal for every operation.
-
----
-
-# 9. Choosing the Appropriate Structure
-
-Different problems require different tree structures.
-
-Use a **Binary Search Tree** when:
-
-- ordered searching is required;
-- elements must remain sorted.
-
-Use a **Balanced Tree** when:
-
-- predictable logarithmic performance is essential;
-- insertions and deletions occur frequently.
-
-Use a **Heap** or **PriorityQueue** when:
-
-- the next highest- or lowest-priority element must always be retrieved efficiently;
-- priority scheduling is more important than searching.
-
-Selecting the appropriate structure improves both performance and maintainability.
-
----
-
-# 10. Engineering Perspective
-
-Complexity analysis demonstrates that the efficiency of an algorithm depends not only on the algorithm itself but also on the underlying data structure.
-
-Professional software engineers evaluate expected workloads before choosing a collection. For example, an application that performs millions of search operations benefits from balanced search trees, while a scheduling system naturally relies on heaps or priority queues.
-
-Understanding these trade-offs enables developers to build systems that remain efficient as data volumes increase.
-
----
-
-# 11. Relationship with the Next Document
-
-This document concludes the study of the principal tree structures and their computational characteristics.
-
-The next document presents **common algorithms based on trees**, demonstrating how these data structures are applied to practical problems such as searching, scheduling, graph processing, expression evaluation, and hierarchical data management.
-
----
-
-# 12. Key Takeaways
-
-After completing this document, the learner should understand that:
-
-- the height of a tree largely determines the efficiency of its operations;
-- Binary Search Trees provide efficient searching only when they remain balanced;
-- self-balancing trees guarantee **O(log n)** search, insertion, and deletion;
-- heaps optimize priority-based operations rather than searching;
-- Java's `PriorityQueue` inherits the complexity characteristics of binary heaps;
-- choosing the correct data structure depends on the operations an application performs most frequently rather than on a single notion of overall performance.
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected executable contracts, proof arguments, tests and benchmark protocol.
+A bound belongs to an operation and input model, not simply to the word "tree".
+
+## Height, Population and Width
+
+Let n be live nodes, h edge-height (-1 for empty), w maximum width and c retained
+heap capacity. Comparisons of primitive int keys take constant time. Allocation,
+output storage and deferred garbage collection must be distinguished.
+
+A BST search follows one path: O(h+1) time, O(1) extra storage for the iterative
+implementation. Sorted distinct insertion into the unbalanced BST gives h=n-1,
+so a miss above the maximum traverses all n nodes. A shuffled order does not
+guarantee logarithmic height for every possible permutation. Expected random-BST
+claims need a specified probability model, not merely a fixed benchmark seed.
+
+AVL balance bounds the heights of a node's subtrees to differ by at most one.
+Minimum population obeys N(h)=1+N(h-1)+N(h-2), with N(-1)=0 and N(0)=1. Its
+exponential growth in h yields logarithmic height. Searches and updates take
+O(log(n+1)) worst time; cached heights make height retrieval constant. Recursion
+in the AVL update is bounded by this height; deletion can repair many ancestors.
+Red-black/B-tree variants are conceptual extensions, not additional implementations.
+
+## Search Trees: Operation-Specific Costs
+
+| Selected operation | Unbalanced BST | AVL | Auxiliary/output storage |
+|---|---|---|---|
+| contains/add/remove | O(h+1), worst O(n) | O(log(n+1)) worst | BST O(1); AVL recursive updates O(log(n+1)) |
+| first/last/floor/ceiling | O(h+1) | O(log(n+1)) | O(1) working storage |
+| height | Theta(n) scan | Theta(1) cached | BST O(w) queue |
+| sorted snapshot | Theta(n) | Theta(n) | Theta(n) result plus O(h+1) stack |
+| size/isEmpty/clear | Theta(1) | Theta(1) | Clear drops root; future GC is separate |
+
+The selected API locates removal by **key**. Constant-time unlinking given a
+known node or an already known parent is a different contract. Inclusive floor
+and ceiling are not strict successor/predecessor. Retained node storage is
+Theta(n). A general binary tree has no universal insertion/deletion cost without
+a position, search, ownership and subtree-removal specification.
+
+## Complete Traversal and Metrics
+
+Every complete traversal must output every node, even if the tree is balanced.
+Its time and output size are Theta(n); balancing does not reduce this to O(log n).
+The explicit DFS frontier for preorder/inorder/postorder uses O(h+1) working
+space. Level-order uses O(w) queue space. List output is an additional Theta(n),
+not hidden inside those frontier bounds.
+
+`TreeAnalysis` computes size, height, edge-diameter and local-height balance in
+Theta(n) time with O(h+1) explicit frames and a constant-size final summary.
+It does not repeatedly rescan subtree heights or store a summary map for all
+nodes. Proper-tree inputs are required; shared-subtree DAG work is not described
+by the same distinct-node count. Explicit frames avoid call-stack overflow but
+still consume memory proportional to the active path.
+
+## Heap Sifting, Construction and Resizing
+
+A complete binary heap has logarithmic height. Heap order constrains parent and
+child, not arbitrary key order. Peek is constant; arbitrary membership search
+remains O(n) in the worst case. Selected `IntMinHeap` exposes no membership or
+remove(Object) API.
+
+| Heap operation | Time | Qualification |
+|---|---|---|
+| peek/size/isEmpty/capacity | Theta(1) | Empty result uses OptionalInt |
+| offer without growth | O(log(n+1)) | Sift up one path |
+| offer with growth | Theta(n) copy plus sift | One operation can be linear |
+| poll root | O(log(n+1)) | No shrink; sift down one path |
+| build from array | Theta(n) | Copy plus bottom-up sifting |
+| repeated-offer build | O(n log(n+1)) worst | Descending distinct input makes min-heap insertion adverse |
+| toArray | Theta(n) | Independent heap-order output, not sorted |
+| clear | Theta(1) | Capacity retained, live size reset |
+
+Geometric growth makes total copying linear across a growing sequence, adding
+O(1) amortised copying per offer. Combined with sifting, the amortised upper
+bound is O(log(n+1)), while one growing call can be linear. Retained storage is
+Theta(c); old/new arrays coexist during resize. No byte-level footprint claim
+follows from the asymptotic bound.
+
+Bottom-up heap building is not n independent worst-height sifts. At height t,
+there are at most order n/2^(t+1) nodes; summing their O(t) sift work gives O(n).
+The required copy gives Omega(n), hence Theta(n). "Heapify" must distinguish
+one subtree sift, O(log n) worst, from complete bottom-up construction.
+
+## Selected Applications and JDK References
+
+`HeapSort` builds an internal max-heap and grows a sorted suffix. It has
+O(n log(n+1)) time, Theta(n log n) worst-case time and O(1) auxiliary storage.
+It is in-place and unstable. Inputs with many equal values may cause early sift
+termination; the worst bound is not an assertion of the same work on every input.
+
+`KSmallest`, for k>0, spends Theta(n) building a copied min-heap and at most
+O(k log(n+1)) on extraction, with O(n) heap plus Theta(k) output storage. k=0
+returns immediately. A bounded O(k)-space streaming selection is a different
+algorithm and is not claimed here.
+
+Java 21 TreeSet documents logarithmic add/remove/contains. PriorityQueue
+specifies constant peek/size and logarithmic enqueue/dequeue, while contains and
+remove(Object) are linear. Removing the root with poll and removing an arbitrary
+matching object are not interchangeable. The consulted OpenJDK 21 source grows
+its backing array by copying; account for that individual growth event when
+analysing actual allocation work. PriorityQueue iteration is not sorted, and
+null is forbidden. Custom comparators and boxed values add their own costs.
+
+## Experimental Interpretation
+
+The guide's JMH fixtures distinguish insertion order for lookup and descending
+versus seeded random heap input. Trials reserve heap capacity, so peek/pairs
+exclude growth. Lookup excludes construction/updates. Repeated-minimum restore
+pairs and build methods answer different questions. A fixed seed is reproducible
+input, not a distributional guarantee or an asymptotic proof.
+
+Results remain pending author measurements. Record actual source/runtime,
+settings, all means/errors and the exact fixture. Smoke execution verifies the
+harness only; passing tests, mathematical arguments and timings remain separate
+evidence. See the guide for the full verification and evidence chain.

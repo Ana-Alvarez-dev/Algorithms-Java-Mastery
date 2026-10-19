@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 One of the most important operations performed on a tree is **visiting every node in a systematic order**. Unlike linear data structures, where elements are naturally arranged in sequence, trees have a hierarchical organization with multiple possible paths. As a result, there is no single "correct" way to visit all nodes.
 
 A **tree traversal** defines the order in which every node of a tree is processed exactly once. Different traversal strategies are designed for different purposes, such as searching, printing data, evaluating expressions, copying trees, or serializing hierarchical structures.
@@ -249,7 +253,10 @@ Every traversal visits each node exactly once.
 | Postorder | O(n) |
 | Level-Order | O(n) |
 
-The space complexity depends on the tree height or the maximum number of nodes stored simultaneously.
+The selected Java traversals take Theta(n) time and allocate Theta(n) output.
+Their additional frontier uses O(h+1) space for iterative DFS and O(w) for BFS,
+where w is maximum width. Output space must not be omitted. Proper-tree input
+without shared child identity is required; these methods are not DAG traversals.
 
 ---
 
@@ -300,7 +307,8 @@ Choosing the appropriate traversal depends on the desired processing order rathe
 
 Tree traversals describe **how nodes are visited**.
 
-The next document introduces **Balanced Trees**, which focus on **maintaining an efficient tree structure**. By keeping the tree height close to logarithmic, balanced trees ensure that traversal, search, insertion, and deletion remain efficient even as the tree grows.
+The next document introduces **Balanced Trees**, which focus on **maintaining an efficient tree structure**. Logarithmic height bounds search and update paths; a complete traversal still
+visits all n nodes and remains Theta(n), regardless of balancing.
 
 ---
 

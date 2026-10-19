@@ -461,6 +461,26 @@ occupied suffix despite distinct home hashes; no exact timing cause is inferred.
 Evidence remains in Markdown without JSON/log artifacts. CONSTANT_HASH and size
 10,000 require separate measurements.
 
+# Tree and Heap Experiments
+
+[The Trees guide](../09-trees/implementation-and-benchmark-guide.md) specifies
+six lookup methods (BST/AVL/JDK TreeSet, hit/miss) over two insertion orders and
+six heap methods (manual/JDK peek and restored pairs, two manual build methods)
+over two distributions. Three default sizes give 72 configurations; the initial
+two-size subsets have 24 tree and 24 heap cells and are run separately.
+
+Tree setup/updates are excluded from lookup timing; query selection is timed for
+hits, while miss repeats an absent upper key. Heap pairs reserve capacity and
+restore the minimum/count/multiset, while builds include allocation/population.
+Primitive versus boxed storage/API mechanics limit algorithm-only comparisons.
+The guide retains these workload restrictions, settings and Windows commands.
+
+OpenJDK 21 verification passed 524 tests (59 new). Twelve methods were discovered,
+24 short smoke cases completed and a separate probe checked all 72 combinations.
+Result and Interpretation remain pending author measurements; preserve actual
+source/JDK/JMH, means/errors and console evidence in Markdown without JSON/log.
+No smoke score is presented as research or proof of complexity.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

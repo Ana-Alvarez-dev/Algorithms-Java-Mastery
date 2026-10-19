@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 Technical interviews frequently include questions about tree data structures because they evaluate a candidate's understanding of recursion, hierarchical data organization, computational complexity, and algorithmic reasoning. Rather than focusing solely on implementation details, interviewers often assess whether a developer can explain why a particular tree structure is appropriate for a given problem.
 
 This document summarizes the most important concepts, comparisons, and interview questions related to Binary Trees, Binary Search Trees, Balanced Trees, Heaps, and Java's `PriorityQueue`. Its purpose is to serve as a concise review guide before technical assessments.
@@ -136,7 +140,11 @@ These complexities make heaps ideal for priority queues.
 | Balanced Tree | O(log n) | O(log n) | O(log n) |
 | Heap | O(n) | O(log n) | O(log n) |
 
-\*Depends on the chosen insertion strategy.
+\*A general binary tree needs an explicit insertion/ownership contract. Heap
+Delete here means root extraction, not arbitrary-key removal. The insertion
+entry excludes an individual Theta(n) array-growth copy; the selected dynamic
+heap has O(log(n+1)) amortised insertion. Full traversal/output remain Theta(n).
+Floor/ceiling are inclusive, not strict predecessor/successor.
 
 ---
 

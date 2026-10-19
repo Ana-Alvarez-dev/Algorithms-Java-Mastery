@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 Before studying Binary Trees, Binary Search Trees, balanced trees, and heaps, it is essential to establish a common vocabulary. Tree algorithms are described using a precise set of terms that define the relationships between nodes and the structural properties of a tree.
 
 Understanding this terminology is fundamental because the same concepts appear throughout computer science literature, technical interviews, academic textbooks, and software engineering documentation. A clear understanding of these definitions allows developers to reason about tree algorithms more accurately and communicate effectively when discussing hierarchical data structures.
@@ -215,6 +219,8 @@ Example:
 | A | 2 |
 
 The height of the root is commonly referred to as the **height of the tree**.
+The executable module uses edge-height: empty tree -1 and leaf 0. Its diameter
+also counts edges, with empty diameter explicitly defined as zero.
 
 ---
 
