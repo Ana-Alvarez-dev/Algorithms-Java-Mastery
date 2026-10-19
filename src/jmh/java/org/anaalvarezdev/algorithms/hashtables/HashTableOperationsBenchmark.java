@@ -39,12 +39,25 @@ import java.util.concurrent.TimeUnit;
  * CONSTANT_HASH deliberately forces one hash class. Neither is a random workload.
  *
  * Result:
- * Pending an author-supplied measurement run. Smoke checks are not research data.
+ * Author run reported 2026-10-19: JMH 1.37, Oracle JDK 21.0.9, one thread,
+ * 3 x 500 ms warmup, 5 x 500 ms measurement, two forks (Cnt=10).
+ * DISTINCT_HASH, n=100/1000: 18 configurations, all means/errors and printed
+ * iterations in docs/17-benchmarking/results/hash-tables/README.md.
+ * Hit means 3.217-4.468 ns/op; fixed miss means 1.332-1.489 ns/op.
+ * Remove/restore n=100/1000 (mean +/- error ns/op): chaining 12.859 +/- 0.397 /
+ * 13.408 +/- 0.585; JDK 15.593 +/- 1.025 / 15.783 +/- 0.637;
+ * probing 53.530 +/- 1.553 / 360.300 +/- 4.195. Execution SHA not supplied;
+ * reviewed source 03e6ed5 is not assumed to be the measured revision.
  *
  * Interpretation:
- * Pending. Retain actual runtime, source commit, settings, means and errors.
- * Compare matching size/hash mode; do not infer allocation, memory footprint,
- * cache causes, amortised proofs or isolated deletion cost from paired scores.
+ * Distinct homes still form a contiguous occupied block. After remove(i),
+ * put's duplicate search passes DELETED and scans to EMPTY at n: n-i+1 visits,
+ * averaging (n+3)/2 over a cursor cycle (51.5/501.5). A source counter probe
+ * confirmed these work counts; it does not explain exact nanosecond ratios.
+ * This fixture does not satisfy independent uniform placement assumptions.
+ * Pair scores do not isolate deletion; growth/cleanup and CONSTANT_HASH remain
+ * unmeasured here. No allocation, memory, cache-cause or amortised-proof claim.
+ * All individual errors and runtime/provenance limits remain in the report.
  * Protocol: docs/08-hash-tables/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

@@ -90,7 +90,10 @@ The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 connects specifications, strategies, pseudocode, traces, correctness arguments,
 conditional complexity, Java, tests and experimental questions. Quadratic/double
 probing, universal/perfect hashing, tree bins and concurrent maps remain conceptual
-extensions. Research results remain pending an author-supplied run.
+extensions. The [first reported results](../17-benchmarking/results/hash-tables/README.md)
+retain all 18 DISTINCT_HASH configurations, errors and printed iterations. The
+report traces the longer probing reinsertion path; execution SHA confirmation
+remains pending.
 
 # Prerequisites
 

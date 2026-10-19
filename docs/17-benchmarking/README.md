@@ -452,8 +452,13 @@ The [module guide](../08-hash-tables/implementation-and-benchmark-guide.md)
 defines nine methods, 54 default configurations and the 18-configuration initial
 subset. OpenJDK 21 verification passed 465 tests, including 47 new tests; JMH
 smoke and an independent probe checked the harness. Result and Interpretation
-remain pending a measured author run. Record evidence in Markdown without
-JSON/log artifacts, keeping different hash modes and runtimes identifiable.
+are now completed by the [first reported subset](results/hash-tables/README.md):
+18 DISTINCT_HASH configurations on Oracle JDK 21.0.9, with all means/errors,
+180 measurement and 108 warmup iteration averages. Execution SHA is unconfirmed.
+The source trace explains how tombstone-safe reinsertion scans the contiguous
+occupied suffix despite distinct home hashes; no exact timing cause is inferred.
+Evidence remains in Markdown without JSON/log artifacts. CONSTANT_HASH and size
+10,000 require separate measurements.
 
 # Key Takeaways
 
