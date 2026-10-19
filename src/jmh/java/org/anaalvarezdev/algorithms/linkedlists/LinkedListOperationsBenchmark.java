@@ -35,11 +35,34 @@ import java.util.concurrent.TimeUnit;
  * ArrayList is pre-sized to n + 1, so the pair measures shifting without resizing.
  *
  * Result:
- * Pending a recorded controlled execution; harness smoke scores are not results.
+ * First measured subset supplied on 2026-10-19: 30 console rows, sizes 100/1000,
+ * average time in ns/op, Cnt = 10 each. Follow-up headers confirm JMH 1.37,
+ * JDK 21.0.9, no VM options, compiler blackholes, one thread, 3 x 500 ms warmup,
+ * and 2 forks x 5 measurements of 500 ms for five configurations. Their
+ * 50 measurement and 30 warmup averages are retained in Markdown. The author
+ * identified source commit a16a431e5d7562557a06e795e332e1c8dfbac5ac;
+ * remaining iteration values are unavailable.
+ * At n = 1000, reported means +/- errors in ns/op:
+ * Representation      Middle get           Prepend/remove      Traverse
+ * ArrayList           1.668 +/- 0.744       104.285 +/- 1.096   971.031 +/- 382.618
+ * Circular            671.151 +/- 114.886   20.840 +/- 3.835    2488.897 +/- 513.506
+ * Doubly              1368.056 +/- 2343.650 16.247 +/- 3.378    4063.288 +/- 1464.355
+ * JDK LinkedList      694.916 +/- 77.854    17.384 +/- 3.274    2421.615 +/- 467.094
+ * Singly              677.253 +/- 89.571    11.242 +/- 7.069    3644.669 +/- 566.782
+ * All 30 means/errors and supplied detailed statistics are recorded in Markdown:
+ * docs/17-benchmarking/results/linked-lists/README.md. Smoke scores are excluded.
  *
  * Interpretation:
- * Pending. Compare the same size, operation and runtime; retain reported errors.
- * Iterator allocation/checks and dispatch are part of the traversal workloads.
+ * ArrayList has the lowest middle-access and traversal means at both sizes;
+ * linked structures have lower prepend/remove pair means in this subset.
+ * This is consistent with indexing, link traversal and head-shifting costs.
+ * Doubly middle get at 1000 and JDK LinkedList middle get at 100 have errors
+ * larger than their means. Do not assert precise rankings among topologies.
+ * Two sizes do not establish asymptotic growth or isolate cache/JIT/GC causes.
+ * Iterator allocation/checks and dispatch belong to the traversal workloads;
+ * the mutation score measures a restored pair, not one insertion or removal.
+ * Partial iteration evidence locates variability in five ArrayList cases;
+ * it does not explain the two highest-error linked-access results.
  *
  * Limitations:
  * Fixed values and middle target, warm repeated structures, one thread. Runtime,

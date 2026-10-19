@@ -162,20 +162,21 @@ java -jar target\benchmarks.jar ".*sorting.*" -p size=100 -wi 1 -w 50ms -i 1 -r 
 For a first controlled subset, covering all eight methods on three distributions:
 
 ```powershell
-java -jar target\benchmarks.jar ".*sorting.*" -p size=100,1000 -p distribution=RANDOM,SORTED,REVERSE_SORTED -foe true -rf json -rff sorting-first-run.json -o sorting-first-run.log
+java -jar target\benchmarks.jar ".*sorting.*" -p size=100,1000 -p distribution=RANDOM,SORTED,REVERSE_SORTED -foe true
 ```
 
 To execute each complete default group separately:
 
 ```powershell
-java -jar target\benchmarks.jar ".*sorting.ElementarySortingBenchmark.*" -foe true -rf json -rff sorting-elementary.json -o sorting-elementary.log
-java -jar target\benchmarks.jar ".*sorting.EfficientSortingBenchmark.*" -foe true -rf json -rff sorting-efficient.json -o sorting-efficient.log
+java -jar target\benchmarks.jar ".*sorting.ElementarySortingBenchmark.*" -foe true
+java -jar target\benchmarks.jar ".*sorting.EfficientSortingBenchmark.*" -foe true
 ```
 
 The full matrix contains 160 configurations and may take tens of minutes. Start
 with the subset if you want to inspect results before running the complete matrix.
-Avoid overriding the elementary group to million-element inputs. Export names
-should be changed for subsequent runs to preserve each experiment's provenance.
+Avoid overriding the elementary group to million-element inputs. Capture the
+complete header and final table as text or legible screenshots; keep distinct
+runs separate in Markdown rather than adding JSON/log exports to the project.
 
 On Linux, build with `bash mvnw -Pbenchmark clean package` and use
 `target/benchmarks.jar` in the Java commands.
@@ -184,21 +185,27 @@ On Linux, build with `bash mvnw -Pbenchmark clean package` and use
 
 The benchmark templates now record the
 [first reported Sorting subset](../17-benchmarking/results/sorting/README.md):
-48 configurations, two forks with five measurement iterations each, and all
-480 raw iteration averages. It covers sizes 100 and 1,000 on RANDOM, SORTED,
+48 configurations, two forks with five measurement iterations each, and
+findings from the 480 original iteration averages. The JSON/log files were
+removed from the current tree on 2026-10-19 at the author's request; individual
+arrays are not reproduced in Markdown. The summary covers sizes 100 and 1,000 on RANDOM, SORTED,
 and REVERSE_SORTED input. The complete default matrix remains unmeasured in
 this record. Wide errors in several cases limit performance conclusions.
 
 The project targets Java 21, but the supplied execution used JDK 25.0.1. The
 library reference measures that runtime's `Arrays.sort`; it is not Java 21
-runtime evidence. The exports and log retain that environment distinction.
+runtime evidence. The Markdown report retains that environment distinction.
 
 For each research run, retain:
 
-- the complete JMH JSON and log, including headers and reported uncertainty;
+- the complete JMH header, completion marker and final table as text or captures,
+  preserving all reported means and errors in the Markdown evidence record;
 - the source commit (`git rev-parse HEAD`) and exact command;
 - `java -version`, CPU, operating system, JVM arguments, and effective JMH settings;
 - distribution definitions, seed, and the fact that copying is timed.
+
+Record missing metadata explicitly. Without individual iteration values, a
+summary cannot support new analyses of variation across forks or outliers.
 
 Compare matching size/distribution pairs. Check variability before discussing
 precise ratios, and consider allocation or GC profiling for later research.

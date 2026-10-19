@@ -44,8 +44,9 @@ import java.util.concurrent.TimeUnit;
  *   quick 11.806 +/- 1.879 us/op.
  * - REVERSE_SORTED: Arrays.sort 2.367 +/- 2.075; merge 30.058 +/- 2.503;
  *   quick 12.740 +/- 4.516 us/op.
- * The full JSON retains every result and all per-fork iteration averages:
- * docs/17-benchmarking/results/sorting/2026-10-12-first-reported-run.json.
+ * The complete mean/error tables and earlier per-fork findings are retained in
+ * docs/17-benchmarking/results/sorting/README.md. JSON/log exports were removed
+ * from the current tree on 2026-10-19 at the author's request.
  *
  * Interpretation:
  * - Arrays.sort has the lowest sorting mean within this group in each measured
