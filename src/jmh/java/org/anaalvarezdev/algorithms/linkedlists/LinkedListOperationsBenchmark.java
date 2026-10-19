@@ -39,8 +39,9 @@ import java.util.concurrent.TimeUnit;
  * average time in ns/op, Cnt = 10 each. Follow-up headers confirm JMH 1.37,
  * JDK 21.0.9, no VM options, compiler blackholes, one thread, 3 x 500 ms warmup,
  * and 2 forks x 5 measurements of 500 ms for five configurations. Their
- * 50 measurement and 30 warmup averages are retained in Markdown. The exact
- * execution commit remains pending; remaining iteration values are unavailable.
+ * 50 measurement and 30 warmup averages are retained in Markdown. The author
+ * identified source commit a16a431e5d7562557a06e795e332e1c8dfbac5ac;
+ * remaining iteration values are unavailable.
  * At n = 1000, reported means +/- errors in ns/op:
  * Representation      Middle get           Prepend/remove      Traverse
  * ArrayList           1.668 +/- 0.744       104.285 +/- 1.096   971.031 +/- 382.618

@@ -25,6 +25,7 @@ remove pair. Setup is excluded; timed outputs are consumed by JMH. The
 [first reported evidence record](../../../../../../../docs/17-benchmarking/results/linked-lists/README.md)
 preserves 30 console means and errors supplied on 2026-10-19, without JSON/log
 files. Supplied headers confirm JMH 1.37 and JDK 21.0.9; 50 measurement and 30
-warmup iteration averages are recorded for five configurations. The exact
-execution commit remains pending. On 2026-10-12, Java 21 verification passed 338 repository
-tests, including all 81 Linked Lists tests, and built the executable benchmark jar.
+warmup iteration averages are recorded for five configurations. The author
+identified the executed source as commit `a16a431`; the report records the full
+SHA. On 2026-10-12, Java 21 verification passed 338 repository tests, including
+all 81 Linked Lists tests, and built the executable benchmark jar.

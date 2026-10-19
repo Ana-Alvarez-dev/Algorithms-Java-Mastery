@@ -418,7 +418,8 @@ The [first reported Linked Lists results](results/linked-lists/README.md) preser
 all 30 console means and errors supplied on 2026-10-19 and complete the template's
 Result and Interpretation sections. Supplied headers confirm JMH 1.37 and
 JDK 21.0.9; 50 measurement and 30 warmup iteration values are retained for five
-configurations. The exact execution commit remains pending. Two results have errors
+configurations. The author identified the executed source as commit `a16a431`.
+Two results have errors
 larger than their means. No JSON/log files are versioned for this record.
 
 # Key Takeaways

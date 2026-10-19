@@ -7,10 +7,10 @@ and completes the benchmark template's `Result` and `Interpretation` sections.
 No JSON or log file is versioned for this experiment.
 
 The run completed in **4 minutes 29 seconds**. The interpretation remains
-preliminary: only two sizes were measured, some errors are wide, and the exact
-execution commit remains pending. A follow-up console excerpt supplied on the
-same date confirms the runtime settings and provides iteration evidence for
-five configurations.
+preliminary: only two sizes were measured and some errors are wide. Follow-up
+evidence supplied on the same date confirms the runtime settings, provides
+iteration values for five configurations, and identifies the author's executed
+source checkout as commit `a16a431e5d7562557a06e795e332e1c8dfbac5ac`.
 
 ## Evidence and Provenance
 
@@ -28,7 +28,7 @@ five configurations.
 | JVM options | `<none>` in the supplied headers |
 | Build environment reported separately | Maven 3.9.11 using Oracle JDK 21.0.9, Windows 11 amd64, OS version 10.0 |
 | CPU and profiler output | Not supplied |
-| Exact execution commit | Not supplied; pending `git rev-parse HEAD` from the executed source checkout |
+| Execution source commit reported by the author | `a16a431e5d7562557a06e795e332e1c8dfbac5ac`, supplied in response to the `git rev-parse HEAD` request |
 | JMH version | 1.37 |
 | Threads | 1; synchronised iterations |
 | Warmup | 3 iterations per fork, 500 ms each |
@@ -36,11 +36,12 @@ five configurations.
 | Forks | 2; both forks are present for each of the five supplied configurations |
 | Timeout | 10 minutes per iteration |
 
-The reviewed source is main commit
-`a16a431e5d7562557a06e795e332e1c8dfbac5ac`, which merged Linked Lists PR #69.
-Its implementation commit is `727616130fd05070ffbc212ee4b45328ad64dae8`.
-These identify the definitions inspected for this report; neither is asserted
-to be the author's execution commit.
+The author-reported execution source matches the reviewed main
+[commit a16a431](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/commit/a16a431e5d7562557a06e795e332e1c8dfbac5ac),
+which merged Linked Lists PR #69. Its implementation commit is
+`727616130fd05070ffbc212ee4b45328ad64dae8`. The source identifier is supplied by
+the author; JMH's console does not embed it. Later commits documenting the
+results are separate from the source revision used for this execution.
 
 The follow-up includes matching headers for `arrayListMiddleGet` and
 `arrayListPrependRemove` at sizes 100/1,000, and `arrayListTraverse` at 100.
@@ -248,9 +249,9 @@ operating-system cause. Every value is retained.
   remaining 250 measurement averages cannot be reconstructed from the final
   table. No iteration evidence was supplied for the two highest-error cells,
   so their variability cannot be localised or explained here.
-- Runtime settings are confirmed by the supplied headers; the exact execution
-  commit and CPU remain unavailable. The inspected source commit must not be
-  presented as the captured execution commit.
+- Runtime settings are confirmed by the supplied headers and the source
+  revision is identified by the author. CPU details remain unavailable. The
+  exact shell command is the instructed protocol, not a captured command line.
 - The supplied subset covers 30 of the 60 default configurations. Sizes
   10,000 and 100,000 remain unmeasured in this record.
 - Fixed values, a fixed middle target, repeated warm access and the trial's
@@ -270,8 +271,8 @@ reasonable hypotheses. The timings do not prove those counts or establish a
 single best container for every application.
 
 This closes the initial result-and-interpretation stage with preliminary
-evidence. The follow-up confirms the runtime settings; the execution commit
-remains pending. Future runs should preserve the complete header, command,
+evidence. Follow-up evidence records the runtime settings and author-reported
+execution source commit. Future runs should preserve the complete header, command,
 commit, Java version, CPU/OS, completion marker and full result table as text
 or legible captures, then record their provenance in Markdown. Keep separate
 runs distinct and retain all reported errors. JSON and log files are not part

@@ -217,8 +217,8 @@ for exact contracts, ownership, complexity, validation evidence and Windows
 execution commands. The
 [first reported results and research interpretation](../17-benchmarking/results/linked-lists/README.md)
 preserve 30 console measurements with their errors. Interpretation is preliminary;
-the execution commit remains pending. Supplied headers confirm JMH 1.37 and
-JDK 21.0.9, with two forks of five measurement iterations.
+the author identified the executed source as commit `a16a431`. Supplied headers
+confirm JMH 1.37 and JDK 21.0.9, with two forks of five measurement iterations.
 
 The module studies three classical linked-list structures.
 

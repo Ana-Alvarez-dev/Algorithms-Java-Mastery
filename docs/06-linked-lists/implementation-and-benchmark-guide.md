@@ -225,8 +225,9 @@ record 30 console measurements supplied on **2026-10-19**, preserving all means
 and errors. Follow-up headers confirm JMH 1.37, JDK 21.0.9, one thread, three
 500 ms warmup iterations and two forks of five 500 ms measurement iterations
 for five configurations. Their 50 measurement and 30 warmup averages are also
-recorded. The execution commit remains pending. Two middle-access cells have errors larger than
-their means. Interpretation remains preliminary; smoke scores are excluded.
+recorded. The author identified the executed source as commit `a16a431` (the
+full SHA is in the evidence record). Two middle-access cells have errors larger
+than their means. Interpretation remains preliminary; smoke scores are excluded.
 
 ## Run from Windows PowerShell
 
