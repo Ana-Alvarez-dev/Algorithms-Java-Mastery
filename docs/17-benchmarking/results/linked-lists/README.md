@@ -8,25 +8,33 @@ No JSON or log file is versioned for this experiment.
 
 The run completed in **4 minutes 29 seconds**. The interpretation remains
 preliminary: only two sizes were measured, some errors are wide, and the exact
-execution commit and complete JMH header were not supplied.
+execution commit remains pending. A follow-up console excerpt supplied on the
+same date confirms the runtime settings and provides iteration evidence for
+five configurations.
 
 ## Evidence and Provenance
 
 | Item | Evidence and status |
 |---|---|
-| Evidence format | Author-pasted final console table, completion footer and final `singlyTraverse` result block |
+| Evidence format | Author-pasted final table and completion footer, followed by headers/iterations for five ArrayList configurations and detailed result blocks for five configurations in total |
 | Reporting date | 2026-10-19; the console excerpt has no execution timestamp |
 | Mode and unit | Average time (`avgt`), `ns/op` |
 | Coverage | 15 methods x sizes 100 and 1,000 = 30 configurations |
 | Measurement count | `Cnt = 10` in every row; these are iteration averages, not ten individual list operations |
-| Total represented iteration averages | 300; their individual values were not supplied |
+| Total represented iteration averages | 300; 50 rounded measurement-iteration values were supplied for five configurations; the other 250 remain unavailable |
 | Blackhole mode | Compiler blackholes, explicitly identified in the supplied footer |
-| JDK selected by the author | Oracle JDK 21.0.9, runtime 21.0.9+7-LTS-338, Java HotSpot(TM) 64-Bit Server VM |
-| Runtime evidence boundary | The author verified the explicit JDK 21 executable before this run; the benchmark's JVM header is absent, so the runtime is author-reported rather than independently confirmed from this excerpt |
+| Runtime confirmed in supplied headers | JDK 21.0.9, Java HotSpot(TM) 64-Bit Server VM, 21.0.9+7-LTS-338; separately identified as Oracle JDK by the author's version check |
+| VM invoker | `C:\Program Files\Java\jdk-21\bin\java.exe` |
+| JVM options | `<none>` in the supplied headers |
 | Build environment reported separately | Maven 3.9.11 using Oracle JDK 21.0.9, Windows 11 amd64, OS version 10.0 |
-| CPU, JVM arguments and profiler output | Not supplied |
+| CPU and profiler output | Not supplied |
 | Exact execution commit | Not supplied; pending `git rev-parse HEAD` from the executed source checkout |
-| Effective JMH version, threads, warmup, measurement duration and fork count | Header not supplied; source defaults are listed below as expectations, not confirmed runtime metadata |
+| JMH version | 1.37 |
+| Threads | 1; synchronised iterations |
+| Warmup | 3 iterations per fork, 500 ms each |
+| Measurement | 5 iterations per fork, 500 ms each |
+| Forks | 2; both forks are present for each of the five supplied configurations |
+| Timeout | 10 minutes per iteration |
 
 The reviewed source is main commit
 `a16a431e5d7562557a06e795e332e1c8dfbac5ac`, which merged Linked Lists PR #69.
@@ -34,10 +42,15 @@ Its implementation commit is `727616130fd05070ffbc212ee4b45328ad64dae8`.
 These identify the definitions inspected for this report; neither is asserted
 to be the author's execution commit.
 
-The POM declares JMH **1.37**. The reviewed benchmark defaults are one thread,
-three 500 ms warmup iterations, five 500 ms measurement iterations and two
-forks. The reported `Cnt = 10` is consistent with two forks of five iterations,
-but does not uniquely establish that configuration. The instructed command was:
+The follow-up includes matching headers for `arrayListMiddleGet` and
+`arrayListPrependRemove` at sizes 100/1,000, and `arrayListTraverse` at 100.
+They confirm JMH **1.37**, JDK **21.0.9**, one thread, three 500 ms warmup
+iterations and five 500 ms measurement iterations. Both forks are present in
+each configuration. These settings match the reviewed source defaults.
+Headers for the remaining 25 configurations are not reproduced in the supplied
+excerpt; their final rows all report `Cnt = 10`.
+
+The instructed command was:
 
 ```powershell
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar ".*linkedlists.*" -p size=100,1000 -foe true
@@ -146,8 +159,19 @@ over n elements.
 
 ## Additional Supplied Statistics
 
-The author also supplied the detailed result block for `singlyTraverse` at
-size 1,000:
+The follow-up supplied four complete ArrayList result blocks. Every number
+below is in **ns/op**. Confidence intervals are the printed **99.9%** intervals
+under the stated normal-distribution assumption.
+
+| Method | Size | Mean +/- error | Min | Max | Standard deviation | Confidence interval |
+|---|---:|---:|---:|---:|---:|---|
+| `arrayListMiddleGet` | 100 | 1.372 +/- 0.103 | 1.313 | 1.533 | 0.068 | [1.269, 1.475] |
+| `arrayListMiddleGet` | 1,000 | 1.668 +/- 0.744 | 1.320 | 2.681 | 0.492 | [0.924, 2.412] |
+| `arrayListPrependRemove` | 100 | 59.856 +/- 7.032 | 56.081 | 70.439 | 4.651 | [52.824, 66.888] |
+| `arrayListPrependRemove` | 1,000 | 104.285 +/- 1.096 | 103.201 | 105.788 | 0.725 | [103.189, 105.381] |
+
+The earlier excerpt also supplied the detailed result block for
+`singlyTraverse` at size 1,000:
 
 | Statistic | Reported value (ns/op) |
 |---|---:|
@@ -161,8 +185,58 @@ The block explicitly states that its interval assumes a normal distribution.
 Its endpoints agree with the rounded mean plus/minus error. The standard
 deviation is a different statistic from the reported error. Min/max describe
 measurement-iteration averages, not fastest/slowest individual operations or
-request-latency percentiles. Detailed blocks for the other 29 cells were not
+request-latency percentiles. Detailed blocks for the other 25 cells were not
 supplied, so no equivalent statistics are reconstructed for them.
+
+## Partial Iteration Evidence
+
+The follow-up contains **50 measurement-iteration averages** and **30 warmup
+iteration averages** for five configurations. Each value below preserves its
+three printed decimal places in **ns/op**. Warmup is excluded from all reported
+measurement means. Each iteration itself aggregates many operation invocations.
+
+### Measurement Iterations
+
+| Method | Size | Fork | Iteration 1 | Iteration 2 | Iteration 3 | Iteration 4 | Iteration 5 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `arrayListMiddleGet` | 100 | 1 | 1.396 | 1.533 | 1.345 | 1.370 | 1.351 |
+| `arrayListMiddleGet` | 100 | 2 | 1.320 | 1.435 | 1.313 | 1.316 | 1.344 |
+| `arrayListMiddleGet` | 1,000 | 1 | 1.337 | 1.320 | 1.323 | 2.456 | 1.725 |
+| `arrayListMiddleGet` | 1,000 | 2 | 1.450 | 1.409 | 1.478 | 1.501 | 2.681 |
+| `arrayListPrependRemove` | 100 | 1 | 59.037 | 59.588 | 61.143 | 70.439 | 65.157 |
+| `arrayListPrependRemove` | 100 | 2 | 56.673 | 56.881 | 56.901 | 56.658 | 56.081 |
+| `arrayListPrependRemove` | 1,000 | 1 | 103.839 | 104.247 | 103.582 | 103.201 | 103.918 |
+| `arrayListPrependRemove` | 1,000 | 2 | 104.522 | 104.665 | 105.788 | 104.803 | 104.283 |
+| `arrayListTraverse` | 100 | 1 | 52.767 | 53.553 | 52.990 | 52.482 | 53.203 |
+| `arrayListTraverse` | 100 | 2 | 52.913 | 53.047 | 52.737 | 52.952 | 63.081 |
+
+### Warmup Iterations
+
+| Method | Size | Fork | Iteration 1 | Iteration 2 | Iteration 3 |
+|---|---:|---:|---:|---:|---:|
+| `arrayListMiddleGet` | 100 | 1 | 1.339 | 1.385 | 1.379 |
+| `arrayListMiddleGet` | 100 | 2 | 1.336 | 1.351 | 1.319 |
+| `arrayListMiddleGet` | 1,000 | 1 | 1.341 | 1.356 | 1.327 |
+| `arrayListMiddleGet` | 1,000 | 2 | 1.446 | 1.458 | 1.363 |
+| `arrayListPrependRemove` | 100 | 1 | 60.616 | 62.645 | 58.925 |
+| `arrayListPrependRemove` | 100 | 2 | 57.233 | 56.589 | 57.168 |
+| `arrayListPrependRemove` | 1,000 | 1 | 110.775 | 106.738 | 108.266 |
+| `arrayListPrependRemove` | 1,000 | 2 | 106.706 | 112.590 | 105.291 |
+| `arrayListTraverse` | 100 | 1 | 54.192 | 53.347 | 53.021 |
+| `arrayListTraverse` | 100 | 2 | 54.393 | 53.963 | 53.064 |
+
+The ten measurement values per configuration reproduce the previously reported
+means within **0.001 ns/op**, allowing for console rounding. They are rounded
+iteration averages, so they cannot reproduce full-precision confidence estimates
+exactly. The supplied `arrayListTraverse` excerpt ends after its final iteration;
+its aggregate result remains supported by the earlier final table.
+
+`arrayListMiddleGet` at 1,000 includes iteration averages of 2.456 and
+2.681 ns/op, while its other eight range from 1.320 to 1.725 ns/op.
+For `arrayListTraverse` at 100, nine iteration averages range from 52.482 to
+53.553 ns/op; the last is 63.081 ns/op. These observations help locate variation
+inside the supplied measurements. They do not identify a JIT, GC, cache or
+operating-system cause. Every value is retained.
 
 ## Uncertainty and Limits
 
@@ -170,11 +244,13 @@ supplied, so no equivalent statistics are reconstructed for them.
   bound below zero is not evidence of physical negative execution time.
 - The table preserves JMH-reported errors. No formal significance test or
   equivalence claim is made by comparing or overlapping intervals.
-- Without per-fork and per-iteration values, we cannot inspect fork differences,
-  diagnose outliers, reanalyse the distribution or explain timing variation.
-- Header fields and the exact source commit remain explicitly pending. The
-  source defaults and separately verified JDK must not be presented as a
-  complete captured execution environment.
+- Per-fork iteration values are available for only five configurations. The
+  remaining 250 measurement averages cannot be reconstructed from the final
+  table. No iteration evidence was supplied for the two highest-error cells,
+  so their variability cannot be localised or explained here.
+- Runtime settings are confirmed by the supplied headers; the exact execution
+  commit and CPU remain unavailable. The inspected source commit must not be
+  presented as the captured execution commit.
 - The supplied subset covers 30 of the 60 default configurations. Sizes
   10,000 and 100,000 remain unmeasured in this record.
 - Fixed values, a fixed middle target, repeated warm access and the trial's
@@ -194,8 +270,8 @@ reasonable hypotheses. The timings do not prove those counts or establish a
 single best container for every application.
 
 This closes the initial result-and-interpretation stage with preliminary
-evidence. Provenance remains incomplete until the execution commit and header
-are supplied. Future runs should preserve the complete header, command,
+evidence. The follow-up confirms the runtime settings; the execution commit
+remains pending. Future runs should preserve the complete header, command,
 commit, Java version, CPU/OS, completion marker and full result table as text
 or legible captures, then record their provenance in Markdown. Keep separate
 runs distinct and retain all reported errors. JSON and log files are not part

@@ -36,9 +36,11 @@ import java.util.concurrent.TimeUnit;
  *
  * Result:
  * First measured subset supplied on 2026-10-19: 30 console rows, sizes 100/1000,
- * average time in ns/op, Cnt = 10 each. The author selected Oracle JDK 21.0.9;
- * the execution header and exact source commit were not supplied. Source
- * defaults (JMH 1.37, 2 forks x 5 measurements) are not confirmed header data.
+ * average time in ns/op, Cnt = 10 each. Follow-up headers confirm JMH 1.37,
+ * JDK 21.0.9, no VM options, compiler blackholes, one thread, 3 x 500 ms warmup,
+ * and 2 forks x 5 measurements of 500 ms for five configurations. Their
+ * 50 measurement and 30 warmup averages are retained in Markdown. The exact
+ * execution commit remains pending; remaining iteration values are unavailable.
  * At n = 1000, reported means +/- errors in ns/op:
  * Representation      Middle get           Prepend/remove      Traverse
  * ArrayList           1.668 +/- 0.744       104.285 +/- 1.096   971.031 +/- 382.618
@@ -58,7 +60,8 @@ import java.util.concurrent.TimeUnit;
  * Two sizes do not establish asymptotic growth or isolate cache/JIT/GC causes.
  * Iterator allocation/checks and dispatch belong to the traversal workloads;
  * the mutation score measures a restored pair, not one insertion or removal.
- * Individual iteration values are unavailable; provenance remains incomplete.
+ * Partial iteration evidence locates variability in five ArrayList cases;
+ * it does not explain the two highest-error linked-access results.
  *
  * Limitations:
  * Fixed values and middle target, warm repeated structures, one thread. Runtime,

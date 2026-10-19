@@ -416,8 +416,9 @@ matrix has fifteen methods and four sizes. The
 defines timed work, setup exclusions, checksums, scope and Windows run commands.
 The [first reported Linked Lists results](results/linked-lists/README.md) preserve
 all 30 console means and errors supplied on 2026-10-19 and complete the template's
-Result and Interpretation sections. The author selected JDK 21.0.9; the exact
-execution commit and complete JMH header remain pending. Two results have errors
+Result and Interpretation sections. Supplied headers confirm JMH 1.37 and
+JDK 21.0.9; 50 measurement and 30 warmup iteration values are retained for five
+configurations. The exact execution commit remains pending. Two results have errors
 larger than their means. No JSON/log files are versioned for this record.
 
 # Key Takeaways

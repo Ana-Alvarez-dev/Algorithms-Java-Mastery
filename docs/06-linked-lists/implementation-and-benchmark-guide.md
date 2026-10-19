@@ -222,9 +222,10 @@ construction, which is also part of the documented memory context.
 
 The [first reported subset and research interpretation](../17-benchmarking/results/linked-lists/README.md)
 record 30 console measurements supplied on **2026-10-19**, preserving all means
-and errors. The author selected Oracle JDK 21.0.9. The execution commit and
-complete JMH header were not supplied, so source defaults remain distinct from
-confirmed runtime metadata. Two middle-access cells have errors larger than
+and errors. Follow-up headers confirm JMH 1.37, JDK 21.0.9, one thread, three
+500 ms warmup iterations and two forks of five 500 ms measurement iterations
+for five configurations. Their 50 measurement and 30 warmup averages are also
+recorded. The execution commit remains pending. Two middle-access cells have errors larger than
 their means. Interpretation remains preliminary; smoke scores are excluded.
 
 ## Run from Windows PowerShell
