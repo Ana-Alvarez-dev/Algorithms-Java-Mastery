@@ -1,12 +1,15 @@
 # Common Algorithms Using Stacks and Queues
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 Stacks and queues are **fundamental data structures** used to solve a wide variety of algorithmic problems. Their importance lies not in the complexity of their operations, but in the way they organize the processing of information.
 
 A stack naturally supports **Last In, First Out (LIFO)** processing, while a queue supports **First In, First Out (FIFO)** processing. Choosing the appropriate structure often simplifies an algorithm and improves both readability and performance.
 
-This document introduces the most representative algorithms and problem categories that rely on stacks and queues. Detailed implementations will be developed in later modules.
+This document introduces the most representative algorithms and problem categories that rely on stacks and queues. The current selected implementations cover delimiter validation, checked postfix evaluation, next-greater indices, sliding-window maxima and queue reversal. Infix conversion and tree/graph traversal remain later extensions. Exact contracts and executable evidence are linked in the guide above.
 
 ---
 

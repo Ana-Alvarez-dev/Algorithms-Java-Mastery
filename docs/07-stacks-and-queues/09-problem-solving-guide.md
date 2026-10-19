@@ -1,5 +1,8 @@
 # Problem Solving Guide
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 Selecting the appropriate data structure is one of the first decisions in algorithm design. Many problems that initially appear complex become significantly simpler once the correct structure has been identified.

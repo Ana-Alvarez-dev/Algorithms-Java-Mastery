@@ -1,5 +1,8 @@
 # Stack Fundamentals
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 A **stack** is a linear abstract data type that restricts insertion and removal

@@ -1,5 +1,8 @@
 # Common Mistakes
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 Stacks and queues are conceptually simple data structures, yet implementation errors are common, especially when managing boundaries, references, or indices.

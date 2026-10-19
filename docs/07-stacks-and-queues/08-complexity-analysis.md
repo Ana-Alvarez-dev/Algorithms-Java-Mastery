@@ -1,5 +1,8 @@
 # Complexity Analysis
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 One of the main advantages of stacks and queues is that their fundamental operations are designed to execute in **constant time**. This efficiency makes them essential building blocks for many algorithms and software systems.
@@ -26,7 +29,7 @@ The purpose of this document is to:
 
 | Operation | Complexity |
 |-----------|-----------:|
-| Push | O(1) |
+| Push without resizing | O(1) |
 | Pop | O(1) |
 | Peek | O(1) |
 | isEmpty | O(1) |
@@ -73,7 +76,7 @@ This implementation is generally avoided because removing an element may require
 
 | Operation | Complexity |
 |-----------|-----------:|
-| Enqueue | O(1) |
+| Enqueue without resizing | O(1) |
 | Dequeue | O(1) |
 | Peek | O(1) |
 | Resize | O(n) |
@@ -115,12 +118,17 @@ Although linked structures use only the required number of elements, each node i
 
 | Operation | Array Stack | Circular Queue | Linked Stack | Linked Queue |
 |-----------|------------:|---------------:|-------------:|-------------:|
-| Insert | O(1) | O(1) | O(1) | O(1) |
+| Insert | O(1) amortised | O(1) amortised | O(1) | O(1) |
 | Remove | O(1) | O(1) | O(1) | O(1) |
 | Peek | O(1) | O(1) | O(1) | O(1) |
 | Resize | O(n) | O(n) | — | — |
 
 ---
+
+The selected `TwoStackQueue` has O(n) worst-case dequeue/peek when transferring,
+and O(1) amortised operations over a sequence. The bounded deque uses O(1)
+endpoint work with explicit overflow rejection. These guarantees do not imply
+constant allocation/GC latency. See the guide for capacity retention and clear costs.
 
 # 6. Engineering Perspective
 
@@ -137,7 +145,8 @@ Other important aspects include:
 
 For most Java applications:
 
-- **ArrayDeque** provides excellent performance for both stacks and queues.
+- **ArrayDeque** is a useful standard reference with amortised endpoint operations;
+  actual performance comparisons require matched workloads and a recorded run.
 - Linked implementations are useful when node-based structures or incremental growth are required.
 
 ---

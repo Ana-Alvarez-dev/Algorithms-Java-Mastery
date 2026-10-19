@@ -1,5 +1,8 @@
 # Deque Fundamentals
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 A **deque** is a linear abstract data type that permits insertion and removal
