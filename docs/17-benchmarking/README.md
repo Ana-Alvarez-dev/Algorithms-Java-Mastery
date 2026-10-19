@@ -433,8 +433,12 @@ defines setup exclusions, reserved capacity, exact paired operations and the
 
 OpenJDK 21 verification passed all 418 repository tests, including 80 new tests.
 The ten JMH methods were discovered and smoke-checked; a separate correctness
-probe checked all 40 method/size combinations. Result and Interpretation remain
-pending an author-supplied measurement run. No JSON/log artifacts are required.
+probe checked all 40 method/size combinations. The
+[first reported measurement subset](results/stacks-and-queues/README.md) now
+completes Result and Interpretation: 20 configurations, 200 measurement and 120
+warmup averages, JDK 21.0.9/JMH 1.37, author-reported source `804f69f`. Eleven
+reported errors reach at least 25% of their means. Conclusions remain preliminary;
+all printed evidence is retained in Markdown without JSON/log artifacts.
 
 # Key Takeaways
 

@@ -234,8 +234,13 @@ memory-footprint, latency-percentile or worst-case transfer result is inferred.
 
 The fixed data, repeated warm state, allocator, GC, JIT and physical memory
 layout constrain generalisation. Growth and isolated transfer latency require
-separate justified experiments. `Result` and `Interpretation` remain pending
-an author-supplied measurement run; smoke checks only validate the harness.
+separate justified experiments. The
+[first reported measurement subset](../17-benchmarking/results/stacks-and-queues/README.md)
+now completes both templates' Result and Interpretation sections. Supplied on
+2026-10-19, it records 20 configurations, 200 measurement and 120 warmup iteration
+averages on JDK 21.0.9/JMH 1.37, with author-reported source
+`804f69f32b0da715ed41f390034523890c24bca5`. Eleven errors reach at least 25% of
+their means. Interpretation remains preliminary; smoke checks remain separate.
 
 ## Windows Execution and Evidence
 

@@ -286,8 +286,10 @@ The project rule is:
 
 Sorting and Linked Lists also have Java implementations, tests, JMH templates
 and preliminary recorded results. Stacks and Queues now adds six containers,
-five application algorithms, 80 tests and ten JMH methods. Its research results
-remain pending an author-supplied run.
+five application algorithms, 80 tests and ten JMH methods. Its
+[first reported results](docs/17-benchmarking/results/stacks-and-queues/README.md)
+preserve 20 configurations and the printed iteration values from JDK 21.0.9;
+interpretation remains preliminary and retains reported uncertainty.
 
 - [Sorting scope and evidence](docs/05-sorting/implementation-and-benchmark-guide.md)
 - [Linked Lists scope and evidence](docs/06-linked-lists/implementation-and-benchmark-guide.md)
