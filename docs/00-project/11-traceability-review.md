@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **08 — Hash Tables**. It is a source/evidence inventory,
+progression through **09 — Trees**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -21,6 +21,11 @@ configurations on JDK 21.0.9. The author subsequently confirmed
 execution source `03e6ed5e5649b4018b47f054319e0495676b7fcf`, matching the
 reviewed PR #73 merge. This confirmation was supplied separately from JMH.
 
+The Trees contribution extends the review from main commit
+`3f1e5dfb6a0dc5144fa426585a0a00ba5eeeec60`, which merged the Hash Tables
+source confirmation through PR #75. Its scope and functional/harness evidence
+are recorded below. Tree and heap research measurements remain pending.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -34,7 +39,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes the Hash Tables contribution in this branch.
+helpers. The matrix includes the Trees contribution in this branch.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -45,10 +50,11 @@ helpers. The matrix includes the Hash Tables contribution in this branch.
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
-| 09–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Trees | 11 | 59 | 12 | [Scope, contracts and evidence protocol](../09-trees/implementation-and-benchmark-guide.md); BST/AVL/heap, four traversals, metrics and heap applications verified; measured research results pending |
+| 10–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **465 passing repository tests**, compared with **418** before
-Hash Tables and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
+There are now **524 passing repository tests**, compared with **465** before
+Trees, **418** before Hash Tables and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
 ## Rechecked Gaps
@@ -168,6 +174,43 @@ All ten numbered documents link to the authoritative implementation guide.
 Future hash variants are not counted as implemented, and no smoke timing is
 labelled a research result. Earlier Arrays/Searching findings remain unchanged.
 
+## Trees Verification and Review
+
+On 2026-10-19, using verification-host **OpenJDK 21+35-2513**, the 465-test
+baseline built, then normal Maven tests and benchmark-profile clean package
+passed **524 tests**, zero failures/errors/skips. The **59 Trees tests** include
+10 shared ordered-set contract tests inherited by BST/AVL, concrete rotation/
+delete cases, heap/model tests, traversals, metrics and selected heap applications.
+
+| Check | Observed evidence |
+|---|---|
+| Ordered sets | 5,000 seeded TreeSet-model steps per representation; all 576 insertion/removal-order pairs over four distinct keys; inclusive neighbours, extremes, size, ordering, identity uniqueness and snapshots |
+| Unbalanced BST | Sorted spine height, iterative queries/updates, successor repair including its right child |
+| AVL | Four insertion rotations, deletion with zero-balance heavy child, cached height/local balance, 10,000-key sorted growth/drain and alternating extrema |
+| Min-heap | 5,000 seeded PriorityQueue-model steps; growth/capacity boundaries, duplicate/extreme keys, child selection and independent snapshots |
+| Small arrays | All 1,093 arrays length 0–6 over {-1,0,1}; build/drain/sort oracles; all 7,108 array/k combinations for KSmallest |
+| Standalone trees | All 626 shapes through seven nodes; independent small traversal and all-pairs-distance metric oracles; 100,000-node explicit-stack cases |
+| JMH discovery | Twelve methods, two classes, 72 default method/size/fixture configurations |
+| Harness smoke | All 24 size-100 cases across insertion orders/distributions; one 50 ms warmup/measurement, one fork |
+| Independent harness probe | All 72 combinations, nine calls each; cursor wrap, shape/height, query outcomes, minima, restored multiset/capacity, independent builds and invariants |
+| JavaDoc | Package passes doclint excluding missing tags |
+
+The guide connects selected contracts to pseudocode, concrete traces, invariants,
+termination and complexity. AVL logarithmic height uses the minimum-node
+recurrence; deletion repair is distinguished from insertion-only rotation counts.
+The docs correct an inaccurate implication that balanced full traversal becomes
+logarithmic, separate output from frontier space, account for a growing offer's
+linear copy, and distinguish inclusive floor/ceiling from strict successor/
+predecessor and root poll from arbitrary-key deletion. Proper-tree identity and
+edge-height conventions are explicit. The README's misnumbered contents are
+repaired; all thirteen conceptual documents link to the authoritative guide.
+
+Red-black/B-trees, tries, LCA, graph/scheduling/expression applications and a full
+generic collections API remain extensions. Earlier executable packages and POM
+are unchanged; the recorded Arrays/Searching gaps remain tracked. No fresh CI
+result is inferred. Result/Interpretation await author runs; local smoke and
+functional probes do not supply research timings.
+
 ## Evidence Policy and Next Action
 
 The repository retains results in Markdown, with existing historical CSV
@@ -201,6 +244,13 @@ CONSTANT_HASH, size 10,000, allocation and growth remain separate questions.
 The template, guide and report carry these findings and provenance limits.
 The source-to-run link now includes the author's SHA confirmation. No earlier
 module's open findings or historical results are silently reclassified.
+
+Trees is ready for its separate
+[tree and heap initial measurements](../09-trees/implementation-and-benchmark-guide.md#jmh-design-and-evidence-protocol)
+after integration. Each two-size subset has 24 configurations. Retain the actual
+source SHA, JDK/JMH/settings, full means/errors and available printed iterations.
+Keep their different operation/fixture families and later runs identifiable,
+in Markdown without JSON/log exports.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

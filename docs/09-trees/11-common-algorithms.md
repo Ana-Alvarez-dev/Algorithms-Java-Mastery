@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 Tree data structures are not only theoretical concepts but also practical tools that support numerous algorithms used in modern software engineering. Their hierarchical organization makes them suitable for solving problems involving searching, ordering, prioritization, hierarchical relationships, graph processing, and expression evaluation.
 
 Many well-known algorithms rely directly on tree structures. Binary Search Trees enable efficient searching, heaps support priority-based algorithms, and balanced trees guarantee predictable performance for dynamic collections. Understanding these applications helps bridge the gap between theoretical data structures and real-world software development.
@@ -107,6 +111,12 @@ Characteristics:
 - does not require additional memory proportional to the input size.
 
 ---
+
+The executable module provides in-place max-heap `HeapSort`, copied-min-heap
+`KSmallest`, four iterative `TreeTraversals` and bottom-up `TreeAnalysis` for
+size, edge-height, diameter and balance. KSmallest deliberately uses O(n) heap
+storage; it is not a streaming O(k)-space selection. Other applications below,
+including scheduling, graph and expression algorithms, remain extensions.
 
 # 5. Priority Scheduling
 

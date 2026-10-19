@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 Trees are one of the most important non-linear data structures in computer science. Unlike arrays, linked lists, stacks, and queues, which organize elements sequentially, trees represent information using **hierarchical relationships**. This hierarchical organization allows many operations to be performed more efficiently while naturally modeling structures found in real-world and computational systems.
 
 Trees serve as the foundation for numerous algorithms and advanced data structures, including Binary Search Trees (BSTs), AVL Trees, Red-Black Trees, Heaps, B-Trees, and Tries. They also play a central role in databases, file systems, compilers, search engines, networking, artificial intelligence, and modern backend applications.

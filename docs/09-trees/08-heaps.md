@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 A **Heap** is a specialized tree-based data structure designed to efficiently manage priorities rather than maintain a fully ordered collection of elements. Unlike a Binary Search Tree (BST), which organizes data to support efficient searching, a heap guarantees that the element with the highest or lowest priority is always located at the root.
 
 Heaps are fundamental to many algorithms and systems. They are widely used to implement priority queues, scheduling algorithms, graph algorithms such as Dijkstra's and Prim's, event simulation systems, memory management, and numerous backend applications where processing elements according to priority is essential.
@@ -186,7 +190,11 @@ For a heap containing **n** elements:
 | Heapify | O(log n) |
 | Build Heap | O(n) |
 
-The logarithmic complexity results from the height of the complete binary tree.
+The logarithmic entries describe sifting without array growth. A single offer
+that grows the selected dynamic heap copies Theta(n) slots; geometric growth
+adds constant amortised copying, leaving logarithmic amortised insertion.
+Here Heapify means one subtree sift, while Build Heap means the distinct
+bottom-up Theta(n) algorithm. A heap-order snapshot is not sorted output.
 
 ---
 
@@ -250,5 +258,5 @@ After completing this document, the learner should understand that:
 - Min-Heaps and Max-Heaps differ in whether the smallest or largest element is stored at the root;
 - heaps are typically represented using arrays rather than linked nodes;
 - heap operations rely on the heapify procedure to preserve correctness;
-- heaps provide **O(1)** access to the highest-priority element and **O(log n)** insertion and removal;
+- heaps provide **O(1)** priority access and **O(log n)** sifting; insertion can also incur a linear backing-array growth event;
 - heaps are fundamental to priority queues, scheduling algorithms, graph algorithms, and many high-performance software systems.

@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 A **Binary Search Tree (BST)** is one of the most important data structures in computer science. It extends the concept of a Binary Tree by introducing an **ordering property** that enables efficient searching, insertion, and deletion operations.
 
 Unlike a general Binary Tree, where values may be arranged arbitrarily, a Binary Search Tree organizes its elements according to a strict ordering rule. This organization allows many operations to be performed without examining every node, making BSTs the foundation of numerous search structures, database indexes, symbol tables, and associative containers.
@@ -149,6 +153,10 @@ Insert **65**.
 The Binary Search Tree property remains preserved after insertion.
 
 ---
+
+The selected Java sets use strict ordering with unique int keys. Equal-key add
+returns false without changing size. This is a chosen set contract; a multiset
+BST would need a separate duplicate policy. Key comparisons do not subtract ints.
 
 # 6. Deletion
 

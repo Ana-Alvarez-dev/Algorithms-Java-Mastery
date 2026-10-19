@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, tests and benchmark protocol.
+Conceptual extensions below are not automatically implemented.
+
 Regardless of their specific type, all tree-based data structures support a common set of fundamental operations. These operations allow developers to search for elements, insert new values, remove existing nodes, and obtain structural information about the tree.
 
 Understanding these operations is essential because they form the basis of more advanced structures such as Binary Search Trees (BSTs), AVL Trees, Red-Black Trees, B-Trees, and many database indexing structures. While the implementation details may vary, the underlying concepts remain largely the same.
@@ -272,6 +276,10 @@ Like successors, predecessors help preserve the BST ordering during deletion.
 
 ---
 
+The selected Java API exposes **inclusive floor/ceiling** for arbitrary query
+keys. These are not strict predecessor/successor operations on a present node.
+Empty extrema/neighbours use OptionalInt, not a reserved integer sentinel.
+
 # 9. Calculating Tree Height
 
 Tree height measures the longest path from the root to any leaf.
@@ -321,6 +329,10 @@ This simple validation avoids unnecessary processing and prevents runtime errors
 ---
 
 # 11. Complexity Summary
+
+These are path operations with O(h+1) cost. Height retrieval is a separate
+operation: the ordinary BST scans Theta(n), whereas AVL returns a cached value.
+A complete snapshot/traversal still takes Theta(n), with linear output space.
 
 For a **balanced Binary Search Tree**:
 
