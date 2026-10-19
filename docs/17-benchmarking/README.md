@@ -454,7 +454,8 @@ subset. OpenJDK 21 verification passed 465 tests, including 47 new tests; JMH
 smoke and an independent probe checked the harness. Result and Interpretation
 are now completed by the [first reported subset](results/hash-tables/README.md):
 18 DISTINCT_HASH configurations on Oracle JDK 21.0.9, with all means/errors,
-180 measurement and 108 warmup iteration averages. Execution SHA is unconfirmed.
+180 measurement and 108 warmup iteration averages. The author confirmed execution
+source `03e6ed5e5649b4018b47f054319e0495676b7fcf`.
 The source trace explains how tombstone-safe reinsertion scans the contiguous
 occupied suffix despite distinct home hashes; no exact timing cause is inferred.
 Evidence remains in Markdown without JSON/log artifacts. CONSTANT_HASH and size

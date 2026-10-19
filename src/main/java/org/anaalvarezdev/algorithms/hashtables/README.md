@@ -27,8 +27,9 @@ including **47 module tests**. Nine JMH methods built and passed smoke checks in
 both hash modes; a separate probe validated all 54 default method/size/mode
 combinations. The [first reported results](../../../../../../../docs/17-benchmarking/results/hash-tables/README.md)
 complete Result and Interpretation with 18 DISTINCT_HASH configurations on JDK
-21.0.9, including all errors and printed iterations. Execution SHA is missing;
-the reviewed source revision is recorded separately. The contiguous occupied
+21.0.9, including all errors and printed iterations. The author confirmed
+execution source `03e6ed5e5649b4018b47f054319e0495676b7fcf`, matching the
+reviewed PR #73 merge. The contiguous occupied
 fixture makes probing's remove/restore duplicate search traverse a long suffix,
 despite distinct home hashes.
 

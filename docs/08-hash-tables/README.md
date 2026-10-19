@@ -92,8 +92,8 @@ conditional complexity, Java, tests and experimental questions. Quadratic/double
 probing, universal/perfect hashing, tree bins and concurrent maps remain conceptual
 extensions. The [first reported results](../17-benchmarking/results/hash-tables/README.md)
 retain all 18 DISTINCT_HASH configurations, errors and printed iterations. The
-report traces the longer probing reinsertion path; execution SHA confirmation
-remains pending.
+report traces the longer probing reinsertion path. The author confirmed
+execution source `03e6ed5e5649b4018b47f054319e0495676b7fcf`.
 
 # Prerequisites
 
