@@ -214,7 +214,10 @@ contract tests and structural-invariant checks. Representative node algorithms
 and a fifteen-method JMH comparison are also implemented. See the
 [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 for exact contracts, ownership, complexity, validation evidence and Windows
-execution commands. Measured performance results remain pending a controlled run.
+execution commands. The
+[first reported results and research interpretation](../17-benchmarking/results/linked-lists/README.md)
+preserve 30 console measurements with their errors. Interpretation is preliminary;
+the execution commit and complete header remain pending.
 
 The module studies three classical linked-list structures.
 

@@ -40,8 +40,9 @@ import java.util.concurrent.TimeUnit;
  * - SORTED: insertion 1.781 +/- 2.007; bubble 2.736 +/- 5.653;
  *   selection 103.916 +/- 17.889 us/op.
  * - REVERSE_SORTED: selection 2339.062 +/- 6286.460 us/op.
- * The full JSON retains every result and all per-fork iteration averages:
- * docs/17-benchmarking/results/sorting/2026-10-12-first-reported-run.json.
+ * The complete mean/error tables and earlier per-fork findings are retained in
+ * docs/17-benchmarking/results/sorting/README.md. JSON/log exports were removed
+ * from the current tree on 2026-10-19 at the author's request.
  *
  * Interpretation:
  * - Bubble and insertion have lower reported means on sorted input than on
@@ -49,7 +50,7 @@ import java.util.concurrent.TimeUnit;
  * - Selection still scans every suffix; different timings do not change its
  *   distribution-independent comparison count.
  * - Wide errors, fork differences and iteration spikes limit precise rankings.
- *   All original values are retained; none are removed as outliers.
+ *   No observations were excluded as outliers in the reported summaries.
  * - Sorted copyOnly at n = 1,000 is 8.836 +/- 31.165 us/op. This unstable
  *   control must not be subtracted to manufacture an isolated sorting cost.
  * - Only two sizes and three distributions were measured. Larger sizes and

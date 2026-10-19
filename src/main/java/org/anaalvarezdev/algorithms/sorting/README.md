@@ -29,7 +29,9 @@ The two JMH groups measure **copy plus sort**, use deterministic fresh inputs,
 and include copy-only controls; the efficient group also includes `Arrays.sort`.
 The benchmark profile builds `target/benchmarks.jar`. The
 [first Sorting evidence record](../../../../../../../docs/17-benchmarking/results/sorting/README.md)
-preserves 48 configurations and all 480 measurement-iteration averages supplied
-on 2026-10-12. The runtime was JDK 25.0.1, while the project targets Java 21.
+preserves the 48-configuration summary supplied on 2026-10-12 and findings from
+the original 480 measurement-iteration averages. JSON/log exports were removed
+from the current tree on 2026-10-19; individual arrays are not reproduced in
+Markdown. The runtime was JDK 25.0.1, while the project targets Java 21.
 Interpretation is preliminary because several cases and copy controls have
 wide uncertainty. The supplied subset does not cover the full default matrix.

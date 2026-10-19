@@ -12,10 +12,21 @@ when discussing the measurements.
 
 ## Evidence and Provenance
 
-- [JMH JSON export](2026-10-12-first-reported-run.json): every original score,
-  error, confidence interval, percentile, metadata field, and per-fork raw array.
-- [JMH log](2026-10-12-first-reported-run.log): warmup and measurement output,
-  headers, warnings, completion marker, and the 48-row summary.
+On **2026-10-19**, the author requested Markdown evidence without JSON/log files
+in the project. Those two exports were removed from the current tree. The full
+48-configuration summary, metadata and previously checked variability findings
+remain below. The original files were versioned in
+[commit 0b50198](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/commit/0b50198176360f977b53395d72f5b7d53d4920ea);
+their removal does not rewrite repository history. Individual iteration arrays
+are no longer included in the current tree, so the summary alone cannot reproduce
+the earlier per-fork analysis.
+
+The following describes evidence inspected when this report was prepared:
+
+- The supplied JMH JSON contained original scores, errors, confidence intervals,
+  percentiles, metadata and per-fork arrays.
+- The supplied log contained warmup and measurement output, headers, warnings,
+  a completion marker and the 48-row summary.
 - The author supplied both exports inside Markdown code fences. Only the outer
   fences and surrounding whitespace were removed to make the export files usable.
   A local Windows user/repository path in the log's JMH jar warning was replaced
@@ -83,9 +94,10 @@ over many random seeds or a complete worst-case investigation.
 ## Complete Reported Summary
 
 Every table entry is **mean +/- JMH-reported error in us/op**, rounded to three
-decimal places for readability. The JSON preserves full precision and all raw
-iteration averages. The log identifies its intervals as 99.9% confidence
-intervals under JMH's statistical assumptions.
+decimal places for readability. The original JSON supplied full precision and
+raw iteration averages; those arrays are not reproduced here. The inspected log
+identified its intervals as 99.9% confidence intervals under JMH's statistical
+assumptions.
 
 ### Efficient Group
 
@@ -154,8 +166,9 @@ Two examples are especially important:
   approximately 848.909 to 1,436.183 us/op.
 
 These are raw **iteration averages**, not individual operation latencies or
-request-latency percentiles. All values, including these spikes, remain in
-the export. No observations were deleted, winsorized, or replaced.
+request-latency percentiles. All values, including these spikes, were retained
+in the inspected export. None was deleted, winsorized or replaced in calculating
+the reported summaries. Removing export files later does not change those scores.
 
 The elementary sorted copy-only mean exceeds the sorted Bubble and Insertion
 means. The independently measured operations have substantial uncertainty;
@@ -172,8 +185,8 @@ also describe separate measurements, even when the source input pair matches.
   still come from the algorithm analysis and its assumptions.
 - The recorded errors are JMH's uncertainty estimates, not standard deviations
   or correctness failures. A confidence bound below zero does not represent
-  physical negative execution time; retain the exported bounds as statistical
-  output rather than silently changing them.
+  physical negative execution time; interpret bounds as statistical output
+  rather than silently changing reported uncertainty.
 - Runtime scores include cloning and allocation. Space complexity, allocation
   rate, GC behavior, and object stability were not measured by a profiler here.
 - Correctness evidence remains the separate JUnit suite and algorithm reasoning.
@@ -183,8 +196,11 @@ also describe separate measurements, even when the source input pair matches.
 
 The templates and report can use this execution as a preliminary empirical
 example. A future run should record its exact source commit, command, CPU and
-OS version, retain all raw data, and investigate variation across forks and
-iterations before asserting precise rankings.
+OS version, preserve the full header and final table as text or captures, and
+identify the evidence retained in Markdown. Investigating variation across
+forks and iterations requires their individual values; a final table alone
+cannot support that analysis. JSON/log files are not versioned under the
+author's current evidence policy.
 
 If the research target is Java 21, select that runtime explicitly and store
 the resulting run separately. The present JDK 25 run remains valid evidence of
@@ -192,12 +208,14 @@ what was measured on that runtime. Additional warmup, longer measurements,
 more forks, and a separate GC-profiled experiment can help investigate the
 variation, but none guarantees that every instability disappears.
 
-Keep the first run and its uncertainty. Broader input sizes or additional
+Keep the first run's summary and uncertainty. Broader input sizes or additional
 distributions should become separate evidence records, not overwrite this subset.
 
 ## Integrity Identifiers
 
-SHA-256 identifiers allow the extraction and saved artifacts to be checked:
+These historical SHA-256 identifiers document the attachments and extracted
+files inspected on 2026-10-12. The JSON/log artifacts are no longer in the
+current tree; identifiers do not substitute for access to their original data.
 
 | Item | SHA-256 |
 |---|---|

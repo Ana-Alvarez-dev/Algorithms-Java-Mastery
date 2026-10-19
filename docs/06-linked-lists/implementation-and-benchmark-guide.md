@@ -220,8 +220,12 @@ workloads; they do not represent arbitrary access distributions or cold-memory
 behavior. Setup holds all five representations and uses interleaved node
 construction, which is also part of the documented memory context.
 
-`Result` and `Interpretation` remain pending a controlled author-supplied run.
-Do not invent timing values or infer asymptotic bounds from smoke checks.
+The [first reported subset and research interpretation](../17-benchmarking/results/linked-lists/README.md)
+record 30 console measurements supplied on **2026-10-19**, preserving all means
+and errors. The author selected Oracle JDK 21.0.9. The execution commit and
+complete JMH header were not supplied, so source defaults remain distinct from
+confirmed runtime metadata. Two middle-access cells have errors larger than
+their means. Interpretation remains preliminary; smoke scores are excluded.
 
 ## Run from Windows PowerShell
 
@@ -233,8 +237,17 @@ git switch main
 git pull --ff-only origin main
 .\mvnw.cmd test
 .\mvnw.cmd -Pbenchmark clean package
+java -version
+.\mvnw.cmd -version
 java -jar target\benchmarks.jar -l ".*linkedlists.*"
 ```
+
+Both version checks should select Java 21 for the reference environment. If
+Maven uses 21 but the terminal's `java` selects another version, set `JAVA_HOME`
+and put that JDK's `bin` first on `PATH`, or invoke its `java.exe` explicitly.
+For the author's verified installation, replace `java` in the commands below
+with `& "C:\Program Files\Java\jdk-21\bin\java.exe"`. Other installations may
+have a different path. The POM's `release=21` does not select the runtime.
 
 First check the harness briefly:
 
@@ -242,23 +255,27 @@ First check the harness briefly:
 java -jar target\benchmarks.jar ".*linkedlists.*" -p size=100 -wi 1 -w 50ms -i 1 -r 50ms -f 1 -t 1 -foe true
 ```
 
-Then capture a controlled 30-configuration subset while keeping terminal output:
+Then run a 30-configuration subset and capture its console evidence:
 
 ```powershell
 git rev-parse HEAD
 java -version
-java -jar target\benchmarks.jar ".*linkedlists.*" -p size=100,1000 -foe true -rf json -rff linked-lists-first-run.json | Tee-Object -FilePath linked-lists-first-run.log
+java -jar target\benchmarks.jar ".*linkedlists.*" -p size=100,1000 -foe true
 ```
 
-Omit the size override to run the full 60-configuration matrix. Keep each run's
-JSON, complete log, source commit, command, effective JMH settings, CPU and OS
-version. Preserve actual runtime version: compiling for Java 21 does not force
-the Java command to run under that JDK. Store later experiments separately.
+Omit the size override to run the full 60-configuration matrix. Wait for the
+completion marker and final table. Preserve the header, full table, source
+commit, command, actual Java version, effective settings, CPU and OS as pasted
+text or legible captures. Record them in Markdown; do not add JSON/log artifacts
+to the repository. Missing header or commit fields must remain explicitly
+pending. Without individual iteration values, variation across forks cannot
+be reanalysed. Store later experiments separately.
 
 On Linux, use `bash mvnw -Pbenchmark clean package` and
-`target/benchmarks.jar` in the Java commands. When results arrive, populate the
-benchmark's Result/Interpretation sections and a linked evidence record under
-`docs/17-benchmarking/results/linked-lists/`, preserving raw data and errors.
+`target/benchmarks.jar` in the Java commands. Update the benchmark's
+Result/Interpretation sections together with its linked evidence record under
+`docs/17-benchmarking/results/linked-lists/`, preserving every reported mean
+and error and identifying the evidence actually available.
 
 ## Academic and API References
 

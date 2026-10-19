@@ -400,8 +400,10 @@ limited to 10,000 elements; Merge, Quick, and the library reference extend to
 1,000,000. The [Sorting implementation and benchmark guide](../05-sorting/implementation-and-benchmark-guide.md)
 defines the complete protocol, Windows commands, and evidence-recording rules.
 The [first reported Sorting results](results/sorting/README.md) preserve the
-complete 48-configuration subset, JMH metadata, and all 480 raw iteration
-averages. The run used JDK 25.0.1 and completes both templates' result sections.
+complete 48-configuration summary and JMH metadata. The original 480 iteration
+averages were checked when that report was prepared; JSON/log exports were
+removed from the current tree on 2026-10-19 at the author's request. The run used
+JDK 25.0.1 and completes both templates' result sections.
 Interpretation remains preliminary because of wide errors and fork variation.
 
 # Linked Lists Experiment
@@ -412,7 +414,11 @@ access, and a prepend/remove pair that restores the original state. The default
 matrix has fifteen methods and four sizes. The
 [Linked Lists implementation and benchmark guide](../06-linked-lists/implementation-and-benchmark-guide.md)
 defines timed work, setup exclusions, checksums, scope and Windows run commands.
-Result and Interpretation remain pending a controlled run with complete metadata.
+The [first reported Linked Lists results](results/linked-lists/README.md) preserve
+all 30 console means and errors supplied on 2026-10-19 and complete the template's
+Result and Interpretation sections. The author selected JDK 21.0.9; the exact
+execution commit and complete JMH header remain pending. Two results have errors
+larger than their means. No JSON/log files are versioned for this record.
 
 # Key Takeaways
 
