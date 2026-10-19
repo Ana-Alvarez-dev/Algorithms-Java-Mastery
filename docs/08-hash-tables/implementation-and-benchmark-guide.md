@@ -217,8 +217,28 @@ optimisation; growth and accumulated tombstone cleanup are not this workload.
 No memory, allocation-rate or isolated removal-latency claim is made.
 
 Defaults: one thread, average ns/op, three 500 ms warmups, five 500 ms
-measurements, two forks. Result and Interpretation remain pending measured
-author evidence. A smoke run only checks harness execution.
+measurements, two forks. The [first reported subset](../17-benchmarking/results/hash-tables/README.md)
+now records all 18 DISTINCT_HASH configurations on Oracle JDK 21.0.9, with means,
+errors, 180 measurement averages and 108 warmup averages. The execution SHA is
+not supplied; reviewed merge `03e6ed5` is kept distinct from run provenance.
+A smoke run only checks harness execution.
+
+### Empirical finding and source trace
+
+Probing remove/restore rises from 53.530 +/- 1.553 ns/op at n=100 to
+360.300 +/- 4.195 ns/op at n=1,000. Distinct homes occupy consecutive slots
+0..n-1. After removing i, `put` searches beyond the tombstone to the first EMPTY
+slot n, visiting n-i+1 slots to rule out an existing equal key. `reusable` then
+restores slot i. A full cursor cycle averages (n+3)/2 such search visits:
+51.5 and 501.5. A temporary instrumented source copy confirmed these counts over
+two cycles at both sizes. No production optimisation is introduced.
+
+This deterministic probe-work explanation is separate from profiling exact time.
+Distinct homes do not imply independent uniformly distributed positions or short
+absence searches after deletion. The fixture preserves correctness and exposes
+a workload limitation; conditional expected bounds still require their hashing
+assumptions. The report retains all statistics, the full trace and limits.
+CONSTANT_HASH and size 10,000 remain unmeasured in this initial subset.
 
 From Windows PowerShell after merging and pulling main:
 

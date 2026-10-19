@@ -25,7 +25,12 @@ mutable, shallow HashMaps; no internal nodes or arrays are exposed.
 Verification on 2026-10-19 with OpenJDK 21 passed **465 repository tests**,
 including **47 module tests**. Nine JMH methods built and passed smoke checks in
 both hash modes; a separate probe validated all 54 default method/size/mode
-combinations. Result and Interpretation remain pending a measured author run.
+combinations. The [first reported results](../../../../../../../docs/17-benchmarking/results/hash-tables/README.md)
+complete Result and Interpretation with 18 DISTINCT_HASH configurations on JDK
+21.0.9, including all errors and printed iterations. Execution SHA is missing;
+the reviewed source revision is recorded separately. The contiguous occupied
+fixture makes probing's remove/restore duplicate search traverse a long suffix,
+despite distinct home hashes.
 
 Worst-case collision handling and probing rebuild costs remain explicit in the
 guide. Smoke results do not establish expected or amortised bounds.

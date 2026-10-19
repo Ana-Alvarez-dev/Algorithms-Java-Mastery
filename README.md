@@ -293,7 +293,10 @@ interpretation remains preliminary and retains reported uncertainty.
 
 Hash Tables now adds separate-chaining and linear-probing implementations,
 four application algorithms, 47 tests and nine JMH methods. Its measured
-results remain pending; expected costs and worst-case collision/rebuild costs
+[first reported results](docs/17-benchmarking/results/hash-tables/README.md)
+cover 18 DISTINCT_HASH configurations, with errors, all printed iterations and
+a trace of probing reinsertion. Execution SHA remains unconfirmed. Expected
+costs and worst-case collision/rebuild costs
 are distinguished in the implementation guide.
 
 - [Sorting scope and evidence](docs/05-sorting/implementation-and-benchmark-guide.md)
