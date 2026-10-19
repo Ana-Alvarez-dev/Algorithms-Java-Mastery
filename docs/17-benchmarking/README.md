@@ -422,6 +422,20 @@ configurations. The author identified the executed source as commit `a16a431`.
 Two results have errors
 larger than their means. No JSON/log files are versioned for this record.
 
+# Stacks and Queues Experiments
+
+`StackOperationsBenchmark` compares restored push/pop pairs across four
+representations. `QueueOperationsBenchmark` compares FIFO rotation across six
+representations, including a two-stack queue whose transfers remain timed.
+The [module guide](../07-stacks-and-queues/implementation-and-benchmark-guide.md)
+defines setup exclusions, reserved capacity, exact paired operations and the
+20-configuration initial subset (40 configurations by default).
+
+OpenJDK 21 verification passed all 418 repository tests, including 80 new tests.
+The ten JMH methods were discovered and smoke-checked; a separate correctness
+probe checked all 40 method/size combinations. Result and Interpretation remain
+pending an author-supplied measurement run. No JSON/log artifacts are required.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

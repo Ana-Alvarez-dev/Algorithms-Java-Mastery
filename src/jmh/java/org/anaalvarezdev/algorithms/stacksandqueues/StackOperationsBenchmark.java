@@ -1,0 +1,85 @@
+package org.anaalvarezdev.algorithms.stacksandqueues;
+
+import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Fork;
+import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
+import org.openjdk.jmh.annotations.Mode;
+import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
+import org.openjdk.jmh.annotations.Threads;
+import org.openjdk.jmh.annotations.Warmup;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.concurrent.TimeUnit;
+
+/*
+ * Research Question:
+ * How do manual array/linked stacks and JDK Deque implementations compare for
+ * a push/pop pair on prepopulated stacks with reserved array capacity?
+ *
+ * Theoretical Expectation:
+ * Constant endpoint work for every method; array resizing is excluded here.
+ * Allocation sites for linked nodes are timed, subject to JIT optimisation.
+ *
+ * Measured Operation:
+ * Push cached Integer -1 then pop and return it. Every invocation restores
+ * size, order and values. Trial population/initial boxing are excluded.
+ * Each score measures one pair, not one isolated push or pop. The fixed value
+ * and repeatedly warm state restrict generalisation; inspect generated code
+ * and use separate profiling before making allocation or causal claims.
+ *
+ * Result:
+ * Pending an author-supplied measurement run. Harness smoke scores are excluded.
+ *
+ * Interpretation:
+ * Pending. Compare matched size, runtime and blackhole mode; retain errors.
+ * No asymptotic, memory-footprint or worst-case latency conclusion follows.
+ * Protocol: docs/07-stacks-and-queues/implementation-and-benchmark-guide.md.
+ */
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.NANOSECONDS)
+@State(Scope.Thread)
+@Threads(1)
+@Warmup(iterations = 3, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Measurement(iterations = 5, time = 500, timeUnit = TimeUnit.MILLISECONDS)
+@Fork(2)
+public class StackOperationsBenchmark {
+    @Param({"100", "1000", "10000", "100000"})
+    private int size;
+
+    private ArrayStack<Integer> array;
+    private LinkedStack<Integer> linked;
+    private Deque<Integer> javaArrayDeque;
+    private Deque<Integer> javaLinkedList;
+
+    @Setup(Level.Trial)
+    public void setup() {
+        array = new ArrayStack<>(size + 1);
+        linked = new LinkedStack<>();
+        javaArrayDeque = new ArrayDeque<>(size + 1);
+        javaLinkedList = new LinkedList<>();
+        for (int value = 0; value < size; value++) {
+            Integer boxed = value;
+            array.push(boxed);
+            linked.push(boxed);
+            javaArrayDeque.push(boxed);
+            javaLinkedList.push(boxed);
+        }
+    }
+
+    @Benchmark
+    public Integer arrayPushPop() { array.push(-1); return array.pop(); }
+    @Benchmark
+    public Integer linkedPushPop() { linked.push(-1); return linked.pop(); }
+    @Benchmark
+    public Integer javaArrayDequePushPop() { javaArrayDeque.push(-1); return javaArrayDeque.pop(); }
+    @Benchmark
+    public Integer javaLinkedListPushPop() { javaLinkedList.push(-1); return javaLinkedList.pop(); }
+}

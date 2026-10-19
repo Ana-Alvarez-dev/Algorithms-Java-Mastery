@@ -282,6 +282,21 @@ The project rule is:
 
 ---
 
+## Current Module Evidence
+
+Sorting and Linked Lists also have Java implementations, tests, JMH templates
+and preliminary recorded results. Stacks and Queues now adds six containers,
+five application algorithms, 80 tests and ten JMH methods. Its research results
+remain pending an author-supplied run.
+
+- [Sorting scope and evidence](docs/05-sorting/implementation-and-benchmark-guide.md)
+- [Linked Lists scope and evidence](docs/06-linked-lists/implementation-and-benchmark-guide.md)
+- [Stacks and Queues scope, contracts and run commands](docs/07-stacks-and-queues/implementation-and-benchmark-guide.md)
+- [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
+
+The review distinguishes verified implementations from conceptual future work,
+passing tests from known contract gaps, and local builds from CI evidence.
+
 ## Technology Stack
 
 | Technology | Responsibility |

@@ -165,7 +165,8 @@ following objectives.
 ├── 07-common-algorithms.md
 ├── 08-complexity-analysis.md
 ├── 09-problem-solving-guide.md
-└── 10-common-mistakes.md
+├── 10-common-mistakes.md
+└── implementation-and-benchmark-guide.md
 ```
 
 The documents are organised progressively.
@@ -897,30 +898,23 @@ one.
 The Java source code associated with this module should separate the abstract
 behaviour from implementation details.
 
-A possible package organisation is:
+The selected implementation uses this package (mirrored in tests and JMH):
 
 ```text
-src/main/java/org/anaalvarez/algorithms/
-└── stacksandqueues/
-    ├── stack/
-    │   ├── Stack.java
-    │   ├── ArrayStack.java
-    │   └── LinkedStack.java
-    │
-    ├── queue/
-    │   ├── Queue.java
-    │   ├── CircularArrayQueue.java
-    │   └── LinkedQueue.java
-    │
-    ├── deque/
-    │   └── CustomDeque.java
-    │
-    └── algorithms/
-        ├── DelimiterValidator.java
-        ├── PostfixEvaluator.java
-        ├── NextGreaterElement.java
-        └── QueueReverser.java
+src/main/java/org/anaalvarezdev/algorithms/stacksandqueues/
+    Stack.java                 ArrayStack.java          LinkedStack.java
+    FifoQueue.java             CircularArrayQueue.java  LinkedQueue.java
+    TwoStackQueue.java         DoubleEndedQueue.java    BoundedArrayDeque.java
+    ArrayCapacity.java         DelimiterValidator.java  PostfixEvaluator.java
+    NextGreaterElement.java    SlidingWindowMaximum.java
+    QueueReverser.java
 ```
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+defines the selected contracts, pseudocode, traces, invariants, proofs, costs,
+tests and Windows commands. Fixed-array stacks and other conceptual extensions
+are explicitly distinguished from the executable scope. Benchmark Result and
+Interpretation sections remain pending a measured author-supplied run.
 
 The final package structure may evolve as the implementation grows, but it
 should preserve:
@@ -941,12 +935,12 @@ correctness.
 A possible test organisation is:
 
 ```text
-src/test/java/org/anaalvarez/algorithms/
+src/test/java/org/anaalvarezdev/algorithms/
 └── stacksandqueues/
-    ├── stack/
-    ├── queue/
-    ├── deque/
-    └── algorithms/
+    ├── StackContractTest.java (inherited by two implementations)
+    ├── QueueContractTest.java (inherited by three implementations)
+    ├── BoundedArrayDequeTest.java
+    └── five algorithm test classes
 ```
 
 Representative test scenarios include:

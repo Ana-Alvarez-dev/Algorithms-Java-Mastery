@@ -1,10 +1,15 @@
 # Java Deque
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 The **Java Collections Framework (JCF)** provides the `Deque<E>` interface as the recommended abstraction for implementing both **stacks** and **queues** in modern Java.
 
-Unlike legacy classes such as `Stack` or `LinkedList` used directly as queues, `Deque` offers a unified, efficient, and flexible API for operations at both ends of a sequence.
+`Deque` is preferred to the legacy `java.util.Stack` abstraction for LIFO use.
+`LinkedList` is a current implementation of `Deque`, not a competing legacy
+interface. The interface defines behaviour; the implementation determines costs.
 
 This document introduces the role of `Deque` within the Java Collections Framework and explains why it is the preferred abstraction for implementing LIFO and FIFO behaviours.
 
@@ -116,9 +121,9 @@ Deque<Integer> deque = new ArrayDeque<>();
 Characteristics:
 
 - dynamic circular array;
-- very fast insertions and removals;
-- excellent cache locality;
-- recommended for most applications.
+- non-null elements;
+- amortised constant-time endpoint insertion and removal;
+- occasional linear growth; individual latency is not guaranteed constant.
 
 ---
 
@@ -132,8 +137,8 @@ Characteristics:
 
 - doubly linked list;
 - dynamic growth;
-- higher memory overhead;
-- generally slower than `ArrayDeque` for stack and queue operations.
+- endpoint insertion/removal using constant pointer work;
+- node allocation per insertion; exact memory and timing require measurement.
 
 ---
 
@@ -142,12 +147,14 @@ Characteristics:
 | Characteristic | ArrayDeque | LinkedList |
 |---------------|------------|------------|
 | Internal structure | Dynamic circular array | Doubly linked list |
-| Memory overhead | Lower | Higher |
-| Cache locality | Better | Weaker |
+| Storage | Backing array with retained capacity | Separate nodes and links |
+| Growth | Occasional array allocation/copy | Node allocation per insertion |
 | Recommended for stacks | ✔ | Possible |
 | Recommended for queues | ✔ | Possible |
 
-For most applications, **ArrayDeque** is the preferred choice.
+The representation suggests different allocation and locality hypotheses.
+This module has not yet recorded comparative timing or memory measurements;
+its selected workloads and limitations are specified in the guide above.
 
 ---
 
@@ -155,8 +162,19 @@ For most applications, **ArrayDeque** is the preferred choice.
 
 - `Deque` replaces the legacy `Stack` class in modern Java.
 - `ArrayDeque` does **not** allow `null` elements.
-- All fundamental stack and queue operations execute in **O(1)** under normal conditions.
+- ArrayDeque endpoint operations are **O(1) amortised**, with occasional growth.
+- In Java 21, Deque also extends `SequencedCollection`; the diagram above shows
+  the Queue relationship rather than the complete interface hierarchy.
 - The implementation details are hidden behind the `Deque` interface.
+
+| Intent | Strict operation | Special-value operation |
+|---|---|---|
+| Insert at an end | `addFirst/addLast`: capacity failure throws | `offerFirst/offerLast`: false on capacity failure |
+| Remove at an end | `removeFirst/removeLast`: empty throws | `pollFirst/pollLast`: null when empty |
+| Inspect an end | `getFirst/getLast`: empty throws | `peekFirst/peekLast`: null when empty |
+
+Some implementations permit null, including LinkedList. The selected manual
+containers reject it so absence sentinels remain unambiguous.
 
 ---
 

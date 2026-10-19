@@ -1,5 +1,8 @@
 # Queue Implementations
 
+> Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
+> [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 A queue is defined by its **First In, First Out (FIFO)** behaviour rather than
