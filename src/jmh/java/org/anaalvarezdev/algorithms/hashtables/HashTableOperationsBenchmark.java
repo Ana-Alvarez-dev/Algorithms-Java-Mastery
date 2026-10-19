@@ -46,8 +46,9 @@ import java.util.concurrent.TimeUnit;
  * Hit means 3.217-4.468 ns/op; fixed miss means 1.332-1.489 ns/op.
  * Remove/restore n=100/1000 (mean +/- error ns/op): chaining 12.859 +/- 0.397 /
  * 13.408 +/- 0.585; JDK 15.593 +/- 1.025 / 15.783 +/- 0.637;
- * probing 53.530 +/- 1.553 / 360.300 +/- 4.195. Execution SHA not supplied;
- * reviewed source 03e6ed5 is not assumed to be the measured revision.
+ * probing 53.530 +/- 1.553 / 360.300 +/- 4.195. Author-reported execution SHA:
+ * 03e6ed5e5649b4018b47f054319e0495676b7fcf (PR #73 merge), matching review.
+ * Source identity was confirmed separately, not embedded by JMH.
  *
  * Interpretation:
  * Distinct homes still form a contiguous occupied block. After remove(i),

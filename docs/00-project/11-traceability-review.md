@@ -17,8 +17,9 @@ The Hash Tables contribution extends the review from main commit
 `f26a7763413793df701fcfb68b53547a992a2222`, which merged the Stacks and Queues
 results through PR #72. Its functional/harness verification is recorded separately
 below. A subsequent author-supplied Hash Tables run records 18 DISTINCT_HASH
-configurations on JDK 21.0.9. PR #73's merged source `03e6ed5` was reviewed, but
-the execution SHA was not supplied; source-to-run identity remains unconfirmed.
+configurations on JDK 21.0.9. The author subsequently confirmed
+execution source `03e6ed5e5649b4018b47f054319e0495676b7fcf`, matching the
+reviewed PR #73 merge. This confirmation was supplied separately from JMH.
 
 ## Required Chain
 
@@ -43,7 +44,7 @@ helpers. The matrix includes the Hash Tables contribution in this branch.
 | Sorting | 5 | 69 | 8 | [Implementation guide](../05-sorting/implementation-and-benchmark-guide.md), [48 reported configurations](../17-benchmarking/results/sorting/README.md); JDK 25.0.1, substantial uncertainty, execution SHA unknown |
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
-| Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; execution SHA unconfirmed; probing reinsertion source trace recorded |
+| Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
 | 09–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **465 passing repository tests**, compared with **418** before
@@ -187,8 +188,9 @@ The [Hash Tables initial run](../17-benchmarking/results/hash-tables/README.md)
 now retains all 18 configurations, 180 measurement and 108 warmup averages,
 complete headers/result blocks and the 2 minute 39 second completion marker.
 All final means/errors and min/max agree with the printed iterations. The
-execution SHA remains missing; reviewed source `03e6ed5e5649b4018b47f054319e0495676b7fcf`
-(PR #73's merge) is not substituted for it.
+author subsequently confirmed execution source
+`03e6ed5e5649b4018b47f054319e0495676b7fcf` (PR #73's merge), matching the
+reviewed source. This author-reported identity is separate from console metadata.
 
 Probing remove/restore increases from 53.530 +/- 1.553 to 360.300 +/- 4.195
 ns/op. A source trace and temporary counter probe confirm that the duplicate
@@ -197,8 +199,8 @@ This is a work-count explanation, not a profiler-based attribution of exact
 nanoseconds. Executable source is unchanged; tombstone correctness remains required.
 CONSTANT_HASH, size 10,000, allocation and growth remain separate questions.
 The template, guide and report carry these findings and provenance limits.
-Confirm the execution SHA to complete that link; no earlier module's open
-findings or historical results are silently reclassified.
+The source-to-run link now includes the author's SHA confirmation. No earlier
+module's open findings or historical results are silently reclassified.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

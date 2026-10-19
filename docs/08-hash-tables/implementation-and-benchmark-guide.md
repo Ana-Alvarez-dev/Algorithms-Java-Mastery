@@ -219,8 +219,9 @@ No memory, allocation-rate or isolated removal-latency claim is made.
 Defaults: one thread, average ns/op, three 500 ms warmups, five 500 ms
 measurements, two forks. The [first reported subset](../17-benchmarking/results/hash-tables/README.md)
 now records all 18 DISTINCT_HASH configurations on Oracle JDK 21.0.9, with means,
-errors, 180 measurement averages and 108 warmup averages. The execution SHA is
-not supplied; reviewed merge `03e6ed5` is kept distinct from run provenance.
+errors, 180 measurement averages and 108 warmup averages. The author confirmed execution source
+`03e6ed5e5649b4018b47f054319e0495676b7fcf` separately from the console output;
+it matches the reviewed PR #73 merge.
 A smoke run only checks harness execution.
 
 ### Empirical finding and source trace

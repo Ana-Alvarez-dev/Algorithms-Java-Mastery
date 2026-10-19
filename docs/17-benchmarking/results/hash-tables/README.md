@@ -19,7 +19,7 @@ to CPU, allocation or cache effects.
 |---|---|
 | Source | Author-pasted console output supplied as `Texto pegado(2).txt` |
 | Date | Reporting date 2026-10-19; no execution timestamp in output |
-| Execution source SHA | Not supplied; pending author confirmation |
+| Execution source SHA reported by author | `03e6ed5e5649b4018b47f054319e0495676b7fcf`, confirmed separately on 2026-10-19 |
 | Reviewed source | `03e6ed5e5649b4018b47f054319e0495676b7fcf`, merge of PR #73; implementation commit `6808f47160e7c2f0d1b55f688036843f6c683407` |
 | JMH | 1.37, present in all 18 headers |
 | Runtime | JDK 21.0.9, Java HotSpot(TM) 64-Bit Server VM, 21.0.9+7-LTS-338 |
@@ -39,11 +39,11 @@ to CPU, allocation or cache effects.
 | Operating system | Windows executable path; Windows 11 amd64 reported separately during setup |
 | Full command line | Initial pasted line is truncated; exact invocation is not captured |
 
-The author reported pulling the preceding changes. Remote main confirms PR #73
-is merged, but neither fact identifies the exact revision used to build the
-measured jar. The reviewed SHA above is **not** substituted for the missing
-execution SHA. A later `git rev-parse HEAD` identifies the run only if the
-checkout and built source have remained unchanged since measurement.
+After supplying the console output, the author confirmed execution source
+**`03e6ed5e5649b4018b47f054319e0495676b7fcf`** on 2026-10-19. It is the merge
+of PR #73 and matches the reviewed implementation. This is an author-reported
+source identity supplied separately; the pasted JMH output does not embed it.
+Later result-documentation commits are distinct from the measured revision.
 
 Headers and coverage match the instructed protocol:
 
@@ -272,9 +272,9 @@ These **108 values**, in **ns/op**, are excluded from all measurement means.
 
 ## Research Limits and Next Experiments
 
-- Execution source SHA is missing. The reviewed PR #73 revision is known, but
-  exact source-to-run identity remains unconfirmed. CPU model, power settings
-  and an intact captured command line were not supplied.
+- Source identity is author-reported and matches the reviewed PR #73 merge;
+  it is not embedded in the measured jar's supplied output. CPU model, power
+  settings and an intact captured command line were not supplied.
 - This subset measures **18 of 54 default configurations**. CONSTANT_HASH and
   size 10,000 remain unmeasured. The largest reported relative error here is
   about **14.9%**; uncertainty and systematic fixture effects remain
@@ -300,9 +300,9 @@ CONSTANT_HASH subset separately; and use justified profiler runs to investigate
 allocation or generated code. Keep source identity, seeds, capacity and all
 runtime settings with each run. These experiments have not been executed here.
 
-The template can now use this subset as preliminary empirical evidence. Confirm
-the execution SHA before treating its source-to-measurement link as complete.
-No source optimisation or new module is implied by the timing table alone.
+The template can now use this subset as preliminary empirical evidence, with
+source-to-measurement identity confirmed separately by the author. No source
+optimisation or new module is implied by the timing table alone.
 
 ## Source Integrity
 
