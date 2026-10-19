@@ -1,5 +1,8 @@
 # Common Mistakes
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 Hash tables are among the most efficient data structures for associative data access, but they are also one of the most frequently misunderstood. Many performance problems and software defects arise not from the data structure itself, but from incorrect assumptions about how hashing, collisions, and key comparison work.

@@ -75,8 +75,22 @@ After completing this module, the learner should be able to:
 | **08-complexity-analysis.md** | Analyses the time and space complexity of hash table operations under different scenarios. |
 | **09-common-algorithms.md** | Presents representative algorithms and problem patterns that rely on hash tables. |
 | **10-common-mistakes.md** | Reviews common implementation errors, incorrect assumptions, and best practices when working with hash tables. |
+| [Implementation and benchmark guide](implementation-and-benchmark-guide.md) | Defines executable scope, contracts, pseudocode, traces, correctness, tests and evidence protocol. |
 
 ---
+
+# Current Executable Scope
+
+The package `org.anaalvarezdev.algorithms.hashtables` contains a selected
+non-null `HashTable<K,V>` contract, a separate-chaining table and a linear-probing
+table with deletion markers. Frequency counting, duplicate detection, TwoSum
+and first-unique-index algorithms apply those implementations.
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+connects specifications, strategies, pseudocode, traces, correctness arguments,
+conditional complexity, Java, tests and experimental questions. Quadratic/double
+probing, universal/perfect hashing, tree bins and concurrent maps remain conceptual
+extensions. Research results remain pending an author-supplied run.
 
 # Prerequisites
 

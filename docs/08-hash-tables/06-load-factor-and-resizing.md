@@ -1,5 +1,8 @@
 # Load Factor and Resizing
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 The performance of a hash table depends not only on the quality of its hash function or collision resolution strategy, but also on **how full the table becomes**. As more elements are inserted, collisions become increasingly frequent, causing search, insertion, and deletion operations to require additional work.
@@ -115,7 +118,8 @@ Reinsert Elements
 Continue Operations
 ```
 
-Increasing the table size reduces the average number of collisions.
+Increasing capacity can reduce bucket collisions for dispersed hashes. It does
+not separate keys with identical complete hashes; that collision class persists.
 
 ---
 
@@ -149,21 +153,17 @@ This process is called **rehashing**.
 
 # 7. Complexity of Resizing
 
-Resizing requires every stored element to be reinserted into the new table.
+Let n be live entries and c retained capacity. Relinking cached-hash chained
+nodes scans buckets/entries in Θ(c+n). For linear probing, reinserting into
+clusters is expected O(c+n) under suitable distribution, but may cost O(c+n²)
+when keys collide. Visiting each old entry once does not bound each reinsertion
+by constant work.
 
-| Operation | Complexity |
-|-----------|-----------:|
-| Resize / Rehash | O(n) |
-
-Although resizing is expensive, it occurs only occasionally.
-
-Therefore, insertion remains:
-
-```text
-Average: O(1)
-```
-
-This behaviour is known as **amortized constant time**.
+Geometric growth supports **expected amortised O(1)** insertion only with the
+hashing assumptions and occupancy controls required by the strategy. Expected
+cost averages over a model of keys/hashes; amortised cost accounts for operation
+sequences. They are distinct concepts. The selected linear table also tracks
+occupied-plus-deleted slots and performs same-capacity cleanup.
 
 ---
 

@@ -1,5 +1,8 @@
 # Collisions
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 An ideal hash table would assign every key to a unique position in the underlying array. In practice, however, this is impossible for most applications. Since the number of possible keys is usually much larger than the number of available array positions, different keys may be mapped to the same index.

@@ -1,5 +1,8 @@
 # Separate Chaining
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 Since collisions are unavoidable in hash tables, every implementation must provide a mechanism for storing multiple elements that map to the same table index. One of the oldest and most widely used solutions is **Separate Chaining**.

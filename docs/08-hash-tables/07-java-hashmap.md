@@ -1,5 +1,8 @@
 # Java HashMap
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 The concepts introduced throughout this module—hash functions, collisions, collision resolution, load factor, and resizing—are applied in practice through the **HashMap** class, one of the most widely used data structures in the Java Collections Framework.
@@ -147,7 +150,7 @@ If multiple keys map to the same bucket, collision resolution mechanisms are app
 
 # 7. Complexity
 
-Under normal conditions:
+When key hashes disperse properly among buckets:
 
 | Operation | Average Complexity |
 |-----------|-------------------:|
@@ -166,6 +169,13 @@ In the worst case:
 Good hash functions and an appropriate load factor make the average case far more common.
 
 ---
+
+The JDK reference permits a null key and null values and does not promise
+iteration order or thread safety. The selected manual tables reject both nulls
+so a null result unambiguously means absence. Their small API is not the full
+Map interface. JDK collision handling may use key comparison order; do not
+present it as the same singly linked academic representation. See the official
+[Java 21 HashMap specification](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/HashMap.html).
 
 # 8. Best Practices
 

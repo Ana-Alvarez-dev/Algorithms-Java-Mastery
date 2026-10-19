@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-transition to **07 — Stacks and Queues**. It is a source/evidence inventory,
+progression through **08 — Hash Tables**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -12,6 +12,11 @@ An empirical follow-up supplied on the same date records the author's Stacks
 and Queues execution from commit `804f69f32b0da715ed41f390034523890c24bca5`
 (PR #71's merge). That source identity is distinct from the review's initial
 base above and from the later commits documenting its results.
+
+The Hash Tables contribution extends the review from main commit
+`f26a7763413793df701fcfb68b53547a992a2222`, which merged the Stacks and Queues
+results through PR #72. Its functional/harness verification is recorded separately
+below; Hash Tables research measurements remain pending.
 
 ## Required Chain
 
@@ -26,7 +31,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes the Stacks and Queues contribution in this branch.
+helpers. The matrix includes the Hash Tables contribution in this branch.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -36,10 +41,11 @@ helpers. The matrix includes the Stacks and Queues contribution in this branch.
 | Sorting | 5 | 69 | 8 | [Implementation guide](../05-sorting/implementation-and-benchmark-guide.md), [48 reported configurations](../17-benchmarking/results/sorting/README.md); JDK 25.0.1, substantial uncertainty, execution SHA unknown |
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
-| 08–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Hash Tables | 8 | 47 | 9 | [Scope, contracts and evidence protocol](../08-hash-tables/implementation-and-benchmark-guide.md); implementation/tests/harness verified; measured research results pending |
+| 09–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are **418 passing repository tests** after this contribution, compared
-with **338** before it. Counts do not demonstrate complete behavioural coverage
+There are now **465 passing repository tests**, compared with **418** before
+Hash Tables and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
 ## Rechecked Gaps
@@ -107,7 +113,7 @@ an actual workflow remains future work. No CI result was inferred from tests.
   The empirical follow-up completes their Result/Interpretation fields with
   20 configurations and their errors; smoke times remain excluded.
 
-## Verification Performed
+## Stacks and Queues Verification
 
 On 2026-10-19, using **OpenJDK 21+35-2513** on the verification host:
 
@@ -136,6 +142,29 @@ subsequent author-supplied run records 20 configurations, 200 measurement and
 120 warmup averages. Its JDK 21.0.9 machine is a separate environment from the
 OpenJDK verification host above; no fresh local test run is inferred from it.
 
+## Hash Tables Verification and Review
+
+On 2026-10-19, OpenJDK 21 verification passed the 418-test baseline, then
+**465 tests** after this contribution, including **47 Hash Tables tests**.
+Normal tests and the benchmark-profile clean package passed. Nine new methods
+were discovered; all 18 short smoke cases at size 100 across two hash modes
+completed. A separate probe checked all **54 method/size/hash-mode combinations**
+for query wrap, hit/miss behaviour, restored original references and mappings,
+counts and structural invariants. JavaDoc passed doclint excluding missing tags.
+
+The two tables inherit 12 shared tests and add representation-specific cases.
+They are checked against HashMap with 2,500 seeded steps per representation/hash
+mode. Four application algorithms use independent small-input oracles; TwoSum
+also checks overflow, distinct positions and its exact tie policy.
+
+Documentation corrections make expected versus amortised analysis explicit,
+retain capacity c in sparse/tombstone bounds, and preserve the quadratic
+worst-case probing rebuild. HashMap null/order policies and the preconditions
+for quadratic/double probe coverage are distinguished from the selected API.
+All ten numbered documents link to the authoritative implementation guide.
+Future hash variants are not counted as implemented, and no smoke timing is
+labelled a research result. Earlier Arrays/Searching findings remain unchanged.
+
 ## Evidence Policy and Next Action
 
 The repository retains results in Markdown, with existing historical CSV
@@ -151,6 +180,12 @@ Future runs should follow the
 [evidence protocol](../07-stacks-and-queues/implementation-and-benchmark-guide.md#windows-execution-and-evidence)
 and remain distinct from this initial subset. Larger sizes, growth and isolated
 transfer latency remain separate research questions.
+
+Hash Tables is ready for its
+[18-configuration initial measurement](../08-hash-tables/implementation-and-benchmark-guide.md#jmh-design-and-evidence-protocol)
+after integration. Capture actual JDK/JMH settings, source SHA, full final table
+and completion marker; preserve all means/errors and available iteration values.
+Keep its future run distinct from existing Stacks and Queues evidence.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain
