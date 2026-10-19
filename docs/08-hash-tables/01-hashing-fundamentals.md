@@ -1,5 +1,8 @@
 # Hashing Fundamentals
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 Hash tables are designed to solve one of the most common problems in computer science: **finding information efficiently**. While linear data structures such as arrays and linked lists often require sequential traversal to locate an element, hash tables use a different strategy. Instead of searching through the stored data, they compute where the data should be located.

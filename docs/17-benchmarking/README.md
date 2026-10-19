@@ -440,6 +440,21 @@ warmup averages, JDK 21.0.9/JMH 1.37, author-reported source `804f69f`. Eleven
 reported errors reach at least 25% of their means. Conclusions remain preliminary;
 all printed evidence is retained in Markdown without JSON/log artifacts.
 
+# Hash Table Experiments
+
+`HashTableOperationsBenchmark` compares chained/probed manual tables and JDK
+HashMap for successful lookup, absent lookup and a remove/restore pair. DISTINCT_HASH
+and CONSTANT_HASH fixtures separate ideal distinct homes from a single collision
+class. JDK keys are Comparable; it is a library reference with different collision
+management, not a pure academic chain. Construction and growth are excluded.
+
+The [module guide](../08-hash-tables/implementation-and-benchmark-guide.md)
+defines nine methods, 54 default configurations and the 18-configuration initial
+subset. OpenJDK 21 verification passed 465 tests, including 47 new tests; JMH
+smoke and an independent probe checked the harness. Result and Interpretation
+remain pending a measured author run. Record evidence in Markdown without
+JSON/log artifacts, keeping different hash modes and runtimes identifiable.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

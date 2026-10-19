@@ -291,9 +291,15 @@ five application algorithms, 80 tests and ten JMH methods. Its
 preserve 20 configurations and the printed iteration values from JDK 21.0.9;
 interpretation remains preliminary and retains reported uncertainty.
 
+Hash Tables now adds separate-chaining and linear-probing implementations,
+four application algorithms, 47 tests and nine JMH methods. Its measured
+results remain pending; expected costs and worst-case collision/rebuild costs
+are distinguished in the implementation guide.
+
 - [Sorting scope and evidence](docs/05-sorting/implementation-and-benchmark-guide.md)
 - [Linked Lists scope and evidence](docs/06-linked-lists/implementation-and-benchmark-guide.md)
 - [Stacks and Queues scope, contracts and run commands](docs/07-stacks-and-queues/implementation-and-benchmark-guide.md)
+- [Hash Tables scope, contracts and run commands](docs/08-hash-tables/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,

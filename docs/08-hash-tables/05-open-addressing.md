@@ -1,5 +1,8 @@
 # Open Addressing
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 **Open Addressing** is a collision resolution strategy in which every element is stored directly inside the hash table itself. Unlike Separate Chaining, no external linked lists or auxiliary collections are used. When a collision occurs, the algorithm searches for another available position according to a predefined probing strategy.
@@ -143,7 +146,10 @@ Conceptually:
 
 Instead of examining consecutive positions, the distance grows quadratically.
 
-This reduces clustering compared with linear probing.
+This changes the clustering pattern compared with linear probing. Coverage of
+all slots depends on the capacity and coefficients; an arbitrary quadratic
+sequence is not guaranteed to visit every slot. The executable scope here uses
+linear probing, not this variant.
 
 ---
 
@@ -169,7 +175,9 @@ Secondary Hash
 Probe Distance
 ```
 
-Different keys are likely to follow different probing sequences.
+Different keys can follow different probing sequences. The step must be
+nonzero and relatively prime to the capacity to visit every slot; for a
+power-of-two table, an odd step supplies that property.
 
 Among the common probing strategies, double hashing generally provides the most uniform distribution.
 
@@ -236,7 +244,11 @@ Assuming a good hash function and a reasonable load factor:
 | Insert | O(1) | O(n) |
 | Delete | O(1) | O(n) |
 
-As the table approaches full capacity, average performance gradually moves toward the worst case.
+These ordinary-operation bounds assume capacity proportional to live size and
+exclude rebuilding. With deletion markers and retained capacity c, search may
+scan O(c) slots even when current n is small. Used-slot occupancy, not only
+live load, matters. The selected implementation guide records its cleanup policy
+and O(c+n²) collision-heavy rebuild bound.
 
 ---
 

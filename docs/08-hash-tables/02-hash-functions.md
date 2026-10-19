@@ -1,5 +1,8 @@
 # Hash Functions
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 A hash table is only as effective as the **hash function** it uses. Regardless of the size of the table or the quality of its implementation, poor hashing leads to uneven data distribution, frequent collisions, and degraded performance.
@@ -276,6 +279,11 @@ The next document explains:
 - why every practical hash table must include a collision resolution strategy.
 
 ---
+
+Java hashes may be negative. Java `%` is not automatically a nonnegative
+mathematical modulo, and `Math.abs(Integer.MIN_VALUE)` remains negative.
+The selected tables mix the hash then mask by `capacity-1` for power-of-two
+capacity. Equality-compatible, stable hash state is required while a key is stored.
 
 # 11. Key Takeaways
 

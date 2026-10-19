@@ -1,5 +1,8 @@
 # Common Algorithms
 
+> Selected implementations, contracts, pseudocode, traces, correctness, tests
+> and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
+
 ## Algorithms Java Mastery
 
 Hash tables are not algorithms themselves; rather, they are data structures that enable a wide variety of efficient algorithms. Their ability to perform average **O(1)** lookups makes them an essential component in applications requiring fast access, indexing, grouping, and counting.
@@ -9,6 +12,14 @@ Many algorithms that would require linear searches when implemented with arrays 
 This document presents some of the most common algorithmic applications of hash tables in software engineering and backend development.
 
 ---
+
+# Executable Applications
+
+This module now implements frequency counting, duplicate detection, TwoSum and
+first unique index. Their exact absence, tie, overflow, mutation and null contracts
+are defined in the [implementation guide](implementation-and-benchmark-guide.md).
+Caching, grouping, memoisation and graph-index examples below remain conceptual
+applications rather than additional completed implementations.
 
 # 1. Purpose
 
