@@ -43,8 +43,8 @@ import java.util.concurrent.TimeUnit;
  * All four SHUFFLED AVL errors exceed 25% of their means (largest 55.1%);
  * no precise ranking or formal significance claim follows. One shuffle/size
  * and a fixed upper miss do not sample all insertion/query distributions.
- * Heap timings are not supplied. Preserve every error/runtime/provenance limit;
- * no memory, allocation, cache-cause, update-cost or asymptotic-proof claim.
+ * Separate heap results: docs/17-benchmarking/results/trees/heap-first-run.md.
+ * No memory, allocation, cache-cause, update-cost or asymptotic-proof claim.
  * Protocol: docs/09-trees/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

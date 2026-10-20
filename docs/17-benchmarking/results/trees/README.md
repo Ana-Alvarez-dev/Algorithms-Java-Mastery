@@ -6,9 +6,10 @@ The author supplied this completed **TreeOperationsBenchmark** execution on
 The run completed in **3 minutes 35 seconds**. The tree lookup template now
 records Result and Interpretation from this evidence.
 
-The attachment also lists all twelve tree/heap benchmark methods. That discovery
-listing contains **no heap measurement**. HeapOperationsBenchmark Result and
-Interpretation therefore remain pending; this report covers lookup only.
+The lookup attachment also lists all twelve tree/heap methods; that discovery
+listing contained **no heap measurement**. The subsequent separate
+[heap report](heap-first-run.md) now preserves its 24-cell measurement run and
+completes the heap template. This report continues to cover lookup only.
 All supplied printed results and iterations are retained in Markdown. No JSON,
 log or copied console-text artifact is versioned.
 
@@ -332,8 +333,9 @@ These **144 values**, in **ns/op**, are excluded from all measurement means.
   identifier. Exact benchmark timestamps, CPU, power settings and profiling
   evidence remain unknown.
 - This measures **24 of 36 default lookup configurations**, with size 10,000
-  unmeasured. No heap configuration is measured: the attachment's listing is
-  discovery only. Full Trees defaults comprise 36 lookup plus 36 heap cells.
+  unmeasured. Heap observations belong to the separate [heap run](heap-first-run.md),
+  not this lookup attachment's discovery listing. The two reports now cover
+  48 of 72 default module cells; samples are not pooled.
 - **4 of 24 errors reach at least 25% of their means**, all SHUFFLED AVL cells;
   the largest is about 55.1%. The 99.9% interval is JMH's model output, not a
   guarantee about independent individual operations or real-world latency.
@@ -349,25 +351,17 @@ These **144 values**, in **ns/op**, are excluded from all measurement means.
   Java change is made by this documentation update. Timings do not replace
   invariants, proof arguments or functional tests.
 
-The lookup source-to-run link now includes the author's checkout history.
-Keep its `c576cb7` revision distinct from later documentation commits. The heap
-subset is the next outstanding supplied evidence and needs its own source SHA:
+The lookup source-to-run link includes the author's checkout history. Its
+`c576cb7` revision stays distinct from the subsequent heap run's `ce621c6`,
+reported before that launch, and from later documentation commits.
+Both templates now contain preliminary Result/Interpretation supported by their
+separate initial 24-cell subsets. The [heap report](heap-first-run.md) preserves
+its own metadata, errors, full iterations and limits; no lookup samples are
+replaced or pooled into it.
 
-```powershell
-git rev-parse HEAD
-& "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar ".*trees.HeapOperationsBenchmark.*" -p size=100,1000 -foe true
-```
-
-Preserve its own headers, final 24-cell table, errors, completion marker and any
-available iterations. If it has already been run, supply that separate output;
-this report does not assume the run failed or require lookup to be repeated.
-Later experiments could sample several shuffle seeds or varied absent-key
-positions at matching size/runtime, and use justified profilers to investigate
-causal questions. Those experiments have not been executed here.
-
-The lookup template now uses this complete initial subset as preliminary
-empirical evidence, with source provenance identified from the author's reflog.
-Heap Result/Interpretation remain pending their separate measured output.
+Later experiments could sample more shuffle seeds, varied absent keys or more
+sizes at matched settings. Those experiments have not been executed here.
+Neither lookup nor heap needs repeating merely to record the supplied outputs.
 
 ## Source Integrity
 
