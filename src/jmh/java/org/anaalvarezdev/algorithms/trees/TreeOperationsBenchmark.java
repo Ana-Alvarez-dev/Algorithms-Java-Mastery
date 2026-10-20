@@ -29,8 +29,11 @@ import java.util.concurrent.TimeUnit;
  * docs/17-benchmarking/results/trees/README.md; completion 3 min 35 sec.
  * SORTED BST hit n=100/1000: 85.424 +/- 12.292 / 1304.430 +/- 7.248 ns/op;
  * SORTED BST miss: 170.056 +/- 15.668 / 3411.725 +/- 209.696 ns/op.
- * Execution SHA is unconfirmed; reviewed source c576cb7 is recorded separately.
- * The older 3f1e5df checkout lacks Trees and is not this run's source identity.
+ * Author-supplied reflog identifies execution source:
+ * c576cb79aa9747aced1cd041e97f64fc99e60010 (PR #76 merge), matching review.
+ * It records checkout at 14:01:52 -0300 and a later pull to results merge
+ * ce621c6 at 22:02:31 on 2026-10-19. JMH does not embed this source identity.
+ * Older 3f1e5df lacks Trees; ce621c6 documents already supplied results.
  *
  * Interpretation:
  * SORTED BST is a right chain: source hit visits average (n+1)/2 over a full

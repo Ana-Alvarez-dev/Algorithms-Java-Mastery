@@ -480,7 +480,8 @@ OpenJDK 21 verification passed 524 tests (59 new). Twelve methods were discovere
 The [first reported lookup subset](results/trees/README.md) now supplies 24 cells
 on JDK 21.0.9, all errors, 240 measurement and 144 warmup averages. It completes
 the lookup template and relates the sorted-BST timings to source path lengths.
-Four SHUFFLED AVL errors exceed 25% of their means; execution SHA is unconfirmed.
+Four SHUFFLED AVL errors exceed 25% of their means. The author's reflog identifies
+execution source `c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge).
 The heap discovery list is not a timing result: heap measurements remain pending.
 Evidence stays in Markdown without JSON/log; smoke is not research or proof.
 

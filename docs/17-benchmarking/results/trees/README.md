@@ -18,7 +18,7 @@ log or copied console-text artifact is versioned.
 |---|---|
 | Source | Author-pasted console attachment `Texto pegado(3).txt` |
 | Reporting date | 2026-10-19, author's timezone; no execution timestamp in JMH output |
-| Execution source SHA | Not supplied for this run; pending author confirmation |
+| Execution source attributed from author reflog | `c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge); history supplied on 2026-10-19 |
 | Reviewed source | `c576cb79aa9747aced1cd041e97f64fc99e60010`, merge of PR #76; implementation commit `e79f2d999dc0f4d2e36b8a03180f5c05491f8265` |
 | JMH | 1.37, confirmed in all 24 headers |
 | Runtime | JDK 21.0.9, Java HotSpot(TM) 64-Bit Server VM, 21.0.9+7-LTS-338 |
@@ -45,12 +45,30 @@ The captured lookup command, omitting only the local prompt, is:
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar ".*trees.TreeOperationsBenchmark.*" -p size=100,1000 -foe true
 ```
 
-The previously supplied SHA `3f1e5dfb6a0dc5144fa426585a0a00ba5eeeec60` belongs
-to the earlier checkout that produced "No matching benchmarks". It does not
-contain Trees and must **not** be assigned to this successful run. Remote main
-now contains PR #76, but that fact does not identify the author's exact built
-revision. The reviewed merge above is kept distinct from the missing execution
-SHA. Source identity needs separate author confirmation; JMH does not embed it.
+### Source checkout recovered from the author's reflog
+
+After the output was supplied, the author initially reported current HEAD
+`ce621c63fabc2fe04c180d71fd1f9e165cc8a447`. That revision merges PR #77, which
+records these already supplied results, so it is later than the lookup run.
+The author then supplied local reflog history on 2026-10-19:
+
+| Local checkout | Reflog time (2026-10-19, UTC-03:00) | Meaning |
+|---|---|---|
+| `3f1e5dfb6a0dc5144fa426585a0a00ba5eeeec60` | 13:29:49 | Checkout before Trees; the earlier "No matching benchmarks" error belongs here |
+| `c576cb79aa9747aced1cd041e97f64fc99e60010` | 14:01:52 | Fast-forward pull of PR #76's Trees implementation |
+| `ce621c63fabc2fe04c180d71fd1f9e165cc8a447` | 22:02:31 | Fast-forward pull of PR #77's results documentation |
+
+The successful output was supplied between the last two pulls. The author
+history therefore identifies **`c576cb79aa9747aced1cd041e97f64fc99e60010`** as
+the execution checkout, matching the reviewed source. Reflog timestamps identify
+checkout changes, not the exact benchmark start/end time. This is provenance
+supplied by the author, not an embedded JMH source stamp or a recovered jar hash.
+
+A source comparison also confirms that all **13 Trees production/JMH Java
+files** have the same executable text between `c576cb7` and `ce621c6` after
+excluding block comments; only the lookup template's research comment changed.
+That equivalence check does not replace the checkout timeline. The older
+`3f1e5df` still lacks Trees and is not relabelled as the successful run's source.
 
 Decimal commas are transcribed as dots, preserving three printed decimal places.
 These are rounded console iteration averages, not full-precision JMH raw arrays
@@ -309,9 +327,10 @@ These **144 values**, in **ns/op**, are excluded from all measurement means.
 
 ## Research Limits and Handoff
 
-- **Execution source SHA remains unconfirmed** for this successful run. The
-  earlier SHA belongs to the checkout before Trees; reviewed PR #76 merge is
-  recorded separately. CPU, power settings and profiling evidence are unknown.
+- Execution source is attributed to PR #76 merge `c576cb7` from the author's
+  checkout history and the reporting timeline, not from an embedded jar/source
+  identifier. Exact benchmark timestamps, CPU, power settings and profiling
+  evidence remain unknown.
 - This measures **24 of 36 default lookup configurations**, with size 10,000
   unmeasured. No heap configuration is measured: the attachment's listing is
   discovery only. Full Trees defaults comprise 36 lookup plus 36 heap cells.
@@ -330,9 +349,9 @@ These **144 values**, in **ns/op**, are excluded from all measurement means.
   Java change is made by this documentation update. Timings do not replace
   invariants, proof arguments or functional tests.
 
-Confirm the execution SHA if the checkout/built source has remained unchanged
-since measurement. Keep it distinct from the later commit documenting results.
-The heap subset is the next outstanding supplied evidence:
+The lookup source-to-run link now includes the author's checkout history.
+Keep its `c576cb7` revision distinct from later documentation commits. The heap
+subset is the next outstanding supplied evidence and needs its own source SHA:
 
 ```powershell
 git rev-parse HEAD
@@ -347,8 +366,8 @@ positions at matching size/runtime, and use justified profilers to investigate
 causal questions. Those experiments have not been executed here.
 
 The lookup template now uses this complete initial subset as preliminary
-empirical evidence. Heap Result/Interpretation remain pending, and source-to-run
-identity is not marked complete until the author supplies the execution SHA.
+empirical evidence, with source provenance identified from the author's reflog.
+Heap Result/Interpretation remain pending their separate measured output.
 
 ## Source Integrity
 

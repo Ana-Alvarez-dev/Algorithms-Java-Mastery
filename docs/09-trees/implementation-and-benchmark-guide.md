@@ -364,8 +364,11 @@ The [first reported lookup subset](../17-benchmarking/results/trees/README.md)
 now completes TreeOperationsBenchmark Result and Interpretation: 24 cells on
 Oracle JDK 21.0.9, all errors, 240 measurement and 144 warmup iteration averages,
 completion 3 minutes 35 seconds. The complete lookup command was captured;
-execution SHA remains unconfirmed. Reviewed source is PR #76 merge `c576cb7`,
-not the older `3f1e5df` checkout that did not contain Trees.
+the author subsequently supplied local reflog evidence identifying execution
+source `c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge), matching review.
+That checkout began at 14:01:52 -0300 on 2026-10-19; the pull to results merge
+`ce621c6` occurred at 22:02:31, after the output was supplied. The report keeps
+these events separate from the older `3f1e5df` checkout that lacked Trees.
 
 SORTED BST hit means are 85.424 +/- 12.292 and 1304.430 +/- 7.248 ns/op;
 upper-miss means are 170.056 +/- 15.668 and 3411.725 +/- 209.696 ns/op.

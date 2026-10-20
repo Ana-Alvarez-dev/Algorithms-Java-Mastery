@@ -25,8 +25,9 @@ The Trees contribution extends the review from main commit
 `3f1e5dfb6a0dc5144fa426585a0a00ba5eeeec60`, which merged the Hash Tables
 source confirmation through PR #75. Its scope and functional/harness evidence
 are recorded below. A later supplied lookup run records 24 configurations on
-JDK 21.0.9; heap timings and that successful run's execution SHA remain pending.
-PR #76 merge `c576cb7` is the separately reviewed source for this follow-up.
+JDK 21.0.9. The author's subsequently supplied reflog identifies execution
+source `c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge), matching review.
+Heap timings remain pending; results merge `ce621c6` is a later checkout.
 
 ## Required Chain
 
@@ -52,7 +53,7 @@ helpers. The matrix includes the Trees contribution in this branch.
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
-| Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; execution SHA unconfirmed; heap timings pending |
+| Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; source `c576cb7` identified from author reflog; heap timings pending |
 | 10–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **524 passing repository tests**, compared with **465** before
@@ -259,10 +260,17 @@ The sorted-BST source trace gives average successful visits (n+1)/2 per full
 cursor cycle and n visits for the fixed upper miss. It explains path work,
 not exact nanosecond ratios, CPU/cache causes or a fitted asymptotic exponent.
 
-Execution SHA remains unconfirmed. Reviewed source is
-`c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge); the older supplied
-`3f1e5df` lacks Trees and belongs to the failed pattern-match checkout, not this
-successful run. Confirm the correct measured revision separately.
+The author supplied local reflog evidence on 2026-10-19. It records the pull to
+`c576cb79aa9747aced1cd041e97f64fc99e60010` at **14:01:52 -0300** and the later
+pull to results merge `ce621c63fabc2fe04c180d71fd1f9e165cc8a447` at **22:02:31**.
+The successful output was supplied between those entries. This identifies
+`c576cb7` as the execution checkout, matching the reviewed PR #76 merge.
+The older `3f1e5df` lacked Trees and belonged to the failed pattern match.
+The report retains the checkout timeline; it is author-provided provenance,
+not a source SHA or jar hash embedded by JMH. The 13 Trees production/JMH Java
+files have identical executable source between `c576cb7` and `ce621c6`, with
+only the lookup benchmark's research block comment changed. Numerical evidence
+and executable behaviour remain unchanged by this provenance update.
 The [heap initial subset](../09-trees/implementation-and-benchmark-guide.md#jmh-design-and-evidence-protocol)
 still needs its separate 24-cell measurement output, source SHA and metadata.
 The discovery list is not evidence of a measured heap run. Preserve both

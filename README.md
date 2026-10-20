@@ -314,8 +314,8 @@ standalone tree traversals/metrics and heap applications. Its 59 tests bring
 repository verification to 524 tests; twelve JMH methods have functional/harness
 evidence. The [first lookup results](docs/17-benchmarking/results/trees/README.md)
 retain all 24 cells with errors and printed iterations on JDK 21.0.9, including
-the sorted-BST path analysis. Execution SHA is unconfirmed; heap measurements
-remain pending. The guide keeps those limits distinct from smoke verification.
+the sorted-BST path analysis. The author's reflog identifies execution source
+`c576cb7`; heap measurements remain pending. The guide keeps those limits distinct from smoke verification.
 
 ## Technology Stack
 
