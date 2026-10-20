@@ -360,8 +360,23 @@ Both classes use average ns/op, **one thread, three 500 ms warmups, five 500 ms
 measurements and two forks**. Full defaults total **72 configurations**.
 The initial measured subset below uses two sizes: **24 tree + 24 heap cells**.
 A controlled cell has `Cnt=10` measurement-iteration averages, not ten invocations.
-Result and Interpretation remain pending author measurements. Smoke scores must
-not be promoted to empirical research evidence.
+The [first reported lookup subset](../17-benchmarking/results/trees/README.md)
+now completes TreeOperationsBenchmark Result and Interpretation: 24 cells on
+Oracle JDK 21.0.9, all errors, 240 measurement and 144 warmup iteration averages,
+completion 3 minutes 35 seconds. The complete lookup command was captured;
+execution SHA remains unconfirmed. Reviewed source is PR #76 merge `c576cb7`,
+not the older `3f1e5df` checkout that did not contain Trees.
+
+SORTED BST hit means are 85.424 +/- 12.292 and 1304.430 +/- 7.248 ns/op;
+upper-miss means are 170.056 +/- 15.668 and 3411.725 +/- 209.696 ns/op.
+The reviewed right-chain source gives (n+1)/2 hit visits over a complete key
+cycle and n upper-miss visits: 50.5/500.5 and 100/1000 respectively. This path
+argument is separate from the exact time ratios and the AVL height proof.
+Four SHUFFLED AVL errors exceed 25% of their means, limiting rankings.
+The report retains every statistic, fork and stated experimental restriction.
+
+The attachment lists heap methods but supplies no heap timings. HeapOperationsBenchmark
+Result and Interpretation remain pending. Smoke scores are excluded from research.
 
 After creating/merging the feature PR, from the local repository root:
 

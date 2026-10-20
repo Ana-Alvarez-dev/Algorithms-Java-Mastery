@@ -23,12 +23,25 @@ import java.util.concurrent.TimeUnit;
  * Primitive versus boxed APIs and library mechanics limit algorithm-only claims.
  *
  * Result:
- * Pending author measurements. Smoke execution only verifies the harness.
+ * Author lookup run reported 2026-10-19: JMH 1.37, Oracle JDK 21.0.9, one
+ * thread, 3 x 500 ms warmup, 5 x 500 ms measurement, two forks (Cnt=10).
+ * All 24 cells, errors, 240 measured and 144 warmup averages are preserved in
+ * docs/17-benchmarking/results/trees/README.md; completion 3 min 35 sec.
+ * SORTED BST hit n=100/1000: 85.424 +/- 12.292 / 1304.430 +/- 7.248 ns/op;
+ * SORTED BST miss: 170.056 +/- 15.668 / 3411.725 +/- 209.696 ns/op.
+ * Execution SHA is unconfirmed; reviewed source c576cb7 is recorded separately.
+ * The older 3f1e5df checkout lacks Trees and is not this run's source identity.
  *
  * Interpretation:
- * Pending. Retain actual source SHA, JDK/JMH/settings and every mean/error.
- * Compare matching size/order/query kind. Do not infer memory, allocation rates,
- * cache causes, update latency or asymptotic proofs from lookup means.
+ * SORTED BST is a right chain: source hit visits average (n+1)/2 over a full
+ * cursor cycle (50.5/500.5), while fixed upper miss visits n (100/1000).
+ * This explains path work, not exact nanosecond ratios (about 15.27/20.06).
+ * AVL's logarithmic-height argument remains separate from these timing means.
+ * All four SHUFFLED AVL errors exceed 25% of their means (largest 55.1%);
+ * no precise ranking or formal significance claim follows. One shuffle/size
+ * and a fixed upper miss do not sample all insertion/query distributions.
+ * Heap timings are not supplied. Preserve every error/runtime/provenance limit;
+ * no memory, allocation, cache-cause, update-cost or asymptotic-proof claim.
  * Protocol: docs/09-trees/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

@@ -312,9 +312,10 @@ passing tests from known contract gaps, and local builds from CI evidence.
 Trees adds an iterative unbalanced BST, AVL ordered int set, dynamic min-heap,
 standalone tree traversals/metrics and heap applications. Its 59 tests bring
 repository verification to 524 tests; twelve JMH methods have functional/harness
-evidence. Author performance measurements remain pending, distinct from smoke.
-The guide records edge-height, duplicate/absence policies, output/growth costs
-and all selected scope limits.
+evidence. The [first lookup results](docs/17-benchmarking/results/trees/README.md)
+retain all 24 cells with errors and printed iterations on JDK 21.0.9, including
+the sorted-BST path analysis. Execution SHA is unconfirmed; heap measurements
+remain pending. The guide keeps those limits distinct from smoke verification.
 
 ## Technology Stack
 
