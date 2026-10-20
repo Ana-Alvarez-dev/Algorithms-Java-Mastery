@@ -113,7 +113,10 @@ exclude growth. Lookup excludes construction/updates. Repeated-minimum restore
 pairs and build methods answer different questions. A fixed seed is reproducible
 input, not a distributional guarantee or an asymptotic proof.
 
-Results remain pending author measurements. Record actual source/runtime,
-settings, all means/errors and the exact fixture. Smoke execution verifies the
-harness only; passing tests, mathematical arguments and timings remain separate
-evidence. See the guide for the full verification and evidence chain.
+The [first lookup subset](../17-benchmarking/results/trees/README.md) retains
+24 cells, all errors and printed iterations on JDK 21.0.9. Its sorted-BST path
+analysis explains linear node visits without fitting a timing exponent or
+attributing CPU/cache causes. Four SHUFFLED AVL errors exceed 25% of their means.
+Execution SHA remains unconfirmed; heap measurements remain pending. Smoke
+execution, passing tests, mathematical arguments and measured timings remain
+separate evidence. See the guide for the full chain and remaining experiments.

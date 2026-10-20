@@ -477,9 +477,12 @@ The guide retains these workload restrictions, settings and Windows commands.
 
 OpenJDK 21 verification passed 524 tests (59 new). Twelve methods were discovered,
 24 short smoke cases completed and a separate probe checked all 72 combinations.
-Result and Interpretation remain pending author measurements; preserve actual
-source/JDK/JMH, means/errors and console evidence in Markdown without JSON/log.
-No smoke score is presented as research or proof of complexity.
+The [first reported lookup subset](results/trees/README.md) now supplies 24 cells
+on JDK 21.0.9, all errors, 240 measurement and 144 warmup averages. It completes
+the lookup template and relates the sorted-BST timings to source path lengths.
+Four SHUFFLED AVL errors exceed 25% of their means; execution SHA is unconfirmed.
+The heap discovery list is not a timing result: heap measurements remain pending.
+Evidence stays in Markdown without JSON/log; smoke is not research or proof.
 
 # Key Takeaways
 

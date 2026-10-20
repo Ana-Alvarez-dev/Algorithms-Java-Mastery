@@ -34,6 +34,9 @@ A heap snapshot is not sorted. Growing offer can copy linearly, despite
 logarithmic sift work; snapshot and complete traversal allocate linear output.
 The guide documents these bounds and retained-capacity/GC qualifications.
 
-Result and Interpretation in both benchmark templates remain pending measured
-author runs. Smoke scores are excluded from research. Preserve local results
-in Markdown, without JSON/log artifacts, following the guide's two commands.
+The [first lookup subset](../../../../../../../docs/17-benchmarking/results/trees/README.md)
+completes the lookup template's Result/Interpretation with all 24 cells, errors
+and printed iterations on JDK 21.0.9. The report explains sorted-BST source path
+work and records four high-error SHUFFLED AVL cells. Execution SHA is unconfirmed.
+HeapOperationsBenchmark remains pending author timings; its discovery listing
+is separate from measurement. Evidence stays Markdown without JSON/log artifacts.

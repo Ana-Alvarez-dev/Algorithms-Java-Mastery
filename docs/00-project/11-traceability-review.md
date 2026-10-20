@@ -24,7 +24,9 @@ reviewed PR #73 merge. This confirmation was supplied separately from JMH.
 The Trees contribution extends the review from main commit
 `3f1e5dfb6a0dc5144fa426585a0a00ba5eeeec60`, which merged the Hash Tables
 source confirmation through PR #75. Its scope and functional/harness evidence
-are recorded below. Tree and heap research measurements remain pending.
+are recorded below. A later supplied lookup run records 24 configurations on
+JDK 21.0.9; heap timings and that successful run's execution SHA remain pending.
+PR #76 merge `c576cb7` is the separately reviewed source for this follow-up.
 
 ## Required Chain
 
@@ -50,7 +52,7 @@ helpers. The matrix includes the Trees contribution in this branch.
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
-| Trees | 11 | 59 | 12 | [Scope, contracts and evidence protocol](../09-trees/implementation-and-benchmark-guide.md); BST/AVL/heap, four traversals, metrics and heap applications verified; measured research results pending |
+| Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; execution SHA unconfirmed; heap timings pending |
 | 10–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **524 passing repository tests**, compared with **465** before
@@ -208,8 +210,11 @@ repaired; all thirteen conceptual documents link to the authoritative guide.
 Red-black/B-trees, tries, LCA, graph/scheduling/expression applications and a full
 generic collections API remain extensions. Earlier executable packages and POM
 are unchanged; the recorded Arrays/Searching gaps remain tracked. No fresh CI
-result is inferred. Result/Interpretation await author runs; local smoke and
-functional probes do not supply research timings.
+result is inferred. Local smoke and functional probes do not supply research
+timings. A subsequent author lookup
+run completes the tree lookup template with 24 cells and their errors. Heap
+Result/Interpretation remain pending; the attachment lists heap methods without
+measuring them.
 
 ## Evidence Policy and Next Action
 
@@ -245,12 +250,23 @@ The template, guide and report carry these findings and provenance limits.
 The source-to-run link now includes the author's SHA confirmation. No earlier
 module's open findings or historical results are silently reclassified.
 
-Trees is ready for its separate
-[tree and heap initial measurements](../09-trees/implementation-and-benchmark-guide.md#jmh-design-and-evidence-protocol)
-after integration. Each two-size subset has 24 configurations. Retain the actual
-source SHA, JDK/JMH/settings, full means/errors and available printed iterations.
-Keep their different operation/fixture families and later runs identifiable,
-in Markdown without JSON/log exports.
+The [Trees lookup execution](../17-benchmarking/results/trees/README.md) now
+retains all 24 initial cells, 240 measurement and 144 warmup averages, complete
+headers/result blocks, captured lookup command and the 3 minute 35 second
+completion marker. All printed means/extrema and final-table rows agree.
+Four SHUFFLED AVL errors exceed 25% of their means; the largest is about 55.1%.
+The sorted-BST source trace gives average successful visits (n+1)/2 per full
+cursor cycle and n visits for the fixed upper miss. It explains path work,
+not exact nanosecond ratios, CPU/cache causes or a fitted asymptotic exponent.
+
+Execution SHA remains unconfirmed. Reviewed source is
+`c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge); the older supplied
+`3f1e5df` lacks Trees and belongs to the failed pattern-match checkout, not this
+successful run. Confirm the correct measured revision separately.
+The [heap initial subset](../09-trees/implementation-and-benchmark-guide.md#jmh-design-and-evidence-protocol)
+still needs its separate 24-cell measurement output, source SHA and metadata.
+The discovery list is not evidence of a measured heap run. Preserve both
+families and later runs separately in Markdown without JSON/log exports.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain
