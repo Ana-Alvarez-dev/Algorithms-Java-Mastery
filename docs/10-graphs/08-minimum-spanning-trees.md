@@ -2,6 +2,22 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
+## Selected Forest Contract
+
+The executable Kruskal rejects directed input, accepts negative weights, ignores
+loops and returns a minimum spanning forest when disconnected. Its immutable
+result records long total, selected edges and component count, with selected
+edge count V-components. Empty input is defined; multiple tied optimum forests
+can exist, so deterministic endpoint tie-breaking is an implementation policy.
+The cost includes O(V) set initialisation and an edge-sort copy, not only E log E.
+Union by size with path halving has a direct logarithmic height bound; the guide
+states that conservative bound separately from stronger amortised theory.
+Prim remains a conceptual alternative, apart from a temporary verification oracle.
+
 A **Minimum Spanning Tree (MST)** is a subset of the edges of a connected, weighted, undirected graph that connects every vertex with the minimum possible total edge weight.
 
 Unlike shortest-path algorithms, which minimize the cost of travelling between selected vertices, a Minimum Spanning Tree minimizes the total cost required to connect the complete graph.

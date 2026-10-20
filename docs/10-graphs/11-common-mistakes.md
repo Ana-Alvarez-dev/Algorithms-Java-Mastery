@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
 Graphs are highly flexible data structures, but that flexibility also makes them easy to model or implement incorrectly.
 
 Many graph-related defects do not originate in the traversal algorithm itself. They usually arise from:

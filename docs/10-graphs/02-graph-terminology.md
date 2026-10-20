@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
 Before studying graph representations and algorithms, it is necessary to establish a precise vocabulary.
 
 Graphs can model many different structures, including computer networks, social relationships, transportation routes, software dependencies, and communication systems. Although these applications are different, they are described using the same fundamental concepts from graph theory.

@@ -2,6 +2,19 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
+## Selected Iterative Contract
+
+The Java DFS stores active neighbour iterators to match ascending recursive
+preorder, rather than pushing all neighbours and marking them prematurely.
+This uses O(V) working/output storage even for dense input because active rows
+are not copied. It visits only source reachability and uses no call recursion;
+a separate undirected ConnectedComponents API handles all components. DFS
+finishing times, edge classification and SCC remain conceptual extensions.
+
 **Depth-First Search (DFS)** is a graph traversal algorithm that explores one path as deeply as possible before returning to examine alternative paths.
 
 Unlike Breadth-First Search, which processes vertices level by level, DFS follows a branch until it reaches a vertex with no unvisited neighbours. The algorithm then **backtracks** to the most recent vertex that still has unexplored connections.

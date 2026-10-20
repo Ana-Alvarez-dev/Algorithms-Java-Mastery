@@ -2,6 +2,19 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
+## Selected BFS Contract
+
+The Java API visits source-reachable vertices only, with ascending neighbours.
+A source must be valid even for an empty graph. Unreachable distance is -1,
+source path is [source], and unreachable path is empty. Results own their arrays
+and return copies. State allocation contributes O(V) even if few vertices are
+reachable; matrix scans cost O(V + R*V) for R reached vertices. No weighted-cost
+shortest path or full disconnected forest is inferred from this source search.
+
 **Breadth-First Search (BFS)** is a graph traversal algorithm that explores vertices according to their distance from a selected starting point.
 
 Instead of following one path as deeply as possible, BFS visits all immediate neighbours of the source before continuing to vertices located farther away.

@@ -104,6 +104,23 @@ After completing this module, the learner should be able to:
 
 ---
 
+# Current Executable Scope
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+connects the methodology to immutable list/matrix graphs, source BFS and
+iterative DFS, undirected components, FIFO Kahn ordering, lazy-queue Dijkstra
+and Kruskal minimum spanning forest. Twelve production files and 48 module tests
+bring local repository verification to 572 passing tests. Six JMH methods have
+harness evidence; author Result/Interpretation measurements remain pending.
+
+Contracts distinguish unweighted deduplication from rejected weighted parallel
+pairs, valid empty results from invalid source searches, zero/negative weights,
+long path/forest totals, independent snapshots and deterministic ordering.
+Prim, Bellman-Ford, Floyd-Warshall, SCC, mutable/generic graphs and advanced
+services remain extensions. Small test oracles are not production algorithms.
+
+---
+
 # Position Within the Repository
 
 This module builds upon the concepts introduced in:

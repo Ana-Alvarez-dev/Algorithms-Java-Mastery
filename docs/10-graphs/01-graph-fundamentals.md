@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
 Graphs are one of the most general and powerful data structures in Computer Science. While arrays, linked lists, trees, stacks, and queues model specific relationships between elements, graphs can represent **any set of objects together with the relationships that exist among them**.
 
 Many computational problems involve entities that are interconnected rather than organized sequentially or hierarchically. Social networks connect people, transportation systems connect cities, communication networks connect computers, and software projects connect modules through dependencies. These scenarios cannot be efficiently modeled using linear or tree-based structures alone.
