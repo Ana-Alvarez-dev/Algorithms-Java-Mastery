@@ -37,6 +37,7 @@ The guide documents these bounds and retained-capacity/GC qualifications.
 The [first lookup subset](../../../../../../../docs/17-benchmarking/results/trees/README.md)
 completes the lookup template's Result/Interpretation with all 24 cells, errors
 and printed iterations on JDK 21.0.9. The report explains sorted-BST source path
-work and records four high-error SHUFFLED AVL cells. Execution SHA is unconfirmed.
+work and records four high-error SHUFFLED AVL cells. The author's reflog
+identifies execution source `c576cb79aa9747aced1cd041e97f64fc99e60010`.
 HeapOperationsBenchmark remains pending author timings; its discovery listing
 is separate from measurement. Evidence stays Markdown without JSON/log artifacts.

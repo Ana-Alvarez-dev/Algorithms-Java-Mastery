@@ -89,7 +89,8 @@ and copied-heap k-smallest selection. The package contains 11 production files,
 59 module tests and 12 JMH methods in two classes. Verification passed 524
 repository tests. The [first lookup results](../17-benchmarking/results/trees/README.md)
 complete the lookup template with 24 cells, all errors and printed iterations
-on JDK 21.0.9. Execution SHA remains unconfirmed and heap results remain pending;
+on JDK 21.0.9. The author's reflog identifies execution source `c576cb7`;
+heap results remain pending;
 24 smoke cases and the 72-combination probe are separate functional checks.
 
 Contracts explicitly define unique versus duplicate values, empty results,
