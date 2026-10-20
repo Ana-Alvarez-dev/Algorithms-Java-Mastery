@@ -117,7 +117,13 @@ The [first lookup subset](../17-benchmarking/results/trees/README.md) retains
 24 cells, all errors and printed iterations on JDK 21.0.9. Its sorted-BST path
 analysis explains linear node visits without fitting a timing exponent or
 attributing CPU/cache causes. Four SHUFFLED AVL errors exceed 25% of their means.
-The author's reflog identifies execution source `c576cb7`; heap measurements
-remain pending. Smoke
-execution, passing tests, mathematical arguments and measured timings remain
-separate evidence. See the guide for the full chain and remaining experiments.
+The author's reflog identifies lookup source `c576cb7`. The separate
+[heap run](../17-benchmarking/results/trees/heap-first-run.md), with source
+`ce621c6` supplied before launch, adds all 24 initial heap cells. Descending
+repeated insertion requires sum floor(log2(i)) parent moves (480/7987 at the
+two sizes); bottom-up has a separate linear construction proof. The reported
+means are consistent with this contrast, not a fitted complexity exponent.
+Five heap errors reach 25% of their means; the largest is about 237.9%, and its
+literal CI lower marker `? 0` is retained. Both initial subsets are now recorded,
+without pooling their samples. Smoke, tests, mathematical arguments and timings
+remain separate evidence. See the guide for limits and future experiments.

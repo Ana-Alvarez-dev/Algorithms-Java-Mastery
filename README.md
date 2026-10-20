@@ -315,7 +315,10 @@ repository verification to 524 tests; twelve JMH methods have functional/harness
 evidence. The [first lookup results](docs/17-benchmarking/results/trees/README.md)
 retain all 24 cells with errors and printed iterations on JDK 21.0.9, including
 the sorted-BST path analysis. The author's reflog identifies execution source
-`c576cb7`; heap measurements remain pending. The guide keeps those limits distinct from smoke verification.
+`c576cb7`. The separate [heap results](docs/17-benchmarking/results/trees/heap-first-run.md)
+add 24 cells from author-reported source `ce621c6`, also on JDK 21.0.9. Both
+initial subsets now retain all means/errors and printed iterations: 48 of 72
+default module cells. Uncertainty, source identities and smoke remain distinct.
 
 ## Technology Stack
 

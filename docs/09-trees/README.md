@@ -90,8 +90,10 @@ and copied-heap k-smallest selection. The package contains 11 production files,
 repository tests. The [first lookup results](../17-benchmarking/results/trees/README.md)
 complete the lookup template with 24 cells, all errors and printed iterations
 on JDK 21.0.9. The author's reflog identifies execution source `c576cb7`;
-heap results remain pending;
-24 smoke cases and the 72-combination probe are separate functional checks.
+the [heap run](../17-benchmarking/results/trees/heap-first-run.md) adds 24 cells
+from author-reported source `ce621c6`, also with all errors and iterations.
+Both templates now contain preliminary Result/Interpretation for the initial
+48 cells; size 10,000 remains unmeasured. Smoke/probes stay functional checks.
 
 Contracts explicitly define unique versus duplicate values, empty results,
 edge-height, proper-tree ownership, inclusive floor/ceiling, independent output

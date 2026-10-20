@@ -378,8 +378,28 @@ argument is separate from the exact time ratios and the AVL height proof.
 Four SHUFFLED AVL errors exceed 25% of their means, limiting rankings.
 The report retains every statistic, fork and stated experimental restriction.
 
-The attachment lists heap methods but supplies no heap timings. HeapOperationsBenchmark
-Result and Interpretation remain pending. Smoke scores are excluded from research.
+The lookup attachment's heap listing was discovery only. The subsequent
+[heap measurement](../17-benchmarking/results/trees/heap-first-run.md) now completes
+HeapOperationsBenchmark Result/Interpretation with 24 cells, all errors,
+240 measurement and 144 warmup averages, completion 3 minutes 36 seconds.
+The author supplied source `ce621c63fabc2fe04c180d71fd1f9e165cc8a447` before
+launch; actual JMH/JDK and settings match the documented controlled protocol.
+The initial pasted heap command is truncated; source identity is supplied
+separately, not embedded by JMH.
+
+At descending n=1,000, bottom-up reports 2354.977 +/- 304.174 versus repeated
+offer 13996.646 +/- 2803.147 ns/op. Every new descending value is a new minimum;
+source-level repeated-offer parent moves sum floor(log2(i)), giving 480/7987
+at n=100/1000. Bottom-up's separate linear proof counts height-weighted sifts
+and input copying. Neither argument is inferred from elapsed time ratios.
+Five heap errors reach 25% of their means; JDK peek RANDOM n=100 has error
+11.922 on mean 5.012 ns/op (237.9%). Its supplied CI lower marker is `? 0`,
+preserved literally. No universal primitive/JDK ranking follows.
+
+Both initial subsets are now recorded: **48 of 72 module defaults**, with
+separate provenance and uncertainties. Size 10,000 remains unmeasured. No new
+performance run or executable Java change is made to document these outputs;
+smoke scores remain excluded from research.
 
 After creating/merging the feature PR, from the local repository root:
 

@@ -27,7 +27,10 @@ source confirmation through PR #75. Its scope and functional/harness evidence
 are recorded below. A later supplied lookup run records 24 configurations on
 JDK 21.0.9. The author's subsequently supplied reflog identifies execution
 source `c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge), matching review.
-Heap timings remain pending; results merge `ce621c6` is a later checkout.
+The later heap run supplies 24 additional cells from source `ce621c6`, which
+the author reported before that launch. Initial lookup and heap evidence now
+cover 48 cells with separate source identities; results merge `ce621c6` is
+later than lookup but is the author-reported checkout for the heap run.
 
 ## Required Chain
 
@@ -53,7 +56,7 @@ helpers. The matrix includes the Trees contribution in this branch.
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
-| Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; source `c576cb7` identified from author reflog; heap timings pending |
+| Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; lookup source `c576cb7` from author reflog; [24 heap results](../17-benchmarking/results/trees/heap-first-run.md) from author-reported `ce621c6`; both initial subsets recorded with limits |
 | 10–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **524 passing repository tests**, compared with **465** before
@@ -213,9 +216,10 @@ generic collections API remain extensions. Earlier executable packages and POM
 are unchanged; the recorded Arrays/Searching gaps remain tracked. No fresh CI
 result is inferred. Local smoke and functional probes do not supply research
 timings. A subsequent author lookup
-run completes the tree lookup template with 24 cells and their errors. Heap
-Result/Interpretation remain pending; the attachment lists heap methods without
-measuring them.
+run completes the tree lookup template with 24 cells and their errors. A later
+heap run completes the other template with 24 cells, retaining its own source,
+JVM metadata, errors and printed iterations. The earlier discovery list stays
+distinct from that actual heap measurement.
 
 ## Evidence Policy and Next Action
 
@@ -271,10 +275,27 @@ not a source SHA or jar hash embedded by JMH. The 13 Trees production/JMH Java
 files have identical executable source between `c576cb7` and `ce621c6`, with
 only the lookup benchmark's research block comment changed. Numerical evidence
 and executable behaviour remain unchanged by this provenance update.
-The [heap initial subset](../09-trees/implementation-and-benchmark-guide.md#jmh-design-and-evidence-protocol)
-still needs its separate 24-cell measurement output, source SHA and metadata.
-The discovery list is not evidence of a measured heap run. Preserve both
-families and later runs separately in Markdown without JSON/log exports.
+The [heap initial run](../17-benchmarking/results/trees/heap-first-run.md) now
+records all 24 cells, 240 measurement and 144 warmup averages, complete headers/
+result blocks and its 3 minute 36 second completion marker. Source
+`ce621c63fabc2fe04c180d71fd1f9e165cc8a447` was reported by the author **before**
+launch; it is not inferred from a later results merge. Actual runtime is JDK
+21.0.9/JMH 1.37 with the controlled 3/5 x 500 ms, two-fork, one-thread settings.
+The first command line is truncated and CPU/profiler data remain unavailable.
+
+Five heap errors reach at least 25% of their means; RANDOM size-100 JDK peek
+has mean 5.012 and error 11.922 ns/op (237.9%). Its supplied CI lower marker
+`? 0` is preserved as text. Descending construction means favour bottom-up;
+source repeated-offer parent moves total 480/7987 at n=100/1000, while bottom-up
+has a separate linear build proof. No precise ranking, exact CPU cause, formal
+significance or asymptotic exponent is inferred from timings.
+
+Both initial subsets now complete the two templates: **48 of 72 defaults**, with
+480 measurement and 288 warmup averages preserved across distinct reports.
+Size 10,000 remains unmeasured in both families. Source checkout attribution,
+JVMs, all errors and the uncertainty limits remain inspectable; samples are
+not pooled. Earlier Arrays/Searching findings remain unchanged. Keep later
+runs separate in Markdown without JSON/log exports.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

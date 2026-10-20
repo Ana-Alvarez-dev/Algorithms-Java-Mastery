@@ -482,8 +482,14 @@ on JDK 21.0.9, all errors, 240 measurement and 144 warmup averages. It completes
 the lookup template and relates the sorted-BST timings to source path lengths.
 Four SHUFFLED AVL errors exceed 25% of their means. The author's reflog identifies
 execution source `c576cb79aa9747aced1cd041e97f64fc99e60010` (PR #76 merge).
-The heap discovery list is not a timing result: heap measurements remain pending.
-Evidence stays in Markdown without JSON/log; smoke is not research or proof.
+The heap discovery list alone was not a timing result. A subsequent
+[heap run](results/trees/heap-first-run.md) now supplies 24 cells, all errors,
+240 measurement and 144 warmup averages, with source `ce621c6` reported before
+launch. The runtime is also JDK 21.0.9/JMH 1.37. Five heap errors reach 25% of
+their means, largest about 237.9%; the printed CI marker `? 0` is kept literally.
+Both initial subsets (48 of 72 defaults) now complete the templates, separately
+preserving source/runtime and uncertainty. Evidence stays Markdown without
+JSON/log; smoke is not research or proof, and size 10,000 remains unmeasured.
 
 # Key Takeaways
 
