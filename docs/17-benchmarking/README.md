@@ -514,6 +514,23 @@ CPU/profiler data was supplied. Both templates now use this initial evidence
 without pooling samples, ranking unlike outputs or claiming exact causes.
 Evidence stays Markdown without JSON/log exports; smoke remains separate.
 
+# Recursion Experiments
+
+The [Recursion guide](../11-recursion/implementation-and-benchmark-guide.md)
+defines three exact factorial forms (9 cells), naive/memoised/iterative Fibonacci
+(9 cells) and balanced/iterative long array sum (6 cells). All eight methods use
+average **nanoseconds/op**, one thread, 3/5 x 500 ms and two forks. The combined
+initial default run has 24 cells; source is captured before launch/pulling results.
+
+Memoisation includes a fresh cache allocation/fill per invocation, not a retained
+lookup. Array setup is excluded; full-range int data sums exactly in long.
+Tail position is not a constant-stack promise, and timing differences do not
+isolate call overhead, cache causes, stack bytes or mathematical complexity.
+Normal/profile verification passed 600 tests (28 new), JavaDoc and all 24 smoke
+cells; an independent probe checked all 24 default combinations. Result and
+Interpretation await author measurements. Preserve all errors and actual runtime
+in Markdown without JSON/log artifacts; no smoke score is research evidence.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

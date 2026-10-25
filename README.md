@@ -305,6 +305,7 @@ are distinguished in the implementation guide.
 - [Hash Tables scope, contracts and run commands](docs/08-hash-tables/implementation-and-benchmark-guide.md)
 - [Trees scope, contracts and run commands](docs/09-trees/implementation-and-benchmark-guide.md)
 - [Graphs scope, contracts and run commands](docs/10-graphs/implementation-and-benchmark-guide.md)
+- [Recursion scope, contracts and run commands](docs/11-recursion/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -328,6 +329,13 @@ and [weighted results](docs/17-benchmarking/results/graphs/weighted-first-run.md
 now retain all 32 default cells, every error and printed iteration on JDK 21.0.9.
 Author-reported source is `00fc9de`; interpretation keeps source work, timing
 uncertainty and separate algorithm outputs distinct. Evidence stays Markdown.
+
+Recursion adds seven bounded/exact algorithm examples and iterative references.
+Its 28 tests bring local repository verification to 600 tests. The guide defines
+numeric/work/output limits, induction, decreasing variants and recurrences,
+distinguishing total calls, depth, memo state, bit cost and retained output.
+Eight JMH methods cover 24 default cells; author research measurements remain
+pending and smoke evidence remains separate.
 
 ## Technology Stack
 

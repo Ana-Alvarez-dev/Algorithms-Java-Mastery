@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
 Recursion and iteration are two fundamental approaches for solving computational problems.
 
 Both techniques are capable of solving many of the same problems, but they express the solution using different reasoning models.
@@ -190,7 +194,9 @@ Each recursive invocation creates a new stack frame.
 
 # 8. Memory Usage
 
-Iteration usually requires constant additional memory.
+The selected scalar loops require constant local state. Iteration in general
+can need an explicit stack, queue, cache or result buffer, so it does not imply
+constant **total** auxiliary memory. Those structures are counted separately.
 
 ```text
 O(1)

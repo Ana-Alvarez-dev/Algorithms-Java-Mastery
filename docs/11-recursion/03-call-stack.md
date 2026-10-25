@@ -2,6 +2,18 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
+## Selected Stack Model
+
+The implementation guide counts maximum active depth, not every node in a
+branching call tree. Naive Fibonacci and Hanoi have exponential work with
+linear depth. Balanced array sum and pair checks have logarithmic depth without
+copying slices. Source frame counts are logical models, not measurements of
+JIT-generated frames or a fixed safe Java recursion limit.
+
 Every recursive algorithm is executed through a mechanism known as the **Call Stack**.
 
 Although recursion appears as a sequence of self-invocations in source code, the Java Virtual Machine (JVM) executes every recursive call exactly like any other method invocation. Each call creates a new execution context that is stored on the program stack until the method finishes.

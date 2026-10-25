@@ -2,6 +2,18 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
+## Executable Pattern Boundaries
+
+One recursive call describes branching, not necessarily linear time/depth:
+power halves its exponent and reuses one result. Two disjoint half ranges with
+constant combination give linear total word work, while naive Fibonacci repeats
+overlapping n-1/n-2 work. Memoised Fibonacci allocates a fresh cache per call.
+Hanoi materialises exponential output; stack depth alone omits that storage.
+
 Although recursive algorithms may appear very different from one another, most of them follow a relatively small number of recurring design patterns.
 
 Recognizing these patterns is more valuable than memorizing individual algorithms because it allows software engineers to identify the underlying structure of new problems and apply an appropriate solution strategy.
