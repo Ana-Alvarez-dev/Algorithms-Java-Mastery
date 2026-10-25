@@ -1,5 +1,8 @@
 # Strategy Fundamentals
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for the reviewed Java contracts, traces, correctness, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 **Divide and Conquer** is one of the most important algorithm design paradigms in Computer Science. Instead of solving a problem as a single task, this strategy recursively divides it into smaller, independent subproblems, solves each one separately, and combines their solutions to produce the final result.
@@ -151,7 +154,10 @@ Left
 Right
 ```
 
-The existence of multiple independent recursive branches is one of the defining characteristics of the paradigm.
+Multiple independent branches characterise full divide-and-conquer here.
+Binary search and selection retain only one branch and can be classified more
+specifically as decrease-and-conquer; the broader family used in this module
+includes them without claiming that both halves execute.
 
 ---
 
@@ -528,7 +534,7 @@ After completing this document, the learner should understand that:
 - recursive decomposition reduces large problems into smaller independent subproblems;
 - balanced decomposition often leads to efficient algorithms;
 - a correct base case is essential for recursive termination;
-- Divide and Conquer differs from ordinary recursion because it typically generates multiple independent recursive branches;
+- full divide-and-conquer solves multiple smaller problems, while the included decrease-and-conquer cases retain only one;
 - many classical algorithms are based on this paradigm;
 - the efficiency of Divide and Conquer depends on both the decomposition strategy and the cost of combining solutions;
 - mastering this strategy provides the foundation for understanding many advanced algorithms studied later in the repository.

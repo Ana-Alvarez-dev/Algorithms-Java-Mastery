@@ -1,0 +1,40 @@
+# Divide and Conquer Implementations
+
+This Java 21 package implements the selected scope of
+[module 12](../../../../../../../docs/12-divide-and-conquer/README.md).
+The [implementation guide](../../../../../../../docs/12-divide-and-conquer/implementation-and-benchmark-guide.md)
+connects specifications, decomposition, pseudocode, traces, proofs, cost models,
+tests and JMH. Existing Searching/Sorting case studies are reused unchanged.
+
+| Type | Observable contract | Verification |
+|---|---|---|
+| MaximumSubarray | Divide/linear variants return Optional of canonical nonempty half-open range and exact long sum; empty gives no result; input preserved | Six tests: exhaustive interval oracle, 500 seeded cases, ties/extremes and large exact sum |
+| InversionCount | Merge/direct-pair variants count strict inversions in long; equal values excluded; input preserved | Six tests: exhaustive pair oracle, 500 seeded cases, duplicate reversal identities and count beyond int |
+| QuickSelect | In-place zero-based sorted rank; duplicate multiplicities preserved; rank positioned with earlier/later inequalities | Six tests: 21,324 exhaustive array/rank combinations, sorted-copy/permutation checks, full-int/structured/large inputs and rejection before mutation |
+
+Verification reported 2026-10-25 (UTC), using OpenJDK 21, passed **618 repository
+tests**, including **18 module tests**, normal tests and benchmark-profile clean
+package. All six JMH methods are discovered; 48 short smoke cells complete.
+An independent probe checks every default combination three calls each against
+separate oracles, with repeatability and unchanged trial inputs. JavaDoc passes
+doclint excluding missing tags. Local checks are distinct from CI status.
+
+Balanced crossing scans and merge counts have Theta(n log n) work for n>=2;
+linear maximum subarray has linear work. Logical depth, total source allocations,
+scratch arrays and returned output are distinct. QuickSelect is iterative with
+O(1) state and an O(n^2) worst bound; its deterministic median-of-three pivot
+does not promise expected-linear work on arbitrary input. All-equal input takes
+one linear partition. All possible int-array sums/counts fit long.
+
+MaximumSubarray tie order is highest sum, earliest start, then earliest end;
+all-negative inputs do not choose an implicit empty zero sum. Selection
+validates ranks before writing and otherwise permutes the input. Its benchmark
+clones inside both timed workflows to preserve repeated trial data; the clone's
+O(n) space is separate from the production selector's O(1) auxiliary state.
+
+Three templates retain Research Question, Theoretical Expectation, Measured
+Work, Result and Interpretation. Author measurements remain pending; smoke
+scores are not research. The guide defines 16 cells per class / 48 combined,
+in **microseconds/op**, with actual source/settings and every error preserved
+later as Markdown without JSON/log artifacts. Parallel algorithms, Strassen,
+randomised/worst-linear selection and later paradigms remain extensions.

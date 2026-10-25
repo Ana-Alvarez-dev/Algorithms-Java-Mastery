@@ -1,5 +1,8 @@
 # Binary Search Case Study
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for the reviewed Java contracts, traces, correctness, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 Binary Search is one of the simplest and most elegant applications of the **Divide and Conquer** paradigm.
@@ -261,7 +264,7 @@ Correctness follows directly from recursive reduction.
 
 # 11. Recurrence Relation
 
-Binary Search generates the recurrence:
+The worst search path generates the recurrence:
 
 ```text
 T(n)
@@ -272,7 +275,7 @@ T(n / 2)
 
 +
 
-O(1)
+Theta(1)
 ```
 
 where:
@@ -292,7 +295,7 @@ a = 1
 
 b = 2
 
-f(n) = O(1)
+f(n) = Theta(1)
 ```
 
 Applying the Master Theorem:
@@ -305,7 +308,12 @@ T(n)
 Θ(log n)
 ```
 
-This confirms Binary Search's logarithmic running time.
+This models the worst search path for n>=2; a first-middle hit is constant.
+Average-case tight bounds require a specified query distribution. This module
+reuses the existing Searching implementations, which return any matching
+duplicate index and trust the sorted-array precondition rather than scanning
+to validate it. Binary search is also called decrease-and-conquer because only
+one reduced problem survives.
 
 ---
 
@@ -452,7 +460,7 @@ After completing this document, the learner should understand that:
 - it requires the input data to be sorted;
 - each recursive call reduces the search space by half;
 - Binary Search performs one recursive call per level;
-- the recurrence relation is `T(n) = T(n/2) + O(1)`;
+- the recurrence relation is `T(n) = T(n/2) + Theta(1)` for the worst path;
 - the Master Theorem yields a time complexity of `Θ(log n)`;
 - recursive Binary Search requires `O(log n)` auxiliary stack space;
 - iterative Binary Search requires `O(1)` additional space;

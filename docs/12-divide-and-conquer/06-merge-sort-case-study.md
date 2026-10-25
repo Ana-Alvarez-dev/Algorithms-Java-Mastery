@@ -1,5 +1,8 @@
 # Merge Sort Case Study
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for the reviewed Java contracts, traces, correctness, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 Merge Sort is one of the classical applications of the **Divide and Conquer** paradigm. Unlike simpler recursive algorithms, Merge Sort repeatedly divides a collection into smaller independent subproblems, recursively sorts each subproblem, and finally combines the partial solutions into one completely ordered sequence.
@@ -149,7 +152,8 @@ The recursive decomposition continues until every subproblem contains exactly on
 
 # 6. Base Case
 
-The recursion stops when:
+The existing implementation returns for lengths below two (including empty input).
+The recursive nonempty base stops when:
 
 ```text
 Subarray Size = 1
@@ -249,7 +253,7 @@ T(n)
 
 +
 
-O(n)
+Theta(n)
 ```
 
 where:
@@ -269,7 +273,7 @@ a = 2
 
 b = 2
 
-f(n) = O(n)
+f(n) = Theta(n)
 ```
 
 Applying the Master Theorem:
@@ -282,7 +286,11 @@ T(n)
 Θ(n log n)
 ```
 
-This complexity holds for every valid input.
+For n>=2 this tight bound follows because the reviewed Sorting.MergeSort
+performs a full merge on every level, without an ordered-halves shortcut. It
+uses one auxiliary array per public call. Choosing the left item on equality
+supports stability by source reasoning; equal primitive ints do not expose
+identities for an observable stability test. No generic record sort is added.
 
 ---
 
@@ -375,7 +383,7 @@ For small arrays, simpler algorithms such as Insertion Sort may perform better b
 | Combine | Merge required | No explicit merge |
 | Stable | Yes | No (standard implementation) |
 | Worst Case | O(n log n) | O(n²) |
-| Auxiliary Space | O(n) | O(log n) average |
+| Auxiliary Space | O(n) | O(log n) worst for the repository's smaller-side-recursive variant |
 
 Both algorithms apply Divide and Conquer but make different engineering trade-offs.
 
@@ -462,7 +470,7 @@ After completing this document, the learner should understand that:
 - Merge Sort is a classical Divide and Conquer sorting algorithm;
 - the algorithm recursively divides the input into two balanced halves;
 - the merge phase combines two sorted subarrays into a larger sorted array;
-- the recurrence relation is `T(n) = 2T(n/2) + O(n)`;
+- the recurrence relation is `T(n) = 2T(n/2) + Theta(n)`;
 - the Master Theorem yields a running time of `Θ(n log n)`;
 - Merge Sort guarantees the same asymptotic complexity for best, average, and worst cases;
 - the algorithm is stable but requires `O(n)` auxiliary memory;

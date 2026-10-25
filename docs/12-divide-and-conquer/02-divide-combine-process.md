@@ -1,5 +1,8 @@
 # Divide–Conquer–Combine Process
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for the reviewed Java contracts, traces, correctness, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 The defining characteristic of the **Divide and Conquer** paradigm is its systematic problem-solving process. Rather than treating recursion as a simple implementation technique, Divide and Conquer organizes algorithm design into three well-defined stages:
@@ -348,7 +351,10 @@ Right Half
 
 The solution of one subproblem should not depend on the solution of another.
 
-Independence simplifies recursive reasoning and enables parallel execution.
+Mathematical independence simplifies reasoning. Parallel execution additionally
+requires safe ownership of scratch/output regions and coordination before
+combining; shared mutable arrays are not automatically safe. All selected
+implementations in this contribution execute sequentially.
 
 ---
 
@@ -526,7 +532,7 @@ Several well-known algorithms illustrate different Divide–Conquer–Combine be
 |-----------|---------|----------|----------|
 | Binary Search | Split search interval | Search one half | No explicit merge |
 | Merge Sort | Split array | Sort both halves | Merge sorted halves |
-| Quick Sort | Partition around pivot | Sort partitions | Partition already produces final placement |
+| Hoare QuickSort | Partition by pivot value | Sort both boundary regions | Cross-region order established; boundary is not a final pivot rank |
 
 Although all three algorithms follow the same paradigm, they differ significantly in the cost of each stage.
 
