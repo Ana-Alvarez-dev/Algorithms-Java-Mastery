@@ -324,8 +324,32 @@ profiler is included. RANDOM seed reproducibility is not broad workload sampling
 Both classes use **average microseconds/op (`us/op`)**, one thread, three
 500 ms warmups, five 500 ms measurements, two forks. A controlled cell has
 `Cnt=10` iteration averages, not ten individual invocations. There are **32 default
-configurations**, split 24/8. Result and Interpretation remain pending author
-measurements; short smoke values are not recorded as research scores.
+configurations**, split 24/8. The author supplied both complete executions on
+**2026-10-24**, with source **`00fc9de90757eab77fbf6f824132d9bbea3f37e2`**,
+PR #80's merge. Actual runtime is JMH 1.37/JDK 21.0.9, matching the controlled
+protocol. This author-reported SHA is separate from JMH headers; both initial
+pasted command lines are truncated. Short smoke values stay outside research.
+
+The [traversal report](../17-benchmarking/results/graphs/README.md) preserves all
+24 cells/errors, 240 measurement and 144 warmup averages, completed in 3 min
+36 sec. PATH/SPARSE means favour list scanning in this subset; on DENSE input,
+E itself grows quadratically, and size-100 BFS intervals overlap. Three errors
+reach 25% of their means, largest about 41.7%. Source adjacency/row counts
+explain algorithmic work without establishing exact CPU/cache causes.
+
+The [weighted report](../17-benchmarking/results/graphs/weighted-first-run.md)
+preserves eight cells/errors, 80 measurement and 48 warmup averages, completed
+in 1 min 14 sec. Both sparse Dijkstra errors exceed 25%. Dense Kruskal at 1,000
+reports 163948.138 +/- 19262.711 us/op, roughly 164 ms against a 500 ms iteration
+target; actual invocation counts are not supplied. The source sorts/scans all
+499,500 canonical dense edges and does not stop once V-1 are selected. Those
+source facts do not assign a fraction of elapsed time to sorting or union/find.
+
+Both Result/Interpretation fields now use all **32 current default cells**, with
+separate report statistics, complete printed observations and explicit limits.
+No sample pooling, new production optimisation, formal significance test,
+asymptotic fit or generalisation to all graph inputs is claimed. No new
+performance run or executable Java change is made to document these outputs.
 
 After the feature PR is merged, from the Windows local repository root:
 

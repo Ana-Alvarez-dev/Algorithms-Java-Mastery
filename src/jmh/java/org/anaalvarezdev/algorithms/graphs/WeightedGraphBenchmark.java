@@ -20,13 +20,21 @@ import java.util.concurrent.TimeUnit;
  * forest result. Input construction is excluded; work/output allocation is timed.
  *
  * Result:
- * Pending author measurements; smoke is not research timing.
+ * Author run reported 2026-10-24; source 00fc9de90757eab77fbf6f824132d9bbea3f37e2
+ * supplied with outputs. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/
+ * measurement, two forks (Cnt=10), completed 1 min 14 sec. All 8 cells/errors,
+ * 80 measured and 48 warmup averages: docs/17-benchmarking/results/graphs/weighted-first-run.md.
+ * DENSE n=1000: Dijkstra 5395.066 +/- 479.629; Kruskal 163948.138 +/- 19262.711 us/op.
  *
  * Interpretation:
- * Pending source/runtime/settings and all means/errors. Compare a method with
- * itself across matching fixtures; do not rank shortest paths versus minimum
- * spanning forest as interchangeable algorithms. No profiler, memory-footprint,
- * allocation-rate, worst-case guarantee or asymptotic exponent is inferred.
+ * DENSE has 4950/499500 canonical edges at n=100/1000. Current Kruskal sorts and
+ * scans every edge: 4950/499500 union attempts, 99/999 accepted. It does not stop
+ * when connected. These are source counts, not profiler attribution of elapsed
+ * time. Both SPARSE Dijkstra errors exceed 25% (34.5%/28.3%). Dense Kruskal mean
+ * is about 164 ms against a 500 ms iteration target; actual invocation counts
+ * are not supplied. No data removed, significance, cache or allocation claim.
+ * Source distances and minimum spanning forest remain different problems;
+ * compare methods with themselves, without fitting an exponent from two sizes.
  * Protocol: docs/10-graphs/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

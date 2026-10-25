@@ -323,9 +323,11 @@ default module cells. Uncertainty, source identities and smoke remain distinct.
 
 Graphs adds immutable list/matrix representations, BFS/iterative DFS, components,
 Kahn ordering, lazy-queue Dijkstra and Kruskal forest. Its 48 tests bring local
-verification to 572 tests. Six JMH methods have functional/harness evidence;
-author performance measurements remain pending. The guide defines direction,
-loops/duplicates, empty results, long costs and representation-specific bounds.
+verification to 572 tests. The [traversal results](docs/17-benchmarking/results/graphs/README.md)
+and [weighted results](docs/17-benchmarking/results/graphs/weighted-first-run.md)
+now retain all 32 default cells, every error and printed iteration on JDK 21.0.9.
+Author-reported source is `00fc9de`; interpretation keeps source work, timing
+uncertainty and separate algorithm outputs distinct. Evidence stays Markdown.
 
 ## Technology Stack
 

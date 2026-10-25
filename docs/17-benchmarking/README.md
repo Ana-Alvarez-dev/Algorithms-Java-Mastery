@@ -504,9 +504,15 @@ Units are **microseconds/op**, distinct from Trees' nanoseconds. Defaults retain
 one thread, 3/5 x 500 ms warmup/measurement and two forks. OpenJDK 21 verification
 passed 572 tests (48 new); six methods were discovered, all 16 short size-100
 smoke cases completed and a separate probe checked all 32 default combinations.
-Result/Interpretation remain pending actual author measurements. Capture source
-SHA before launch, headers, full means/errors, iterations and completion markers
-for the separate 24/8 runs. Evidence stays Markdown without JSON/log exports.
+The author supplied [all 24 traversal cells](results/graphs/README.md) and
+[all 8 weighted cells](results/graphs/weighted-first-run.md) on 2026-10-24, with
+source `00fc9de90757eab77fbf6f824132d9bbea3f37e2`. Headers confirm JDK 21.0.9 /
+JMH 1.37 and controlled defaults. All means/errors, 320 measurement and 192 warmup
+averages are preserved; completion times are 3 min 36 sec and 1 min 14 sec.
+Five errors reach at least 25% of their means; commands are truncated and no
+CPU/profiler data was supplied. Both templates now use this initial evidence
+without pooling samples, ranking unlike outputs or claiming exact causes.
+Evidence stays Markdown without JSON/log exports; smoke remains separate.
 
 # Key Takeaways
 

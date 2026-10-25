@@ -37,7 +37,11 @@ normalisation, output allocation, lazy priority entries and conservative
 union-by-size bounds. No graph mutation, generic multigraph or full alternative
 algorithm suite is claimed. Earlier modules remain unchanged.
 
-Result and Interpretation in both JMH templates await measured author output.
-Follow the guide's separate 24-cell traversal and 8-cell weighted commands,
-record SHA before launch, and preserve microsecond units and all errors in
-Markdown without JSON/log artifacts.
+Both JMH templates now contain Result and Interpretation from the author's
+[24 traversal cells](../../../../../../../docs/17-benchmarking/results/graphs/README.md)
+and [8 weighted cells](../../../../../../../docs/17-benchmarking/results/graphs/weighted-first-run.md).
+Source `00fc9de90757eab77fbf6f824132d9bbea3f37e2` was supplied with the outputs;
+actual runtime is JDK 21.0.9/JMH 1.37. All means/errors, 320 measurement and
+192 warmup averages remain in separate Markdown reports without JSON/log.
+Five cells have error at least 25% of the mean; these and workload limitations
+remain visible. All current default cells are measured, not all possible graphs.
