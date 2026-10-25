@@ -12,6 +12,28 @@ This module studies Divide and Conquer from an academic perspective, combining f
 
 ---
 
+# Current Executable Scope
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+connects specifications, pseudocode, traces, proofs, work/storage models and
+Java evidence. Three new types cover canonical maximum subarray, strict
+inversion counting and duplicate-aware in-place rank selection. Existing
+Searching/Sorting cases are reused, with no duplicated algorithms.
+
+Eighteen new tests bring local verification to **618 passing tests**. Six JMH
+methods define **48 default cells**, in **microseconds/op**. All default cells
+pass independent return/nonmutation probes and short execution smoke; controlled
+author measurements remain pending in Result/Interpretation. No JSON/log
+exports or invented scores are added.
+
+The review supplies the Master theorem's exact hypotheses, distinguishes
+balanced from average-case Quicksort, and maps Hoare boundaries/smaller-side
+stack bounds to the actual source. Selection retains one side; its
+deterministic pivot has no arbitrary-input expected-linear guarantee.
+Parallel algorithms, Strassen and stronger selection guarantees remain extensions.
+
+---
+
 # Learning Objectives
 
 After completing this module, the learner should be able to:
@@ -232,13 +254,13 @@ While the Recursion module explains **how recursive algorithms work**, this modu
 The mathematical foundations developed here will also support the study of later modules, including:
 
 ```text
-Divide and Conquer
+12 - Divide and Conquer
         ↓
-Dynamic Programming
+13 - Greedy Algorithms
         ↓
-Greedy Algorithms
+14 - Backtracking
         ↓
-Advanced Algorithm Design
+15 - Dynamic Programming
 ```
 
 ---

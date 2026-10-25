@@ -540,6 +540,32 @@ are not supplied. Source work counts justify algorithmic distinctions without
 isolating call overhead, memo allocation, stack usage or CPU causes. All
 evidence stays Markdown without JSON/log artifacts; smoke remains separate.
 
+# Divide and Conquer Experiments
+
+The [module guide](../12-divide-and-conquer/implementation-and-benchmark-guide.md)
+defines three matching-output comparisons: maximum subarray with crossing scans
+versus a linear method, merge versus direct-pair inversion counting, and fresh
+copy-plus-selection versus copy-plus-sort for rank=size/2. Each class has 16
+default cells, for **48 total**, using average **microseconds/op**, one thread,
+3/5 x 500 ms and two forks. Fixtures use seed 20261025 and four distributions
+per class. Inversion sizes 100/1,000 bound quadratic work; the other classes use
+100/10,000. No repeated mutation sorts away the original selection workload.
+
+Normal/profile verification passed **618 tests**, including 18 new tests; six
+methods were discovered, all 48 short smoke cells completed and an independent
+probe checked every default combination three calls each. These are local
+functional/harness checks, not measured research scores or a new CI status.
+Result/Interpretation await author output after feature integration. Capture
+source SHA before launch/pulling results, actual JDK/JMH headers, all means/errors,
+fork iterations and completion markers. Evidence stays Markdown without JSON/log.
+
+Comparisons include full contract work: different maximum-subarray result
+construction, private merge-count allocations, and timed clones in BOTH
+selection workflows. Deterministic median-of-three does not inherit randomised
+selection's expected-linear proof. Two sizes cannot establish an exponent;
+timing alone does not isolate call/partition costs, allocation rates or cache
+causes. Existing Searching/Sorting/Recursion research keeps its own provenance.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

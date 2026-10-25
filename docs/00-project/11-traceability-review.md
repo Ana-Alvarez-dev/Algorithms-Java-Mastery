@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **11 — Recursion**. It is a source/evidence inventory,
+progression through **12 — Divide and Conquer**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -46,6 +46,11 @@ The first author-reported Recursion run now records all 24 current default cells
 on JDK 21.0.9/JMH 1.37, with separately supplied source
 `fe370a1953c089a55f8851399acc42a59e3d37b7` (PR #82 merge).
 
+The Divide and Conquer contribution extends review from main
+`be8c6cdf4cbbab3f760cbc22cbc5136151674b1f`, which integrated Recursion results
+through PR #83. Local verification reported 2026-10-25 (UTC) is recorded below;
+its own author performance measurements remain pending.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -59,7 +64,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes the Recursion contribution in this branch.
+helpers. The matrix includes selected implementations through module 12.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -73,10 +78,11 @@ helpers. The matrix includes the Recursion contribution in this branch.
 | Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; lookup source `c576cb7` from author reflog; [24 heap results](../17-benchmarking/results/trees/heap-first-run.md) from author-reported `ce621c6`; both initial subsets recorded with limits |
 | Graphs | 12 | 48 | 6 | [Selected contracts](../10-graphs/implementation-and-benchmark-guide.md), [24 traversal results](../17-benchmarking/results/graphs/README.md), [8 weighted results](../17-benchmarking/results/graphs/weighted-first-run.md); JDK 21.0.9, author-reported source `00fc9de`, all errors/printed iterations retained with preliminary limits |
 | Recursion | 7 | 28 | 8 | [Selected contracts](../11-recursion/implementation-and-benchmark-guide.md), [24 results and research](../17-benchmarking/results/recursion/README.md); JDK 21.0.9/JMH 1.37, author-reported source `fe370a1`, all errors/iterations retained; five wide-error cells and preliminary limits |
-| 12–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Divide and Conquer | 3 | 18 | 6 | [Contracts, traces, invariants and protocol](../12-divide-and-conquer/implementation-and-benchmark-guide.md); maximum subarray, strict inversions and order statistic verified; existing Searching/Sorting reused; measured author results pending |
+| 13–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **600 passing repository tests**, compared with **572** before
-Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
+There are now **618 passing repository tests**, compared with **600** before
+Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
 and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
@@ -307,6 +313,42 @@ unchanged. Local verification is not a new CI status. The subsequent author
 run completes all three Result/Interpretation fields using real measured output;
 no smoke timing is substituted for it.
 
+## Divide and Conquer Verification and Review
+
+Verification reported **2026-10-25 (UTC)**, using **OpenJDK 21+35-2513**, passed
+normal Maven tests and benchmark-profile clean package: **618 tests**, zero
+failures/errors/skips, including **18 new module tests** (prior Recursion 600).
+The guide links all nine numbered documents to contracts, decomposition,
+pseudocode, manual traces, invariants/induction, decreasing measures and costs.
+
+| Check | Evidence |
+|---|---|
+| Canonical maximum subarray | Quadratic interval oracle for all 3,280 arrays of length 0..7 over {-1,0,1}; 500 full-int seeded cases; negative/zero/crossing/tie examples; 200,000-value exact long sum and nonmutation |
+| Strict inversions | Independent direct-pair oracle on all small arrays and 500 seeded cases; 200 duplicate-aware reversal identities; descending 100,000 count 4,999,950,000 and nonmutation |
+| Order statistic | Sorted-copy ranks, full permutation and global partition inequalities for all 21,324 small array/rank cases; every rank in 200 seeded arrays; extreme/structured/large equal inputs; invalid ranks rejected before mutation |
+| JMH | Six discovered methods, all 48 short smoke configurations completed; independent prefix-minimum/pair/sorted-copy probe verifies all defaults three calls each and unchanged trial inputs |
+| JavaDoc | Package passes doclint excluding missing tags |
+
+Three production files add selected examples without cloning existing binary
+search or sorts. Earlier production/tests/POM and measured reports remain
+unchanged. The conceptual review supplies polynomial gaps and case-three
+regularity for the Master theorem, distinguishes tight local work from upper
+bounds, and separates conditional balance from average-case Quicksort analysis.
+The actual Hoare source returns a boundary, not a final pivot rank, and recurses
+only on the smaller side: O(log n) worst logical depth despite quadratic time.
+Three-way selection keeps one side with O(1) state, but its deterministic
+median-of-three pivot has no arbitrary-input expected-linear guarantee.
+
+Maximum-subarray nonempty/tie/Optional policy, duplicate-strict inversion counts,
+long arithmetic and selection mutation are explicit. Work, depth, total source
+record constructions, scratch arrays and live state are not interchangeable.
+Benchmarks include full differing contract work, including both selection
+clones; no score or profiler/cause claim is invented. Parallel/Strassen,
+randomised/median-of-medians selection and future paradigms remain extensions.
+The next numbered module is **13 - Greedy Algorithms**, then Backtracking and
+Dynamic Programming. Local checks do not establish CI status or fix the open
+earlier Arrays/Searching findings. Smoke is separate from measured research.
+
 ## Evidence Policy and Next Action
 
 The repository retains results in Markdown, with existing historical CSV
@@ -441,10 +483,19 @@ cache/GC/vectorisation cause or allocation rate is inferred from timings.
 
 The selected initial grid is complete; performance for all valid inputs or the
 other four Recursion classes is not claimed. Earlier 600-test verification,
-open findings and future modules remain distinct. This update changes only
-documentation/comments, with no new timed run or CI status. All evidence stays
+open findings and future modules remain distinct. That Recursion results
+update changed only documentation/comments, with no new timed run or CI status. All evidence stays
 Markdown without JSON/log exports; future experiments need their own source,
 settings, complete errors and controls.
+
+Divide and Conquer is ready for its
+[initial controlled measurements](../12-divide-and-conquer/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
+after feature integration: 16 cells per class / **48 combined**, in
+**microseconds/op**. Capture SHA before launch and before later documentation
+pulls, actual JDK/JMH settings, complete errors, available fork iterations and
+completion markers. Do not reuse Recursion's SHA or nanosecond units. All three
+Result/Interpretation fields remain pending actual output; nothing is marked
+measured from smoke. Evidence stays Markdown without JSON/log artifacts.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

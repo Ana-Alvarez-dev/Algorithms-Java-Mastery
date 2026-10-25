@@ -306,6 +306,7 @@ are distinguished in the implementation guide.
 - [Trees scope, contracts and run commands](docs/09-trees/implementation-and-benchmark-guide.md)
 - [Graphs scope, contracts and run commands](docs/10-graphs/implementation-and-benchmark-guide.md)
 - [Recursion scope, contracts and run commands](docs/11-recursion/implementation-and-benchmark-guide.md)
+- [Divide and Conquer scope, contracts and run commands](docs/12-divide-and-conquer/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -339,6 +340,14 @@ now retains all 24 default cells, every error, 240 measured and 144 warmup
 averages on JDK 21.0.9/JMH 1.37. Author-reported source is `fe370a1` (PR #82).
 All three templates include preliminary interpretation; five errors reach 25%
 of their means. Smoke evidence stays separate and all evidence stays Markdown.
+
+Divide and Conquer adds canonical maximum subarray, strict inversion counting
+and duplicate-aware in-place order statistics, reusing existing Searching/Sorting
+cases. Its 18 tests bring local verification to **618 tests**. The guide links
+contracts, traces, invariants and corrected recurrence/partition models; six JMH
+methods define 48 defaults in microseconds/op. All pass independent probes and
+execution smoke, while author performance results remain pending. Master theorem
+conditions and the actual smaller-side Hoare Quicksort stack bound are explicit.
 
 ## Technology Stack
 

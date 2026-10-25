@@ -1,5 +1,8 @@
 # Common Mistakes
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for the reviewed Java contracts, traces, correctness, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 The Divide and Conquer paradigm provides elegant and highly efficient solutions to many computational problems. However, its recursive nature and multi-stage execution process also introduce implementation challenges that are not present in simpler algorithms.
@@ -64,7 +67,7 @@ Example:
 1
 ```
 
-Instead of reducing the recursion depth:
+In a naive two-call implementation, instead of reducing the recursion depth:
 
 ```text
 O(log n)
@@ -76,7 +79,10 @@ the algorithm approaches:
 O(n)
 ```
 
-Quick Sort illustrates this issue when poor pivot selection repeatedly creates unbalanced partitions.
+Unbalanced Quicksort can have quadratic work. The existing repository source
+recurses on the smaller side and loops over the larger, so its stack depth
+remains O(log n) even in a slow case; the generic naive-depth example above
+must not be attributed to that implementation.
 
 ---
 
@@ -231,7 +237,9 @@ Result:
 O(n²)
 ```
 
-Randomized or median-based pivot selection often reduces this risk.
+Pivot policies need explicit models: randomised selection has an expectation
+over its random choices; a deterministic median of three positions does not
+guarantee balanced partitions or worst-case linear selection.
 
 ---
 
@@ -393,7 +401,8 @@ Factors such as:
 
 also influence practical performance.
 
-Quick Sort often outperforms Merge Sort despite having a worse theoretical worst case.
+Any practical ranking needs matching inputs, operations and runtime evidence.
+Theoretical bounds alone do not establish cache causes or an elapsed-time winner.
 
 ---
 
@@ -531,7 +540,9 @@ Successful Divide and Conquer algorithms are not merely recursive—they are car
 
 This document concludes the study of the Divide and Conquer paradigm.
 
-The next module introduces **Dynamic Programming**, another major algorithm design paradigm.
+The next numbered module is **13 - Greedy Algorithms**, followed by
+14 - Backtracking and 15 - Dynamic Programming. Dynamic Programming is a later
+comparison, not the immediate module handoff.
 
 While Divide and Conquer solves **independent** recursive subproblems, Dynamic Programming focuses on **overlapping** subproblems and avoids repeated computation through memoization and tabulation.
 
