@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **09 — Trees**. It is a source/evidence inventory,
+progression through **10 — Graphs**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -32,6 +32,11 @@ the author reported before that launch. Initial lookup and heap evidence now
 cover 48 cells with separate source identities; results merge `ce621c6` is
 later than lookup but is the author-reported checkout for the heap run.
 
+The Graphs contribution extends this review from main commit
+`aca933f9c15db0e977f64a6ea48ce5bb9b537b90`, which integrated Trees heap results
+through PR #79. Its selected scope and local verification are recorded below;
+Graphs author research measurements remain pending.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -45,7 +50,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes the Trees contribution in this branch.
+helpers. The matrix includes the Graphs contribution in this branch.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -57,10 +62,12 @@ helpers. The matrix includes the Trees contribution in this branch.
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
 | Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; lookup source `c576cb7` from author reflog; [24 heap results](../17-benchmarking/results/trees/heap-first-run.md) from author-reported `ce621c6`; both initial subsets recorded with limits |
-| 10–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Graphs | 12 | 48 | 6 | [Selected contracts, proofs and protocol](../10-graphs/implementation-and-benchmark-guide.md); immutable representations, traversals, components/order, Dijkstra/Kruskal verified; author timing pending |
+| 11–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **524 passing repository tests**, compared with **465** before
-Trees, **418** before Hash Tables and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
+There are now **572 passing repository tests**, compared with **524** before
+Graphs, **465** before Trees, **418** before Hash Tables and **338** before
+Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
 ## Rechecked Gaps
@@ -221,6 +228,40 @@ heap run completes the other template with 24 cells, retaining its own source,
 JVM metadata, errors and printed iterations. The earlier discovery list stays
 distinct from that actual heap measurement.
 
+## Graphs Verification and Review
+
+On **2026-10-20 UTC**, verification-host **OpenJDK 21+35-2513** passed normal
+Maven tests and benchmark-profile clean package: **572 tests**, zero failures,
+errors/skips, including **48 Graphs tests** (the prior Trees base recorded 524).
+The guide maps all twelve conceptual documents to selected APIs, pseudocode,
+traces, invariants, termination, cost models, tests and justified experiments.
+
+| Check | Evidence |
+|---|---|
+| Immutable representations | Eight shared tests per list/matrix; 400 seeded graph input cases; loops, direction, duplicates, invalid IDs/rows, independent snapshots and iterator exhaustion |
+| Source traversal | All 512 directed three-vertex graphs with loops at every source in both representations; BFS all-pairs oracle and small recursive DFS order oracle |
+| Components / DAG | All 64 undirected four-vertex graphs; directed transitive-closure cycle oracle and edge precedence; empty DAG distinguished from cycle |
+| Deep path | 100,000 vertices, explicit DFS frames and BFS distances |
+| Dijkstra | 400 seeded six-vertex graphs / 2,400 source cases against repeated relaxation; zero cycles, stale queue entries, negative edges unreachable from source and long costs |
+| Kruskal / disjoint sets | 192 weighted small graph cases against exhaustive subset enumeration, disconnected/negative/loop/tie/long-total cases; 1,000 seeded unions against naive labels |
+| JMH | Six discovered methods, 16 short smoke cells and all 32 default combinations checked three calls each against functional/reference oracles |
+| JavaDoc | New package passes doclint excluding missing tags |
+
+The selected graph APIs are immutable and fixed to int vertices. Unweighted
+input duplicates collapse, weighted pairs are rejected, and each public result
+has independent arrays or immutable lists. DFS iterators avoid copying active
+rows; Kahn uses local indegrees/FIFO, Dijkstra has lazy duplicate queue entries,
+and Kruskal returns a forest on disconnected input. Long sums, global negative
+validation and source/empty-result policies are explicit.
+
+The guide accounts for M constructor records, V initialisation, reachable row
+scans, output allocation and conservative union-by-size height bounds. Indexed-
+heap queue space is not assigned to lazy Dijkstra. Generic examples, alternative
+algorithms/SCC and graph-domain services remain extensions, not production
+completion. Earlier source/tests/POM and tracked Arrays/Searching findings stay
+unchanged. These are local checks; no new CI result is inferred. Smoke and
+reference probes are not research timing.
+
 ## Evidence Policy and Next Action
 
 The repository retains results in Markdown, with existing historical CSV
@@ -296,6 +337,13 @@ Size 10,000 remains unmeasured in both families. Source checkout attribution,
 JVMs, all errors and the uncertainty limits remain inspectable; samples are
 not pooled. Earlier Arrays/Searching findings remain unchanged. Keep later
 runs separate in Markdown without JSON/log exports.
+
+Graphs is ready for its
+[separate traversal and weighted measurements](../10-graphs/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
+after integration: 24 traversal cells and 8 weighted cells. Record SHA **before
+launch and before pulling later documentation changes**, actual JDK/JMH settings,
+microsecond units, every mean/error, available iterations and completion marker.
+The initial empirical fields remain pending and no scores are invented.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

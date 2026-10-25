@@ -304,6 +304,7 @@ are distinguished in the implementation guide.
 - [Stacks and Queues scope, contracts and run commands](docs/07-stacks-and-queues/implementation-and-benchmark-guide.md)
 - [Hash Tables scope, contracts and run commands](docs/08-hash-tables/implementation-and-benchmark-guide.md)
 - [Trees scope, contracts and run commands](docs/09-trees/implementation-and-benchmark-guide.md)
+- [Graphs scope, contracts and run commands](docs/10-graphs/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -319,6 +320,12 @@ the sorted-BST path analysis. The author's reflog identifies execution source
 add 24 cells from author-reported source `ce621c6`, also on JDK 21.0.9. Both
 initial subsets now retain all means/errors and printed iterations: 48 of 72
 default module cells. Uncertainty, source identities and smoke remain distinct.
+
+Graphs adds immutable list/matrix representations, BFS/iterative DFS, components,
+Kahn ordering, lazy-queue Dijkstra and Kruskal forest. Its 48 tests bring local
+verification to 572 tests. Six JMH methods have functional/harness evidence;
+author performance measurements remain pending. The guide defines direction,
+loops/duplicates, empty results, long costs and representation-specific bounds.
 
 ## Technology Stack
 

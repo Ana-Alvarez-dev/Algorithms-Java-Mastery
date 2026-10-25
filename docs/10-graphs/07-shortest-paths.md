@@ -2,6 +2,24 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
+## Selected Weighted Contract and Queue Bound
+
+The executable Dijkstra rejects every negative edge, including an unreachable
+one. Zero weights and zero cycles are valid; repeated weighted endpoint pairs
+are rejected at graph construction. Results use long/OptionalLong so paths
+beyond the int range remain valid. With nonnegative int weights, a shortest
+simple path has at most V-1 edges and candidate sums fit long.
+
+Java PriorityQueue inserts a new entry on each strict improvement and skips
+stale entries; it is not an indexed decrease-key heap. The selected bound is
+O(V+E+E log(E+1)) time and O(V+E) additional state. An O(V) queue-space claim
+for an indexed heap cannot be assigned to this implementation. Bellman-Ford,
+Floyd-Warshall and other weighted algorithms remain extensions.
+
 A **shortest-path problem** asks for the minimum-cost route between vertices in a graph.
 
 The meaning of *cost* depends on the graph model. In an unweighted graph, the cost of a path is usually the number of edges it contains. In a weighted graph, the cost is calculated by adding the weights of the edges along the path.

@@ -2,6 +2,21 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
+## Selected Representation Contract
+
+The executable graphs are immutable and fixed to IDs 0..V-1. Unweighted pairs
+collapse; weighted parallel pairs are rejected. Both allow loops. Undirected
+logical edges are counted once, including loops, though nonloop adjacency uses
+two entries. Sorted primitive list rows use binary search for membership;
+boolean matrix access is constant. Public neighbours return copies, while
+internal iterators let algorithms avoid copying an active row per DFS frame.
+Construction normalises M supplied records with ordered sets, so its cost is
+not the same as appending to an already allocated mutable textbook list.
+
 A graph is defined abstractly by its vertices and edges, but an implementation must decide how those elements will be stored in memory.
 
 This decision is known as the **graph representation**.

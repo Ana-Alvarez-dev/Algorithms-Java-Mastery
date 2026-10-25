@@ -491,6 +491,23 @@ Both initial subsets (48 of 72 defaults) now complete the templates, separately
 preserving source/runtime and uncertainty. Evidence stays Markdown without
 JSON/log; smoke is not research or proof, and size 10,000 remains unmeasured.
 
+# Graph Experiments
+
+The [Graphs guide](../10-graphs/implementation-and-benchmark-guide.md) defines
+four list/matrix BFS/DFS methods over PATH/SPARSE/DENSE fixtures (24 cells) and
+Dijkstra/Kruskal over SPARSE/DENSE weighted fixtures (8 cells). Both use sizes
+100/1,000 and return freshly allocated algorithm results. Graph construction
+is excluded; output/frontier/queue/sort work is timed. Weighted methods solve
+different problems and are not ranked as interchangeable alternatives.
+
+Units are **microseconds/op**, distinct from Trees' nanoseconds. Defaults retain
+one thread, 3/5 x 500 ms warmup/measurement and two forks. OpenJDK 21 verification
+passed 572 tests (48 new); six methods were discovered, all 16 short size-100
+smoke cases completed and a separate probe checked all 32 default combinations.
+Result/Interpretation remain pending actual author measurements. Capture source
+SHA before launch, headers, full means/errors, iterations and completion markers
+for the separate 24/8 runs. Evidence stays Markdown without JSON/log exports.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

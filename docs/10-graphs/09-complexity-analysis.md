@@ -2,6 +2,23 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
+## Bounds of the Selected Java Implementations
+
+The guide's ledger is authoritative for the selected immutable APIs. Construction
+uses M supplied records and ordered normalisation; list membership is binary
+search in a sorted row. Source traversals include O(V) state even when only R
+vertices are reached; matrix cost is O(V + R*V), becoming O(V²) when connected.
+Lazy Dijkstra has O(V+E) possible state, including stale queue entries, and
+O(V+E+E log(E+1)) time. Kruskal includes O(V) initialisation, sorting and a
+conservative O(log(V+1)) bound per union/find operation. An edge-only bound
+omits isolated vertices. Public outputs and temporary constructor storage are
+counted separately from retained graph storage. Generic reference tables below
+must be read with their representation/queue/connectedness assumptions.
+
 The performance of a graph algorithm depends on two principal quantities:
 
 ```text

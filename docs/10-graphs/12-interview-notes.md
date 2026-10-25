@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
 Graph-related questions are common in technical interviews because they evaluate several abilities at the same time:
 
 - problem modeling;

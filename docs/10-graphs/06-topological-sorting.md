@@ -2,6 +2,19 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
+## Selected Kahn Contract
+
+The executable API rejects undirected input and uses local indegrees. A present
+empty array means an empty DAG; empty Optional means a cycle anywhere, including
+a disconnected self-loop. FIFO zero-indegree processing is deterministic but
+not lexicographically minimal. Requiring a priority queue for lexicographic
+selection would change both the contract and queue costs. No partial result is
+returned as a valid order when a cycle remains.
+
 **Topological Sorting** is a graph algorithm that produces a linear ordering of the vertices in a **Directed Acyclic Graph (DAG)**.
 
 The resulting order respects every directed dependency in the graph. For each edge:

@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java contracts, proof arguments, tests and JMH protocol. Generic
+examples and conceptual extensions below are not automatically implemented.
+
 Graph algorithms solve problems involving relationships, connectivity, reachability, ordering, routing, and optimization.
 
 The previous documents introduced the principal techniques of this module:
