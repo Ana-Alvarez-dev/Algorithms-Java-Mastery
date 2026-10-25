@@ -15,10 +15,18 @@ import java.util.concurrent.TimeUnit;
  * scratch. No precomputed result or setup allocation is subtracted. Small
  * bounded workloads and JIT inlining/specialisation restrict generalisation.
  * Result:
- * Pending author measurements; smoke execution checks the harness only.
+ * First author run; source fe370a1953c089a55f8851399acc42a59e3d37b7 supplied
+ * separately. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/measurement,
+ * two forks (Cnt=10), complete combined run 3 min 35 sec. Full means/errors,
+ * 240 measured and 144 warmup averages: docs/17-benchmarking/results/recursion/README.md.
+ * All nine Factorial cells retained. At n=20: loop 7.134 +/- 1.620, ordinary
+ * recursion 24.741 +/- 4.252, tail recursion 25.186 +/- 5.213 ns/op.
  * Interpretation:
- * Pending source/runtime/settings and every mean/error. Timing cannot recover
- * actual frame counts, establish tail-call elimination or a universal ranking.
+ * Loop means are lower; ordinary/tail intervals overlap at every selected n.
+ * Loop errors at n=5/10 reach 43.8%/26.7%. Recursive helpers do n products,
+ * including multiplication by one; loop does max(n-1,0). This does not isolate
+ * call overhead. Similar tail/ordinary means do not establish tail-call
+ * elimination, equivalence or constant stack use; bounded inputs/JIT limit generalisation.
  * Protocol: docs/11-recursion/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

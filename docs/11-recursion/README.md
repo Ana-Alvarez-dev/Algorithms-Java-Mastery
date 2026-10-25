@@ -20,8 +20,12 @@ The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 connects the methodology to factorial, Fibonacci, BigInteger power, balanced
 long array sum, int-array palindrome, Euclidean GCD and materialised Hanoi.
 Seven production files and 28 module tests bring local verification to 600
-passing tests. Eight JMH methods cover 24 default cells in three classes;
-Result and Interpretation await author measurements, with smoke kept separate.
+passing tests. Eight JMH methods cover 24 default cells in three classes.
+The [first research report](../17-benchmarking/results/recursion/README.md)
+completes all three Result/Interpretation fields using JDK 21.0.9/JMH 1.37 and
+author-reported source `fe370a1`. Every error, 240 measured and 144 warmup
+averages is retained; five cells have error at least 25% of their means.
+This is initial selected-grid evidence with explicit limits; smoke stays separate.
 
 The selected contracts define exact numeric domains, workload/output caps,
 null/range policies and ownership. Ordinary/tail/iterative forms are compared

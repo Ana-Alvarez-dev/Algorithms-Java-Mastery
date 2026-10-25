@@ -15,11 +15,18 @@ import java.util.concurrent.TimeUnit;
  * excluded. Each timed call validates, scans and returns the full long sum.
  * The array is shared read-only within the trial; there is no timed clone.
  * Result:
- * Pending author measurements; smoke is harness evidence only.
+ * First author run; source fe370a1953c089a55f8851399acc42a59e3d37b7 supplied
+ * separately. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/measurement,
+ * two forks (Cnt=10), complete combined run 3 min 35 sec. Full means/errors,
+ * 240 measured and 144 warmup averages: docs/17-benchmarking/results/recursion/README.md.
+ * All six ArraySum cells retained. Size 1000000 loop: 272188.344 +/- 207549.689;
+ * recursive: 3473757.020 +/- 643696.308 ns/op.
  * Interpretation:
- * Pending actual source/runtime/settings, sizes and every mean/error. Source
- * work/depth, JIT optimisation and elapsed means are distinct. No cache cause,
- * exact stack-byte usage or asymptotic proof follows from the measured scores.
+ * Loop means are lower on these fixtures, but largest loop error is 76.3%;
+ * recursive size-100 error is 35.9%. Both perform linear total work. Nonempty
+ * recursive helper calls are 2*size-1, with logarithmic depth and no slice copy.
+ * Source counts are not profiler attribution. No precise ratio, stack bytes,
+ * cache/vectorisation cause, significance or asymptotic fit is established.
  * Protocol: docs/11-recursion/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

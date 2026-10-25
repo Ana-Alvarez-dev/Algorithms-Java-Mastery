@@ -41,8 +41,10 @@ current default Graphs cells on JDK 21.0.9/JMH 1.37, with author-reported source
 
 The Recursion contribution extends review from main commit
 `7ab257e7041d9e70207a54f876178c256ebe34d8`, which integrated Graphs results
-through PR #81. Its selected scope and local verification are recorded below;
-Recursion author research measurements remain pending.
+through PR #81. Its selected scope and local verification are recorded below.
+The first author-reported Recursion run now records all 24 current default cells
+on JDK 21.0.9/JMH 1.37, with separately supplied source
+`fe370a1953c089a55f8851399acc42a59e3d37b7` (PR #82 merge).
 
 ## Required Chain
 
@@ -70,7 +72,7 @@ helpers. The matrix includes the Recursion contribution in this branch.
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
 | Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; lookup source `c576cb7` from author reflog; [24 heap results](../17-benchmarking/results/trees/heap-first-run.md) from author-reported `ce621c6`; both initial subsets recorded with limits |
 | Graphs | 12 | 48 | 6 | [Selected contracts](../10-graphs/implementation-and-benchmark-guide.md), [24 traversal results](../17-benchmarking/results/graphs/README.md), [8 weighted results](../17-benchmarking/results/graphs/weighted-first-run.md); JDK 21.0.9, author-reported source `00fc9de`, all errors/printed iterations retained with preliminary limits |
-| Recursion | 7 | 28 | 8 | [Selected contracts, induction, recurrences and protocol](../11-recursion/implementation-and-benchmark-guide.md); seven examples and reference variants verified; measured author results pending |
+| Recursion | 7 | 28 | 8 | [Selected contracts](../11-recursion/implementation-and-benchmark-guide.md), [24 results and research](../17-benchmarking/results/recursion/README.md); JDK 21.0.9/JMH 1.37, author-reported source `fe370a1`, all errors/iterations retained; five wide-error cells and preliminary limits |
 | 12–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **600 passing repository tests**, compared with **572** before
@@ -301,8 +303,9 @@ limit is inferred by deliberately overflowing the runtime stack.
 
 Conceptual mutual recursion/frameworks and full later paradigms remain extensions.
 Prior code/tests/POM, measured results and open Arrays/Searching findings remain
-unchanged. Local verification is not a new CI status, and no smoke timing fills
-the pending author Result/Interpretation fields.
+unchanged. Local verification is not a new CI status. The subsequent author
+run completes all three Result/Interpretation fields using real measured output;
+no smoke timing is substituted for it.
 
 ## Evidence Policy and Next Action
 
@@ -413,12 +416,35 @@ Java change or new timed run is introduced by recording these results. Future
 experiments must retain their own source, settings, errors and complete evidence
 in Markdown without JSON/log exports.
 
-Recursion is ready for its
-[initial 24-cell measurement](../11-recursion/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
-after integration, using nanoseconds/op. Capture SHA before launch and before
-pulling later results, complete JMH headers, every mean/error, available fork
-iterations and completion marker. Retain its own source/runtime rather than
-reusing Graphs' source or microsecond unit. Initial empirical fields stay pending.
+The [first Recursion report](../17-benchmarking/results/recursion/README.md)
+now preserves all **24 current default cells**, **240 measurement** and **144
+warmup averages**, with completion **3 min 35 sec**. Source
+`fe370a1953c089a55f8851399acc42a59e3d37b7` is the author's separately supplied
+checkout attribution (PR #82); it is not embedded in JMH or a jar hash. Headers
+confirm JDK 21.0.9/JMH 1.37, one thread, 3/5 x 500 ms and two forks, in
+**nanoseconds/op**, distinct from Graphs' microseconds. The full command,
+execution timestamp, CPU/power, profiler data and jar hash are unavailable.
+
+All three templates contain preliminary Result/Interpretation, supported by
+every final mean/error, measured/warmup iteration, extrema, sample standard
+deviation and printed 99.9% CI. Five errors reach 25% of their means: two
+ArraySum, two iterative Factorial and one memoised Fibonacci cell, maximum
+about 76.3%. No observation is discarded and no significance/equivalence or
+precise universal speedup is claimed.
+
+Source counts distinguish factorial products/helper calls, naive Fibonacci's
+exponential total calls versus linear active depth, per-call memo allocation,
+and balanced sum's linear total work versus logarithmic depth. They are not
+measured machine events, exact frames or evidence of tail-call elimination.
+The nearly flat loop Fibonacci means do not prove constant complexity. No
+cache/GC/vectorisation cause or allocation rate is inferred from timings.
+
+The selected initial grid is complete; performance for all valid inputs or the
+other four Recursion classes is not claimed. Earlier 600-test verification,
+open findings and future modules remain distinct. This update changes only
+documentation/comments, with no new timed run or CI status. All evidence stays
+Markdown without JSON/log exports; future experiments need their own source,
+settings, complete errors and controls.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

@@ -276,11 +276,33 @@ difference is not isolated recursion-call overhead. No benchmark is added merely
 because a class exists: power/GCD/palindrome/Hanoi have mathematical/test evidence
 without a distinct timing question selected here.
 
-Result and Interpretation remain pending author measurements. Smoke times do not
-fill them. No memory-footprint, allocation-rate, tail-call-elimination, exact
-frame-count, cache-cause, significance or asymptotic-fit claim is made from times.
+The [first research report](../17-benchmarking/results/recursion/README.md)
+now completes all three Result/Interpretation fields with **24 means/errors**,
+**240 measured** and **144 warmup averages**, completed in **3 min 35 sec**.
+The author separately supplied source
+**`fe370a1953c089a55f8851399acc42a59e3d37b7`**, PR #82's merge. Headers confirm
+JDK 21.0.9/JMH 1.37, one thread, 3/5 x 500 ms and two forks. The SHA is author
+checkout attribution, not embedded in JMH or verified by a supplied jar hash;
+the attachment begins with a header and contains no full command or timestamp.
 
-First create/merge the feature PR. Then, from the Windows local repository root:
+Loop means are lower on the selected fixtures. Ordinary/tail factorial intervals
+overlap, without demonstrating elimination or equivalence; their helpers also
+perform one more multiplication than the loop at these n values. Naive Fibonacci
+has 177/21,891/2,692,537 logical helper calls at n=10/20/30, whereas memoisation
+computes distinct states with a fresh per-call array. Balanced ArraySum still
+does linear total work (2k-1 helper calls for nonempty k) despite logarithmic
+depth. Those source counts are not profiling events or measured JVM frames.
+
+Five cells have error at least 25% of their means: ArraySum loop size 1,000,000
+(76.3%), recursive size 100 (35.9%), Factorial loop n=5/10 (43.8%/26.7%) and
+Fibonacci memoised n=30 (75.5%). All values remain intact. Source work, depth,
+allocation and elapsed means remain distinct; no exact ratio, memory footprint,
+allocation rate, tail-call elimination, cache/CPU cause, significance or
+asymptotic fit follows from this run. No new executable code, timed experiment
+or CI status is introduced by recording it. Smoke stays separate.
+
+The commands below retain the reproducible Windows protocol. After integrating
+source changes, run from the local repository root:
 
 ```powershell
 git switch main
