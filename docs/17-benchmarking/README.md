@@ -527,9 +527,18 @@ lookup. Array setup is excluded; full-range int data sums exactly in long.
 Tail position is not a constant-stack promise, and timing differences do not
 isolate call overhead, cache causes, stack bytes or mathematical complexity.
 Normal/profile verification passed 600 tests (28 new), JavaDoc and all 24 smoke
-cells; an independent probe checked all 24 default combinations. Result and
-Interpretation await author measurements. Preserve all errors and actual runtime
-in Markdown without JSON/log artifacts; no smoke score is research evidence.
+cells; an independent probe checked all 24 default combinations.
+
+The [first Recursion report](results/recursion/README.md) now completes all three
+Result/Interpretation fields with 24 means/errors, 240 measured and 144 warmup
+averages. Author-reported source is `fe370a1953c089a55f8851399acc42a59e3d37b7`
+(PR #82); headers confirm JDK 21.0.9/JMH 1.37 and the controlled defaults.
+The complete run took 3 min 35 sec. Five cells have error at least 25% of their
+means, largest about 76.3%; the report preserves every observation and limit.
+The full command, execution timestamp, CPU/power, jar hash and profiler data
+are not supplied. Source work counts justify algorithmic distinctions without
+isolating call overhead, memo allocation, stack usage or CPU causes. All
+evidence stays Markdown without JSON/log artifacts; smoke remains separate.
 
 # Key Takeaways
 

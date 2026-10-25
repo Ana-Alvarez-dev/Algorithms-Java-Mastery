@@ -28,6 +28,10 @@ contract is separate from the old Arrays aggregation finding, which stays open.
 
 The three benchmark templates retain
 Research Question, Theoretical Expectation, Measured Work, Result and
-Interpretation. Result/Interpretation remain pending actual author measurement.
-The guide defines the combined 24-cell nanosecond run, records source before
-launch, and keeps smoke separate from Markdown research without JSON/log files.
+Interpretation. The [first research report](../../../../../../../docs/17-benchmarking/results/recursion/README.md)
+now completes all three with 24 means/errors, 240 measured and 144 warmup
+averages. Author-reported source is `fe370a1953c089a55f8851399acc42a59e3d37b7`,
+the PR #82 merge; runtime is JDK 21.0.9/JMH 1.37, in nanoseconds/op. Five errors
+reach 25% of their means. Work counts, depth, differing allocations and timing
+uncertainty stay distinct; this is not a tail-call-elimination or cache claim.
+The guide keeps smoke separate from Markdown research without JSON/log files.

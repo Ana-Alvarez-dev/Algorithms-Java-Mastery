@@ -334,8 +334,11 @@ Recursion adds seven bounded/exact algorithm examples and iterative references.
 Its 28 tests bring local repository verification to 600 tests. The guide defines
 numeric/work/output limits, induction, decreasing variants and recurrences,
 distinguishing total calls, depth, memo state, bit cost and retained output.
-Eight JMH methods cover 24 default cells; author research measurements remain
-pending and smoke evidence remains separate.
+The [Recursion research report](docs/17-benchmarking/results/recursion/README.md)
+now retains all 24 default cells, every error, 240 measured and 144 warmup
+averages on JDK 21.0.9/JMH 1.37. Author-reported source is `fe370a1` (PR #82).
+All three templates include preliminary interpretation; five errors reach 25%
+of their means. Smoke evidence stays separate and all evidence stays Markdown.
 
 ## Technology Stack
 
