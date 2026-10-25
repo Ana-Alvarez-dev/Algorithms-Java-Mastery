@@ -20,13 +20,21 @@ import java.util.concurrent.TimeUnit;
  * allocation are part of each implementation, not isolated factors.
  *
  * Result:
- * Pending author measurements; smoke checks are harness evidence only.
+ * Author run reported 2026-10-24; source 00fc9de90757eab77fbf6f824132d9bbea3f37e2
+ * supplied with outputs. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/
+ * measurement, two forks (Cnt=10), completed 3 min 36 sec. All 24 cells/errors,
+ * 240 measured and 144 warmup averages: docs/17-benchmarking/results/graphs/README.md.
+ * SPARSE n=1000 BFS list/matrix: 34.781 +/- 0.360 / 624.284 +/- 12.492 us/op;
+ * DFS list/matrix: 40.952 +/- 0.774 / 404.327 +/- 17.054 us/op.
  *
  * Interpretation:
- * Pending actual source SHA, runtime/settings and all means/errors. Compare only
- * matching size/shape/traversal; BFS returns paths/distances and DFS only order,
- * so their difference is not an isolated queue-versus-stack cost. No cache cause,
- * memory footprint, allocation rate or asymptotic proof follows from means.
+ * PATH/SPARSE means favour list scans in this subset. DENSE has quadratic edge
+ * population (4950/499500 at n=100/1000), so list O(V+E) also grows quadratically
+ * in V. Dense size-100 BFS intervals overlap. Three errors reach 25% of means,
+ * largest 41.7%; no formal significance or universal representation ranking.
+ * Row-position counts/source paths explain work, not CPU/cache causes or exact
+ * ratios. BFS returns distances/parents/order while DFS only order; their means
+ * do not isolate queue-versus-stack cost. No memory/allocation/asymptotic proof.
  * Protocol: docs/10-graphs/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

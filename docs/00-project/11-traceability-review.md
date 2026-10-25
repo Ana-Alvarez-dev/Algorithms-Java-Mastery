@@ -35,7 +35,9 @@ later than lookup but is the author-reported checkout for the heap run.
 The Graphs contribution extends this review from main commit
 `aca933f9c15db0e977f64a6ea48ce5bb9b537b90`, which integrated Trees heap results
 through PR #79. Its selected scope and local verification are recorded below;
-Graphs author research measurements remain pending.
+A subsequent empirical follow-up supplied on **2026-10-24** records all 32
+current default Graphs cells on JDK 21.0.9/JMH 1.37, with author-reported source
+`00fc9de90757eab77fbf6f824132d9bbea3f37e2` (PR #80 merge).
 
 ## Required Chain
 
@@ -62,7 +64,7 @@ helpers. The matrix includes the Graphs contribution in this branch.
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
 | Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; lookup source `c576cb7` from author reflog; [24 heap results](../17-benchmarking/results/trees/heap-first-run.md) from author-reported `ce621c6`; both initial subsets recorded with limits |
-| Graphs | 12 | 48 | 6 | [Selected contracts, proofs and protocol](../10-graphs/implementation-and-benchmark-guide.md); immutable representations, traversals, components/order, Dijkstra/Kruskal verified; author timing pending |
+| Graphs | 12 | 48 | 6 | [Selected contracts](../10-graphs/implementation-and-benchmark-guide.md), [24 traversal results](../17-benchmarking/results/graphs/README.md), [8 weighted results](../17-benchmarking/results/graphs/weighted-first-run.md); JDK 21.0.9, author-reported source `00fc9de`, all errors/printed iterations retained with preliminary limits |
 | 11–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **572 passing repository tests**, compared with **524** before
@@ -338,12 +340,38 @@ JVMs, all errors and the uncertainty limits remain inspectable; samples are
 not pooled. Earlier Arrays/Searching findings remain unchanged. Keep later
 runs separate in Markdown without JSON/log exports.
 
-Graphs is ready for its
-[separate traversal and weighted measurements](../10-graphs/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
-after integration: 24 traversal cells and 8 weighted cells. Record SHA **before
-launch and before pulling later documentation changes**, actual JDK/JMH settings,
-microsecond units, every mean/error, available iterations and completion marker.
-The initial empirical fields remain pending and no scores are invented.
+The author supplied both Graphs runs on **2026-10-24**, reporting source
+`00fc9de90757eab77fbf6f824132d9bbea3f37e2` (PR #80 merge). The source matches
+reviewed executable code; its identity is supplied separately, not embedded by
+JMH. The [traversal report](../17-benchmarking/results/graphs/README.md) retains
+24 cells, 240 measurement and 144 warmup averages, completion 3 min 36 sec.
+The [weighted report](../17-benchmarking/results/graphs/weighted-first-run.md)
+retains eight cells, 80 measurement and 48 warmup averages, completion 1 min
+14 sec. Every mean/error agrees with the final table/result block; rounded
+means, extrema and standard deviations match the printed observations.
+
+All 32 current default cells now support both templates' Result/Interpretation.
+Actual runtime is JDK 21.0.9/JMH 1.37, one thread, 3/5 x 500 ms and two forks;
+scores are microseconds/op. Both initial command lines are truncated; CPU,
+exact execution timestamps, jar hash and profiler data are not supplied.
+Five cells have errors at least 25% of their means: three traversal cells and
+two sparse Dijkstra cells. Those uncertainties remain in full, without deleting
+outliers or claiming formal significance.
+
+Source work counts distinguish list adjacency from full matrix rows; DENSE
+also makes list edges quadratic in V. Current Kruskal sorts/scans all canonical
+edges, even after spanning a connected graph: 4,950/499,500 attempts at V=100/
+1,000, selecting 99/999. Its dense size-1,000 mean is about 164 ms relative to
+a 500 ms measurement target; per-iteration invocation counts remain unknown.
+Those facts are not profiler attribution or an asymptotic fit. Dijkstra and
+Kruskal solve different problems and are not ranked as substitutes.
+
+This completes initial default-grid evidence, not performance coverage of all
+graphs or proof of correctness. Both run samples remain separate. The earlier
+572-test verification and prior module findings remain unchanged; no executable
+Java change or new timed run is introduced by recording these results. Future
+experiments must retain their own source, settings, errors and complete evidence
+in Markdown without JSON/log exports.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

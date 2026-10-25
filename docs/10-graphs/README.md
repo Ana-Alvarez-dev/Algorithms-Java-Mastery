@@ -111,7 +111,11 @@ connects the methodology to immutable list/matrix graphs, source BFS and
 iterative DFS, undirected components, FIFO Kahn ordering, lazy-queue Dijkstra
 and Kruskal minimum spanning forest. Twelve production files and 48 module tests
 bring local repository verification to 572 passing tests. Six JMH methods have
-harness evidence; author Result/Interpretation measurements remain pending.
+harness evidence. The [traversal report](../17-benchmarking/results/graphs/README.md)
+and [weighted report](../17-benchmarking/results/graphs/weighted-first-run.md)
+now complete both templates with all 32 default cells, errors and printed
+iterations on JDK 21.0.9, using author-reported source `00fc9de`. This is initial
+fixture evidence with explicit limits, not performance coverage of all graphs.
 
 Contracts distinguish unweighted deduplication from rejected weighted parallel
 pairs, valid empty results from invalid source searches, zero/negative weights,
