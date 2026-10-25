@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
 This document consolidates technical-interview questions and reasoning prompts
 related to recursion.
 

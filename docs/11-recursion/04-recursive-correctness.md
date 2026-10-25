@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
 A recursive algorithm is not considered correct simply because it produces the expected result for a few test cases.
 
 From an algorithmic perspective, correctness means proving that **every recursive call eventually terminates** and **every returned result is mathematically correct for all valid inputs**.

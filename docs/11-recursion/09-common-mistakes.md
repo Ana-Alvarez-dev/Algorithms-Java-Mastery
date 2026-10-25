@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
 Recursion is one of the most elegant algorithmic techniques in Computer Science, but it is also one of the easiest to implement incorrectly.
 
 Unlike iterative algorithms, recursive algorithms depend on several conditions being satisfied simultaneously:

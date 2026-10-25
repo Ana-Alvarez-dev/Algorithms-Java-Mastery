@@ -2,6 +2,18 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
+## Selected Tail-Recursive Examples
+
+Factorial's accumulator maintains accumulator * remaining! = original!, and
+Euclidean GCD passes the reduced pair directly. Both have loop references.
+The conservative Java analysis counts recursive depth; elapsed time cannot
+establish tail-call elimination or constant stack bytes. No stack-overflow test
+is used to choose the public numeric or output domains.
+
 Tail recursion is a particular form of recursion in which the recursive call is the **final operation** performed by the method.
 
 Unlike ordinary recursive algorithms, a tail-recursive method performs no additional computation after the recursive call returns. The result produced by the recursive invocation becomes the result of the current invocation immediately.

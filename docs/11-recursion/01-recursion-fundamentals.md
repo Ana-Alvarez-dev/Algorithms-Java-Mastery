@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
 Recursion is a fundamental algorithmic technique in which a problem is solved by expressing its solution in terms of smaller instances of the same problem.
 
 Instead of repeatedly executing a sequence of instructions through loops, a recursive algorithm delegates part of its work to another invocation of itself. Each recursive call solves a simpler version of the original problem until a trivial case is reached.

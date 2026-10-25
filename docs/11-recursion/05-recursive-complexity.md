@@ -2,6 +2,10 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
 Correctness determines whether a recursive algorithm produces the expected result.
 
 Complexity analysis determines **how efficiently** that algorithm uses computational resources.
@@ -616,12 +620,16 @@ O(n)
 
 | Recursive Pattern | Time | Additional Space |
 |-------------------|------|------------------|
-| One recursive call reducing by one | O(n) | O(n) |
-| One recursive call reducing by half | O(log n) | O(log n) |
-| Two half-sized recursive calls | O(n log n) | O(log n)* |
-| Two overlapping recursive calls | Exponential | O(n) |
+| One call reducing by one, constant local work | Theta(n+1) | O(n+1) logical depth |
+| One call reducing by half, constant local work | Theta(log(n+1)) | O(log(n+1)) logical depth |
+| Two halves, constant combination | Theta(n) | O(log(n+1)) depth* |
+| Two halves, linear combination | Theta(n log n) | O(log(n+1)) depth* |
+| Naive F(n-1)+F(n-2), no memo | Theta(phi^n), also O(2^n) | O(n+1) depth* |
 
-\* Ignoring temporary auxiliary arrays.
+\* These columns count call depth, excluding extra arrays, memo caches and
+materialised output. The pattern needs base cases, subproblem sizes and local
+work. Two calls alone do not determine an n log n or exponential bound.
+BigInteger operations have variable bit cost; multiplication count is separate.
 
 ---
 

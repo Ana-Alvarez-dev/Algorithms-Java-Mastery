@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **10 — Graphs**. It is a source/evidence inventory,
+progression through **11 — Recursion**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -39,6 +39,11 @@ A subsequent empirical follow-up supplied on **2026-10-24** records all 32
 current default Graphs cells on JDK 21.0.9/JMH 1.37, with author-reported source
 `00fc9de90757eab77fbf6f824132d9bbea3f37e2` (PR #80 merge).
 
+The Recursion contribution extends review from main commit
+`7ab257e7041d9e70207a54f876178c256ebe34d8`, which integrated Graphs results
+through PR #81. Its selected scope and local verification are recorded below;
+Recursion author research measurements remain pending.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -52,7 +57,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes the Graphs contribution in this branch.
+helpers. The matrix includes the Recursion contribution in this branch.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -65,11 +70,12 @@ helpers. The matrix includes the Graphs contribution in this branch.
 | Hash Tables | 8 | 47 | 9 | [Scope and contracts](../08-hash-tables/implementation-and-benchmark-guide.md), [18 reported configurations](../17-benchmarking/results/hash-tables/README.md); JDK 21.0.9/JMH 1.37, all printed iterations retained; author-reported source `03e6ed5` matches review; probing reinsertion source trace recorded |
 | Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; lookup source `c576cb7` from author reflog; [24 heap results](../17-benchmarking/results/trees/heap-first-run.md) from author-reported `ce621c6`; both initial subsets recorded with limits |
 | Graphs | 12 | 48 | 6 | [Selected contracts](../10-graphs/implementation-and-benchmark-guide.md), [24 traversal results](../17-benchmarking/results/graphs/README.md), [8 weighted results](../17-benchmarking/results/graphs/weighted-first-run.md); JDK 21.0.9, author-reported source `00fc9de`, all errors/printed iterations retained with preliminary limits |
-| 11–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Recursion | 7 | 28 | 8 | [Selected contracts, induction, recurrences and protocol](../11-recursion/implementation-and-benchmark-guide.md); seven examples and reference variants verified; measured author results pending |
+| 12–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **572 passing repository tests**, compared with **524** before
-Graphs, **465** before Trees, **418** before Hash Tables and **338** before
-Stacks and Queues. Counts do not demonstrate complete behavioural coverage
+There are now **600 passing repository tests**, compared with **572** before
+Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
+and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
 ## Rechecked Gaps
@@ -264,6 +270,40 @@ completion. Earlier source/tests/POM and tracked Arrays/Searching findings stay
 unchanged. These are local checks; no new CI result is inferred. Smoke and
 reference probes are not research timing.
 
+## Recursion Verification and Review
+
+Verification reported **2026-10-24**, using host **OpenJDK 21+35-2513**, passed
+normal Maven tests and benchmark-profile clean package: **600 tests**, zero
+failures/errors/skips, including **28 Recursion tests** (prior Graphs base 572).
+The guide maps ten conceptual documents to contracts, pseudocode, traces,
+induction/accumulator invariants, decreasing variants, cost ledgers and evidence.
+
+| Check | Evidence |
+|---|---|
+| Factorial | Exact BigInteger products for all 21 accepted inputs; ordinary/tail/loop boundaries and rejection |
+| Fibonacci | Exact BigInteger sequence through 92; all 31 naive inputs; work cap distinct from numeric range |
+| Power | 1,105 small base/exponent cases against BigInteger.pow; large exact values and MAX exponent with bounded-result bases |
+| Array sum | 1,093 arrays / 27,064 slices; full-int extremes, 128 seeded slices, 200,000-value exact long sum and nonmutation |
+| Palindrome | Independent reversed-copy oracle, all small arrays, million-value symmetry and first/last pair mismatches |
+| GCD | BigInteger.gcd for 6,561 small signed pairs plus 5,000 seeded int pairs; zero and MIN_VALUE magnitude |
+| Hanoi | Legal peg simulation for 0..12 and 16 disks, optimal move count/final state, immutable output and rejection |
+| JMH | Eight discovered methods, all 24 short smoke cells and 24 default combinations checked three calls each against independent references |
+| JavaDoc | Package passes doclint excluding missing tags |
+
+The guide separates primitive numeric limits from work/output caps; no shared
+memo cache or mutated inputs are exposed. ArraySum returns long and does not
+silently fix or relabel the earlier Arrays aggregation benchmark. It corrects
+recurrence tables that assigned n log n to any two half-sized calls, accounts
+for output and BigInteger bit costs, and distinguishes depth from total calls.
+Conservative Java tail analysis makes no constant-stack promise; iteration's
+space depends on explicit data structures, not merely its syntax. No stack-depth
+limit is inferred by deliberately overflowing the runtime stack.
+
+Conceptual mutual recursion/frameworks and full later paradigms remain extensions.
+Prior code/tests/POM, measured results and open Arrays/Searching findings remain
+unchanged. Local verification is not a new CI status, and no smoke timing fills
+the pending author Result/Interpretation fields.
+
 ## Evidence Policy and Next Action
 
 The repository retains results in Markdown, with existing historical CSV
@@ -372,6 +412,13 @@ graphs or proof of correctness. Both run samples remain separate. The earlier
 Java change or new timed run is introduced by recording these results. Future
 experiments must retain their own source, settings, errors and complete evidence
 in Markdown without JSON/log exports.
+
+Recursion is ready for its
+[initial 24-cell measurement](../11-recursion/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
+after integration, using nanoseconds/op. Capture SHA before launch and before
+pulling later results, complete JMH headers, every mean/error, available fork
+iterations and completion marker. Retain its own source/runtime rather than
+reusing Graphs' source or microsecond unit. Initial empirical fields stay pending.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

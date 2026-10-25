@@ -2,6 +2,18 @@
 
 ## Algorithms Java Mastery
 
+The [implementation guide](implementation-and-benchmark-guide.md) defines the
+selected Java scope, contracts, proof arguments, recurrences, tests and JMH
+protocol. Conceptual examples below are not automatically executable evidence.
+
+## Executable Domain Decisions
+
+The selected factorial domain 0..20 and memoised/iterative Fibonacci domain
+0..92 prevent long overflow. Naive Fibonacci caps at 30 for work, and Hanoi
+caps at 16 for materialised output; these are different kinds of bounds.
+Invalid inputs are rejected before recursive work. Array slices use validated
+half-open indices; zero-length sums and zero mirrored pairs have explicit bases.
+
 Every recursive algorithm is built upon two essential components:
 
 - the **base case**;

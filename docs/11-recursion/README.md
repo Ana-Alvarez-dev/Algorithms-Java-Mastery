@@ -14,6 +14,24 @@ This module provides a rigorous academic introduction to recursion while emphasi
 
 ---
 
+# Current Executable Scope
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+connects the methodology to factorial, Fibonacci, BigInteger power, balanced
+long array sum, int-array palindrome, Euclidean GCD and materialised Hanoi.
+Seven production files and 28 module tests bring local verification to 600
+passing tests. Eight JMH methods cover 24 default cells in three classes;
+Result and Interpretation await author measurements, with smoke kept separate.
+
+The selected contracts define exact numeric domains, workload/output caps,
+null/range policies and ownership. Ordinary/tail/iterative forms are compared
+without assuming Java tail-call elimination. Calls, depth, distinct memo states,
+BigInteger bit cost and retained output are analysed separately. The examples
+introduce patterns without marking future divide-and-conquer/backtracking/DP
+modules complete or changing earlier searching/array implementations.
+
+---
+
 # Learning Objectives
 
 After completing this module, the learner should be able to:
