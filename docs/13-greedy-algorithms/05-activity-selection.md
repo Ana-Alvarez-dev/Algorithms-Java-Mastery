@@ -49,7 +49,12 @@ The ActivitySelection benchmark compares complete calls on a shuffled trial
 list versus a list ordered outside timing. That is an explicit difference in
 caller preconditions, not free end-to-end sorting or an isolated sorting-cost
 measurement. Both return immutable plans; size and compatibility shape also
-change output sizes. Result/Interpretation remain pending author measurements.
+change output sizes. The
+[first report](../17-benchmarking/results/greedy/README.md) now supplies all
+16 activity cells/errors and their printed iterations. Presorted means are
+lower for the matching fixtures, but preparation stays outside timing. Seven
+full-sort cells have error at least 25%, maximum about 48.6%; no isolated sort
+cost, general ratio or formal significance/equivalence is claimed.
 
 ## Verification and Boundaries
 

@@ -76,6 +76,9 @@ The proof assumptions appear as validation and ownership policies: positive
 frequencies/coins, nonempty intervals, exact arithmetic, safe comparisons and
 immutable results. Tests use exhaustive small alternatives and independent
 oracles, not only agreement between two greedy implementations. Benchmark
-templates ask bounded empirical questions; their pending Result/Interpretation
-fields are not filled by correctness proofs or smoke timings. Later measurement
-must retain source/runtime and all uncertainty.
+templates ask bounded empirical questions. The
+[first report](../17-benchmarking/results/greedy/README.md) now fills all three
+Result/Interpretation fields with 40 measured cells, every error and printed
+iteration, using author-reported source `674ab35` and JDK 21.0.9/JMH 1.37.
+Ten wide-error cells remain visible. Proofs and smoke are not substituted for
+those observations, and timings do not prove optimality or isolate CPU causes.

@@ -27,8 +27,11 @@ Huffman codes/exact costs and an explicitly limited greedy-change heuristic.
 Twenty-seven new tests bring local verification to **645 passing tests**.
 Five JMH methods define **40 default cells** in three classes, using
 **microseconds/op**. All defaults pass functional reference probes and short
-execution smoke; Result/Interpretation await controlled author measurements.
-No JSON/log exports or invented scores are added.
+execution smoke. The [first research report](../17-benchmarking/results/greedy/README.md)
+now completes all three Result/Interpretation fields with 40 means/errors,
+400 measured and 240 warmup averages on JDK 21.0.9/JMH 1.37. Author-reported
+source is `674ab35` (PR #86). Ten errors reach 25% of their means; every value
+and preliminary limit remains in Markdown without JSON/log exports.
 
 The review distinguishes interval scheduling's selection alias from room
 assignment, corrects snapshot/output space and heap-construction assumptions,

@@ -59,6 +59,11 @@ All 1,024 small interval sets and 500 seeded schedules are checked against an
 independent maximum-overlap oracle, with per-room legality, original indices,
 determinism and ownership checks. The benchmark times complete assignment
 across size and overlap shapes, not activity-selection cardinality or isolated
-heap costs. Initial author Result/Interpretation remain pending. Multi-room
-weighted priorities, resource capacities and real-time/preemptive scheduling
-have different contracts and are not claimed by these examples.
+heap costs. The [first report](../17-benchmarking/results/greedy/README.md)
+now supplies all eight assignment cells/errors and printed iterations on JDK
+21.0.9/JMH 1.37, with author-reported source `674ab35`. At 10,000, disjoint/
+touching means are 1901.335 +/- 19.514 / 1894.487 +/- 45.547 us/op and their
+confidence intervals overlap. Known room/heap operation counts are analytical, not timing
+attribution; output objectives, input ordering and allocations stay distinct.
+Multi-room weighted priorities, resource capacities and real-time/preemptive
+scheduling have different contracts and are not claimed by these examples.

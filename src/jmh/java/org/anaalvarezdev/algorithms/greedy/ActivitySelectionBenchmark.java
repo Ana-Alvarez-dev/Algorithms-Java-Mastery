@@ -18,12 +18,20 @@ import java.util.concurrent.TimeUnit;
  * seed-20261026 shuffled intervals and a finish/start-ordered list; setup sorting
  * is excluded for scanPresorted. No caller mutation, no pure sorting subtraction.
  * Result:
- * Pending author measurements; short smoke checks harness execution only.
+ * Author run reported 2026-10-26; source 674ab35b7d82f1a9ab7fbab63fa1a9e80253965c
+ * supplied separately. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/
+ * measurement, two forks (Cnt=10), combined run 5 min 51 sec. All 40 cells/errors,
+ * 400 measured and 240 warmup averages: docs/17-benchmarking/results/greedy/README.md.
+ * All 16 activity cells retained. DISJOINT n=10000 presorted/full:
+ * 94.215 +/- 1.244 / 1610.244 +/- 431.882 us/op; RANDOM:
+ * 56.152 +/- 1.875 / 2587.016 +/- 1158.367 us/op.
  * Interpretation:
- * Pending source/runtime/settings, all means/errors and parameters. Presorted
- * preparation is a different caller precondition, not free end-to-end sorting.
- * Compare matching shapes; source work/output differences do not establish
- * allocation rates, cache/CPU causes, significance or a fitted exponent.
+ * Presorted means are lower for all matching fixtures, but its input order was
+ * prepared outside timing. Both validate/snapshot/materialise the same plan;
+ * subtraction does not isolate sorting. Seven full-sort errors reach 25%,
+ * largest 48.6% at TOUCHING/100. Known selected output sizes are n for disjoint/
+ * touching and one for overlapping; output count alone does not explain time.
+ * No universal ratio, significance, allocation-rate or cache/CPU cause is claimed.
  * Protocol: docs/13-greedy-algorithms/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

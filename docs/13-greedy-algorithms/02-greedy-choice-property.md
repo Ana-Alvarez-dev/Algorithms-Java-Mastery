@@ -377,7 +377,7 @@ After completing this document, the learner should understand that:
 - the Greedy Choice Property allows locally optimal decisions to produce globally optimal solutions;
 - every Greedy decision must be a safe choice;
 - local optimality and global optimality are different concepts;
-- the Greedy Choice Property is a mathematical property of the problem, not the algorithm;
+- a safe-choice claim must specify the problem objective, rule and residual state; one safe rule does not justify another;
 - not every optimization problem satisfies this property;
 - correctness requires both the Greedy Choice Property and Optimal Substructure;
 - formal reasoning is necessary before applying a Greedy strategy;

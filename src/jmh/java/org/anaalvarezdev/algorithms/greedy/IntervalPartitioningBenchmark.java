@@ -16,12 +16,21 @@ import java.util.concurrent.TimeUnit;
  * Trial-only seed-20261026 construction is excluded; input stays unchanged.
  * DISJOINT/TOUCHING need one room; OVERLAPPING needs size rooms.
  * Result:
- * Pending author measurements; smoke is functional/harness evidence only.
+ * Author run reported 2026-10-26; source 674ab35b7d82f1a9ab7fbab63fa1a9e80253965c
+ * supplied separately. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/
+ * measurement, two forks (Cnt=10), combined run 5 min 51 sec. All 40 cells/errors,
+ * 400 measured and 240 warmup averages: docs/17-benchmarking/results/greedy/README.md.
+ * All eight room cells retained. At n=10000 DISJOINT/TOUCHING:
+ * 1901.335 +/- 19.514 / 1894.487 +/- 45.547; OVERLAPPING/RANDOM:
+ * 2823.808 +/- 39.895 / 3069.430 +/- 43.918 us/op.
  * Interpretation:
- * Pending actual source/runtime/settings and every mean/error. This retains
- * every interval, unlike activity selection. Do not rank their unlike outputs
- * as alternative algorithms. No isolated heap, memory-byte, cache or CPU claim
- * follows from size/shape means or from an asymptotic upper bound.
+ * No room error reaches 25%; disjoint/touching timing confidence intervals
+ * overlap, without demonstrating equivalence. Source has n peeks/offers and n-r reuse
+ * removals for r rooms: one room for disjoint/touching, n for overlapping.
+ * Fewer removals or peak room count alone do not explain elapsed means; sort,
+ * heap/record/result work remains included. Counts are not CPU/profile events.
+ * Assigning every interval differs from selection; no cross-objective ranking,
+ * isolated heap cost, memory-byte claim or fitted exponent follows.
  * Protocol: docs/13-greedy-algorithms/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

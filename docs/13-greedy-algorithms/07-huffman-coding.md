@@ -75,6 +75,10 @@ Tests check all 1,093 positive small frequency arrays against an independent
 oracle enumerating full-binary-tree root partitions, plus prefix freedom,
 recovered weighted lengths, 100 seeded alphabets, uniform/skewed/extreme weights
 and immutable deterministic output. The benchmark compares only exact cost
-workflows, including heap boxing versus clone/sort/arrays. Result/Interpretation
-await author output; no code-generation throughput, compression ratio,
-allocation rate or CPU/cache cause follows from these harness checks.
+workflows, including heap boxing versus clone/sort/arrays. The
+[first report](../17-benchmarking/results/greedy/README.md) now records all
+16 cost cells/errors and printed iterations. Two-queue means are lower in the
+matching subset; UNIFORM size-100 intervals overlap, and three UNIFORM errors
+reach 25%. Source counts n-1 merges/2n-1 heap offers explain work, not timing
+shares. No code-generation throughput, compression ratio, allocation rate,
+CPU/cache cause or universal speedup follows from cost-only measurements.

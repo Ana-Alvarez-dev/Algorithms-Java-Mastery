@@ -596,12 +596,21 @@ Normal/profile verification passed **645 tests**, including **27 new tests**.
 All five methods are discovered, 40 short smoke cells complete and a reference
 probe checks every default three calls each with repeatability/nonmutation.
 These are local checks, not controlled research scores or a new CI status.
-Result/Interpretation remain pending author output after source integration.
-Capture SHA before launch/pulling result changes, actual JDK/JMH settings,
-complete means/errors, fork iterations and completion markers. Keep parameter
-names/class-specific sizes and microsecond units clear. Evidence stays Markdown
-without JSON/log exports. No pure sorting/heap cost, profiler cause, allocation
-rate, significance or fitted exponent is invented from functional smoke.
+The [first author report](results/greedy/README.md), supplied on 2026-10-26,
+now completes all three Result/Interpretation fields with 40 means/errors,
+400 measured and 240 warmup averages, completed in 5 min 51 sec. Author-reported
+source is `674ab35b7d82f1a9ab7fbab63fa1a9e80253965c`, PR #86's merge; headers
+confirm JDK 21.0.9/JMH 1.37 and the controlled defaults. Ten errors reach 25%
+of their means: seven full activity sorts and three UNIFORM Huffman cells,
+maximum about 48.6%. No observation is discarded. Command line, execution
+timestamp, CPU/power, jar hash and profiler data were not supplied.
+
+Presorted activity means and two-queue Huffman cost means are lower in their
+matching subset; presorted preparation is excluded and UNIFORM/100 Huffman
+intervals overlap. Room assignment retains all intervals and is not ranked
+against subset selection. Analytical heap/merge/output ledgers do not identify
+CPU/cache causes, allocation rates or pure sorting/heap costs. Every observation
+and limitation remains in Markdown without JSON/log; smoke stays separate.
 
 # Key Takeaways
 

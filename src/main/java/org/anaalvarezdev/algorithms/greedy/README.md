@@ -40,8 +40,13 @@ distinguishes its payment invariant from the safe-choice proofs of other APIs.
 No production exact-change solver or automatic coin-system classifier is added.
 
 Three templates retain Research Question, Theoretical Expectation, Measured
-Work, Result and Interpretation. Author measurements remain pending; smoke is
-harness evidence only. The guide defines **40 default cells (16/8/16)** in
-**microseconds/op**, preserving source, actual runtime and all errors later in
-Markdown without JSON/log artifacts. Matroids, weighted scheduling, knapsack,
-full compression codecs and later paradigms remain extensions.
+Work, Result and Interpretation. The
+[first research report](../../../../../../../docs/17-benchmarking/results/greedy/README.md)
+now completes all three with **40 cells: 16 activity, 8 rooms, 16 Huffman**, every error,
+400 measured and 240 warmup averages in **microseconds/op**, on JDK 21.0.9/JMH 1.37.
+Author-reported source is `674ab35b7d82f1a9ab7fbab63fa1a9e80253965c` (PR #86).
+Ten cells have error at least 25% of their means; all observations remain intact
+in Markdown without JSON/log. Smoke remains separate, presorted preparation is
+excluded for that API, room assignment solves a different objective, and Huffman
+cost timings omit codes. Matroids, weighted scheduling, knapsack, full codecs
+and later paradigms remain extensions.
