@@ -1,5 +1,8 @@
 # Optimal Substructure
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for selected contracts, pseudocode, traces, proofs, Java, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 **Optimal Substructure** is one of the two fundamental mathematical properties required by many optimization problems that can be solved efficiently using Greedy algorithms or Dynamic Programming.

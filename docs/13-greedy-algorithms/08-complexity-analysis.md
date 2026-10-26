@@ -2,384 +2,64 @@
 
 ## Algorithms Java Mastery
 
-The primary objective of algorithm analysis is not only to determine whether a Greedy algorithm produces an optimal solution, but also to understand **how efficiently** it does so as the input size grows.
-
-Unlike Divide and Conquer algorithms, whose complexity is often described using **recurrence relations**, Greedy algorithms are generally iterative. Their computational complexity is determined by operations such as:
-
-- sorting;
-- selecting the next candidate;
-- maintaining priority queues;
-- scanning collections.
-
-For this reason, the efficiency of a Greedy algorithm depends not only on its decision strategy but also on the data structures used during execution.
-
-The algorithms studied in this module illustrate this principle. Activity Selection and Interval Scheduling achieve their efficiency after sorting the input, while Huffman Coding relies on a **Priority Queue (Min Heap)** to repeatedly obtain the smallest frequencies efficiently.
-
-Understanding these computational characteristics allows software engineers to select the most appropriate Greedy solution for a particular engineering problem.
-
----
-
-# 1. Purpose
-
-The purpose of this document is to:
-
-- analyze the computational complexity of Greedy algorithms;
-- compare the algorithms studied in this module;
-- evaluate time and auxiliary space complexity;
-- understand the influence of data structures;
-- discuss engineering trade-offs.
-
----
-
-# 2. Complexity in Greedy Algorithms
-
-Most Greedy algorithms follow the same high-level process.
-
-```text
-Prepare Input
-        ↓
-Select Best Candidate
-        ↓
-Update Solution
-        ↓
-Repeat
-```
-
-Their running time is determined by:
-
-- preprocessing;
-- candidate selection;
-- data structure operations.
-
----
-
-# 3. Sorting Cost
-
-Many Greedy algorithms begin by sorting the input.
-
-Typical complexity:
-
-```text
-O(n log n)
-```
-
-After sorting:
-
-```text
-Linear Scan
-
-↓
-
-O(n)
-```
-
-Consequently, sorting usually dominates the total execution time.
-
----
-
-# 4. Activity Selection
-
-Execution process:
-
-```text
-Sort Activities
-        ↓
-Select Compatible Activities
-```
-
-Time complexity:
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Sorting | O(n log n) |
-| Selection | O(n) |
-
-Overall:
-
-```text
-O(n log n)
-```
-
-Auxiliary space:
-
-```text
-O(1)
-```
-
-excluding the input collection.
-
----
-
-# 5. Interval Scheduling
-
-Execution process:
-
-```text
-Sort Intervals
-        ↓
-Select Compatible Intervals
-```
-
-Time complexity:
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Sorting | O(n log n) |
-| Selection | O(n) |
-
-Overall:
-
-```text
-O(n log n)
-```
-
-Auxiliary space:
-
-```text
-O(1)
-```
-
-excluding the input.
-
----
-
-# 6. Huffman Coding
-
-Execution process:
-
-```text
-Frequency Analysis
-        ↓
-Priority Queue
-        ↓
-Repeated Merges
-```
-
-Time complexity:
-
-| Operation | Complexity |
-|-----------|-----------:|
-| Build Priority Queue | O(n) |
-| Merge Operations | O(n log n) |
-
-Overall:
-
-```text
-O(n log n)
-```
-
-Auxiliary space:
-
-```text
-O(n)
-```
-
-because the algorithm stores the Huffman tree and the Priority Queue.
-
----
-
-# 7. Time Complexity Comparison
-
-| Algorithm | Time Complexity |
-|------------|----------------:|
-| Activity Selection | O(n log n) |
-| Interval Scheduling | O(n log n) |
-| Huffman Coding | O(n log n) |
-
-Although all three algorithms share the same asymptotic complexity, they achieve it through different operations.
-
----
-
-# 8. Auxiliary Space Comparison
-
-| Algorithm | Auxiliary Space |
-|------------|----------------:|
-| Activity Selection | O(1) |
-| Interval Scheduling | O(1) |
-| Huffman Coding | O(n) |
-
-Scheduling algorithms require very little additional memory, while Huffman Coding must maintain an explicit binary tree.
-
----
-
-# 9. Role of Data Structures
-
-The efficiency of Greedy algorithms depends heavily on selecting appropriate data structures.
-
-Examples include:
-
-| Problem | Primary Data Structure |
-|----------|------------------------|
-| Activity Selection | Sorted Array/List |
-| Interval Scheduling | Sorted Array/List |
-| Huffman Coding | Priority Queue (Min Heap) |
-
-The Greedy strategy alone is insufficient without efficient supporting structures.
-
----
-
-# 10. Preprocessing versus Decision Cost
-
-Many Greedy algorithms spend most of their execution time preparing the input.
-
-Conceptually:
-
-```text
-Sorting
-
-↓
-
-Greedy Decisions
-
-↓
-
-Fast Execution
-```
-
-After preprocessing, each Greedy decision is typically inexpensive.
-
----
-
-# 11. Scalability
-
-As input size increases:
-
-- sorting scales as **O(n log n)**;
-- linear scanning scales as **O(n)**;
-- heap operations scale as **O(log n)**.
-
-These growth rates allow Greedy algorithms to remain efficient for large datasets.
-
----
-
-# 12. Practical Performance
-
-Although asymptotic complexity is important, practical performance also depends on:
-
-- implementation quality;
-- cache locality;
-- constant factors;
-- memory allocation;
-- data structure efficiency.
-
-Two algorithms with the same Big-O complexity may perform differently in practice.
-
----
-
-# 13. Engineering Trade-Offs
-
-| Criterion | Scheduling Algorithms | Huffman Coding |
-|-----------|----------------------|---------------|
-| Main Cost | Sorting | Priority Queue |
-| Auxiliary Memory | Very Low | Moderate |
-| Scalability | Excellent | Excellent |
-| Implementation | Simple | More Complex |
-
-Selecting an algorithm depends on the characteristics of the problem rather than complexity alone.
-
----
-
-# 14. Comparison with Previous Paradigms
-
-| Paradigm | Typical Complexity Driver |
-|-----------|--------------------------|
-| Divide and Conquer | Recursive decomposition |
-| Greedy | Sorting and local decisions |
-| Dynamic Programming | State exploration and memoization |
-
-Each paradigm achieves efficiency through a different strategy.
-
----
-
-# 15. Common Complexity Misconceptions
-
-## "Greedy algorithms are always O(n)."
-
-Incorrect.
-
-Many Greedy algorithms require an initial sorting step.
-
-Overall complexity:
-
-```text
-O(n log n)
-```
-
----
-
-## "The Greedy decision is the expensive part."
-
-Usually false.
-
-The decision itself is often constant time.
-
-Sorting or maintaining a Priority Queue generally dominates execution time.
-
----
-
-## "Algorithms with the same Big-O always perform equally."
-
-Incorrect.
-
-Memory usage, implementation details, and constant factors influence real-world performance.
-
----
-
-# 16. Java Perspective
-
-Java provides several efficient data structures commonly used by Greedy algorithms.
-
-Examples include:
-
-- `Arrays.sort()`;
-- `Collections.sort()`;
-- `PriorityQueue`;
-- `Comparator`;
-- `ArrayList`.
-
-Using the appropriate Java collection often determines the practical performance of the implementation.
-
----
-
-# 17. Engineering Perspective
-
-Professional software engineers evaluate Greedy algorithms according to multiple criteria.
-
-```text
-Correctness
-        ↓
-Time Complexity
-        ↓
-Memory Usage
-        ↓
-Data Structures
-        ↓
-Scalability
-        ↓
-Maintainability
-```
-
-Big-O notation provides valuable insight, but engineering decisions also consider implementation simplicity, available memory, and expected input characteristics.
-
----
-
-# 18. Relationship with the Next Document
-
-This document summarized the computational characteristics of the Greedy algorithms studied throughout the module.
-
-The next document, **Common Mistakes**, examines the conceptual and implementation errors frequently encountered when designing Greedy algorithms, including incorrect selection criteria, invalid assumptions about optimality, and misuse of supporting data structures.
-
----
-
-# 19. Key Takeaways
-
-After completing this document, the learner should understand that:
-
-- Greedy algorithm complexity is usually determined by preprocessing and efficient candidate selection;
-- sorting often dominates the running time of scheduling algorithms;
-- Huffman Coding relies on a Priority Queue to achieve efficient execution;
-- Activity Selection and Interval Scheduling require only constant auxiliary space after sorting;
-- Huffman Coding requires linear auxiliary space because of the Huffman tree and Priority Queue;
-- algorithms with identical asymptotic complexity may have different practical performance;
-- selecting appropriate data structures is essential for efficient Greedy implementations;
-- professional software engineers evaluate Greedy algorithms according to correctness, complexity, memory usage, scalability, and implementation quality.
+The [implementation guide](implementation-and-benchmark-guide.md) supplies the
+contracts, traces, proofs, source ledgers, tests and measurement protocol.
+Let n be interval/symbol count, k selected intervals, r allocated rooms,
+d denominations and L materialised Huffman codeword characters. Empty and
+constant-size cases have constant cost; int comparisons are word operations.
+Exact BigInteger arithmetic and string character work are separate quantities.
+
+| Reviewed operation | Work | Storage / output |
+|---|---|---|
+| ActivitySelection.select | O(n log n) worst sorting plus linear validation/scan | O(n) snapshot/sort state plus O(k) plan |
+| ActivitySelection.selectSorted | O(n+1) including validation, scan and result | O(n) worst snapshot/output; scalar scan alone O(1) |
+| IntervalPartitioning.assign | O(n log n) ordering plus O(n log(r+1)) heap work | O(n) snapshot/entries/assignment, O(r) room availability heap |
+| HuffmanCoding.build | O(n log n) comparison/tree work plus O(L) characters and exact arithmetic | O(n+L), including code strings and traversal state |
+| HuffmanCoding.costWithHeap | O(n log n) comparisons plus n-1 exact additions | O(n) queue/boxing; no codes |
+| HuffmanCoding.costWithTwoQueues | O(n log n) worst sorting plus linear cursor merges and exact additions | O(n) private leaf/merge arrays; no codes |
+| CoinChange.greedy | O(d log(d+1)+1) worst preprocessing/scan | O(d) private copy and compressed uses, no amount-sized structure |
+
+Activity selection and classical unweighted interval scheduling are the same
+problem here. Assigning every interval to rooms is another objective; their
+scores are not a ranking of interchangeable solutions. Time bounds alone also
+do not justify the validity of a greedy choice: arbitrary greedy change can
+be fast, suboptimal and incomplete.
+
+## Include Preparation and Retained Results
+
+A last-finish scan uses constant scalar state. Public snapshots, sorting
+workspace and an immutable selected plan do not disappear from the space
+account. The validated presorted method still snapshots and returns a plan.
+Its benchmark excludes caller order preparation by design, not as a universal
+claim that scheduling has free sorting or constant space.
+
+The room heap retains each room's last availability, including idle rooms.
+There is one peek and one offer per interval, and n-r reused-room removals;
+room allocation happens r times. These source operation counts are not actual
+comparator/instruction counts or measured allocation bytes. r ranges from one
+to n for nonempty schedules, depending on maximum overlap.
+
+## Huffman Heap, Queues and Output
+
+For n>=2, cost computation has n-1 merges and 2(n-1) minimum removals/front
+selections. Heap cost performs 2n-1 offers including initial leaves. Individual
+offers have O(n log n) aggregate worst preprocessing, unlike a separate linear
+heapify algorithm. Two-queue cost sorts inside its public call, then merges
+through monotone cursors. Neither produces codewords; full build additionally
+creates the tree, map, strings and exact weighted length.
+
+Positive int frequencies have a long-bounded subtree sum, but total weighted
+path length also multiplies by depth and is kept exact with BigInteger.
+O(n+L) includes materialised codewords; quoting only O(n) tree space would omit
+the returned representation. Explicit-stack traversal does not prove constant
+memory or a fixed byte count. Singleton nonempty code policy has its own base.
+
+## Model and Empirical Boundaries
+
+O(n log n) is a worst comparison bound; it is not an assertion of identical
+sorting work for every fixture. One seed, two sizes and a finite shape grid do
+not prove an exponent or universal speed ranking. Heap boxing, snapshots,
+BigInteger arithmetic, candidate/output counts and runtime optimisations can
+affect elapsed time, but timings alone do not identify their shares or CPU/cache
+causes. The three benchmark templates state complete timed work and retain
+pending Result/Interpretation until author measurements arrive.
