@@ -90,7 +90,14 @@ multisets and both global partition inequalities, including exhaustive small
 duplicates, extreme ints and structured/large inputs. Tests are finite evidence;
 the invariants above justify progress and correctness generally.
 
-The new benchmark Result/Interpretation fields await author measurements.
-No general speed ranking, cache benefit, memory-footprint estimate or
-allocation rate follows from an algorithm's name. The source, input model,
-timed ownership work, actual runtime and all errors must accompany any claim.
+The [first report](../17-benchmarking/results/divide-and-conquer/README.md)
+now completes selection Result/Interpretation with all 16 workflow cells, using
+author-reported source `507b253` and JDK 21.0.9/JMH 1.37. Selection means are
+lower on RANDOM; copy-plus-sort means are lower on the two ordered fixtures.
+Duplicate-heavy size-10,000 intervals overlap. Four selection/sort errors reach
+25% of their means. On sorted input the first pivot's equal band contains rank
+n/2, so selection uses one full partition; that source fact does not guarantee
+it beats a library call. The exact library path was not inspected or profiled.
+The report preserves every error/iteration and both timed clones, without
+general speed rankings, cache causes, allocation rates or stronger worst-case
+guarantees. Existing Sorting evidence retains its separate source/runtime.

@@ -17,12 +17,22 @@ import java.util.concurrent.TimeUnit;
  * (upper middle at even sizes). Selection partitions that copy; reference sorts
  * it fully. Trial setup uses seed 20261025 and is excluded. No reused sorted data.
  * Result:
- * Pending author measurements; smoke checks only discovery/execution.
+ * Author run reported 2026-10-26; source 507b2537d3dedd3beb57900d3ee72d7858571c89
+ * supplied separately. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/
+ * measurement, two forks (Cnt=10), combined run 7 min 4 sec. All 48 cells/errors,
+ * 480 measured and 288 warmup averages: docs/17-benchmarking/results/divide-and-conquer/README.md.
+ * All 16 selection/sort cells retained. SORTED n=10000 select/sort:
+ * 18.015 +/- 3.109 / 9.164 +/- 2.476 us/op; RANDOM: 102.795 +/- 7.247 /
+ * 455.682 +/- 60.337 us/op. Both workflows include a timed clone.
  * Interpretation:
- * Pending actual source/runtime/settings and all errors. This compares complete
- * copy-plus-selection/sort workflows, not isolated partition costs or all ranks.
- * Do not subtract times to infer a pure cost, assume a random pivot, infer cache
- * causes or generalise two sizes/four distributions to adversarial guarantees.
+ * Selection means are lower for RANDOM; sort means are lower for ordered data.
+ * DUPLICATE_HEAVY n=10000 intervals overlap (92.606 +/- 11.744 versus
+ * 113.075 +/- 19.241 us/op). Four workflow errors reach 25%, largest 40.2%.
+ * Sorted selection returns after one partition of n items: the first pivot's
+ * equal band contains rank n/2. A linear pass still need not beat a library
+ * call. Its exact library path/CPU causes were not profiled. Deterministic
+ * worst-case bounds remain; no pure partition cost, universal ratio or formal
+ * significance/equivalence follows from these complete copy-plus-operation means.
  * Protocol: docs/12-divide-and-conquer/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

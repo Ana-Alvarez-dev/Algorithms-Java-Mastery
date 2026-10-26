@@ -249,13 +249,36 @@ copy or an isolated partition cost. Inversion's default size cap bounds direct
 pair work; overriding it to huge sizes can make that reference expensive.
 
 Each template retains Research Question, Theoretical Expectation, Measured
-Work, Result and Interpretation. **Result/Interpretation await author output**
-after feature integration. No score, uncertainty, CPU profile, allocation rate,
-stack bytes, cache cause, significance or asymptotic fit is invented. Two sizes
-are not enough to infer an exponent. Measurements compare matching parameters
-within a family and keep differing output/state/ownership work explicit.
+Work, Result and Interpretation. The
+[first research report](../17-benchmarking/results/divide-and-conquer/README.md)
+now completes all three from **48 means/errors**, **480 measured** and **288
+warmup averages**, with completion **7 min 4 sec**. The author supplied the
+output on **2026-10-26**, separately reporting source
+**`507b2537d3dedd3beb57900d3ee72d7858571c89`**, the PR #84 merge. Headers confirm
+JDK 21.0.9/JMH 1.37 and the defaults above. The SHA is author checkout
+attribution, not embedded in JMH or verified by a supplied jar hash. The
+attachment starts with a header; full command, execution timestamp, CPU/power
+and profiler data are not supplied.
 
-After creating/merging the feature PR, run from the Windows repository root:
+Linear maximum-subarray means are lower on all selected fixtures. At size 100,
+direct inversion counts have lower means on sorted/reverse inputs; at 1,000,
+merge means are lower in all four fixtures. Selection has lower means on RANDOM,
+while copy-plus-sort has lower means on ordered fixtures. Duplicate-heavy
+size-10,000 selection/sort intervals overlap. These are bounded observations,
+not a general crossover threshold, significance test or universal ranking.
+
+Six errors reach 25% of their means: two direct inversion and four selection/
+sort workflow cells, maximum about 74.5%. No observation is dropped. The report
+derives pair visits, full-merge/crossing scan counts and result-construction
+counts from source, without assigning CPU/cache/GC causes or elapsed-cost
+shares. Sorted selection returns after one partition because rank=size/2 lies
+in the first pivot's equal band; that still does not guarantee it beats the
+library workflow. Actual library paths were not inspected or profiled here.
+No allocation rate, stack bytes, formal equivalence, fitted exponent or new
+performance experiment is claimed. Earlier 618-test verification is separate.
+
+The following commands retain the reproducible Windows protocol. After source
+integration, run from the local repository root:
 
 ```powershell
 git switch main

@@ -16,11 +16,19 @@ import java.util.concurrent.TimeUnit;
  * deterministic seed-20261025 inputs; both methods read the same unchanged data.
  * No timed clone. Sign/zero distributions also change branch/tie workloads.
  * Result:
- * Pending author measurements; short smoke is harness evidence only.
+ * Author run reported 2026-10-26; source 507b2537d3dedd3beb57900d3ee72d7858571c89
+ * supplied separately. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/
+ * measurement, two forks (Cnt=10), combined run 7 min 4 sec. All 48 cells/errors,
+ * 480 measured and 288 warmup averages: docs/17-benchmarking/results/divide-and-conquer/README.md.
+ * All 16 maximum-subarray cells retained. MIXED n=10000 divide/linear:
+ * 224.857 +/- 4.264 / 4.978 +/- 0.049 us/op; all errors are below 25% of means.
  * Interpretation:
- * Pending actual source/runtime/settings and every mean/error. Compare matching
- * size/distribution, retaining allocation and work differences. No profiler,
- * cache-cause, stack-byte or asymptotic-fit inference follows from times alone.
+ * Linear means are lower on all selected fixtures. Recursive crossing-scan
+ * visits are 672/133616 and source Subarray constructions 199/19999 at
+ * n=100/10000; loop processes n values and constructs one Subarray. Logarithmic
+ * depth differs from linear total constructions. These are source counts, not
+ * measured allocation rates or elapsed-cost attribution. Different sign/tie
+ * work remains included; no cache/GC cause, significance or asymptotic fit.
  * Protocol: docs/12-divide-and-conquer/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

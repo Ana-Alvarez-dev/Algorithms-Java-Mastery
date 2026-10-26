@@ -67,4 +67,8 @@ tree, or apply the [Master theorem](04-master-theorem.md) after checking all its
 conditions. Variable-size, overlapping, data-dependent or decrement recurrences
 need a justified model and may not match that theorem.
 No benchmark ratio substitutes for the recurrence proof. The source/test/JMH
-mapping and pending empirical fields remain in the implementation guide.
+mapping remains in the implementation guide. The
+[first research report](../17-benchmarking/results/divide-and-conquer/README.md)
+now preserves all 48 default means/errors and printed iterations, with source
+`507b253` and JDK 21.0.9/JMH 1.37. Its source scan/construction ledgers are
+analytical counts, not measured machine events or a fitted asymptotic exponent.

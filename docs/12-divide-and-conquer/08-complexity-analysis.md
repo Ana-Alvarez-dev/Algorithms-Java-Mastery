@@ -67,5 +67,11 @@ There is no blanket practical-speed winner. Layout, runtime optimisations,
 allocation and input distribution can affect elapsed time, but source
 complexity does not identify a CPU/cache cause. None is asserted without a
 matching experiment or profiler evidence. The JMH protocol times complete
-operations, preserves the immutable trial inputs and leaves Result/Interpretation
-pending measured author output. Ratios from two sizes do not prove an exponent.
+operations and preserves trial inputs. The
+[first research report](../17-benchmarking/results/divide-and-conquer/README.md)
+now supplies all 48 means/errors and printed iterations on JDK 21.0.9/JMH 1.37,
+with author-reported source `507b253` and six wide-error cells. Source scan/
+construction counts explain differing work, not timing shares or machine events.
+Small direct inversion counts and ordered copy-plus-sort can have lower means
+than their compared variants; those bounded observations do not determine a
+universal ranking. Ratios from two sizes do not prove an exponent.
