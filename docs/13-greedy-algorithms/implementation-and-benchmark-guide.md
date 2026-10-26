@@ -288,11 +288,34 @@ decode data or measure total file compression. CoinChange has test/counterexampl
 evidence without a timing question selected here; Interval is a domain value.
 
 Each template has Research Question, Theoretical Expectation, Measured Work,
-Result and Interpretation. **Result/Interpretation await measured author output**.
-No score, error, allocation rate, stack-byte usage, cache/CPU cause, significance
-or fitted exponent is invented. One seed/two sizes do not cover all inputs.
+Result and Interpretation. The
+[first research report](../17-benchmarking/results/greedy/README.md) now completes
+all three from **40 means/errors**, **400 measured** and **240 warmup averages**,
+with completion **5 min 51 sec**. The author supplied the output on
+**2026-10-26**, separately reporting source
+**`674ab35b7d82f1a9ab7fbab63fa1a9e80253965c`**, PR #86's merge. Headers confirm
+JDK 21.0.9/JMH 1.37 and the defaults above. Source is author checkout attribution,
+not embedded in JMH or established by a supplied jar hash. Full command,
+execution timestamp, CPU/power details and profiler data are unavailable.
 
-After creating/merging the feature PR, run from the Windows repository root:
+Presorted activity means are lower in all matching fixtures, with order
+preparation outside timing; subtraction does not isolate sorting cost. Seven
+full-sort activity cells have errors at least 25%, largest about 48.6%.
+Two-queue Huffman cost means are lower in the subset; UNIFORM/100 intervals
+overlap, and three UNIFORM cells have error at least 25%. Room errors are below
+25%, but disjoint/touching timing confidence intervals overlap and peak room count alone does
+not explain means. Selection and room assignment remain different objectives.
+
+Source ledgers distinguish output counts, n-r reuse removals, n-1 Huffman merges
+and 2n-1 heap offers. They are not measured CPU events, actual allocation rates
+or elapsed-cost attribution. All ten wide-error cells and every observation
+remain intact. Huffman timings omit code construction/compression; CoinChange
+has no timing evidence here. No universal ratio, significance/equivalence,
+fitted exponent or new timed experiment is claimed. Earlier 645-test verification
+remains separate from this results-only documentation update.
+
+The commands below retain the reproducible Windows protocol. After source
+integration, run from the local repository root:
 
 ```powershell
 git switch main

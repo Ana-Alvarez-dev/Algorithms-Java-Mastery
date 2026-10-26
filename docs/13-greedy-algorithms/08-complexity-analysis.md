@@ -61,5 +61,10 @@ sorting work for every fixture. One seed, two sizes and a finite shape grid do
 not prove an exponent or universal speed ranking. Heap boxing, snapshots,
 BigInteger arithmetic, candidate/output counts and runtime optimisations can
 affect elapsed time, but timings alone do not identify their shares or CPU/cache
-causes. The three benchmark templates state complete timed work and retain
-pending Result/Interpretation until author measurements arrive.
+causes. The [first report](../17-benchmarking/results/greedy/README.md) now
+completes all three templates with 40 means/errors and every printed iteration,
+using author-reported source `674ab35` and JDK 21.0.9/JMH 1.37. Ten errors reach
+25% of their means. The source output/heap/merge ledgers remain analytical;
+presorted preparation, different interval objectives and omitted Huffman codes
+prevent interpreting the means as isolated or interchangeable operation costs.
+No fitted exponent or significance/equivalence test is claimed.

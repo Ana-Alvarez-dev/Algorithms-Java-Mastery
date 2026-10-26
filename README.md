@@ -360,7 +360,11 @@ greedy change with explicit failure counterexamples. Its 27 tests bring local
 verification to **645 tests**. The guide links exchange/lower-bound arguments,
 invariants, ownership, work/output space and independent oracles. Five methods
 in three JMH templates define 40 defaults in microseconds/op; all pass functional
-probes and execution smoke. Controlled author results remain pending. Interval
+probes and execution smoke. The
+[first Greedy report](docs/17-benchmarking/results/greedy/README.md) now retains
+all 40 means/errors, 400 measured and 240 warmup averages on JDK 21.0.9/JMH 1.37,
+using author-reported source `674ab35` (PR #86). All three templates include
+preliminary interpretation, with ten wide-error cells retained. Interval
 objectives, presorted preparation and cost-only Huffman work remain explicit.
 
 ## Technology Stack

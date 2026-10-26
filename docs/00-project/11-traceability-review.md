@@ -56,7 +56,9 @@ cells on JDK 21.0.9/JMH 1.37, with separately supplied source
 The Greedy contribution extends review from main
 `9f65e53437bb7200f658a65f6fb795c20266f85c`, which integrated Divide and Conquer
 research through PR #85. Its local verification reported 2026-10-26 is recorded
-below; its own controlled author measurements remain pending.
+below. The first author-reported Greedy run now records all 40 default cells
+on JDK 21.0.9/JMH 1.37, with separately supplied source
+`674ab35b7d82f1a9ab7fbab63fa1a9e80253965c` (PR #86 merge).
 
 ## Required Chain
 
@@ -86,7 +88,7 @@ helpers. The matrix includes selected implementations through module 13.
 | Graphs | 12 | 48 | 6 | [Selected contracts](../10-graphs/implementation-and-benchmark-guide.md), [24 traversal results](../17-benchmarking/results/graphs/README.md), [8 weighted results](../17-benchmarking/results/graphs/weighted-first-run.md); JDK 21.0.9, author-reported source `00fc9de`, all errors/printed iterations retained with preliminary limits |
 | Recursion | 7 | 28 | 8 | [Selected contracts](../11-recursion/implementation-and-benchmark-guide.md), [24 results and research](../17-benchmarking/results/recursion/README.md); JDK 21.0.9/JMH 1.37, author-reported source `fe370a1`, all errors/iterations retained; five wide-error cells and preliminary limits |
 | Divide and Conquer | 3 | 18 | 6 | [Selected contracts](../12-divide-and-conquer/implementation-and-benchmark-guide.md), [48 results and research](../17-benchmarking/results/divide-and-conquer/README.md); JDK 21.0.9/JMH 1.37, author-reported source `507b253`, all errors/printed iterations retained; six wide-error cells and preliminary limits |
-| Greedy | 5 | 27 | 5 | [Selected contracts, proofs and protocol](../13-greedy-algorithms/implementation-and-benchmark-guide.md); interval selection/partitioning, deterministic Huffman codes/costs and explicit change heuristic verified; controlled author timings pending |
+| Greedy | 5 | 27 | 5 | [Selected contracts](../13-greedy-algorithms/implementation-and-benchmark-guide.md), [40 results and research](../17-benchmarking/results/greedy/README.md); JDK 21.0.9/JMH 1.37, author-reported source `674ab35`, all errors/printed iterations retained; ten wide-error cells and preliminary limits |
 | 14–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **645 passing repository tests**, compared with **618** before
@@ -575,15 +577,38 @@ retain their own source/settings, complete errors and matched controls. Greedy
 implementation/measurement, Backtracking and Dynamic Programming are separate
 contributions; Divide and Conquer data is not reused as their performance data.
 
-Greedy is ready for its
-[initial controlled measurements](../13-greedy-algorithms/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
-after feature integration: **40 cells**, split 16 activity / 8 rooms / 16 Huffman
-cost, in **microseconds/op**. Capture source SHA before launch and later results
-pulls, actual runtime/settings, all errors, available fork iterations and
-completion markers. Presorted preparation, different interval objectives and
-Huffman cost-only work remain explicit. All three Result/Interpretation fields
-await author output; no scores are invented from smoke. Evidence stays Markdown
-without JSON/log exports.
+The [first Greedy report](../17-benchmarking/results/greedy/README.md) now
+completes all three templates with **40 means/errors**, **400 measured** and
+**240 warmup averages**, completed in **5 min 51 sec**. Source
+`674ab35b7d82f1a9ab7fbab63fa1a9e80253965c` is separately author-reported checkout
+attribution, matching the PR #86 merge; it is not embedded in JMH or a jar hash.
+Headers confirm JDK 21.0.9/JMH 1.37, one thread, 3/5 x 500 ms, two forks and
+microseconds/op. The output contains no command or execution timestamp;
+CPU/power, generated-code inspection and profiler data remain unavailable.
+
+All final means/errors match their blocks and parameters. Rounded observation
+means, extrema and sample standard deviations agree to printed precision;
+printed 99.9% CIs and every warmup/measurement value are retained. Ten errors
+reach 25% of their means: seven activity sortAndSelect and three UNIFORM Huffman
+cells, maximum about 48.6%. No outlier is removed and no significance/equivalence
+test or universal speedup is claimed. UNIFORM/100 Huffman intervals overlap.
+
+Presorted activity and two-queue Huffman means are lower in matching fixtures,
+but order preparation is excluded for the former, and the latter omits codes/
+compression. Room assignment places every interval and is not ranked against
+subset selection; disjoint/touching timing confidence intervals overlap.
+Source output/heap/merge ledgers distinguish n peeks/offers, n-r room reuses, n-1 Huffman merges
+and 2n-1 heap offers. Those counts and derived expected costs are mathematical
+evidence, not profiler events, actual allocations or elapsed-cost attribution.
+
+The initial default grid is complete, not all Greedy inputs/APIs. Codebook
+generation and CoinChange are not timed. This update changes documentation/
+comments only, with no executable Java change, new timed run or CI status.
+Earlier 645-test verification, open findings and prior source provenance remain
+distinct. All evidence stays Markdown without JSON/log. A safe-choice takeaway
+now consistently names the objective/rule/residual state, matching its existing
+introduction. Further controlled experiments retain their own source/settings
+and all errors; Backtracking and Dynamic Programming remain separate work.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

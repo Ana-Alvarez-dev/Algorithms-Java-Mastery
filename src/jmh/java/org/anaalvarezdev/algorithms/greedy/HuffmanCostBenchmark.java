@@ -18,11 +18,20 @@ import java.util.concurrent.TimeUnit;
  * is excluded. SKEWED has one MAX_INT frequency plus ones; no overflow in long
  * subtree weights, and weighted cost uses BigInteger.
  * Result:
- * Pending author measurements; smoke values are not empirical conclusions.
+ * Author run reported 2026-10-26; source 674ab35b7d82f1a9ab7fbab63fa1a9e80253965c
+ * supplied separately. JMH 1.37/JDK 21.0.9, one thread, 3/5 x 500 ms warmup/
+ * measurement, two forks (Cnt=10), combined run 5 min 51 sec. All 40 cells/errors,
+ * 400 measured and 240 warmup averages: docs/17-benchmarking/results/greedy/README.md.
+ * All 16 cost cells retained. RANDOM n=1000 heap/two-queue:
+ * 149.045 +/- 1.551 / 32.205 +/- 1.556 us/op; SKEWED:
+ * 68.620 +/- 0.846 / 14.491 +/- 0.312 us/op.
  * Interpretation:
- * Pending source/runtime/settings and every error. Cost-only workflows have the
- * same optimum, not a full encoder's cost. No isolated sort/heap/boxing cost,
- * allocation rate, cache cause, significance or two-size exponent is inferred.
+ * Two-queue means are lower in this subset; UNIFORM/100 intervals overlap.
+ * Three UNIFORM errors reach 25% (35.3%/43.4% heap, 44.7% two-queue at 100).
+ * Both do n-1 merges/exact cost additions; heap offers total 2n-1, while the
+ * other method includes clone/sort/arrays and monotone cursors. Source counts
+ * are not profiler attribution or measured allocation. Cost-only results do
+ * not time codewords/compression. No isolated heap/boxing cost or universal ratio.
  * Protocol: docs/13-greedy-algorithms/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)
