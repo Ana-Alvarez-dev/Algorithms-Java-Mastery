@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **12 — Divide and Conquer**. It is a source/evidence inventory,
+progression through **13 — Greedy Algorithms**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -53,6 +53,11 @@ The first author-reported run, supplied on 2026-10-26, now records all 48 defaul
 cells on JDK 21.0.9/JMH 1.37, with separately supplied source
 `507b2537d3dedd3beb57900d3ee72d7858571c89` (PR #84 merge).
 
+The Greedy contribution extends review from main
+`9f65e53437bb7200f658a65f6fb795c20266f85c`, which integrated Divide and Conquer
+research through PR #85. Its local verification reported 2026-10-26 is recorded
+below; its own controlled author measurements remain pending.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -66,7 +71,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes selected implementations through module 12.
+helpers. The matrix includes selected implementations through module 13.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -81,10 +86,11 @@ helpers. The matrix includes selected implementations through module 12.
 | Graphs | 12 | 48 | 6 | [Selected contracts](../10-graphs/implementation-and-benchmark-guide.md), [24 traversal results](../17-benchmarking/results/graphs/README.md), [8 weighted results](../17-benchmarking/results/graphs/weighted-first-run.md); JDK 21.0.9, author-reported source `00fc9de`, all errors/printed iterations retained with preliminary limits |
 | Recursion | 7 | 28 | 8 | [Selected contracts](../11-recursion/implementation-and-benchmark-guide.md), [24 results and research](../17-benchmarking/results/recursion/README.md); JDK 21.0.9/JMH 1.37, author-reported source `fe370a1`, all errors/iterations retained; five wide-error cells and preliminary limits |
 | Divide and Conquer | 3 | 18 | 6 | [Selected contracts](../12-divide-and-conquer/implementation-and-benchmark-guide.md), [48 results and research](../17-benchmarking/results/divide-and-conquer/README.md); JDK 21.0.9/JMH 1.37, author-reported source `507b253`, all errors/printed iterations retained; six wide-error cells and preliminary limits |
-| 13–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Greedy | 5 | 27 | 5 | [Selected contracts, proofs and protocol](../13-greedy-algorithms/implementation-and-benchmark-guide.md); interval selection/partitioning, deterministic Huffman codes/costs and explicit change heuristic verified; controlled author timings pending |
+| 14–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **618 passing repository tests**, compared with **600** before
-Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
+There are now **645 passing repository tests**, compared with **618** before
+Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
 and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
@@ -351,6 +357,49 @@ The next numbered module is **13 - Greedy Algorithms**, then Backtracking and
 Dynamic Programming. Local checks do not establish CI status or fix the open
 earlier Arrays/Searching findings. Smoke is separate from measured research.
 
+## Greedy Verification and Review
+
+Verification reported **2026-10-26**, using **OpenJDK 21+35-2513**, passed normal
+Maven tests and benchmark-profile clean package: **645 tests**, zero failures/
+errors/skips, including **27 new module tests** (prior Divide and Conquer 618).
+The guide connects all nine conceptual documents to precise objectives,
+contracts, pseudocode/traces, exchanges, lower bounds, invariants and evidence.
+
+| Check | Evidence |
+|---|---|
+| Interval domain | Two tests: nonempty half-open intervals, signed/extreme times, rejection without subtraction |
+| Activity selection | Six tests: all 1,024 sets from ten intervals on endpoints 0..4 against exhaustive compatible subsets, 200 seeded lists, touching/ties/duplicates, ordered-domain and ownership checks |
+| Room assignment | Six tests: all small sets plus 500 seeded schedules against maximum overlap; all original positions assigned legally, deterministic room ties, immutable output |
+| Huffman | Seven tests: all 1,093 positive weight arrays length 0..6 against all full-binary-tree root partitions; prefix freedom/recovered cost, 100 seeded alphabets, singleton/empty, uniform/skew/extreme frequencies and deterministic immutable maps |
+| Greedy change | Six tests: suboptimal {1,3,4}/6 and incomplete {3,4}/6 counterexamples; binary coins match exact test-only DP for amounts 0..4,096; invalid/empty/duplicates and compressed MAX_VALUE quantity |
+| JMH | Five discovered methods, all 40 short smoke cells complete; reference DP/sweep/sorted-multiset probe checks every default three calls each and trial nonmutation/repeatability |
+| JavaDoc | Package passes doclint excluding missing tags |
+
+Five production files add selected examples without duplicating Graphs' Dijkstra/
+Kruskal or copying activity selection under another name. Interval scheduling
+and activity selection share a cardinality objective; room partitioning retains
+every interval and minimises rooms. The proof matches a simultaneous-overlap
+lower bound, and the heap retains one latest finish per allocated room, including
+idle ones. Scalar greedy state is not the complete public space bound when
+snapshots, sorting workspace and immutable output are materialised.
+
+Huffman has positive int frequencies, opaque int symbols, deterministic ties,
+empty/one-bit-singleton policies, exact BigInteger weighted length and explicit-
+stack code generation. Materialised code strings add O(L) state/work to tree/
+queue bounds. Cost-only heap/two-queue workflows omit codewords and are not full
+compression; heap leaves are inserted individually rather than linear heapify.
+CoinChange exposes payment/remainder validity without claiming arbitrary-system
+optimality or completeness. Tests include actual counterexamples rather than
+promoting that heuristic's success on canonical examples to a general theorem.
+
+The document review scopes safe choices to the specified rule/objective and
+corrects output-space, queue-construction and next-module claims. The next
+numbered module is **14 - Backtracking**, then **15 - Dynamic Programming**.
+Weighted scheduling, knapsack, matroids, full compression and automatic coin
+classification remain extensions. Earlier source/tests/POM, measured reports
+and open findings are unchanged. Local checks do not establish CI status;
+smoke is separate from controlled author research.
+
 ## Evidence Policy and Next Action
 
 The repository retains results in Markdown, with existing historical CSV
@@ -518,11 +567,23 @@ arbitrary-input expected-linear guarantee follows. Library paths were not
 inspected or profiled, and two sizes do not prove a complexity exponent.
 
 Initial default-grid evidence is complete, not all accepted inputs/ranks/seeds.
-This update changes documentation/comments only, with no executable Java change,
-new timed run or CI status. Earlier 618-test verification and open findings stay
+That Divide and Conquer results update changed documentation/comments only,
+with no executable Java change, new timed run or CI status. Its earlier 618-test
+verification and open findings stay
 distinct. All evidence is Markdown without JSON/log exports. Further experiments
-retain their own source/settings, complete errors and matched controls; later
-Greedy/Backtracking/Dynamic Programming modules remain separate work.
+retain their own source/settings, complete errors and matched controls. Greedy
+implementation/measurement, Backtracking and Dynamic Programming are separate
+contributions; Divide and Conquer data is not reused as their performance data.
+
+Greedy is ready for its
+[initial controlled measurements](../13-greedy-algorithms/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
+after feature integration: **40 cells**, split 16 activity / 8 rooms / 16 Huffman
+cost, in **microseconds/op**. Capture source SHA before launch and later results
+pulls, actual runtime/settings, all errors, available fork iterations and
+completion markers. Presorted preparation, different interval objectives and
+Huffman cost-only work remain explicit. All three Result/Interpretation fields
+await author output; no scores are invented from smoke. Evidence stays Markdown
+without JSON/log exports.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

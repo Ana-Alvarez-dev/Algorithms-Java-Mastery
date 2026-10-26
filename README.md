@@ -307,6 +307,7 @@ are distinguished in the implementation guide.
 - [Graphs scope, contracts and run commands](docs/10-graphs/implementation-and-benchmark-guide.md)
 - [Recursion scope, contracts and run commands](docs/11-recursion/implementation-and-benchmark-guide.md)
 - [Divide and Conquer scope, contracts and run commands](docs/12-divide-and-conquer/implementation-and-benchmark-guide.md)
+- [Greedy scope, contracts and run commands](docs/13-greedy-algorithms/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -352,6 +353,15 @@ now retains all 48 means/errors, 480 measured and 288 warmup averages on JDK
 cells and fixture-specific point rankings remain explicit. Master theorem
 conditions and the actual smaller-side Hoare Quicksort stack bound stay distinct
 from timing evidence. All three templates now include preliminary interpretation.
+
+Greedy adds shared half-open intervals, maximum-cardinality activity selection,
+minimum-room assignment, deterministic Huffman codes/exact costs, and compressed
+greedy change with explicit failure counterexamples. Its 27 tests bring local
+verification to **645 tests**. The guide links exchange/lower-bound arguments,
+invariants, ownership, work/output space and independent oracles. Five methods
+in three JMH templates define 40 defaults in microseconds/op; all pass functional
+probes and execution smoke. Controlled author results remain pending. Interval
+objectives, presorted preparation and cost-only Huffman work remain explicit.
 
 ## Technology Stack
 

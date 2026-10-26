@@ -1,5 +1,8 @@
 # Greedy Strategy
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for selected contracts, pseudocode, traces, proofs, Java, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 The **Greedy Strategy** is one of the fundamental algorithm design paradigms in Computer Science. It constructs a solution incrementally by repeatedly making the **best possible decision at the current step**, without reconsidering previous choices.

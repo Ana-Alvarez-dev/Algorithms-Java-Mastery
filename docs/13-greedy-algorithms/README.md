@@ -16,6 +16,28 @@ This module introduces the theoretical foundations of the Greedy paradigm, studi
 
 ---
 
+# Current Executable Scope
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+connects specifications, pseudocode, traces, exchange/lower-bound proofs,
+invariants, complexity, Java and tests. Five production files implement shared
+half-open Interval, activity selection, minimum-room partitioning, deterministic
+Huffman codes/exact costs and an explicitly limited greedy-change heuristic.
+
+Twenty-seven new tests bring local verification to **645 passing tests**.
+Five JMH methods define **40 default cells** in three classes, using
+**microseconds/op**. All defaults pass functional reference probes and short
+execution smoke; Result/Interpretation await controlled author measurements.
+No JSON/log exports or invented scores are added.
+
+The review distinguishes interval scheduling's selection alias from room
+assignment, corrects snapshot/output space and heap-construction assumptions,
+and scopes Huffman optimality to its prefix-payload objective. Counterexamples
+expose greedy change's failure on arbitrary denominations. Weighted scheduling,
+knapsack, matroids, full compression formats and later paradigms remain extensions.
+
+---
+
 # Learning Objectives
 
 After completing this module, the learner should be able to:
@@ -238,7 +260,10 @@ Reduce Remaining Problem
 Repeat
 ```
 
-The next module, Dynamic Programming, will study problems where Greedy decisions are insufficient because subproblems overlap.
+The next numbered module is **14 - Backtracking**; **15 - Dynamic Programming**
+follows later. Overlap and optimal substructure help identify reusable states,
+but failure of a greedy rule alone does not specify which alternative paradigm
+or state model will solve a problem efficiently.
 
 ---
 

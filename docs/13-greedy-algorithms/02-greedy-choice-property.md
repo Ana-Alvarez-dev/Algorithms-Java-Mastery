@@ -1,5 +1,8 @@
 # Greedy Choice Property
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for selected contracts, pseudocode, traces, proofs, Java, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 The **Greedy Choice Property** is the fundamental characteristic that distinguishes optimization problems that can be solved using a Greedy algorithm from those that require more sophisticated approaches.
@@ -10,7 +13,10 @@ The central idea is simple:
 
 However, this property does **not** hold for every optimization problem. Before designing a Greedy algorithm, it must be demonstrated that every local decision is **safe**, meaning that choosing the best available option at the current step cannot prevent the construction of an optimal final solution.
 
-Because of this, the Greedy Choice Property is not an implementation detail but a mathematical property of the problem itself. Understanding this concept is essential before studying correctness proofs and classical Greedy algorithms.
+A safe-choice claim belongs to a specified problem, selection rule and residual
+state. One correct greedy rule does not make every locally appealing rule for
+the same problem correct. The implementation guide proves the selected rules
+and gives explicit coin-change counterexamples.
 
 ---
 
@@ -183,7 +189,9 @@ Choose the Activity
 That Finishes Earliest
 ```
 
-Once selected, this activity cannot reduce the number of compatible activities that may be chosen later.
+The earliest-finishing activity can replace the first interval of an optimal
+unweighted plan without reducing its cardinality. This exchange statement,
+not a claim about every priority or profit objective, justifies the rule.
 
 This makes the decision safe.
 

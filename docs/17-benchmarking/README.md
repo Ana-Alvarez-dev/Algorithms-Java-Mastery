@@ -574,6 +574,35 @@ selection's expected-linear proof. Two sizes cannot establish an exponent;
 timing alone does not isolate call/partition costs, allocation rates or cache
 causes. Existing Searching/Sorting/Recursion research keeps its own provenance.
 
+# Greedy Experiments
+
+The [Greedy guide](../13-greedy-algorithms/implementation-and-benchmark-guide.md)
+defines five methods in three templates: ActivitySelection (16 cells), room
+assignment (8) and Huffman optimum cost (16), for **40 default cells**. All use
+average **microseconds/op**, one thread, 3/5 x 500 ms and two forks. Trial setup
+uses seed 20261026. Interval sizes are 100/10,000 with DISJOINT, TOUCHING,
+OVERLAPPING and RANDOM; Huffman sizes are 100/1,000 with UNIFORM, RANDOM,
+SKEWED and TWO_LEVEL positive frequencies.
+
+Activity compares full sort-plus-selection against a validated presorted API,
+with order preparation outside that second method's timing. Both include
+snapshots and immutable plans. Room assignment retains all intervals, so it is
+not ranked against a selection algorithm that may discard them. Huffman compares
+exact cost only, including heap boxing versus clone/sort/arrays; codewords and
+full compression are excluded. CoinChange has test/counterexample evidence
+without a timing question selected here.
+
+Normal/profile verification passed **645 tests**, including **27 new tests**.
+All five methods are discovered, 40 short smoke cells complete and a reference
+probe checks every default three calls each with repeatability/nonmutation.
+These are local checks, not controlled research scores or a new CI status.
+Result/Interpretation remain pending author output after source integration.
+Capture SHA before launch/pulling result changes, actual JDK/JMH settings,
+complete means/errors, fork iterations and completion markers. Keep parameter
+names/class-specific sizes and microsecond units clear. Evidence stays Markdown
+without JSON/log exports. No pure sorting/heap cost, profiler cause, allocation
+rate, significance or fitted exponent is invented from functional smoke.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

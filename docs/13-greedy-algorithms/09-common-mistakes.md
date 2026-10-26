@@ -1,5 +1,8 @@
 # Common Mistakes
 
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+for selected contracts, pseudocode, traces, proofs, Java, tests and evidence limits.
+
 ## Algorithms Java Mastery
 
 Greedy algorithms are often considered simple because they repeatedly make the **best local decision**. However, their apparent simplicity can be misleading.
@@ -217,7 +220,7 @@ The efficiency of a Greedy algorithm often depends on its supporting data struct
 
 Examples:
 
-- using a list instead of a Priority Queue for Huffman Coding;
+- repeatedly scanning an unsorted list for minimum Huffman weights without accounting for the cost; a proven sorted two-queue variant is a valid alternative;
 - repeatedly searching unsorted collections.
 
 Poor data structure choices increase execution time unnecessarily.
@@ -400,11 +403,28 @@ Successful Greedy algorithms are the result of rigorous mathematical reasoning c
 
 ---
 
+# Concrete Counterexamples and Boundary Policies
+
+Largest-coin-first on {1,3,4} at amount 6 completes with three coins while 3+3
+uses two. On {3,4}, it leaves remainder 2 despite 3+3 being feasible. A payment
+invariant is not a proof of optimality/completeness. The API exposes both its
+remainder and compressed quantities and rejects nonpositive denominations.
+
+Half-open intervals may touch; empty/reversed intervals are rejected. Weighted
+selection and minimum-room assignment have different objectives from unweighted
+cardinality. Huffman requires positive frequencies here, with explicit empty/
+singleton policies, deterministic ties and exact cost. Its tree-space bound
+must include code strings when those are materialised. See the guide for
+independent small oracles and actual scope rather than inferring correctness
+from a handful of examples or benchmark means.
+
 # 21. Relationship with the Next Module
 
 This document concludes the study of the **Greedy Algorithms** module.
 
-The next module introduces **Dynamic Programming**, another major optimization paradigm.
+The next numbered module is **14 - Backtracking**, followed by
+**15 - Dynamic Programming**. Dynamic Programming is a later comparison, not
+the immediate module handoff.
 
 Unlike Greedy algorithms, Dynamic Programming solves problems with **overlapping subproblems** by storing intermediate solutions instead of making irreversible local decisions.
 
