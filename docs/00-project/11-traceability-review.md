@@ -48,8 +48,10 @@ on JDK 21.0.9/JMH 1.37, with separately supplied source
 
 The Divide and Conquer contribution extends review from main
 `be8c6cdf4cbbab3f760cbc22cbc5136151674b1f`, which integrated Recursion results
-through PR #83. Local verification reported 2026-10-25 (UTC) is recorded below;
-its own author performance measurements remain pending.
+through PR #83. Local verification reported 2026-10-25 (UTC) is recorded below.
+The first author-reported run, supplied on 2026-10-26, now records all 48 default
+cells on JDK 21.0.9/JMH 1.37, with separately supplied source
+`507b2537d3dedd3beb57900d3ee72d7858571c89` (PR #84 merge).
 
 ## Required Chain
 
@@ -78,7 +80,7 @@ helpers. The matrix includes selected implementations through module 12.
 | Trees | 11 | 59 | 12 | [Selected scope](../09-trees/implementation-and-benchmark-guide.md), [24 lookup results](../17-benchmarking/results/trees/README.md); JDK 21.0.9, all printed iterations retained; lookup source `c576cb7` from author reflog; [24 heap results](../17-benchmarking/results/trees/heap-first-run.md) from author-reported `ce621c6`; both initial subsets recorded with limits |
 | Graphs | 12 | 48 | 6 | [Selected contracts](../10-graphs/implementation-and-benchmark-guide.md), [24 traversal results](../17-benchmarking/results/graphs/README.md), [8 weighted results](../17-benchmarking/results/graphs/weighted-first-run.md); JDK 21.0.9, author-reported source `00fc9de`, all errors/printed iterations retained with preliminary limits |
 | Recursion | 7 | 28 | 8 | [Selected contracts](../11-recursion/implementation-and-benchmark-guide.md), [24 results and research](../17-benchmarking/results/recursion/README.md); JDK 21.0.9/JMH 1.37, author-reported source `fe370a1`, all errors/iterations retained; five wide-error cells and preliminary limits |
-| Divide and Conquer | 3 | 18 | 6 | [Contracts, traces, invariants and protocol](../12-divide-and-conquer/implementation-and-benchmark-guide.md); maximum subarray, strict inversions and order statistic verified; existing Searching/Sorting reused; measured author results pending |
+| Divide and Conquer | 3 | 18 | 6 | [Selected contracts](../12-divide-and-conquer/implementation-and-benchmark-guide.md), [48 results and research](../17-benchmarking/results/divide-and-conquer/README.md); JDK 21.0.9/JMH 1.37, author-reported source `507b253`, all errors/printed iterations retained; six wide-error cells and preliminary limits |
 | 13–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **618 passing repository tests**, compared with **600** before
@@ -488,14 +490,39 @@ update changed only documentation/comments, with no new timed run or CI status. 
 Markdown without JSON/log exports; future experiments need their own source,
 settings, complete errors and controls.
 
-Divide and Conquer is ready for its
-[initial controlled measurements](../12-divide-and-conquer/implementation-and-benchmark-guide.md#jmh-design-and-windows-evidence-protocol)
-after feature integration: 16 cells per class / **48 combined**, in
-**microseconds/op**. Capture SHA before launch and before later documentation
-pulls, actual JDK/JMH settings, complete errors, available fork iterations and
-completion markers. Do not reuse Recursion's SHA or nanosecond units. All three
-Result/Interpretation fields remain pending actual output; nothing is marked
-measured from smoke. Evidence stays Markdown without JSON/log artifacts.
+The [first Divide and Conquer report](../17-benchmarking/results/divide-and-conquer/README.md)
+now completes all three templates with **48 means/errors**, **480 measured**
+and **288 warmup averages**, completion **7 min 4 sec**. Source
+`507b2537d3dedd3beb57900d3ee72d7858571c89` is separately author-reported checkout
+attribution, matching the PR #84 merge. It is not embedded in JMH or a jar hash.
+Headers confirm JDK 21.0.9/JMH 1.37, one thread, 3/5 x 500 ms, two forks and
+**microseconds/op**, distinct from Recursion's nanoseconds. The attachment
+contains no command line or execution timestamp; CPU/power and profiler data
+are unavailable.
+
+All final means/errors agree with their result blocks. Rounded observation
+means, extrema and sample standard deviations agree to printed precision;
+printed 99.9% CIs and every warmup/measurement value remain intact. Six errors
+reach 25% of means: two direct inversion and four selection/sort cells, maximum
+about 74.5%. No outlier is discarded, and no significance/equivalence test is
+claimed. Duplicate-heavy size-10,000 selection/sort intervals overlap.
+
+Linear maximum-subarray means are lower for all matching fixtures; small
+ordered direct counts and ordered copy-plus-sort have lower means in selected
+comparisons. These are not general crossover thresholds or universal rankings.
+Source ledgers distinguish pair visits, full merge/crossing scans, source
+record constructions and sorted selection's single partition. They are not
+measured CPU events, actual allocation rates or elapsed-time attribution.
+Both selection workflow clones remain timed; no pure partition cost or
+arbitrary-input expected-linear guarantee follows. Library paths were not
+inspected or profiled, and two sizes do not prove a complexity exponent.
+
+Initial default-grid evidence is complete, not all accepted inputs/ranks/seeds.
+This update changes documentation/comments only, with no executable Java change,
+new timed run or CI status. Earlier 618-test verification and open findings stay
+distinct. All evidence is Markdown without JSON/log exports. Further experiments
+retain their own source/settings, complete errors and matched controls; later
+Greedy/Backtracking/Dynamic Programming modules remain separate work.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain

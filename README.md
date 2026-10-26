@@ -345,9 +345,13 @@ Divide and Conquer adds canonical maximum subarray, strict inversion counting
 and duplicate-aware in-place order statistics, reusing existing Searching/Sorting
 cases. Its 18 tests bring local verification to **618 tests**. The guide links
 contracts, traces, invariants and corrected recurrence/partition models; six JMH
-methods define 48 defaults in microseconds/op. All pass independent probes and
-execution smoke, while author performance results remain pending. Master theorem
-conditions and the actual smaller-side Hoare Quicksort stack bound are explicit.
+methods define 48 defaults in microseconds/op. The
+[first research report](docs/17-benchmarking/results/divide-and-conquer/README.md)
+now retains all 48 means/errors, 480 measured and 288 warmup averages on JDK
+21.0.9/JMH 1.37, with author-reported source `507b253` (PR #84). Six wide-error
+cells and fixture-specific point rankings remain explicit. Master theorem
+conditions and the actual smaller-side Hoare Quicksort stack bound stay distinct
+from timing evidence. All three templates now include preliminary interpretation.
 
 ## Technology Stack
 

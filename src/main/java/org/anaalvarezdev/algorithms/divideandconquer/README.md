@@ -33,8 +33,11 @@ clones inside both timed workflows to preserve repeated trial data; the clone's
 O(n) space is separate from the production selector's O(1) auxiliary state.
 
 Three templates retain Research Question, Theoretical Expectation, Measured
-Work, Result and Interpretation. Author measurements remain pending; smoke
-scores are not research. The guide defines 16 cells per class / 48 combined,
-in **microseconds/op**, with actual source/settings and every error preserved
-later as Markdown without JSON/log artifacts. Parallel algorithms, Strassen,
-randomised/worst-linear selection and later paradigms remain extensions.
+Work, Result and Interpretation. The
+[first research report](../../../../../../../docs/17-benchmarking/results/divide-and-conquer/README.md)
+now completes all three with 48 means/errors, 480 measured and 288 warmup
+averages, in **microseconds/op**, on JDK 21.0.9/JMH 1.37. Author-reported source
+is `507b2537d3dedd3beb57900d3ee72d7858571c89` (PR #84). Six errors reach 25%
+of their means. All observations and workload limits stay intact in Markdown
+without JSON/log artifacts; smoke remains separate. Parallel algorithms,
+Strassen, randomised/worst-linear selection and later paradigms remain extensions.

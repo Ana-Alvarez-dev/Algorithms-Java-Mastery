@@ -555,9 +555,17 @@ Normal/profile verification passed **618 tests**, including 18 new tests; six
 methods were discovered, all 48 short smoke cells completed and an independent
 probe checked every default combination three calls each. These are local
 functional/harness checks, not measured research scores or a new CI status.
-Result/Interpretation await author output after feature integration. Capture
-source SHA before launch/pulling results, actual JDK/JMH headers, all means/errors,
-fork iterations and completion markers. Evidence stays Markdown without JSON/log.
+The [first author report](results/divide-and-conquer/README.md), supplied on
+2026-10-26, now completes all three Result/Interpretation fields. It preserves
+48 means/errors, 480 measured and 288 warmup averages, completion 7 min 4 sec.
+Author-reported source is `507b2537d3dedd3beb57900d3ee72d7858571c89`, PR #84's
+merge; headers confirm JDK 21.0.9/JMH 1.37 and the controlled defaults.
+Six errors reach 25% of their means, largest about 74.5%. The full command,
+execution timestamp, CPU/power, jar hash and profiler data are not supplied.
+Source scan/construction counts remain analytical, not measured machine events.
+Small ordered direct counts and ordered copy-plus-sort have lower means in
+selected comparisons; no universal ranking or crossover threshold follows.
+Every observation remains Markdown without JSON/log; smoke stays separate.
 
 Comparisons include full contract work: different maximum-subarray result
 construction, private merge-count allocations, and timed clones in BOTH

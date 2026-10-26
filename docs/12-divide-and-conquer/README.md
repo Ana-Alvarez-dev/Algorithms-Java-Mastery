@@ -22,9 +22,12 @@ Searching/Sorting cases are reused, with no duplicated algorithms.
 
 Eighteen new tests bring local verification to **618 passing tests**. Six JMH
 methods define **48 default cells**, in **microseconds/op**. All default cells
-pass independent return/nonmutation probes and short execution smoke; controlled
-author measurements remain pending in Result/Interpretation. No JSON/log
-exports or invented scores are added.
+pass independent return/nonmutation probes and short execution smoke. The
+[first research report](../17-benchmarking/results/divide-and-conquer/README.md)
+now completes all three Result/Interpretation fields with 48 means/errors,
+480 measured and 288 warmup averages on JDK 21.0.9/JMH 1.37. Author-reported
+source is `507b253` (PR #84). Six errors reach 25% of their means; all data and
+preliminary limits remain intact in Markdown without JSON/log exports.
 
 The review supplies the Master theorem's exact hypotheses, distinguishes
 balanced from average-case Quicksort, and maps Hoare boundaries/smaller-side
