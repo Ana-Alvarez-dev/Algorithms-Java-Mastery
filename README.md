@@ -67,7 +67,7 @@ engineering documentation.
 | Dynamic Programming | Documented + implemented + tested + initial 57-cell research |
 | Testing | Applied regression/oracle evidence + optional coverage; 710 normal tests pass |
 | Benchmarking | Applied protocol + 723 profile tests; first five-cell aggregation report, source inferred from reflog; original jar hash unavailable |
-| Linux environment | Documented |
+| Linux environment | Applied preflight + 20 shell cases; Linux Java 21 builds verified |
 | CI/CD concepts | Documented |
 | GitHub Actions workflow | Planned / not yet implemented |
 
@@ -318,6 +318,8 @@ are distinguished in the implementation guide.
 - [Testing contracts, regressions and coverage commands](docs/16-testing/implementation-and-verification-guide.md)
 - [Benchmarking protocol, fixture tests and exact execution commands](docs/17-benchmarking/implementation-and-benchmark-guide.md)
 - [Benchmarking local verification](docs/17-benchmarking/verification-report.md)
+- [Linux environment verification and commands](docs/18-linux-environment/implementation-and-verification-guide.md)
+- [Linux local verification](docs/18-linux-environment/verification-report.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -435,7 +437,20 @@ supports `5eee0dc` as the inferred execution source before results merge
 `12f2973`. The original jar is absent, so its hash is unavailable. Execution-time
 dirty state, command/time and fresh machine metadata remain unknown. Historical results retain their limitations.
 Evidence stays Markdown with no new JSON/log/CSV files. Next is
-**18 - Linux Environment**; the GitHub Actions workflow remains unimplemented.
+**18 - Linux Environment**, applied below; the GitHub Actions workflow remains
+unimplemented.
+
+Linux Environment now connects all ten notes to a read-only project preflight,
+with twenty offline subprocess cases for valid/invalid JDK selection, spaced
+paths, dirty state, optional/required artifacts and withheld option values.
+The wrapper is tracked executable and Linux launchers use scoped LF attributes.
+Local Linux/JDK 21 builds pass **710 normal / 723 profile JUnit tests**; the
+**20 shell cases are separate**. Discovery retains 115 methods in 40 classes.
+The [verification report](docs/18-linux-environment/verification-report.md)
+distinguishes actual Linux checks from fake-launcher shell fixtures. Windows
+remains supported and author WSL availability is not assumed. No old benchmark
+hash/source field is backfilled from a new build, and no Linux author timing
+or passing CI is claimed. Next numbered module: **19 - CI/CD**.
 
 ## Technology Stack
 

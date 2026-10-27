@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **17 — Benchmarking**. It is a source/evidence inventory,
+progression through **18 — Linux Environment**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -90,6 +90,12 @@ attribution is now inferred from the author's supplied reflog (`5eee0dc` before
 results merge `12f2973`); original jar hash is unavailable. Earlier numerical
 evidence is not rewritten.
 
+The Linux Environment contribution extends review from main
+`5efd7f7b7cf5ddfa34a7380b01b6a7435299da8f` (PR #95, aggregation provenance).
+Its applied preflight, twenty offline subprocess cases, wrapper portability
+and local Java 21 build checks are recorded separately below. No old numerical
+evidence or missing artifact identity is replaced.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -123,7 +129,8 @@ helpers. The matrix includes selected algorithms through module 15 and cross-cut
 | Dynamic Programming | 3 | 22 | 9 | [State/recurrence contracts](../15-dynamic-programming/implementation-and-benchmark-guide.md), [57 results and research](../17-benchmarking/results/dynamic-programming/README.md); JDK 21.0.9/JMH 1.37, author-reported `d572651`; mixed units, every error/printed iteration and eleven wide-error cells retained; reused Fibonacci is not a new file |
 | Testing | 0 new production files | 16 added in Searching, not additive | 0 new | [Regression/coverage guide](../16-testing/implementation-and-verification-guide.md), [baseline/red/green evidence](../16-testing/verification-report.md); coverage profile and fixture validity, no separate production package |
 | Benchmarking | 0 new production files | 13 additional under -Pbenchmark only | 0 new; 115 existing methods in 40 classes | [Applied guide](../17-benchmarking/implementation-and-benchmark-guide.md), [local verification](../17-benchmarking/verification-report.md); five-cell author output retained, source inferred from supplied reflog; original jar absent, historical data unchanged |
-| 18–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Linux Environment | 0 new Java files; 2 Bash scripts | 20 shell subprocess cases, separate from JUnit | 0 new; environment/artifact preflight | [Applied guide](../18-linux-environment/implementation-and-verification-guide.md), [local checks](../18-linux-environment/verification-report.md); wrapper executable/LF, real Linux JDK 21 builds; author WSL availability unclaimed |
+| 19: CI/CD | No workflow yet | No passing workflow run claimed | Not applicable | Next numbered module; local verification remains distinct from CI |
 
 There are **710 passing normal-suite tests** and **723 under -Pbenchmark**
 (the same 710 plus thirteen fixture checks). The normal count compares with **694** before
@@ -645,6 +652,30 @@ no CI workflow/status or new JSON/log/CSV is introduced. Next numbered module
 is **18 - Linux Environment**; source attribution is inferred and the original
 artifact hash remains unavailable. These limits do not require inventing data
 or rebuilding the old artifact to continue the curriculum.
+
+## Linux Environment Verification and Review
+
+Reviewed on **2026-10-27** from `5efd7f7` (PR #95). The
+[guide](../18-linux-environment/implementation-and-verification-guide.md) applies
+all ten notes to a concrete Linux/JDK preflight. The
+[report](../18-linux-environment/verification-report.md) distinguishes twenty
+offline shell cases using fake launchers from real Linux/JDK 21 verification.
+The verifier reports source/dirty state and environment, resolves PATH versus
+JAVA_HOME Java/Javac 21, optionally hashes a present jar, and rejects absent
+required artifacts or injected option variables for ordinary timing capture.
+It does not install, build, run a jar or change local configuration. Exit codes,
+spaced paths and reporting boundaries are explicit.
+
+The wrapper gains tracked executable mode without a content change; scoped LF
+attributes cover mvnw/Linux scripts. Production Java, tests, POM and historical
+results are unchanged. Real wrapper builds pass **710 normal / 723 profile
+JUnit tests**; **20 shell cases are separate and non-additive to JUnit**.
+Discovery retains 115 methods in 40 classes. A local metadata/hash check is not
+a new research dataset, author Linux/WSL execution or passing GitHub Actions.
+The author's existing Windows workflow remains available. Prior aggregation
+source stays inferred from the supplied reflog and its old jar hash stays
+unavailable; a fresh Linux artifact cannot replace that identity. Next numbered
+module: **19 - CI/CD**; the workflow gap remains open.
 
 ## Evidence Policy and Next Action
 
