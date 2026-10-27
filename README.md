@@ -61,7 +61,10 @@ engineering documentation.
 | Complexity | Documented |
 | Arrays | Documented + implemented + tested + selected JMH |
 | Searching | Documented + implemented + tested + selected JMH |
-| Sorting | Next algorithmic module |
+| Sorting | Documented + implemented + tested + selected JMH |
+| Linked Lists through Greedy | Selected implementations, tests and initial measured research |
+| Backtracking | Documented + implemented + tested; author measurements pending |
+| Dynamic Programming | Next algorithmic module |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
 | GitHub Actions workflow | Planned / not yet implemented |
@@ -308,6 +311,7 @@ are distinguished in the implementation guide.
 - [Recursion scope, contracts and run commands](docs/11-recursion/implementation-and-benchmark-guide.md)
 - [Divide and Conquer scope, contracts and run commands](docs/12-divide-and-conquer/implementation-and-benchmark-guide.md)
 - [Greedy scope, contracts and run commands](docs/13-greedy-algorithms/implementation-and-benchmark-guide.md)
+- [Backtracking scope, contracts and run commands](docs/14-backtracking/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -366,6 +370,15 @@ all 40 means/errors, 400 measured and 240 warmup averages on JDK 21.0.9/JMH 1.37
 using author-reported source `674ab35` (PR #86). All three templates include
 preliminary interpretation, with ten wide-error cells retained. Interval
 objectives, presorted preparation and cost-only Huffman work remain explicit.
+
+Backtracking adds unique permutations, increasing combinations, ordinary
+N-Queens and signed subset-sum decision. The guide connects all nine reviewed
+notes to contracts, traces, completeness/uniqueness and sound-pruning arguments,
+state restoration, output costs and independent test oracles. Normal/profile
+verification passes **672 tests**, including **27 new tests**. Eight JMH methods
+in four templates define **46 defaults** in microseconds/op; all pass execution
+checks and three-call reference probes. Author-measured Result/Interpretation
+remain pending; smoke scores are excluded from research.
 
 ## Technology Stack
 

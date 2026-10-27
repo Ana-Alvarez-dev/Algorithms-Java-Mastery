@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **13 — Greedy Algorithms**. It is a source/evidence inventory,
+progression through **14 — Backtracking**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -60,6 +60,11 @@ below. The first author-reported Greedy run now records all 40 default cells
 on JDK 21.0.9/JMH 1.37, with separately supplied source
 `674ab35b7d82f1a9ab7fbab63fa1a9e80253965c` (PR #86 merge).
 
+The Backtracking contribution extends review from main
+`605c299f11944e0234c1651c21d4191f07b3432f`, which integrated Greedy research
+through PR #87. Its selected contracts and local verification reported
+2026-10-26 are recorded below. Author measurements remain pending.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -73,7 +78,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes selected implementations through module 13.
+helpers. The matrix includes selected implementations through module 14.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -89,10 +94,11 @@ helpers. The matrix includes selected implementations through module 13.
 | Recursion | 7 | 28 | 8 | [Selected contracts](../11-recursion/implementation-and-benchmark-guide.md), [24 results and research](../17-benchmarking/results/recursion/README.md); JDK 21.0.9/JMH 1.37, author-reported source `fe370a1`, all errors/iterations retained; five wide-error cells and preliminary limits |
 | Divide and Conquer | 3 | 18 | 6 | [Selected contracts](../12-divide-and-conquer/implementation-and-benchmark-guide.md), [48 results and research](../17-benchmarking/results/divide-and-conquer/README.md); JDK 21.0.9/JMH 1.37, author-reported source `507b253`, all errors/printed iterations retained; six wide-error cells and preliminary limits |
 | Greedy | 5 | 27 | 5 | [Selected contracts](../13-greedy-algorithms/implementation-and-benchmark-guide.md), [40 results and research](../17-benchmarking/results/greedy/README.md); JDK 21.0.9/JMH 1.37, author-reported source `674ab35`, all errors/printed iterations retained; ten wide-error cells and preliminary limits |
-| 14–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Backtracking | 4 | 27 | 8 | [Selected contracts, proofs and protocol](../14-backtracking/implementation-and-benchmark-guide.md); four templates/46 defaults pass local checks, author Result/Interpretation pending |
+| 15–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **645 passing repository tests**, compared with **618** before
-Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
+There are now **672 passing repository tests**, compared with **645** before
+Backtracking, **618** before Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
 and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
@@ -402,6 +408,41 @@ classification remain extensions. Earlier source/tests/POM, measured reports
 and open findings are unchanged. Local checks do not establish CI status;
 smoke is separate from controlled author research.
 
+## Backtracking Verification and Review
+
+Verification reported **2026-10-26**, using **OpenJDK 21+35-2513**, passes normal
+Maven tests and benchmark-profile clean package: **672 tests**, zero failures/
+errors/skips, including **27 new tests** (prior Greedy 645). All nine numbered
+notes now connect to the guide's contracts, pseudocode, traces, soundness,
+completeness/uniqueness, termination, restoration and complexity arguments.
+
+| Check | Evidence |
+|---|---|
+| Permutations | Seven tests: all 120 small multisets through length 7 against complete index permutations then value deduplication; BigInteger multinomials, 100 seeded arrays, 10!, immutable rows, caps and input preservation |
+| Combinations | Six tests: all n<=12/k against bitmask subsets; BigInteger counts at n=18, 48,620-row boundary, Pascal identity, ordering, ownership and invalid domains |
+| N-Queens | Seven tests: full column-permutation/leaf-only diagonal oracle through n=9; published ordinary counts through 12, 14,200-row boundary, reflection inclusion, caps and restoration |
+| Signed subset sum | Seven tests: 1,093 signed arrays length <=6 and all targets -8..8 against independent reachable sets; 100 seeded full-int arrays, extreme long targets, signed overshoot and long sums, reversal/negation and nonmutation |
+| JMH | Eight discovered methods; all 46 default smoke cells complete at one 50 ms warmup/measurement and one fork; separate independent probe checks every default three calls each |
+| JavaDoc | Four production classes pass doclint excluding missing tags |
+
+The review corrects duplicate-value generation, signed pruning, first-hit versus
+full search, fixed-width masks and candidate-order claims. It distinguishes
+visited states, candidate scans, output copying/retention and active depth.
+Counts do not time enumeration; masks have constant state per frame but O(n)
+depth. Educational caps are explicit API limits, not fixed resource guarantees.
+CLRS Third Edition sections/pages are scoped to DFS and positive subset-sum
+context, not claimed as a copied N-Queens/permutation algorithm; NIST and OEIS
+provide separately identified primary references.
+
+Four templates contain questions, expectations, timed work and limitations;
+Result/Interpretation remain pending controlled author measurements. The 46
+defaults split 12/12/6/16 and use **microseconds/op**, 3/5 x 500 ms, two forks
+and one thread. Capture source SHA after feature merge and before launching or
+pulling a later results update. Retain full console evidence in Markdown without
+JSON/log exports. Smoke timings are excluded from research. Previous executable
+source/tests/POM, measured reports and tracked Arrays/Searching/CI gaps remain
+unchanged. Next is **15 - Dynamic Programming**, currently conceptual.
+
 ## Evidence Policy and Next Action
 
 The repository retains results in Markdown, with existing historical CSV
@@ -602,13 +643,13 @@ and 2n-1 heap offers. Those counts and derived expected costs are mathematical
 evidence, not profiler events, actual allocations or elapsed-cost attribution.
 
 The initial default grid is complete, not all Greedy inputs/APIs. Codebook
-generation and CoinChange are not timed. This update changes documentation/
+generation and CoinChange are not timed. That Greedy results update changed documentation/
 comments only, with no executable Java change, new timed run or CI status.
 Earlier 645-test verification, open findings and prior source provenance remain
 distinct. All evidence stays Markdown without JSON/log. A safe-choice takeaway
 now consistently names the objective/rule/residual state, matching its existing
 introduction. Further controlled experiments retain their own source/settings
-and all errors; Backtracking and Dynamic Programming remain separate work.
+and all errors; their measurements are not reused for Backtracking or Dynamic Programming.
 
 The source-to-test-to-experiment chain is inspectable for the selected modules.
 The rechecked gaps remain tracked work, and conceptual future modules remain
