@@ -20,7 +20,11 @@ are documented before allocation. Witnesses are separate from values/lengths.
 Twenty-two tests use independent BigInteger/subset/subsequence references,
 identities, boundaries and ownership. Nine JMH methods in three classes define
 57 defaults: Fibonacci 9 ns/op, knapsack/LCS 24 us/op each. Full private setup
-is timed; controlled author measurements remain pending. The guide defines
-Windows Java 21 commands and Markdown source/runtime/console evidence without
-JSON/log exports. Dense initialisation and pseudopolynomial capacity costs
-remain explicit; local smoke is not measured research or passing CI.
+is timed. The [first research report](../../../../../../../docs/17-benchmarking/results/dynamic-programming/README.md)
+completes all three templates with 57 means/errors, 570 measured and 342 warmup
+averages on JDK 21.0.9/JMH 1.37, author-reported source `d572651` (PR #90).
+Eleven wide-error cells and the n=20 table Fibonacci CI marker `? 0` remain.
+Knapsack rolling point means are lower throughout; LCS depends on shape, and
+overlapping intervals limit exact rankings. Units stay per row in Markdown
+without JSON/log. Dense setup, pseudopolynomial capacity and omitted witnesses
+remain explicit; state ledgers are not timing attribution and smoke is separate.

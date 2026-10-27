@@ -45,10 +45,18 @@ knapsack 24 and LCS 24 in us/op. Each row's units must be retained. Full public
 value/length workflows are timed; plan/sequence generation is tested separately.
 
 Local discovery, complete short smoke/default reference probes and JavaDoc are
-harness/functional evidence. Controlled author Result/Interpretation remain
-pending after feature integration. Keep source/runtime, every error, printed
-iteration and completion in Markdown without JSON/log exports; smoke stays
-separate. Earlier modules retain their own provenance and tracked findings.
+harness/functional evidence. The
+[first research report](../17-benchmarking/results/dynamic-programming/README.md)
+now completes all three Result/Interpretation fields with **57 means/errors**,
+**570 measured** and **342 warmup averages**, completion **8 min 30 sec**.
+Author-reported source is `d572651484f3ec6cffe03ad589bddd5a4a8fb8a3` (PR #90);
+headers confirm JDK 21.0.9/JMH 1.37 and the controlled defaults. Eleven errors
+reach 25%: four Fibonacci/seven LCS, maximum 163.7% for table Fibonacci n=20;
+its printed `? 0` CI marker remains literal. Twelve fully numeric method-pair
+intervals overlap. Every observation retains its unit in Markdown without
+JSON/log; source ledgers, smoke and earlier module provenance stay distinct.
+Full command, exact execution timestamp, CPU/power, jar hash and profiler data
+are unavailable; SHA attribution was supplied separately from JMH.
 
 Sparse caches, arbitrary-precision Fibonacci, fractional/unbounded knapsack,
 rod cutting, matrix-chain order, edit distance, Hirschberg reconstruction and

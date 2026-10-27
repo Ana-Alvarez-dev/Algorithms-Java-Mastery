@@ -44,6 +44,12 @@ five with independent subsequence enumeration, plus seeded/Unicode/boundary/
 tie/identity cases. They verify witness legality as well as optimum length.
 
 Three length methods define 24 JMH cells: n=32/128, IDENTICAL, DISJOINT,
-SHIFTED and seeded RANDOM. Fresh state is timed; witnesses are not. Author
-Result/Interpretation remain pending; no cache cause or universal winner follows
-from smoke. See the [implementation and benchmark guide](implementation-and-benchmark-guide.md). Next: [complexity](11-complexity-analysis.md).
+SHIFTED and seeded RANDOM. Fresh state is timed; witnesses are not. The
+[first report](../17-benchmarking/results/dynamic-programming/README.md) retains
+all 24 cells/errors and printed iterations from author-reported source `d572651`,
+JDK 21.0.9/JMH 1.37. Memo means are lower than rolling on IDENTICAL/SHIFTED;
+large DISJOINT/RANDOM favour rolling. Seven errors reach 25%; n=32 RANDOM memo/
+rolling and n=128 RANDOM memo/table intervals overlap. Dense setup persists
+despite a diagonal search, so lower storage/output length alone do not explain
+time. No witness throughput, cache cause or universal winner is inferred.
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md). Next: [complexity](11-complexity-analysis.md).

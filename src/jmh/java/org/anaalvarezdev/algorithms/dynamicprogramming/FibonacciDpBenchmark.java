@@ -15,12 +15,21 @@ import java.util.concurrent.TimeUnit;
  * Full validated value calls, including per-call memo fill/table allocation.
  * No naive exponential search, retained warm cache or sequence output.
  * Result:
- * Pending author measurements; short smoke is functional/harness evidence.
+ * Author run reported 2026-10-26; source d572651484f3ec6cffe03ad589bddd5a4a8fb8a3
+ * supplied separately (PR #90). JMH 1.37/JDK 21.0.9, one thread,
+ * 3/5 x 500 ms warmup/measurement, two forks (Cnt=10), combined 8 min 30 sec.
+ * All 57 means/errors, 570 measured and 342 warmup averages:
+ * docs/17-benchmarking/results/dynamic-programming/README.md. Units stay per row.
+ * All nine Fibonacci cells in ns/op. At n=90 rolling/table/memoised:
+ * 15.455 +/- 1.323 / 147.322 +/- 10.103 / 536.951 +/- 30.365.
  * Interpretation:
- * Pending source/runtime/settings and all errors. This is a public-workflow
- * comparison, not isolated recursion/allocation cost. ns/op here differs from
- * the other templates' us/op; do not pool rows or reuse earlier Recursion data.
- * No TCO, allocation rate, CPU/cache cause or arbitrary-precision bound follows.
+ * Rolling point means are lower at all n, but four errors reach 25%. Table
+ * n=20 has 86.692 +/- 141.911 ns/op (163.7%); literal CI lower marker ? 0
+ * is preserved. Fork means 127.539/45.845 retain the 347.118 iteration.
+ * No precise n=20 table ordering or significance/equivalence is claimed.
+ * Same n-1 recurrence additions do not explain all differences: fresh memo/
+ * table setup and state differ. No isolated call/allocation cost, TCO, CPU
+ * cause, arbitrary-precision bound or reuse of earlier Recursion data follows.
  * Protocol: docs/15-dynamic-programming/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

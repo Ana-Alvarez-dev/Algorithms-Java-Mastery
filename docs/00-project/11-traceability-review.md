@@ -70,7 +70,9 @@ through PR #87. Its selected contracts and local verification reported
 The Dynamic Programming contribution extends review from main
 `da3db882a70e3cc59ee05491ee76d8d8c11b97ae`, which integrated Backtracking
 research through PR #89. Selected scope and local verification reported
-2026-10-26 are recorded below. Its author measurements remain pending.
+2026-10-26 are recorded below. The first author-reported run now records all
+57 defaults on JDK 21.0.9/JMH 1.37, with separately supplied source
+`d572651484f3ec6cffe03ad589bddd5a4a8fb8a3` (PR #90 merge).
 
 ## Required Chain
 
@@ -102,7 +104,7 @@ helpers. The matrix includes selected implementations through module 15.
 | Divide and Conquer | 3 | 18 | 6 | [Selected contracts](../12-divide-and-conquer/implementation-and-benchmark-guide.md), [48 results and research](../17-benchmarking/results/divide-and-conquer/README.md); JDK 21.0.9/JMH 1.37, author-reported source `507b253`, all errors/printed iterations retained; six wide-error cells and preliminary limits |
 | Greedy | 5 | 27 | 5 | [Selected contracts](../13-greedy-algorithms/implementation-and-benchmark-guide.md), [40 results and research](../17-benchmarking/results/greedy/README.md); JDK 21.0.9/JMH 1.37, author-reported source `674ab35`, all errors/printed iterations retained; ten wide-error cells and preliminary limits |
 | Backtracking | 4 | 27 | 8 | [Selected contracts](../14-backtracking/implementation-and-benchmark-guide.md), [46 results and research](../17-benchmarking/results/backtracking/README.md); JDK 21.0.9/JMH 1.37, author-reported source `b62df1b`, every error/printed iteration retained; two wide-error cells and preliminary limits |
-| Dynamic Programming | 3 | 22 | 9 | [State/recurrence contracts, proofs and protocol](../15-dynamic-programming/implementation-and-benchmark-guide.md); 57 default cells in three templates, author measurements pending; reused Fibonacci code is not counted as a new file |
+| Dynamic Programming | 3 | 22 | 9 | [State/recurrence contracts](../15-dynamic-programming/implementation-and-benchmark-guide.md), [57 results and research](../17-benchmarking/results/dynamic-programming/README.md); JDK 21.0.9/JMH 1.37, author-reported `d572651`; mixed units, every error/printed iteration and eleven wide-error cells retained; reused Fibonacci is not a new file |
 | 16–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **694 passing repository tests**, compared with **672** before
@@ -508,13 +510,40 @@ computation, LCS is optimisation, and DP also supports counting/feasibility.
 CLRS Third Edition Chapter 15 and §16.2/exercise 16.2-2 are separately identified;
 knapsack is not misattributed to a complete Chapter 15 worked algorithm.
 
-Three templates define 57 defaults (9 Fibonacci ns/op, 24 knapsack/24 LCS us/op),
-one thread, 3/5 x 500 ms and two forks. Full validation/private preparation is
-timed; plan/sequence reconstruction is not. Author Result/Interpretation remain
-pending. Source/runtime/settings, row units, all errors/iterations and completion
-must be retained in Markdown without JSON/log exports. Smoke is harness evidence,
-not research or CI; earlier source/tests/POM, reports and tracked Arrays/Searching
-findings remain unchanged. The next numbered module is **16 - Testing**.
+The [first DP report](../17-benchmarking/results/dynamic-programming/README.md)
+completes all three templates with **57 means/errors**, **570 measured** and
+**342 warmup averages**, completion **8 min 30 sec**. Source
+`d572651484f3ec6cffe03ad589bddd5a4a8fb8a3` is separately author-reported checkout
+attribution (PR #90 merge), whose tree matches reviewed implementation. Headers
+confirm JDK 21.0.9/JMH 1.37, one thread, 3/5 x 500 ms and two forks. Fibonacci
+ns/op stays separate from knapsack/LCS us/op; no observation is silently converted.
+The full command, execution timestamp, CPU/power, jar hash and profiler data are
+unavailable. Earlier OS/vendor/locale setup is contextual rather than newly
+supplied metadata; the SHA is not embedded by JMH or tied to a capture timestamp.
+
+All means/errors agree with result blocks and parameters; rounded means, extrema
+and sample deviations match printed observations. Eleven errors reach 25%:
+four Fibonacci and seven LCS, none knapsack. Table Fibonacci n=20 has 163.7%
+error, a 347.118 ns/op measured iteration, fork means 127.539/45.845 and literal
+CI lower marker `? 0`. All remain. Twelve fully numeric matching-method CI pairs
+overlap; two n=20 pairs instead have a nonnumeric boundary. No precise table
+ranking or significance/equivalence follows from those point means.
+
+Rolling point means are lower for all eight knapsack fixtures, while memo/table
+order is mixed and five pairs overlap. LCS memo/rolling depends on shape:
+IDENTICAL/SHIFTED favour memo means, large DISJOINT/RANDOM favour rolling.
+Source ledgers distinguish Fibonacci additions/calls, knapsack dense cells/
+reachable states/updates and LCS diagonal/full-grid dependencies. Dense cache
+preparation persists for a sparse search; source counts are not profiler events,
+actual allocations/bytes or isolated elapsed-cost shares. Witnesses are not
+timed. No universal ratio, CPU/cache cause or fitted exponent is claimed;
+knapsack's numeric capacity bound stays pseudopolynomial.
+
+This results update changes documentation/comments only, with no executable Java
+change, new timed run or CI status. Earlier 694-test verification and tracked
+Arrays/Searching findings remain distinct. All evidence stays Markdown without
+JSON/log; smoke and prior reports remain separate. Further experiments retain
+their own source/settings and every error. The next module is **16 - Testing**.
 
 ## Evidence Policy and Next Action
 

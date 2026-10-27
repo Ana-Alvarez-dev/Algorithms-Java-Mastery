@@ -32,9 +32,15 @@ agreement, Cassini's identity, invalid limits and interleaved boundary calls.
 
 Three methods at n=20/40/90 define nine cells in **ns/op**. Complete public calls
 include private memo/table setup; no warm cache persists. The other new templates
-use us/op, so retain row units. `Result`/`Interpretation` await author measurements;
-smoke and previous Recursion results cannot supply them. No isolated recursion,
-allocation or tail-call-elimination claim follows from a timing difference.
+use us/op, so retain row units. The
+[first report](../17-benchmarking/results/dynamic-programming/README.md) now
+records all nine Fibonacci cells/errors and printed iterations, with source
+`d572651` separately author reported and JDK 21.0.9/JMH 1.37 in the headers.
+Rolling point means are lower at all n, but four errors reach 25%; table n=20
+has 163.7% error, fork means 127.539/45.845 ns/op and literal CI lower marker
+`? 0`. Every observation stays. No precise n=20 table ordering or isolated
+recursion/allocation/TCO cause follows. The same n-1 additions per variant do
+not explain all gaps; smoke and prior Recursion results remain separate.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) gives the proof, sources and protocol. Next:
 [0/1 knapsack](09-knapsack-case-study.md).

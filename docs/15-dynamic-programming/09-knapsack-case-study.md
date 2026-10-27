@@ -44,6 +44,13 @@ numeric-mask tie resolution; seeded arrays, exact long sums, caps and ownership.
 
 The three value-only methods define 24 JMH defaults over n=16/64, C=32/128 and
 LIGHT/TOO_HEAVY. Full setup/validation stays timed; trial generation is excluded.
-Pending author measurements cannot be replaced by smoke or state counts. The
-[implementation and benchmark guide](implementation-and-benchmark-guide.md) connects recurrence, proofs, traces, tests and protocol. Next:
+The [first report](../17-benchmarking/results/dynamic-programming/README.md)
+now records all 24 cells/errors and printed iterations, source `d572651`
+separately author reported, JDK 21.0.9/JMH 1.37 in headers. Rolling point means
+are lower throughout; memo/table order is mixed and five interval pairs overlap.
+No error reaches 25%, which does not isolate systematic/runtime effects.
+The source ledger distinguishes dense cells, memo expansions and rolling
+updates; heavy inputs still initialise the dense cache. Plan output is not timed
+and no precise setup share, CPU cause or bit-polynomial bound is inferred.
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md) connects recurrence, proofs, traces, tests and protocol. Next:
 [longest common subsequence](10-longest-common-subsequence.md).

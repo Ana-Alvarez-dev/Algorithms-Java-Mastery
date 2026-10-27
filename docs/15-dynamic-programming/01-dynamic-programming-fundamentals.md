@@ -32,5 +32,10 @@ expanded. Rolling storage reduces retained state but does not preserve a witness
 for free. There is no universal performance ranking among implementation styles.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) connects all twelve notes to Java, induction/invariants, traces,
-independent tests and three pending measurement templates. Next:
+independent tests and three measurement templates. Their
+[first research report](../17-benchmarking/results/dynamic-programming/README.md)
+now retains all 57 cells, every error and printed iteration from author-reported
+source `d572651`, JDK 21.0.9/JMH 1.37. Eleven wide-error cells and per-row units
+remain visible; full setup and shape-dependent comparisons limit conclusions.
+Next:
 [overlapping subproblems](02-overlapping-subproblems.md).

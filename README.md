@@ -64,7 +64,7 @@ engineering documentation.
 | Sorting | Documented + implemented + tested + selected JMH |
 | Linked Lists through Greedy | Selected implementations, tests and initial measured research |
 | Backtracking | Documented + implemented + tested + initial 46-cell research |
-| Dynamic Programming | Documented + implemented + tested; author measurements pending |
+| Dynamic Programming | Documented + implemented + tested + initial 57-cell research |
 | Testing | Next numbered module; existing tests remain evidence |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
@@ -393,8 +393,14 @@ All twelve notes link state/recurrence design, traces, induction, deterministic
 ties, dense-cache setup and rolling dependency invariants. Normal/profile checks
 pass **694 tests**, including **22 new tests**. Nine methods in three JMH templates
 define **57 defaults** (9 Fibonacci ns/op, 24 knapsack/24 LCS us/op); row units and
-value-only versus witness work remain explicit. Author Result/Interpretation
-await controlled measurements. No smoke score completes research or CI.
+value-only versus witness work remain explicit. The
+[first DP report](docs/17-benchmarking/results/dynamic-programming/README.md)
+now completes all three Result/Interpretation fields with 57 means/errors,
+570 measured and 342 warmup averages on JDK 21.0.9/JMH 1.37, author-reported
+source `d572651` (PR #90). Eleven errors reach 25%, largest 163.7% for Fibonacci
+table n=20; its literal CI marker remains. Knapsack rolling point means are
+lower throughout; LCS memo/rolling comparisons depend on shape. Source-state
+ledgers are not timing attribution; smoke and earlier reports remain separate.
 
 ## Technology Stack
 
