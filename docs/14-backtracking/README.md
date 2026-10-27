@@ -46,10 +46,16 @@ eight methods and **46 default cells** (12 permutation, 12 combination,
 6 queen, 16 subset). All complete short execution checks; an independent probe
 checks every default three times. JavaDoc passes doclint excluding missing tags.
 
-`Result` and `Interpretation` remain pending author measurements on the merged
-source. Smoke scores are not research. The protocol captures source SHA, actual
-runtime, complete headers/iterations/errors and completion in Markdown, without
-new JSON/log exports. Earlier module evidence retains its own provenance.
+The [first research report](../17-benchmarking/results/backtracking/README.md)
+now completes all four Result/Interpretation fields with **46 means/errors**,
+**460 measured** and **276 warmup averages**, completion **6 min 42 sec**.
+Author-reported source is `b62df1b84810dfe5dea023d5d00bac2eb05c0cd0` (PR #88);
+headers confirm JDK 21.0.9/JMH 1.37 and the controlled defaults. The author also
+supplied Oracle/Windows 11 amd64/es_AR/UTF-8 metadata. Two errors reach 25%:
+unpruned combinations 12/HALF and flags queens n=8. Every observation remains
+in Markdown without JSON/log exports. Complete command, execution timestamp,
+CPU/power, jar hash and profiler data remain unavailable; source attribution is
+not embedded by JMH. Earlier module evidence and smoke stay separate.
 
 Sudoku, graph colouring, mazes, branch-and-bound optimisation, symmetry-reduced
 queens, streaming and production memoisation/tabulation are future extensions.

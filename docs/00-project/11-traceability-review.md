@@ -63,7 +63,9 @@ on JDK 21.0.9/JMH 1.37, with separately supplied source
 The Backtracking contribution extends review from main
 `605c299f11944e0234c1651c21d4191f07b3432f`, which integrated Greedy research
 through PR #87. Its selected contracts and local verification reported
-2026-10-26 are recorded below. Author measurements remain pending.
+2026-10-26 are recorded below. The first author-supplied run now records all
+46 default cells on JDK 21.0.9/JMH 1.37, with separately supplied source
+`b62df1b84810dfe5dea023d5d00bac2eb05c0cd0` (PR #88 merge).
 
 ## Required Chain
 
@@ -94,7 +96,7 @@ helpers. The matrix includes selected implementations through module 14.
 | Recursion | 7 | 28 | 8 | [Selected contracts](../11-recursion/implementation-and-benchmark-guide.md), [24 results and research](../17-benchmarking/results/recursion/README.md); JDK 21.0.9/JMH 1.37, author-reported source `fe370a1`, all errors/iterations retained; five wide-error cells and preliminary limits |
 | Divide and Conquer | 3 | 18 | 6 | [Selected contracts](../12-divide-and-conquer/implementation-and-benchmark-guide.md), [48 results and research](../17-benchmarking/results/divide-and-conquer/README.md); JDK 21.0.9/JMH 1.37, author-reported source `507b253`, all errors/printed iterations retained; six wide-error cells and preliminary limits |
 | Greedy | 5 | 27 | 5 | [Selected contracts](../13-greedy-algorithms/implementation-and-benchmark-guide.md), [40 results and research](../17-benchmarking/results/greedy/README.md); JDK 21.0.9/JMH 1.37, author-reported source `674ab35`, all errors/printed iterations retained; ten wide-error cells and preliminary limits |
-| Backtracking | 4 | 27 | 8 | [Selected contracts, proofs and protocol](../14-backtracking/implementation-and-benchmark-guide.md); four templates/46 defaults pass local checks, author Result/Interpretation pending |
+| Backtracking | 4 | 27 | 8 | [Selected contracts](../14-backtracking/implementation-and-benchmark-guide.md), [46 results and research](../17-benchmarking/results/backtracking/README.md); JDK 21.0.9/JMH 1.37, author-reported source `b62df1b`, every error/printed iteration retained; two wide-error cells and preliminary limits |
 | 15–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are now **672 passing repository tests**, compared with **645** before
@@ -434,14 +436,41 @@ CLRS Third Edition sections/pages are scoped to DFS and positive subset-sum
 context, not claimed as a copied N-Queens/permutation algorithm; NIST and OEIS
 provide separately identified primary references.
 
-Four templates contain questions, expectations, timed work and limitations;
-Result/Interpretation remain pending controlled author measurements. The 46
-defaults split 12/12/6/16 and use **microseconds/op**, 3/5 x 500 ms, two forks
-and one thread. Capture source SHA after feature merge and before launching or
-pulling a later results update. Retain full console evidence in Markdown without
-JSON/log exports. Smoke timings are excluded from research. Previous executable
-source/tests/POM, measured reports and tracked Arrays/Searching/CI gaps remain
-unchanged. Next is **15 - Dynamic Programming**, currently conceptual.
+Four templates contain questions, expectations, timed work and limitations.
+The [first Backtracking report](../17-benchmarking/results/backtracking/README.md)
+now completes Result/Interpretation for **all 46 defaults**, split 12 permutation /
+12 combination / 6 queen / 16 subset cells. It retains **460 measured** and
+**276 warmup averages**, completion **6 min 42 sec**, in **microseconds/op**.
+Separately author-reported source is `b62df1b84810dfe5dea023d5d00bac2eb05c0cd0`,
+PR #88's merge; its tree matches reviewed source. JMH headers confirm 1.37,
+JDK 21.0.9, 3/5 x 500 ms, two forks and one thread. Oracle/Windows 11 amd64,
+es_AR/UTF-8 metadata was separately supplied. The full command, execution
+timestamp, CPU/power, jar hash and profiler data are unavailable; source SHA
+is not embedded by JMH and its capture time is not established by the text.
+
+All means/errors match their result blocks; rounded statistics match printed
+iterations within precision, and every 99.9% CI remains intact. Two errors
+reach 25%: n=12/HALF unpruned combinations (38.3%, fork means 4.834/7.892 us/op)
+and n=8 queen flags (29.5%). The n=12/HALF combination intervals overlap, so
+the point means do not establish a precise ordering or equivalence. No outlier
+is discarded. Tiny identical printed
+iterations retain nonzero reported uncertainty instead of inventing precision.
+
+Pruned combination means are lower at HALF/ALL, but TWO favours unpruned; one
+avoided call need not reduce elapsed work. Masks and frequency counters have
+lower means in matching subsets, but DISTINCT permutation candidate-check
+counts agree, so reduced loop width alone cannot explain all gaps. Subset
+bounds have lower miss means, while the early PRESENT witness favours the
+reference without suffix preparation. Source prefix/candidate ledgers are
+analytical, not machine events, measured allocations or exact timing shares.
+Counts omit enumeration; no universal gain, significance/equivalence, CPU cause
+or exponential/factorial fit is claimed.
+
+This results update changes documentation/comments only, with no executable Java
+change, new timed run or CI status. Earlier 672-test verification and tracked
+Arrays/Searching findings remain distinct. Evidence stays Markdown without
+JSON/log exports; smoke is excluded. Future runs retain their own source/settings
+and all errors. Next is **15 - Dynamic Programming**, currently conceptual.
 
 ## Evidence Policy and Next Action
 

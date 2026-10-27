@@ -15,12 +15,21 @@ import java.util.concurrent.TimeUnit;
  * Seed-20261026 trial shuffling is excluded; input stays unchanged. No output
  * permutations are materialised, so enumeration/output throughput is not timed.
  * Result:
- * Pending author measurements; smoke is harness evidence only.
+ * Author run reported 2026-10-26; source b62df1b84810dfe5dea023d5d00bac2eb05c0cd0
+ * supplied separately (PR #88). JMH 1.37/JDK 21.0.9, Windows 11 amd64,
+ * one thread, 3/5 x 500 ms warmup/measurement, two forks (Cnt=10).
+ * Combined run 6 min 42 sec; all 46 cells/errors, 460 measured and 276 warmup
+ * averages: docs/17-benchmarking/results/backtracking/README.md.
+ * All 12 count cells retained. n=8 frequency/positions DISTINCT:
+ * 457.918 +/- 5.051 / 603.265 +/- 37.037; DUPLICATE_HEAVY:
+ * 4.999 +/- 0.052 / 13.494 +/- 2.840 us/op.
  * Interpretation:
- * Pending actual source/runtime/settings and every mean/error. Duplication
- * changes both result population and candidate checks; compare matching inputs.
- * No isolated call/candidate cost, allocation rate, CPU/cache cause or exponent
- * is inferred from these two sizes or a short execution check.
+ * Frequency means are lower for all six matching inputs. Duplicate counts
+ * change both prefix population and loop width. For DISTINCT, u=n and both
+ * make the same candidate-check count, so reduced width cannot explain the
+ * whole grid. Different bookkeeping, clone/sort/state remain timed. No error
+ * reaches 25%, but duplicate-heavy n=8 positions has about 21.0%. These are
+ * counts, not enumeration throughput, allocation rates or isolated CPU costs.
  * Protocol: docs/14-backtracking/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

@@ -306,11 +306,36 @@ is hidden in the baselines. Return types, local work/state allocation and caps
 remain explicit. Two sizes (three for queens) do not establish an exponent.
 
 Each template retains Research Question, Theoretical Expectation, Measured Work,
-Result and Interpretation. **Result/Interpretation await author measurements**
-after integration. No score, error, allocation rate, stack bytes, cache/CPU
-cause, significance/equivalence or fitted complexity result is invented.
+Result and Interpretation. The
+[first research report](../17-benchmarking/results/backtracking/README.md) now
+completes all four with **46 means/errors**, **460 measured** and **276 warmup
+averages**, completion **6 min 42 sec**. Supplied on **2026-10-26**, it uses
+separately author-reported source **`b62df1b84810dfe5dea023d5d00bac2eb05c0cd0`**,
+the merge of PR #88, whose tree matches this reviewed contribution. Headers
+confirm JDK 21.0.9/JMH 1.37 and the defaults above; Oracle/Windows 11 amd64,
+es_AR/UTF-8 were separately supplied. Source is author checkout attribution,
+not embedded by JMH or established by a jar hash. Complete command, execution
+timestamp, CPU/power, generated-code inspection and profiler data are unavailable.
 
-After creating/merging the feature PR, run from the Windows repository root:
+Two cells have error at least 25%: unpruned combinations n=12/HALF (38.3%)
+and queens flags n=8 (29.5%). The 12/HALF combination intervals overlap; their
+point means do not establish a precise ordering or equivalence. Every printed
+observation and CI remains intact.
+Pruned combination means are lower at HALF/ALL but higher at TWO; a single
+avoided call does not guarantee lower elapsed time. Masks and frequency counts
+have lower means across their matching fixtures; for DISTINCT, both permutation
+candidate-check counts are equal, so reduced loop width alone cannot explain
+the whole grid. Bounded subset misses have lower means, but PRESENT favours the
+unbounded reference; suffix preparation remains timed in the bounded API.
+
+The report derives exact prefix/candidate ledgers, including signed misses,
+independently of timing. These are not observed CPU events, actual allocations,
+stack bytes or elapsed-cost attribution. Counts omit enumeration; no universal
+speedup, significance/equivalence or exponential/factorial fit is claimed.
+Earlier 672-test verification stays distinct from this results-only update.
+
+The following commands retain the Windows protocol for later runs from the
+local repository root after source integration:
 
 ```powershell
 git switch main

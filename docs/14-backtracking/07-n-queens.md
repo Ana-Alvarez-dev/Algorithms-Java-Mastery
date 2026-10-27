@@ -57,3 +57,15 @@ it does not isolate bit operations, allocation rates or enumerate boards.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) contains pseudocode, invariants, traces and source limits.
 Next: [complexity analysis](08-complexity-analysis.md).
+
+## First Count Measurements
+
+The [first report](../17-benchmarking/results/backtracking/README.md) preserves
+all six cells, errors and printed iterations from source `b62df1b`, separately
+author reported, on JDK 21.0.9/JMH 1.37. Masks have lower means at n=8/10/12;
+at n=12 masks/flags report 5663.154 +/- 329.313 / 47867.076 +/- 448.464 us/op.
+Both visit 856,189 legal-prefix nodes; source candidate work differs (10,103,868
+flag checks versus 856,188 available-child iterations). Those analytical counts
+do not isolate bit instructions, allocation or CPU causes. Flags n=8 has 29.5%
+error; all observations remain. Counts do not measure board enumeration or
+symmetry-reduced/first-solution search, and O(n) logical depth remains.

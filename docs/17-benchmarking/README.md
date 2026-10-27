@@ -634,11 +634,27 @@ Normal/profile verification passes **672 tests**, including **27 new tests**.
 All eight methods are discovered; 46 short smoke cells complete, and a separate
 reference probe checks every default three times with repeatability/nonmutation.
 JavaDoc passes doclint excluding missing tags. These are local functional/harness
-checks, not controlled author research or passing CI. All four Result and
-Interpretation fields remain pending author source/runtime/settings and complete
-console measurements. Preserve every mean/error and printed iteration in
-Markdown without new JSON/log exports; source call ledgers are analytical.
-The guide provides discovery and Java 21 commands after merging the feature.
+checks, not controlled author research or passing CI. The
+[first author report](results/backtracking/README.md), supplied on 2026-10-26,
+now completes all four Result/Interpretation fields with **46 means/errors**,
+**460 measured** and **276 warmup averages**, completion **6 min 42 sec**.
+Author-reported source is `b62df1b84810dfe5dea023d5d00bac2eb05c0cd0` (PR #88);
+headers confirm JDK 21.0.9/JMH 1.37 and the controlled defaults. Oracle/Windows
+11 amd64/es_AR/UTF-8 metadata was separately supplied. Two errors reach 25%:
+12/HALF unpruned combinations (38.3%) and n=8 queen flags (29.5%). The 12/HALF
+combination intervals overlap; no precise ordering/equivalence is established.
+No value is discarded. Full command, execution timestamp, CPU/power, jar hash and profiler
+data remain unavailable.
+
+Capacity pruning has lower means at HALF/ALL, while TWO favours unpruned point
+means. Masks and frequency counters have lower means throughout their matching
+subsets, but DISTINCT permutations have identical candidate-check counts in
+both variants. Subset bounds have lower miss means; an early PRESENT witness
+favours withoutBounds. Source call/candidate ledgers explain different work,
+not exact elapsed shares, allocation rates or CPU causes. Counts do not time
+enumeration, and no fitted exponent/significance/universal gain is claimed.
+All evidence remains Markdown without JSON/log exports; smoke stays separate.
+The guide retains discovery and Java 21 commands for later controlled runs.
 
 # Key Takeaways
 
