@@ -21,9 +21,10 @@ The [corrected aggregation record](results/arrays/aggregation-corrected-run.md)
 now records the **first supplied five-cell run**: 50 measured and 30 warmup
 averages, JDK 21.0.9/JMH 1.37, matching controlled headers and 44-second completion.
 The maximum relative error is 10.917%; finite growth is compatible with a linear
-scan, without a hardware diagnosis. Execution SHA/dirty state, jar identity,
-command/time and fresh machine metadata remain unavailable. Attribution to the
-reviewed corrected fixture stays provisional. Old ascending-payload means remain
+scan, without a hardware diagnosis. The author's subsequent reflog supports
+`5eee0dc` as the inferred execution source before results merge `12f2973`.
+The original jar is absent, so its hash is unavailable. Execution-time dirty
+state, command/time and fresh machine metadata remain unknown. Old ascending-payload means remain
 historical; local discovery/smoke and allocation-profiler compatibility stay
 separate. For subsequent runs, retain complete console text;
 no JSON/log/new CSV exports are required. Coverage, timing and profiled runs
@@ -741,7 +742,7 @@ with exact sums 4,950..49,500,000. A long/formula probe checks all five defaults
 three calls each, preservation and size guards; five short smoke cells complete.
 These checks do not supply research scores. The [historical Arrays report](results/arrays/README.md)
 still records the old ascending payload and invalid two largest sums. Corrected
-Result/Interpretation were pending at that stage. The later [module 17 record](results/arrays/aggregation-corrected-run.md) now supplies five means/errors and all iterations, with execution-source attribution open; old means are not reused.
+Result/Interpretation were pending at that stage. The later [module 17 record](results/arrays/aggregation-corrected-run.md) now supplies five means/errors and all iterations, with source attribution inferred from the supplied reflog and original jar hash unavailable; old means are not reused.
 
 JaCoCo 0.8.13 is optional under `-Pcoverage`, generating ignored HTML/XML. The
 baseline had 694 passing tests and a 100%-covered yet incorrect nearest-value

@@ -86,7 +86,9 @@ PR #92. The ten notes now use an applied protocol, with benchmark-profile
 fixture tests, exact commands, discovery and local smoke. Corrected aggregation
 author output now supplies all five means/errors and 80 printed iteration
 averages on JDK 21.0.9/JMH 1.37, with 44-second completion. Execution source
-attribution remains open; earlier numerical evidence is not rewritten.
+attribution is now inferred from the author's supplied reflog (`5eee0dc` before
+results merge `12f2973`); original jar hash is unavailable. Earlier numerical
+evidence is not rewritten.
 
 ## Required Chain
 
@@ -120,7 +122,7 @@ helpers. The matrix includes selected algorithms through module 15 and cross-cut
 | Backtracking | 4 | 27 | 8 | [Selected contracts](../14-backtracking/implementation-and-benchmark-guide.md), [46 results and research](../17-benchmarking/results/backtracking/README.md); JDK 21.0.9/JMH 1.37, author-reported source `b62df1b`, every error/printed iteration retained; two wide-error cells and preliminary limits |
 | Dynamic Programming | 3 | 22 | 9 | [State/recurrence contracts](../15-dynamic-programming/implementation-and-benchmark-guide.md), [57 results and research](../17-benchmarking/results/dynamic-programming/README.md); JDK 21.0.9/JMH 1.37, author-reported `d572651`; mixed units, every error/printed iteration and eleven wide-error cells retained; reused Fibonacci is not a new file |
 | Testing | 0 new production files | 16 added in Searching, not additive | 0 new | [Regression/coverage guide](../16-testing/implementation-and-verification-guide.md), [baseline/red/green evidence](../16-testing/verification-report.md); coverage profile and fixture validity, no separate production package |
-| Benchmarking | 0 new production files | 13 additional under -Pbenchmark only | 0 new; 115 existing methods in 40 classes | [Applied guide](../17-benchmarking/implementation-and-benchmark-guide.md), [local verification](../17-benchmarking/verification-report.md); five-cell author output retained, execution-source attribution open, historical data unchanged |
+| Benchmarking | 0 new production files | 13 additional under -Pbenchmark only | 0 new; 115 existing methods in 40 classes | [Applied guide](../17-benchmarking/implementation-and-benchmark-guide.md), [local verification](../17-benchmarking/verification-report.md); five-cell author output retained, source inferred from supplied reflog; original jar absent, historical data unchanged |
 | 18–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
 There are **710 passing normal-suite tests** and **723 under -Pbenchmark**
@@ -627,15 +629,22 @@ JDK 21.0.9/JMH 1.37 and 00:00:44 completion. All printed means/extrema/stdev/CI
 reconcile within display rounding. Mean growth for tenfold n is 11.215, 10.033,
 10.138 and 11.249; none of the errors reaches 25% (maximum 10.917%). These
 observations are compatible with source linear work, not a complexity proof
-or cache/GC/JIT diagnosis. SHA/dirty state, jar hash, exact command/time and
-fresh machine metadata were not supplied. The known PR #93 merge `5eee0dc`
-is the reviewed protocol source, not substituted as the execution source.
+or cache/GC/JIT diagnosis. The author's subsequently supplied reflog shows
+`5eee0dc` immediately before results merge `12f2973`. The conversation places
+the measurement before the results PR, supporting `5eee0dc` as an inferred
+execution checkout. The reflog has no run/build timestamps or dirty state;
+this is not an execution-time attestation. Executable aggregation source and
+production/tests/POM are identical between those merges. The original jar
+is absent according to the author's failed hash attempt, so its SHA-256 is
+unavailable. Exact command/time and fresh machine metadata remain unknown.
 
 Historical means/errors, censored intervals and source limitations remain
 unchanged. The Arrays historical overflow limitation remains historical; future
 fixture validity does not repair old data. Coverage is separate from JMH, and
 no CI workflow/status or new JSON/log/CSV is introduced. Next numbered module
-is **18 - Linux Environment**; execution-source attribution remains open separately.
+is **18 - Linux Environment**; source attribution is inferred and the original
+artifact hash remains unavailable. These limits do not require inventing data
+or rebuilding the old artifact to continue the curriculum.
 
 ## Evidence Policy and Next Action
 

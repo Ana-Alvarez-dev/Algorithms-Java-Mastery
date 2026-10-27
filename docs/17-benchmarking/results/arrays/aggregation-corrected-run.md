@@ -3,8 +3,10 @@
 **Evidence received: 2026-10-27.** The author supplied complete JMH console
 headers, both forks for all five sizes, result blocks and the final table.
 All five means/errors, **50 measured** and **30 warmup iteration averages**
-are retained below. Completion: **00:00:44**. Execution source attribution
-and jar identity remain unconfirmed; this limitation does not erase the data.
+are retained below. Completion: **00:00:44**. A subsequent author-supplied
+reflog supports `5eee0dc` as the preceding checkout; execution-source attribution
+is inferred from that sequence and the conversation. The original jar is no
+longer available for hashing; these limits do not erase the observations.
 
 ## Question, reviewed source and attribution
 
@@ -14,15 +16,19 @@ pseudocode, trace, proof, fixture tests, timed work and the requested command.
 The reviewed protocol was merged through PR #93 into
 `5eee0dc47547a4713adb7a1a16d4316745bd8d99`; its contribution commit is
 `7caf9f1c1a8735952199438aa6dc5c3e96539fc4`.
-These identify the code reviewed for interpretation, **not an author-confirmed
-execution checkout**. The console does not embed a Git SHA or jar hash. An
-explicit two-fork command could also override a different source default.
+The subsequent reflog shows `5eee0dc` immediately before the pull to the
+results merge `12f2973`. Together with the conversation sequence (measurement,
+results PR, then pull), this supports an **inferred execution checkout** of
+`5eee0dc`, rather than the later results commit. The console does not embed a
+Git SHA or jar hash. Reflog entries alone do not timestamp a benchmark or
+record the jar build and working-tree state; this is a qualified attribution.
 
 In that reviewed source, trial setup uses `value[i]=i%100`, outside timing;
 the production scan and Blackhole consumption are timed. Each thread reuses
 its array. Expected sums below describe this reviewed fixture. JMH did not
 print return values or payload contents; linking these observations to that
-exact fixture remains provisional until source/artifact evidence is supplied.
+exact fixture is supported by the reflog-based source inference, while the
+precise built artifact and execution-time dirty state remain unverified.
 
 The [historical Arrays report](README.md) retains the old ascending payload's
 five means and the two int-sum domain violations. Those old values and missing
@@ -33,8 +39,8 @@ provenance prevent treating the new/old means as a controlled improvement.
 
 | Field | Supplied evidence |
 |---|---|
-| Execution source SHA / clean or dirty state | Not supplied; reviewed merge is not substituted |
-| Jar SHA-256 | Not supplied |
+| Execution source SHA / clean or dirty state | `5eee0dc47547a4713adb7a1a16d4316745bd8d99`, inferred from supplied reflog and conversation sequence; execution-time dirty state unknown |
+| Jar SHA-256 | Unavailable: subsequent Get-FileHash attempt reports that target/benchmarks.jar does not exist; no replacement artifact is substituted |
 | Execution start timestamp | Not supplied; receipt date is not run time |
 | Complete invoked command | Not supplied; the preceding requested command is not proof of invocation |
 | JMH version | 1.37 in all five headers |
@@ -59,6 +65,44 @@ literally. All five effective headers agree with the planned timing protocol;
 this does not certify power, background load, payload or source identity.
 The compiler-Blackhole advisory and general JMH warning accompanied the output;
 no assembly, hardware counters or GC diagnosis was supplied.
+
+## Source-attribution follow-up: author-supplied reflog
+
+The author supplied the following output after the current `git rev-parse HEAD`
+returned the results merge, and repeated a failed `Get-FileHash` attempt. No
+reflog timestamps were included:
+
+```text
+12f2973 (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: pull --ff-only origin main: Fast-forward
+5eee0dc HEAD@{1}: pull --ff-only origin main: Fast-forward
+18a8ef5 HEAD@{2}: pull --ff-only origin main: Fast-forward
+8bacc90 HEAD@{3}: pull --ff-only origin main: Fast-forward
+d572651 HEAD@{4}: pull --ff-only origin main: Fast-forward
+da3db88 HEAD@{5}: pull --ff-only origin main: Fast-forward
+b62df1b HEAD@{6}: pull --ff-only origin main: Fast-forward
+605c299 HEAD@{7}: pull --ff-only origin main: Fast-forward
+```
+
+`5eee0dc` expands to `5eee0dc47547a4713adb7a1a16d4316745bd8d99` (PR #93,
+Benchmarking protocol); `12f2973` expands to
+`12f2973034b4a0ed1f9a3a03e3e687af903a9c24` (PR #94, reported results).
+The first is the most recent recorded checkout before the results pull.
+The conversation places the reported measurement before creation/merge of
+that results PR. This supports the preceding checkout as the likely execution
+source; it is not an execution-time attestation or proof of which jar was used.
+
+A source comparison confirms that the aggregation benchmark's executable Java
+is identical between those two merges after removing comments/whitespace.
+Production code, tests, fixture tests and POM also have no changes between them.
+This establishes compatibility of the tracked source, not artifact identity.
+
+The subsequent hash attempt failed at
+`C:\Users\rousl\Documents\Algorithms-Java-Mastery\target\benchmarks.jar`:
+Resolve-Path reported that the file did not exist. The cause of its absence was
+not established. Therefore the original jar SHA-256 is **unavailable**, not
+zero, and a newly built jar must not be presented as the old artifact.
+Execution-time dirty state, build timestamp and exact command remain unknown.
+No measurement is rerun or altered for this provenance follow-up.
 
 ## Result
 
@@ -181,11 +225,12 @@ values, every prefix stays below the final total, at most 49,500,000; that
 supports the int-sum contract for the reviewed defaults. Those are source/test
 claims, conditional on execution attribution, not values observed from timing.
 
-Source SHA, dirty state, artifact hash, actual command/start time and fresh
-machine/power metadata remain open provenance fields. Completing them strengthens
-the link without changing the five observations. Record subsequent runs
-separately; do not erase this execution or backfill missing metadata by assuming
-it from PR order. A GC run would have a distinct identity and units. No raw
+The source checkout is now inferred from the supplied reflog and conversation
+sequence. Execution-time dirty state, original artifact hash, actual command/start
+time and fresh machine/power metadata remain unknown. The absent jar prevents
+hashing that original artifact now; a rebuilt jar would have a new artifact
+identity. Record subsequent runs separately and retain these limits. The five
+observations are unchanged. A GC run would have a distinct identity and units. No raw
 JSON/log/new CSV file is required; evidence is retained in Markdown.
 
 The [local verification report](../../verification-report.md) retains the

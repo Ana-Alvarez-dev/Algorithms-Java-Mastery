@@ -332,9 +332,11 @@ unchanged. Normal tests remain 710; the profile package passes 723.
 The [first supplied run record](aggregation-corrected-run.md) now retains five
 means/errors, 50 measured and 30 warmup averages on JDK 21.0.9/JMH 1.37, with
 44-second completion. Maximum relative error is 10.917%; finite growth is
-compatible with a linear scan. Source SHA/dirty state, jar identity, command/time
-and fresh machine metadata were not supplied; attribution to the reviewed
-corrected fixture remains provisional. It does not reuse these historical means
+compatible with a linear scan. The author's subsequent reflog supports source
+`5eee0dc` before results merge `12f2973`; this attribution is inferred from the
+checkout and conversation sequence. The original jar is absent, so its hash
+is unavailable; execution-time dirty state, command/time and fresh machine
+metadata remain unknown. It does not reuse these historical means
 or infer their missing errors/runtime.
 The earlier overflow limitations remain attached to their original payload.
 Local smoke/profiler compatibility is not a research run; no new CSV/JSON/log
