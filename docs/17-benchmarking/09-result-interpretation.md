@@ -8,8 +8,8 @@ Use 100 × error/score, for positive finite scores, as a descriptive relative-wi
 
 Overlapping intervals do not establish equality; non-overlap alone is not a complete comparison study. Timing differences do not identify cache, GC or compilation causes without additional evidence. Keep hypotheses and observations distinct.
 
-The corrected aggregation template currently says Pending. It contains expected mathematical sums, not invented elapsed times. Fill Result and Interpretation only after reconciling source identity, effective headers, configuration coverage and completion.
+The corrected aggregation template now records five supplied means/errors, 50 measured and 30 warmup averages, matching effective headers and completion. No error reaches the 25% flag (maximum 10.917%). Expected sums remain mathematical source oracles. Execution SHA, dirty state and jar identity were not supplied; that source-to-run link remains explicitly provisional.
 
 ## Applied protocol and sources
 
-See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from pending author measurements.
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), whose execution source attribution remains open.

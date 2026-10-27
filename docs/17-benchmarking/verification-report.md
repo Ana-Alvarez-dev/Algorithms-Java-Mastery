@@ -23,7 +23,7 @@ from the starting snapshot only at `@Fork(2)`.
 The benchmark Maven profile adds `src/jmh-test/java` at generate-test-sources.
 The normal source roots and coverage profile remain unchanged. Test classes
 are not included in `benchmarks.jar`. There are still **40 JMH classes / 115
-methods**. The new pending record is separate from historical Arrays data.
+methods**. The separate aggregation record preserves author output without replacing historical Arrays data.
 No historical numerical table or CSV is replaced. No JSON/log/new CSV is versioned.
 
 ## Verification environment
@@ -81,11 +81,13 @@ fully qualified selector in the [guide](implementation-and-benchmark-guide.md).
 JMH accepted `-lp`, the explicit average-time/nanosecond options, size overrides,
 failure handling and `-prof gc`. The five-cell smoke preserves one full scan per
 invocation and completes without benchmark errors. The ordinary controlled
-3/5 x 500 ms, two-fork command is prepared for the author; its scores are pending.
+3/5 x 500 ms, two-fork command was prepared for the author; the subsequent
+reported execution is recorded separately below.
 
 All short-run timings and profiler values stay outside versioned evidence.
-No author measurement is inferred from those compatibility checks. The pending
-record contains mathematical expected sums and explicit Pending cells only.
+No author measurement is inferred from those compatibility checks. At that
+local review the author-run record was pending; the follow-up below records
+subsequently supplied observations while retaining source-attribution limits.
 
 ## Limits and next step
 
@@ -97,8 +99,27 @@ Coverage is not timing, and source counts are not CPU or allocation attribution.
 
 After merging, the author clean-builds on Java 21, captures source/dirty state,
 jar SHA-256, timestamp and environment, then runs the guide's controlled command.
-Complete headers, forks/iterations, result blocks, completion and final table
-will populate the [corrected aggregation record](results/arrays/aggregation-corrected-run.md)
-and the JMH Result/Interpretation fields. A profiled execution is separately
-attributed. Next numbered subject is **18 — Linux Environment**; pending timing
-remains an explicit follow-up rather than a fabricated completion.
+The author subsequently supplied complete headers, forks/iterations, result
+blocks, completion and final table, now retained in the
+[aggregation record](results/arrays/aggregation-corrected-run.md) and the JMH
+Result/Interpretation fields. Execution-source and artifact attribution remain
+open. A profiled execution is separately attributed. Next numbered subject is
+**18 — Linux Environment**.
+
+## Author-output follow-up: 2026-10-27
+
+The five supplied rows retain 50 measured and 30 warmup averages; headers confirm
+JDK 21.0.9/JMH 1.37, 3/5 x 500 ms, two forks, one thread, compiler Blackholes and
+no VM options. Completion is 00:00:44. Independent numerical checks reconcile
+means, extrema, sample stdev and 99.9% CI values within 0.0012 ns/op of the
+printed values. No supplied observation is discarded. No relative error reaches
+25%; the maximum is 10.917%. Mean growth is compatible with linear source work
+without establishing an isolated hardware cause or old-versus-new improvement.
+
+SHA/dirty state, jar hash, actual command/start time and fresh machine metadata
+were not supplied. PR #93 merge `5eee0dc` identifies reviewed source, not the
+execution checkout. Expected sums refer to that reviewed modulo-100 fixture;
+JMH did not print actual sums/payloads. This source-to-run link stays provisional.
+The follow-up changes only Markdown and the benchmark's research comment;
+executable Java, tests and POM are unchanged, so the 710/723 outcomes above
+remain prior verification rather than a newly claimed test execution.

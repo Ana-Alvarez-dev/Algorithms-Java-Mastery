@@ -24,10 +24,20 @@ import java.util.concurrent.TimeUnit;
  * ArrayAggregation.sum plus Blackhole consumption; trial-only modulo-100 input
  * generation is excluded. Supported fixture sizes are 0..1000000.
  * Result:
- * Pending author measurements of the corrected fixture introduced in module 16.
- * Module 17 standardises this experiment to two forks (previous default: one).
+ * Author-supplied console received 2026-10-27, AverageTime ns/op, Cnt=10:
+ * size       mean         error (99.9%)
+ * 100        22.231       2.427
+ * 1000       249.323      13.697
+ * 10000      2501.538     18.532
+ * 100000     25359.597    235.917
+ * 1000000    285257.728   7591.839
+ * Headers confirm JDK 21.0.9/JMH 1.37, 3/5 x 500 ms, two forks, one thread,
+ * compiler Blackholes and no VM options. Completion: 00:00:44.
+ * Execution SHA/dirty state, jar hash, command/time and fresh machine metadata
+ * were not supplied. Attribution to this reviewed modulo-100 fixture remains
+ * provisional; JMH does not print payload contents or returned sums.
  * Protocol: docs/17-benchmarking/implementation-and-benchmark-guide.md.
- * Pending record: docs/17-benchmarking/results/arrays/aggregation-corrected-run.md.
+ * Full record: docs/17-benchmarking/results/arrays/aggregation-corrected-run.md.
  * Historical Result (old ascending 0..n-1 fixture):
  *
  * Input Size (n)       Average Time (ns/op)
@@ -69,18 +79,22 @@ import java.util.concurrent.TimeUnit;
  * with the theoretical Θ(n) analysis. It does not constitute a
  * mathematical proof of asymptotic complexity.
  *
- * Evidence and limitations:
+ * Historical evidence and limitations:
  * These are existing recorded means, not results of a new execution here.
  * Reported errors, measurement counts and original run headers are unknown.
  * The two largest inputs exceed the documented int-sum precondition; their
  * results time overflowing arithmetic, not a valid mathematical sum.
- * Corrected Fixture Interpretation:
- * Pending a separate controlled run. New value[i]=i%100 changes the payload;
- * default sums range 4950..49500000. Old means are not measurements of this
- * corrected data. Functional/default smoke checks provide no research score.
- * Source, actual runtime/settings, every error/iteration and completion must be
- * retained separately. No isolated allocation/cache cause or exponent is fitted.
- * Verification: docs/16-testing/implementation-and-verification-guide.md.
+ * Interpretation (reported run, corrected-fixture attribution provisional):
+ * Tenfold sizes give mean-time ratios 11.215, 10.033, 10.138 and 11.249.
+ * Mean time per element is about 0.249..0.254 ns at 1000..100000, then 0.285
+ * at 1000000, compatible with linear scan work rather than a complexity proof.
+ * Relative errors range 0.741..10.917%; no cell reaches the 25% review flag.
+ * All 50 measured and 30 warmup averages are retained, including the 40.417
+ * ns/op warmup at size 100 and different fork means at size 1000000.
+ * No cache/GC/JIT cause, significance or old-versus-new improvement is inferred.
+ * Reviewed default sums are 4950..49500000; old means concern another payload.
+ * Source/artifact confirmation remains open; smoke is separate from this run.
+ * Verification: docs/17-benchmarking/verification-report.md.
  * Full extracted data and preliminary research interpretation:
  * docs/17-benchmarking/results/arrays/arrays-template-results.csv
  * docs/17-benchmarking/results/arrays/README.md
