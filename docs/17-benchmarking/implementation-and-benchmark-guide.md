@@ -20,18 +20,18 @@ These bounds describe this fixture, not a new restriction on the production API.
 
 | n | Expected mathematical sum | Status of corrected timing |
 |---:|---:|---|
-| 100 | 4,950 | Reported; source attribution open |
-| 1,000 | 49,500 | Reported; source attribution open |
-| 10,000 | 495,000 | Reported; source attribution open |
-| 100,000 | 4,950,000 | Reported; source attribution open |
-| 1,000,000 | 49,500,000 | Reported; source attribution open |
+| 100 | 4,950 | Reported; source inferred from reflog |
+| 1,000 | 49,500 | Reported; source inferred from reflog |
+| 10,000 | 495,000 | Reported; source inferred from reflog |
+| 100,000 | 4,950,000 | Reported; source inferred from reflog |
+| 1,000,000 | 49,500,000 | Reported; source inferred from reflog |
 
 The original ascending fixture and its five means remain in the
 [historical Arrays report](results/arrays/README.md). At the two largest sizes
 its mathematical sums exceed int. The corrected payload was introduced by
 Testing; this module changes its fork default **from one to two**. Historical
 means are not measurements of this payload/protocol. The
-[first supplied record](results/arrays/aggregation-corrected-run.md) now retains five means/errors, all 80 printed iteration averages and 44-second completion. Its JDK 21.0.9/JMH 1.37 headers match this protocol; execution SHA/artifact attribution remains open.
+[first supplied record](results/arrays/aggregation-corrected-run.md) now retains five means/errors, all 80 printed iteration averages and 44-second completion. Its JDK 21.0.9/JMH 1.37 headers match this protocol; the later supplied reflog supports source `5eee0dc`; the original jar hash and execution-time dirty state remain unavailable.
 
 ## Strategy, pseudocode, trace and correctness
 

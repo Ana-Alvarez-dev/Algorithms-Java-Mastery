@@ -102,8 +102,8 @@ jar SHA-256, timestamp and environment, then runs the guide's controlled command
 The author subsequently supplied complete headers, forks/iterations, result
 blocks, completion and final table, now retained in the
 [aggregation record](results/arrays/aggregation-corrected-run.md) and the JMH
-Result/Interpretation fields. Execution-source and artifact attribution remain
-open. A profiled execution is separately attributed. Next numbered subject is
+Result/Interpretation fields. The later supplied reflog supports inferred
+source attribution; the original artifact hash is unavailable. A profiled execution is separately attributed. Next numbered subject is
 **18 — Linux Environment**.
 
 ## Author-output follow-up: 2026-10-27
@@ -116,10 +116,14 @@ printed values. No supplied observation is discarded. No relative error reaches
 25%; the maximum is 10.917%. Mean growth is compatible with linear source work
 without establishing an isolated hardware cause or old-versus-new improvement.
 
-SHA/dirty state, jar hash, actual command/start time and fresh machine metadata
-were not supplied. PR #93 merge `5eee0dc` identifies reviewed source, not the
-execution checkout. Expected sums refer to that reviewed modulo-100 fixture;
-JMH did not print actual sums/payloads. This source-to-run link stays provisional.
+The subsequently supplied eight-entry reflog shows `5eee0dc` immediately before
+results merge `12f2973`. Combined with the conversation sequence, it supports an
+inferred execution source of `5eee0dc`, without proving the build, exact jar or
+execution-time dirty state. Expected sums refer to that reviewed modulo-100
+fixture; JMH did not print actual sums/payloads. The author's subsequent hash
+attempt failed because target/benchmarks.jar is absent; the original SHA-256 is
+unavailable. Exact command/start time and fresh machine metadata remain unknown.
+The full supplied reflog and inference limits are retained in the result record.
 The follow-up changes only Markdown and the benchmark's research comment;
 executable Java, tests and POM are unchanged, so the 710/723 outcomes above
 remain prior verification rather than a newly claimed test execution.

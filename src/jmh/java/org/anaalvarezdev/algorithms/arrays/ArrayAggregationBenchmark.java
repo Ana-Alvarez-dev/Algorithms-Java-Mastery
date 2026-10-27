@@ -33,9 +33,11 @@ import java.util.concurrent.TimeUnit;
  * 1000000    285257.728   7591.839
  * Headers confirm JDK 21.0.9/JMH 1.37, 3/5 x 500 ms, two forks, one thread,
  * compiler Blackholes and no VM options. Completion: 00:00:44.
- * Execution SHA/dirty state, jar hash, command/time and fresh machine metadata
- * were not supplied. Attribution to this reviewed modulo-100 fixture remains
- * provisional; JMH does not print payload contents or returned sums.
+ * Later author-supplied reflog supports 5eee0dc as the inferred execution
+ * checkout before results merge 12f2973, using the conversation sequence.
+ * The original jar is absent, so its hash is unavailable. Execution-time dirty
+ * state, command/time and fresh machine metadata remain unknown. Reflog is
+ * not a build/run attestation; JMH does not print payloads or returned sums.
  * Protocol: docs/17-benchmarking/implementation-and-benchmark-guide.md.
  * Full record: docs/17-benchmarking/results/arrays/aggregation-corrected-run.md.
  * Historical Result (old ascending 0..n-1 fixture):
@@ -84,7 +86,7 @@ import java.util.concurrent.TimeUnit;
  * Reported errors, measurement counts and original run headers are unknown.
  * The two largest inputs exceed the documented int-sum precondition; their
  * results time overflowing arithmetic, not a valid mathematical sum.
- * Interpretation (reported run, corrected-fixture attribution provisional):
+ * Interpretation (reported run, source inferred from supplied reflog):
  * Tenfold sizes give mean-time ratios 11.215, 10.033, 10.138 and 11.249.
  * Mean time per element is about 0.249..0.254 ns at 1000..100000, then 0.285
  * at 1000000, compatible with linear scan work rather than a complexity proof.
@@ -93,7 +95,7 @@ import java.util.concurrent.TimeUnit;
  * ns/op warmup at size 100 and different fork means at size 1000000.
  * No cache/GC/JIT cause, significance or old-versus-new improvement is inferred.
  * Reviewed default sums are 4950..49500000; old means concern another payload.
- * Source/artifact confirmation remains open; smoke is separate from this run.
+ * Source attribution is inferred; original jar hash is unavailable. Smoke is separate.
  * Verification: docs/17-benchmarking/verification-report.md.
  * Full extracted data and preliminary research interpretation:
  * docs/17-benchmarking/results/arrays/arrays-template-results.csv

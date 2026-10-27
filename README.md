@@ -66,7 +66,7 @@ engineering documentation.
 | Backtracking | Documented + implemented + tested + initial 46-cell research |
 | Dynamic Programming | Documented + implemented + tested + initial 57-cell research |
 | Testing | Applied regression/oracle evidence + optional coverage; 710 normal tests pass |
-| Benchmarking | Applied protocol + 723 profile tests; first five-cell aggregation report, execution-source attribution open |
+| Benchmarking | Applied protocol + 723 profile tests; first five-cell aggregation report, source inferred from reflog; original jar hash unavailable |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
 | GitHub Actions workflow | Planned / not yet implemented |
@@ -430,9 +430,10 @@ functional checks and smoke, which are not research scores. The
 [corrected aggregation record](docs/17-benchmarking/results/arrays/aggregation-corrected-run.md)
 now records five supplied means/errors, 50 measured and 30 warmup averages,
 JDK 21.0.9/JMH 1.37 and 44-second completion. No error reaches the 25% flag;
-finite growth is compatible with a linear scan. Execution SHA/dirty state, jar
-identity, command/time and fresh machine metadata remain unavailable, so source
-attribution remains open. Historical results retain their limitations.
+finite growth is compatible with a linear scan. The author's subsequent reflog
+supports `5eee0dc` as the inferred execution source before results merge
+`12f2973`. The original jar is absent, so its hash is unavailable. Execution-time
+dirty state, command/time and fresh machine metadata remain unknown. Historical results retain their limitations.
 Evidence stays Markdown with no new JSON/log/CSV files. Next is
 **18 - Linux Environment**; the GitHub Actions workflow remains unimplemented.
 
