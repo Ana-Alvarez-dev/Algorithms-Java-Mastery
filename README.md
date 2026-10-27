@@ -68,8 +68,8 @@ engineering documentation.
 | Testing | Applied regression/oracle evidence + optional coverage; 710 normal tests pass |
 | Benchmarking | Applied protocol + 723 profile tests; first five-cell aggregation report, source inferred from reflog; original jar hash unavailable |
 | Linux environment | Applied preflight + 20 shell cases; Linux Java 21 builds verified |
-| CI/CD concepts | Documented |
-| GitHub Actions workflow | Planned / not yet implemented |
+| CI/CD concepts | Applied to two-job Maven verification and package preparation |
+| GitHub Actions workflow | Implemented; local commands/lint pass, first hosted run pending |
 
 The README is intentionally maintained as a **living project summary**. It is
 updated only when repository evidence changes.
@@ -320,6 +320,8 @@ are distinguished in the implementation guide.
 - [Benchmarking local verification](docs/17-benchmarking/verification-report.md)
 - [Linux environment verification and commands](docs/18-linux-environment/implementation-and-verification-guide.md)
 - [Linux local verification](docs/18-linux-environment/verification-report.md)
+- [CI/CD workflow and verification guide](docs/19-ci-cd/implementation-and-verification-guide.md)
+- [CI/CD validation and hosted-run status](docs/19-ci-cd/verification-report.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -437,8 +439,8 @@ supports `5eee0dc` as the inferred execution source before results merge
 `12f2973`. The original jar is absent, so its hash is unavailable. Execution-time
 dirty state, command/time and fresh machine metadata remain unknown. Historical results retain their limitations.
 Evidence stays Markdown with no new JSON/log/CSV files. Next is
-**18 - Linux Environment**, applied below; the GitHub Actions workflow remains
-unimplemented.
+**18 - Linux Environment**, applied below; GitHub Actions was not yet implemented
+at that review. The later CI/CD contribution follows it below.
 
 Linux Environment now connects all ten notes to a read-only project preflight,
 with twenty offline subprocess cases for valid/invalid JDK selection, spaced
@@ -450,7 +452,21 @@ The [verification report](docs/18-linux-environment/verification-report.md)
 distinguishes actual Linux checks from fake-launcher shell fixtures. Windows
 remains supported and author WSL availability is not assumed. No old benchmark
 hash/source field is backfilled from a new build, and no Linux author timing
-or passing CI is claimed. Next numbered module: **19 - CI/CD**.
+or passing CI is claimed at that Linux review. It supplies the prerequisites for
+**19 - CI/CD**, applied below.
+
+CI/CD now provides [.github/workflows/maven-ci.yml](.github/workflows/maven-ci.yml)
+for main pushes, main-target PRs and manual dispatch. The two jobs use Linux and
+Java 21: tests/coverage first, then an uninstrumented benchmark package with
+identity capture and discovery. Official action SHAs are pinned, permissions
+are read-only, and diagnostics/package artifacts request seven-day retention.
+The [verification report](docs/19-ci-cd/verification-report.md) records actionlint
+and all six run blocks passing locally: twenty shell cases, 710 coverage tests,
+723 profile tests, generated reports and 115-method discovery. **The first
+hosted run remains pending**; local commands are not relabelled as hosted CI.
+No deployment, benchmark timing gate or branch-protection change is introduced.
+The existing numbered sequence reaches module 19; follow-up is the observed
+hosted run and closing traceability review.
 
 ## Technology Stack
 
@@ -465,7 +481,7 @@ or passing CI is claimed. Next numbered module: **19 - CI/CD**.
 | Git | Version control |
 | GitHub | Collaboration, branches and pull requests |
 | Linux | Professional command-line engineering environment |
-| GitHub Actions | Intended CI platform |
+| GitHub Actions | CI workflow platform; first hosted run pending |
 | Generative AI | Learning, review and engineering assistance under human validation |
 
 ---

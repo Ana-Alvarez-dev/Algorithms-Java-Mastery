@@ -1,0 +1,127 @@
+name: Maven CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  MAVEN_ARGS: --batch-mode --no-transfer-progress
+
+jobs:
+  verify:
+    name: Java 21 tests and coverage
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Select Java 21
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: |
+            pom.xml
+            .mvn/wrapper/maven-wrapper.properties
+
+      - name: Check Linux environment and shell contracts
+        run: |
+          bash scripts/linux/check-environment.sh
+          bash scripts/linux/test-check-environment.sh
+          ./mvnw -version
+
+      - name: Run tests and generate coverage
+        run: |
+          ./mvnw -DfailIfNoTests=true -Pcoverage clean verify
+          test -s target/site/jacoco/index.html
+          test -s target/site/jacoco/jacoco.xml
+
+      - name: Retain test and coverage reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: verification-reports-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            target/surefire-reports/TEST-*.xml
+            target/site/jacoco/
+          retention-days: 7
+          if-no-files-found: warn
+
+  benchmark-package:
+    name: Java 21 benchmark package
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Select Java 21
+        uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: |
+            pom.xml
+            .mvn/wrapper/maven-wrapper.properties
+
+      - name: Check Linux environment
+        run: |
+          bash scripts/linux/check-environment.sh
+          ./mvnw -version
+
+      - name: Test and package benchmarks without coverage
+        run: ./mvnw -DfailIfNoTests=true -Pbenchmark clean package
+
+      - name: Capture package identity
+        run: |
+          {
+            printf '# CI benchmark package provenance\n\n'
+            printf 'Run: %s/%s/actions/runs/%s/attempts/%s\n\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT"
+            printf 'Event: %s\n\nEvent SHA: `%s`\n\n' "$GITHUB_EVENT_NAME" "$GITHUB_SHA"
+            printf '```text\n'
+            bash scripts/linux/check-environment.sh --require-benchmark
+            ./mvnw -version
+            printf '```\n'
+          } > target/ci-provenance.md
+          cat target/ci-provenance.md
+
+      - name: Check benchmark discovery
+        run: |
+          "$JAVA_HOME/bin/java" -jar target/benchmarks.jar -l
+          discovered=$("$JAVA_HOME/bin/java" -jar target/benchmarks.jar '^org\.anaalvarezdev\.algorithms\.arrays\.ArrayAggregationBenchmark\.sum$' -lp)
+          printf '%s\n' "$discovered"
+          grep -Fxq 'org.anaalvarezdev.algorithms.arrays.ArrayAggregationBenchmark.sum' <<< "$discovered"
+          grep -Fq 'param "size"' <<< "$discovered"
+
+      - name: Retain verified benchmark package
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: benchmark-package-${{ github.sha }}-${{ github.run_attempt }}
+          path: |
+            target/benchmarks.jar
+            target/ci-provenance.md
+            target/surefire-reports/TEST-*.xml
+          retention-days: 7
+          if-no-files-found: error
