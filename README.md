@@ -64,7 +64,8 @@ engineering documentation.
 | Sorting | Documented + implemented + tested + selected JMH |
 | Linked Lists through Greedy | Selected implementations, tests and initial measured research |
 | Backtracking | Documented + implemented + tested + initial 46-cell research |
-| Dynamic Programming | Next algorithmic module |
+| Dynamic Programming | Documented + implemented + tested; author measurements pending |
+| Testing | Next numbered module; existing tests remain evidence |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
 | GitHub Actions workflow | Planned / not yet implemented |
@@ -312,6 +313,7 @@ are distinguished in the implementation guide.
 - [Divide and Conquer scope, contracts and run commands](docs/12-divide-and-conquer/implementation-and-benchmark-guide.md)
 - [Greedy scope, contracts and run commands](docs/13-greedy-algorithms/implementation-and-benchmark-guide.md)
 - [Backtracking scope, contracts and run commands](docs/14-backtracking/implementation-and-benchmark-guide.md)
+- [Dynamic Programming scope, contracts and run commands](docs/15-dynamic-programming/implementation-and-benchmark-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -384,6 +386,15 @@ now completes all four Result/Interpretation fields with 46 means/errors,
 source `b62df1b` (PR #88). Two errors reach 25%. Pruning loses on TWO combinations
 and early-witness subset controls by point mean; counts omit enumeration and
 source work ledgers remain distinct from timing causes. Smoke is excluded.
+
+Dynamic Programming adds full-table Fibonacci, exact 0/1 knapsack values/plans,
+and UTF-16 LCS lengths/sequences, reusing Recursion's memoised/rolling Fibonacci.
+All twelve notes link state/recurrence design, traces, induction, deterministic
+ties, dense-cache setup and rolling dependency invariants. Normal/profile checks
+pass **694 tests**, including **22 new tests**. Nine methods in three JMH templates
+define **57 defaults** (9 Fibonacci ns/op, 24 knapsack/24 LCS us/op); row units and
+value-only versus witness work remain explicit. Author Result/Interpretation
+await controlled measurements. No smoke score completes research or CI.
 
 ## Technology Stack
 
