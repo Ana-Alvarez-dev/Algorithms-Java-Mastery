@@ -162,8 +162,9 @@ blocks, run-complete marker/duration and final table. Copy text into the
 conversation; a cropped final-table screenshot cannot recover omitted values.
 
 On Linux, use `./mvnw -Pbenchmark clean package` and the explicit path to a Java 21
-executable with the same jar selector/options. Local verification used
-`bash mvnw` because the tracked wrapper lacks executable permission. OS changes
+executable with the same jar selector/options. Earlier local verification used
+`bash mvnw` while the wrapper lacked executable permission. Module 18 now
+tracks it executable and adds the [Linux environment preflight](../18-linux-environment/implementation-and-verification-guide.md). OS changes
 require a separately attributed run; Windows and Linux data are not pooled.
 
 ## Separate allocation diagnostic
