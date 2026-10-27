@@ -612,6 +612,34 @@ against subset selection. Analytical heap/merge/output ledgers do not identify
 CPU/cache causes, allocation rates or pure sorting/heap costs. Every observation
 and limitation remains in Markdown without JSON/log; smoke stays separate.
 
+# Backtracking Experiments
+
+The [module guide](../14-backtracking/implementation-and-benchmark-guide.md)
+defines eight methods in four templates: permutation counts (12 cells),
+combination counts (12), ordinary N-Queens counts (6) and signed subset-sum
+decision (16), for **46 defaults**. All use average **microseconds/op**, one
+thread, 3/5 x 500 ms and two forks. Deterministic trial fixtures are outside
+timing; permutation shuffle seed is 20261026.
+
+Permutation variants both clone/sort/count unique value arrangements; candidate
+loops differ between positions and multiplicities. Combinations compare full
+counts with/without remaining-cardinality pruning. Queens compare flags versus
+available-column masks, without symmetry reduction. Subset decisions compare
+signed suffix bounds against the same include-first search without bounds;
+suffix preparation remains timed. Root misses, in-range misses and an early
+witness prevent a universal claim that pruning must improve every workflow.
+No enumeration throughput, isolated predicate/bit cost or production DP is timed.
+
+Normal/profile verification passes **672 tests**, including **27 new tests**.
+All eight methods are discovered; 46 short smoke cells complete, and a separate
+reference probe checks every default three times with repeatability/nonmutation.
+JavaDoc passes doclint excluding missing tags. These are local functional/harness
+checks, not controlled author research or passing CI. All four Result and
+Interpretation fields remain pending author source/runtime/settings and complete
+console measurements. Preserve every mean/error and printed iteration in
+Markdown without new JSON/log exports; source call ledgers are analytical.
+The guide provides discovery and Java 21 commands after merging the feature.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

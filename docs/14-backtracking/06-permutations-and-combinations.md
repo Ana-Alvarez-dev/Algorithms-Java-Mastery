@@ -1,445 +1,68 @@
 # Permutations and Combinations
 
-## Algorithms Java Mastery
+Permutations distinguish value order; combinations ignore the order in which
+distinct members were selected. The Java contracts choose canonical output
+orders so repeated calls are deterministic.
 
-**Permutations** and **Combinations** are among the most classical applications of the **Backtracking** algorithm design paradigm. Both problems require systematically exploring a large search space while constructing solutions incrementally.
+## Unique Value Permutations
 
-Although they appear similar, they differ in one fundamental aspect:
+`Permutations.unique(int[])` preserves input and returns deeply immutable
+lexicographic rows. Equal values are indistinguishable: [2,1,1] yields exactly
+[1,1,2], [1,2,1], [2,1,1]. Empty input yields one empty row. Enumeration accepts
+length 0..9; two exact-count variants accept 0..10. Null and larger inputs fail
+explicitly. The caps bound work/output; they are not mathematical limits.
 
-- **Permutations** consider the **order** of the selected elements.
-- **Combinations** ignore the order and consider only the selected elements themselves.
-
-Backtracking provides a natural solution because it recursively generates partial solutions, verifies whether they are complete, and backtracks to explore alternative possibilities.
-
-These problems are fundamental in Computer Science because they introduce many concepts that appear in more advanced Backtracking applications, including state-space trees, candidate generation, recursive exploration, pruning, and combinatorial complexity.
-
----
-
-# 1. Purpose
-
-The purpose of this document is to:
-
-- distinguish permutations from combinations;
-- explain how Backtracking generates both structures;
-- analyze recursive search;
-- understand candidate generation;
-- evaluate computational complexity.
-
----
-
-# 2. Combinatorial Generation
-
-Both problems belong to **combinatorial generation**, whose objective is to systematically enumerate every valid solution.
-
-Conceptually:
+Sort a private clone, then scan positions at each depth:
 
 ```text
-Input Elements
-        ↓
-Generate Candidates
-        ↓
-Explore Search Tree
-        ↓
-Produce All Solutions
+skip if used[i]
+skip if i>0 and a[i]==a[i-1] and not used[i-1]
+mark used[i]; write path[depth]
+recurse to depth+1
+unmark used[i]
 ```
 
-Backtracking guarantees that every valid solution is eventually explored.
+Used-index tracking alone does not deduplicate repeated values. Requiring the
+first unused equal copy gives a unique canonical path for every value prefix.
+Every unique arrangement still has that path, proving completeness. The
+alternative count loops over remaining value multiplicities and restores the
+chosen count after recursion. Neither count uses factorial shortcuts or memo.
 
----
+If multiplicities are m1..mu, unique rows P=n!/product(mi!), rather than always
+n!. Position loops inspect n entries per nonterminal prefix; frequency loops
+inspect u. Both also clone/sort/allocate. Enumeration additionally writes and
+retains O((n+1)P) row/container output, separate from O(n) live search state.
 
-# 3. What Is a Permutation?
+## Combinations of 0..n-1
 
-A **permutation** is an arrangement where **order matters**.
-
-Example:
-
-Elements:
+`Combinations.choose(n,k)` accepts 0<=k<=n<=18. Rows increase strictly and are
+lexicographic; k=0 yields one empty row, including n=0. Invalid domains fail
+before search. Both counters return exact C(n,k) without materialising rows.
 
 ```text
-A B C
+choose(from, remaining):
+    if remaining==0: copy row / count one
+    for candidate=from through n-remaining:
+        write next candidate
+        choose(candidate+1, remaining-1)
 ```
 
-Valid permutations:
-
-```text
-ABC
-
-ACB
-
-BAC
-
-BCA
-
-CAB
-
-CBA
-```
-
-Each different ordering represents a different solution.
-
----
-
-# 4. What Is a Combination?
-
-A **combination** is a selection where **order does not matter**.
-
-Example:
-
-Elements:
-
-```text
-A B C
-```
-
-Choosing two elements:
-
-```text
-AB
-
-AC
-
-BC
-```
-
-Notice:
-
-```text
-AB
-
-=
-
-BA
-```
-
-Only one of these represents a valid combination.
-
----
-
-# 5. Fundamental Difference
-
-| Permutations | Combinations |
-|--------------|--------------|
-| Order matters | Order does not matter |
-| Every ordering is unique | Different orderings are identical |
-| Larger search space | Smaller search space |
-
-This distinction determines how candidates are generated.
-
----
-
-# 6. Backtracking Strategy
-
-Both problems follow the same recursive process.
-
-```text
-Current Solution
-        ↓
-Generate Candidate
-        ↓
-Validate
-        ↓
-Continue
-        ↓
-Backtrack
-```
-
-The difference lies in how candidates are selected.
-
----
-
-# 7. Candidate Generation for Permutations
-
-At each recursive level:
-
-```text
-Choose Any
-Unused Element
-```
-
-Example:
-
-```text
-Current
-
-↓
-
-A
-
-↓
-
-Choose
-
-B
-
-or
-
-C
-```
-
-Previously selected elements cannot be chosen again.
-
----
-
-# 8. Candidate Generation for Combinations
-
-For combinations:
-
-```text
-Choose Only
-Remaining Elements
-```
-
-Conceptually:
-
-```text
-A
-
-↓
-
-B
-
-↓
-
-C
-```
-
-The search never returns to earlier elements.
-
-This naturally avoids duplicate combinations.
-
----
-
-# 9. State-Space Tree
-
-Both problems can be represented using a state-space tree.
-
-Permutations:
-
-```text
-        {}
-      /  |  \
-     A   B   C
-```
-
-Combinations:
-
-```text
-        {}
-      /  |  \
-     A   B   C
-```
-
-The branching process differs after the first level because combinations avoid revisiting previous elements.
-
----
-
-# 10. Recursive Exploration
-
-The recursive search follows the same structure.
-
-```text
-Partial Solution
-        ↓
-Choose Candidate
-        ↓
-Recursive Call
-        ↓
-Undo Choice
-```
-
-Every recursive call explores one branch of the search tree.
-
----
-
-# 11. Base Case
-
-The recursion terminates when the solution reaches the required size.
-
-Conceptually:
-
-```text
-Solution Complete
-        ↓
-Store Solution
-        ↓
-Return
-```
-
-The algorithm then backtracks to generate alternative solutions.
-
----
-
-# 12. Backtracking Process
-
-After returning from recursion:
-
-```text
-Remove
-Last Candidate
-        ↓
-Try Next Candidate
-```
-
-This restoration step ensures that the previous state is recovered before exploring another branch.
-
----
-
-# 13. Avoiding Duplicate Solutions
-
-Duplicate generation must be prevented.
-
-Permutations:
-
-```text
-Already Used?
-
-↓
-
-Skip
-```
-
-Combinations:
-
-```text
-Already
-Processed?
-
-↓
-
-Do Not Return
-```
-
-These rules guarantee that each solution is generated exactly once.
-
----
-
-# 14. Complexity Analysis
-
-Suppose there are:
-
-```text
-n
-```
-
-elements.
-
-Permutations:
-
-```text
-n!
-```
-
-possible solutions.
-
-Combinations:
-
-```text
-n choose k
-```
-
-possible solutions.
-
-Because every solution must be generated, the running time is proportional to the number of generated solutions.
-
----
-
-# 15. Space Complexity
-
-Recursive depth depends on the solution size.
-
-Permutations:
-
-```text
-O(n)
-```
-
-Combinations:
-
-```text
-O(k)
-```
-
-Additional memory is required for the current partial solution.
-
----
-
-# 16. Practical Applications
-
-Permutations and combinations appear in many practical systems.
-
-Examples include:
-
-- password generation;
-- scheduling;
-- resource allocation;
-- test-case generation;
-- game solving;
-- feature selection;
-- recommendation systems;
-- combinatorial optimization.
-
-These problems frequently require systematic search.
-
----
-
-# 17. Java Perspective
-
-Java implementations commonly use:
-
-- recursion;
-- `ArrayList`;
-- boolean arrays;
-- recursive helper methods;
-- index variables.
-
-Boolean arrays are especially useful for permutation problems because they efficiently track previously selected elements.
-
----
-
-# 18. Engineering Perspective
-
-Professional software engineers often use these problems to evaluate recursive reasoning during technical interviews.
-
-Typical design questions include:
-
-```text
-How are
-candidates
-generated?
-```
-
-```text
-How are
-duplicates
-avoided?
-```
-
-```text
-When should
-recursion stop?
-```
-
-These problems develop the fundamental skills required for more advanced Backtracking algorithms.
-
----
-
-# 19. Relationship with the Next Document
-
-This document introduced the two classical combinatorial generation problems solved using Backtracking.
-
-The next document studies the **N-Queens Problem**, a significantly more sophisticated application that combines candidate generation, constraint validation, pruning, and recursive search to solve a constraint satisfaction problem.
-
----
-
-# 20. Key Takeaways
-
-After completing this document, the learner should understand that:
-
-- permutations generate ordered arrangements of elements;
-- combinations generate unordered selections of elements;
-- Backtracking systematically generates every valid solution;
-- candidate generation differs depending on whether order matters;
-- recursion terminates when a complete solution has been constructed;
-- backtracking restores the previous state before exploring alternative branches;
-- duplicate solutions must be avoided through appropriate candidate selection rules;
-- permutations and combinations provide the conceptual foundation for more advanced Backtracking algorithms such as the N-Queens Problem.
+Increasing indices give every subset exactly one path. The upper bound is
+sound because enough greater indices must remain. For choose(4,2), output is
+[0,1], [0,2], [0,3], [1,2], [1,3], [2,3]. The unpruned counter instead loops
+through n-1 and retains dead prefixes; both counts agree.
+
+Output copying costs Omega((k+1)C(n,k)); result count alone does not describe
+search work. At k=n, pruned calls are n+1, unpruned 2^n, with one output.
+Largest accepted output is C(18,9)=48,620 rows; working depth/path is O(k+1).
+
+## Evidence
+
+Seven permutation tests compare small multisets against all index permutations
+then value deduplication and BigInteger multinomials. Six combination tests use
+independent bitmask subsets, BigInteger binomials, Pascal identity and boundary
+materialisation. Ownership, invalid domains, extremes and restoration are tested.
+The two count benchmarks each define 12 default cells; enumeration is not timed.
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md) contains complete proofs, cost ledgers and the measurement protocol.
+Next: [N-Queens](07-n-queens.md).
