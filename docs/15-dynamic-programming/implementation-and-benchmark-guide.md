@@ -216,9 +216,34 @@ probe; no future JMH return value or timing is invented from these expectations.
 Only exact values/lengths are timed. Plan/sequence construction is verified
 separately; no output-generation throughput is claimed. Research Question,
 Theoretical Expectation, Measured Work, Result and Interpretation belong in each
-template. **Result/Interpretation await controlled author measurements**; smoke
-scores cannot fill them. Two sizes/one seed do not fit an exponent or identify
-allocation rates, stack bytes, CPU/cache causes or statistical significance.
+template. The
+[first research report](../17-benchmarking/results/dynamic-programming/README.md)
+now completes all three with **57 means/errors**, **570 measured** and **342
+warmup averages**, completion **8 min 30 sec**. The author supplied the output
+on **2026-10-26**, separately reporting source
+**`d572651484f3ec6cffe03ad589bddd5a4a8fb8a3`**, PR #90's merge. Its tree matches
+this reviewed implementation. Headers confirm JDK 21.0.9/JMH 1.37, the controlled
+defaults and each template's units. The full command, execution timestamp,
+CPU/power, generated-code inspection, jar hash and profiler data are unavailable.
+Source is author checkout attribution, not embedded by JMH; previous OS/vendor/
+locale setup is contextual rather than newly captured run metadata.
+
+Eleven errors reach 25%: four Fibonacci/seven LCS, none knapsack. Table Fibonacci
+n=20 reports 86.692 +/- 141.911 ns/op (163.7%); its literal `? 0` lower CI marker,
+every fork/iteration and all other statistics remain intact. Twelve fully numeric
+matching-method interval pairs overlap. No significance/equivalence, universal
+ratio or exact n=20 table ranking follows from the point means.
+
+Rolling has lower knapsack means throughout the selected grid, but memo/table
+order varies and five pairs overlap. LCS memo means are lower than rolling on
+IDENTICAL/SHIFTED at both n; large DISJOINT/RANDOM favour rolling means. The
+report derives Fibonacci calls/additions, knapsack grid/expanded-state/update
+counts and LCS diagonal/full-grid dependencies independently of elapsed scores.
+Dense initialisation remains even when few states expand. Counts are not
+profiler events, actual allocations, stack bytes or isolated elapsed-cost shares.
+All timed methods omit witnesses. No fitted exponent or CPU/cache cause is
+claimed. Earlier 694-test verification remains separate from this results-only
+documentation update; smoke timings are excluded from research.
 
 ## Verification and Windows Protocol
 

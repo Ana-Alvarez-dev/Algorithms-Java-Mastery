@@ -25,11 +25,16 @@ Variant agreement complements these references and the proof; it is not itself
 a proof. The seeded grid probe additionally checks every benchmark return value
 and repeatability without turning its execution times into research scores.
 
-Keep Result/Interpretation pending until author measurements include source,
-actual runtime/settings, complete errors/fork observations and completion. Three
-templates use different units: ns/op for Fibonacci, us/op for the other two.
-Do not pool unlike outputs, erase uncertain cells or infer CPU causes from means.
-Evidence stays Markdown without JSON/log exports. The [implementation and benchmark guide](implementation-and-benchmark-guide.md) contains the chain
+The [first report](../17-benchmarking/results/dynamic-programming/README.md)
+now completes all three templates with 57 cells, every error/fork observation,
+570 measured and 342 warmup averages. Author-reported source is `d572651`;
+headers confirm JDK 21.0.9/JMH 1.37 and the controlled defaults. Eleven wide-error
+cells remain, including 163.7% at table Fibonacci n=20 and its literal `? 0` CI
+marker. Do not delete the 347.118 ns/op iteration or infer a precise ranking.
+Twelve fully numeric interval pairs overlap; a diagonal/heavy memo search still
+pays dense setup. Per-row ns/op/us/op, source counts versus runtime causes,
+omitted witnesses and prior provenance remain distinct. Evidence stays Markdown
+without JSON/log. The [implementation and benchmark guide](implementation-and-benchmark-guide.md) contains the chain
 from state specification through implementation, tests and experiment protocol.
 
 The next numbered module is **16 - Testing**, building on the repository's actual

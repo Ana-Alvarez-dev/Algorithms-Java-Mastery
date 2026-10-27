@@ -677,11 +677,26 @@ Seeded trial preparation is excluded; per-call validation/private state remains.
 Normal/profile checks pass **694 tests**, including **22 new tests**. Discovery,
 all 57 short smoke cells, independent three-call default probes and JavaDoc are
 local verification, not controlled research or CI. Each template has its question,
-expectation, timed work and limits; Result/Interpretation await author source/
-runtime/settings and complete errors/observations after feature integration.
-The guide has Windows Java 21 commands. Keep evidence Markdown without JSON/log,
-separate from smoke and prior module reports. No pure call/allocation cost,
-cache/CPU cause, universal winner, formal significance or exponent is invented.
+expectation, timed work and limits. The
+[first author report](results/dynamic-programming/README.md), supplied on
+2026-10-26, now completes all three with **57 means/errors**, **570 measured**
+and **342 warmup averages**, completion **8 min 30 sec**. Author-reported source
+is `d572651484f3ec6cffe03ad589bddd5a4a8fb8a3`, PR #90's merge; headers confirm
+JDK 21.0.9/JMH 1.37 and the controlled defaults. Eleven errors reach 25% (four
+Fibonacci, seven LCS), maximum 163.7% at table Fibonacci n=20. Its printed CI
+lower marker `? 0` stays literal; no observation is removed. Twelve fully numeric
+within-fixture interval pairs overlap; no significance/equivalence is inferred.
+The full command, execution timestamp, CPU/power, jar hash and profiler data
+are unavailable. Earlier OS/vendor/locale setup is contextual rather than new
+metadata in this attachment; source attribution is not embedded by JMH.
+
+Rolling means are lower for all knapsack fixtures, but memo versus full table
+is mixed and five pairs overlap. LCS memo/rolling depends on shape; identical/
+shifted favour memo means, large disjoint/random favour rolling. Dense cache
+setup remains even for a chain/diagonal; source helper/transition counts do not
+isolate CPU, call or allocation costs. Preserve Fibonacci ns/op and other us/op
+rows without pooling. Witness APIs stay outside timing; smoke and prior reports
+remain separate. All evidence stays Markdown without JSON/log exports.
 
 # Key Takeaways
 

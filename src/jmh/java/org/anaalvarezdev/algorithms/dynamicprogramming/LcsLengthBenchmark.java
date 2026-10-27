@@ -16,12 +16,22 @@ import java.util.concurrent.TimeUnit;
  * is excluded. No sequence reconstruction, normalisation, code-point conversion
  * or shared warmed cache. ASCII fixtures fall within the UTF-16 contract.
  * Result:
- * Pending author measurements; smoke is not controlled research evidence.
+ * Author run reported 2026-10-26; source d572651484f3ec6cffe03ad589bddd5a4a8fb8a3
+ * supplied separately (PR #90). JMH 1.37/JDK 21.0.9, one thread,
+ * 3/5 x 500 ms warmup/measurement, two forks (Cnt=10), combined 8 min 30 sec.
+ * All 57 means/errors, 570 measured and 342 warmup averages:
+ * docs/17-benchmarking/results/dynamic-programming/README.md. Units stay per row.
+ * All 24 LCS cells in us/op. n=128 IDENTICAL memoised/rolling/table:
+ * 13.947 +/- 0.702 / 49.353 +/- 14.854 / 111.161 +/- 21.021; RANDOM:
+ * 121.560 +/- 16.427 / 42.091 +/- 6.680 / 121.045 +/- 25.484.
  * Interpretation:
- * Pending source/runtime/settings and all errors. Output length alone does not
- * determine work; dense setup and branching remain included. No reconstruction
- * throughput, measured heap/stack bytes, cache cause, universal winner or fitted
- * exponent follows. Two sizes and one seed do not cover arbitrary String pairs.
+ * Memo means are lower than rolling on IDENTICAL/SHIFTED at both n; large
+ * DISJOINT/RANDOM favour rolling means. Seven errors reach 25%; multiple
+ * pairs overlap (including n=32 RANDOM memo/rolling and large RANDOM memo/table).
+ * Identical memo expands n diagonal states but still fills (n+1)^2 cells;
+ * table/rolling visit n^2 positions. Output length/storage alone do not explain
+ * elapsed time. These are length-only ASCII fixtures; no witness throughput,
+ * Unicode conversion, allocation/stack bytes, CPU cause or universal winner.
  * Protocol: docs/15-dynamic-programming/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

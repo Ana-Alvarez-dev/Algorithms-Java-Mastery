@@ -35,3 +35,16 @@ No smoke score, two-size grid, lower mean or source state count proves an expone
 allocation rate, exact stack size, cache/CPU cause or statistical significance.
 Fresh preparation and plan omissions must remain explicit. The [implementation and benchmark guide](implementation-and-benchmark-guide.md) provides
 the full ledgers and protocol. Next: [common mistakes](12-common-mistakes.md).
+
+## First Empirical Review
+
+The [first report](../17-benchmarking/results/dynamic-programming/README.md)
+records 57 means/errors, 570 measured and 342 warmup averages using author-reported
+source `d572651`, JDK 21.0.9/JMH 1.37. Fibonacci stays ns/op and knapsack/LCS us/op.
+Eleven errors reach 25%; the n=20 table Fibonacci CI lower marker `? 0` remains
+text. Twelve fully numeric interval pairs overlap; no significance test or
+exponent is fitted. Source ledgers separate additions/helper calls, dense setup,
+memo expansions, table positions and rolling updates. A heavy/diagonal memo
+search still initialises its full grid. Knapsack rolling means are lower in
+this grid, while LCS memo/rolling depends on shape. These do not identify CPU,
+call or allocation shares; materialised plans/sequences remain outside timing.

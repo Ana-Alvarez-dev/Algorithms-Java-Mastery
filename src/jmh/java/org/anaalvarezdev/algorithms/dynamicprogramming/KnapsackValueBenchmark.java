@@ -16,12 +16,22 @@ import java.util.concurrent.TimeUnit;
  * trial construction/shuffling is excluded. Inputs stay unchanged, no plan,
  * memo reuse, fractional choices or repeated-item semantics are timed.
  * Result:
- * Pending author measurements; smoke scores do not supply research results.
+ * Author run reported 2026-10-26; source d572651484f3ec6cffe03ad589bddd5a4a8fb8a3
+ * supplied separately (PR #90). JMH 1.37/JDK 21.0.9, one thread,
+ * 3/5 x 500 ms warmup/measurement, two forks (Cnt=10), combined 8 min 30 sec.
+ * All 57 means/errors, 570 measured and 342 warmup averages:
+ * docs/17-benchmarking/results/dynamic-programming/README.md. Units stay per row.
+ * All 24 knapsack cells in us/op. n=64,C=128 LIGHT rolling/memoised/table:
+ * 4.597 +/- 0.777 / 23.005 +/- 2.881 / 21.544 +/- 2.661; TOO_HEAVY:
+ * 0.196 +/- 0.008 / 13.668 +/- 2.160 / 17.207 +/- 1.518.
  * Interpretation:
- * Pending source/runtime/settings and all errors. Reachable memo states do not
- * describe dense allocation cost. Do not isolate cache lookup, recursion or
- * memory traffic by subtraction. These controls are not random knapsack inputs;
- * no universal ratio, allocation rate, CPU cause or polynomial bit bound follows.
+ * Rolling has lower point means on all eight fixtures. No error reaches 25%,
+ * but five memo/table interval pairs overlap; memo is not uniformly quicker.
+ * Heavy memo expands n states yet fills the whole grid. At n=16, changing C
+ * from 32 to 128 leaves R=16 heavy/R=136 light while dense cells rise 561/2193.
+ * Source ledgers are not profiler events, allocated bytes or isolated setup
+ * shares. Plans are not timed; numeric O(nC) stays pseudopolynomial. No
+ * universal ratio, cache/CPU cause, significance or fitted exponent follows.
  * Protocol: docs/15-dynamic-programming/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)
