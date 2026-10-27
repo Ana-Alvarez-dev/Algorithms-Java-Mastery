@@ -321,3 +321,16 @@ provide the experiment and algorithm definitions. Related concepts are covered
 in [Arrays documentation](../../../03-arrays/README.md),
 [benchmark design](../../07-benchmark-design.md) and
 [result interpretation](../../09-result-interpretation.md).
+
+
+## Module 17: Separate Corrected Aggregation Protocol
+
+The [applied guide](../../implementation-and-benchmark-guide.md) standardises the
+corrected modulo-100 experiment to two forks and adds thirteen untimed fixture
+checks under `-Pbenchmark`. The production scan and corrected values are
+unchanged. Normal tests remain 710; the profile package passes 723.
+The [new run record](aggregation-corrected-run.md) is pending author measurements.
+It does not reuse these historical means or infer their missing errors/runtime.
+The earlier overflow limitations remain attached to their original payload.
+Local smoke/profiler compatibility is not a research run; no new CSV/JSON/log
+files are added.

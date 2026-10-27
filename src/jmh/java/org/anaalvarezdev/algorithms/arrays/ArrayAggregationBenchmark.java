@@ -25,6 +25,9 @@ import java.util.concurrent.TimeUnit;
  * generation is excluded. Supported fixture sizes are 0..1000000.
  * Result:
  * Pending author measurements of the corrected fixture introduced in module 16.
+ * Module 17 standardises this experiment to two forks (previous default: one).
+ * Protocol: docs/17-benchmarking/implementation-and-benchmark-guide.md.
+ * Pending record: docs/17-benchmarking/results/arrays/aggregation-corrected-run.md.
  * Historical Result (old ascending 0..n-1 fixture):
  *
  * Input Size (n)       Average Time (ns/op)
@@ -95,7 +98,7 @@ import java.util.concurrent.TimeUnit;
         time = 500,
         timeUnit = TimeUnit.MILLISECONDS
 )
-@Fork(1)
+@Fork(2)
 public class ArrayAggregationBenchmark {
     @Param({
             "100",
