@@ -124,6 +124,18 @@
 
                     <executions>
                         <execution>
+                            <id>add-jmh-test-source</id>
+                            <phase>generate-test-sources</phase>
+                            <goals>
+                                <goal>add-test-source</goal>
+                            </goals>
+                            <configuration>
+                                <sources>
+                                    <source>src/jmh-test/java</source>
+                                </sources>
+                            </configuration>
+                        </execution>
+                        <execution>
                             <id>add-jmh-source</id>
                             <phase>generate-sources</phase>
 

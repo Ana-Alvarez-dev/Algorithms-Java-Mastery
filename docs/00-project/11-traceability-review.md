@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **16 — Testing**. It is a source/evidence inventory,
+progression through **17 — Benchmarking**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -80,6 +80,12 @@ PR #91. Verification reported 2026-10-27 records a coverage baseline, failing
 duplicate regressions, a contract correction, valid future aggregation inputs
 and the corrected full suite. Historical measurements retain their limitations.
 
+The Benchmarking contribution extends review from main
+`18a8ef53d4a1c4f1cd58c9caf22c72051be6b891`, which integrated Testing through
+PR #92. The ten notes now use an applied protocol, with benchmark-profile
+fixture tests, exact commands, discovery and local smoke. Corrected aggregation
+measurements remain pending; earlier numerical evidence is not rewritten.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -93,7 +99,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes selected algorithm implementations through module 15 and cross-cutting Testing in module 16.
+helpers. The matrix includes selected algorithms through module 15 and cross-cutting Testing/Benchmarking in modules 16–17. Profile-only fixture counts are explicit.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -112,9 +118,11 @@ helpers. The matrix includes selected algorithm implementations through module 1
 | Backtracking | 4 | 27 | 8 | [Selected contracts](../14-backtracking/implementation-and-benchmark-guide.md), [46 results and research](../17-benchmarking/results/backtracking/README.md); JDK 21.0.9/JMH 1.37, author-reported source `b62df1b`, every error/printed iteration retained; two wide-error cells and preliminary limits |
 | Dynamic Programming | 3 | 22 | 9 | [State/recurrence contracts](../15-dynamic-programming/implementation-and-benchmark-guide.md), [57 results and research](../17-benchmarking/results/dynamic-programming/README.md); JDK 21.0.9/JMH 1.37, author-reported `d572651`; mixed units, every error/printed iteration and eleven wide-error cells retained; reused Fibonacci is not a new file |
 | Testing | 0 new production files | 16 added in Searching, not additive | 0 new | [Regression/coverage guide](../16-testing/implementation-and-verification-guide.md), [baseline/red/green evidence](../16-testing/verification-report.md); coverage profile and fixture validity, no separate production package |
-| 17–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Benchmarking | 0 new production files | 13 additional under -Pbenchmark only | 0 new; 115 existing methods in 40 classes | [Applied guide](../17-benchmarking/implementation-and-benchmark-guide.md), [local verification](../17-benchmarking/verification-report.md); corrected aggregation run pending, historical data unchanged |
+| 18–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **710 passing repository tests**, compared with **694** before
+There are **710 passing normal-suite tests** and **723 under -Pbenchmark**
+(the same 710 plus thirteen fixture checks). The normal count compares with **694** before
 Testing, **672** before Dynamic Programming, **645** before Backtracking, **618** before Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
 and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or establish complete behaviour outside the selected scope. The Testing row
@@ -589,7 +597,33 @@ and five short smoke cells complete. Existing means remain historical and a
 separate corrected author run is needed. No new JMH family is added to time tests.
 Coverage instrumentation and performance measurement remain separate. The CI
 workflow gap is still open; local verification is not CI. Evidence stays Markdown
-without versioned JSON/log/new CSV. Next is **17 - Benchmarking**.
+without versioned JSON/log/new CSV. This supplied the prerequisite for
+**17 - Benchmarking**, reviewed next.
+
+## Benchmarking Verification and Review
+
+Reviewed on **2026-10-27**, starting from Testing merge `18a8ef5` (PR #92).
+The [applied guide](../17-benchmarking/implementation-and-benchmark-guide.md)
+and [verification report](../17-benchmarking/verification-report.md) distinguish
+normal tests (710), benchmark-profile tests (723), discovery, smoke and research.
+The thirteen new checks use the actual aggregation setup and independent
+long/formula sums, bounded values, repeated-call preservation, size rejection
+and fresh trial arrays. They are test sources, not benchmark jar payload.
+
+All ten notes now connect theory to this protocol and prior module examples.
+There are still 40 JMH classes and 115 methods. The corrected five-size
+aggregation changes its default from one to two forks; measured scan and
+modulo-100 payload are unchanged. Explicit commands preserve Java 21, 3/5 x
+500 ms, one thread, AverageTime ns/op, source/dirty state and jar SHA-256.
+Profiler diagnostics have a separate run identity; local compatibility checks
+supply no performance conclusions. Corrected author timing is pending in a
+[new record](../17-benchmarking/results/arrays/aggregation-corrected-run.md).
+
+Historical means/errors, censored intervals and source limitations remain
+unchanged. The Arrays historical overflow limitation remains historical; future
+fixture validity does not repair old data. Coverage is separate from JMH, and
+no CI workflow/status or new JSON/log/CSV is introduced. Next numbered module
+is **18 - Linux Environment**, with author measurement still pending separately.
 
 ## Evidence Policy and Next Action
 

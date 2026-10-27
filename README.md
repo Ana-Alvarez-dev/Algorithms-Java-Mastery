@@ -65,7 +65,8 @@ engineering documentation.
 | Linked Lists through Greedy | Selected implementations, tests and initial measured research |
 | Backtracking | Documented + implemented + tested + initial 46-cell research |
 | Dynamic Programming | Documented + implemented + tested + initial 57-cell research |
-| Testing | Applied regression/oracle evidence + optional coverage; 710 tests pass |
+| Testing | Applied regression/oracle evidence + optional coverage; 710 normal tests pass |
+| Benchmarking | Applied protocol + fixture tests; 723 profile tests, corrected aggregation measurement pending |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
 | GitHub Actions workflow | Planned / not yet implemented |
@@ -315,6 +316,8 @@ are distinguished in the implementation guide.
 - [Backtracking scope, contracts and run commands](docs/14-backtracking/implementation-and-benchmark-guide.md)
 - [Dynamic Programming scope, contracts and run commands](docs/15-dynamic-programming/implementation-and-benchmark-guide.md)
 - [Testing contracts, regressions and coverage commands](docs/16-testing/implementation-and-verification-guide.md)
+- [Benchmarking protocol, fixture tests and exact execution commands](docs/17-benchmarking/implementation-and-benchmark-guide.md)
+- [Benchmarking local verification](docs/17-benchmarking/verification-report.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -411,7 +414,22 @@ the contract. Optional `-Pcoverage` generates JaCoCo 0.8.13 HTML/XML under targe
 the [verification report](docs/16-testing/verification-report.md) retains actual
 before/after counters and their limits. Future aggregation data now fits int,
 while historical Arrays means stay unchanged and corrected timing is pending.
-No new JMH family or CI status is claimed. Next is **17 - Benchmarking**.
+No new JMH family or CI status is claimed. This was the prerequisite for
+module **17 - Benchmarking**, applied below.
+
+Benchmarking now connects all ten notes to an executable five-size aggregation
+protocol. Thirteen profile-only fixture checks verify real prepared inputs with
+long/formula oracles, repeated calls and state preservation. Normal tests remain
+**710**; the benchmark-profile package passes **723**. Discovery retains 40 JMH
+classes / 115 methods; no additional algorithm or benchmark family is invented.
+The corrected aggregation uses two forks, 3/5 x 500 ms and one thread, with exact
+Java 21 commands, source/dirty-state/jar provenance and separate GC diagnostics.
+The [verification report](docs/17-benchmarking/verification-report.md) records
+functional checks and smoke, which are not research scores. The
+[corrected aggregation record](docs/17-benchmarking/results/arrays/aggregation-corrected-run.md)
+remains **pending an author run**; historical results retain their limitations.
+Evidence stays Markdown with no new JSON/log/CSV files. Next is
+**18 - Linux Environment**; the GitHub Actions workflow remains unimplemented.
 
 ## Technology Stack
 

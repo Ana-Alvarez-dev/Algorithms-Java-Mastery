@@ -2,6 +2,28 @@
 
 ## Algorithms Java Mastery
 
+## Applied module 17: controlled execution and fixture checks
+
+The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
+connects the ten notes below to contracts, proof/trace, tests, exact Java 21
+commands, source/jar provenance and evidence interpretation. The
+[verification report](verification-report.md) records local checks from main
+`18a8ef53d4a1c4f1cd58c9caf22c72051be6b891` (Testing merge, PR #92).
+
+This cross-cutting contribution adds no production algorithm or JMH method.
+There are still **40 benchmark classes / 115 benchmark methods**. Normal tests
+remain **710**; `-Pbenchmark` adds **13 fixture tests**, for **723**. They verify
+the real corrected aggregation setup before packaging. The five-cell experiment
+now uses two forks (previously one), 3/5 x 500 ms, one thread, AverageTime ns/op.
+Its timed scan and the bounded payload introduced by Testing are unchanged.
+
+The [corrected aggregation record](results/arrays/aggregation-corrected-run.md)
+is **pending author measurements**. Old ascending-payload means remain
+historical; local discovery/smoke and an allocation-profiler compatibility
+check supply no research score. Copy complete console text for the new run;
+no JSON/log/new CSV exports are required. Coverage, timing and profiled runs
+have separate evidence boundaries. Next numbered module: **18 — Linux**.
+
 Understanding an algorithm's theoretical complexity is an essential part of Computer Science, but it is not sufficient for evaluating its real-world performance. Two algorithms with the same asymptotic complexity may exhibit significantly different execution times because of implementation details, compiler optimizations, memory behavior, and hardware characteristics.
 
 **Benchmarking** is the discipline of measuring software performance through controlled and reproducible experiments. Instead of reasoning only about asymptotic growth, benchmarking evaluates how algorithms behave during actual execution under realistic conditions.
@@ -45,7 +67,10 @@ After completing this module, the learner should be able to:
 │── 07-benchmark-design.md
 │── 08-benchmark-parameters.md
 │── 09-result-interpretation.md
-└── 10-common-mistakes.md
+│── 10-common-mistakes.md
+│── implementation-and-benchmark-guide.md
+│── verification-report.md
+└── results/
 ```
 
 ---
