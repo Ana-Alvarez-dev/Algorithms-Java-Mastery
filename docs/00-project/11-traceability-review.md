@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **14 — Backtracking**. It is a source/evidence inventory,
+progression through **15 — Dynamic Programming**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -67,6 +67,11 @@ through PR #87. Its selected contracts and local verification reported
 46 default cells on JDK 21.0.9/JMH 1.37, with separately supplied source
 `b62df1b84810dfe5dea023d5d00bac2eb05c0cd0` (PR #88 merge).
 
+The Dynamic Programming contribution extends review from main
+`da3db882a70e3cc59ee05491ee76d8d8c11b97ae`, which integrated Backtracking
+research through PR #89. Selected scope and local verification reported
+2026-10-26 are recorded below. Its author measurements remain pending.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -80,7 +85,7 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes selected implementations through module 14.
+helpers. The matrix includes selected implementations through module 15.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
@@ -97,10 +102,11 @@ helpers. The matrix includes selected implementations through module 14.
 | Divide and Conquer | 3 | 18 | 6 | [Selected contracts](../12-divide-and-conquer/implementation-and-benchmark-guide.md), [48 results and research](../17-benchmarking/results/divide-and-conquer/README.md); JDK 21.0.9/JMH 1.37, author-reported source `507b253`, all errors/printed iterations retained; six wide-error cells and preliminary limits |
 | Greedy | 5 | 27 | 5 | [Selected contracts](../13-greedy-algorithms/implementation-and-benchmark-guide.md), [40 results and research](../17-benchmarking/results/greedy/README.md); JDK 21.0.9/JMH 1.37, author-reported source `674ab35`, all errors/printed iterations retained; ten wide-error cells and preliminary limits |
 | Backtracking | 4 | 27 | 8 | [Selected contracts](../14-backtracking/implementation-and-benchmark-guide.md), [46 results and research](../17-benchmarking/results/backtracking/README.md); JDK 21.0.9/JMH 1.37, author-reported source `b62df1b`, every error/printed iteration retained; two wide-error cells and preliminary limits |
-| 15–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Dynamic Programming | 3 | 22 | 9 | [State/recurrence contracts, proofs and protocol](../15-dynamic-programming/implementation-and-benchmark-guide.md); 57 default cells in three templates, author measurements pending; reused Fibonacci code is not counted as a new file |
+| 16–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **672 passing repository tests**, compared with **645** before
-Backtracking, **618** before Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
+There are now **694 passing repository tests**, compared with **672** before
+Dynamic Programming, **645** before Backtracking, **618** before Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
 and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
 or resolve a known counterexample outside the selected implementation scope.
 
@@ -470,7 +476,45 @@ This results update changes documentation/comments only, with no executable Java
 change, new timed run or CI status. Earlier 672-test verification and tracked
 Arrays/Searching findings remain distinct. Evidence stays Markdown without
 JSON/log exports; smoke is excluded. Future runs retain their own source/settings
-and all errors. Next is **15 - Dynamic Programming**, currently conceptual.
+and all errors. The next module at that review was **15 - Dynamic Programming**;
+its implementation contribution is recorded below.
+
+## Dynamic Programming Verification and Review
+
+Verification reported **2026-10-26**, using **OpenJDK 21+35-2513**, passes normal
+tests and benchmark-profile clean package: **694 tests**, zero failures/errors/
+skips, including **22 new tests** (prior Backtracking 672). All twelve study
+notes link to the guide's contracts, state meanings, recurrences, pseudocode,
+traces, induction, reconstruction ties and full work/space models.
+
+| Check | Evidence |
+|---|---|
+| Fibonacci | Five tests: every exact long value 0..92 against BigInteger, reused memoised/iterative agreement, exact Cassini identity, invalid limits and interleaved boundaries |
+| Knapsack | Nine tests: all 7,381 arrays through four items (weights 1..3, values 0..2) at nine capacities, against complete subsets and numeric-mask tie oracle; 100 seeded inputs, greedy/ascending-loop counterexamples, long sums, grid/item caps, ownership and metamorphic checks |
+| LCS | Eight tests: all 3,969 pairs of binary Strings through length five against independent subsequence enumeration; 100 seeded pairs, witness legality/ties, UTF-16/surrogate policy, 512-unit boundaries, symmetry/common-suffix identities and repeatability |
+| JMH | Nine discovered methods, all 57 short smoke cells; independent probe checks every default three times against BigInteger, unit-weight optimum and matching-position LIS references with unchanged trial inputs |
+| JavaDoc | Three production classes pass doclint excluding missing tags |
+
+Three new production files add full-table Fibonacci, exact 0/1 knapsack values/
+plans and LCS lengths/sequences. Memoised/rolling Fibonacci is reused from
+Recursion; its source and earlier measurements are unchanged. Knapsack uses
+positive weights, nonnegative values, long sums and shared explicit grid caps.
+LCS uses Java UTF-16 units; deterministic witness ties and lone-surrogate
+semantics are explicit. Rolling values/lengths do not retain a free witness.
+
+The review corrects pseudopolynomial capacity bounds, dense memo preparation,
+state sufficiency, zero sentinels and dependency versioning. Fibonacci is value
+computation, LCS is optimisation, and DP also supports counting/feasibility.
+CLRS Third Edition Chapter 15 and §16.2/exercise 16.2-2 are separately identified;
+knapsack is not misattributed to a complete Chapter 15 worked algorithm.
+
+Three templates define 57 defaults (9 Fibonacci ns/op, 24 knapsack/24 LCS us/op),
+one thread, 3/5 x 500 ms and two forks. Full validation/private preparation is
+timed; plan/sequence reconstruction is not. Author Result/Interpretation remain
+pending. Source/runtime/settings, row units, all errors/iterations and completion
+must be retained in Markdown without JSON/log exports. Smoke is harness evidence,
+not research or CI; earlier source/tests/POM, reports and tracked Arrays/Searching
+findings remain unchanged. The next numbered module is **16 - Testing**.
 
 ## Evidence Policy and Next Action
 

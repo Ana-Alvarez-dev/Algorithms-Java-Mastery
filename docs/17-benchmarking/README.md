@@ -656,6 +656,33 @@ enumeration, and no fitted exponent/significance/universal gain is claimed.
 All evidence remains Markdown without JSON/log exports; smoke stays separate.
 The guide retains discovery and Java 21 commands for later controlled runs.
 
+# Dynamic Programming Experiments
+
+The [module guide](../15-dynamic-programming/implementation-and-benchmark-guide.md)
+defines **nine methods/57 defaults** in three templates: Fibonacci values
+(9 cells, **ns/op**), 0/1 knapsack values (24, **us/op**) and LCS lengths
+(24, **us/op**). All use one thread, 3/5 x 500 ms and two forks. Mixed summary
+units must be retained per row; inapplicable N/A parameters are not zero.
+
+Fibonacci reuses Recursion's fresh memoised/iterative calls and adds a full
+table at n=20/40/90; earlier timings are not reused. Knapsack n=16/64, C=32/128
+compares LIGHT unit weights with all TOO_HEAVY items. Dense memo still allocates/
+fills the full grid while reaching only an item chain in the heavy fixture;
+rolling skips unavailable updates. O(nC) is pseudopolynomial in numeric C.
+LCS n=32/128 uses IDENTICAL, DISJOINT, SHIFTED and seed-20261026 RANDOM pairs.
+Dense memo's diagonal expansion does not eliminate dense setup. One-row storage
+and full tables solve the same length question without timing reconstruction.
+Seeded trial preparation is excluded; per-call validation/private state remains.
+
+Normal/profile checks pass **694 tests**, including **22 new tests**. Discovery,
+all 57 short smoke cells, independent three-call default probes and JavaDoc are
+local verification, not controlled research or CI. Each template has its question,
+expectation, timed work and limits; Result/Interpretation await author source/
+runtime/settings and complete errors/observations after feature integration.
+The guide has Windows Java 21 commands. Keep evidence Markdown without JSON/log,
+separate from smoke and prior module reports. No pure call/allocation cost,
+cache/CPU cause, universal winner, formal significance or exponent is invented.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:
