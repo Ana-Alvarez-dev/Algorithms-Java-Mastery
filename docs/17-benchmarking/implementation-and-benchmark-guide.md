@@ -20,18 +20,18 @@ These bounds describe this fixture, not a new restriction on the production API.
 
 | n | Expected mathematical sum | Status of corrected timing |
 |---:|---:|---|
-| 100 | 4,950 | Pending author run |
-| 1,000 | 49,500 | Pending author run |
-| 10,000 | 495,000 | Pending author run |
-| 100,000 | 4,950,000 | Pending author run |
-| 1,000,000 | 49,500,000 | Pending author run |
+| 100 | 4,950 | Reported; source attribution open |
+| 1,000 | 49,500 | Reported; source attribution open |
+| 10,000 | 495,000 | Reported; source attribution open |
+| 100,000 | 4,950,000 | Reported; source attribution open |
+| 1,000,000 | 49,500,000 | Reported; source attribution open |
 
 The original ascending fixture and its five means remain in the
 [historical Arrays report](results/arrays/README.md). At the two largest sizes
 its mathematical sums exceed int. The corrected payload was introduced by
 Testing; this module changes its fork default **from one to two**. Historical
 means are not measurements of this payload/protocol. The
-[new record](results/arrays/aggregation-corrected-run.md) remains pending.
+[first supplied record](results/arrays/aggregation-corrected-run.md) now retains five means/errors, all 80 printed iteration averages and 44-second completion. Its JDK 21.0.9/JMH 1.37 headers match this protocol; execution SHA/artifact attribution remains open.
 
 ## Strategy, pseudocode, trace and correctness
 
@@ -182,8 +182,8 @@ recorded as author research. Local GC smoke only checks compatibility.
 
 ## Recording and interpretation rules
 
-Use the pending record for the **new** run; update this benchmark's Result and
-Interpretation only from reconciled evidence. Preserve all observed values and
+Use the separate record for each **new** run; update this benchmark's Result and
+Interpretation only from reconciled evidence, retaining unresolved source attribution. Preserve all observed values and
 literal unavailable/censored markers. Retain ns/op; expected sums are correctness
 oracles, not observed return values printed by JMH. Describe drift, fork variation
 and wide errors before ranking or explaining growth.

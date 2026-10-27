@@ -66,7 +66,7 @@ engineering documentation.
 | Backtracking | Documented + implemented + tested + initial 46-cell research |
 | Dynamic Programming | Documented + implemented + tested + initial 57-cell research |
 | Testing | Applied regression/oracle evidence + optional coverage; 710 normal tests pass |
-| Benchmarking | Applied protocol + fixture tests; 723 profile tests, corrected aggregation measurement pending |
+| Benchmarking | Applied protocol + 723 profile tests; first five-cell aggregation report, execution-source attribution open |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
 | GitHub Actions workflow | Planned / not yet implemented |
@@ -413,7 +413,8 @@ Independent linear/exhaustive/seeded/property checks and fresh fixtures support
 the contract. Optional `-Pcoverage` generates JaCoCo 0.8.13 HTML/XML under target;
 the [verification report](docs/16-testing/verification-report.md) retains actual
 before/after counters and their limits. Future aggregation data now fits int,
-while historical Arrays means stay unchanged and corrected timing is pending.
+while historical Arrays means stay unchanged. Corrected timing was pending
+at that stage; the later Benchmarking follow-up below records the supplied run.
 No new JMH family or CI status is claimed. This was the prerequisite for
 module **17 - Benchmarking**, applied below.
 
@@ -427,7 +428,11 @@ Java 21 commands, source/dirty-state/jar provenance and separate GC diagnostics.
 The [verification report](docs/17-benchmarking/verification-report.md) records
 functional checks and smoke, which are not research scores. The
 [corrected aggregation record](docs/17-benchmarking/results/arrays/aggregation-corrected-run.md)
-remains **pending an author run**; historical results retain their limitations.
+now records five supplied means/errors, 50 measured and 30 warmup averages,
+JDK 21.0.9/JMH 1.37 and 44-second completion. No error reaches the 25% flag;
+finite growth is compatible with a linear scan. Execution SHA/dirty state, jar
+identity, command/time and fresh machine metadata remain unavailable, so source
+attribution remains open. Historical results retain their limitations.
 Evidence stays Markdown with no new JSON/log/CSV files. Next is
 **18 - Linux Environment**; the GitHub Actions workflow remains unimplemented.
 

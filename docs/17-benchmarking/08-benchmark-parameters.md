@@ -19,4 +19,4 @@ Record actual Java executable/version, options, Blackhole mode, source SHA, dirt
 
 ## Applied protocol and sources
 
-See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from pending author measurements.
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), whose execution source attribution remains open.

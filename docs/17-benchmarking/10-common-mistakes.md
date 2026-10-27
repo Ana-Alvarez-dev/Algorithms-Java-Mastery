@@ -5,7 +5,7 @@
 | Treating a Maven build as a measurement | Run the executable jar after a successful profile build |
 | Reusing a stale jar after changing branches | Clean-build, discover the exact method and record jar SHA-256 |
 | Timing invalid inputs | Keep modulo-100 aggregation; old large ascending sums violated int range |
-| Treating a smoke score as research | Label smoke separately; controlled Result remains Pending |
+| Treating a smoke score as research | Label smoke separately; use only the separately attributed author observations in Result |
 | Assuming release=21 selects Java | Check Maven and use the explicit Java 21 executable |
 | Timing tests or coverage | Run coverage separately; build benchmarks without that profile |
 | Ignoring setup and reuse | State that construction is trial-only and repeated scans reuse data |
@@ -22,4 +22,4 @@ No new JSON/log/CSV files are required. Copy the complete console output into th
 
 ## Applied protocol and sources
 
-See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from pending author measurements.
+See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), whose execution source attribution remains open.

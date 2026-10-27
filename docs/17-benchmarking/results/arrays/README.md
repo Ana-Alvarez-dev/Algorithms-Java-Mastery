@@ -329,8 +329,13 @@ The [applied guide](../../implementation-and-benchmark-guide.md) standardises th
 corrected modulo-100 experiment to two forks and adds thirteen untimed fixture
 checks under `-Pbenchmark`. The production scan and corrected values are
 unchanged. Normal tests remain 710; the profile package passes 723.
-The [new run record](aggregation-corrected-run.md) is pending author measurements.
-It does not reuse these historical means or infer their missing errors/runtime.
+The [first supplied run record](aggregation-corrected-run.md) now retains five
+means/errors, 50 measured and 30 warmup averages on JDK 21.0.9/JMH 1.37, with
+44-second completion. Maximum relative error is 10.917%; finite growth is
+compatible with a linear scan. Source SHA/dirty state, jar identity, command/time
+and fresh machine metadata were not supplied; attribution to the reviewed
+corrected fixture remains provisional. It does not reuse these historical means
+or infer their missing errors/runtime.
 The earlier overflow limitations remain attached to their original payload.
 Local smoke/profiler compatibility is not a research run; no new CSV/JSON/log
 files are added.
