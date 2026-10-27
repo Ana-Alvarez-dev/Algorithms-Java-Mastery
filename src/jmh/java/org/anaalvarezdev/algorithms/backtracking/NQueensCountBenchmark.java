@@ -15,11 +15,21 @@ import java.util.concurrent.TimeUnit;
  * Full validated count. Flags include private arrays/path allocation and writes;
  * mask recursion uses primitive state. No boards are materialised or cached.
  * Result:
- * Pending author measurements; smoke checks execution and return consumption.
+ * Author run reported 2026-10-26; source b62df1b84810dfe5dea023d5d00bac2eb05c0cd0
+ * supplied separately (PR #88). JMH 1.37/JDK 21.0.9, Windows 11 amd64,
+ * one thread, 3/5 x 500 ms warmup/measurement, two forks (Cnt=10).
+ * Combined run 6 min 42 sec; all 46 cells/errors, 460 measured and 276 warmup
+ * averages: docs/17-benchmarking/results/backtracking/README.md.
+ * All six ordinary-count cells retained. n=12 masks/flags:
+ * 5663.154 +/- 329.313 / 47867.076 +/- 448.464 us/op; result count 14200
+ * is derived from the contract/reference, not printed by JMH.
  * Interpretation:
- * Pending actual source/runtime/settings and all means/errors. This is not an
- * isolated bit-instruction or allocation comparison. No measured stack bytes,
- * arbitrary-n mask guarantee, cache cause or factorial fit is inferred.
+ * Mask means are lower at n=8/10/12. Both visit the same valid-prefix tree;
+ * at n=12, source counts give 10103868 flag candidate checks versus 856188
+ * available-child iterations. Flags also include arrays/path writes. This
+ * does not isolate a bit instruction, actual allocation rate or CPU cause.
+ * n=8 flags error is 29.5%; all observations remain. O(n) depth is distinct
+ * from constant-size mask state per frame; no arbitrary-n or stack-byte claim.
  * Protocol: docs/14-backtracking/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

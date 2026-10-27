@@ -54,9 +54,22 @@ Candidate reordering affects first-hit work, while an unchanged complete
 counter still visits the same valid prefixes.
 
 Eight methods in four JMH templates define 46 matching default cells. Their
-future means/errors describe those fixtures and full timed contracts. Short
+reported means/errors describe those fixtures and full timed contracts. Short
 smoke, two sizes, or lower means cannot establish an exponent, universal ranking,
 CPU/cache cause, allocation rate or formal statistical significance.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) has the full state/call ledgers and evidence protocol.
 Next: [common mistakes](09-common-mistakes.md).
+
+## First Empirical Review
+
+The [first report](../17-benchmarking/results/backtracking/README.md) now records
+46 means/errors, 460 measured and 276 warmup averages, with author-reported
+source `b62df1b` and JDK 21.0.9/JMH 1.37. Two errors reach 25% (38.3% for
+12/HALF unpruned combinations; 29.5% for n=8 queen flags). All observations
+and printed intervals remain. Derived work ledgers distinguish prefix calls,
+candidate checks and full preparation; they are not measured machine events.
+TWO combinations and early-witness subsets favour the unpruned point means.
+Mask/frequency means are lower in matching subsets, but there is no universal
+ranking, cause isolation, allocation rate or fitted exponent. Enumeration's
+width/retention costs are still outside these count/decision timings.

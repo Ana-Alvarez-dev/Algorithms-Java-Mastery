@@ -46,3 +46,14 @@ it does not alone reduce an unchanged complete counter's set of legal prefixes.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) provides correctness proofs and separates source node counts from
 future JMH timings. Next: [permutations and combinations](06-permutations-and-combinations.md).
+
+## First Measured Controls
+
+The [first report](../17-benchmarking/results/backtracking/README.md) retains
+all 46 cells and printed iterations from author-reported source `b62df1b`,
+JDK 21.0.9/JMH 1.37. HALF/ALL combinations have lower pruned means, but TWO
+has lower unpruned means at both n; only one call is avoided there. Subset
+miss means favour bounds, while the early PRESENT witness favours the reference
+without preparation. These controls reject a universal pruning-speedup claim.
+Two wide-error cells stay visible; logical calls do not isolate predicate or
+allocation cost. Proof of soundness remains separate from elapsed-time evidence.

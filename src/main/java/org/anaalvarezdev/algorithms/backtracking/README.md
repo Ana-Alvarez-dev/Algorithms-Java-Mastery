@@ -20,6 +20,11 @@ Count variants do not materialise rows, and decision returns at the first witnes
 Tests in the matching test package execute 27 cases using independent exhaustive
 oracles, identities, published counts, boundaries and ownership checks. Four JMH
 classes in the matching JMH package define eight methods/46 defaults. Full
-public workflow is timed; no memoisation/formula replaces the search. Author
-measurement is pending; the guide has Windows Java 21 commands and the required
-source/runtime/console evidence. No JSON/log output is needed.
+public workflow is timed; no memoisation/formula replaces the search. The
+[first research report](../../../../../../../docs/17-benchmarking/results/backtracking/README.md)
+now completes all four templates with 46 means/errors, 460 measured and 276
+warmup averages on JDK 21.0.9/JMH 1.37; author-reported source is `b62df1b`
+(PR #88). Two wide-error cells stay visible. Pruning benefits depend on the
+family and stopping rule; count timings omit enumeration and source counts
+do not isolate CPU/GC/allocation causes. The guide retains Java 21 commands.
+Evidence remains Markdown without JSON/log; smoke stays separate.

@@ -48,4 +48,16 @@ overlap and the cost of storing states. It is not an automatic replacement for
 output-proportional enumeration. No production DP module is claimed here.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) joins these review decisions to code, tests, source references and
-the four pending measurement templates.
+the four measurement templates and their recorded first-run evidence.
+
+## Evidence From the First Run
+
+The [first research report](../17-benchmarking/results/backtracking/README.md)
+completes all four templates with 46 cells and every printed iteration/error.
+Author-reported source is `b62df1b` (PR #88); headers confirm JDK 21.0.9/JMH 1.37.
+Two wide-error cells remain intact. TWO combinations and early PRESENT subset
+witnesses have lower unpruned means, illustrating why fewer calls or an added
+bound cannot guarantee lower elapsed time. DISTINCT permutation variants have
+equal candidate-check counts but different means; source ledgers alone do not
+identify runtime causes. Preserve nonzero printed uncertainty even when tiny
+rounded iterations coincide; do not turn smoke or a point mean into a proof.

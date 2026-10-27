@@ -66,3 +66,15 @@ The two count benchmarks each define 12 default cells; enumeration is not timed.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) contains complete proofs, cost ledgers and the measurement protocol.
 Next: [N-Queens](07-n-queens.md).
+
+## First Count Measurements
+
+The [first report](../17-benchmarking/results/backtracking/README.md) records
+12 permutation and 12 combination cells, with every error/printed iteration
+from author-reported source `b62df1b`, JDK 21.0.9/JMH 1.37. Frequency means
+are lower on the six matching permutation fixtures. DISTINCT has u=n and equal
+candidate-check counts, so loop-width reduction alone does not explain all gaps.
+Combination pruning helps HALF/ALL by point mean; TWO reverses that direction.
+Unpruned 12/HALF error reaches 38.3% and its interval overlaps the pruned one.
+These are complete primitive counts,
+including private preparation; enumeration/copying throughput is not measured.

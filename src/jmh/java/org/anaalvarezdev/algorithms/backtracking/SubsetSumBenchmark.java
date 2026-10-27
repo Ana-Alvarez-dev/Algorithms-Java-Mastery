@@ -16,12 +16,22 @@ import java.util.concurrent.TimeUnit;
  * matching arrays for unbounded. Trial-only fixture construction is excluded;
  * input order stays unchanged, and no witness/subset output or DP is timed.
  * Result:
- * Pending author measurements; smoke is not measured research evidence.
+ * Author run reported 2026-10-26; source b62df1b84810dfe5dea023d5d00bac2eb05c0cd0
+ * supplied separately (PR #88). JMH 1.37/JDK 21.0.9, Windows 11 amd64,
+ * one thread, 3/5 x 500 ms warmup/measurement, two forks (Cnt=10).
+ * Combined run 6 min 42 sec; all 46 cells/errors, 460 measured and 276 warmup
+ * averages: docs/17-benchmarking/results/backtracking/README.md.
+ * All 16 decisions retained. n=18 bounded/withoutBounds RANGE_MISS:
+ * 0.055 +/- 0.001 / 774.377 +/- 11.168; SIGNED_MISS:
+ * 360.426 +/- 6.790 / 778.161 +/- 20.444 us/op.
  * Interpretation:
- * Pending source/runtime/settings and every error. Targeted root/near-upper
- * misses do not make arbitrary subset sum easy; PRESENT can expose preparation
- * overhead, SIGNED_MISS does not receive a parity shortcut. Source node counts
- * are not elapsed-cost attribution, profiler events or asymptotic proof.
+ * Bounded means are lower for all miss controls, while withoutBounds is lower
+ * for PRESENT at both n (n=18: 0.010 +/- 0.001 versus bounded 0.062 +/- 0.001).
+ * The witness uses the same n/2+1 include-prefix calls; bounded still prepares
+ * suffix arrays/checks bounds. Root rejection still has O(n) preparation.
+ * SIGNED_MISS has no parity shortcut and retains many prefixes. No error
+ * reaches 25%; tiny rounded scores retain printed nonzero uncertainty. No
+ * universal pruning gain, isolated allocation cost or polynomial bound follows.
  * Protocol: docs/14-backtracking/implementation-and-benchmark-guide.md.
  */
 @BenchmarkMode(Mode.AverageTime)

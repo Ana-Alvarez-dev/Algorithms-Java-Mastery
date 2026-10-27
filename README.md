@@ -63,7 +63,7 @@ engineering documentation.
 | Searching | Documented + implemented + tested + selected JMH |
 | Sorting | Documented + implemented + tested + selected JMH |
 | Linked Lists through Greedy | Selected implementations, tests and initial measured research |
-| Backtracking | Documented + implemented + tested; author measurements pending |
+| Backtracking | Documented + implemented + tested + initial 46-cell research |
 | Dynamic Programming | Next algorithmic module |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
@@ -377,8 +377,13 @@ notes to contracts, traces, completeness/uniqueness and sound-pruning arguments,
 state restoration, output costs and independent test oracles. Normal/profile
 verification passes **672 tests**, including **27 new tests**. Eight JMH methods
 in four templates define **46 defaults** in microseconds/op; all pass execution
-checks and three-call reference probes. Author-measured Result/Interpretation
-remain pending; smoke scores are excluded from research.
+checks and three-call reference probes. The
+[first Backtracking report](docs/17-benchmarking/results/backtracking/README.md)
+now completes all four Result/Interpretation fields with 46 means/errors,
+460 measured and 276 warmup averages on JDK 21.0.9/JMH 1.37, using author-reported
+source `b62df1b` (PR #88). Two errors reach 25%. Pruning loses on TWO combinations
+and early-witness subset controls by point mean; counts omit enumeration and
+source work ledgers remain distinct from timing causes. Smoke is excluded.
 
 ## Technology Stack
 
