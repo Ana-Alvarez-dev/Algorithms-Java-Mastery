@@ -149,6 +149,20 @@ be presented as measurements of correct mathematical summation for those
 inputs. A future experiment should use contract-valid data or an explicitly
 defined wider-sum operation and report new results separately.
 
+### Module 16 Fixture Follow-up (2026-10-27)
+
+The current ArrayAggregationBenchmark trial data is now value[i]=i%100, with
+an explicit size cap 0..1,000,000. Default mathematical sums are 4,950 / 49,500 /
+495,000 / 4,950,000 / 49,500,000. An independent long/formula probe and five
+short harness cells validate the corrected domain. Details are in the
+[Testing verification report](../../../16-testing/verification-report.md).
+
+This changes future fixture payloads, not this historical execution. All five
+means, missing errors/runtime/source and the two original invalid-domain cases
+remain as recorded. No corrected-fixture author timings have been supplied;
+record a separate dataset with its own source/settings/errors instead of
+relabelling these values or filling Result from smoke.
+
 ## 6. Copy Strategy
 
 At one million elements, the recorded means are:

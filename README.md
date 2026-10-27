@@ -65,7 +65,7 @@ engineering documentation.
 | Linked Lists through Greedy | Selected implementations, tests and initial measured research |
 | Backtracking | Documented + implemented + tested + initial 46-cell research |
 | Dynamic Programming | Documented + implemented + tested + initial 57-cell research |
-| Testing | Next numbered module; existing tests remain evidence |
+| Testing | Applied regression/oracle evidence + optional coverage; 710 tests pass |
 | Linux environment | Documented |
 | CI/CD concepts | Documented |
 | GitHub Actions workflow | Planned / not yet implemented |
@@ -314,6 +314,7 @@ are distinguished in the implementation guide.
 - [Greedy scope, contracts and run commands](docs/13-greedy-algorithms/implementation-and-benchmark-guide.md)
 - [Backtracking scope, contracts and run commands](docs/14-backtracking/implementation-and-benchmark-guide.md)
 - [Dynamic Programming scope, contracts and run commands](docs/15-dynamic-programming/implementation-and-benchmark-guide.md)
+- [Testing contracts, regressions and coverage commands](docs/16-testing/implementation-and-verification-guide.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -401,6 +402,16 @@ source `d572651` (PR #90). Eleven errors reach 25%, largest 163.7% for Fibonacci
 table n=20; its literal CI marker remains. Knapsack rolling point means are
 lower throughout; LCS memo/rolling comparisons depend on shape. Source-state
 ledgers are not timing attribution; smoke and earlier reports remain separate.
+
+Testing now adds a real baseline/red/green chain: a 100%-covered nearest-value
+method still fails six new duplicate partitions; the corrected lowest-index
+implementation passes **710 tests**, including **16 new Searching invocations**.
+Independent linear/exhaustive/seeded/property checks and fresh fixtures support
+the contract. Optional `-Pcoverage` generates JaCoCo 0.8.13 HTML/XML under target;
+the [verification report](docs/16-testing/verification-report.md) retains actual
+before/after counters and their limits. Future aggregation data now fits int,
+while historical Arrays means stay unchanged and corrected timing is pending.
+No new JMH family or CI status is claimed. Next is **17 - Benchmarking**.
 
 ## Technology Stack
 
