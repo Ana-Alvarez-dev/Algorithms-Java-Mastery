@@ -18,6 +18,23 @@ and the [first Searching benchmark record](../17-benchmarking/results/searching/
 The findings below describe the reviewed snapshot; they are proposed follow-up
 work, not corrections already applied by this report.
 
+## Module 16 Follow-up (2026-10-27)
+
+**S01 is now corrected.** The implementation reuses lower bounds to return the
+first copy of the selected nearest value. The [Testing report](../16-testing/verification-report.md)
+records a 694-test green baseline with 100% instruction/branch/line coverage in
+the old method, then six failures from twelve new named cases, followed by 710
+passing tests after the fix. Sixteen new Searching invocations include exhaustive
+linear-oracle, seeded, metamorphic and fixture-isolation checks. Searching now
+has 101 executed tests; the additional helper is test-only.
+
+The [applied-problems note](08-common-search-problems.md) and class proof/cost
+model now match empty/minimum fast paths plus at most two logarithmic lower
+bounds. The lower-bound helper's JavaDoc comparison markup is repaired; its
+executable behaviour is unchanged. S02-S08 and the original review/results are
+not reclassified as resolved by this focused correction. The sections below
+retain the original pre-fix counterexamples and historical verification.
+
 ## Method and Sources
 
 The review used four distinct forms of evidence:
@@ -74,7 +91,7 @@ needs improvement. These are qualitative review priorities, not numeric scores.
 
 | ID | Priority | Finding | Primary evidence |
 |---|---|---|---|
-| S01 | High | Closest-value tie policy fails with duplicate values | `08-common-search-problems.md`, `ClosestValueSearch.java`, reproduced outputs |
+| S01 | High; corrected in module 16 | Historical closest-value tie defect with duplicate values | `08-common-search-problems.md`, `ClosestValueSearch.java`, reproduced outputs |
 | S02 | Medium | The formal problem-definition document does not specify the implemented contracts | `02-search-problem-definition.md`; README Document Overview |
 | S03 | Medium | Binary-search example understates the maximum number of midpoint probes | `04-binary-search.md`, Search Space Reduction |
 | S04 | Medium | Average-case claims omit their probability models in several sections | `04-binary-search.md`, `05-recursive-binary-search.md`, `06-search-complexity.md` |
@@ -142,7 +159,7 @@ contract table for the implemented `int[]` operations:
 | `LastOccurrence` | Nondecreasing | Last index or `-1` | `-1` | Largest matching index |
 | `SearchInsertPosition` | Nondecreasing | Lower bound in `[0, n]` | `0` | Before existing equal values |
 | `SearchRange` | Nondecreasing | Inclusive `[first, last]` indices | `{-1, -1}` | Complete target endpoints |
-| `ClosestValueSearch` | Nondecreasing | Closest-value index | `-1` | Smallest equally close index intended; S01 remains open |
+| `ClosestValueSearch` | Nondecreasing | Closest-value index | `-1` | Smallest equally close index; S01 corrected by module 16 |
 
 All eight methods reject null input with `NullPointerException` and leave the
 input array unchanged. Sortedness is a caller obligation, not an implemented
@@ -318,8 +335,8 @@ observations above come from the previously recorded author-supplied summary.
 
 ## Recommended Correction Order and Acceptance Criteria
 
-1. **Resolve S01:** preserve and implement the intended nearest-index tie policy,
-   add meaningful duplicate regression tests, and update the correctness argument.
+1. **S01 completed by module 16:** preserve the nearest-index tie policy, add
+   regressions/oracles and update the proof/costs; see the follow-up above.
 2. **Specify contracts and repair traceability:** address S02 and S07; every path
    and result representation should agree across documentation, source, and tests.
 3. **Correct the teaching analysis:** address S03–S06 with precise probe counts,
@@ -330,6 +347,6 @@ observations above come from the previously recorded author-supplied summary.
    existing evidence, retain all uncertainty, and store any future run separately.
 
 The module can continue into research discussion now, provided these open
-findings remain visible. Full contract alignment should wait for S01 and the
-specification corrections; a successful test run alone is not evidence that
+remaining findings stay visible. S01 is corrected; broader alignment still
+requires the specification corrections; a successful test run alone is not evidence that
 those documentation guarantees have been satisfied.

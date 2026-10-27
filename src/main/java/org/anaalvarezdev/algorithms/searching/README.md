@@ -79,3 +79,16 @@ are available in the
 Wide error margins in several cases and incomplete run metadata limit precision.
 A more stable follow-up run remains useful; the current evidence can already
 support the research documentation with those limits stated explicitly.
+
+## Testing Module Follow-up
+
+`ClosestValueSearch` now enforces the lowest-index nearest-value tie even with
+duplicates, reusing `SearchInsertPosition` rather than copying lower-bound code.
+Empty/minimum fast paths are constant; worst time is Theta(log(n+1)), auxiliary
+space O(1). Input is preserved and distances widen before subtraction. The
+[Testing guide](../../../../../../../docs/16-testing/implementation-and-verification-guide.md)
+and [verification report](../../../../../../../docs/16-testing/verification-report.md)
+link six pre-fix failures to twelve named cases plus four oracle/property/
+isolation tests. Searching has 101 executed tests (85 existing +16 new).
+Historical Searching benchmark scores remain unchanged; no closest-value timing
+question is added merely because its contract was fixed.

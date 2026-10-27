@@ -27,27 +27,24 @@ import java.util.Objects;
  * - The input array remains unchanged.
  *
  * Algorithmic Strategy:
- * Binary search followed by comparison of the two boundary candidates
- * that surround the target.
+ * Lower-bound search followed by comparison of the two boundary values.
+ * If the lower value wins, a second lower bound finds its first occurrence.
  *
  * Correctness:
- * - If the target is found exactly, its distance is zero and is therefore
- *   minimal.
- * - Otherwise, after binary search terminates, high identifies the greatest
- *   value smaller than the target and low identifies the smallest value
- *   greater than the target, when those positions exist.
- * - Any other array element is at least as far from the target as one of
- *   those two boundary candidates.
- * - Comparing those candidates therefore yields a closest value.
+ * - At or below the minimum, index zero minimises distance and index.
+ * - The first lower bound identifies the first value at least the target.
+ *   Its predecessor, if present, is the largest value below the target.
+ * - Sortedness makes one of these boundary values closest; ties favour lower.
+ * - The upper index is already its value's first occurrence. A second lower
+ *   bound selects the first copy when the lower value or maximum wins.
+ * - Thus the method minimises both distance and index, including duplicates.
  *
  * Termination:
- * - Every unsuccessful binary-search iteration strictly reduces the active
- *   interval.
- * - The loop terminates when an exact match is found or low > high.
+ * - Each delegated lower-bound iteration shrinks a finite half-open interval.
  *
  * Time Complexity:
- * - Best case: Θ(1)
- * - Worst case: Θ(log n)
+ * - Best case: Θ(1), for empty input or target at/below the minimum.
+ * - Worst case: Θ(log(n+1)), at most two lower bounds.
  *
  * Space Complexity:
  * - Θ(1)
@@ -80,35 +77,19 @@ public final class ClosestValueSearch {
             return -1;
         }
 
-        int low = 0;
-        int high = array.length - 1;
-
-        while (low <= high) {
-            int middle = low + (high - low) / 2;
-            int value = array[middle];
-
-            if (value == target) {
-                return middle;
-            }
-
-            if (value < target) {
-                low = middle + 1;
-            } else {
-                high = middle - 1;
-            }
+        if (target <= array[0]) {
+            return 0;
         }
 
-        if (high < 0) {
-            return low;
+        int upper = SearchInsertPosition.search(array, target);
+        if (upper == array.length) {
+            return SearchInsertPosition.search(array, array[array.length - 1]);
         }
 
-        if (low >= array.length) {
-            return high;
-        }
+        long lowerDistance = Math.abs((long) target - array[upper - 1]);
+        long upperDistance = Math.abs((long) array[upper] - target);
 
-        long lowerDistance = Math.abs((long) target - array[high]);
-        long upperDistance = Math.abs((long) array[low] - target);
-
-        return lowerDistance <= upperDistance ? high : low;
+        return lowerDistance <= upperDistance
+                ? SearchInsertPosition.search(array, array[upper - 1]) : upper;
     }
 }

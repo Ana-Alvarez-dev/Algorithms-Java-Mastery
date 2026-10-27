@@ -305,21 +305,17 @@ The problem is:
 
 If two values are equally close, the implementation returns the lower index.
 
-The strategy is:
+The strategy first handles empty input (-1) and target at/below the minimum
+(index zero). It then reuses SearchInsertPosition's lower bound for the target.
+Compare the adjacent lower/upper values in long; if the lower value wins or
+ties, use another lower bound to select its first copy. Above the maximum,
+return the first occurrence of that maximum. An exact midpoint is not an excuse
+to return a later duplicate.
 
-```text
-Binary Search
-        ↓
-Exact Match?
-   ├── Yes → return immediately
-   └── No
-        ↓
-Search Terminates Between Two Boundaries
-        ↓
-Compare Lower and Upper Candidate
-        ↓
-Return Closest Index
-```
+For [10,20,20,40]/25, the first bound is 3; 20 is closer than 40, and its lower
+bound is 1. For an exact repeated 20, the first bound already gives index 1.
+The [Testing guide](../16-testing/implementation-and-verification-guide.md)
+provides the invariant, proof, counterexamples and independent oracle evidence.
 
 Implementation:
 
@@ -331,14 +327,12 @@ Test evidence:
 
 ```text
 src/test/java/org/anaalvarezdev/algorithms/searching/ClosestValueSearchTest.java
+src/test/java/org/anaalvarezdev/algorithms/searching/ClosestValueSearchRegressionTest.java
 ```
 
-Complexity:
-
-```text
-Time:  Θ(log n)
-Space: Θ(1)
-```
+Complexity: best Theta(1) for empty/minimum fast paths, worst
+Theta(log(n+1)) across at most two lower bounds, O(1) auxiliary space. The
+original exact-midpoint early-return argument no longer describes this code.
 
 Distance comparison uses a wider numeric representation so that extreme integer
 values do not cause overflow during absolute-distance calculation.

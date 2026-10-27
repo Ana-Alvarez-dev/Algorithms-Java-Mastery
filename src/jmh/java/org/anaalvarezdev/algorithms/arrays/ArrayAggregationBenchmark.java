@@ -16,7 +16,16 @@ import org.openjdk.jmh.infra.Blackhole;
 import java.util.concurrent.TimeUnit;
 
 /*
+ * Research Question:
+ * How does a complete aggregation scan scale over contract-valid bounded data?
+ * Theoretical Expectation:
+ * Linear work, constant accumulator state. Every prefix/result fits int.
+ * Measured Work:
+ * ArrayAggregation.sum plus Blackhole consumption; trial-only modulo-100 input
+ * generation is excluded. Supported fixture sizes are 0..1000000.
  * Result:
+ * Pending author measurements of the corrected fixture introduced in module 16.
+ * Historical Result (old ascending 0..n-1 fixture):
  *
  * Input Size (n)       Average Time (ns/op)
  *
@@ -33,7 +42,7 @@ import java.util.concurrent.TimeUnit;
  * approximately one order of magnitude results in an execution
  * time increase close to the same order of magnitude.
  *
- * Interpretation:
+ * Historical Interpretation:
  *
  * The experimental results are consistent with the theoretical
  * time complexity T(n) = Θ(n).
@@ -62,6 +71,13 @@ import java.util.concurrent.TimeUnit;
  * Reported errors, measurement counts and original run headers are unknown.
  * The two largest inputs exceed the documented int-sum precondition; their
  * results time overflowing arithmetic, not a valid mathematical sum.
+ * Corrected Fixture Interpretation:
+ * Pending a separate controlled run. New value[i]=i%100 changes the payload;
+ * default sums range 4950..49500000. Old means are not measurements of this
+ * corrected data. Functional/default smoke checks provide no research score.
+ * Source, actual runtime/settings, every error/iteration and completion must be
+ * retained separately. No isolated allocation/cache cause or exponent is fitted.
+ * Verification: docs/16-testing/implementation-and-verification-guide.md.
  * Full extracted data and preliminary research interpretation:
  * docs/17-benchmarking/results/arrays/arrays-template-results.csv
  * docs/17-benchmarking/results/arrays/README.md
@@ -94,10 +110,13 @@ public class ArrayAggregationBenchmark {
 
     @Setup(Level.Trial)
     public void setup() {
+        if (size < 0 || size > 1_000_000) {
+            throw new IllegalArgumentException("aggregation fixture requires size 0..1000000");
+        }
         array = new int[size];
 
         for (int index = 0; index < size; index++) {
-            array[index] = index;
+            array[index] = index % 100;
         }
     }
 

@@ -698,6 +698,30 @@ isolate CPU, call or allocation costs. Preserve Fibonacci ns/op and other us/op
 rows without pooling. Witness APIs stay outside timing; smoke and prior reports
 remain separate. All evidence stays Markdown without JSON/log exports.
 
+# Testing Module: Fixture Validity and Coverage Separation
+
+The [Testing guide](../16-testing/implementation-and-verification-guide.md) and
+[verification report](../16-testing/verification-report.md) connect regression
+evidence to benchmark domains. The nearest-value duplicate defect is corrected
+with oracle/property tests; it has no distinct new timing question. Existing
+Searching/DP/Backtracking datasets retain their provenance.
+
+The future aggregation fixture now uses value[i]=i%100 at sizes 100..1,000,000,
+with exact sums 4,950..49,500,000. A long/formula probe checks all five defaults,
+three calls each, preservation and size guards; five short smoke cells complete.
+These checks do not supply research scores. The [historical Arrays report](results/arrays/README.md)
+still records the old ascending payload and invalid two largest sums. Corrected
+Result/Interpretation await a separate author run; old means are not reused.
+
+JaCoCo 0.8.13 is optional under `-Pcoverage`, generating ignored HTML/XML. The
+baseline had 694 passing tests and a 100%-covered yet incorrect nearest-value
+method; new named regressions exposed six failures, then the corrected suite
+passes 710 tests. Counters are local verification, not JMH timings or passing CI.
+Use separate clean coverage and benchmark builds; never treat instrumented test
+execution times as microbenchmark measurements. No new benchmark family is
+added merely to time tests. Current source-domain fixes and historical
+measurement limitations have separate statuses.
+
 # Key Takeaways
 
 After completing this module, the learner should understand that:

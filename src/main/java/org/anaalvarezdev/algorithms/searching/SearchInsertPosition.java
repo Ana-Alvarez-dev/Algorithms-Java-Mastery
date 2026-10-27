@@ -20,9 +20,9 @@ import java.util.Objects;
  * - The array is sorted in nondecreasing order.
  *
  * Postconditions:
- * - 0 <= result <= array.length.
- * - Every valid index smaller than result contains a value < target.
- * - If result < array.length, array[result] >= target.
+ * - {@code 0 <= result <= array.length}.
+ * - Every valid index smaller than result contains a value {@code < target}.
+ * - If {@code result < array.length}, {@code array[result] >= target}.
  * - Inserting target at result preserves nondecreasing order.
  * - The input array remains unchanged.
  *
@@ -30,7 +30,7 @@ import java.util.Objects;
  * Lower-bound binary search.
  *
  * Correctness:
- * - Every index smaller than low contains a value < target.
+ * - Every index smaller than low contains a value {@code < target}.
  * - high always identifies a valid candidate boundary.
  * - Each comparison preserves these boundary properties.
  * - When low == high, low is the first valid insertion position.

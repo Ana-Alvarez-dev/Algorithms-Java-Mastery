@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **15 — Dynamic Programming**. It is a source/evidence inventory,
+progression through **16 — Testing**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -74,6 +74,12 @@ research through PR #89. Selected scope and local verification reported
 57 defaults on JDK 21.0.9/JMH 1.37, with separately supplied source
 `d572651484f3ec6cffe03ad589bddd5a4a8fb8a3` (PR #90 merge).
 
+The Testing contribution extends review from main
+`8bacc90f00e4ad7dc998743d06be65ff7f5c04aa`, which integrated DP research through
+PR #91. Verification reported 2026-10-27 records a coverage baseline, failing
+duplicate regressions, a contract correction, valid future aggregation inputs
+and the corrected full suite. Historical measurements retain their limitations.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -87,13 +93,13 @@ Tests, timing, proof arguments and source provenance provide different evidence.
 
 Counts below are **executed JUnit tests**, including inherited contract tests,
 not source-file or assertion counts. Java source counts include interfaces and
-helpers. The matrix includes selected implementations through module 15.
+helpers. The matrix includes selected algorithm implementations through module 15 and cross-cutting Testing in module 16.
 
 | Module | Java files | Executed tests | JMH methods | Evidence and current status |
 |---|---:|---:|---:|---|
 | 00–02: project, foundations, complexity | Conceptual | Not a standalone executable package | Not applicable | Methodology and analysis prerequisites; not falsely marked incomplete for lacking benchmarks |
-| Arrays | 13 | 103 | 15 | [105 recorded means and research](../17-benchmarking/results/arrays/README.md); original errors/runtime/source identity unknown; aggregation input violation remains |
-| Searching | 8 | 85 | 4 | [65 means/errors](../17-benchmarking/results/searching/README.md) and [documentation review](../04-searching/documentation-review.md); closest-value duplicate tie mismatch remains |
+| Arrays | 13 | 103 | 15 | [105 recorded means and research](../17-benchmarking/results/arrays/README.md); original errors/runtime/source identity unknown; historical aggregation violation retained, future fixture corrected by module 16 |
+| Searching | 8 | 101 | 4 | [65 means/errors](../17-benchmarking/results/searching/README.md) and [documentation review](../04-searching/documentation-review.md); S01 duplicate tie corrected by module 16; sixteen new invocations included here |
 | Sorting | 5 | 69 | 8 | [Implementation guide](../05-sorting/implementation-and-benchmark-guide.md), [48 reported configurations](../17-benchmarking/results/sorting/README.md); JDK 25.0.1, substantial uncertainty, execution SHA unknown |
 | Linked Lists | 6 | 81 | 15 | [Implementation guide](../06-linked-lists/implementation-and-benchmark-guide.md), [30 reported configurations](../17-benchmarking/results/linked-lists/README.md); JDK 21.0.9, author-reported source `a16a431`, partial iterations and wide-error limitations recorded |
 | Stacks and Queues | 15 | 80 | 10 | [Selected scope](../07-stacks-and-queues/implementation-and-benchmark-guide.md) and [20 reported configurations](../17-benchmarking/results/stacks-and-queues/README.md); JDK 21.0.9/JMH 1.37, author-reported source `804f69f`, all printed iteration values preserved; preliminary interpretation |
@@ -105,20 +111,22 @@ helpers. The matrix includes selected implementations through module 15.
 | Greedy | 5 | 27 | 5 | [Selected contracts](../13-greedy-algorithms/implementation-and-benchmark-guide.md), [40 results and research](../17-benchmarking/results/greedy/README.md); JDK 21.0.9/JMH 1.37, author-reported source `674ab35`, all errors/printed iterations retained; ten wide-error cells and preliminary limits |
 | Backtracking | 4 | 27 | 8 | [Selected contracts](../14-backtracking/implementation-and-benchmark-guide.md), [46 results and research](../17-benchmarking/results/backtracking/README.md); JDK 21.0.9/JMH 1.37, author-reported source `b62df1b`, every error/printed iteration retained; two wide-error cells and preliminary limits |
 | Dynamic Programming | 3 | 22 | 9 | [State/recurrence contracts](../15-dynamic-programming/implementation-and-benchmark-guide.md), [57 results and research](../17-benchmarking/results/dynamic-programming/README.md); JDK 21.0.9/JMH 1.37, author-reported `d572651`; mixed units, every error/printed iteration and eleven wide-error cells retained; reused Fibonacci is not a new file |
-| 16–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
+| Testing | 0 new production files | 16 added in Searching, not additive | 0 new | [Regression/coverage guide](../16-testing/implementation-and-verification-guide.md), [baseline/red/green evidence](../16-testing/verification-report.md); coverage profile and fixture validity, no separate production package |
+| 17–19: later subjects | No production packages yet | No corresponding tests yet | None yet | Documentation represents a learning plan, not completed executable evidence |
 
-There are now **694 passing repository tests**, compared with **672** before
-Dynamic Programming, **645** before Backtracking, **618** before Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
+There are now **710 passing repository tests**, compared with **694** before
+Testing, **672** before Dynamic Programming, **645** before Backtracking, **618** before Greedy, **600** before Divide and Conquer, **572** before Recursion, **524** before Graphs, **465** before Trees, **418** before Hash Tables
 and **338** before Stacks and Queues. Counts do not demonstrate complete behavioural coverage
-or resolve a known counterexample outside the selected implementation scope.
+or establish complete behaviour outside the selected scope. The Testing row
+is cross-cutting; its sixteen invocations are already counted in Searching.
 
 ## Rechecked Gaps
 
 ### Searching: duplicate tie contract
 
 `ClosestValueSearch` promises the lowest index among equally close values.
-The following counterexamples were re-executed against this branch's unchanged
-Searching production source:
+The following historical counterexamples were re-executed against the pre-fix
+source; module 16 now returns the required indices in every row:
 
 | Input | Target | Actual index | Contract-required index |
 |---|---:|---:|---:|
@@ -126,16 +134,21 @@ Searching production source:
 | `[10,20,20,40]` | 25 | 2 | 1 |
 | `[10,20,20]` | 100 | 2 | 1 |
 
-The existing 85 Searching tests pass but do not establish this missing duplicate
-policy. A focused future fix should first add regression tests, then reconcile
-the implementation and documented best/worst costs. This contribution does
-not silently change Searching behaviour. It does not depend on that method.
+**Corrected in module 16.** The original 85 Searching tests did not establish
+this duplicate policy. Twelve new named cases exposed six pre-fix failures;
+four additional tests use a linear oracle, exhaustive/seeded inputs, safe
+metamorphic relations and fixture isolation. The corrected 101 Searching
+invocations pass. Reused lower bounds enforce both distance and index, with
+empty/minimum fast paths and logarithmic worst work. The
+[Testing report](../16-testing/verification-report.md) preserves before/after
+coverage: the old method was already 100% covered by recorded counters.
+The original mismatch remains historical evidence rather than an open code bug.
 
 ### Arrays: invalid aggregation benchmark inputs
 
 `ArrayAggregation.sum` documents that the mathematical sum must fit in an int.
-Its benchmark generates `0..n-1`, violating that precondition at its two largest
-sizes. Rechecking the original inputs produced:
+The historical benchmark generated `0..n-1`, violating that precondition at
+its two largest sizes. Rechecking those original inputs produced:
 
 | Size | Mathematical sum | Actual Java int result |
 |---|---:|---:|
@@ -143,9 +156,11 @@ sizes. Rechecking the original inputs produced:
 | 1,000,000 | 499,999,500,000 | 1,783,293,664 |
 
 This is a benchmark-domain violation, not evidence that the implementation is
-wrong for inputs within its documented domain. Correct the future benchmark
-dataset or introduce a separately specified wider accumulator and remeasure.
-Historical means must retain their limitation; do not relabel them valid sums.
+wrong for inputs within its documented domain. **The future fixture is now
+corrected by module 16** to value[i]=i%100 with a validated size cap and exact
+default sums through 49,500,000. An independent long/formula probe and smoke
+verify the domain. Historical means retain their limitation; no corrected
+author timings are supplied yet and no old value is relabelled.
 
 ### Build and CI evidence
 
@@ -544,6 +559,37 @@ change, new timed run or CI status. Earlier 694-test verification and tracked
 Arrays/Searching findings remain distinct. All evidence stays Markdown without
 JSON/log; smoke and prior reports remain separate. Further experiments retain
 their own source/settings and every error. The next module is **16 - Testing**.
+
+## Testing Verification and Review
+
+Verification reported **2026-10-27**, with OpenJDK 21+35-2513/Maven Wrapper 3.9.11,
+records the baseline/red/green chain in the
+[Testing report](../16-testing/verification-report.md). Production/tests match
+the base for the 694-test baseline, with only optional JaCoCo configuration
+added. ClosestValueSearch had 85/85 instructions, 14/14 branches and 21/21 lines
+covered, yet six of twelve new named cases failed before the correction.
+
+The corrected suite passes **710 tests** in normal, benchmark-package and
+coverage verification, zero failures/errors/skips. The sixteen new Searching
+invocations include 8,712 exhaustive queries, 300 seeded arrays, safe translation/
+scaling and a copying-builder isolation check. All eleven Testing notes link
+contracts, partitions, oracle independence, parameterisation, exceptions,
+ownership, fixture validation and coverage limits to actual code/evidence.
+
+JaCoCo 0.8.13 is an optional coverage-only profile, generating HTML/XML under
+ignored target with no percentage gate or excluded production scope. Actual
+135-class counters and source changes are identified; no path/mutation score
+or correctness proof is inferred. The lower-bound helper's JavaDoc markup is
+repaired without changing its executable behaviour. Searching JavaDoc passes
+doclint excluding missing tags. Historical docs/results remain identified.
+
+The aggregation benchmark uses contract-valid modulo-100 inputs; all five
+default fixtures match long/formula sums and preserve inputs across three calls,
+and five short smoke cells complete. Existing means remain historical and a
+separate corrected author run is needed. No new JMH family is added to time tests.
+Coverage instrumentation and performance measurement remain separate. The CI
+workflow gap is still open; local verification is not CI. Evidence stays Markdown
+without versioned JSON/log/new CSV. Next is **17 - Benchmarking**.
 
 ## Evidence Policy and Next Action
 
