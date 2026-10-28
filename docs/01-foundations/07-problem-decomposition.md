@@ -541,6 +541,20 @@ A complete correctness argument may therefore require:
 Decomposition improves correctness reasoning only when the relationships
 between components remain explicit.
 
+For merge sort, let the original sequence be the concatenation L0 followed by
+R0. The recursive contracts must return sorted permutations L and R of those
+respective sequences. The merge contract requires sorted inputs and guarantees
+a sorted result whose multiplicity of each value is the sum of its multiplicities
+in L and R. That result is consequently a sorted permutation of the original
+sequence. Sorted subresults alone are insufficient without this merge guarantee.
+
+The base cases of size zero or one are already sorted permutations. Splitting
+an instance of integer size n >= 2 into sizes floor(n/2) and ceil(n/2) gives
+strictly smaller non-negative sizes, supporting induction and termination when
+the recursive calls and merge also terminate. Shared-state implementations
+add obligations about disjoint ranges and preservation of values during writes.
+This is a composition argument, not a claim that every decomposition is valid.
+
 ---
 
 # Decomposition and Preconditions
@@ -1106,8 +1120,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The systematic decomposition of computational problems into smaller instances
 or responsibilities provides an important foundation for the study of
@@ -1123,3 +1136,9 @@ docs/00-project/10-references.md
 
 Complementary references may be introduced in later modules when a specific
 algorithmic paradigm requires additional theoretical treatment.
+
+
+For this review, the directly consulted source is the supplied **Third Edition
+(2009)**, not the fourth-edition text. The [review record](documentation-review.md)
+identifies verified sections/pages and separates textbook concepts from this
+repository's contract, testing and engineering conventions.

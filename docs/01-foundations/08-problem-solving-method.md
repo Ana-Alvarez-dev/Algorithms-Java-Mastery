@@ -98,7 +98,12 @@ Benchmarking
 Technical Conclusions
 ```
 
-Each stage has a specific responsibility and should not be skipped.
+Use these stages as reasoning responsibilities, with depth proportional to the
+problem. Decomposition, a separate invariant proof, design patterns and timed
+benchmarks are used when they answer a concrete question. If a stage is not
+applicable, explain that decision rather than inventing work to fill a template.
+Specifications and strategies may be revised as analysis exposes a contradiction;
+this is a study workflow, not an irreversible waterfall process.
 
 ---
 
@@ -168,7 +173,8 @@ Array contains at least one element.
 Index belongs to the valid range.
 ```
 
-The algorithm is only expected to behave correctly when these conditions are satisfied.
+The mathematical result guarantee applies when these conditions hold. Any
+separately specified rejection behaviour remains an obligation of the public API.
 
 ---
 
@@ -200,13 +206,18 @@ Typical examples include:
 - negative values;
 - maximum and minimum values.
 
-Every identified edge case should later become an automated test.
+Select tests from relevant boundaries, equivalence classes and known defect
+risks; several examples may exercise the same obligation. Documented rejection
+behaviour also deserves tests. A list of examples does not imply a separate test
+for every imaginable input, nor does it establish general correctness.
 
 ---
 
 # Stage 7 — Problem Decomposition
 
-The computational problem is divided into smaller responsibilities.
+When it simplifies reasoning, divide the computational problem into smaller
+responsibilities with explicit input/output contracts. A simple direct problem
+may need no decomposition.
 
 General progression:
 
@@ -299,7 +310,9 @@ Compare 9
 Return 15
 ```
 
-Manual tracing validates the reasoning before programming.
+Manual tracing checks the selected executions and may expose a defect before
+programming. It does not validate the general correctness claim; that requires
+the contract-based argument in the next stage.
 
 ---
 
@@ -329,7 +342,9 @@ Topics include:
 - asymptotic growth;
 - Big O notation.
 
-This stage evaluates efficiency independently of hardware.
+State the input-size parameters, case or probability model, and costs of basic
+operations. The analysis then describes growth under that model; a unit-cost
+assumption is not a claim that every operation has the same hardware latency.
 
 ---
 
@@ -370,7 +385,10 @@ Automated tests provide confidence that the implementation satisfies its specifi
 
 # Stage 15 — Benchmarking
 
-Performance is evaluated experimentally.
+Evaluate performance experimentally when there is a stated measurement
+question and a justified benchmark. Record the input contract, runtime,
+source/artifact identity, configuration and uncertainty. A conceptual topic or
+trivial operation need not acquire a timed benchmark merely to fill this stage.
 
 Topics include:
 
@@ -394,7 +412,7 @@ Possible questions include:
 - Is it efficient?
 - Can it be improved?
 - Which situations favour its use?
-- Which design pattern best represents its behaviour?
+- Would an abstraction or design pattern solve an actual implementation problem?
 
 The objective is to encourage critical thinking rather than simple implementation.
 
@@ -481,7 +499,7 @@ Every algorithm should:
 - evaluate complexity;
 - implement only after reasoning;
 - verify behaviour through automated tests;
-- compare performance experimentally;
+- compare performance experimentally when justified by a measurement question;
 - document technical conclusions.
 
 Following this methodology promotes disciplined, reproducible, and professional algorithm development.
@@ -503,3 +521,11 @@ The learner should remember the following principles:
 The **Problem-Solving Method** therefore becomes the methodological foundation of the entire **Algorithms Java Mastery** repository.
 
 It unifies the concepts introduced throughout the **Foundations** module and establishes the standard workflow that will be applied consistently in every subsequent module, from Arrays and Searching to Graphs and Dynamic Programming.
+
+# Review and Source Attribution
+
+The [Foundations documentation review](documentation-review.md) records the
+consulted CLRS Third Edition sections and the corrections applied to this
+module. This sixteen-stage engineering workflow is the repository's synthesis;
+it is not a prescribed CLRS checklist. No fourth-edition page was checked for
+this review.

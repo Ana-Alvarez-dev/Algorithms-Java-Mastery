@@ -3,6 +3,13 @@
 Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
+A later **2026-10-28 Foundations documentation review**, based on main
+`d70d8d1c61da6e22394edadaca84d50d4255cc84` (PR #98 merge), is recorded
+[separately](../01-foundations/documentation-review.md). It reads the eight
+Foundations notes and README, applies eight scoped corrections and preserves
+the historical build, coverage and benchmark evidence below. Complexity and
+later modules are not declared re-reviewed by that follow-up.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

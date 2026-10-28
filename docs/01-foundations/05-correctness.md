@@ -343,6 +343,16 @@ Examples include:
 
 Termination is a separate logical responsibility from partial correctness.
 
+A common proof uses a **variant**: a non-negative integer that strictly decreases
+on each executed loop iteration. More generally, the progress measure must be
+well-founded, so an infinite descending chain is impossible. Merely becoming
+smaller is insufficient: repeatedly halving a positive real number never reaches
+zero in exact real arithmetic. Recursive calls must also preserve their
+preconditions and eventually reach a defined base case.
+
+The indexed maximum proof in [Invariants](06-invariants.md#an-indexed-proof-and-a-termination-variant)
+uses n - i as its variant, separately from its maximum-so-far invariant.
+
 ---
 
 # Total Correctness
@@ -813,14 +823,18 @@ cover every possible valid input.
 
 ---
 
-## Proving the Implementation Instead of the Algorithmic Idea
+## Assuming an Abstract Proof Automatically Proves the Implementation
 
-Implementation details may distract from the underlying reasoning.
+An abstract argument should state its numeric and state model. The Java
+translation must preserve those assumptions, including bounds, arithmetic,
+aliasing and mutation behaviour. Proving an implementation is a valid activity;
+it should not be dismissed as a correctness mistake.
 
-The correctness argument should first explain why the algorithmic strategy
-works.
-
-Implementation-specific behaviour can then be verified separately.
+For example, a mathematical sum over unbounded integers does not justify an
+`int` sum when intermediate values overflow. Tests complement the analysis of
+this translation; they do not turn an unchecked numeric assumption into proof.
+The maximum example only compares and copies input values, so its result does
+not require arithmetic on their magnitudes.
 
 ---
 
@@ -946,8 +960,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The book provides the principal academic foundation for reasoning about
 algorithm correctness, loop invariants, termination, and the relationship
@@ -964,3 +977,8 @@ docs/00-project/10-references.md
 In particular, more formal treatment may be supported by works such as
 Dijkstra's *A Discipline of Programming* and Gries's *The Science of
 Programming* when additional depth is appropriate.
+
+For this review, the directly consulted source is the supplied **Third Edition
+(2009)**, not the fourth-edition text. The [review record](documentation-review.md)
+identifies verified sections/pages and separates textbook concepts from this
+repository's contract, testing and engineering conventions.

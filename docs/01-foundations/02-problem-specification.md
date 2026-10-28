@@ -464,7 +464,9 @@ Output
 Examples support understanding, but they do not replace the formal
 specification.
 
-A finite set of examples cannot define every possible valid instance.
+Representative examples do not usually enumerate the full valid domain. An
+exhaustive finite-domain table can specify a function, but the examples here
+are illustrative and are not such a complete table.
 
 ---
 
@@ -681,9 +683,15 @@ The input contains at least one valid element.
 ```
 
 ```text
-Postcondition:
-The returned value is greater than or equal to every element in the input.
+Postconditions:
+The returned value occurs in the input sequence as supplied at entry.
+It is greater than or equal to every element of that original sequence.
+For the read-only API studied here, the input sequence is unchanged.
 ```
+
+Both value properties are necessary: for input `[1, 2]`, returning `3` satisfies
+the upper-bound property but is not the maximum element. A mutation policy also
+needs to be explicit when the specification is refined into an API contract.
 
 These concepts are developed systematically in:
 
@@ -923,8 +931,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The book provides the principal academic foundation for the systematic
 description and analysis of computational problems throughout **Algorithms Java
@@ -939,3 +946,8 @@ docs/00-project/10-references.md
 
 Complementary references may be introduced when a topic requires additional
 formal treatment of specifications, contracts, or program correctness.
+
+For this review, the directly consulted source is the supplied **Third Edition
+(2009)**, not the fourth-edition text. The [review record](documentation-review.md)
+identifies verified sections/pages and separates textbook concepts from this
+repository's contract, testing and engineering conventions.

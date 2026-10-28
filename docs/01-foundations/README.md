@@ -70,23 +70,35 @@ The current structure is:
 ```text
 01-foundations/
 ├── README.md
-├── algorithm-definition.md
-├── problem-specification.md
-├── preconditions-and-postconditions.md
-├── edge-cases.md
-├── correctness.md
-├── invariants.md
-├── problem-decomposition.md
-└── problem-solving-method.md
+├── 01-algorithm-definition.md
+├── 02-problem-specification.md
+├── 03-preconditions-and-postconditions.md
+├── 04-edge-cases.md
+├── 05-correctness.md
+├── 06-invariants.md
+├── 07-problem-decomposition.md
+├── 08-problem-solving-method.md
+└── documentation-review.md
 ```
 
 Each document addresses one essential concept of algorithmic reasoning.
 
 ---
 
+# Documentation Review
+
+The [2026-10-28 review](documentation-review.md) reads all eight numbered notes
+and this README, records eight scoped findings/corrections, and supplies
+worked contracts, invariant/progress arguments and counterexamples. It uses
+the supplied CLRS Third Edition with explicit page locators, separately from
+the preferred fourth-edition bibliography. It does not claim a formal proof
+audit of every downstream module or new Java/benchmark executions.
+
+---
+
 # Document Overview
 
-## algorithm-definition.md
+## [01-algorithm-definition.md](01-algorithm-definition.md)
 
 Introduces the formal definition of an algorithm and its fundamental characteristics.
 
@@ -94,7 +106,7 @@ The learner studies what an algorithm is, how it differs from a program, and why
 
 ---
 
-## problem-specification.md
+## [02-problem-specification.md](02-problem-specification.md)
 
 Explains how computational problems should be formally specified.
 
@@ -111,7 +123,7 @@ A correct specification is the foundation of every algorithm.
 
 ---
 
-## preconditions-and-postconditions.md
+## [03-preconditions-and-postconditions.md](03-preconditions-and-postconditions.md)
 
 Introduces software contracts.
 
@@ -126,7 +138,7 @@ Every algorithm should clearly state the conditions under which it operates.
 
 ---
 
-## edge-cases.md
+## [04-edge-cases.md](04-edge-cases.md)
 
 Explains the importance of analysing boundary conditions before implementation.
 
@@ -142,7 +154,7 @@ Edge-case analysis becomes the foundation of later automated testing.
 
 ---
 
-## correctness.md
+## [05-correctness.md](05-correctness.md)
 
 Introduces formal reasoning about algorithm correctness.
 
@@ -156,7 +168,7 @@ The document also introduces the concepts of:
 
 ---
 
-## invariants.md
+## [06-invariants.md](06-invariants.md)
 
 Introduces algorithmic invariants.
 
@@ -171,7 +183,7 @@ Invariant reasoning will later support the study of:
 
 ---
 
-## problem-decomposition.md
+## [07-problem-decomposition.md](07-problem-decomposition.md)
 
 Explains how complex computational problems can be divided into simpler subproblems.
 
@@ -186,7 +198,7 @@ The learner develops the ability to simplify complexity before implementation.
 
 ---
 
-## problem-solving-method.md
+## [08-problem-solving-method.md](08-problem-solving-method.md)
 
 Defines the standard methodology used throughout this repository.
 
@@ -402,4 +414,3 @@ docs/00-project/10-references.md
 **Previous:** `docs/00-project/`
 
 **Next:** `docs/02-complexity/`
-

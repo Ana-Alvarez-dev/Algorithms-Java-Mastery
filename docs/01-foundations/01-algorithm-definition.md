@@ -122,10 +122,13 @@ This distinction is fundamental throughout the repository.
 
 # Definition of an Algorithm
 
-An **algorithm** is a well-defined computational procedure that receives input
-values when required, performs a finite sequence of precisely specified
-operations, and produces one or more outputs that solve a specified
-computational problem.
+An **algorithm** describes a well-defined computational procedure for
+transforming input into output for a specified computational problem.
+
+A procedure is not correct merely because its steps are precise. For the finite
+input/output tasks studied here, a **correct** algorithm must terminate on every
+valid input and produce output satisfying the specification. Candidate
+procedures may fail either obligation; correctness must be argued separately.
 
 Conceptually:
 
@@ -159,13 +162,16 @@ unbounded descriptions of computation.
 
 ## Finiteness
 
-An algorithm must terminate after a finite number of computational steps.
+For the finite tasks in this repository, total correctness requires termination
+after finitely many steps on every valid input. The number of steps may depend
+on the input; it need not have one fixed bound for all input sizes.
 
-A procedure that continues indefinitely without reaching a defined result does
-not satisfy the usual requirement of algorithmic termination.
+CLRS also discusses incorrect algorithms, including candidates that fail to
+halt on some inputs. Such a candidate fails this requirement. Calling a
+procedure an algorithm is not itself a proof of termination.
 
-Termination becomes particularly important when reasoning formally about
-correctness.
+Reactive services intended to run continuously require a different specification
+and are outside this module's finite input/output scope.
 
 ---
 
@@ -270,6 +276,11 @@ Consider the following example.
 
 ## Possible Java Implementation
 
+This teaching snippet assumes `values != null` and `values.length > 0`, with no
+concurrent modification during the call. It returns a value from the original
+input that is at least every original element, and leaves the input unchanged.
+It does not explicitly validate those preconditions.
+
 ```java
 public static int findMaximum(int[] values) {
     int maximum = values[0];
@@ -284,9 +295,12 @@ public static int findMaximum(int[] values) {
 }
 ```
 
-The Java code is not the algorithm itself.
-
-It is one implementation of the algorithm.
+The Java code expresses the algorithm as a concrete implementation. The same
+procedure can also be specified in prose, pseudocode or another language. The repository counterpart is
+[`FindMaximum.find`](../../src/main/java/org/anaalvarezdev/algorithms/arrays/FindMaximum.java);
+its [existing tests](../../src/test/java/org/anaalvarezdev/algorithms/arrays/FindMaximumTest.java)
+cover results, non-mutation and the observed null/empty exceptions. This snippet
+is an explanation, not an additional production API.
 
 The same algorithm could be implemented using another programming language
 without changing its underlying reasoning.
@@ -367,8 +381,10 @@ through correctness reasoning and computational complexity analysis.
 Most algorithms studied throughout the initial modules of this repository are
 deterministic.
 
-For a deterministic algorithm, the same valid input under the same defined
-conditions produces the same expected result.
+For a deterministic algorithm, the same valid input and defined initial state
+determine the same computational choices and result. Equal final outputs alone
+do not establish determinism: a randomised sorting procedure can take different
+paths while returning the same ordered values.
 
 Conceptually:
 
@@ -571,8 +587,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The book provides the principal academic foundation for the definition and
 systematic study of algorithms throughout **Algorithms Java Mastery**.
@@ -586,3 +601,8 @@ docs/00-project/10-references.md
 
 Complementary references may be introduced in later documents when a topic
 requires additional theoretical depth.
+
+For this review, the directly consulted source is the supplied **Third Edition
+(2009)**, not the fourth-edition text. The [review record](documentation-review.md)
+identifies verified sections/pages and separates textbook concepts from this
+repository's contract, testing and engineering conventions.
