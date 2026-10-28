@@ -239,6 +239,22 @@ The exact space complexity depends on what additional structures are used.
 
 ---
 
+# ArrayTraversal Callback Contract
+
+ArrayTraversal.traverse reads each current array slot and calls action.accept
+in index order. The loop itself does not write the array, but the action may
+hold another reference and modify it, allocate, throw or take non-constant time.
+For example, on [1,2], a callback can change the second slot to 99 while handling
+the first; the next argument is then 99. There is no input snapshot or rollback.
+
+On normal completion there are n calls; if the action throws, later calls do not
+occur. Total work is Θ(1+n) plus callback work, and only the loop's own workspace
+is Θ(1). Non-mutation of the input additionally requires no callback/external
+writes. The [Javadoc](../../src/main/java/org/anaalvarezdev/algorithms/arrays/ArrayTraversal.java)
+now states that boundary; executable instructions are unchanged.
+
+---
+
 # Reverse Traversal
 
 ## Definition
@@ -411,12 +427,10 @@ The pointers move toward each other.
 
 ## Complexity
 
-When each pointer moves monotonically through the array:
-
-```text
-Time: Θ(n)
-Auxiliary Space: Θ(1)
-```
+With monotonic pointer movement, at most O(n) moves, and constant work per
+move, the traversal has O(n) time and Θ(1) workspace. A Θ(n) bound additionally
+needs a linear lower bound on the work, as in full reversal. Early termination
+can use less work; monotonicity alone does not establish a tight bound.
 
 A two-pointer approach does not automatically guarantee `Θ(n)`.
 
@@ -512,8 +526,10 @@ This avoids repeated work.
 
 ## Complexity
 
-After the initial window is constructed, each subsequent step updates the state
-in constant time.
+Assume 1 <= k <= n, numeric operations fit the chosen model, and window sums
+are streamed/consumed. The initial window costs Θ(k), and n-k constant updates
+give Θ(n) total work. Materialising all n-k+1 results uses Θ(n-k+1) output
+storage in addition to Θ(1) workspace excluding output.
 
 For an array of length `n`:
 
@@ -524,7 +540,7 @@ Time: Θ(n)
 with:
 
 ```text
-Auxiliary Space: Θ(1)
+Workspace excluding output: Θ(1)
 ```
 
 when only a fixed number of variables are maintained.
@@ -554,8 +570,13 @@ Examples include problems involving:
 - bounded counts;
 - distinct-element conditions.
 
-The linear-time result depends on the fact that the left and right boundaries
-move monotonically rather than repeatedly restarting the scan.
+Monotonic boundaries with constant work per movement provide an O(n) work
+bound, but correctness needs the condition's own monotonicity argument.
+For example, expanding to reach a sum threshold and shrinking while sum >= K
+works for the usual minimum-length problem with non-negative values. On
+[1,-1,5] with K=5, that rule first records length 3, removes 1, sees sum 4 and
+stops shrinking; it misses the valid length-one window [5]. Negative values
+break that argument even though the pointer motion remains linear.
 
 ---
 
@@ -591,19 +612,15 @@ For an input:
 [2][4][3][5]
 ```
 
-the prefix sums are:
+the current PrefixSum API builds:
 
 ```text
-[2][6][9][14]
+[0][2][6][9][14]
 ```
 
-Conceptually:
-
-```text
-prefix[i]
-    =
-sum of elements from index 0 through i
-```
+The n+1 convention uses prefix[i] = sum of original elements at indices [0,i),
+including prefix[0]=0. A length-n inclusive-prefix convention is also valid,
+but its boundary formula is different and must not be mixed with this API.
 
 ---
 
@@ -612,10 +629,10 @@ sum of elements from index 0 through i
 A prefix-sum array can be constructed with one traversal:
 
 ```text
-prefix[0] = numbers[0];
-
-for (int i = 1; i < numbers.length; i++) {
-    prefix[i] = prefix[i - 1] + numbers[i];
+// numbers is non-null; n+1 is representable and allocation succeeds.
+long[] prefix = new long[numbers.length + 1];
+for (int i = 0; i < numbers.length; i++) {
+    prefix[i + 1] = prefix[i] + numbers[i];
 }
 ```
 
@@ -638,15 +655,14 @@ traversing the complete range again.
 For an inclusive range `[l, r]`:
 
 ```text
-sum(l, r) =
-prefix[r] - prefix[l - 1]
+sum(l, r) = prefix[r + 1] - prefix[l]
 ```
 
-with a separate boundary case when:
-
-```text
-l = 0
-```
+with 0 <= l <= r < n. No l=0 special case is needed. Empty input builds [0]
+but has no valid non-empty inclusive range. PrefixSum.rangeSum checks the
+range; it does not validate the provenance or cumulative contents of an arbitrary
+long[]. The [applied contracts](implementation-contracts.md#prefixsum-construction-and-queries)
+state those obligations.
 
 After preprocessing:
 
@@ -656,8 +672,11 @@ Range Query: Θ(1)
 
 under the static-array model.
 
-This assumes that the underlying values are not modified without updating the
-prefix structure.
+The prefix describes the input at construction time. Later input mutations do
+not update it: queries still describe that original snapshot. Editing the prefix
+itself can invalidate its meaning. For q ranges of lengths k_j, direct scans
+cost Θ(q+Σ k_j), while build plus q prefix queries costs Θ(n+q), with the
+appropriate constant setup at zero. Only full-length ranges give Θ(qn).
 
 ---
 
@@ -871,7 +890,7 @@ C = columns
 a complete traversal requires:
 
 ```text
-Θ(RC)
+Θ(1+R+RC)
 ```
 
 time.
@@ -1004,7 +1023,7 @@ Nested Full Traversal
 ```text
 Matrix Traversal
         ↓
-Θ(RC)
+Θ(1+R+RC)
 ```
 
 However, these are patterns rather than automatic rules.
@@ -1143,7 +1162,7 @@ The strategy must be justified by the problem's properties.
 | Prefix Sum | `Θ(n)` preprocessing | `Θ(n)` if separate | Range queries |
 | Suffix Processing | `Θ(n)` | `Θ(n)` if separate | Right-to-left state |
 | Partition | `Θ(n)` | `Θ(1)` in place | Quick Sort |
-| Matrix Traversal | `Θ(RC)` | `Θ(1)` auxiliary | Grids, matrices |
+| Matrix Traversal | `Θ(1+R+RC)` | `Θ(1)` auxiliary | Grids, matrices |
 
 These are typical results under the corresponding implementation assumptions.
 
@@ -1268,7 +1287,7 @@ and:
 Matrix
 R × C
         ↓
-Θ(RC)
+Θ(1+R+RC)
 ```
 
 ---
@@ -1395,8 +1414,9 @@ can reuse previous computation.
 
 ## Assuming Prefix Sums Always Give O(1) Range Queries
 
-The `Θ(1)` query result assumes the prefix structure is already built and the
-underlying values have not been changed without updating the prefix data.
+The Θ(1) query bound assumes an already built, intact prefix. Its sums describe
+the construction-time input; answering about later modified input requires an
+updated representation. The existing API does not update itself.
 
 The preprocessing itself requires:
 
@@ -1675,9 +1695,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The traversal methodology also builds directly upon:
 
@@ -1694,3 +1713,8 @@ Additional academic and technical references are documented in:
 ```text
 docs/00-project/10-references.md
 ```
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

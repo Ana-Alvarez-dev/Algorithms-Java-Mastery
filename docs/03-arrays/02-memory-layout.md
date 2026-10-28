@@ -717,8 +717,9 @@ This operation can require:
 
 work for the copied elements.
 
-However, as established in `08-amortized-analysis.md`, a suitable geometric
-growth policy can produce:
+As established in [Amortized Analysis](../02-complexity/08-amortized-analysis.md),
+a fixed initial capacity and a valid append-only geometric-growth sequence can
+produce:
 
 ```text
 Amortized Append Cost
@@ -751,6 +752,18 @@ in Java source code.
 
 Nevertheless, the classical array model remains useful for understanding the
 algorithmic behaviour of indexed access and traversal.
+
+---
+
+# What the Java Specifications Guarantee
+
+The base+i*elementSize formula is a classical model, not a Java API exposing
+addresses or promising a portable byte layout. The
+[Java SE 21 JVM specification, section 2.7](https://docs.oracle.com/javase/specs/jvms/se21/html/jvms-2.html#jvms-2.7)
+leaves object representation to implementations. Model indexed primitive access
+as constant work, but do not infer object-header size, adjacency of referenced
+objects, contiguous physical RAM pages or a cache cause from that assumption.
+Measurements require their own implementation/environment evidence.
 
 ---
 
@@ -1418,9 +1431,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The conceptual treatment of array organisation, memory access, and algorithmic
 performance is complemented by official Java documentation for Java-specific
@@ -1436,3 +1448,8 @@ docs/00-project/10-references.md
 The distinction between the classical array memory model and concrete JVM
 implementation details should be preserved throughout the remainder of the
 module.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

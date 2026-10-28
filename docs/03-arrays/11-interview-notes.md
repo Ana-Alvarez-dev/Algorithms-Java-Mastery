@@ -686,7 +686,7 @@ Two common strategies can be compared.
 ### Pairwise Comparison
 
 ```text
-Time: Θ(n²)
+Worst time: Θ(n²); an immediate matching pair takes Θ(1)
 Auxiliary Space: Θ(1)
 ```
 
@@ -695,8 +695,8 @@ Auxiliary Space: Θ(1)
 Under suitable hashing assumptions:
 
 ```text
-Expected Time: Θ(n)
-Auxiliary Space: Θ(n)
+Expected upper time: O(n); Θ(n) on duplicate-free input
+Worst auxiliary space: Θ(n)
 ```
 
 The trade-off is:
@@ -746,6 +746,31 @@ Invalid Strategy for the Given Preconditions
 ```
 
 This demonstrates why algorithm selection begins with problem analysis.
+
+---
+
+# Questions Grounded in the Implemented Contract
+
+- What is the difference between physical capacity c and logical size s? Why
+  can a non-zero slot still be unused, and where is the new size stored?
+- Why does inserting at s perform zero shifts, while deleting at s-1 still clears
+  one slot? State Θ(1+s-i) and Θ(s-i), not only a worst-case label.
+- Does a callback make ArrayTraversal read-only or constant-cost automatically?
+  Explain the aliasing counterexample and callback cost boundary.
+- What does PrefixSum.build([]) return, and why does its n+1 layout use
+  prefix[right+1]-prefix[left]? Are queries about the old or updated input?
+- Can an int sum wrap in an intermediate step and still meet its final-result
+  contract? Explain [Integer.MAX_VALUE,1,-1] using modular addition.
+- What does the returned sorted-compaction size mean? Does the physical tail
+  have to be zero, unique or sorted? How many pairwise min/max comparisons occur
+  for even and odd lengths?
+- Why does R empty rows take Θ(R) traversal work despite containing zero cells?
+  Does copying the outer int[][] isolate its rows?
+
+The [contract map and proofs](implementation-contracts.md) supply the current
+answers. Standalone mean/rotation/second-largest/duplicate-detection exercises
+remain learning extensions, not claims of additional production APIs. Pairwise
+and hash detection bounds above must include their worst/expected assumptions.
 
 ---
 
@@ -1318,9 +1343,8 @@ The principal academic reference for this module is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The interview preparation developed in this document is derived from the
 concepts studied throughout the **Foundations**, **Complexity**, and **Arrays**
@@ -1338,3 +1362,8 @@ docs/00-project/10-references.md
 This document should be treated as a review resource. The detailed module
 documents remain the primary study material for understanding the underlying
 concepts rigorously.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

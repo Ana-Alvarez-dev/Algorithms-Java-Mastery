@@ -162,6 +162,7 @@ Length
 Last Index
 ```
 
+For n=0, no element index is valid; -1 is not a valid last position.
 This distinction becomes important when implementing traversal algorithms.
 
 ---
@@ -920,6 +921,20 @@ of arrays.
 
 ---
 
+# Concrete Logical-Size Contract
+
+For this repository's insertion/deletion APIs, let c=array.length and let s be
+the caller-maintained logical size. The active sequence is array[0:s]; the
+remaining slots are capacity, even if they contain non-zero values. Zero is
+valid data, not an unused-slot marker. The returned size must be saved by the
+caller; these static methods do not store it in the array or resize the object.
+
+Insertion requires 0<=s<c and 0<=i<=s. Deletion requires 0<s<=c and 0<=i<s.
+The exact shifts and original-state postconditions are recorded in the
+[current implementation contracts](implementation-contracts.md).
+
+---
+
 # Advantages of Arrays
 
 Arrays provide several important structural advantages.
@@ -1278,7 +1293,7 @@ Under the standard fixed-array model:
 | Full traversal | `Θ(n)` | Constant work per element |
 | Unsorted search | Worst `Θ(n)` | Sequential search model |
 | Copy `n` elements | `Θ(n)` | Process every copied element |
-| Shift up to `n` elements | `Θ(n)` | Order-preserving operation |
+| Shift k elements, k <= n | `Θ(1+k)`, worst `Θ(n)` | Constant-cost moves; k need not equal n |
 
 This table is a review aid.
 
@@ -1771,9 +1786,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The conceptual treatment of arrays, indexed structures, algorithmic operations,
 and complexity developed throughout this module is complemented by official
@@ -1788,3 +1802,8 @@ docs/00-project/10-references.md
 The next documents progressively connect this abstract array model with memory
 organisation, Java semantics, algorithm implementation, correctness, and
 complexity analysis.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

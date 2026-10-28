@@ -584,8 +584,9 @@ Manual tracing can reveal:
 - incorrect termination;
 - incorrect assumptions.
 
-A small trace is often an efficient way to validate the basic reasoning before
-implementation.
+A small trace checks only the selected input and can reveal defects. It does
+not establish correctness over the full valid domain; the invariant and
+termination argument must still justify that claim.
 
 ---
 
@@ -992,6 +993,19 @@ The best strategy depends on:
 - memory constraints;
 - performance requirements;
 - hashing assumptions.
+
+---
+
+# Contract Questions for the Existing APIs
+
+Use the [implementation contracts](implementation-contracts.md) rather than
+inventing an empty/exception/return policy while writing examples. In particular,
+save returned logical sizes, specify callback effects and cost, choose the numeric
+sum domain, and keep the n+1 prefix convention consistent with range boundaries.
+The pairwise/hash duplicate-detection comparison above is a teaching extension:
+its quadratic and linear results are worst/duplicate-free costs, not lower
+bounds on immediate duplicate matches. Hashing assumes expected amortized
+constant-cost operations; memory is a worst-case bound.
 
 ---
 
@@ -1423,9 +1437,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The problem-solving methodology integrates the principles established throughout
 the **Foundations**, **Complexity**, and **Arrays** modules.
@@ -1442,3 +1455,8 @@ docs/00-project/10-references.md
 
 Additional references may be introduced when later algorithmic modules require
 more specialised literature.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

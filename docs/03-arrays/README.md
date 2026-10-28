@@ -6,7 +6,7 @@ The **03-arrays** module introduces the first fundamental data structure studied
 
 Arrays provide the foundation upon which many classical algorithms and more advanced data structures are built. Understanding their properties is essential before studying searching algorithms, sorting algorithms, trees, graphs and dynamic programming.
 
-Unlike later dynamic data structures, arrays have a fixed size and store elements in contiguous memory locations. This organisation enables constant-time random access while introducing trade-offs for insertion and deletion operations.
+Arrays have fixed length and support constant-cost indexed access in the word-RAM model. Classical contiguous storage explains that model; Java specifies indexed array objects while leaving physical layout to the JVM. Order-preserving insertion and deletion introduce separate logical-size and shifting costs.
 
 ---
 
@@ -123,7 +123,9 @@ These principles guide every document contained in this module.
 ├── 08-complexity-analysis.md
 ├── 09-problem-solving-guide.md
 ├── 10-common-mistakes.md
-└── 11-interview-notes.md
+├── 11-interview-notes.md
+├── implementation-contracts.md
+└── documentation-review.md
 ```
 
 ---
@@ -216,6 +218,18 @@ clear engineering responsibility.
 
 The interview document is a review layer and must remain bounded by concepts
 actually developed in the module.
+
+---
+
+# Applied Contracts and Documentation Review
+
+The [current implementation map](implementation-contracts.md) documents all
+thirteen Arrays classes and fourteen static operations, their actual empty and
+failure behaviour, mutation, costs and selected invariant/progress arguments.
+The [2026-10-28 review](documentation-review.md) records scoped findings,
+source/test/JMH inspection and independent bounded checks. It updates the
+ArrayTraversal Javadoc's callback boundary without changing executable code.
+Teaching strategies and empirical measurements retain their separate status.
 
 ---
 
@@ -337,7 +351,7 @@ Examples include:
 | Linear search | Θ(1) best, Θ(n) worst |
 | Reverse in place | Θ(n) time, Θ(1) auxiliary space |
 | Copy | Θ(n) time and storage for the new array |
-| Insert/delete with shifting or copying | O(n) worst case |
+| Current capacity-preserving insert/delete | Insert Θ(1+s-i), delete Θ(s-i); worst Θ(s) |
 | Prefix-sum construction | Θ(n) preprocessing |
 
 The learner should derive these results from the operations performed rather
@@ -380,6 +394,10 @@ consolidates 105 recorded means from 11 benchmark templates, along with an
 extracted CSV, source provenance and preliminary interpretation. The report
 distinguishes operation-count reasoning from timing evidence and documents
 missing error margins, state reuse and contract-invalid aggregation inputs.
+The [separate corrected aggregation run](../17-benchmarking/results/arrays/aggregation-corrected-run.md)
+retains five later means/errors and their original provenance limits. Current
+aggregation setup uses i%100; that does not replace the older ascending-input
+observations or recover the missing original jar hash.
 
 ---
 

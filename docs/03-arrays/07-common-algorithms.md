@@ -114,6 +114,18 @@ and test structures defined elsewhere in the repository.
 
 ---
 
+# Implemented APIs and Teaching Examples
+
+The [implementation contracts](implementation-contracts.md) cover the thirteen
+current classes and fourteen static methods, including PrefixSum, pairwise
+min/max and sorted compaction. The twelve examples below are not a promise of
+twelve separate production classes. Mean, count, sortedness check, second-largest,
+rotation, standalone two-input merge and duplicate detection are teaching
+extensions. Duplicate detection is different from RemoveDuplicatesSorted's
+in-place compaction; linear search's canonical API belongs to Searching.
+
+---
+
 # Algorithm 1 — Find the Maximum Element
 
 ## Problem
@@ -149,8 +161,12 @@ The array is valid.
 The array contains at least one element.
 ```
 
-Whether `null` is accepted should be explicitly defined by the implementation
-contract.
+FindMaximum.find requires a non-null, non-empty int[]. It returns a member of
+the original input that dominates every original element and leaves the input
+unchanged. Current null input causes NullPointerException; empty input causes
+ArrayIndexOutOfBoundsException. There is no explicit validation step. FindMinimum
+has the corresponding membership/lower-bound contract. The contract map links
+the existing tests and the [indexed proof](../01-foundations/06-invariants.md#an-indexed-proof-and-a-termination-variant).
 
 ---
 
@@ -346,13 +362,15 @@ return sum
 
 ## Correctness Invariant
 
-After processing the first `i` elements:
-
-> `sum` equals the sum of all processed elements.
-
-At termination, every element has been included.
-
-Therefore, `sum` equals the sum of the complete array.
+For mathematical unbounded-integer pseudocode, sum equals the processed-prefix
+sum. The Java ArrayAggregation.sum instead uses int: after each step its bits
+represent that prefix sum modulo 2^32. When the final mathematical sum fits
+int, the signed final result is exact, as required by the current contract.
+An intermediate prefix need not fit: [Integer.MAX_VALUE,1,-1] finishes with
+Integer.MAX_VALUE despite an intermediate wrap. If the final sum is outside
+int range, this API does not promise the mathematical result or detect overflow.
+Empty input returns zero. The [numeric contract](implementation-contracts.md#aggregation-and-numeric-range)
+keeps those distinctions explicit.
 
 ---
 
@@ -431,7 +449,12 @@ return sum / number of elements
 
 The summation requires a complete traversal.
 
-The final division is constant work.
+The mathematical pseudocode uses real/rational division. A Java teaching
+translation for int[] can accumulate in long and return `(double)sum / n` for
+n>0; int division would truncate [1,2] to 1 instead of the mean 1.5. The floating
+result is rounded, not an arbitrary-precision rational guarantee. No mean API
+is implemented in the Arrays package. Under this fixed-word model division is
+constant work.
 
 Therefore:
 
@@ -569,13 +592,12 @@ At every iteration:
 > Positions outside the interval `[left, right]` have already been placed in
 > their final reversed positions.
 
-When:
-
-```text
-left ≥ right
-```
-
-all positions have been processed.
+Also keep the unprocessed interval equal to its original contents and maintain
+right=n-1-left. Each swap establishes two correct outer positions and shrinks
+that interval. At left>right nothing remains; at left=right the untouched centre
+already equals its own reversed position. Thus every position has the required
+value, including odd, empty and singleton cases. There are exactly floor(n/2)
+swaps and a finite decreasing interval, not a requirement to swap the centre.
 
 ---
 
@@ -718,8 +740,7 @@ Worst case:
 
 Average case depends on the probability model.
 
-Under the standard model where the target is present and each position is
-equally likely:
+For n >= 1 with one target uniformly located among n positions:
 
 ```text
 Θ(n)
@@ -795,7 +816,11 @@ Update Largest / Second Largest
 Continue
 ```
 
-The exact comparison logic must account for duplicate values.
+The exact comparison logic must account for duplicate values and absence of a
+second distinct candidate. Do not use Integer.MIN_VALUE as an absence sentinel:
+[Integer.MIN_VALUE,0] has that valid second-largest value. Track candidate
+presence separately. On [5,5,5] no second distinct value exists; a future API
+must define its absence result. This remains a teaching extension.
 
 ---
 
@@ -845,9 +870,13 @@ Several valid algorithms exist.
 
 A simple in-place implementation can:
 
-1. store the last element;
-2. shift the remaining elements right;
-3. place the stored value at the beginning.
+1. return immediately for n<2 (so empty input never reads A[-1]);
+2. store the last element;
+3. shift the remaining elements right, traversing backwards;
+4. place the stored value at the beginning.
+
+For a future k-position rotation, define direction, negative-k and empty-input
+policies before normalising k modulo n; modulo zero is not a valid empty case.
 
 ---
 
@@ -941,10 +970,13 @@ copy remaining elements from B
 
 ## Correctness Invariant
 
-At every iteration:
-
-> The result array contains the smallest elements from the two input prefixes
-> considered so far, in sorted order.
+At each loop header, let i,j count consumed elements and k=i+j. The written
+result prefix is a sorted merge, with multiplicities, of the original A[0:i]
+and B[0:j]. Inputs remain unchanged; each unread suffix remains sorted. When
+both heads exist, copying the lesser (left on equality) preserves order and
+multiplicity; advancing that input maintains k=i+j. Exhausting one input then
+permits the other sorted suffix to be appended. The result is a sorted
+permutation of the concatenation, not just a sequence that happens to be sorted.
 
 When either input is exhausted, every remaining value can be appended directly
 because that input is already sorted.
@@ -1008,7 +1040,7 @@ The number of comparisons grows quadratically.
 ## Complexity
 
 ```text
-Time: Θ(n²)
+Worst time: Θ(n²); best Θ(1) for an immediate matching pair
 Auxiliary Space: Θ(1)
 ```
 
@@ -1034,10 +1066,15 @@ No  → Store Value
 Under appropriate hashing assumptions:
 
 ```text
-Expected Time: Θ(n)
-Auxiliary Space: Θ(n)
+Expected time: O(n); Θ(n) on a duplicate-free input
+Worst auxiliary space: Θ(n)
 ```
 
+Assume each membership/insertion has expected amortized O(1) cost, including
+resizing, and fixed-cost keys. Duplicate-free input requires n visits; early
+repetition can terminate sooner. The pairwise worst case has n(n-1)/2 comparisons,
+but it can return on the first pair. Do not infer an unconditional Θ(n) expected
+cost for every fixed repeated input from hashing assumptions alone.
 This alternative will be revisited in the **Hashing** module.
 
 ---
@@ -1721,9 +1758,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The algorithmic reasoning, correctness methodology, and complexity analysis
 follow the principles established throughout the preceding **Foundations** and
@@ -1741,3 +1777,8 @@ docs/00-project/10-references.md
 Additional references may be introduced in later modules when particular
 algorithms, data structures, or Java implementation details require more
 specialised treatment.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

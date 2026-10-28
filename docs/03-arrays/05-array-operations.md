@@ -109,6 +109,22 @@ Therefore, complexity should always be stated with its relevant assumptions.
 
 ---
 
+# Which Operations Are Implemented Here?
+
+The [current contract map](implementation-contracts.md) gives the actual static
+methods, empty-input policy, failures, mutation and costs across all thirteen
+Arrays classes. Rotation, standalone sortedness/mean/count/second-largest and
+two-array merge are teaching strategies here, not additional implemented Arrays
+APIs. Linear/binary search belong to Searching.
+
+For in-place insertion/deletion, n below means the logical size s, not physical
+capacity c. InsertAtIndex shifts exactly s-i values and writes the insertion
+slot: Θ(1+s-i). DeleteAtIndex shifts exactly s-i-1 values and clears the old
+last active slot: Θ(s-i). Existing capacity suffices; neither method allocates,
+resizes, infers the size from zeros or stores the new size for the caller.
+
+---
+
 # Access
 
 ## Definition
@@ -320,8 +336,7 @@ when the target is at the last relevant position or is absent.
 
 Average-case complexity depends on the probability model.
 
-Under the common model where the target is present and each position is equally
-likely:
+For n >= 1 with exactly one target whose position is uniform among n slots:
 
 ```text
 Θ(n)
@@ -388,7 +403,8 @@ For a recursive implementation:
 S_aux(n) ∈ Θ(log n)
 ```
 
-because of the call stack.
+in the worst case, with constant-size frames and index intervals rather than
+copied subarrays. An initial-midpoint success has Θ(1) active frames.
 
 ---
 
@@ -1603,9 +1619,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The analysis of array operations in this document applies the complexity and
 problem-solving methodologies established throughout the preceding
@@ -1622,3 +1637,8 @@ docs/00-project/10-references.md
 
 Additional references may be introduced when a particular operation requires
 more specialised algorithmic or implementation-level analysis.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.
