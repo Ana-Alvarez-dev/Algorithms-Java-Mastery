@@ -4,7 +4,7 @@ Reviewed on **2026-10-19**, starting from main commit
 `494c243488b69c2703357de6bf1bbaa581fe9042`.
 
 This review checks the evidence chain for the executable modules and the
-progression through **18 — Linux Environment**. It is a source/evidence inventory,
+progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
 of every future module has undergone a formal proof review.
 
@@ -96,6 +96,12 @@ Its applied preflight, twenty offline subprocess cases, wrapper portability
 and local Java 21 build checks are recorded separately below. No old numerical
 evidence or missing artifact identity is replaced.
 
+The CI/CD contribution extends review from main
+`a0e174db482164027b086a0ddb986bf136c38b4a` (PR #96, Linux Environment).
+It implements the two-job Maven CI workflow and validates its local commands
+and syntax. The previous absence of workflow source is addressed; the first
+hosted run and repository enforcement remain separate evidence/configuration.
+
 ## Required Chain
 
 The [study methodology](03-study-methodology.md) and
@@ -130,7 +136,7 @@ helpers. The matrix includes selected algorithms through module 15 and cross-cut
 | Testing | 0 new production files | 16 added in Searching, not additive | 0 new | [Regression/coverage guide](../16-testing/implementation-and-verification-guide.md), [baseline/red/green evidence](../16-testing/verification-report.md); coverage profile and fixture validity, no separate production package |
 | Benchmarking | 0 new production files | 13 additional under -Pbenchmark only | 0 new; 115 existing methods in 40 classes | [Applied guide](../17-benchmarking/implementation-and-benchmark-guide.md), [local verification](../17-benchmarking/verification-report.md); five-cell author output retained, source inferred from supplied reflog; original jar absent, historical data unchanged |
 | Linux Environment | 0 new Java files; 2 Bash scripts | 20 shell subprocess cases, separate from JUnit | 0 new; environment/artifact preflight | [Applied guide](../18-linux-environment/implementation-and-verification-guide.md), [local checks](../18-linux-environment/verification-report.md); wrapper executable/LF, real Linux JDK 21 builds; author WSL availability unclaimed |
-| 19: CI/CD | No workflow yet | No passing workflow run claimed | Not applicable | Next numbered module; local verification remains distinct from CI |
+| CI/CD | 0 new Java files; 1 workflow | 20 shell cases, 710 coverage / 723 package JUnit invocations locally; not additive | Discovery only, no timing gate | [Applied guide](../19-ci-cd/implementation-and-verification-guide.md), [validation and hosted status](../19-ci-cd/verification-report.md); two jobs, source/artifact retention; first hosted run pending |
 
 There are **710 passing normal-suite tests** and **723 under -Pbenchmark**
 (the same 710 plus thirteen fixture checks). The normal count compares with **694** before
@@ -178,8 +184,10 @@ This is a benchmark-domain violation, not evidence that the implementation is
 wrong for inputs within its documented domain. **The future fixture is now
 corrected by module 16** to value[i]=i%100 with a validated size cap and exact
 default sums through 49,500,000. An independent long/formula probe and smoke
-verify the domain. Historical means retain their limitation; no corrected
-author timings are supplied yet and no old value is relabelled.
+verify the domain. Historical means retain their limitation. Module 17 now
+records five corrected-protocol observations and all printed iterations, with
+source `5eee0dc` inferred from the supplied reflog and original jar hash
+unavailable; no old value is relabelled.
 
 ### Build and CI evidence
 
@@ -187,10 +195,11 @@ The POM targets Java 21. Maven's runtime and the Java executable launching JMH
 must be recorded separately. The historical Sorting run used JDK 25; Linked
 Lists used JDK 21. Those environments are kept distinct.
 
-No `.github/workflows` files are versioned in the reviewed base tree. Therefore
-local successful builds are reported as local verification, not as passing CI.
-The project's CI documentation describes intended engineering practice; adding
-an actual workflow remains future work. No CI result was inferred from tests.
+No `.github/workflows` files were versioned in the reviewed base trees through
+module 18. Module 19 now adds the actual two-job Maven CI definition, addressing
+that source-level gap. Its first hosted execution remains pending. Local builds,
+actionlint and command checks remain local verification; no passing hosted CI
+result or branch-protection enforcement is inferred from them.
 
 ## Stacks and Queues Review Decisions
 
@@ -676,6 +685,36 @@ The author's existing Windows workflow remains available. Prior aggregation
 source stays inferred from the supplied reflog and its old jar hash stays
 unavailable; a fresh Linux artifact cannot replace that identity. Next numbered
 module: **19 - CI/CD**; the workflow gap remains open.
+
+## CI/CD Implementation and Verification
+
+Reviewed on **2026-10-27** from Linux merge `a0e174d` (PR #96). The actual
+[Maven CI workflow](../../.github/workflows/maven-ci.yml) addresses the earlier
+source-level workflow gap. The [guide](../19-ci-cd/implementation-and-verification-guide.md)
+and [report](../19-ci-cd/verification-report.md) separate implemented automation,
+local command validation and the pending first hosted run.
+
+Main pushes, main-target pull requests and manual dispatch select two Linux/
+Temurin-21 jobs. Verify runs preflight, twenty shell cases and coverage-enabled
+Maven verify, with no-tests failure and required HTML/XML reports. The dependent
+package job checks out source separately, builds the benchmark profile without
+coverage, captures run/source/dirty-state/environment/jar identity in generated
+Markdown and checks discovery. Artifacts request seven-day retention; diagnostic
+upload never masks verification failure. SHA-pinned official actions, read-only
+permissions, timeouts and PR/ref cancellation are explicit. No deployment,
+performance threshold or branch-protection setting is added.
+
+Actionlint 1.7.12 and Bash syntax checks pass locally; all six workflow run blocks
+execute successfully using local OpenJDK 21 and temporary transport settings.
+Observed counts are **20 shell cases**, **710 coverage-enabled JUnit invocations**
+and **723 benchmark-profile invocations**, with reports, provenance and discovery
+checks passing. Production Java, tests, POM, prior scripts and historical data
+are unchanged; repeated builds do not increase unique test counts. Hosted
+checkout/setup/cache/uploads are not claimed to have run locally. **First hosted
+run: pending**, to be documented with its URL/attempt, actual checked SHA and
+conclusions after the author opens the PR. This reaches the existing numbered
+sequence through 19; the next step is observed CI and a closing traceability
+review. The unavailable original aggregation jar hash remains unavailable.
 
 ## Evidence Policy and Next Action
 

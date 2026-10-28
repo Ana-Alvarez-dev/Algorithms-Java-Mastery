@@ -1,489 +1,66 @@
-# CI/CD (Continuous Integration and Continuous Delivery)
-
-## Algorithms Java Mastery
-
-Modern software development is no longer limited to writing correct code. Professional software engineering requires that every code change be **automatically built, tested, verified, and prepared for deployment**. This objective is achieved through the practices known as **Continuous Integration (CI)** and **Continuous Delivery (CD)**.
-
-CI/CD has become a fundamental component of modern software engineering because it enables development teams to detect errors early, maintain high software quality, automate repetitive tasks, and deliver reliable software rapidly. Nearly every professional Java project—from small open-source libraries to large enterprise applications—uses automated pipelines to compile code, execute tests, analyze code quality, generate artifacts, and prepare software for deployment.
-
-Within the Java ecosystem, CI/CD pipelines commonly integrate tools such as **Git**, **GitHub**, **GitHub Actions**, **Maven**, **JUnit**, **AssertJ**, and static analysis tools. These technologies work together to create an automated workflow in which every commit is validated before becoming part of the main codebase.
-
-This module introduces the principles of Continuous Integration and Continuous Delivery from the perspective of a professional Java backend developer. The focus is not only on learning how to configure pipelines but also on understanding the engineering principles behind software automation, reproducibility, quality assurance, and collaborative development.
-
-By completing this module, students will understand how modern software projects automatically compile, test, validate, and package applications, preparing them for advanced topics such as Docker, Kubernetes, cloud-native development, DevOps, and enterprise deployment pipelines.
-
----
-
-# Learning Objectives
-
-After completing this module, the learner should be able to:
-
-- explain the principles of Continuous Integration and Continuous Delivery;
-- distinguish Continuous Integration from Continuous Delivery;
-- understand the role of GitHub Actions in modern Java development;
-- interpret the structure of workflow configuration files;
-- configure Maven-based CI pipelines;
-- integrate automated testing into software delivery pipelines;
-- understand automated code quality verification;
-- generate and manage build artifacts;
-- identify common CI/CD mistakes and apply professional best practices.
-
----
-
-# Module Structure
-
-```text
-19-ci-cd/
-│── README.md
-│── 01-continuous-integration.md
-│── 02-continuous-delivery.md
-│── 03-github-actions.md
-│── 04-workflow-anatomy.md
-│── 05-maven-ci-pipeline.md
-│── 06-automated-testing.md
-│── 07-code-quality-checks.md
-│── 08-build-artifacts.md
-└── 09-common-mistakes.md
-```
-
----
-
-# Module Contents
-
-## 01. Continuous Integration
-
-Introduces the concept of Continuous Integration and explains why software should be integrated frequently.
-
-Topics include:
-
-- Continuous Integration;
-- frequent commits;
-- automated builds;
-- early error detection;
-- development workflow;
-- engineering benefits.
-
----
-
-## 02. Continuous Delivery
-
-Explains how validated software is automatically prepared for deployment.
-
-Topics include:
-
-- Continuous Delivery;
-- deployment readiness;
-- release automation;
-- deployment pipeline;
-- software lifecycle.
-
----
-
-## 03. GitHub Actions
-
-Introduces GitHub's automation platform.
-
-Topics include:
-
-- GitHub Actions;
-- workflows;
-- runners;
-- events;
-- jobs;
-- reusable actions;
-- automation.
-
----
-
-## 04. Workflow Anatomy
-
-Studies the internal structure of GitHub Actions workflow files.
-
-Topics include:
-
-- YAML syntax;
-- workflow structure;
-- triggers;
-- jobs;
-- steps;
-- actions;
-- environment variables.
-
----
-
-## 05. Maven CI Pipeline
-
-Explains how Maven projects are automatically built inside CI pipelines.
-
-Topics include:
-
-- Maven lifecycle;
-- dependency resolution;
-- project compilation;
-- automated packaging;
-- pipeline execution.
-
----
-
-## 06. Automated Testing
-
-Studies how automated tests become part of Continuous Integration.
-
-Topics include:
-
-- JUnit;
-- AssertJ;
-- automated test execution;
-- regression testing;
-- pipeline validation.
-
----
-
-## 07. Code Quality Checks
-
-Introduces automatic quality verification during CI execution.
-
-Topics include:
-
-- compilation verification;
-- static analysis;
-- coding standards;
-- code coverage;
-- quality gates.
-
----
-
-## 08. Build Artifacts
-
-Explains the artifacts generated during automated builds.
-
-Topics include:
-
-- JAR files;
-- reports;
-- test results;
-- artifact storage;
-- artifact reuse.
-
----
-
-## 09. Common Mistakes
-
-Summarizes the conceptual and practical mistakes commonly encountered when designing CI/CD pipelines.
-
-Topics include:
-
-- pipeline misconfiguration;
-- missing automated tests;
-- inconsistent environments;
-- unnecessary manual processes;
-- poor workflow design;
-- maintainability.
-
----
-
-# Learning Progression
-
-This module follows the lifecycle of an automated software pipeline.
-
-```text
-Continuous Integration
-        ↓
-Continuous Delivery
-        ↓
-GitHub Actions
-        ↓
-Workflow Structure
-        ↓
-Maven Pipeline
-        ↓
-Automated Testing
-        ↓
-Code Quality
-        ↓
-Build Artifacts
-        ↓
-Professional Best Practices
-```
-
-Each document builds upon the previous one to provide a complete understanding of modern software automation.
-
----
-
-# Relationship with Previous Modules
-
-This module integrates the knowledge developed throughout the repository.
-
-```text
-Problem Understanding
-        ↓
-Algorithm Design
-        ↓
-Correctness Reasoning
-        ↓
-Complexity Analysis
-        ↓
-Java Implementation
-        ↓
-Automated Testing
-        ↓
-Benchmarking
-        ↓
-Linux Environment
-        ↓
-CI/CD
-```
-
-Previous modules focused on writing correct, tested, and efficient software.
-
-This module focuses on automating the validation and delivery of that software.
-
----
-
-# Java Perspective
-
-Modern Java projects commonly combine:
-
-- Git;
-- GitHub;
-- Maven;
-- JUnit;
-- AssertJ;
-- GitHub Actions;
-- automated quality verification;
-- build artifacts.
-
-These tools work together to ensure that every code change is automatically validated before integration into the project.
-
----
-
-# Engineering Perspective
-
-Professional software engineers understand that software quality depends not only on code but also on process automation.
-
-Before accepting a code change, engineers typically ask:
-
-- Does the project compile successfully?
-- Do all automated tests pass?
-- Has code quality been verified?
-- Can the application be built automatically?
-- Is the generated artifact ready for deployment?
-- Can another developer reproduce the same build?
-
-CI/CD answers these questions automatically, reducing human error and increasing software reliability.
-
----
-
-# Relationship with Future Modules
-
-The concepts introduced in this module provide the foundation for technologies that rely heavily on automated software delivery.
-
-Examples include:
-
-- Docker;
-- Kubernetes;
-- Spring Boot deployment;
-- Cloud Computing;
-- DevOps;
-- Microservices.
-
-Understanding CI/CD is therefore essential for professional backend development and modern software engineering.
-
----
-
-# Current Repository Status
-
-The CI/CD module defines the engineering concepts and target automation model for **Algorithms Java Mastery**.
-
-At the time of this documentation update, the repository does not yet contain an executable workflow under:
-
-```text
-.github/workflows/
-```
-
-This distinction is intentional and important:
-
-```text
-Concept Studied
-        ≠
-Feature Implemented
-```
-
-The documentation may define the desired CI architecture before the workflow is implemented.
-
-Implementation evidence should only be claimed after the corresponding workflow file exists and runs successfully.
-
-For the current repository, **Continuous Integration is the priority**.
-
-Continuous Delivery is studied conceptually, but the project does not require a production deployment target in order to satisfy its present academic purpose.
-
----
-
-# CI Scope for Algorithms Java Mastery
-
-The initial CI pipeline should remain focused.
-
-Its responsibility is to reproduce the validated build process in a clean environment.
-
-```text
-Push / Pull Request
-        ↓
-Repository Checkout
-        ↓
-Java Setup
-        ↓
-Maven Wrapper
-        ↓
-Compilation
-        ↓
-JUnit + AssertJ Tests
-        ↓
-Maven Verification
-        ↓
-CI Result
-```
-
-Long-running or unstable benchmarks should not automatically become part of the standard CI gate merely because JMH exists in the repository.
-
-Benchmark automation requires a separate experimental objective.
-
----
-
-# Local-to-CI Traceability
-
-A reliable CI pipeline should automate a workflow that is already understood locally.
-
-```text
-Windows
-.\mvnw.cmd clean verify
-
-or
-
-Linux
-./mvnw clean verify
-        ↓
-Known Local Build Contract
-        ↓
-GitHub Actions Workflow
-        ↓
-Equivalent Clean-Environment Verification
-```
-
-This establishes the engineering principle:
-
-> **Automation should reproduce a known and validated build process rather than invent a different one.**
-
-The relationship with the Linux module is therefore direct:
-
-```text
-docs/18-linux-environment/
-        ↓
-Terminal-Based Maven Execution
-        ↓
-Reproducible Local Verification
-        ↓
-docs/19-ci-cd/
-        ↓
-Automated Verification
-```
-
----
-
-# Relationship with the Academic Architecture
-
-CI/CD does not alter the algorithmic source of truth.
-
-The complete traceability chain is:
-
-```text
-CLRS
- ↓
-Foundations
- ↓
-Complexity
- ↓
-Algorithm / Data Structure Module
- ↓
-Java Implementation
- ↓
-Automated Tests
- ↓
-Benchmark when justified
- ↓
-Local Maven Verification
- ↓
-Linux / Windows Environment
- ↓
-Continuous Integration
-```
-
-Each layer has a distinct responsibility.
-
-Continuous Integration validates repository integration and reproducibility.
-
-It does not prove algorithm correctness and it does not establish asymptotic complexity.
-
----
-
-# Technical Review Questions
-
-The following questions are limited to the responsibilities of this module:
-
-1. What problem does Continuous Integration solve?
-2. What is the difference between local validation and CI validation?
-3. Why should CI use the Maven Wrapper?
-4. Why should the CI pipeline reproduce the same build intent used locally?
-5. What events commonly trigger a CI workflow?
-6. Why should automated tests run before a pull request is integrated?
-7. Why should JMH benchmarks not automatically be treated as standard CI tests?
-8. What is the difference between Continuous Integration and Continuous Delivery?
-9. Why does this repository prioritise CI before deployment automation?
-10. What evidence would demonstrate that CI is actually implemented rather than merely documented?
-
-The objective is to evaluate engineering reasoning rather than memorised YAML.
-
----
-
-# Module Completion Criteria
-
-This module can be considered complete at the conceptual level when the learner can:
-
-- explain CI and Continuous Delivery;
-- describe the responsibility of a GitHub Actions workflow;
-- explain triggers, jobs, and steps;
-- describe a Maven-based validation pipeline;
-- explain how JUnit and AssertJ become CI evidence;
-- distinguish local verification from clean-environment automation;
-- explain why benchmark automation requires separate design;
-- identify the expected build artefacts;
-- distinguish documented CI architecture from implemented workflow evidence.
-
-Implementation completion requires an actual workflow under
-`.github/workflows/` that executes successfully against the repository.
-
----
-
-# References
-
-CI/CD-specific sources should be drawn from the official technical references centralised in:
-
-```text
-docs/00-project/10-references.md
-```
-
-CLRS remains the principal academic inspiration for the algorithmic content of the repository; CI/CD provides complementary engineering automation.
-
----
-
-# Key Takeaways
-
-After completing this module, the learner should understand that:
-
-- Continuous Integration automates the compilation, testing, and validation of software after every meaningful code change;
-- Continuous Delivery prepares validated software for reliable and repeatable deployment;
-- GitHub Actions enables workflow automation directly within GitHub repositories;
-- workflow files describe how software pipelines execute through triggers, jobs, and steps;
-- Maven integrates naturally with CI pipelines to automate project builds and dependency management;
-- automated testing and code quality verification improve software reliability and reduce regression defects;
-- build artifacts represent the deliverable outputs of the software build process;
-- mastering CI/CD prepares developers for professional Java engineering, DevOps practices, cloud-native applications, and enterprise software delivery.
+# CI/CD: Applied Maven Verification
+
+This module connects the existing contracts, Java 21 tests, Linux checks,
+coverage and benchmark packaging to an actual GitHub Actions workflow. It
+follows module 18 and completes the repository's existing numbered sequence
+through 19. The next evidence item is the first observed hosted run and a
+closing traceability review.
+
+## Implemented workflow
+
+- [Maven CI YAML](../../.github/workflows/maven-ci.yml): two jobs, configured events, permissions, pinned actions and artifacts.
+- [Implementation and verification guide](implementation-and-verification-guide.md): contract, pseudocode/trace, failure handling, action identities, local checks and author procedure.
+- [Verification report](verification-report.md): observed local outcomes and pending hosted evidence.
+
+`verify` runs Linux preflight, twenty shell cases and coverage-enabled tests,
+requiring HTML/XML coverage output. `benchmark-package` needs verify, starts a
+separate job and builds the uninstrumented benchmark profile with tests, jar
+identity capture and discovery. It retains the package and Markdown provenance.
+There is no timed performance threshold, release publication or service deployment.
+
+The workflow handles main pushes, PRs targeting main and manual dispatch.
+Feature-branch push alone is not a trigger. It requests contents:read, disables
+checkout credential persistence, uses fifteen-minute job timeouts, cancels older
+runs for a PR/ref, caches Maven dependencies and requests seven-day artifacts.
+Three official actions are pinned to reviewed full SHAs. Hosted image/JDK patch
+are still recorded execution context, not immutable machine identities.
+
+## Local verification versus hosted status
+
+Actionlint **1.7.12** accepts the workflow. All six run blocks were separately
+syntax-checked and executed locally: **20 shell cases**, **710 coverage-enabled
+JUnit invocations** and **723 package-profile JUnit invocations**, with coverage
+files, jar/provenance and discovery checks passing. There are still **115 JMH
+methods / 40 classes**. Production Java, tests, POM and historical results are
+unchanged; counts across repeated builds are not new distinct tests.
+
+**First hosted GitHub Actions run: pending.** The local harness did not run the
+JavaScript actions, hosted Temurin installer, cache or upload service. No run
+URL, hosted conclusion or enabled branch-protection rule is invented. Create
+the PR normally and inspect the two named checks as described in the guide.
+Windows remains supported; installing WSL locally is not required for GitHub's
+hosted Linux jobs.
+
+## Study notes
+
+| Note | Applied question |
+|---|---|
+| [01 — Continuous integration](01-continuous-integration.md) | Which changes/events are verified and what does passing establish? |
+| [02 — Continuous delivery](02-continuous-delivery.md) | What package is prepared, and where does deployment remain out of scope? |
+| [03 — GitHub Actions](03-github-actions.md) | Which actions, runtime, permissions and cache are selected? |
+| [04 — Workflow anatomy](04-workflow-anatomy.md) | How do needs, step failures, cancellation and diagnostics interact? |
+| [05 — Maven pipeline](05-maven-ci-pipeline.md) | How are the coverage and benchmark profiles separated? |
+| [06 — Automated testing](06-automated-testing.md) | Which tests run and which behaviours remain unproved? |
+| [07 — Quality checks](07-code-quality-checks.md) | Which gates exist and which analyses were not configured? |
+| [08 — Build artifacts](08-build-artifacts.md) | How are source, run attempt, jar bytes and retained reports connected? |
+| [09 — Common mistakes](09-common-mistakes.md) | Which failure/provenance shortcuts should be avoided? |
+
+## Evidence boundaries
+
+CI artifacts live in generated output/Actions retention; important observations
+remain in versioned Markdown. No JSON/log/new CSV evidence file is added to Git.
+The earlier aggregation record keeps its reflog-inferred source and unavailable
+original jar hash. A newly captured CI jar does not fill that old missing value.
+Coverage, tests, build duration and JMH measurements remain separate claims.
+The workflow-definition gap is addressed at source level; hosted success awaits
+observed run/attempt evidence, and repository enforcement settings are separate.
