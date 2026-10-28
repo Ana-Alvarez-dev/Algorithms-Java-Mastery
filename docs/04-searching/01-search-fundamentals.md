@@ -114,7 +114,9 @@ Examples include:
 - compiler symbol tables;
 - cache lookups.
 
-The efficiency of these systems often depends more on searching performance than on any other algorithmic operation.
+Searching can be a significant part of these systems. Its contribution relative
+to I/O, updates and other work depends on the workload; this module does not
+establish a universal system bottleneck.
 
 ---
 
@@ -344,7 +346,9 @@ Without understanding complexity analysis and array traversal, evaluating search
 
 Searching is a fundamental computational problem that appears in virtually every software system.
 
-Different searching algorithms solve the same problem using different strategies, assumptions and performance characteristics.
+Different algorithms can solve the same exact-match problem, but lower bounds,
+nearest-value selection and equality endpoints have different postconditions.
+Choose the required result before comparing strategies or complexity.
 
 Understanding the search problem itself is more important than memorising individual algorithms.
 

@@ -312,7 +312,11 @@ A useful invariant is:
 > If the target exists in the array, then before each iteration it occurs within
 > the current interval `[low, high]`.
 
-This invariant explains why discarding half of the array is safe.
+Together with 0<=low<=high+1<=n and unchanged input, this invariant explains
+safe elimination. With m=high-low+1 candidates, the two possible next sizes
+are floor((m-1)/2) and floor(m/2). Thus the non-negative interval size strictly
+decreases, including the transition from one candidate to an empty interval.
+The returned duplicate may be any matching position, not necessarily a boundary.
 
 ## Initialization
 
@@ -418,7 +422,7 @@ The middle element is the target.
 Θ(1)
 ```
 
-Only one comparison.
+Only one midpoint probe, whose equality check succeeds immediately.
 
 ---
 
@@ -520,7 +524,13 @@ A safer midpoint calculation is:
 int middle = low + (high - low) / 2;
 ```
 
-This expression prevents integer overflow when working with very large arrays.
+For the actual inclusive interval, 0<=low<=high<n while the guard is true.
+The difference is non-negative and representable; adding half of it gives an
+index between low and high. This is a proof under those bounds, not a safe
+formula for arbitrary negative sentinels or arbitrary int endpoints. Empty
+input is handled before accessing a midpoint by the loop guard. The
+[contract map](implementation-contracts.md#intervals-and-finite-index-arithmetic)
+also covers the half-open lower-bound implementation.
 
 ---
 

@@ -218,7 +218,9 @@ low > high
 Return NOT FOUND
 ```
 
-This condition guarantees termination.
+The empty-interval condition stops an already empty call. Termination of the
+whole recursion additionally requires each non-terminal call to reach a
+strictly smaller valid interval; a base case alone does not establish progress.
 
 ---
 
@@ -331,9 +333,10 @@ Sorted order determines which half can still contain the target.
 The recursive call is made only on that half.
 
 The remaining interval is strictly smaller than the current interval.
-
-Therefore the recursive call solves a smaller instance of the same search
-problem while preserving every valid target position.
+Assume inductively that the helper's contract holds on every smaller interval.
+Sortedness excludes matches in the discarded part, and the induction hypothesis
+therefore makes the returned subcall result correct for the original interval.
+This applies to any matching duplicate, not specifically the first one.
 
 ## Termination
 
@@ -361,13 +364,17 @@ additional work.
 Conceptually:
 
 ```text
-T(n) = T(n / 2) + Θ(1)
+W(0) = Θ(1)
+W(m) = W(floor(m/2)) + Θ(1), for m>=1
 ```
 
-which yields logarithmic worst-case growth:
+Here W is worst-case work for this inclusive floor-midpoint helper. Of the
+left/right continuations, the larger has floor(m/2) elements; a target above
+all distinct values attains successive right continuations. This rounded
+recurrence yields logarithmic growth, with constant work at empty input:
 
 ```text
-T(n) = Θ(log n)
+W(n) = Θ(1+log(n+1))
 ```
 
 The worst-case recursion depth is logarithmic, producing:
@@ -407,7 +414,11 @@ instead gives constant-depth success. Average-case claims require their model.
 Θ(log n)
 ```
 
-The same number of comparisons as the iterative implementation.
+With equal inputs and midpoint policy, it visits the same midpoint sequence
+as the iterative method. An absent target adds one empty helper call, with no
+array probe; the public wrapper is another frame. Logical call depth is not a
+measurement of JVM stack bytes or a promise about available stack. See the
+[operation and frame counts](implementation-contracts.md#operation-counts-and-probability-models).
 
 ---
 
@@ -474,7 +485,7 @@ Each recursive invocation remains on the stack until the deepest call completes.
 | Worst-case auxiliary memory | Θ(1) | Θ(log n) |
 | Readability | High | Very High |
 | Recursive stack growth | None; ordinary call frame remains | Up to Θ(log n) frames |
-| Risk of Stack Overflow | No | Very Small |
+| Stack consideration | No recursive growth | Depends on available stack; logarithmic logical depth |
 
 ---
 

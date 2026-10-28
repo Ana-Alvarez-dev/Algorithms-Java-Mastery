@@ -92,3 +92,12 @@ link six pre-fix failures to twelve named cases plus four oracle/property/
 isolation tests. Searching has 101 executed tests (85 existing +16 new).
 Historical Searching benchmark scores remain unchanged; no closest-value timing
 question is added merely because its contract was fixed.
+
+## Applied Documentation Review (2026-10-28)
+
+The [current contract and proof map](../../../../../../../docs/04-searching/implementation-contracts.md)
+links all eight APIs to their results, validation, interval variants and cost
+models. The [dated review](../../../../../../../docs/04-searching/documentation-review.md#ordered-documentation-review-follow-up-2026-10-28)
+records documentation corrections and independent bounded model checks.
+Production Java, tests and benchmark bodies are unchanged in that pass; the
+101 hosted Searching invocations above remain historical execution evidence.

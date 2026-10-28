@@ -79,6 +79,9 @@ Results for unsorted input to an ordered operation are outside its contract.
 | ClosestValueSearch | Nondecreasing | Closest-value index, -1 only when empty | -1 | Minimise absolute long distance, then index |
 
 These contracts map to the eight existing classes, not hypothetical API choices.
+The [applied contract and proof map](implementation-contracts.md) states each
+result mathematically, including the sentinel boundary n, actual validation,
+mutation policy and distinctions from the Java standard library.
 See the [module matrix](README.md#module-traceability-matrix),
 [Testing regressions](../16-testing/verification-report.md) and
 [closing review](../00-project/12-closing-traceability-review.md). General result
@@ -437,7 +440,9 @@ The search problem combines algorithmic reasoning with computational complexity 
 
 # Key Takeaways
 
-Every searching algorithm solves the same computational problem but relies on different assumptions and strategies.
+The concrete result distinguishes an exact match from an insertion boundary,
+nearest value or pair of endpoints. These are different computational contracts,
+even when they share an interval-reduction strategy.
 
 A precise problem definition allows software engineers to analyse correctness, evaluate complexity and select the most appropriate algorithm for a given application.
 

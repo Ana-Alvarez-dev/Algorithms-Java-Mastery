@@ -103,7 +103,7 @@ Binary Search is appropriate when:
 | Average | Θ(log n) under a stated search model |
 | Worst | Θ(log n) |
 | Auxiliary Space (Iterative) | Θ(1) |
-| Auxiliary Space (Recursive) | Θ(log n) |
+| Auxiliary Space (Recursive) | Worst Θ(log n); Θ(1) for initial match/empty |
 
 ---
 
@@ -186,7 +186,8 @@ Because it avoids recursive call overhead and uses constant auxiliary memory.
 int middle = low + (high - low) / 2;
 ```
 
-This formulation prevents integer overflow while producing the correct midpoint.
+Under the valid non-negative array bounds, this formulation computes the floor
+midpoint without overflow. It is not a formula for arbitrary int endpoints.
 
 ---
 
@@ -346,9 +347,9 @@ What does `SearchInsertPosition` compute?
 
 **Expected direction**
 
-It computes the first index whose value is greater than or equal to the target.
-This is the lower-bound position and is a valid insertion point that preserves
-nondecreasing order.
+It returns the first index whose value is at least the target, or n when no
+such element exists. This is an insertion position, not necessarily a valid
+element index. The current method preserves input and does not insert anything.
 
 ---
 
@@ -363,7 +364,11 @@ Binary Search in a sorted array?
 
 At termination, the insertion boundary separates values below and above the
 target. The nearest possible value must therefore be one of the two adjacent
-boundary candidates.
+boundary candidates. The predecessor can be the last copy of a repeated lower
+value, so choosing the nearest value alone does not ensure the smallest index.
+The current method applies another lower bound when that lower value wins or
+ties, or when the target exceeds the maximum; upper is already its first copy.
+Handle empty/minimum cases before using upper-1.
 
 ---
 
@@ -407,6 +412,21 @@ complexity?
 
 No. Both remain `Θ(log n)`. A benchmark measures concrete implementation and
 environment effects; it does not change the asymptotic model.
+
+---
+
+# Applied Review Checkpoints
+
+Explain why a successful ordinary binary search uses 2p-1 value comparisons
+for p probes, while its failed search uses 2p, excluding guards. Give the
+non-negative domain that makes the midpoint arithmetic safe. State the full
+lower-bound partitions, justify first/last candidates outside the active
+interval and distinguish probes from the final empty recursive helper call.
+
+Then compare q full scans with preprocessing plus q searches, preserving the
+meaning of original positions. The [contract map](implementation-contracts.md)
+contains the derivations; the dated review records independent bounded checks,
+not a new Java test or performance run.
 
 ---
 

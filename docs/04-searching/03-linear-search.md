@@ -264,13 +264,18 @@ An index i such that A[i] = key
 or a defined NOT FOUND result when key is absent
 ```
 
-For this repository, the exact absence representation must be defined by the
-implementation contract.
+For this repository, return the smallest matching index, or -1 when absent.
+An arbitrary matching index would satisfy the textbook exercise's existence
+result but would not fully specify this implementation's first-occurrence policy.
 
 A useful loop invariant is:
 
-> Before examining the element at the current index, the target has not been
-> found in the portion of the sequence already examined.
+> At loop header index=i, 0<=i<=n and every j in [0,i) has A[j]!=key.
+
+If A[i]==key, that exclusion makes i the smallest matching index. Otherwise,
+advancing i preserves the exclusion; the non-negative variant n-i decreases.
+The [contract map](implementation-contracts.md) distinguishes zero element
+comparisons on empty input from its constant control work.
 
 A complete correctness argument follows the repository-wide structure.
 
@@ -363,11 +368,13 @@ Every element must be inspected.
 Average-case analysis requires assumptions about where the target may occur and
 whether the search is successful.
 
-Under common models in which a successful target position is distributed across
-the sequence, the expected number of inspected elements remains proportional to
-`n`.
+For n>=1, assume one matching position chosen uniformly among the n indices.
+The expected equality-comparison count is (1+2+...+n)/n=(n+1)/2. With success
+probability p and that conditional position model, it is
+p*(n+1)/2+(1-p)*n. A workload always querying the first value instead uses one
+comparison; duplicates must be modelled by their first matching position.
 
-Therefore the average growth is linear under those assumptions:
+Therefore the average growth is linear under the specified model:
 
 ```text
 Θ(n)

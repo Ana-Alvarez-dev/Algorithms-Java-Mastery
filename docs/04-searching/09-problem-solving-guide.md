@@ -305,7 +305,9 @@ Duplicate values
 Repeated Elements
 ```
 
-Testing confirms that the implementation satisfies its specification.
+Testing checks the specification on the executed cases; it does not establish
+the universal contract. Include oracle independence, mutation checks and the
+invariant/progress argument when assessing the evidence.
 
 ---
 
@@ -343,7 +345,7 @@ Representative traces include:
 | Last boundary | `LastOccurrence` | `LastOccurrenceTest` | Not required |
 | Lower-bound insertion point | `SearchInsertPosition` | `SearchInsertPositionTest` | Not required |
 | Complete duplicate range | `SearchRange` | `SearchRangeTest` | Not required |
-| Nearest value | `ClosestValueSearch` | `ClosestValueSearchTest` | Not required |
+| Nearest value | `ClosestValueSearch` | `ClosestValueSearchTest` + `ClosestValueSearchRegressionTest` | Not required |
 
 The table is intended to demonstrate methodology, not to require one
 implementation for every possible search problem.
@@ -401,6 +403,17 @@ Correctness Proof      ≠ Unit Test
 Complexity Analysis    ≠ Benchmark Result
 Implementation         ≠ Specification
 ```
+
+---
+
+# Review Questions for the Current APIs
+
+Use the [applied map](implementation-contracts.md) to ask whether the desired
+result is an original-array index, an insertion sentinel or fixed endpoints;
+whether duplicate ties require a second boundary search; and which comparison,
+probe or frame count is being analysed. Check interval bounds before using the
+safe-midpoint formula. Keep source assertions, earlier hosted test results,
+independent models and measured JMH observations labelled separately.
 
 ---
 

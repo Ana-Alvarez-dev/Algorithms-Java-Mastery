@@ -230,7 +230,9 @@ follow it.
 ├── 08-common-search-problems.md
 ├── 09-problem-solving-guide.md
 ├── 10-common-mistakes.md
-└── 11-interview-notes.md
+├── 11-interview-notes.md
+├── implementation-contracts.md
+└── documentation-review.md
 ```
 
 The structure progresses from general search concepts to individual algorithms,
@@ -1102,6 +1104,23 @@ error margins in several measurements and incomplete environment metadata;
 precise performance conclusions require a more stable follow-up execution.
 Execution evidence must remain separate from mathematical correctness and
 complexity arguments.
+
+---
+
+# Applied Contract Review (2026-10-28)
+
+The [contract and proof map](implementation-contracts.md) connects all eight
+current APIs to exact results, mutations, failures, interval invariants,
+finite-width arithmetic, operation counts and existing test/JMH source.
+The [dated review follow-up](documentation-review.md#ordered-documentation-review-follow-up-2026-10-28)
+adds S09-S16 while retaining the historical S01-S08 findings and resolutions.
+
+The supplied CLRS Third Edition (2009), exercises 2.1-3 and 2.3-5, was directly
+consulted; the Fourth Edition (2022) remains the preferred bibliography, without
+an assertion of identical pagination. The current pass changes Markdown only.
+Its independent mathematical checks do not replace earlier hosted Java test
+results or constitute a new JMH run. The 65 historical means/errors retain their
+original evidence and provenance limits.
 
 ---
 
