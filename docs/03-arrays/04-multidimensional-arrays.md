@@ -467,6 +467,21 @@ The appropriate representation depends on the computational problem.
 
 ---
 
+# Shape and Aliasing Preconditions
+
+The traversal examples require a non-null outer array and non-null rows. Creating
+new int[R][] creates R null row references; its cells cannot be traversed until
+rows are assigned. An empty outer array has no matrix[0], so code cannot infer
+a column count from that expression. A rectangular algorithm must validate or
+assume its own shape; int[][] alone does not guarantee it.
+
+Rows can also alias: `int[] row={1,2}; int[][] a={row,row};` has two logical rows
+but one shared row object. Writing a[0][0] changes what a[1][0] observes. A shallow
+outer clone shares rows too. Read-only traversal visits each logical row, while
+mutation and distinct-storage counts must respect that aliasing.
+
+---
+
 # Traversing a Rectangular Array
 
 A common approach is to use nested loops:
@@ -544,7 +559,7 @@ elements.
 Therefore:
 
 ```text
-T(R, C) ∈ Θ(RC)
+T(R,C) ∈ Θ(1+R+RC); for R,C >= 1, Θ(RC)
 ```
 
 This is more precise than writing simply:
@@ -597,10 +612,13 @@ A complete traversal therefore has time complexity proportional to the total
 number of stored elements:
 
 ```text
-T ∈ Θ(Σ Lᵢ)
+T ∈ Θ(1+R+Σ Lᵢ)
 ```
 
-This is more precise than assuming every row has the same length.
+The R term accounts for reaching/testing each row, even when every row is
+empty. For R>0 empty rows, Σ L_i is zero but the outer loop still executes R
+times. A null row needs a defined skip/reject policy; the displayed loops reject
+it implicitly by dereference, rather than treating it as an empty row.
 
 ---
 
@@ -624,10 +642,13 @@ C elements per row
 Θ(RC)
 ```
 
-for the array's element storage.
+for positive dimensions' primitive-cell storage. Under the word-storage model,
+new int[R][C] also has R reference slots and R row objects plus an outer object:
+its total storage is Θ(1+R+RC). R zero-length rows therefore still need linear
+row/reference storage. For arbitrary shared rows, count distinct row objects
+for retained storage; logical visits can revisit the same row.
 
-For Java, the complete concrete memory footprint also includes object and
-runtime representation overhead.
+Actual Java byte footprints also include implementation-dependent overhead.
 
 Therefore:
 
@@ -664,9 +685,9 @@ under the standard model.
 This distinction is important:
 
 ```text
-Input Storage
+Input Storage (new int[R][C])
         ↓
-Θ(RC)
+Θ(1+R+RC)
 
 Auxiliary Traversal Space
         ↓
@@ -719,7 +740,7 @@ Every stored position must be visited.
 Therefore:
 
 ```text
-T(R, C) ∈ Θ(RC)
+T(R,C) ∈ Θ(1+R+RC); for R,C >= 1, Θ(RC)
 ```
 
 assuming constant work per position.
@@ -737,13 +758,14 @@ C columns
 
 a complete transpose processes each matrix position.
 
-A straightforward implementation may therefore require:
+For positive dimensions, a straightforward implementation has:
 
 ```text
 Θ(RC)
 ```
 
-time.
+time. With zero-sized dimensions, account separately for shape checks, row
+visits and construction of the output rows; a product alone can be zero.
 
 The auxiliary-space complexity depends on whether the transpose is performed:
 
@@ -752,7 +774,11 @@ The auxiliary-space complexity depends on whether the transpose is performed:
 - under square or rectangular dimensions.
 
 The implementation strategy must therefore be specified before assigning a
-space bound.
+space bound. For a new rectangular transpose, return storage is Θ(1+C+RC)
+words. The workspace excluding that output may be constant; this is different
+from constant total additional storage. In-place swap transposition needs a
+square shape and a row-alias policy. Matrix arithmetic also needs a numeric
+range contract; int addition/multiplication may wrap.
 
 ---
 
@@ -775,7 +801,7 @@ R × K × C
 Therefore:
 
 ```text
-T(R, K, C) ∈ Θ(RKC)
+T(R,K,C) ∈ Θ(RKC) for positive dimensions and constant-cost arithmetic
 ```
 
 For square matrices where:
@@ -1091,7 +1117,7 @@ Practical Performance
 must remain distinct from:
 
 ```text
-Θ(RC)
+Θ(1+R+RC)
         ↓
 Asymptotic Complexity
 ```
@@ -1107,7 +1133,7 @@ The asymptotic traversal cost does not change because of cache behaviour.
 | Row lengths | Equal | May differ |
 | Representation | Array of equal-length rows | Array of variable-length rows |
 | Typical use | Matrices, grids | Irregular data |
-| Traversal model | `R × C` | Sum of row lengths |
+| Total traversal work, including empty rows | `Θ(1+R+RC)` | `Θ(1+R+Σ L_i)` |
 | Memory usage | Predictable from dimensions | Depends on each row |
 
 Choosing between them should depend on the structure of the data.
@@ -1237,7 +1263,7 @@ C columns
 the general traversal result is:
 
 ```text
-Θ(RC)
+Θ(1+R+RC)
 ```
 
 Only when:
@@ -1359,11 +1385,11 @@ Examples:
 ```text
 Matrix Traversal
         ↓
-Θ(RC)
+Θ(1+R+RC)
 ```
 
 ```text
-Matrix Multiplication
+Matrix Multiplication (positive dimensions)
         ↓
 Θ(RKC)
 ```
@@ -1488,8 +1514,9 @@ After studying this document, the learner should remember that:
 - `matrix[row].length` identifies the length of a particular row;
 - rectangular arrays have equal row lengths;
 - jagged arrays may have different row lengths;
-- full traversal of an `R × C` rectangular matrix is `Θ(RC)`;
-- for a square matrix where `R = C = n`, full traversal is `Θ(n²)`;
+- full traversal of an `R × C` rectangular matrix is `Θ(1+R+RC)`,
+  reducing to `Θ(RC)` for positive dimensions;
+- for a square matrix where `R = C = n >= 1`, full traversal is `Θ(n²)`;
 - matrix multiplication may require three independent dimensions, such as
   `Θ(RKC)`;
 - input storage and auxiliary processing memory should be analysed separately;
@@ -1542,9 +1569,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The conceptual treatment of arrays, matrices, indexed structures, and
 algorithmic complexity is complemented by official Java documentation for
@@ -1559,3 +1585,8 @@ docs/00-project/10-references.md
 Additional references may be introduced in later modules when matrix
 algorithms, graph representations, dynamic programming, or multidimensional
 memory models require greater theoretical depth.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

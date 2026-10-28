@@ -20,18 +20,22 @@ import java.util.function.IntConsumer;
  * - action != null
  *
  * Postcondition:
- * - Every element in the array has been visited exactly once.
- * - Elements are visited from index 0 to array.length - 1.
- * - The array remains unchanged.
+ * - On normal completion, action is called once per index, in index order,
+ *   with the value read from that slot at that time.
+ * - This traversal does not write the array itself. The action can mutate
+ *   aliased input or external state; no snapshot or rollback is provided.
+ * - Input contents remain unchanged only if the action and other actors
+ *   do not modify them. An action exception prevents later visits.
  *
  * Algorithmic Strategy:
  * Sequential indexed traversal.
  *
  * Time Complexity:
- * - Θ(n)
+ * - On normal completion, Θ(1 + n) own work plus the action's work.
+ * - Θ(n) for a full traversal with constant-cost, normally completing actions.
  *
  * Space Complexity:
- * - Θ(1)
+ * - Θ(1) traversal workspace, excluding action allocations and retained output.
  *
  * Benchmarking:
  * - Required.
@@ -52,7 +56,8 @@ public class ArrayTraversal {
      * and applies the specified action.
      *
      * @param array the integer array to traverse
-     * @param action the operation to execute for each element
+     * @param action the operation to execute for each current element;
+     *               its mutation, allocation and failure effects are not isolated
      */
     public static void traverse(int[] array, IntConsumer action) {
 

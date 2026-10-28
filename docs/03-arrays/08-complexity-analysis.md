@@ -408,8 +408,8 @@ Average-case analysis requires a probability model.
 
 For example, if:
 
-- the target is guaranteed to be present; and
-- every position is equally likely to contain it;
+- n >= 1 and the target occurs exactly once; and
+- its position has probability 1/n at each slot;
 
 then the expected number of comparisons is:
 
@@ -515,8 +515,9 @@ Maximum recursion depth is logarithmic:
 S_aux(n) ∈ Θ(log n)
 ```
 
-The difference is caused by the implementation strategy rather than the search
-problem itself.
+This recursive bound is worst-case stack usage with constant-size frames.
+Initial-midpoint success uses Θ(1) frames. The difference is caused by the
+implementation strategy rather than the search problem itself.
 
 ---
 
@@ -776,7 +777,9 @@ A[1] ↔ A[n - 2]
 ...
 ```
 
-Approximately half of the positions participate in swaps.
+Exactly floor(n/2) swaps occur; 2*floor(n/2) positions participate. For odd n,
+the centre is untouched. Approximately half as many swaps as elements is not
+the same as saying only half the positions participate.
 
 Since the number of swaps is proportional to `n`:
 
@@ -888,11 +891,9 @@ can result from shifting:
 
 one position to the right.
 
-If up to `n` elements must move:
-
-```text
-T(n) ∈ Θ(n)
-```
+Moving k elements with constant work per move costs Θ(1+k). If k<=n this
+provides O(1+n), and a tight Θ(n) worst case requires a valid linear-shift case.
+The end-insertion/deletion cases instead have constant work.
 
 Shifting therefore explains much of the cost associated with order-preserving
 insertion and deletion.
@@ -919,7 +920,7 @@ elements.
 Therefore:
 
 ```text
-T(R, C) ∈ Θ(RC)
+T(R,C) ∈ Θ(1+R+RC), reducing to Θ(RC) for positive dimensions
 ```
 
 If:
@@ -956,10 +957,12 @@ the total number of elements is:
 A complete traversal therefore has:
 
 ```text
-T ∈ Θ(Σ Lᵢ)
+T ∈ Θ(1+R+Σ Lᵢ) for non-null rows
 ```
 
-This is the appropriate model when rows have different lengths.
+The R term remains necessary when rows are empty; the constant covers an
+empty outer array. Row-reference/row-object storage must also be counted for a
+Java array of arrays. See [shape and cost details](04-multidimensional-arrays.md).
 
 ---
 
@@ -985,10 +988,10 @@ For a rectangular matrix:
 R × C
 ```
 
-the result is:
+the total loop-work result, including row checks, is:
 
 ```text
-Θ(RC)
+Θ(1+R+RC)
 ```
 
 This reinforces the general complexity principle:
@@ -1017,10 +1020,27 @@ Under the stated analytical models:
 `*` The average-case result requires a defined input or position model.
 
 For example, linear search has expected `Θ(n)` under a common model where a
-present target is equally likely to occur at every position.
+unique present target has a uniform position among n>=1 slots.
 
 Insertion and deletion require an explicit logical-capacity model because
 standard Java arrays have fixed length.
+
+---
+
+# Bounds for the Current Implementations
+
+The [applied map](implementation-contracts.md) uses logical size s and index i
+for insertion/deletion: exactly s-i shifts for insert and s-i-1 for delete,
+plus their final write. Current prefix construction allocates n+1 longs; q
+queries require Θ(n+q) including construction, while arbitrary direct ranges
+cost Θ(q+Σ rangeLength), not automatically Θ(qn). Current sorted compaction
+compares n-1 adjacent logical candidates for n>0 and returns the active prefix
+length; its physical tail is not part of the unique result.
+
+ArrayTraversal's own loop has Θ(1+n) work plus callback cost. Bounds shown as
+Θ(n) traversal assume constant-cost, normally completing callbacks; their
+allocations/output need a separate space account. New result arrays count as
+additional storage, consistently with the Complexity module's convention.
 
 ---
 
@@ -1051,9 +1071,9 @@ Reduce Search Space by a Constant Factor
 ```
 
 ```text
-Move or Copy Up to n Elements
+Move or Copy k Elements
         ↓
-Θ(n)
+Θ(1+k); worst Θ(n) when k can be linear in n
 ```
 
 These relationships are more important than memorising isolated values.
@@ -1641,9 +1661,9 @@ Search Space Halved Repeatedly
 or:
 
 ```text
-Up to n Elements Shifted
+k Elements Shifted
         ↓
-Θ(n)
+Θ(1+k); worst Θ(n) when k can be linear in n
 ```
 
 The learner should also be able to identify when the result changes because of:
@@ -1799,9 +1819,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The complexity analysis in this document applies the principles established
 throughout the **Complexity** module, including:
@@ -1827,3 +1846,8 @@ docs/00-project/10-references.md
 Additional references may be introduced when a specific array algorithm,
 implementation technique, or Java library operation requires specialised
 analysis.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

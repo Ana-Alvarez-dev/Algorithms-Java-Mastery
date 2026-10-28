@@ -723,6 +723,35 @@ This is an important distinction when working with mutable objects.
 
 ---
 
+# Reference Type, Runtime Type and Copy Depth
+
+A reference array's runtime component type still controls stores:
+
+```java
+Object[] values = new String[1];
+values[0] = Integer.valueOf(1); // ArrayStoreException
+```
+
+The Object[] variable does not change the allocated String[] into an array that
+can store every Object. This covariance example concerns reference arrays;
+int[] is not an Integer[] or Object[].
+
+For nested arrays, copying the outer array is shallow:
+
+```java
+int[][] original = {{1, 2}};
+int[][] copy = original.clone();
+copy[0][0] = 9; // also visible through original[0][0]
+```
+
+Clone/copyOf can create a distinct outer object while sharing its rows. To
+isolate mutable cells, a two-level int[][] copy must copy each non-null row as
+well, under an explicit null/alias policy. For acyclic nested content comparison,
+Arrays.deepEquals compares nested array contents; Arrays.equals on int[][]
+compares its row references rather than recursively comparing primitive cells.
+
+---
+
 # Iterating with a Traditional `for` Loop
 
 A traditional indexed loop provides access to the position.
@@ -769,7 +798,10 @@ Next Element
 ...
 ```
 
-The underlying traversal still processes elements sequentially.
+The underlying traversal still processes elements sequentially. The loop
+variable is a local copy of each value: `for (int value : numbers) { value=0; }`
+does not zero the array. A copied reference can still be used to mutate the
+object it refers to; reassigning that local reference does not replace its slot.
 
 ---
 
@@ -822,6 +854,8 @@ for (int number : numbers) {
 ```
 
 The approach is concise and reduces opportunities for index-related errors.
+This int accumulator follows modular addition; an exact mathematical-sum claim
+needs the [numeric contract](implementation-contracts.md#aggregation-and-numeric-range).
 
 ---
 
@@ -904,8 +938,13 @@ Repeated Reduction
 Logarithmic Growth
 ```
 
-The relevant complexity depends on the overload and search range, but the
-standard binary-search model is logarithmic.
+For int[] and valid sorted input, inspect the sign of the result: a missing key
+returns -(insertionPoint)-1, not necessarily -1. For [2,4,6], searching for 5
+returns -3. If duplicates exist, any matching index may be returned. This is a
+different absence convention from this repository's BinarySearch.search, which
+returns -1. See the [Java SE 21 Arrays API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Arrays.html#binarySearch(int%5B%5D,int)).
+The standard model has Θ(1) best and Θ(log n) worst search work, not logarithmic
+work on every input.
 
 ---
 
@@ -992,7 +1031,9 @@ Copying `n` elements requires work proportional to the copied length:
 ```
 
 The method therefore does not provide constant-time duplication of an entire
-array.
+array. With newLength different from the original length, copyOf returns that
+new length, truncating or zero-padding primitive int values. The same-length
+copy example above does not describe every copyOf call.
 
 ---
 
@@ -1017,6 +1058,21 @@ It also provides additional functionality for:
 - range-based operations.
 
 The exact API should be consulted when the operation is used in production code.
+
+---
+
+# Initialisation, Creation and Valid Index Types
+
+A local `int[] a;` cannot be read before definite assignment; a reference field
+and each reference-array slot instead receive the default null value. Creating
+new int[n] initialises n int slots, whereas declaring the variable creates no
+array. A negative creation length causes NegativeArraySizeException; a
+non-negative length does not guarantee allocation will succeed.
+
+For array indexing, unary numeric promotion must yield int (for example byte,
+short and char can promote). A long index needs a checked conversion; it is not
+a legal index merely because its numeric value is small. These are language
+rules, separate from a model in which a valid index is already given.
 
 ---
 
@@ -1184,9 +1240,9 @@ static int sum(int[] numbers) {
 }
 ```
 
-The method receives a reference to the array object.
-
-It does not automatically create a copy of the entire array.
+Java passes the reference value by value. Mutating an element can affect the
+shared object, but assigning a new array to the parameter does not rebind the
+caller's variable. The call does not automatically copy the elements.
 
 Therefore, a method may modify the array's elements if the code is written to do
 so.
@@ -1339,9 +1395,9 @@ Common operations can be interpreted through the complexity methodology.
 | Indexed update | `Θ(1)` |
 | `Arrays.fill` over `n` positions | `Θ(n)` |
 | Copy `n` elements | `Θ(n)` |
-| Content comparison of equal-length arrays | `Θ(n)` |
+| Primitive int content comparison, distinct equal-length arrays | Best `Θ(1)`, worst `Θ(n)` under the sequential comparison model |
 | Sequential traversal | `Θ(n)` |
-| Binary search on sorted range | `Θ(log n)` |
+| Binary search on sorted int range | Best `Θ(1)`, worst `Θ(log n)` |
 | Sorting | Depends on the API overload and implementation |
 
 The exact complexity claim should always correspond to the specific operation
@@ -1827,9 +1883,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 Java-specific behaviour is based on the Java language and platform model,
 including the semantics of array objects, indexing, references, and standard
@@ -1845,3 +1900,8 @@ docs/00-project/10-references.md
 Official Java documentation should be consulted whenever this repository makes
 claims about specific library methods or language-level behaviour that may
 depend on the Java platform version.
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.

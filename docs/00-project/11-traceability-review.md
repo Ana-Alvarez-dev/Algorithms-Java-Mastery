@@ -17,6 +17,13 @@ and README, corrects the scoped models/examples and records independent checks.
 It changes no executable source or historical benchmark evidence; later modules
 are not declared re-reviewed by this follow-up.
 
+A **2026-10-28 Arrays documentation review**, based on main
+`ee2383bbe83dd9539171454eeb182f81c150ff83` (PR #100 merge), follows
+[separately](../03-arrays/documentation-review.md). It checks the module's
+technical claims against all thirteen Arrays classes, their tests and JMH
+bodies, and adds an applied contract map. One source Javadoc is clarified;
+executable Java, tests, fixtures and historical research data remain unchanged.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

@@ -678,15 +678,15 @@ under appropriate assumptions.
 Duplicate detection may be implemented with pairwise comparisons:
 
 ```text
-Time: Θ(n²)
+Worst time: Θ(n²); best with immediate match: Θ(1)
 Space: Θ(1)
 ```
 
 or with an auxiliary hash-based structure:
 
 ```text
-Expected Time: Θ(n)
-Auxiliary Space: Θ(n)
+Expected upper time: O(n); Θ(n) on duplicate-free input
+Worst auxiliary space: Θ(n)
 ```
 
 The appropriate choice depends on engineering constraints.
@@ -762,7 +762,8 @@ for (int row = 0; row < matrix.length; row++) {
 }
 ```
 
-This also supports jagged arrays correctly.
+This supports different row lengths when each row is non-null. A null row
+requires a specified skip/reject policy; these loops do not skip it.
 
 ---
 
@@ -967,6 +968,24 @@ Numeric Representation
 must both be considered.
 
 Complexity analysis alone does not guarantee numerical correctness.
+
+---
+
+# Numeric and Logical-Region Counterexamples
+
+ArrayAggregation.sum's contract requires the final mathematical sum to fit int.
+Intermediate wrap alone is not a counterexample: [Integer.MAX_VALUE,1,-1]
+returns the exact final maximum int under modular addition. Do not instead use
+its unqualified mathematical-prefix invariant for intermediate states. A final
+out-of-range sum remains outside that mathematical-result contract.
+
+After RemoveDuplicatesSorted returns k, inspect only array[0:k]. The remainder
+is unspecified and may make the whole physical array unsorted; a second call
+on the full array is therefore not automatically a valid sorted-input operation.
+A copied primitive array is independent, but an outer int[][] clone still shares
+rows. Traversal callbacks can mutate aliased input even when the loop itself
+contains no assignments. These cases are detailed in the
+[applied contracts](implementation-contracts.md).
 
 ---
 
@@ -1468,9 +1487,8 @@ The principal academic reference for this document is:
 
 > **Introduction to Algorithms**
 >
-> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The error-prevention methodology in this document also integrates the concepts
 developed throughout:
@@ -1490,3 +1508,8 @@ in:
 ```text
 docs/00-project/10-references.md
 ```
+For this review the supplied **Third Edition (2009)** and versioned official
+Java SE 21 sources were consulted. The [review record](documentation-review.md)
+identifies checked passages and the boundary between classical models, Java
+semantics, current implementations and teaching extensions. Fourth-edition
+page equivalence and hardware causes are not inferred.
