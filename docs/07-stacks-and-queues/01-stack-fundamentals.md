@@ -1,5 +1,12 @@
 # Stack Fundamentals
 
+> Current Java contract: `Stack<E>` rejects null, permits duplicates and uses
+> `pop/element` for throwing access versus `poll/peek` for null on empty.
+> `isFull` is a conceptual bounded-stack operation, absent from this interface;
+> the selected `ArrayStack` grows. `toList()` is a shallow, independent mutable
+> snapshot in top-first removal order, not an iterator.
+> See the [contract and proof map](implementation-contracts.md).
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -1162,7 +1169,9 @@ preserving the behavioural contract of the structure.
 
 ## 22. Expected Complexity
 
-The fundamental stack operations are expected to be efficient.
+The following are deterministic endpoint-work bounds for a fixed array or
+head-linked stack; they are not probabilistic expectations. For the selected
+growing ArrayStack, push is amortised O(1), with O(n) worst-case growth.
 
 | Operation | Expected time |
 |---|---:|

@@ -1,5 +1,11 @@
 # Stacks and Queues: Implementation and Benchmark Guide
 
+> **2026-10-28 documentation follow-up:** see the
+> [review report](documentation-review.md) and [contract/proof map](implementation-contracts.md).
+> Fresh Java 21 verification is separate from the 2026-10-19 build and author's
+> timing subset below. Current benchmark discovery checks registration and
+> parameters; it supplies no new performance score or coverage percentage.
+
 ## Scope and Traceability
 
 The package is `org.anaalvarezdev.algorithms.stacksandqueues` in the main,

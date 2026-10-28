@@ -1,5 +1,11 @@
 # Common Mistakes
 
+> Current contract pitfalls: `TwoStackQueue.peek` may transfer; array clear
+> retains capacity; snapshots share element references; bounded-deque null
+> insertion throws even when full. None of the manual containers supplies an
+> iterator, blocking operations or thread safety. The [contract map](implementation-contracts.md)
+> gives the precise methods and the Java evidence behind these statements.
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -119,7 +125,9 @@ Front → null
 Rear → null
 ```
 
-Both references (or indices) must represent the empty state correctly.
+For LinkedQueue both references become null. For the selected circular array,
+size becomes zero and head is reset to zero; an array index is not null. The
+bounded deque uses the same canonical empty ring state.
 
 ---
 
@@ -155,7 +163,7 @@ Always analyse the implementation, not only the abstract data structure.
 Some common mistakes when using Java collections include:
 
 - using the legacy `Stack` class instead of `Deque`;
-- choosing `LinkedList` when `ArrayDeque` is generally more efficient;
+- treating a representation preference as a measured guarantee for every workload;
 - inserting `null` into an `ArrayDeque`;
 - programming against concrete implementations instead of interfaces.
 

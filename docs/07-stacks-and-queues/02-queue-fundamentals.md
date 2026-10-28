@@ -1,5 +1,11 @@
 # Queue Fundamentals
 
+> Here queue means FIFO. The selected `FifoQueue<E>` is a small educational
+> interface, distinct from `java.util.Queue`, whose ordering depends on its
+> implementation. Null insertion is rejected; `dequeue/element` throw on empty
+> while `poll/peek` return null. There is no `isFull` or iterator method.
+> See the [contract and proof map](implementation-contracts.md).
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -1251,7 +1257,11 @@ The operation is correct because:
 
 ## 22. Expected Complexity
 
-The fundamental queue operations are expected to be efficient.
+The table describes deterministic ordinary endpoint work for a head/tail
+linked queue or a circular array without growth. It is not an expected-value
+claim. CircularArrayQueue enqueue can take O(n) when growing; TwoStackQueue
+dequeue **and peek** can take O(n) when transferring. Their corresponding
+sequence bounds are amortised O(1), as derived in the contract map.
 
 | Operation | Expected time |
 |---|---:|

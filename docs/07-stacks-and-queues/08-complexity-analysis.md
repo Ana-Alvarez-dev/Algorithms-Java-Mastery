@@ -1,11 +1,19 @@
 # Complexity Analysis
 
+> The [contract and proof map](implementation-contracts.md) supplies the
+> sequence arguments and algorithm invariants. Here n is the live element count
+> before an operation, c is retained capacity, and construction of a reference
+> array counts its c initialised slots.
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
 ## Algorithms Java Mastery
 
-One of the main advantages of stacks and queues is that their fundamental operations are designed to execute in **constant time**. This efficiency makes them essential building blocks for many algorithms and software systems.
+Stacks and queues can support constant endpoint work, but the ADT alone does
+not guarantee it. The selected representations distinguish individual worst-case
+work, amortised sequence bounds and retained capacity. These are algorithmic
+cost models, not bounds on JVM allocation, GC or wall-clock latency.
 
 However, the actual performance of an implementation depends not only on the abstract data structure, but also on its internal representation.
 
@@ -126,9 +134,27 @@ Although linked structures use only the required number of elements, each node i
 ---
 
 The selected `TwoStackQueue` has O(n) worst-case dequeue/peek when transferring,
-and O(1) amortised operations over a sequence. The bounded deque uses O(1)
-endpoint work with explicit overflow rejection. These guarantees do not imply
-constant allocation/GC latency. See the guide for capacity retention and clear costs.
+and O(1) amortised endpoint operations over sequences starting empty. Enqueue
+can also grow an incoming array. Transfer accounting and geometric array-growth
+accounting are both needed; a constant-cost abstract stack proof alone omits
+backing-array copies. A preloaded starting state needs its initial work/credit.
+
+| Additional selected operation | Cost under the reference/pointer model |
+|---|---|
+| ArrayStack/CircularArrayQueue/BoundedArrayDeque construction | Theta(c) |
+| LinkedStack/LinkedQueue empty construction | Theta(1) |
+| TwoStackQueue construction | Theta(c_in + c_out) |
+| BoundedArrayDeque endpoints | Theta(1), including rejection/sentinels |
+| Array-backed clear, including both stacks in TwoStackQueue | Theta(n + 1); retain arrays |
+| LinkedStack/LinkedQueue clear | Theta(1) owner work; eventual GC separate |
+| Any selected container toList | Theta(n + 1) time and new references |
+| Linked container storage | Theta(n + 1) nodes/owner state |
+| TwoStackQueue retained storage | Theta(c_in + c_out), including when empty |
+
+For an initially empty growing array with initial capacity c0, m insertions
+have O(c0 + m) construction-plus-insertion work. With no automatic shrinking,
+current n alone does not bound retained capacity after a large fill and drain.
+Diagnostic structure scans are outside ordinary endpoint costs and JMH bodies.
 
 # 6. Engineering Perspective
 

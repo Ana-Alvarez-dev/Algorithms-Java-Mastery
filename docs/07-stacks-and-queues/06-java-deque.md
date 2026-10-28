@@ -1,5 +1,12 @@
 # Java Deque
 
+> These JCF interfaces are broader than the module's `Stack`, `FifoQueue` and
+> `DoubleEndedQueue`. Their shared operation names do not make the educational
+> types interchangeable with JCF collections. See the [contract map](implementation-contracts.md).
+> Primary API references: [Java 21 Deque](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Deque.html),
+> [Queue](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Queue.html)
+> and [ArrayDeque](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayDeque.html).
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -123,6 +130,7 @@ Characteristics:
 - dynamic circular array;
 - non-null elements;
 - amortised constant-time endpoint insertion and removal;
+- searches, occurrence removal and bulk operations need separate cost analysis;
 - occasional linear growth; individual latency is not guaranteed constant.
 
 ---
@@ -153,8 +161,11 @@ Characteristics:
 | Recommended for queues | ✔ | Possible |
 
 The representation suggests different allocation and locality hypotheses.
-This module has not yet recorded comparative timing or memory measurements;
-its selected workloads and limitations are specified in the guide above.
+The [historical timing subset](../17-benchmarking/results/stacks-and-queues/README.md)
+records 20 paired-operation configurations on Oracle JDK 21.0.9. It does not
+measure heap footprint or isolate allocation/cache causes. Reserved capacity
+excludes array growth; queue rotation averages periodic two-stack transfers.
+The guide specifies the workload and uncertainty limits.
 
 ---
 
@@ -208,5 +219,6 @@ After completing this document, the learner should understand that:
 - `Deque<E>` is the recommended Java abstraction for stacks and queues;
 - `ArrayDeque` is generally the preferred implementation;
 - the same interface supports both LIFO and FIFO behaviour;
-- `LinkedList` also implements `Deque`, but usually with higher memory overhead;
+- `LinkedList` also implements `Deque`; node/reference fields differ from an
+  array representation, while exact heap footprint needs measurement;
 - developers should program against the `Deque` interface rather than concrete implementations whenever possible.
