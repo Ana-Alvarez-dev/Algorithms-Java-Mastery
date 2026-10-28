@@ -63,6 +63,15 @@ Actual Java 21 tests pass (710 overall, 47 module). Only Markdown changes;
 historical timings retain their source/runtime, and later modules are not
 reclassified as re-reviewed.
 
+A **2026-10-28 ordered Trees documentation review**, based on main
+`7182a9990e06dbd4e7d9dd82302ca32932b52d5a` (PR #106 merge), follows
+[separately](../09-trees/documentation-review.md). Scoped TR01-TR12 corrections
+and a contract/proof map distinguish proper standalone trees, keyed set updates,
+AVL height, traversal/metric storage and heap growth/build workloads. Actual
+Java 21 verification passes 710 tests overall, including 59 module invocations.
+Only Markdown changes; both historical timing subsets retain their source
+identities. Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

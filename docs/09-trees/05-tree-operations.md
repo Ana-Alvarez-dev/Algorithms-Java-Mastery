@@ -1,12 +1,21 @@
 # Tree Operations
 
+> Current keyed deletion copies the minimum key from the right subtree into
+> a two-child target, then removes that successor's physical node and reconnects
+> its possible right child. Size changes once; private node identity is not an
+> API promise. Floor/ceiling are inclusive and need no query+1/query-1 arithmetic.
+> See the [contract and proof map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, tests and benchmark protocol.
 Conceptual extensions below are not automatically implemented.
 
-Regardless of their specific type, all tree-based data structures support a common set of fundamental operations. These operations allow developers to search for elements, insert new values, remove existing nodes, and obtain structural information about the tree.
+Tree APIs select operations appropriate to their invariants. The current
+ordered sets support keyed updates; standalone BinaryTreeNode is immutable,
+and IntMinHeap exposes root priority operations rather than arbitrary-key
+removal. A general tree has no universal insertion/deletion contract or cost.
 
 Understanding these operations is essential because they form the basis of more advanced structures such as Binary Search Trees (BSTs), AVL Trees, Red-Black Trees, B-Trees, and many database indexing structures. While the implementation details may vary, the underlying concepts remain largely the same.
 

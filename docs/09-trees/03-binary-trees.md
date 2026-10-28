@@ -1,5 +1,10 @@
 # Binary Trees
 
+> BinaryTreeNode permits repeated values and null children. Its final fields
+> do not enforce **proper-tree ownership**: passing the same child identity on
+> two paths creates a DAG outside traversal/analysis preconditions. Methods do
+> not validate that shape or maintain a visited set. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -51,7 +56,7 @@ Unlike general trees, where a node may have any number of children, Binary Trees
 
 Every Binary Tree satisfies several important properties.
 
-- one unique root;
+- one unique root when nonempty; null represents the empty standalone tree;
 - each node has zero, one, or two children;
 - every child is designated as either left or right;
 - no cycles exist;
@@ -246,11 +251,10 @@ These characteristics make Binary Trees one of the most versatile data structure
 
 Binary Trees also have limitations.
 
-Without balancing:
-
-- height may become large;
-- searching may degrade to linear time;
-- insertion order strongly affects performance.
+A general binary tree has no value-order invariant, so value membership may
+require a complete scan even if its shape is balanced. For a **BST**, insertion
+order can additionally create a long path; without balancing, keyed operations
+can degrade to linear time. Balance controls height, not value ordering.
 
 These limitations motivate the study of Binary Search Trees and self-balancing trees.
 

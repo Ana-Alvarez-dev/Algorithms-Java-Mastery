@@ -1,5 +1,10 @@
 # Tree Fundamentals
 
+> Current representations are distinct: immutable standalone BinaryTreeNode,
+> mutable private-node BST/AVL int sets, and an array min-heap. Recursive tree
+> structure does not require recursive Java execution. Null standalone root is
+> empty; a nonempty tree has one root. See the [contract and proof map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -90,7 +95,9 @@ Subfolders
 Files
 ```
 
-Linear data structures cannot efficiently represent these parent-child relationships.
+Arrays and lists can encode parent-child relationships through indices or
+references; the chosen encoding and operations determine efficiency. The binary
+heap later in this module is itself an array representation of a tree.
 
 Trees provide an intuitive and scalable solution for modeling hierarchical information.
 
@@ -124,7 +131,7 @@ This hierarchical organization enables more efficient searching and organization
 
 Every tree possesses several important properties.
 
-- exactly one **root** node;
+- exactly one **root** node when nonempty; the empty tree has none;
 - parent-child relationships between nodes;
 - zero or more child nodes per parent;
 - no cycles;
@@ -158,7 +165,7 @@ The subtree rooted at **C**:
     D   E
 ```
 
-is itself a complete tree.
+is itself a tree; the separate term complete binary tree has a more specific shape meaning.
 
 This recursive property makes recursion a natural technique for implementing tree algorithms.
 
@@ -254,7 +261,7 @@ After completing this document, the learner should understand that:
 
 - trees are hierarchical, non-linear data structures;
 - nodes are connected through parent-child relationships;
-- every tree has a single root and contains no cycles;
+- every nonempty rooted tree has a single root and contains no cycles;
 - recursive thinking is fundamental when working with trees;
 - trees are used extensively in modern software engineering;
 - this module establishes the foundation for studying Binary Trees, Binary Search Trees, balanced trees, heaps, and other advanced hierarchical data structures.

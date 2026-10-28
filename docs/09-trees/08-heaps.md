@@ -1,5 +1,10 @@
 # Heaps
 
+> Here heap means the selected **binary** heap. IntMinHeap permits duplicates,
+> uses OptionalInt for empty peek/poll and exposes an independent heap-order
+> snapshot. clear resets size while retaining primitive array capacity; unused
+> slots need not be zeroed. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -28,7 +33,9 @@ The purpose of this document is to:
 
 # 2. What Is a Heap?
 
-A **Heap** is a **Complete Binary Tree** that satisfies a specific ordering rule known as the **Heap Property**.
+The **binary heap** studied here is a **Complete Binary Tree** satisfying a
+parent-child heap-order rule. Other heap families need not have this binary
+complete shape and are outside the selected implementation.
 
 Unlike a Binary Search Tree, a heap does **not** maintain a complete ordering among all elements.
 
@@ -88,7 +95,7 @@ The largest value is always located at the root.
 
 # 4. Complete Binary Tree Requirement
 
-A heap must always be a **Complete Binary Tree**.
+The selected binary heap must remain a **Complete Binary Tree**.
 
 This means:
 
@@ -131,7 +138,9 @@ Array representation:
 [10, 20, 30, 40, 50]
 ```
 
-This representation eliminates the need for explicit node references and improves memory efficiency.
+The selected primitive int array avoids per-node child references. Retained
+capacity and JVM allocation details still matter; no portable heap-byte or
+manual-versus-JDK performance ranking follows from that representation alone.
 
 ---
 

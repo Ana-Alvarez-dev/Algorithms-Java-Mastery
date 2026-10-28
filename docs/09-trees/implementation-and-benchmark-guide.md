@@ -1,5 +1,10 @@
 # Trees: Implementation and Benchmark Guide
 
+> **2026-10-28 ordered follow-up:** see the [review report](documentation-review.md)
+> and [contract/proof map](implementation-contracts.md). Actual Java 21 execution
+> and fresh benchmark discovery are separate from the original build, smoke/probes
+> and author's lookup/heap measurements below; no new timing score is added.
+
 ## Selected Scope and Traceability
 
 Package `org.anaalvarezdev.algorithms.trees` mirrors main, test and JMH roots.

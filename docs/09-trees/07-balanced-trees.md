@@ -1,5 +1,11 @@
 # Balanced Trees
 
+> AVL balance concerns subtree **heights**, not equal subtree populations.
+> Two primitive rotations compose the left-right/right-left repairs. Deletion
+> can repair several ancestors and must handle a zero-balance heavy child.
+> See the [contract and proof map](implementation-contracts.md) for the recurrence,
+> ordering partitions, cached-height updates and corresponding Java tests.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -53,11 +59,15 @@ Unbalanced tree:
          50
            \
             60
+             \
+              70
 ```
 
 Although both trees store identical data, the number of comparisons required for searching is dramatically different.
 
-A balanced tree minimizes the number of nodes visited during each operation.
+A height-balanced search tree bounds worst-case path length. It need not have
+the minimum possible height for its population, equal subtree sizes or a
+logarithmic complete traversal.
 
 ---
 
@@ -132,7 +142,9 @@ heavy child whose balance is zero. A complete traversal remains linear.
 
 # 6. Types of Rotations
 
-Most self-balancing trees use four basic rotation operations.
+For AVL repair there are two primitive rotations (left/right) and two
+compositions (left-right/right-left). This is not a universal repair scheme for
+all self-balancing tree families.
 
 ### Left Rotation
 
@@ -168,7 +180,7 @@ Several self-balancing tree structures have been developed.
 
 Characteristics:
 
-- strictly balanced;
+- subtree heights differ by at most one at every node; perfect symmetry is not required;
 - uses balance factors;
 - very fast searching;
 - additional rotations may be required after updates.
@@ -261,7 +273,8 @@ After completing this document, the learner should understand that:
 
 - the efficiency of Binary Search Trees depends on maintaining a small height;
 - balanced trees automatically reorganize themselves to preserve logarithmic height;
-- rotations are the fundamental mechanism used to restore balance;
+- AVL/red-black trees use rotations; multiway B-tree occupancy repair uses
+  different operations such as splits and merges;
 - AVL Trees, Red-Black Trees, and B-Trees are common examples of self-balancing trees;
 - balanced trees provide **O(log n)** search, insertion, and deletion regardless of insertion order;
 - self-balancing trees are fundamental components of modern software engineering, database systems, and backend development.

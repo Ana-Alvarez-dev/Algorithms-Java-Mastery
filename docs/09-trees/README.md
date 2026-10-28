@@ -1,5 +1,11 @@
 # Trees
 
+> **Ordered documentation review — 2026-10-28:** the
+> [review report](documentation-review.md) records scoped TR01-TR12 corrections,
+> actual Java 21 execution and JMH discovery. The [contract and proof map](implementation-contracts.md)
+> connects current APIs, invariants, height/build arguments, tests and research.
+> The historical build and two timing subsets below retain their provenance.
+
 ## Algorithms Java Mastery
 
 Trees are hierarchical data structures that organize information through parent-child relationships. Unlike linear structures such as arrays, linked lists, stacks, and queues, trees enable efficient representation of hierarchical data while supporting fast searching, insertion, deletion, and traversal operations.
@@ -86,8 +92,9 @@ The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 connects the required methodology to an unbalanced BST, an AVL ordered int set,
 a dynamic min-heap, four iterative traversals, tree metrics, in-place Heap Sort
 and copied-heap k-smallest selection. The package contains 11 production files,
-59 module tests and 12 JMH methods in two classes. Verification passed 524
-repository tests. The [first lookup results](../17-benchmarking/results/trees/README.md)
+59 module test invocations and 12 JMH methods in two classes. The original
+2026-10-19 verification passed 524 repository tests; the dated review above
+records fresh verification against the current repository. The [first lookup results](../17-benchmarking/results/trees/README.md)
 complete the lookup template with 24 cells, all errors and printed iterations
 on JDK 21.0.9. The author's reflog identifies execution source `c576cb7`;
 the [heap run](../17-benchmarking/results/trees/heap-first-run.md) adds 24 cells

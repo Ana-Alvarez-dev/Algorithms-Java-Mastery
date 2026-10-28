@@ -1,5 +1,10 @@
 # Interview Notes
 
+> Explain the operation contract before quoting a bound: inclusive floor/ceiling
+> versus strict neighbours, root poll versus keyed deletion, height retrieval
+> versus full traversal, and sift work versus growth. The [contract/proof map](implementation-contracts.md)
+> connects each answer to the current Java implementation and tests.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -88,7 +93,9 @@ O(n)
 
 ### How do balanced trees solve this problem?
 
-Balanced trees automatically reorganize themselves using rotations.
+AVL/red-black trees use local rotations; other families use different repair
+operations. Logarithmic height follows from their specific structural invariant,
+not from the word balanced alone.
 
 This keeps the height approximately logarithmic.
 
@@ -134,13 +141,14 @@ These complexities make heaps ideal for priority queues.
 
 | Data Structure | Search | Insert | Delete |
 |---------------|-------:|-------:|-------:|
-| Binary Tree | O(n) | O(n)* | O(n) |
+| Unordered binary tree, child links only | O(n) value scan | Contract-dependent* | Contract-dependent* |
 | Binary Search Tree (Balanced) | O(log n) | O(log n) | O(log n) |
 | Binary Search Tree (Worst Case) | O(n) | O(n) | O(n) |
 | Balanced Tree | O(log n) | O(log n) | O(log n) |
 | Heap | O(n) | O(log n) | O(log n) |
 
-\*A general binary tree needs an explicit insertion/ownership contract. Heap
+\*A general binary tree needs explicit position, ownership, mutation and removal
+semantics before insertion/deletion costs can be stated. Heap
 Delete here means root extraction, not arbitrary-key removal. The insertion
 entry excludes an individual Theta(n) array-growth copy; the selected dynamic
 heap has O(log(n+1)) amortised insertion. Full traversal/output remain Theta(n).

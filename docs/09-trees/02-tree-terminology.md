@@ -1,5 +1,10 @@
 # Tree Terminology
 
+> The current APIs count height and diameter in **edges**: empty height -1,
+> leaf height 0, empty/leaf diameter 0. This note's level=depth+1 is a naming
+> convention; it is not an extra edge in those metrics. Maximum width counts
+> nodes on a level. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -64,7 +69,8 @@ Example:
 
 Node **A** is the root.
 
-Every tree has exactly one root.
+Every nonempty rooted tree has exactly one root. The executable empty
+standalone input is null, and each mutable set starts with no root.
 
 ---
 
@@ -352,6 +358,6 @@ After completing this document, the learner should understand that:
 - nodes are related through parent-child relationships;
 - leaves have no children, while internal nodes have at least one;
 - depth, height, and level describe the position of nodes within a tree;
-- subtrees are complete trees rooted at any node;
+- a subtree consists of a node and its descendants; it need not have complete-binary-tree shape;
 - ancestors and descendants define hierarchical relationships;
 - mastering tree terminology is essential for understanding tree algorithms and advanced data structures.

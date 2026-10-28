@@ -45,3 +45,9 @@ supplied before launch. Both initial subsets total 48 of 72 defaults; size
 10,000 remains unmeasured. Five heap cells have error at least 25% of the mean,
 including a JDK peek cell whose literal CI marker is retained. Evidence stays
 Markdown without JSON/log; samples from different executions are not pooled.
+
+The [2026-10-28 documentation review](../../../../../../../docs/09-trees/documentation-review.md)
+and [contract/proof map](../../../../../../../docs/09-trees/implementation-contracts.md)
+record fresh Java 21 verification: **710 repository tests**, including **59 Trees
+invocations**, passed. Benchmark packaging/discovery verified all twelve methods
+and both parameter sets, without adding timing or coverage results.
