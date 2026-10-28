@@ -35,3 +35,9 @@ despite distinct home hashes.
 
 Worst-case collision handling and probing rebuild costs remain explicit in the
 guide. Smoke results do not establish expected or amortised bounds.
+
+The [2026-10-28 documentation review](../../../../../../../docs/08-hash-tables/documentation-review.md)
+and [contract/proof map](../../../../../../../docs/08-hash-tables/implementation-contracts.md)
+clarify current API/state/cost assumptions. Fresh Java 21 verification passed
+**710 repository tests**, including **47 Hash Tables invocations**. Packaging
+and discovery verified the nine JMH methods; those checks add no timing scores.

@@ -1,5 +1,10 @@
 # Hash Table Complexity Analysis
 
+> See the [contract and proof map](implementation-contracts.md) for actual
+> state transitions, cleanup accounting and application invariants. These bounds
+> count table work under stated hash/equality assumptions; they do not guarantee
+> JVM allocation/GC latency or justify rankings from a single benchmark fixture.
+
 > Contracts, proofs and executable evidence:
 > [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -20,11 +25,11 @@ worst-case insertion or bounded real-world latency.
 | Operation | Separate chaining | Linear probing |
 |---|---|---|
 | Get/remove expected | O(1+n/c) under simple uniform hashing | O(1) with suitable distribution and bounded used occupancy |
-| Get/remove worst | O(n) | O(c), including tombstones |
-| Put without rebuild worst | O(n) | O(c) |
+| Get/remove worst | O(n+1) | O(c), including tombstones |
+| Put without rebuild worst | O(n+1) | O(c) |
 | Rebuild | Θ(c+n), relinking cached-hash nodes | Expected O(c+n); worst O(c+n²) |
 | Put over a sequence | Expected amortised O(1) | Expected amortised O(1) with growth/cleanup policy |
-| Clear | Θ(c) | Θ(c) |
+| Empty construction / clear | Θ(c) | Θ(c) |
 | Size/isEmpty/capacity | Θ(1) | Θ(1) |
 | Retained storage | Θ(c+n) | Θ(c) |
 
@@ -35,8 +40,11 @@ Both retain capacity after deletion; c need not be proportional to current n.
 
 A chained rebuild visits every bucket and relinks each entry once. A probing
 rebuild visits old slots and reinserts each live entry; concentrated hashes can
-make those insertions progressively longer. The sum can be quadratic. Merely
-counting old entries does not justify worst-case O(n) rehashing.
+make those insertions progressively longer. Their probe work sums to
+1+2+...+n = Theta(n²). Merely counting old entries does not justify worst-case
+O(n) rehashing. Include both array initialisation and old-capacity scanning.
+For current growth/cleanup, old and new capacities differ by at most a factor
+of two, so O(c+n²) covers both. Capacity never shrinks.
 
 Snapshots scan buckets/slots, then insert into a destination HashMap. Add that
 map's insertion costs; no universally linear bound is claimed for arbitrary
@@ -46,8 +54,11 @@ adversarial keys. Array capacity and allocation overhead also remain relevant.
 
 Constant expected operation counts do not imply equal timings across data
 structures. The selected JMH experiment compares matched population and hash
-fixtures, with growth excluded. Result and Interpretation remain pending an
-actual measurement run; smoke results establish harness execution only.
+fixtures, with growth excluded. The [historical subset](../17-benchmarking/results/hash-tables/README.md)
+already records Result and Interpretation for 18 DISTINCT_HASH cells. Its
+contiguous homes cause linear duplicate-search work in probing remove/restore;
+this fixture does not satisfy independent uniform placement assumptions. Smoke
+checks and new method discovery are distinct from those author measurements.
 
 Memory footprint, cache effects, allocation rate and GC behaviour require their
 own measurements. Mathematical bounds derive from algorithms and assumptions,

@@ -1,5 +1,11 @@
 # Java HashMap
 
+> The manual `HashTable` API is intentionally smaller than Map: it exposes
+> capacity and shallow snapshots but no iterator, entry views or null mappings.
+> A HashMap null get result needs containsKey to distinguish absence from a null
+> mapping. The [contract map](implementation-contracts.md) compares only the
+> common non-null workload and keeps implementation details separate.
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -154,7 +160,7 @@ When key hashes disperse properly among buckets:
 
 | Operation | Average Complexity |
 |-----------|-------------------:|
-| `put()` | O(1) |
+| `put()` | O(1) amortised; an individual growth is more expensive |
 | `get()` | O(1) |
 | `remove()` | O(1) |
 
@@ -166,7 +172,11 @@ In the worst case:
 | Insert | O(n) |
 | Remove | O(n) |
 
-Good hash functions and an appropriate load factor make the average case far more common.
+These simplified collision bounds assume constant key work and do not specify
+every JDK internal path. Comparable keys may assist collision handling; no
+universal logarithmic worst-case promise follows from this table. Iterating
+HashMap views depends on capacity plus size, not size alone, and does not apply
+as an iterator guarantee to the manual types, which expose none.
 
 ---
 

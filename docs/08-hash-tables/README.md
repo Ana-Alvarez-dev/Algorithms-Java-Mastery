@@ -1,5 +1,11 @@
 # Hash Tables
 
+> **Ordered documentation review — 2026-10-28:** the
+> [review report](documentation-review.md) records scoped HT01-HT10 corrections,
+> actual Java 21 execution and JMH registration checks. The
+> [contract and proof map](implementation-contracts.md) connects current APIs,
+> state invariants, expected/amortised costs, Java tests and historical research.
+
 ## Algorithms Java Mastery
 
 Hash tables are one of the most important data structures in modern computer science. They provide efficient access to data by transforming keys into array indices through a hash function, allowing search, insertion, and deletion operations to execute in constant average time.

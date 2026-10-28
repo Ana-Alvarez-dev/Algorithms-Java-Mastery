@@ -1,5 +1,10 @@
 # Hash Tables: Implementation and Benchmark Guide
 
+> **2026-10-28 follow-up:** see the [review report](documentation-review.md)
+> and [contract/proof map](implementation-contracts.md). Fresh Java 21 tests and
+> benchmark discovery remain separate from the 2026-10-19 build, instrumented
+> trace and author-supplied measurements below. No new timing score is recorded.
+
 ## Selected Scope and Traceability
 
 Package `org.anaalvarezdev.algorithms.hashtables` is mirrored in main, test and

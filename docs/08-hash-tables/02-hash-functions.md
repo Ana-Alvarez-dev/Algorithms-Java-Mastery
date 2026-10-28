@@ -1,5 +1,11 @@
 # Hash Functions
 
+> The selected helper uses `h ^ (h >>> 16)` and a `capacity-1` mask with a
+> supported power-of-two capacity. This deterministic spread preserves equal
+> hashes but supplies neither randomness nor protection against constant hashes.
+> Hash values, home indices and equality are distinct concepts; see the
+> [contract map](implementation-contracts.md).
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -116,7 +122,11 @@ Uniform distribution reduces the probability of collisions.
 
 ## Deterministic
 
-The same key must always produce the same hash value.
+Within a table, hash/equality-relevant state must remain stable. The Java
+hashCode contract requires consistency within an application execution when
+equality-relevant information is unchanged; it does not require the same integer
+across separate executions. Equal keys must have equal hashes; the converse
+does not hold.
 
 ```text
 Hash("Alice")
@@ -126,7 +136,8 @@ Hash("Alice")
 25
 ```
 
-Every execution must return the same result.
+Repeated calls under that unchanged state must agree during the execution.
+See the [Java 21 Object contract](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode()).
 
 ---
 
@@ -212,7 +223,10 @@ The quality of the hash function directly affects the efficiency of the hash tab
 
 # 7. Can Collisions Be Avoided?
 
-In practice, **no**.
+Not for every key in a universe larger than the available indices. A particular
+stored set can have no home collisions; perfect hashing for a fixed set is a
+different design outside this module. The selected tables must support arbitrary
+colliding keys rather than assume that every actual input has a collision.
 
 Different keys may produce the same table index.
 

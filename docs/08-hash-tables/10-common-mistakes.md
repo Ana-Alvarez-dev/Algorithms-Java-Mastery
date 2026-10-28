@@ -1,5 +1,10 @@
 # Common Mistakes
 
+> Additional current pitfalls: treating null as a stored value; confusing
+> a tombstone with EMPTY; reusing a tombstone before completing duplicate search;
+> assuming distinct hashes imply random home positions; and treating expected
+> cost as an amortised or worst-case guarantee. See the [contract map](implementation-contracts.md).
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -98,7 +103,9 @@ This is one of the most common programming errors involving `HashMap`.
 
 # 6. Modifying Keys After Insertion
 
-Keys should remain unchanged after being inserted into a hash table.
+Equality/hash-relevant key state must remain stable while stored. Other fields
+may change if they affect neither equality nor hashing. Immutability is a useful
+design choice; it is stronger than this precise requirement.
 
 Incorrect approach:
 
@@ -159,7 +166,10 @@ Performance depends on:
 - the load factor;
 - the implementation.
 
-In the worst case, operations may require **O(n)** time.
+For current chaining, collision-heavy key lookup is O(n+1). Probing lookup
+may scan O(c) slots including tombstones even when live n is small; a probing
+rebuild can take O(c+n²). Therefore one O(n) label does not describe every
+operation or every retained-capacity state.
 
 ---
 
@@ -200,6 +210,7 @@ After completing this document, the learner should understand that:
 - collisions are unavoidable and must be managed correctly;
 - poor hash functions significantly reduce performance;
 - the load factor has a direct impact on efficiency;
-- immutable keys and consistent implementations of `equals()` and `hashCode()` are essential in Java;
+- stable equality/hash-relevant key state and consistent `equals()`/`hashCode()`
+  are required; immutable keys are one way to satisfy that requirement;
 - `HashMap` does not preserve insertion order;
 - effective software engineering involves understanding both the strengths and the limitations of hash tables.

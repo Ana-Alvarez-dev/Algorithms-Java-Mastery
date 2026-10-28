@@ -1,5 +1,11 @@
 # Common Algorithms
 
+> Exact current outputs: frequency Map, duplicate boolean, TwoSum index pair
+> or empty array, first-unique **index** or -1. All reject null and preserve input.
+> The [contract and proof map](implementation-contracts.md) derives prefix
+> invariants, TwoSum's earliest-right/earliest-left tie policy, long complement
+> arithmetic and expected versus collision-heavy costs.
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -64,7 +70,8 @@ Typical applications include:
 
 # 3. Fast Lookup
 
-Hash tables provide immediate access to information associated with a key.
+Hash tables provide key-based access with conditional expected lookup costs.
+Computing the home position does not avoid all chain/probe searches.
 
 Conceptually:
 
