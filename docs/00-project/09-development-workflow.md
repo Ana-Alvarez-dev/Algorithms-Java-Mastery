@@ -928,9 +928,11 @@ repository consistency.
 Continuous Integration is the automation target that follows successful local
 validation.
 
-At the current repository stage, the CI/CD documentation defines the intended
-workflow, while an executable GitHub Actions workflow should only be treated as
-implementation evidence once a workflow file exists under `.github/workflows/`.
+The repository now implements the [Maven CI workflow](../../.github/workflows/maven-ci.yml).
+The [initial hosted record](../19-ci-cd/first-hosted-run.md) confirms successful
+PR/main jobs, actual checked source and inspected artifacts. Local validation,
+workflow source, hosted outcomes and branch-protection enforcement remain
+separate evidence; every subsequent contribution has its own run.
 
 When configured, Continuous Integration should validate the contribution in a
 clean environment and verify at least:

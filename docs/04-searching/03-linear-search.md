@@ -95,7 +95,9 @@ The collection:
 - may contain duplicate values;
 - may contain any comparable elements.
 
-No preprocessing is required.
+No preprocessing is required. The concrete int[] API requires non-null input,
+returns the first matching index (or -1, including for empty input), and preserves
+the array. Null rejection is NullPointerException; there is no sortedness requirement.
 
 ---
 
@@ -105,11 +107,11 @@ After execution:
 
 If the target exists,
 
-the algorithm returns its position (or another application-specific result).
+the repository algorithm returns its first occurrence index.
 
 Otherwise,
 
-the algorithm reports that the element was not found.
+the repository algorithm returns -1.
 
 ---
 
@@ -309,22 +311,20 @@ docs/01-foundations/06-invariants.md
 
 # Repository Traceability
 
-The current executable evidence for Linear Search exists in the Arrays package:
+The canonical executable evidence for Linear Search is in the Searching package:
 
 ```text
 docs/04-searching/03-linear-search.md
         ↓
-src/main/java/org/anaalvarezdev/algorithms/arrays/LinearSearch.java
+src/main/java/org/anaalvarezdev/algorithms/searching/LinearSearch.java
         ↓
-src/test/java/org/anaalvarezdev/algorithms/arrays/LinearSearchTest.java
+src/test/java/org/anaalvarezdev/algorithms/searching/LinearSearchTest.java
         ↓
-src/jmh/java/org/anaalvarezdev/algorithms/arrays/LinearSearchBenchmark.java
+src/jmh/java/org/anaalvarezdev/algorithms/searching/LinearSearchBenchmark.java
 ```
 
-This implementation was introduced during the Arrays learning progression.
-
-The dedicated Searching implementation phase should reuse, move, generalize,
-or complement it deliberately rather than duplicating it accidentally.
+Linear Search was introduced during the Arrays learning progression and is
+now owned by Searching. These are current paths, not planned replacements.
 
 ---
 

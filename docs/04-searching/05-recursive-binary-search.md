@@ -133,7 +133,7 @@ if low > high
 
     return NOT FOUND
 
-middle ← (low + high) / 2
+middle ← low + (high - low) / 2
 
 if A[middle] == key
 
@@ -364,16 +364,16 @@ Conceptually:
 T(n) = T(n / 2) + Θ(1)
 ```
 
-which yields logarithmic growth:
+which yields logarithmic worst-case growth:
 
 ```text
 T(n) = Θ(log n)
 ```
 
-The recursion depth is also logarithmic, producing:
+The worst-case recursion depth is logarithmic, producing:
 
 ```text
-Auxiliary stack space = Θ(log n)
+Worst-case auxiliary stack space = Θ(log n)
 ```
 
 This is distinct from the iterative version, which maintains constant auxiliary
@@ -395,9 +395,9 @@ The middle element is the target.
 
 ## Average Case
 
-```text
-Θ(log n)
-```
+For distinct sorted values and a uniformly chosen successful target position,
+expected probes are Θ(log n) as n grows. Always choosing the initial midpoint
+instead gives constant-depth success. Average-case claims require their model.
 
 ---
 
@@ -419,13 +419,14 @@ recursive Binary Search stores one stack frame for each recursive call.
 
 Therefore,
 
-its auxiliary memory complexity is:
+its worst-case auxiliary memory complexity is:
 
 ```text
 Θ(log n)
 ```
 
-This additional memory is consumed by the call stack.
+This additional memory is consumed by the call stack. An initial-midpoint
+match (or an empty interval) uses Θ(1) depth; Θ(log n) is the worst-case bound.
 
 ---
 
@@ -469,10 +470,10 @@ Each recursive invocation remains on the stack until the deepest call completes.
 
 | Property | Iterative | Recursive |
 |-----------|-----------|-----------|
-| Running Time | Θ(log n) | Θ(log n) |
-| Extra Memory | Θ(1) | Θ(log n) |
+| Worst-case running time | Θ(log n) | Θ(log n) |
+| Worst-case auxiliary memory | Θ(1) | Θ(log n) |
 | Readability | High | Very High |
-| Stack Usage | None | Yes |
+| Recursive stack growth | None; ordinary call frame remains | Up to Θ(log n) frames |
 | Risk of Stack Overflow | No | Very Small |
 
 ---
@@ -610,7 +611,7 @@ with asymptotic proof.
 
 Recursive Binary Search demonstrates how recursion naturally represents the Divide and Conquer paradigm.
 
-Although its running time is identical to the iterative implementation, recursion introduces additional stack usage while often improving conceptual clarity.
+With the same midpoint policy, iterative and recursive versions visit the same midpoint sequence and have the same worst-case asymptotic time. Their measured execution times need not be identical; recursion also changes worst-case stack usage.
 
 Mastering this algorithm prepares the learner for more sophisticated recursive techniques used throughout Computer Science.
 

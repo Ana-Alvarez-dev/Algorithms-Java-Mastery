@@ -854,7 +854,7 @@ Maven
 
 Linux and Windows are execution environments for the same Maven project. Linux additionally provides explicit practice with shell-based development, permissions, processes, environment variables, and automation.
 
-GitHub Actions belongs to the target engineering stack for Continuous Integration, but documentation must distinguish architectural intent from features that are actually implemented in the repository.
+The repository now includes the [Maven CI workflow](../../.github/workflows/maven-ci.yml). Its [initial hosted executions](../19-ci-cd/first-hosted-run.md) passed on the recorded PR/main source, with retained reports and package identity. Implementation, observed job success and repository enforcement remain distinct claims; this does not imply an unconfigured deployment target.
 
 ---
 

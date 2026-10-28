@@ -190,7 +190,13 @@ Example:
 1
 ```
 
-Only ten iterations are required to search more than one thousand elements.
+This diagram counts ten conceptual halvings from 1,024 candidates to one.
+The remaining singleton still needs a midpoint probe: the implemented inclusive
+floor-midpoint search needs up to floor(log2(n))+1 probes for nonempty n, hence
+**eleven** at n=1,024. For target 1,023 in [0..1,023], the midpoint indices are
+511, 767, 895, 959, 991, 1007, 1015, 1019, 1021, 1022, 1023.
+A midpoint probe can perform equality and ordering comparisons; it is not one
+Java primitive comparison. This exact count does not change logarithmic growth.
 
 ---
 
@@ -205,7 +211,7 @@ high ← last index
 
 while low ≤ high
 
-    middle ← (low + high) / 2
+    middle ← low + (high - low) / 2
 
     if A[middle] == key
 
@@ -428,7 +434,7 @@ The search interval is repeatedly halved.
 
 ## Average Case
 
-Binary Search also exhibits logarithmic behaviour.
+For distinct sorted values and a successful target chosen uniformly over the n positions, the expected probe count is Θ(log n) for growing n. This probability model matters: always targeting the first midpoint gives Θ(1), not the stated average model.
 
 ```text
 Θ(log n)
@@ -491,7 +497,7 @@ Binary Search is widely used in:
 |-----------|--------------|---------------|
 | Sorted Data Required | No | Yes |
 | Best Case | Θ(1) | Θ(1) |
-| Average Case | O(n) | Θ(log n) |
+| Average Case, distinct values and uniformly selected successful position | Θ(n) | Θ(log n) |
 | Worst Case | O(n) | Θ(log n) |
 | Space Complexity | Θ(1) | Θ(1) |
 | Suitable for Unsorted Data | Yes | No |

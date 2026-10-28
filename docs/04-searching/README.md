@@ -177,7 +177,7 @@ following activities.
 - test boundary positions;
 - test duplicate values;
 - test invalid input when applicable;
-- verify precondition enforcement;
+- test checked null rejection and distinguish assumed sortedness from validation;
 - test iterative and recursive implementations consistently.
 
 ---
@@ -381,15 +381,10 @@ value.
 
 Applies search strategies to representative computational problems.
 
-Examples may include:
-
-- locating a target in an array;
-- finding the first or last duplicate;
-- determining an insertion point;
-- searching a rotated ordered array;
-- finding a value satisfying a monotonic condition;
-- searching within multidimensional data;
-- comparing sequential and binary-search solutions.
+Implemented scope includes exact matching, first/last occurrence, lower-bound
+insertion, equality-range endpoints and one-dimensional closest-value search.
+Rotated-array, generic monotonic-predicate and multidimensional searches remain
+possible extensions, not implementations claimed by this module.
 
 Each problem should be analysed before implementation.
 
@@ -1011,7 +1006,7 @@ The principal results studied in this module are:
 |---|---:|---:|---:|
 | Linear Search | Θ(1) | Θ(n) | Θ(1) |
 | Iterative Binary Search | Θ(1) | Θ(log n) | Θ(1) |
-| Recursive Binary Search | Θ(1) | Θ(log n) | Θ(log n) |
+| Recursive Binary Search | Θ(1) | Θ(log n) | Θ(log n) worst case; Θ(1) initial match |
 
 Average-case claims require an explicit probability model or assumptions about
 target position and search success.
@@ -1053,14 +1048,10 @@ Maven Verification
 JMH only for a defined empirical question
 ```
 
-Potential implementation topics include:
-
-- iterative binary search;
-- recursive binary search;
-- first occurrence;
-- last occurrence;
-- lower-bound / insertion-position search;
-- search over monotonic predicates.
+Iterative/recursive binary search, first/last occurrence and lower-bound
+insertion are already implemented, along with LinearSearch, SearchRange and
+ClosestValueSearch. A generic monotonic-predicate API remains a possible later
+extension. The module matrix distinguishes implemented coverage from concepts.
 
 Only concepts already documented and justified should enter the implementation
 scope.
@@ -1118,10 +1109,11 @@ complexity arguments.
 
 The [Searching documentation analysis](documentation-review.md) reviews all
 eleven documents against the current implementations, tests, CLRS source, and
-recorded benchmark evidence. It identifies open contract and documentation
-findings, including the closest-value duplicate tie policy, and gives a
-prioritized correction order. Structural completion and passing tests do not
-resolve those findings automatically.
+recorded benchmark evidence. Its historical S01 tie defect was corrected by
+module 16; the closing review now applies the scoped S02-S08 documentation
+corrections with explicit contracts, models and paths. The historical findings
+remain visible with dated resolution follow-ups. This does not certify every
+future extension or replace proof with passing tests.
 
 The Searching documentation can be considered academically complete when the
 learner can:

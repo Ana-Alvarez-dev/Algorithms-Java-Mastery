@@ -69,7 +69,7 @@ engineering documentation.
 | Benchmarking | Applied protocol + 723 profile tests; first five-cell aggregation report, source inferred from reflog; original jar hash unavailable |
 | Linux environment | Applied preflight + 20 shell cases; Linux Java 21 builds verified |
 | CI/CD concepts | Applied to two-job Maven verification and package preparation |
-| GitHub Actions workflow | Implemented; local commands/lint pass, first hosted run pending |
+| GitHub Actions workflow | Observed PR/main success; 710 coverage / 723 package tests; artifacts inspected |
 
 The README is intentionally maintained as a **living project summary**. It is
 updated only when repository evidence changes.
@@ -322,6 +322,8 @@ are distinguished in the implementation guide.
 - [Linux local verification](docs/18-linux-environment/verification-report.md)
 - [CI/CD workflow and verification guide](docs/19-ci-cd/implementation-and-verification-guide.md)
 - [CI/CD validation and hosted-run status](docs/19-ci-cd/verification-report.md)
+- [Initial hosted CI execution and artifact identities](docs/19-ci-cd/first-hosted-run.md)
+- [Closing traceability review and remaining limitations](docs/00-project/12-closing-traceability-review.md)
 - [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
 
 The review distinguishes verified implementations from conceptual future work,
@@ -462,11 +464,23 @@ identity capture and discovery. Official action SHAs are pinned, permissions
 are read-only, and diagnostics/package artifacts request seven-day retention.
 The [verification report](docs/19-ci-cd/verification-report.md) records actionlint
 and all six run blocks passing locally: twenty shell cases, 710 coverage tests,
-723 profile tests, generated reports and 115-method discovery. **The first
-hosted run remains pending**; local commands are not relabelled as hosted CI.
+723 profile tests, generated reports and 115-method discovery. **The initial
+hosted runs are now observed passing**, recorded separately from those local checks.
 No deployment, benchmark timing gate or branch-protection change is introduced.
-The existing numbered sequence reaches module 19; follow-up is the observed
-hosted run and closing traceability review.
+The existing numbered sequence reaches module 19. The
+[hosted record](docs/19-ci-cd/first-hosted-run.md) now confirms both jobs for PR #97
+and merged main, with 710/723 passing JUnit invocations and inspected artifacts.
+Actual main checkout is `0d0ade1`; the PR checked synthetic merge `659cdb7`.
+The two main jobs used different Java 21 patches/images, recorded explicitly.
+
+The [closing review](docs/00-project/12-closing-traceability-review.md) reconciles
+100 production Java files, 115 JMH methods in 40 classes and per-module test
+counts. It also applies Searching S02-S08 documentation corrections: concrete
+contracts, exact probe counts, probability models, monotonicity, output costs,
+current paths and scope/status advice. Java/tests/workflow and historical
+numerical data are unchanged. This closes the selected engineering milestone
+with explicit research, coverage, provenance and repository-enforcement limits;
+it does not claim exhaustive proof or measurement of every possible extension.
 
 ## Technology Stack
 
@@ -481,7 +495,7 @@ hosted run and closing traceability review.
 | Git | Version control |
 | GitHub | Collaboration, branches and pull requests |
 | Linux | Professional command-line engineering environment |
-| GitHub Actions | CI workflow platform; first hosted run pending |
+| GitHub Actions | Observed hosted verification and package retention |
 | Generative AI | Learning, review and engineering assistance under human validation |
 
 ---

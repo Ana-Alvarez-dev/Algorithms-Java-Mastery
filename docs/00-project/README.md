@@ -85,7 +85,8 @@ engineering framework required for the remainder of the repository.
 | **08** | `08-engineering-standards.md` | Defines the engineering principles, quality standards, and coding conventions adopted throughout the repository. |
 | **09** | `09-development-workflow.md` | Describes the complete engineering workflow followed when studying, implementing, validating, and documenting algorithms. |
 | **10** | `10-references.md` | Identifies the academic, technical, and official references supporting the repository. |
-| **11** | [Traceability review](11-traceability-review.md) | Records current executable evidence, provenance gaps and the transition to Stacks and Queues. |
+| **11** | [Traceability review](11-traceability-review.md) | Records module progression, executable evidence and provenance through CI/CD. |
+| **12** | [Closing traceability review](12-closing-traceability-review.md) | Reconciles selected scope, observed CI/artifacts, scoped documentation corrections and continuing limits. |
 
 ---
 

@@ -94,6 +94,14 @@ Typical algorithms:
 
 # Range Search
 
+For k matching values in a sorted array, locating endpoints and enumerating
+matches costs O(log n+k) time. Materialising k values needs Θ(k) output space;
+streaming them need not retain that output. SearchRange returns only the two
+inclusive equality endpoints in a fixed-size array, with logarithmic worst-case
+search work and Θ(1) output space. An interval [a,b] uses the first value >=a
+and first value >b, whereas equality endpoints concern one target. Sorting or
+index construction is separate work and is not free preprocessing.
+
 Some applications search for values belonging to an interval.
 
 Examples:
@@ -111,6 +119,15 @@ These problems frequently combine:
 ---
 
 # Boundary Search
+
+Binary boundary search requires a single-transition predicate, for example
+false...false,true...true in the indexed order. The boundary invariant keeps
+all positions before low false, all positions at/after high true, and the
+unknown boundary in [low,high]. An appointment/failure status can alternate;
+ordering by an unrelated field does not establish this property. Without a
+monotonic predicate or appropriate index, scanning may be necessary.
+The implemented FirstOccurrence, LastOccurrence and SearchInsertPosition search
+ordered value partitions; they are not generic predicate-search APIs.
 
 Many problems require identifying the first or last element satisfying a condition.
 

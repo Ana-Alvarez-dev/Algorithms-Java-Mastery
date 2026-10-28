@@ -6,8 +6,8 @@ JaCoCo reports which bytecode/branches the tests reached; it does not judge asse
 
 The YAML was checked with actionlint 1.7.12. Local ShellCheck/Pyflakes integration was disabled because those tools were unavailable; all six run blocks were additionally syntax-checked and actually executed with Bash. This is an explicit scope limit, not a claim that every static-analysis tool ran in CI.
 
-Full SHA pins, read permissions, fresh checkouts and quoted runtime context constrain the workflow's behaviour, while hosted execution remains pending. A workflow definition and passing local commands do not by themselves enforce branch protection. Required-check settings are repository administration and were not changed.
+Full SHA pins, read permissions, fresh checkouts and quoted runtime context constrain the workflow's behaviour, with initial hosted executions now observed separately. A workflow definition and passing local commands do not by themselves enforce branch protection. Required-check settings are repository administration and were not changed.
 
 ## Applied workflow and evidence
 
-See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the pending first hosted execution.
+See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).

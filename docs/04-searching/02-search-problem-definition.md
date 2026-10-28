@@ -4,7 +4,7 @@
 
 Before studying specific searching algorithms, it is essential to understand the computational problem they are designed to solve.
 
-Although searching appears to be a simple operation, every searching algorithm addresses the same formal problem while making different assumptions about the organisation of the data.
+Exact-match searches share an existence/location question; insertion positions, ordered boundaries and nearest-value selection have distinct outputs and contracts.
 
 This document defines the search problem, identifies its components, establishes the terminology used throughout this module and explains the properties that influence algorithm selection.
 
@@ -56,7 +56,33 @@ or
 Not Found
 ```
 
-Regardless of the implementation, every searching algorithm attempts to solve this same computational problem.
+This describes exact-match search. The implemented lower-bound and nearest-value operations can return a useful result even when no value equals the target.
+
+---
+
+# Concrete Repository Contracts
+
+All eight public int[] operations reject null with NullPointerException and
+leave the input unchanged. Nondecreasing order is a caller obligation for the
+ordered operations; the implementations do not add a linear sortedness scan.
+Results for unsorted input to an ordered operation are outside its contract.
+
+| Operation | Required order | Result | Empty input | Duplicate policy |
+|---|---|---|---|---|
+| LinearSearch | None | Matching index or -1 | -1 | First occurrence |
+| BinarySearch | Nondecreasing | Matching index or -1 | -1 | Any match |
+| RecursiveBinarySearch | Nondecreasing | Matching index or -1 | -1 | Any match |
+| FirstOccurrence | Nondecreasing | First matching index or -1 | -1 | Lowest matching index |
+| LastOccurrence | Nondecreasing | Last matching index or -1 | -1 | Highest matching index |
+| SearchInsertPosition | Nondecreasing | Lower bound in [0,n] | 0 | Before existing equals |
+| SearchRange | Nondecreasing | Inclusive equality endpoints [first,last] | {-1,-1} | All equal-target endpoints; no enumeration |
+| ClosestValueSearch | Nondecreasing | Closest-value index, -1 only when empty | -1 | Minimise absolute long distance, then index |
+
+These contracts map to the eight existing classes, not hypothetical API choices.
+See the [module matrix](README.md#module-traceability-matrix),
+[Testing regressions](../16-testing/verification-report.md) and
+[closing review](../00-project/12-closing-traceability-review.md). General result
+representations discussed below do not replace the concrete guarantees above.
 
 ---
 
@@ -66,7 +92,7 @@ A searching problem always begins with two fundamental inputs.
 
 ## Collection
 
-A finite set of elements stored in a data structure.
+A finite collection stored in a data structure. In this module an int[] is an indexed sequence: order and duplicate positions matter, unlike a mathematical set.
 
 Examples include:
 

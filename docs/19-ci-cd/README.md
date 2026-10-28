@@ -3,14 +3,15 @@
 This module connects the existing contracts, Java 21 tests, Linux checks,
 coverage and benchmark packaging to an actual GitHub Actions workflow. It
 follows module 18 and completes the repository's existing numbered sequence
-through 19. The next evidence item is the first observed hosted run and a
-closing traceability review.
+through 19. The [initial hosted executions](first-hosted-run.md) and
+[closing traceability review](../00-project/12-closing-traceability-review.md)
+now record observed CI and the selected-scope milestone.
 
 ## Implemented workflow
 
 - [Maven CI YAML](../../.github/workflows/maven-ci.yml): two jobs, configured events, permissions, pinned actions and artifacts.
 - [Implementation and verification guide](implementation-and-verification-guide.md): contract, pseudocode/trace, failure handling, action identities, local checks and author procedure.
-- [Verification report](verification-report.md): observed local outcomes and pending hosted evidence.
+- [Verification report](verification-report.md): local outcomes and subsequent hosted follow-up.
 
 `verify` runs Linux preflight, twenty shell cases and coverage-enabled tests,
 requiring HTML/XML coverage output. `benchmark-package` needs verify, starts a
@@ -34,10 +35,14 @@ files, jar/provenance and discovery checks passing. There are still **115 JMH
 methods / 40 classes**. Production Java, tests, POM and historical results are
 unchanged; counts across repeated builds are not new distinct tests.
 
-**First hosted GitHub Actions run: pending.** The local harness did not run the
-JavaScript actions, hosted Temurin installer, cache or upload service. No run
-URL, hosted conclusion or enabled branch-protection rule is invented. Create
-the PR normally and inspect the two named checks as described in the guide.
+**Initial hosted execution observed:** PR run 40606662517 and merged-main run
+40606676206 both succeeded. The [hosted record](first-hosted-run.md) retains
+actual checked source (synthetic merge versus final merge), clean states,
+710/723 JUnit outcomes, artifact IDs/digests and the independently downloaded
+main jar hash. The two main jobs used different Temurin-21 patches/images;
+this allowed variability is recorded rather than hidden. The earlier local
+harness did not run those services and remains separate. Branch-protection
+settings were not changed or verified. Future PRs have their own observed checks.
 Windows remains supported; installing WSL locally is not required for GitHub's
 hosted Linux jobs.
 
@@ -62,5 +67,5 @@ remain in versioned Markdown. No JSON/log/new CSV evidence file is added to Git.
 The earlier aggregation record keeps its reflog-inferred source and unavailable
 original jar hash. A newly captured CI jar does not fill that old missing value.
 Coverage, tests, build duration and JMH measurements remain separate claims.
-The workflow-definition gap is addressed at source level; hosted success awaits
-observed run/attempt evidence, and repository enforcement settings are separate.
+The workflow-definition gap and initial hosted-verification evidence are now
+addressed for the recorded runs. Repository enforcement settings remain separate.

@@ -163,7 +163,8 @@ GitHub cache/upload services or hosted runner.
 Local execution used OpenJDK 21 on Linux, not the hosted Temurin setup. Temporary
 Maven transport settings and a local perf-data workaround were outside the
 workflow. Local-only run-context placeholders test Markdown formatting without
-inventing a GitHub run ID. The actual first hosted run remains pending.
+inventing a GitHub run ID. The subsequent [initial hosted record](first-hosted-run.md) now documents real
+PR/main success; these local checks remain a different evidence layer.
 
 ## Author PR and review procedure
 
@@ -203,10 +204,13 @@ validate the repository's current rules separately.
 - [Maven Surefire test goal](https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html): failIfNoTests; the local project's 3.2.5 plugin descriptor also confirms this property.
 - [Actionlint official release](https://github.com/rhysd/actionlint/releases/tag/v1.7.12): local workflow validation tool.
 
-The source-level CI workflow gap is addressed. Hosted success, uploads/cache and
-repository enforcement still require observed platform evidence. Historical
+The source-level CI workflow gap is addressed. The [hosted follow-up](first-hosted-run.md)
+now records successful PR/main jobs, uploads and independently inspected main
+artifacts. Cache hit/speedup is not inferred from setup success, and repository
+enforcement settings remain separate. Historical
 benchmark observations and unavailable original hashes remain unchanged. There
 is no new timed benchmark or JSON/log/CSV evidence file in Git. This completes
 the existing numbered implementation sequence through 19; the next step is the
-first observed hosted run and a closing traceability review, not an invented
+[closing traceability review](../00-project/12-closing-traceability-review.md),
+with observed CI and scoped documentation corrections rather than an invented
 production deployment or additional numbered module.

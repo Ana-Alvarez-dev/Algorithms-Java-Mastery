@@ -93,7 +93,7 @@ Examples:
 Linear Search worst case        Θ(n)
 Binary Search worst case        Θ(log n)
 Iterative Binary Search space   Θ(1)
-Recursive Binary Search space   Θ(log n)
+Recursive Binary Search worst-case stack space   Θ(log n)
 ```
 
 `O` remains useful when only an asymptotic upper bound is being asserted.
@@ -145,7 +145,11 @@ O(1)
 
 The average case represents the expected behaviour across many searches.
 
-For Linear Search, approximately half of the collection is examined.
+For a successful search with one target, uniformly located over n positions,
+Linear Search examines exactly (n+1)/2 elements in expectation (n>=1).
+If success has probability p and its conditional position is uniform, the
+expected count is p*(n+1)/2+(1-p)*n, since an absent target scans all n elements.
+A fixed first-position target instead takes constant work.
 
 Complexity:
 
@@ -153,7 +157,10 @@ Complexity:
 O(n)
 ```
 
-For Binary Search, the search interval is repeatedly divided in half.
+For Binary Search on distinct sorted values, a uniformly chosen successful
+target position gives expected Θ(log n) probes as n grows. Halving alone does
+not specify an average distribution; always choosing the initial midpoint gives
+Θ(1). These models do not come from the fixed benchmark scenario names.
 
 Complexity:
 
@@ -253,7 +260,7 @@ Although this additional memory is relatively small, it should still be consider
 |-----------|------|----------|--------|-----------------|
 | Linear Search | Θ(1) | Θ(n) under stated position/success assumptions | Θ(n) | Θ(1) |
 | Binary Search (Iterative) | Θ(1) | Θ(log n) under a stated search model | Θ(log n) | Θ(1) |
-| Binary Search (Recursive) | Θ(1) | Θ(log n) under a stated search model | Θ(log n) | Θ(log n) |
+| Binary Search (Recursive) | Θ(1) | Θ(log n) under a stated search model | Θ(log n) | Θ(log n) worst case; Θ(1) initial match |
 
 ---
 
