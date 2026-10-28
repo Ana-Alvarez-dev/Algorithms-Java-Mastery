@@ -167,8 +167,9 @@ the middle element.
 
 Advantages:
 
-- single traversal;
-- no element counting required.
+- the slow/fast phase needs no cached size or counting pass;
+- the actual public middle method first performs cycle validation, then its
+  middle phase; on even length it returns the second middle, floor(n/2).
 
 Typical complexity:
 
@@ -240,7 +241,10 @@ Space : O(1)
 
 # Merging Two Sorted Lists
 
-Two independently sorted lists may be combined into a new ordered list.
+The current mergeSorted destructively combines disjoint sorted LinkedNode
+chains, reusing their element nodes. It does not construct independently owned
+copies of the inputs. Let n and m be their independent lengths; total public
+work is Theta(1+n+m), including cycle/order validation and shared-tail rejection.
 
 Example:
 
@@ -266,7 +270,7 @@ particularly Merge Sort.
 Typical complexity:
 
 ```text
-Time  : O(n)
+Time  : Theta(1+n+m), including validation
 
 Space : O(1)
 ```
@@ -304,6 +308,23 @@ Time  : O(n)
 
 Space : O(1)
 ```
+
+---
+
+# Validation, Identity and Mutation Proofs
+
+LinkedNode is separate from private container nodes. hasCycle compares node
+identity, not equal values; its n counts distinct reachable nodes, including a
+cycle. Other methods reject cycles before changing links. Sorted methods first
+reject null comparators and validate ordering; merge also rejects intersecting
+acyclic inputs by shared tail identity. These checks do not promise rollback
+from arbitrary comparator side effects or exceptions during later mutation.
+
+A merge selects the smaller remaining head, chooses left on equality, then
+attaches the remaining suffix. Retain the returned head and stop treating the
+old input heads as independent owners. Sorted deduplication retains the first
+node of each comparator-equal run and detaches removed nodes. Comparator
+consistency/null support are caller obligations. See the [proof map](implementation-contracts.md#standalone-chain-algorithms).
 
 ---
 
@@ -429,7 +450,7 @@ traceability and the explicit boundary between implemented and later topics.
 | Middle Node | O(n) | O(1) |
 | Reverse | O(n) | O(1) |
 | Cycle Detection | O(n) | O(1) |
-| Merge Sorted Lists | O(n) | O(1)* |
+| Current Merge Sorted Lists | Theta(1+n+m), separate input lengths | O(1)* |
 | Remove Duplicates | O(n) | O(1) |
 | Partition | O(n) | O(1) |
 | Recursive Traversal | O(n) | O(n) |
@@ -503,8 +524,11 @@ Benchmarking allows engineers to compare:
 - merge implementations;
 - duplicate-removal algorithms.
 
-Within this repository, these comparisons are performed using JMH to complement
-theoretical complexity analysis with empirical measurements.
+These are possible future experiments, not current measurements. The existing
+JMH class compares container traversal, fixed middle access and a restored
+prepend/remove pair. It does not benchmark standalone reversal, merging,
+partitioning, duplicate removal or recursive traversal. Shared asymptotic
+reasoning does not supply timings for those algorithms.
 
 ---
 

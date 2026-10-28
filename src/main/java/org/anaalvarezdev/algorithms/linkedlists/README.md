@@ -15,8 +15,9 @@ defines the selected API, node ownership, invariants, exact costs and run comman
 | `LinkedListAlgorithms` | Floyd detection, middle, reversal, stable merge and sorted deduplication | `LinkedListAlgorithmsTest` |
 
 Containers allow null/repeated values, reject invalid indices, and keep their
-nodes private. Split transfers ownership; copying append leaves its source
-unchanged. Iterators reject structural changes and do not support removal.
+nodes private. Split transfers ownership; copying append leaves a distinct
+source unchanged, while self-append duplicates the receiver's original values
+once. Iterators reject structural changes and do not support removal.
 Standalone node algorithms cannot alter private container topology.
 
 `LinkedListOperationsBenchmark` provides fifteen JMH methods comparing manual
@@ -29,3 +30,11 @@ warmup iteration averages are recorded for five configurations. The author
 identified the executed source as commit `a16a431`; the report records the full
 SHA. On 2026-10-12, Java 21 verification passed 338 repository tests, including
 all 81 Linked Lists tests, and built the executable benchmark jar.
+
+## Ordered Documentation Review (2026-10-28)
+
+The [current contract map](../../../../../../../docs/06-linked-lists/implementation-contracts.md)
+and [review report](../../../../../../../docs/06-linked-lists/documentation-review.md)
+record applied proofs, scoped corrections and fresh Java 21 verification.
+Historical timing evidence above remains a separate run. The only Java source
+edit in this review clarifies appendAll's Javadoc; executable tokens are unchanged.

@@ -41,8 +41,9 @@ the three concrete structures. It extends `Iterable<E>`, not `java.util.List`.
 - `toList` returns an independent mutable value snapshot. Element references
   are shallow copies; internal nodes are never exposed.
 - `appendAll` copies the source's value snapshot into new destination nodes.
-  It leaves the source unchanged, rejects a null source, and supports self-append
-  by duplicating the original contents once. It does not splice shared nodes.
+  A distinct source remains unchanged. With self-append the source aliases the
+  receiver, whose original values are duplicated once. Null source is rejected;
+  no existing nodes are spliced or shared between distinct containers.
 - `splitOff(index)` transfers existing suffix nodes into a new sequence of the
   same topology. The original retains the prefix; neither container shares nodes.
 - `reverse` changes logical order in place and preserves element multiplicities.
@@ -51,7 +52,8 @@ the three concrete structures. It extends `Iterable<E>`, not `java.util.List`.
   `NoSuchElementException`; iterator `remove` is unsupported.
 - Structural changes, including reversal and a nonempty split, invalidate
   existing iterators with `ConcurrentModificationException`. Value replacement
-  is nonstructural. Empty clear/reverse and splitting at size are no-ops.
+  is nonstructural. Empty clear, reverse with size<2 and splitting at size are
+  no-ops. Iteration reads current node values, rather than a value snapshot.
 - These structures are not synchronized. Iterator checks detect misuse; they
   are not a concurrency-control mechanism.
 
@@ -294,3 +296,12 @@ those CLRS pages as though every exercise were presented there.
 
 The educational containers support a selected API. They do not replace the
 standard library's full List/Deque implementation.
+
+## Ordered Documentation Review (2026-10-28)
+
+The [applied contract/proof map](implementation-contracts.md) records ownership,
+position-sensitive costs, structural preservation, validation and iterator
+policies. The [review report](documentation-review.md) dates fresh Java 21
+Maven/JUnit verification and benchmark-package discovery separately from the
+historical JDK 21.0.9 timing subset. appendAll's source Javadoc is clarified;
+executable Java and tests are unchanged. No new JMH scores are added.

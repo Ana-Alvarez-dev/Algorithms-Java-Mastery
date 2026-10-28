@@ -274,7 +274,8 @@ Minimum scenarios include:
 - invalid operations;
 - expected exceptions.
 
-Testing confirms that the implementation satisfies its specification.
+JUnit/AssertJ check the specification on executed Java cases; a passing suite
+does not replace invariants, termination or ownership reasoning.
 
 ---
 
@@ -292,6 +293,20 @@ Questions include:
 - Are the tests comprehensive?
 
 Engineering quality extends beyond producing a correct output.
+
+---
+
+# Applied Ownership and Evidence Questions
+
+State whether references denote private container nodes or public LinkedNode
+chains; whether concatenation copies or consumes; and whether independent
+structures also share mutable element objects. For each mutation, account for
+head, tail, size and iterator invalidation as well as local links. Identify
+constant split boundaries and the locating cost before calling a splice O(1).
+
+The [dated review](documentation-review.md) records actual Java 21 Maven/JUnit
+execution against the repository source. Analytical proofs, executable tests,
+benchmark discovery and historical timing rows are separate evidence layers.
 
 ---
 

@@ -448,6 +448,19 @@ preceding traversal.
 
 ---
 
+# Position-Specific Costs in the Implemented Class
+
+For a valid element index i, get/set follow exactly i next links from head,
+so own work is Theta(1+i). get(size-1) therefore traverses even though getLast
+reads the cached tail in constant time. Indexed insertion at 0 or size uses
+endpoint methods; interior insertion/removal locates the predecessor. A cached
+tail supports constant append but cannot supply its missing previous link.
+The head-only table above is a different representation. A loop calling get(i)
+for every index performs quadratic work; one iterator pass is linear. See the
+[exact correspondence](implementation-contracts.md#position-and-ownership-costs).
+
+---
+
 # Comparison with Arrays
 
 Arrays and singly linked lists solve the problem of storing ordered collections
@@ -455,7 +468,7 @@ using different organisational models.
 
 | Characteristic | Array | Singly Linked List |
 |---------------|-------|--------------------|
-| Memory organisation | Contiguous | Dynamic |
+| Logical access model | Indexed slots | Explicit node links |
 | Indexed access | O(1) | O(n) |
 | Sequential traversal | O(n) | O(n) |
 | Insert at beginning | O(n) | O(1) |

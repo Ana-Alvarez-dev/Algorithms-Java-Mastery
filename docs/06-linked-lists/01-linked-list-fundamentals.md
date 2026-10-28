@@ -8,9 +8,10 @@ The following documents extend it to doubly linked and circular topologies.
 A **singly linked list** is a dynamic linear data structure composed of individual
 nodes connected through references.
 
-Unlike arrays, whose elements occupy contiguous memory locations, a singly
-linked list stores each node independently. Every node maintains a reference to
-its successor, forming a unidirectional chain that represents the collection.
+Array indexing and explicit node references provide different logical access
+models. A singly linked list represents its sequence through separately allocated
+node objects, each referencing its successor. Classical contiguous-array storage
+is a model; Java specifies neither portable node addresses nor object byte layout.
 
 This organisation provides flexibility for structural modifications while
 introducing different computational characteristics from those of contiguous
@@ -211,6 +212,18 @@ remaining structure.
 
 ---
 
+# Current API and Representation Boundary
+
+The actual containers cache head, tail and size, allow null/repeated values,
+and implement LinkedSequence<E>/Iterable<E>, not java.util.List. They expose
+values and indices rather than public node handles. The known-node costs below
+are local splice models, not methods that let callers delete arbitrary private
+nodes. Current addLast and size are constant-time; singly linked removeLast
+still locates its predecessor. The [applied contract map](implementation-contracts.md)
+connects these distinctions to the three implementations and their Java tests.
+
+---
+
 # Complexity Analysis
 
 The computational complexity of the principal operations depends on the amount
@@ -235,7 +248,7 @@ These complexities illustrate the trade-offs between linked lists and arrays.
 
 | Characteristic | Array | Singly Linked List |
 |---------------|-------|--------------------|
-| Memory | Contiguous | Dynamic |
+| Logical access model | Indexed slots | Explicit node links |
 | Indexed access | O(1) | O(n) |
 | Insert at beginning | O(n) | O(1) |
 | Delete at beginning | O(n) | O(1) |
