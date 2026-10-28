@@ -317,7 +317,10 @@ They are not proofs.
 
 # Dominant Terms
 
-For asymptotic growth, the fastest-growing term eventually dominates.
+For the finite non-negative sums used below, a largest term bounds the sum
+within a constant factor. Simplify cancellation first: n^2-n^2+n is linear.
+Same Θ order does not imply ratio-one equivalence (~); see
+[Asymptotic Analysis](03-asymptotic-analysis.md).
 
 Examples:
 
@@ -509,6 +512,20 @@ When applicable:
 lim f(n) / g(n) = ∞
 n→∞
 ```
+
+---
+
+# Quantifier Reminder
+
+For eventual non-negative costs and eventual positive g, Big O needs one fixed
+c>0 and one threshold that work for all later n. Little o instead requires
+**every c>0** to admit a threshold n0(c) with f(n)<c*g(n) thereafter; little
+omega requires f(n)>c*g(n). A missing ratio limit does not rule out Θ.
+See [formal definitions and witnesses](04-asymptotic-notations.md).
+
+All indexed-access and fixed-scalar bounds here use the
+[word and encoding model](01-computational-complexity.md#the-computational-model-is-part-of-the-claim).
+A call, a copy, or unbounded arithmetic must include its internal work.
 
 ---
 
@@ -746,7 +763,10 @@ i = 1
 i *= 2
 ```
 
-produces logarithmic iteration count.
+produces a logarithmic iteration count only when the arithmetic cannot wrap
+and the body cost is bounded. The [safe doubling example](06-time-complexity.md#loop-analysis-requires-bounds)
+uses a long counter with a non-negative int bound. An int counter can wrap and
+stop making progress.
 
 ---
 
@@ -784,7 +804,9 @@ T(n) = T(n / 2) + c
 T(n) = 2T(n / 2) + n
 ```
 
-The recurrence structure determines the growth.
+The recurrence needs base costs, integer-size/rounding rules and the actual
+non-recursive work. Halving with constant work is different from halving while
+copying Θ(n) values; see [recurrence examples](06-time-complexity.md#recurrences-need-a-domain-and-base-cost).
 
 ---
 
@@ -802,8 +824,10 @@ Input Space
 Auxiliary Space
 ```
 
-Auxiliary space refers to additional memory required beyond the original input
-storage.
+In this module auxiliary space includes new return storage; workspace excluding
+output is named separately. A materialised k-element result alone takes Θ(k)
+words. Peak-live storage differs from cumulative allocation and measured JVM
+heap occupancy; see [space conventions](07-space-complexity.md#output-workspace-and-word-conventions).
 
 ---
 
@@ -857,7 +881,9 @@ Maximum Active Calls
 
 Time may depend on total recursive work.
 
-Stack space depends on maximum active depth.
+Stack space is proportional to maximum active depth only with constant-size
+frames. Include buffers retained by active calls; depth alone does not bound
+their total size.
 
 ---
 
@@ -959,7 +985,8 @@ Resize
 Θ(n) actual work
 ```
 
-Across `m` appends:
+Starting empty with fixed capacity and only appends (no trim/reserve/delete),
+across m operations:
 
 ```text
 Total Cost
@@ -1007,18 +1034,23 @@ Track stored analytical potential
 
 These values assume the standard models described in their dedicated modules.
 
-| Algorithm                | Relevant Time Result           | Auxiliary Space           |
+| Algorithm                | Relevant Time Result           | Memory metric             |
 | ------------------------ | ------------------------------ | ------------------------- |
 | Array indexed access     | `Θ(1)`                         | `Θ(1)`                    |
 | Linear Search            | Best `Θ(1)`, Worst `Θ(n)`      | `Θ(1)`                    |
 | Binary Search, iterative | Best `Θ(1)`, Worst `Θ(log n)`  | `Θ(1)`                    |
-| Binary Search, recursive | Worst `Θ(log n)`               | `Θ(log n)`                |
+| Binary Search, recursive | Worst `Θ(log n)` | Worst auxiliary `Θ(log n)`; initial-match `Θ(1)` |
 | Selection Sort           | `Θ(n²)`                        | `Θ(1)`                    |
 | Bubble Sort, optimised   | Best `Θ(n)`, Avg/Worst `Θ(n²)` | `Θ(1)`                    |
 | Insertion Sort           | Best `Θ(n)`, Avg/Worst `Θ(n²)` | `Θ(1)`                    |
 | Merge Sort               | `Θ(n log n)`                   | `Θ(n)`                    |
-| Heap Sort                | `Θ(n log n)`                   | commonly `Θ(1)` auxiliary |
+| Heap Sort | Worst `Θ(n log n)` | Auxiliary `Θ(1)` with iterative sift-down |
 | Dynamic-array append     | Amortized `Θ(1)`               | structure storage `Θ(n)`  |
+
+These bounds assume constant-cost comparisons/indexing, n >= 2 where logarithms
+are used, and the stated implementation. Average sorting bounds below use
+uniform permutations of distinct keys. Heap sort is a reference model here,
+not a newly implemented sorting class.
 
 These values are review aids.
 
@@ -1055,12 +1087,21 @@ Always Better Engineering Choice
 | Bubble Sort*   |       `Θ(n)` |      `Θ(n²)` |      `Θ(n²)` |          `Θ(1)` |
 | Insertion Sort |       `Θ(n)` |      `Θ(n²)` |      `Θ(n²)` |          `Θ(1)` |
 | Merge Sort     | `Θ(n log n)` | `Θ(n log n)` | `Θ(n log n)` |          `Θ(n)` |
-| Heap Sort      | `Θ(n log n)` | `Θ(n log n)` | `Θ(n log n)` | commonly `Θ(1)` |
+| Heap Sort | Model-dependent; see note | Not derived here | `Θ(n log n)` | `Θ(1)` with iterative sift-down |
 
 `*` The linear best case assumes early-termination detection.
 
-These are standard analytical models; implementation details may affect some
-specific resource results.
+Average Bubble/Insertion Sort assumes a uniform permutation of distinct keys.
+Expected inversions are n(n-1)/4, giving quadratic shifts/swaps. Merge Sort
+always performs linear merging per level, including already ordered halves.
+
+Heap Sort needs a key-domain qualification: with early-stopping sift-down,
+all-equal keys cause constant work per restoration and Θ(n) total work.
+Thus an unconditional Θ(n log n) best case over duplicate-allowing inputs was
+incorrect. CLRS Third Edition section 6.4 states the O(n log n) upper bound;
+exercise 6.4-4 asks for the worst-case lower bound, and exercise 6.4-5 explicitly
+requires distinct elements for its best-case lower-bound problem. A recursive
+heapify also adds stack space; the Θ(1) column assumes iterative sift-down.
 
 ---
 
@@ -1071,9 +1112,9 @@ Do not collapse independent dimensions without justification.
 Examples:
 
 ```text
-Graph Traversal
+Full Adjacency-List Traversal Forest
 
-Θ(V + E)
+Θ(V + E), with constant work per vertex/adjacency entry
 ```
 
 ```text
@@ -1536,7 +1577,8 @@ The module structure is:
 ├── 07-space-complexity.md
 ├── 08-amortized-analysis.md
 ├── 09-complexity-examples.md
-└── 10-complexity-cheat-sheet.md
+├── 10-complexity-cheat-sheet.md
+└── documentation-review.md
 ```
 
 The conceptual progression is now:
@@ -1643,8 +1685,7 @@ The principal academic reference for this module is:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The concepts summarised in this cheat sheet—including algorithmic cost,
 asymptotic growth, asymptotic notation, case analysis, time complexity, space
@@ -1660,4 +1701,8 @@ docs/00-project/10-references.md
 
 This cheat sheet should be used as a review resource while the detailed
 documents remain the authoritative study material for the **Complexity** module.
-cation to New Algorithms
+
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

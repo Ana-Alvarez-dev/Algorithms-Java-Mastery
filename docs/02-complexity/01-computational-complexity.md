@@ -375,6 +375,35 @@ affect the algorithm.
 
 ---
 
+# The Computational Model Is Part of the Claim
+
+Unless a worked example states otherwise, assume a sequential word-RAM model:
+indexed array access, comparison, assignment and arithmetic on values fitting
+one model word have constant cost. A word must hold the indices and values used
+by the algorithm; this is an asymptotic abstraction, not an infinite Java array.
+Integer arithmetic must not overflow when translating mathematical loop bounds
+into Java. The [time note](06-time-complexity.md#loop-analysis-requires-bounds)
+contains a concrete failure and a bounded correction.
+
+A call such as process(x), a comparison of arbitrary-length strings, a whole
+array copy or arithmetic on unbounded integers is not automatically one
+constant-cost step. Count the work inside the operation, or explicitly say
+that only calls/comparisons are being counted. A comparison count describes
+total running work up to constant factors only when the remaining work is also
+bounded by that count plus required setup/termination work.
+
+For a positive integer value N, binary representation length is
+b = floor(log2(N)) + 1. An N-iteration loop can therefore use exponential work
+in b. Polynomial in a numeric value is not automatically polynomial in its
+encoded input length. Similarly, a fixed number of arbitrary-precision values
+need not occupy a fixed number of bits.
+
+Hardware independence means comparison under an explicit model. Changing the
+representation or the costs of primitive operations may require a new analysis;
+ordinary constant-factor runtime differences do not by themselves do so.
+
+---
+
 # Significant Operations
 
 Not every low-level machine operation must be counted individually.
@@ -1337,8 +1366,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The analysis of computational resources, input size, running-time models, and
 algorithm efficiency throughout *Introduction to Algorithms* provides the
@@ -1353,3 +1381,8 @@ docs/00-project/10-references.md
 Additional specialised references may be introduced later when asymptotic
 analysis, amortized analysis, recurrence relations, or experimental performance
 evaluation require further treatment.
+
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

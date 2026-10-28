@@ -243,8 +243,8 @@ Average-case analysis requires a probability model.
 
 Assume:
 
-* the target is present; and
-* each position is equally likely to contain it.
+* n >= 1 and the target occurs exactly once; and
+* its position is uniformly distributed over the n positions.
 
 Then the expected number of comparisons is:
 
@@ -403,11 +403,12 @@ T_worst(n) ∈ Θ(log n)
 
 A rigorous average-case statement requires a probability model.
 
-Under common search-distribution assumptions, the expected search depth also
-has logarithmic growth.
-
-However, the probability assumptions should be documented rather than simply
-reporting an unexplained “average complexity”.
+For a concrete model, use distinct sorted keys and choose the successful target
+uniformly among them. A balanced midpoint search tree has only O(2^h) nodes
+above depth h; choosing h about half of log2(n) shows that all but O(sqrt(n))
+keys need Ω(log n) probes. Together with the worst-case upper bound this gives
+Θ(log n) expected probes. A target fixed at the initial midpoint instead costs
+one probe, so the probability model is essential.
 
 ---
 
@@ -440,7 +441,9 @@ Therefore:
 S_aux(n) ∈ Θ(log n)
 ```
 
-under the standard recursive implementation model.
+in the **worst case**, using constant-size frames and interval indices.
+An initial-midpoint match has Θ(1) stack depth; copying subarrays would require
+a different time and space analysis.
 
 ---
 
@@ -547,8 +550,11 @@ T_worst(n) ∈ Θ(n²)
 
 ## Average-Case Time
 
-Under common input-distribution assumptions, the number of relevant operations
-also grows quadratically.
+Assume a uniform random permutation of n distinct keys and adjacent swaps.
+Each inverted pair has probability 1/2, giving n(n-1)/4 expected inversions.
+Each adjacent correcting swap removes exactly one inversion, so expected swaps
+are Θ(n^2). The nested-pass upper bound is O(n^2), establishing the matching
+time bound under constant-time comparisons and swaps.
 
 Therefore:
 
@@ -655,7 +661,8 @@ Merge Ordered Results
 
 ## Time Recurrence
 
-A typical recurrence is:
+For n >= 2, use T(n)=T(floor(n/2))+T(ceil(n/2))+Θ(n), with constant base
+cost for n <= 1. For powers of two this simplifies to:
 
 ```text
 T(n) = 2T(n / 2) + Θ(n)
@@ -699,7 +706,11 @@ T_average(n) ∈ Θ(n log n)
 T_worst(n)   ∈ Θ(n log n)
 ```
 
-under the standard model.
+under this always-merge model. No ordered-halves shortcut is assumed; even
+already ordered input has linear merge work per level. If another variant
+skips merges, its best case must be re-analysed. The production
+[MergeSort](../../src/main/java/org/anaalvarezdev/algorithms/sorting/MergeSort.java)
+uses one reusable auxiliary array and does not skip ordered merges.
 
 ---
 
@@ -812,8 +823,11 @@ cost.
 
 ## Amortized Time
 
-Across a sequence of `m` appends under geometric capacity growth, the total
-number of copied elements remains proportional to `m`.
+Start empty with fixed initial capacity and perform only appends, without
+trim/reserve/delete operations. Under a fixed geometric growth factor greater
+than one, total copies are O(m); the m new writes give the lower bound.
+[Amortized Analysis](08-amortized-analysis.md) derives exact doubling costs
+and explains the extra initial-state term for an arbitrary prefilled array.
 
 Thus:
 
@@ -989,8 +1003,10 @@ V = number of vertices
 E = number of edges
 ```
 
-For traversal algorithms operating on adjacency-list representations, the work
-may depend on both quantities.
+For a full traversal forest on an adjacency-list representation, initialise
+state for all V vertices, start a traversal at each unvisited root, and examine
+every adjacency entry. Assume constant work per entry/vertex and no adjacency
+copying hidden inside an accessor. Work then depends on both quantities.
 
 Conceptually:
 
@@ -1011,7 +1027,21 @@ under the relevant graph representation and traversal model.
 This demonstrates why complexity expressions should preserve independent
 problem dimensions.
 
-The detailed analysis belongs to the graph module.
+For an undirected graph, each edge contributes two adjacency entries, preserving
+Θ(V+E). On an adjacency matrix, scanning all candidate neighbours for every
+vertex instead gives Θ(V^2), including sparse graphs.
+
+A single-source traversal need not inspect edges in unreachable components.
+With V-sized initialised arrays, its actual adjacency-list work is Θ(V+E_R),
+where E_R counts adjacency entries scanned from reachable vertices. O(V+E) is
+a uniform upper bound; the Θ(V+E) conclusion requires the stated full traversal
+or an input that makes all relevant entries reachable. The existing [ConnectedComponents](../../src/main/java/org/anaalvarezdev/algorithms/graphs/ConnectedComponents.java)
+walks all roots; [BreadthFirstSearch](../../src/main/java/org/anaalvarezdev/algorithms/graphs/BreadthFirstSearch.java)
+is single-source and allocates V-sized state. The
+[AdjacencyListGraph](../../src/main/java/org/anaalvarezdev/algorithms/graphs/AdjacencyListGraph.java)
+iterator reads stored rows without copying them. Construction/normalisation of
+the graph is separate from these traversal-only bounds. The graph module gives
+the implementation-specific analysis.
 
 ---
 
@@ -1019,15 +1049,15 @@ The detailed analysis belongs to the graph module.
 
 A concise comparison is:
 
-| Example               | Relevant Time Result            | Auxiliary Space          | Important Condition           |
+| Example               | Relevant Time Result            | Memory metric             | Important Condition           |
 | --------------------- | ------------------------------- | ------------------------ | ----------------------------- |
 | Linear Search         | Best `Θ(1)`, Worst `Θ(n)`       | `Θ(1)`                   | No ordering required          |
 | Binary Search         | Best `Θ(1)`, Worst `Θ(log n)`   | Iterative `Θ(1)`         | Ordered input                 |
-| Bubble Sort           | Best `Θ(n)`*; Avg/Worst `Θ(n²)` | `Θ(1)`                   | `*` Optimised version         |
+| Bubble Sort           | Best `Θ(n)`*; Avg/Worst `Θ(n²)` | Auxiliary `Θ(1)` | Early exit; average uses uniform distinct-key permutations |
 | Merge Sort            | `Θ(n log n)`                    | `Θ(n)`                   | Standard array implementation |
 | Dynamic Array Append  | Amortized `Θ(1)`                | Structure storage `Θ(n)` | Geometric capacity growth     |
 | Pairwise Processing   | `Θ(n²)`                         | Often `Θ(1)`             | Constant work per pair        |
-| Graph Traversal Model | `Θ(V + E)`                      | Representation-dependent | Adjacency-list model          |
+| Graph Traversal Model | `Θ(V + E)` | Representation-dependent | Full adjacency-list forest with constant-cost access |
 
 The table summarises results.
 
@@ -1172,7 +1202,7 @@ Iterative
         ↓
 Θ(1)
 
-Recursive
+Recursive worst case (index ranges, constant-size frames)
         ↓
 Θ(log n)
 ```
@@ -1664,8 +1694,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The algorithm-analysis methodology demonstrated throughout these examples draws
 on the treatment of running time, asymptotic notation, case analysis,
@@ -1683,5 +1712,7 @@ Later algorithm modules may introduce additional specialised references when
 their analysis requires deeper treatment of a particular data structure,
 algorithmic paradigm, or computational model.
 
-```
-```
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

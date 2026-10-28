@@ -81,16 +81,27 @@ The current structure of this module is:
 ├── 07-space-complexity.md
 ├── 08-amortized-analysis.md
 ├── 09-complexity-examples.md
-└── 10-complexity-cheat-sheet.md
+├── 10-complexity-cheat-sheet.md
+└── documentation-review.md
 ```
 
 Each document explores a specific aspect of computational complexity while progressively building a complete understanding of algorithm analysis.
 
 ---
 
+# Documentation Review
+
+The [2026-10-28 review](documentation-review.md) reads all ten numbered notes
+and this README. It records scoped corrections, proofs/counterexamples and
+bounded checks; it does not report a new Maven or JMH run. Consulted evidence
+uses the supplied CLRS Third Edition, separately from the preferred fourth-edition
+bibliography, plus versioned official Java SE 21 references.
+
+---
+
 # Document Overview
 
-## 01-computational-complexity.md
+## [01-computational-complexity.md](01-computational-complexity.md)
 
 Introduces the concept of computational complexity and explains why algorithm efficiency is one of the central concerns of Computer Science.
 
@@ -98,20 +109,20 @@ Introduces the concept of computational complexity and explains why algorithm ef
 
 
 
-## 02-algorithm-growth.md
+## [02-algorithm-growth.md](02-algorithm-growth.md)
 
 Compares the most common growth rates observed in algorithms, from constant time to factorial complexity.
 
-Visual comparisons and growth curves are introduced to improve intuition.
+Numerical comparisons and growth-family examples are used to improve intuition.
 
 ---
-## 03-asymptotic-analysis.md
+## [03-asymptotic-analysis.md](03-asymptotic-analysis.md)
 
 Explains how algorithm behaviour is analysed as the input size approaches infinity, allowing objective comparisons independently of hardware.
 
 ---
 
-## 04-asymptotic-notations.md
+## [04-asymptotic-notations.md](04-asymptotic-notations.md)
 
 Introduces the mathematical notation used to describe algorithm growth, including:
 
@@ -123,7 +134,7 @@ Introduces the mathematical notation used to describe algorithm growth, includin
 
 ---
 
-## 05-best-average-worst-case.md
+## [05-best-average-worst-case.md](05-best-average-worst-case.md)
 
 Explains how algorithm performance varies depending on the characteristics of the input.
 
@@ -136,20 +147,20 @@ The document distinguishes between:
 ---
 
 
-## 06-time-complexity.md
+## [06-time-complexity.md](06-time-complexity.md)
 
 Studies the growth of execution time according to input size and introduces methods for counting algorithmic operations.
 
 
 ---
 
-## 07-space-complexity.md
+## [07-space-complexity.md](07-space-complexity.md)
 
 Examines how algorithms use memory and explains the trade-offs between execution time and memory consumption.
 
 ---
 
-## 08-amortized-analysis.md
+## [08-amortized-analysis.md](08-amortized-analysis.md)
 
 Introduces amortized analysis and explains why certain expensive operations remain efficient when evaluated over long execution sequences.
 
@@ -157,7 +168,7 @@ Examples include dynamic arrays and hash tables.
 
 ---
 
-## 09-complexity-examples.md
+## [09-complexity-examples.md](09-complexity-examples.md)
 
 Applies theoretical concepts to real algorithms.
 
@@ -167,15 +178,15 @@ Examples include:
 - Binary Search;
 - Bubble Sort;
 - Merge Sort;
-- Quick Sort;
-- Tree traversals;
-- Hash Table operations.
+- dynamic-array append;
+- pairwise processing;
+- graph traversal.
 
 The objective is to connect mathematical analysis with practical algorithm behaviour.
 
 ---
 
-## 10-complexity-cheat-sheet.md
+## [10-complexity-cheat-sheet.md](10-complexity-cheat-sheet.md)
 
 Provides a concise summary of the entire module.
 
@@ -248,8 +259,7 @@ Each implemented algorithm will include:
 - complexity analysis;
 - Java implementation;
 - automated testing;
-- Java Implementation
-- Experimental Benchmarking (when appropriate)
+- experimental benchmarking when appropriate.
 
 ---
 
@@ -303,8 +313,9 @@ Science.
 Rather than measuring execution time directly, complexity analysis studies how
 resource consumption grows as the input size increases.
 
-This perspective allows algorithms to be compared independently of hardware,
-programming language, compiler optimisations, or execution environment.
+This perspective compares algorithms under a stated model of representation
+and primitive-operation costs. It abstracts many hardware/runtime constants;
+it does not exempt a different representation or extra work from analysis.
 
 The concepts introduced in this module become part of the reasoning process
 applied before every Java implementation developed throughout the repository.
@@ -316,7 +327,7 @@ applied before every Java implementation developed throughout the repository.
 The learner should remember the following principles:
 
 - Efficiency is a fundamental characteristic of every algorithm.
-- Complexity analysis is independent of programming languages and hardware.
+- Complexity analysis compares costs under an explicit computational model.
 - Big O describes asymptotic growth rather than execution time.
 - Time and space complexity often involve trade-offs.
 - Theoretical analysis should be complemented by experimental benchmarking.
@@ -386,14 +397,19 @@ Distinguish target-position cases
         ↓
 Count inspected elements
         ↓
-03-arrays/07-common-algorithms.md
+04-searching/03-linear-search.md
         ↓
-src/main/.../arrays/LinearSearch.java
+src/main/java/org/anaalvarezdev/algorithms/searching/LinearSearch.java
         ↓
-src/test/.../arrays/LinearSearchTest.java
+src/test/java/org/anaalvarezdev/algorithms/searching/LinearSearchTest.java
         ↓
-src/jmh/.../arrays/LinearSearchBenchmark.java
+src/jmh/java/org/anaalvarezdev/algorithms/searching/LinearSearchBenchmark.java
 ```
+
+The current [linear-search implementation](../../src/main/java/org/anaalvarezdev/algorithms/searching/LinearSearch.java),
+[tests](../../src/test/java/org/anaalvarezdev/algorithms/searching/LinearSearchTest.java)
+and [benchmark](../../src/jmh/java/org/anaalvarezdev/algorithms/searching/LinearSearchBenchmark.java)
+exist under Searching; the old Arrays paths do not exist.
 
 This traceability keeps three forms of evidence separate:
 
@@ -469,7 +485,9 @@ The module can be considered complete when the learner can:
 The principal academic reference for this module is:
 
 - Cormen, Leiserson, Rivest and Stein.
-  *Introduction to Algorithms* (Fourth Edition).
+  *Introduction to Algorithms* (Fourth Edition, preferred bibliography).
+  The supplied Third Edition is the text directly checked in this review;
+  [source locators](documentation-review.md#consulted-sources) distinguish the editions.
 
 Additional references are listed in:
 

@@ -487,6 +487,20 @@ The goal is to identify which term determines long-term growth.
 
 ---
 
+# When Dominant-Term Simplification Applies
+
+For the finite sums of non-negative standard growth functions used here, the
+largest term bounds the sum from below and the number of terms times that term
+bounds it from above. This justifies a Θ classification when that largest term
+is identified. For a polynomial, simplify cancellations first and require a
+positive leading coefficient for an eventually positive cost.
+
+For example, n^2 - n^2 + n is exactly n, not quadratic. Oscillating functions
+may require direct bounds rather than a single dominant-term or ratio-limit
+shortcut. Lack of a ratio limit does not alone refute a Θ bound.
+
+---
+
 # Why Dominant Terms Matter
 
 Consider:
@@ -596,7 +610,7 @@ The exact crossover point depends on the functions being compared.
 
 ---
 
-# Asymptotic Equivalence Is Not Exact Equality
+# Same Asymptotic Order Is Not Exact Equality
 
 Suppose:
 
@@ -620,10 +634,11 @@ Therefore:
 f(n) ≠ g(n)
 ```
 
-while their asymptotic growth may still be described as equivalent in an
-appropriate sense.
-
-This distinction is essential when using notation such as `Θ`.
+while f(n) belongs to Θ(g(n)). Call this the same asymptotic order, or
+comparability within constant factors. Reserve f(n) ~ g(n), if used, for the
+stronger relation lim f(n)/g(n) = 1. Here the ratio tends to 3, not 1, so the
+functions are in the same Θ class but are not asymptotically equivalent in that
+stronger sense.
 
 ---
 
@@ -1432,9 +1447,10 @@ function has been understood.
 
 ---
 
-## Treating Asymptotic Equivalence as Exact Equality
+## Confusing Same Order with Ratio-One Equivalence
 
-Functions may have the same asymptotic growth without being numerically equal.
+Functions may belong to the same Θ class without being equal or having a ratio
+that tends to one. For example, 3n+10 is in Θ(n), but (3n+10)/n tends to 3.
 
 ---
 
@@ -1509,7 +1525,7 @@ After completing this document, the learner should understand that:
   becoming irrelevant to practical execution;
 * lower-order terms become relatively less significant as input size grows;
 * dominant terms determine long-term growth;
-* asymptotic equivalence does not mean mathematical equality;
+* the same Θ order does not imply exact equality or ratio-one equivalence;
 * thresholds such as `n₀` express the idea that a relationship holds beyond a
   sufficiently large input size;
 * both time and auxiliary-space functions can be analysed asymptotically;
@@ -1573,8 +1589,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The treatment of asymptotic growth, dominant terms, long-term function
 comparison, and asymptotic bounds throughout *Introduction to Algorithms*
@@ -1589,3 +1604,8 @@ docs/00-project/10-references.md
 Additional mathematical references may be introduced when the formal
 definitions and proofs associated with asymptotic notation require greater
 depth.
+
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

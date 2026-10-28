@@ -198,6 +198,28 @@ the same input representation.
 
 ---
 
+# Output, Workspace and Word Conventions
+
+In this note, auxiliary space means all newly required algorithm storage beyond
+the supplied input, including newly allocated return data. If a result excludes
+returned output, label it **workspace excluding output** and report the output
+separately. For materialising k values, output alone occupies Θ(k) words even
+if workspace excluding output is Θ(1). Streaming can avoid retention but still
+performs the output work.
+
+Counts here are in fixed-size/model words. A constant number of unbounded
+integers may require growing bit storage. Count the objects/buffers reachable
+through references, not just the fixed-size reference variables. This logical
+peak-live model is distinct from cumulative allocation and from observed JVM
+heap occupancy or process memory; it does not assume immediate garbage collection.
+
+For recursion, depth times per-frame storage gives the stack contribution when
+that storage is constant. With buffers retained by active frames, sum their
+sizes along the active path and include any other live data. Tail calls are not
+assumed to eliminate frames in this analysis.
+
+---
+
 # Input Storage
 
 The input itself occupies memory.
@@ -323,7 +345,7 @@ Matrix of Size n × n
 ```text
 Queue Containing Up to n Elements
         ↓
-Θ(n) Auxiliary Space
+O(n) Auxiliary Space; Θ(n) worst case only if a valid input attains linear occupancy
 ```
 
 The analysis should identify the **maximum simultaneously live memory**, not
@@ -749,6 +771,11 @@ Therefore:
 ```text
 S_aux(n) ∈ Θ(log n)
 ```
+
+The recursive Θ(log n) statement is a **worst-case** bound for n >= 2 with
+constant-size frames and interval indices rather than copied subarrays.
+An immediate initial-midpoint match uses Θ(1) active frames. Thus recursive
+binary search does not require Θ(log n) space on every input.
 
 The underlying search strategy is similar, but the implementation structure
 changes the auxiliary-space requirements.
@@ -1430,8 +1457,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The analysis of algorithmic space requirements, auxiliary storage, recursive
 execution, and time-space trade-offs throughout *Introduction to Algorithms*
@@ -1447,5 +1473,7 @@ Additional Java-specific references may be introduced later when empirical
 memory behaviour, runtime representation, or profiling requires implementation-
 level analysis.
 
-```
-```
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.
