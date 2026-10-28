@@ -415,8 +415,8 @@ These functions can have different growth behaviour.
 
 # Fundamental Ordering
 
-When all three functions are defined over the same valid input domain, we
-generally expect:
+When the minimum, maximum and finite expectation are defined on the same
+non-empty valid input domain, the ordering is guaranteed:
 
 ```text
 T_best(n)
@@ -627,8 +627,8 @@ T_worst(n) ∈ Θ(n)
 
 Suppose we adopt a model in which:
 
-* the target is guaranteed to be present; and
-* every position is equally likely to contain the target.
+* n >= 1 and the target occurs exactly once; and
+* its position is uniform over the n positions (probability 1/n each).
 
 Then the expected number of comparisons is:
 
@@ -683,13 +683,28 @@ Different Probability Model
 Different Expected Cost
 ```
 
+For n >= 1, let p be the probability of success, with exactly one target
+uniformly located conditional on success. Unsuccessful searches inspect all n
+elements. The expected comparison count is then
+p*(n+1)/2 + (1-p)*n. More generally, if q_i is the conditional probability that
+the first matching position is i (one-based), it is
+p*sum(i*q_i, i=1..n) + (1-p)*n.
+
+The uniform-position model is Θ(n); a target always at the first position has
+Θ(1) cost. If all values equal the target, the first match also costs one:
+merely saying that the target occurs at every position does not justify the
+uniform-unique-target formula. Empty input makes zero element comparisons and
+has constant total control work, outside the n >= 1 expectation formula.
+
 The average case must never be presented without its assumptions.
 
 ---
 
 # Example — Binary Search
 
-Consider binary search over a sorted collection.
+Consider first-match-on-midpoint binary search over a non-null, sorted array
+with constant-time indexed access and comparisons. Sortedness alone is not
+enough to establish logarithmic total work for an arbitrary collection or API.
 
 ## Best Case
 
@@ -1439,8 +1454,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The treatment of best-case, expected, and worst-case running times throughout
 *Introduction to Algorithms* provides the principal academic foundation for
@@ -1457,3 +1471,8 @@ docs/00-project/10-references.md
 
 Additional probability references may be introduced when average-case or
 expected-cost analysis requires greater mathematical depth.
+
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

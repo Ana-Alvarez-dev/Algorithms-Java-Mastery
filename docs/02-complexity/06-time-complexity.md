@@ -451,8 +451,9 @@ The existence of a loop does not automatically imply linear complexity.
 Consider:
 
 ```text
-for (int i = 1; i < n; i *= 2) {
-    process(i);
+// n is an int with 0 <= n <= Integer.MAX_VALUE.
+for (long i = 1; i < n; i *= 2) {
+    process(i); // assumed constant work on this model word
 }
 ```
 
@@ -479,7 +480,20 @@ Therefore, assuming constant work per iteration:
 T(n) ∈ Θ(log n)
 ```
 
-The loop bound, not merely the presence of a loop, determines the growth.
+For integer n >= 1 the body executes ceil(log2(n)) times (zero at n=1).
+The long counter is safe for this declared int range: its first value reaching
+or exceeding n is at most 2^31. This is not a promise of safety for arbitrary
+long limits.
+
+The previous int-counter version was not a valid logarithmic-time example for
+all positive int bounds. At n=1_073_741_825 it reaches 2^30, then multiplication
+wraps to -2^31 and later to zero. Zero remains below n and doubling it makes no
+progress. The derivation follows the finite-width rules in
+[Java SE 21 JLS sections 4.2.1-4.2.2](https://docs.oracle.com/javase/specs/jls/se21/html/jls-4.html#jls-4.2.2)
+and [15.17.1](https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.17.1).
+
+The loop bound and arithmetic model, not merely the presence of a loop,
+determine termination and growth.
 
 ---
 
@@ -526,8 +540,9 @@ Their iteration bounds must be analysed.
 Consider:
 
 ```text
-for (int i = 1; i <= n; i++) {
-    for (int j = 1; j <= i; j++) {
+// n is a non-negative int; long counters also avoid <= bound wraparound.
+for (long i = 1; i <= n; i++) {
+    for (long j = 1; j <= i; j++) {
         process(i, j);
     }
 }
@@ -588,7 +603,9 @@ n / 8
 ...
 ```
 
-The number of iterations grows logarithmically.
+For integer n >= 1, truncating non-negative integer division gives exactly
+floor(log2(n)) body executions. Thus it differs by one from doubling for many
+non-power-of-two limits. For n=0 the body is not executed.
 
 Therefore:
 
@@ -659,9 +676,13 @@ operationB → T_B(n)
 
 then case analysis may be required.
 
-For worst-case analysis, the larger branch cost may determine the result.
-
-For expected analysis, probabilities may be required.
+Include the work needed to evaluate condition as well as the selected branch.
+For a concrete input x, C(x)=C_condition(x)+C_selected_branch(x).
+The maximum of branch upper bounds gives an upper bound, but does not prove a
+tight worst case unless the expensive branch/cost is attainable by valid inputs.
+Expected cost requires the corresponding branch probabilities and costs.
+For example, scanning an array to decide a condition already costs Θ(n) even
+if both branches perform only constant work.
 
 Conditionals therefore connect time complexity with the case-analysis framework
 introduced previously.
@@ -848,8 +869,8 @@ T_worst(n) ∈ Θ(n)
 
 Requires a probability model.
 
-Under a model where the target is present and equally likely to occur at each
-position:
+For n >= 1, under a model with exactly one target whose position is uniform
+over the n positions:
 
 ```text
 Expected comparisons
@@ -885,13 +906,14 @@ n / 8
 ...
 ```
 
-After approximately:
-
-```text
-log₂ n
-```
-
-reductions, the search interval becomes minimal.
+Assume a non-null sorted array with constant-time indexing and comparisons.
+For the inclusive interval [left,right] with middle=left+(right-left)/2, a
+midpoint probe is one iteration, not one individual Java comparison expression.
+For n >= 1, at most floor(log2(n))+1 probes are needed. A last-element target
+in a strictly increasing array attains this maximum: the remaining right half
+has size floor(n/2) after each unsuccessful probe. At n=1024 that is eleven
+probes, although ten halvings reduce 1024 to one. For empty input there are no
+probes and constant control work.
 
 Therefore, in the worst case:
 
@@ -1051,6 +1073,26 @@ recursive and divide-and-conquer algorithms.
 
 ---
 
+# Recurrences Need a Domain and Base Cost
+
+For example, on sizes n=2^k with T(1)=1:
+
+```text
+T(n)=T(n/2)+1       gives T(2^k)=k+1.
+T(n)=2T(n/2)+n      gives T(2^k)=n*(k+1).
+```
+
+The second formula includes the n leaf costs and k levels of n work.
+For arbitrary integer sizes, state the actual rounded subproblem sizes and a
+base case for n <= 1. Merge sort can use
+T(n)=T(floor(n/2))+T(ceil(n/2))+Θ(n) for n >= 2. The halving expression is not
+a recursive definition down to fractional sizes without a stopping rule.
+Copying a subarray costs Θ(n) at that level, so a recursive search that copies
+halves has T(n)=T(floor(n/2))+Θ(n)=Θ(n) worst-case work, rather than the
+constant-extra-work logarithmic recurrence.
+
+---
+
 # Multi-Parameter Time Complexity
 
 Some algorithms depend on several independent input dimensions.
@@ -1092,6 +1134,11 @@ n = |A|
 m = |B|
 ```
 
+This Θ(nm) total-work shorthand assumes n,m >= 1. With zero-sized inputs,
+outer-loop checks still matter: a direct nested implementation with constant
+setup has Θ(1+n+nm) work, even when m=0 and no pair is processed. Counting
+only pair-body executions gives exactly nm instead. State which cost is meant.
+
 The parameters should remain separate unless the problem defines a relationship
 between them.
 
@@ -1114,7 +1161,11 @@ However, if output is not part of the computational problem being analysed,
 using I/O operations as the principal complexity model may obscure the intended
 algorithmic behaviour.
 
-The cost model should reflect the problem and analytical objective.
+The cost model should reflect the problem and analytical objective. An analysis
+of the core scan may explicitly exclude diagnostic I/O, but a bound claimed for
+the whole implementation must include the actual I/O, allocation, copying,
+validation and helper-call work. Work does not become constant or disappear
+merely because it is described as overhead.
 
 ---
 
@@ -1518,8 +1569,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The analysis of running time, operation counts, case-dependent cost, recurrence
 relations, and asymptotic bounds throughout *Introduction to Algorithms*
@@ -1534,3 +1584,7 @@ docs/00-project/10-references.md
 Additional references may be introduced later when recurrence solving,
 probabilistic time analysis, or specialised computational models require
 greater theoretical depth.
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

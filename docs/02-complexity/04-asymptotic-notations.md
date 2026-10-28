@@ -229,6 +229,19 @@ Asymptotic notation therefore describes **eventual behaviour**.
 
 ---
 
+# Domains and Quantifier Order
+
+Here n ranges over integer input sizes; functions used as costs are eventually
+non-negative. For ratio statements assume g(n) > 0 eventually. Constants and
+thresholds may depend on the functions/model but must not depend on n.
+
+For O, the order is: there exist c > 0 and n0, such that for every n >= n0 the
+bound holds. Choosing c = n does not prove n^2 is in O(n): that is not a constant.
+A finite list of numerical checks also does not establish the universal tail
+condition.
+
+---
+
 # Big O — Asymptotic Upper Bound
 
 Big O describes an asymptotic upper bound.
@@ -606,9 +619,12 @@ We write:
 f(n) ∈ o(g(n))
 ```
 
-when `f(n)` grows strictly slower than `g(n)` asymptotically.
+when, for **every** constant c > 0, there exists a threshold n0(c) such that
+0 <= f(n) < c*g(n) for every integer n >= n0(c). Unlike Big O, this must work
+for arbitrarily small positive c; the threshold may depend on c.
 
-One useful interpretation is:
+For eventually non-negative f and eventually positive g, a useful equivalent
+ratio condition is:
 
 ```text
 lim     f(n) / g(n) = 0
@@ -677,9 +693,11 @@ We write:
 f(n) ∈ ω(g(n))
 ```
 
-when `f(n)` grows strictly faster than `g(n)` asymptotically.
+when, for **every** constant c > 0, there exists a threshold n0(c) such that
+0 <= c*g(n) < f(n) for every integer n >= n0(c).
 
-A useful limit interpretation is:
+For eventually non-negative f and eventually positive g, the equivalent ratio
+condition uses divergence to positive infinity:
 
 ```text
 lim     f(n) / g(n) = ∞
@@ -1060,6 +1078,27 @@ It means the functions share the same asymptotic order within constant factors.
 
 ---
 
+# Witnesses and a Non-Limit Counterexample
+
+For f(n) = 3n^2 + 7n + 4 and integer n >= 1:
+
+```text
+3n^2 <= f(n) <= 14n^2
+```
+
+Thus c1=3, c2=14 and n0=1 witness Θ(n^2). For
+h(n)=4n*log2(n)+10n and n >= 2, 4n*log2(n) <= h(n) <= 14n*log2(n),
+which supplies the missing constants for the linearithmic example.
+
+A ratio need not converge for a Θ bound: let f(n)=n for even n and 2n for odd n.
+Then n <= f(n) <= 2n, even though f(n)/n alternates between 1 and 2.
+Conversely, an O bound that is not Θ does not necessarily imply little o:
+let q(n)=n for even n and 1 for odd n. It is in O(n), not Ω(n), and not o(n),
+because q(n)/n equals 1 on every even n. Use the quantified definitions rather
+than treating little o as merely an arbitrary loose Big O claim.
+
+---
+
 # Example — Logarithm Bases
 
 Consider:
@@ -1254,7 +1293,12 @@ A complexity statement might involve both:
 Θ(V + E)
 ```
 
-This expression should preserve both parameters when they vary independently.
+This expression should preserve both parameters on the declared domain. For a
+simple undirected graph V and E are not wholly independent: 0 <= E <= V(V-1)/2.
+For a bound on two unrestricted sizes n,m, state which tail of the domain is
+quantified, for example all n >= n0 and m >= m0, with constants uniform over
+both. If zero-sized inputs matter, retain setup terms such as n+nm instead of
+silently asserting Θ(nm) at m=0.
 
 Likewise:
 
@@ -1600,8 +1644,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The formal treatment of asymptotic notation, function bounds, growth rates, and
 algorithm analysis throughout *Introduction to Algorithms* provides the
@@ -1615,3 +1658,8 @@ docs/00-project/10-references.md
 
 Additional mathematical references may be introduced when formal proofs or more
 advanced asymptotic relationships require greater theoretical depth.
+
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

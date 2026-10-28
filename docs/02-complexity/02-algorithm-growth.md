@@ -314,8 +314,9 @@ Typical contexts include:
 * operations on balanced search trees;
 * repeated problem-size reduction.
 
-The base of the logarithm usually changes only a constant factor and therefore
-does not affect the asymptotic growth class.
+Changing between fixed logarithm bases greater than one changes only a constant
+factor. A base depending on n is a different situation: log_n(n) = 1 for n > 1,
+whereas log_2(n) grows without bound.
 
 ---
 
@@ -526,8 +527,8 @@ For example:
 10! = 3,628,800
 ```
 
-Factorial growth increases even more rapidly than many common exponential
-functions.
+For every fixed c > 1, n! eventually grows faster than c^n. The base must be
+fixed; this comparison does not say that n! grows faster than n^n.
 
 It often appears when an algorithm explores every permutation of `n` elements.
 
@@ -1040,7 +1041,9 @@ differently because of:
 * library overhead;
 * JVM optimisation.
 
-These implementation effects do not change the theoretical growth model.
+These effects may change constants when the implementation preserves the
+analysed operations. Extra copies, repeated traversal or differently sized
+arithmetic can change the cost function itself and require a new analysis.
 
 ---
 
@@ -1380,8 +1383,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The study of orders of growth and the comparison of algorithmic cost functions
 throughout *Introduction to Algorithms* provides the principal academic
@@ -1395,3 +1397,8 @@ docs/00-project/10-references.md
 
 Additional references may be introduced in later documents when formal
 asymptotic analysis requires greater mathematical depth.
+
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.

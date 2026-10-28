@@ -10,6 +10,13 @@ Foundations notes and README, applies eight scoped corrections and preserves
 the historical build, coverage and benchmark evidence below. Complexity and
 later modules are not declared re-reviewed by that follow-up.
 
+A **2026-10-28 Complexity documentation review**, based on main
+`dfb60afc3b8e60231ec421a8211073fee7677385` (PR #99 merge), follows
+[separately](../02-complexity/documentation-review.md). It reads the ten notes
+and README, corrects the scoped models/examples and records independent checks.
+It changes no executable source or historical benchmark evidence; later modules
+are not declared re-reviewed by this follow-up.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

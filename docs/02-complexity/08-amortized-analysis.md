@@ -319,8 +319,12 @@ The resize operation is much more expensive.
 
 # Simplified Dynamic Array Model
 
-Consider a simplified dynamic array whose capacity doubles whenever it becomes
-full.
+Start from an empty array with fixed capacity one. Only appends are allowed:
+no arbitrary reserve, trim, deletion, contraction or middle insertion occurs.
+Capacity doubles when full. Count one unit for writing the new element and one
+per copied old element; any allocation/initialisation cost is assumed constant
+or bounded by a constant multiple of the copying work plus one. The exact
+numbers below count writes/copies, not allocation bytes or elapsed time.
 
 Conceptually:
 
@@ -360,20 +364,22 @@ k copy operations
 
 plus the insertion itself.
 
-Therefore, some operations may have costs such as:
+The exact first nine append costs under that model are:
 
-```text
-1
-1
-2
-1
-4
-1
-1
-1
-8
-...
-```
+| Append number | Old elements copied | New write | Actual model cost |
+|---:|---:|---:|---:|
+| 1 | 0 | 1 | 1 |
+| 2 | 1 | 1 | 2 |
+| 3 | 2 | 1 | 3 |
+| 4 | 0 | 1 | 1 |
+| 5 | 4 | 1 | 5 |
+| 6 | 0 | 1 | 1 |
+| 7 | 0 | 1 | 1 |
+| 8 | 0 | 1 | 1 |
+| 9 | 8 | 1 | 9 |
+
+The actual-model-cost column includes both copies and the new write, rather
+than only the old capacity.
 
 The expensive operations become larger, but they also become less frequent.
 
@@ -381,7 +387,23 @@ The expensive operations become larger, but they also become less frequent.
 
 # Total Cost of Dynamic Array Insertions
 
-Suppose `n` elements are appended while capacity doubles.
+Suppose m >= 1 elements are appended from the stated empty initial state. The
+final capacity k is the least power of two at least m, so m <= k < 2m.
+The copied old capacities sum exactly to k-1; m=1 has no copies. Consequently:
+
+```text
+copies = k-1 < 2m
+actual write/copy cost = m+k-1 < 3m
+actual cost >= m
+```
+
+This proves Θ(m) total cost and Θ(1) amortized cost, uniformly over every prefix.
+If instead the sequence begins with an arbitrary full array of size N, one
+append can copy N values. A bound on m subsequent operations must retain the
+initial-state contribution, for example O(m+N), unless prepaid work is justified.
+
+Equivalently, writing n for the number of appends in the geometric-series
+illustration below:
 
 The total number of copied elements across resizing operations is approximately:
 
@@ -600,9 +622,12 @@ may conceptually pay for future structural work.
 If the credit system is designed correctly, the total amortized charges provide
 an upper bound on the total actual cost.
 
-The credits are an analytical device.
+For the append-only model above, charging 3 per append is sufficient because
+every prefix has actual cost < 3m. Its balance is 3m minus actual cost, never
+negative. This is a prefix guarantee; checking only a chosen final sequence
+would not ensure that earlier expensive operations can be paid for.
 
-They are not actual variables that must exist in the implementation.
+The credits are an analytical device, not required implementation variables.
 
 ---
 
@@ -648,6 +673,36 @@ Dᵢ
 ```
 
 is the state after operation `i`.
+
+---
+
+# Potential Conditions and a Worked Append Proof
+
+Summing the definition telescopes:
+
+```text
+sum(c_i) = sum(c_hat_i) + Φ(D_0) - Φ(D_m).
+```
+
+To bound every prefix by its amortized charges, require Φ(D_j) >= Φ(D_0)
+for every reachable prefix j. A common convention is initial potential zero and
+non-negative later potential. Otherwise retain the initial-potential term;
+merely writing the difference formula does not establish an upper bound.
+For example, with actual cost 1 per operation and Φ(D_i)=-i, the formula would
+give zero amortized charge, but the actual m-operation cost is m. The boundary
+condition fails, so that would not prove a zero-cost bound.
+
+For this note's empty, capacity-one append model, let s be size and k capacity,
+and use Φ(s,k)=2s-k+1. It is zero initially and non-negative in all reachable
+append-only states: after an expansion the structure is more than half full.
+A non-resizing append has actual cost 1 and potential change 2, giving charge 3.
+For a full array of capacity k, resizing and appending cost k+1; the potential
+changes from k+1 to 3, so the charge is (k+1)+(3-(k+1))=3.
+Thus every prefix costs at most 3m. The +1 normalises the capacity-one initial
+state; it is not the unshifted potential for an initially zero-capacity table.
+
+This argument depends on append-only reachable states. It does not prove a
+bound for arbitrary capacity changes or expand/shrink oscillation.
 
 ---
 
@@ -898,9 +953,11 @@ ArrayList append is amortized constant time
 
 should be interpreted carefully.
 
-It means that for a suitable sequence of append operations, the total
-resizing-and-insertion work grows linearly with the number of operations under
-the relevant implementation model.
+The [Java SE 21 ArrayList specification](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/ArrayList.html)
+provides an amortized-constant add guarantee and leaves the exact growth policy
+unspecified. Here the concrete association is append via add(E), not arbitrary
+indexed insertion, repeated trimming or explicit capacity changes. The doubling
+model above is a proof example, not a claimed ArrayList multiplier.
 
 It does not mean that:
 
@@ -1030,11 +1087,12 @@ does not imply:
 High Cost for Every Operation
 ```
 
-The total number of bit changes across a long sequence can remain bounded
-linearly in the number of increments.
-
-Therefore, the amortized number of bit changes per increment can remain
-constant.
+For a B-bit counter starting at zero, consider m >= 1 increments without
+overflow (m <= 2^B-1), counting bit flips. Bit j, numbered from zero, flips
+floor(m/2^j) times, so the total is sum(j=0..B-1, floor(m/2^j)) < 2m.
+The amortized bit-flip count is therefore O(1). An arbitrary initial state with
+B-1 trailing ones can cost B flips on its next non-overflowing increment; do not
+discard initial state when claiming a uniform sequence bound.
 
 ---
 
@@ -1578,8 +1636,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
-> Fourth Edition
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The treatment of amortized analysis through aggregate analysis, the accounting
 method, and the potential method provides the principal academic foundation for
@@ -1596,3 +1653,8 @@ Official Java documentation should be consulted when later discussing the
 behaviour of concrete Java Collections Framework implementations, while keeping
 the theoretical amortized model distinct from version-specific implementation
 details.
+
+For this review the supplied **Third Edition (2009)** was consulted directly.
+The [documentation review](documentation-review.md) records verified sections,
+printed/PDF page locators, official Java SE 21 sources and attribution limits.
+Fourth-edition page equivalence is not assumed.
