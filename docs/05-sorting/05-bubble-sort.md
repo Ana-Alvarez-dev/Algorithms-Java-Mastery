@@ -968,9 +968,11 @@ Best Case = O(n²)
 
 # Average-Case Complexity
 
-For randomly ordered input, many adjacent comparisons and exchanges are required.
-
-The number of operations grows quadratically.
+For a uniformly random permutation of n distinct keys, each pair is inverted
+with probability 1/2, so expected inversions are n(n-1)/4. Each strict adjacent
+exchange removes one inversion. That gives a quadratic expected lower bound;
+the quadratic worst upper bound makes expected work Theta(n²). A fixed seeded
+int dataset, especially one with duplicates, is not that probability model.
 
 Therefore:
 
@@ -1275,6 +1277,19 @@ does not necessarily mean:
 ```text
 Best Practical Choice
 ```
+
+---
+
+# Few Inversions Do Not Bound All Bubble Work
+
+For [2,3,...,n,1], there are n-1 inversions and exchanges. The final 1 moves
+left by only one slot per left-to-right pass, so this shrinking-prefix version
+still makes n(n-1)/2 comparisons. Thus few exchanges do not imply Theta(n+I)
+total Bubble Sort work. Insertion Sort has that inversion-sensitive bound;
+this Bubble implementation does not. For n>=1 sorted input makes n-1 comparisons;
+empty input makes zero and still has constant control cost.
+The [contract map](implementation-contracts.md) records the inner prefix-maximum
+and outer completed-suffix invariants.
 
 ---
 

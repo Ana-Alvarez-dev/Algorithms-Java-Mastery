@@ -166,6 +166,20 @@ These algorithms scale significantly better for large collections.
 
 ---
 
+# Model and Variant Qualifications
+
+Use fixed-word int comparisons and indexed access; count comparisons, writes,
+copies and logical frames separately. The table's O bounds are upper bounds;
+the [current implementation map](implementation-contracts.md) supplies tight
+case bounds. Bubble/Insertion expected statements use uniformly random
+permutations of distinct keys. Quick's expected claim needs its input/pivot
+model; a fixed seed is not an expectation. Selection's exact comparison count
+is independent of the distribution; Merge always merges in the current code.
+Current Quick's worst stack is logarithmic, not the linear stack of naive
+both-side recursion. Empty/singleton inputs have constant control work.
+
+---
+
 # Growth Comparison
 
 Asymptotic growth can be visualised conceptually.
@@ -207,7 +221,14 @@ Consequently:
 - Quick Sort reaches it on average.
 - Quadratic algorithms cannot achieve it.
 
-This theorem explains why no comparison-based algorithm can guarantee better asymptotic performance than **O(n log n)**.
+For arbitrary permutations of n distinct keys, a binary decision tree needs
+at least n! leaves. Its worst depth h therefore satisfies 2^h>=n!, so
+h>=ceil(log2(n!))=Omega(n log n). This is a worst-case-over-inputs comparison
+bound, not a lower bound for every input. Already ordered/all-equal inputs can
+be linear for adaptive algorithms. Bounded-key counting/radix models have
+additional information and do not contradict the theorem. The lower-bound
+notation is Omega; O(n log n) describes a matching upper bound, not a barrier
+expressed using an upper-bound symbol.
 
 ---
 

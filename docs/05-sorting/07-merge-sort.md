@@ -739,6 +739,19 @@ However, the memory is allocated once rather than repeatedly.
 
 ---
 
+# Current Shared-Workspace Correspondence
+
+The existing class uses the reusable-array design, not a numeric infinity
+sentinel. Integer.MAX_VALUE remains valid data. Each merge copies its active
+interval once into the same auxiliary array, then writes every result slot.
+For a non-empty length n, let h=ceil(log2 n). Total copied slots across merges
+are n*h-(2^h-n), and the same number of destination writes occur. For n=2^h
+this is n*h. Peak workspace is linear, whereas cumulative copy work is
+Theta(n log n); these are different quantities. The [contract map](implementation-contracts.md)
+gives the consumed-head invariant and n<2 fast path.
+
+---
+
 # Manual Trace
 
 Consider:
@@ -1127,7 +1140,8 @@ Its running time can be described through a recurrence relation.
 For an input of size `n`:
 
 ```text
-T(n) = 2T(n / 2) + Θ(n)
+T(0)=T(1)=Theta(1)
+T(n)=T(ceil(n/2))+T(floor(n/2))+Theta(n), n>=2
 ```
 
 The terms represent:
@@ -1519,13 +1533,11 @@ The merge may be skipped.
 
 This can improve practical behaviour on partially ordered data.
 
-However, the core theoretical model remains based on:
-
-```text
-O(n log n)
-```
-
-time.
+For a version with that check at every internal call, already sorted input
+can take Theta(n) total work: linear many calls/checks and no merges, plus any
+linear workspace allocation. Its worst bound remains O(n log n). The current
+Java implementation does not use this shortcut and always has Theta(n log n)
+work for n>=2; do not transfer the extension's improved best case to it.
 
 ---
 
@@ -2271,7 +2283,9 @@ Expected
 [6][6][6][6]
 ```
 
-This case is useful for verifying stability and boundary handling.
+This primitive-value case checks duplicates and boundaries. It cannot expose
+equal-record identity, so stability requires a movement proof or a later tagged
+object/comparator implementation.
 
 ---
 

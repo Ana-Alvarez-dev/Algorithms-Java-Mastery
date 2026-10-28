@@ -851,9 +851,20 @@ Therefore, Insertion Sort is correct.
 
 A useful invariant for the inner loop is:
 
-> Before each inner-loop iteration, the elements in `A[j + 1 ... i]` are the elements originally greater than the key, shifted one position to the right.
+Let B be the array contents at the start of this outer iteration, after saving
+key=B[i]. Use half-open slices. At the inner-loop header j, the logical hole is
+j+1; the shifted destination region is A[j+2:i+1), not A[j+1:i+1).
 
-The key remains safely stored in a temporary variable.
+- A[0:j+1) equals B[0:j+1).
+- A[j+2:i+1) equals B[j+1:i), and each shifted value is greater than key.
+- The multiset of that unchanged prefix, the shifted region and the saved key
+  equals B[0:i+1); exclude the unspecified hole slot from this accounting.
+
+Initially j=i-1 and the shifted region is empty. Shifting A[j] into A[j+1]
+then decrementing j preserves the invariant. j+1 decreases until the guard
+fails; inserting key into the hole establishes the sorted-prefix result.
+The key remains safely stored in a temporary variable. The [applied map](implementation-contracts.md)
+connects this reasoning to the current position/index variable names.
 
 When the loop terminates, index:
 
@@ -976,9 +987,11 @@ Best Case = O(n)
 
 # Average-Case Complexity
 
-For randomly ordered input, each key moves through approximately half of the sorted region on average.
-
-The total number of comparisons and shifts grows quadratically.
+For a uniformly random permutation of distinct keys, expected inversions are
+n(n-1)/4. The current algorithm makes exactly I shifts and max(0,n-1) final
+key writes. Its total work is Theta(1+n+I), hence expected Theta(n²) under that
+model. This is not an expectation over one deterministic benchmark seed or a
+claim that all duplicate-heavy distributions behave identically.
 
 Therefore:
 

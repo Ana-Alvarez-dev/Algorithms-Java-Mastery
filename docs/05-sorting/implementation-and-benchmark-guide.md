@@ -224,3 +224,13 @@ zero-based arrays, shared workspace, middle-pivot Hoare choice, and bounded-stac
 control are documented implementation decisions. The module's fourth-edition
 bibliography remains a separate reference; no pagination from that edition is
 claimed here.
+
+## Documentation Review Follow-up (2026-10-28)
+
+The [applied contract/proof map](implementation-contracts.md) specifies the
+current loops, insertion hole invariant, merge counts and Hoare stack argument.
+The [dated review](documentation-review.md) records independent mathematical
+checks, including a middle-pivot quadratic-time/small-stack adversarial family.
+This pass changes Markdown only; the 2026-10-09 Java verification and later
+JDK 25 benchmark record above remain historical evidence. It does not add an
+object/comparator API, rerun benchmarks or replace missing execution metadata.

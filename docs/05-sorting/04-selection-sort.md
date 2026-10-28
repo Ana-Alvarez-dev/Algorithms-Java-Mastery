@@ -973,6 +973,19 @@ This distinction may matter when data movement is expensive.
 
 ---
 
+# Current Counts and Empty Inputs
+
+The current self-exchange check gives exactly n(n-1)/2 key comparisons and at
+most max(0,n-1) exchanges, independent of any probability distribution.
+For n>=1, sorted input uses zero exchanges; the rotation [2,3,...,n,1] attains
+n-1 exchanges. Reverse distinct input instead uses floor(n/2) exchanges.
+Comparisons and writes are separate counts, so equal comparison counts do not
+promise equal timings. Empty/singleton input uses constant control work; the
+n-1 pass/exchange formulas above assume n>=1. The [applied invariant](implementation-contracts.md)
+also accounts for multiplicities and the inner suffix-minimum scan.
+
+---
+
 # Assignment Count per Exchange
 
 A conventional exchange uses three assignments:

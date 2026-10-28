@@ -38,7 +38,7 @@ For example:
 | Algorithm | Complexity |
 |-----------|------------|
 | Merge Sort | O(n log n) |
-| Quick Sort | O(n log n) |
+| Quick Sort | Balanced/expected O(n log n) under a stated model; worst Theta(n²) |
 
 Although both algorithms belong to the same asymptotic class, they may produce different execution times under identical conditions.
 
@@ -249,7 +249,8 @@ The collected measurements allow computation of:
 
 # Warm-Up
 
-Java applications become faster after the JVM optimizes frequently executed code.
+Warmup allows frequently executed code to compile and runtime state to evolve;
+it does not guarantee monotonically faster execution or a stable measurement phase.
 
 Therefore, benchmark execution is divided into two phases:
 
@@ -275,7 +276,8 @@ Common input categories include:
 
 ## Random Arrays
 
-Representative of general-purpose workloads.
+Samples of a declared generator and seed; not a universal workload or an
+expectation over all inputs.
 
 ---
 
@@ -358,7 +360,7 @@ JMH automatically manages:
 
 - warm-up iterations;
 - measurement iterations;
-- JVM optimizations;
+- a generated harness that reduces common optimisation-related measurement errors;
 - statistical analysis;
 - benchmark isolation.
 
@@ -453,7 +455,7 @@ Common errors include:
 - benchmarking only once;
 - using different datasets;
 - ignoring JVM warm-up;
-- measuring object creation instead of the algorithm;
+- including or excluding allocation without defining the measured operation;
 - comparing algorithms with different implementations;
 - drawing conclusions from insufficient data.
 
@@ -495,6 +497,22 @@ This chapter complements those topics through experimental evaluation.
 Future modules will apply benchmarking to additional algorithms and data structures.
 
 The methodology introduced here will also be reused when evaluating searching algorithms, graph algorithms, and dynamic programming implementations.
+
+---
+
+# Scope of the Actual Harness
+
+The conceptual input-size examples above do not override the elementary
+experiment's 10,000-element cap. Current timings include clone/allocation plus
+sorting; this is deliberate, and the copy-only control is not mechanically
+subtractable. JMH does not prove that generated code, GC/JIT behaviour or the
+host environment are free from bias. Profiling/inspection require separate
+evidence. The current RANDOM fixture can contain duplicates and supplies one
+seeded dataset per pair; NEARLY_SORTED's adjacent exchanges can cancel. Neither
+name defines the distinct-key probability model in an analytical table.
+See the [review](documentation-review.md) and [proof map](implementation-contracts.md)
+for the boundaries between operation counts, current defaults and the retained
+48-cell JDK 25 execution.
 
 ---
 

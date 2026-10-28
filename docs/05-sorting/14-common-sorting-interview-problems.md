@@ -323,6 +323,25 @@ A complete answer should consider:
 
 ---
 
+# Conditions and Implementation Scope
+
+These are teaching extensions, not additional current Java sorting APIs.
+Include the selected sort's bound: Merge gives a worst-case n log n guarantee,
+whereas this Quick Sort has quadratic worst time. Copying to preserve caller
+input adds linear storage, and returning original positions requires retaining
+an index mapping. Sorting changes positions and order.
+
+For interval merging, define closed/half-open endpoints and whether touching
+intervals merge. Keep the maximum end of the current merged interval; adjacent
+original intervals alone are insufficient for [1,10],[2,3],[4,5]. Materialised
+merged intervals also require output storage. A strict majority means more than
+n/2 occurrences, not merely the longest equal run; verify its count. Closest-
+pair differences and pair sums over int values need widened arithmetic before
+subtraction/addition. The [contract map](implementation-contracts.md) separates
+these future policies from the five implemented ascending int[] sorts.
+
+---
+
 # Complexity Analysis Questions
 
 Candidates should be able to explain:
@@ -387,7 +406,8 @@ It demonstrates how algorithmic analysis, complexity reasoning and sorting strat
 
 # Relationship with Future Documents
 
-Subsequent modules on searching, trees, graphs and dynamic programming will build upon the same reasoning process introduced here.
+The earlier Searching module and later Trees, Graphs and Dynamic Programming
+modules share this reasoning process.
 
 Many advanced algorithms also begin by sorting the input before applying more specialized techniques.
 

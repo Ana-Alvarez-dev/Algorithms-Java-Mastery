@@ -1219,6 +1219,19 @@ Only the arrangement may change.
 
 ---
 
+## Applied Contract Boundary
+
+The five current public methods sort a non-null int[] ascending, return void
+and mutate the supplied array. Length and each value's multiplicity are
+preserved; equality of sets alone would miss changed duplicate counts.
+Empty/singleton inputs are accepted. Their [contract map](implementation-contracts.md)
+separates this implemented scope from generic comparators, descending sorting,
+partial selection and external sorting. Writing into the input does not imply
+constant auxiliary storage: the current Merge Sort allocates a linear workspace.
+No concurrent input mutation or allocation/resource guarantee is assumed.
+
+---
+
 ## Example of an Incorrect Result
 
 Input:
