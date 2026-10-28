@@ -168,6 +168,19 @@ The comparison-based algorithms studied in this module require only a valid comp
 
 ---
 
+# Current Java Contract
+
+All five existing sort(int[]) entry points explicitly reject null with
+NullPointerException and message "values must not be null". They return void,
+preserve the supplied array object/length and establish ascending int order
+with the same multiplicities. Empty and singleton arrays complete normally.
+No comparator, subrange or descending API is added by this general discussion.
+See the [applied map](implementation-contracts.md) for actual variants, costs,
+proofs and existing tests. Resource failures are outside the normal-result
+postcondition; relational comparisons do not subtract potentially extreme keys.
+
+---
+
 # Postconditions
 
 A postcondition describes what must be true after the algorithm finishes.

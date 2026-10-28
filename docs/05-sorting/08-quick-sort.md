@@ -92,6 +92,19 @@ After completing this document, the learner should be able to:
 
 ---
 
+# Variant Boundary for This Repository
+
+The main early pseudocode, final-pivot invariant, n-1 partition-comparison count
+and empty-plus-(n-1) worst split below describe **Lomuto** examples. Current
+QuickSort instead uses a middle-value **Hoare** boundary, two non-empty children
+of sizes k and n-k, and smaller-side recursion plus a loop. Its auxiliary stack
+is O(log(n+1)) even in quadratic-time cases. Its boundary is not a final pivot
+index. The [applied proof](implementation-contracts.md#hoare-partition-and-bounded-stack)
+and [implementation guide](implementation-and-benchmark-guide.md) define the
+actual source correspondence; teaching variants remain clearly separate.
+
+---
+
 # Algorithm Overview
 
 Quick Sort selects an element from the current region and uses it as a pivot.
@@ -1506,12 +1519,15 @@ With the same last-element pivot strategy:
 [5][4][3][2][1]
 ```
 
-the pivot is always the smallest value.
+the first pivot is the smallest value. After its final exchange, the next
+last-element pivot can instead be the largest remaining value. Thus repeated
+unbalanced splits, rather than "always smallest", establish the quadratic case.
 
 Partition result:
 
 ```text
-[] | [1] | [5][4][3][2]
+[] | [1] | [4][3][2][5]
+Next last-element pivot: 5 (the largest remaining value).
 ```
 
 Again, one subproblem has size:
@@ -1662,6 +1678,19 @@ O(log n)
 even when partitions are unbalanced.
 
 It is an example of converting one recursive branch into iteration.
+
+---
+
+# Current Worst-Time / Small-Stack Counterexample
+
+A deterministic middle-position pivot can still be forced into repeated
+1-versus-(m-1) Hoare splits. Construct distinct input by starting with [1,...,n]
+and, for left=n-2 down to 0, swapping left with left+(n-1-left)/2 (floor).
+Each partition then selects the remaining minimum and leaves a singleton on
+the left. The larger region is processed by the loop, so helper depth stays
+two for n>=2 while work is quadratic. This is a constructed counting family,
+not a historical JMH result or a claim that ordinary reverse input is its
+worst case. Details and exact pivot-comparison counts are in the [proof map](implementation-contracts.md#quadratic-time-with-constant-depth-on-a-family).
 
 ---
 
@@ -2385,7 +2414,7 @@ The asymptotic space requirement still depends on partition balance and push ord
 
 One recursive call can be replaced by iteration.
 
-Example strategy:
+Example strategy for a Lomuto final-pivot return (not the current Hoare boundary):
 
 ```text
 while left < right

@@ -31,6 +31,13 @@ It adds scoped S09-S16 clarifications and an applied contract/proof map while
 preserving S01-S08 history. Only Markdown changes; source, tests, JMH fixtures
 and the historical 65-row measurement record are unchanged.
 
+A **2026-10-28 ordered Sorting documentation review**, based on main
+`8d8a5beec76c97583d721c36ab3903aa1fd267b7` (PR #102 merge), follows
+[separately](../05-sorting/documentation-review.md). It adds scoped SO01-SO12
+corrections and a current contract/proof map. Only Markdown changes; Java,
+tests, JMH fixtures and the historical 48-configuration JDK 25 record are
+unchanged. Later modules are not declared re-reviewed by this follow-up.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

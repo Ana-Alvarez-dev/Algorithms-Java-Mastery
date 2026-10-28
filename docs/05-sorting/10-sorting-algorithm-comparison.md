@@ -590,6 +590,19 @@ The best case depends on partition balance rather than existing order alone.
 
 ---
 
+# Current-Code Interpretation of the Tables
+
+These teaching comparisons do not make all algorithm variants interchangeable.
+The [applied map](implementation-contracts.md) distinguishes middle-value Hoare
+from final-pivot Lomuto, and a shared-workspace always-merge implementation from
+merge-skip variants. Bubble's n-1-inversion counterexample still takes quadratic
+comparisons, while Insertion takes Theta(1+n+I). Expected Bubble/Insertion/Quick
+statements assume a uniformly random permutation of distinct keys; a label such
+as RANDOM or nearly sorted alone does not define that model. Stability is a
+movement property and deterministic repeatability does not require stability.
+
+---
+
 # Average-Case Comparison
 
 Average-case complexity estimates expected behaviour under assumptions about the input distribution.
@@ -734,7 +747,7 @@ Auxiliary space refers to memory required beyond the input collection.
 | Bubble Sort | `O(1)` |
 | Insertion Sort | `O(1)` |
 | Merge Sort | `O(n)` for standard arrays |
-| Quick Sort | `O(log n)` average stack, `O(n)` worst stack |
+| Current QuickSort | `O(log(n+1))` worst stack, including unbalanced inputs |
 
 ---
 
@@ -807,7 +820,10 @@ O(n)
 
 stack depth.
 
-Thus, Quick Sort's space usage depends on partition balance.
+Those linear-depth examples assume both-side recursive control. The current
+class recurses on only the smaller side and loops on the larger, bounding
+worst-case stack logarithmically even when time is quadratic. Stack and time
+claims must therefore identify the control structure.
 
 ---
 
@@ -3844,7 +3860,7 @@ The following table summarizes the principal characteristics of the sorting algo
 | Best Case | O(n²) | O(n)* | O(n) | O(n log n) | O(n log n) |
 | Average Case | O(n²) | O(n²) | O(n²) | O(n log n) | O(n log n) |
 | Worst Case | O(n²) | O(n²) | O(n²) | O(n log n) | O(n²) |
-| Auxiliary Space | O(1) | O(1) | O(1) | O(n) | O(log n) average |
+| Auxiliary Space for current code | O(1) | O(1) | O(1) | O(n) | O(log(n+1)) worst stack |
 | Stable | No | Yes | Yes | Yes | No |
 | Adaptive | No | Yes* | Yes | No | Generally No |
 | In Place | Yes | Yes | Yes | No | Yes |

@@ -61,7 +61,8 @@ String[] names = {"Lucas", "Ana", "Pedro"};
 Arrays.sort(names);
 ```
 
-The array is modified in place.
+The supplied array is modified. This mutation statement does not promise
+constant auxiliary storage for every overload.
 
 ---
 
@@ -121,7 +122,7 @@ Its return value follows three rules:
 | Result | Meaning |
 |---------|---------|
 | Negative | Current object comes first |
-| Zero | Objects are considered equal |
+| Zero | Equivalent under the ordering; not necessarily equals or identical |
 | Positive | Current object comes after |
 
 This contract allows Java to compare objects consistently.
@@ -174,7 +175,8 @@ Comparator<Employee> comparator =
                   .thenComparing(Employee::id);
 ```
 
-This produces a deterministic ordering.
+This defines lexicographic ordering. A canonical order independent of incoming
+tie order additionally needs a key that distinguishes the remaining records.
 
 ---
 
@@ -193,11 +195,13 @@ double[]
 char[]
 ```
 
-Java uses an optimized **Dual-Pivot Quick Sort** implementation.
+For int[] sorting, the Java SE 21 API describes **Dual-Pivot Quick Sort** in an
+implementation note. Do not infer identical internal paths or constant storage
+for every primitive overload, size or JDK from this family name.
 
 Characteristics:
 
-- in-place;
+- writes into the supplied array;
 - excellent average performance;
 - optimized for primitive values.
 
@@ -213,7 +217,9 @@ Employee[]
 Transaction[]
 ```
 
-Java uses **TimSort**.
+For object-array sorting, stability is an API guarantee. The Java SE 21
+implementation notes describe an adaptive mergesort derived from **TimSort**;
+the implementation family is distinct from the public guarantee.
 
 Characteristics:
 
@@ -225,7 +231,11 @@ Characteristics:
 
 # Collections.sort()
 
-Collections are sorted using **TimSort** because collections store objects rather than primitive values.
+Collections.sort delegates to List.sort. The list operation guarantees stable
+sorting and requires a modifiable list, though resizing is unnecessary.
+List.sort can be overridden; the default implementation sorts an array and
+writes values back. Merely storing objects does not mandate one internal
+algorithm for every List implementation.
 
 Advantages include:
 
@@ -293,9 +303,9 @@ Different data types have different requirements.
 
 | Data Type | Algorithm |
 |-----------|-----------|
-| Primitive arrays | Dual-Pivot Quick Sort |
-| Object arrays | TimSort |
-| Lists | TimSort |
+| int[] Arrays.sort | Ascending numerical order; Dual-Pivot Quick Sort is the Java 21 implementation note |
+| Object-array Arrays.sort | Stable ordering; adaptive mergesort/TimSort described in implementation notes |
+| List.sort / Collections.sort | Stable list sort; dispatch/default requirements matter |
 
 The library selects the algorithm that provides the best balance between:
 
@@ -354,11 +364,23 @@ The objective is to verify correctness, ordering properties and edge cases throu
 
 - Java provides highly optimized sorting implementations.
 - `Arrays.sort()` and `Collections.sort()` are the primary sorting APIs.
-- Primitive arrays use Dual-Pivot Quick Sort.
-- Object arrays and collections use TimSort.
+- Read the overload-specific Java version and distinguish guarantees from implementation notes.
+- Object/list sorting stability is guaranteed; internal algorithms can vary by implementation.
 - `Comparable` defines natural ordering.
 - `Comparator` defines custom ordering.
 - Production software should generally rely on the Java Standard Library instead of handwritten sorting algorithms.
+
+---
+
+# Versioned Primary References
+
+Consult the [Java SE 21 Arrays API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Arrays.html),
+[List.sort](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/List.html#sort(java.util.Comparator)),
+[Collections.sort](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Collections.html)
+and [Comparator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html).
+The historical Sorting measurements used JDK 25.0.1; they do not measure the
+Java 21 library. The [review record](documentation-review.md) preserves that
+boundary and identifies the textbook edition actually consulted.
 
 ---
 

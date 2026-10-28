@@ -356,7 +356,20 @@ For example, an algorithm may use a fixed number of variables and still be consi
 
 ---
 
-## Out-of-Place Sorting
+### Storage Convention for the Current APIs
+
+This review counts recursive frames as auxiliary space. Selection, Bubble and
+Insertion use constant workspace. Merge writes into the original array but
+uses a linear auxiliary array. Quick partitions the original array and uses
+O(log(n+1)) worst-case stack through smaller-side recursion; it is not strict
+constant-space overall. The colloquial "in-place partition" label must not hide
+that stack. Copying before any sort adds linear storage to the complete API.
+Tagged-key movement arguments establish stability mechanisms; primitive int[]
+output cannot expose equal-value identity. See the [proof map](implementation-contracts.md).
+
+---
+
+# Out-of-Place Sorting
 
 An out-of-place algorithm requires additional storage proportional to the input size.
 
@@ -951,11 +964,11 @@ A deterministic sorting result is reproducible.
 
 Given the same input and comparison criterion, the result should be predictable.
 
-Duplicate keys can create ambiguity unless:
-
-- the algorithm is stable;
-- a secondary key is defined;
-- another deterministic tie-breaking rule is used.
+Equivalent keys allow multiple outputs under the key-only specification.
+A deterministic unstable algorithm can still repeat exactly the same output
+for identical input. Stability preserves the incoming order of ties, but that
+incoming order can itself vary. A unique tie-breaker is needed when the goal is
+a canonical record order independent of arrival order, as in repeatable pagination.
 
 Example:
 
@@ -1385,7 +1398,12 @@ A < C
 
 ### Consistent Equivalence
 
-If two elements compare as equivalent, that relationship should remain consistent while sorting is performed.
+If compare(x,y)==0, comparisons of x and y with every z must have the same
+sign. Along with sign reversal and transitivity, this is stronger than merely
+repeating the same comparison result during sorting. Comparison equivalence
+need not mean object identity or equals equality. The [Java SE 21 Comparator
+contract](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Comparator.html)
+is the reference for a future generic implementation.
 
 An invalid comparator can cause:
 

@@ -29,7 +29,9 @@ After completing this document, the learner should be able to:
 
 An algorithm may compile successfully and still produce incorrect results.
 
-Testing verifies that the implementation satisfies its specification under different conditions.
+Testing checks the specification on the executions exercised. Invariants and
+termination arguments address the general result; passing a finite suite does
+not establish correctness for every valid input.
 
 For sorting algorithms, testing answers questions such as:
 
@@ -123,7 +125,8 @@ The algorithm should preserve the ordering.
 [5][4][3][2][1]
 ```
 
-This is commonly used to evaluate worst-case behaviour.
+For Bubble and Insertion with distinct keys this attains worst-case movements.
+It is not a universal Quick Sort worst case: pivot/partition choices matter.
 
 ---
 
@@ -153,7 +156,9 @@ Verifies correct handling of repeated values.
 [7][7][7][7]
 ```
 
-The algorithm should terminate correctly without unnecessary modifications.
+The algorithm should terminate with all multiplicities preserved. Hoare may
+exchange equal values as part of its correct progress; zero writes is not the
+common contract.
 
 ---
 
@@ -163,7 +168,8 @@ The algorithm should terminate correctly without unnecessary modifications.
 [-5][-1][4][2]
 ```
 
-Confirms that comparisons work for the complete numeric range.
+Checks this negative-value example. Full int-range checks need MIN_VALUE and
+MAX_VALUE cases; those exist in the current shared contract tests.
 
 ---
 
@@ -216,7 +222,10 @@ Expected stable result:
 (C, 2)
 ```
 
-Algorithms documented as stable should be tested accordingly.
+These tagged-object examples require observable identities and a comparator
+API. The current int[] tests cannot observe equal-value identity; stable
+movement rules are justified by reasoning. They do not constitute executed
+object-stability tests.
 
 ---
 
@@ -281,6 +290,18 @@ Each test should:
 - verify the result.
 
 Tests should never depend on previous executions.
+
+---
+
+# What Individual Properties Cannot Establish
+
+Checking only isSorted accepts data loss. Set equality accepts [1,1,2] becoming
+[1,2,2], despite changed multiplicities. Idempotence alone even accepts an
+identity function that leaves an unordered array unchanged. Combine ordering,
+length/multiplicities, mutation/exception contracts and independent reference
+checks. The [applied map](implementation-contracts.md) distinguishes 13 inherited
+methods per algorithm from 69 historical Sorting test invocations; neither is a
+new suite execution in this review.
 
 ---
 

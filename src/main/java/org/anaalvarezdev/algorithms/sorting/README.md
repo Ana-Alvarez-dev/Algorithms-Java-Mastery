@@ -35,3 +35,12 @@ from the current tree on 2026-10-19; individual arrays are not reproduced in
 Markdown. The runtime was JDK 25.0.1, while the project targets Java 21.
 Interpretation is preliminary because several cases and copy controls have
 wide uncertainty. The supplied subset does not cover the full default matrix.
+
+## Applied Documentation Review (2026-10-28)
+
+The [current proof map](../../../../../../../docs/05-sorting/implementation-contracts.md)
+records the shared contract and actual algorithm variants. The
+[review report](../../../../../../../docs/05-sorting/documentation-review.md)
+connects corrected claims to source, historical evidence and independent bounded
+models. Only Markdown changes in that review; no new Java test or JMH execution
+is claimed.

@@ -576,7 +576,10 @@ Each stage introduces concepts required to analyse the following documents.
 ├── 11-java-sorting-framework.md
 ├── 12-testing-sorting-algorithms.md
 ├── 13-benchmarking-sorting-algorithms.md
-└── 14-common-sorting-interview-problems.md
+├── 14-common-sorting-interview-problems.md
+├── implementation-and-benchmark-guide.md
+├── implementation-contracts.md
+└── documentation-review.md
 ```
 
 The sequence progresses from foundational definitions to individual algorithms,
@@ -762,7 +765,7 @@ The document examines:
 
 ---
 
-## `10-algorithm-comparison.md`
+## `10-sorting-algorithm-comparison.md`
 
 Compares the algorithms using multiple criteria.
 
@@ -1102,7 +1105,7 @@ Benchmarking should be introduced only after:
 JMH benchmarks belong under:
 
 ```text
-src/jmh/java/org/anaalvarez/algorithms/sorting/
+src/jmh/java/org/anaalvarezdev/algorithms/sorting/
 ```
 
 Results apply only to the documented inputs, environment, Java version, and JMH
@@ -1201,6 +1204,24 @@ docs/00-project/10-references.md
 
 Official Java documentation should be consulted according to the Java version
 configured in `pom.xml`.
+
+---
+
+# Applied Documentation Review (2026-10-28)
+
+The [current contract and proof map](implementation-contracts.md) connects the
+five implementations, six test sources and two JMH groups to actual contracts,
+invariants, counts and variant-specific stack/workspace costs. The
+[review report](documentation-review.md) records twelve scoped findings, supplied
+CLRS Third Edition passages, versioned Java 21 references and independent
+bounded models. This technical pass is not an exhaustive editorial/proof audit
+of every teaching extension in the long numbered notes.
+
+The preferred Fourth Edition bibliography is distinct from the supplied
+Third Edition (2009). The historical 69 Sorting test invocations and 48-cell
+JDK 25.0.1 benchmark subset retain their dates and limits; neither is newly
+executed by the documentation pass. Production Java/tests/JMH and historical
+measurements are unchanged.
 
 ---
 
