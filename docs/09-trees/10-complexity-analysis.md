@@ -1,5 +1,10 @@
 # Tree Complexity Analysis
 
+> The [contract and proof map](implementation-contracts.md) connects these
+> costs to actual fields, Java test methods and benchmark bodies. Empty calls
+> take constant work: the usual nonempty O(h+1)/O(log(n+1)) shorthand can be
+> written O(h+2)/O(1+log(n+1)) when including h=-1 or n=0 explicitly.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -65,6 +70,7 @@ remove(Object) API.
 
 | Heap operation | Time | Qualification |
 |---|---|---|
+| Empty constructor with capacity c | Theta(c) | Array initialisation; c>=1 |
 | peek/size/isEmpty/capacity | Theta(1) | Empty result uses OptionalInt |
 | offer without growth | O(log(n+1)) | Sift up one path |
 | offer with growth | Theta(n) copy plus sift | One operation can be linear |
@@ -74,8 +80,10 @@ remove(Object) API.
 | toArray | Theta(n) | Independent heap-order output, not sorted |
 | clear | Theta(1) | Capacity retained, live size reset |
 
-Geometric growth makes total copying linear across a growing sequence, adding
-O(1) amortised copying per offer. Combined with sifting, the amortised upper
+Starting empty at initial capacity c0, geometric growth bounds construction
+and copied/initialised array slots by O(c0+m) across m offers. Pops/clear do not
+shrink. An arbitrary preloaded suffix must account for its initial state. This
+adds O(1) amortised copying per offer after separating initial construction. Combined with sifting, the amortised upper
 bound is O(log(n+1)), while one growing call can be linear. Retained storage is
 Theta(c); old/new arrays coexist during resize. No byte-level footprint claim
 follows from the asymptotic bound.

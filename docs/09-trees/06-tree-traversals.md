@@ -1,5 +1,11 @@
 # Tree Traversals
 
+> All four current Java methods are iterative and return fresh mutable value
+> lists. Preorder values alone do not encode arbitrary binary-tree shape; a
+> serialization format would also need shape information, such as null markers.
+> The [contract map](implementation-contracts.md) explains traversal invariants,
+> proper-tree identity and frontier storage separately from output storage.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -186,8 +192,8 @@ D → E → B → C → A
 
 ### Common Applications
 
-- deleting trees;
-- releasing memory;
+- visiting children before parent when an explicit cleanup protocol needs it;
+- bottom-up processing (Java garbage collection is a separate mechanism);
 - expression evaluation;
 - bottom-up computations.
 
@@ -225,7 +231,8 @@ Traversal:
 A → B → C → D → E
 ```
 
-Unlike the previous traversals, level-order traversal uses a **queue** instead of recursion.
+The current level-order traversal uses a **queue**; current preorder, inorder
+and postorder use explicit **stacks**, not recursive calls.
 
 ---
 

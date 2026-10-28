@@ -1,5 +1,11 @@
 # Java PriorityQueue
 
+> PriorityQueue is a JCF collection; IntMinHeap is a smaller primitive API.
+> Tied priorities have no stable arrival-order guarantee. Null insertion throws;
+> this unbounded PriorityQueue does not report ordinary capacity rejection by
+> returning false. See the [contract map](implementation-contracts.md) and
+> [Java 21 specification](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/PriorityQueue.html).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -114,10 +120,11 @@ The most frequently used operations are:
 | Method | Description |
 |--------|-------------|
 | `add()` | Inserts an element |
-| `offer()` | Inserts an element (returns `false` instead of throwing an exception when insertion fails) |
-| `peek()` | Returns the highest-priority element without removing it |
-| `poll()` | Removes and returns the highest-priority element |
-| `remove()` | Removes a specific element or the root depending on usage |
+| `offer(e)` | Inserts and returns true; invalid elements can throw, rather than becoming false capacity failures |
+| `peek()` | Returns the head, or null if empty |
+| `poll()` | Removes the head, or returns null if empty |
+| `remove()` | Removes the head; throws NoSuchElementException if empty |
+| `remove(Object)` | Searches for and removes one equal object; returns false if absent |
 | `contains()` | Checks whether an element exists |
 | `size()` | Returns the number of elements |
 | `isEmpty()` | Checks whether the queue is empty |

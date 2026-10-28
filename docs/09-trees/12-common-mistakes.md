@@ -1,5 +1,10 @@
 # Common Mistakes
 
+> Additional current boundaries: no shared-child DAG input; no reserved int
+> sentinel for absence; no sorted heap snapshot; no blanket O(log n) traversal;
+> no constant worst-case growing offer. TreeAnalysis checks balance at **every**
+> node and diameter may lie wholly inside a subtree. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -47,7 +52,9 @@ A Binary Search Tree additionally enforces an ordering property:
 Left < Root < Right
 ```
 
-Without this property, efficient searching is impossible.
+Without an ordering/indexing invariant, a generic value query over only child
+links may require a full scan. Other tree invariants can support other efficient
+queries; heap-root access, for example, does not require the BST property.
 
 ---
 
@@ -55,7 +62,9 @@ Without this property, efficient searching is impossible.
 
 Many beginners believe that searching in a Binary Search Tree is always logarithmic.
 
-This is only true when the tree remains balanced.
+A logarithmic worst-case bound for all query keys needs logarithmic height.
+An individual search may still finish quickly in an unbalanced tree; finding
+the root takes constant work.
 
 Example of an unbalanced BST:
 
@@ -257,7 +266,8 @@ Understanding the strengths and limitations of each structure is therefore an es
 After completing this document, the learner should understand that:
 
 - a Binary Tree and a Binary Search Tree are different data structures;
-- Binary Search Trees only provide logarithmic performance when they remain balanced;
+- logarithmic BST height bounds worst-case paths; individual costs still depend
+  on the query and full traversal remains linear;
 - heaps are optimized for priority access rather than searching;
 - Java's `PriorityQueue` does not iterate in priority order;
 - custom objects require a comparison strategy to be stored correctly in a priority queue;

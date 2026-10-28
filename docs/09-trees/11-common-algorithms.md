@@ -1,5 +1,10 @@
 # Common Algorithms
 
+> Executable results and mutation contracts are mapped [here](implementation-contracts.md):
+> iterative traversals, bottom-up metrics, in-place HeapSort and copied-heap
+> KSmallest. The latter builds the entire input heap even for k=1; k=0 is an
+> immediate empty result. Pattern names below do not add features to these APIs.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -29,7 +34,10 @@ The purpose of this document is to:
 
 Although Binary Search is traditionally performed on sorted arrays, the same principle is naturally applied in **Binary Search Trees**.
 
-The search algorithm repeatedly eliminates half of the remaining search space.
+BST search discards the subtree excluded by the ordering comparison. It does
+not necessarily halve the remaining nodes. A logarithmic worst path requires
+a height guarantee such as AVL balance; an unordered binary tree can need a
+full value scan even when its shape is balanced.
 
 Conceptually:
 
@@ -153,7 +161,9 @@ Applications include:
 
 # 6. Dijkstra's Shortest Path Algorithm
 
-Dijkstra's algorithm computes the shortest path from one source vertex to all reachable vertices in a weighted graph.
+Dijkstra's standard shortest-path algorithm requires nonnegative edge weights.
+It computes shortest distances from a source to reachable vertices; a heap is
+a priority component, not by itself a complete graph algorithm.
 
 Its efficiency depends on repeatedly selecting the smallest tentative distance.
 

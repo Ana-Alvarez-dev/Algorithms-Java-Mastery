@@ -1,5 +1,10 @@
 # Binary Search Trees
 
+> The selected OrderedIntSet has unique primitive int keys, boolean updates,
+> OptionalInt extrema/inclusive neighbours and independent sorted snapshots.
+> BST operations are iterative; AVL updates are recursive on bounded-height
+> paths. Internal nodes are not caller handles. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -326,7 +331,9 @@ Many balanced search trees are improvements upon the Binary Search Tree concept.
 
 Although Binary Search Trees provide efficient searching, their performance depends on maintaining a relatively small height.
 
-The next document introduces **Tree Traversals**, which explain how every node of a tree can be visited systematically using different traversal strategies.
+The next document develops [Tree Operations](05-tree-operations.md), followed
+by [Tree Traversals](06-tree-traversals.md), which visits every node in a
+specified order. The sequence keeps keyed updates separate from full traversal.
 
 Later, the module examines **Balanced Trees**, which automatically maintain logarithmic height to preserve efficient performance.
 
@@ -336,7 +343,11 @@ Later, the module examines **Balanced Trees**, which automatically maintain loga
 
 Binary Search Trees illustrate one of the central ideas of algorithm design: **organizing data to reduce the amount of work required for future operations**.
 
-Rather than searching every element sequentially, the BST ordering property eliminates approximately half of the remaining search space after each comparison when the tree is balanced. This principle is closely related to Binary Search on sorted arrays and demonstrates how structural organization can dramatically improve algorithmic efficiency.
+The BST ordering property discards one whole subtree at each comparison, but
+height balance does **not** imply halving the remaining node population at each
+step. AVL logarithmic paths follow from the minimum-node recurrence for a given
+height. Binary search on a sorted array uses positional midpoints; that is a
+different argument from AVL height balance.
 
 Although production systems often rely on self-balancing variants such as AVL Trees or Red-Black Trees, understanding the Binary Search Tree is essential because these advanced structures extend the same fundamental concepts introduced here.
 
