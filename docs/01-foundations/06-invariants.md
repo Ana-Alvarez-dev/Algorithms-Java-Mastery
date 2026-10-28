@@ -426,6 +426,46 @@ postcondition.
 
 ---
 
+# An Indexed Proof and a Termination Variant
+
+Use zero-based indices and half-open prefixes. Let A0 be the input contents at
+entry, with n >= 1, no concurrent modification and a read-only array contract.
+The snapshot is mathematical notation, not an allocated buffer.
+
+```text
+maximum = A[0]
+i = 1
+while i < n:
+    if A[i] > maximum:
+        maximum = A[i]
+    i = i + 1
+return maximum
+```
+
+At every loop-header test, including the final failed test, use the invariant:
+
+- 1 <= i <= n and A = A0;
+- maximum is a member of A0[0:i];
+- every value in A0[0:i] is <= maximum.
+
+Initialisation uses i = 1 and maximum = A0[0]. For maintenance, write j for
+the index at body entry. Comparing A0[j] with the prefix maximum selects a
+maximum from A0[0:j+1]. After incrementing, i = j+1, so that enlarged prefix
+is exactly A0[0:i] at the next header. The comparison and assignment do not
+modify A.
+
+For termination, the separate variant n - i is a non-negative integer at each
+header and decreases by one on every executed body. It cannot decrease forever.
+At exit the guard gives i >= n; the invariant gives i <= n, so i = n. The prefix
+is now the whole original input, proving membership, dominance and non-mutation.
+For n = 1, initialisation already establishes the postconditions and the body is
+never executed. This proof matches
+[`FindMaximum.find`](../../src/main/java/org/anaalvarezdev/algorithms/arrays/FindMaximum.java)
+for its non-null, non-empty result domain; exception behaviour is a separate
+contract obligation described in [Contracts](03-preconditions-and-postconditions.md).
+
+---
+
 # Invariants and Preconditions
 
 Preconditions establish the state from which invariant reasoning begins.
@@ -855,9 +895,15 @@ search conclusion.
 
 # Example — Insertion Sort
 
-A classical invariant for insertion sort can be expressed as:
+Let A0 denote the original input, n its length, and i the next zero-based outer
+index in 1..n. For n >= 1, an outer-loop invariant for insertion sort is:
 
-> Before each iteration, the portion of the array already processed is sorted.
+> Before processing index i, A[0:i] is a nondecreasing permutation of A0[0:i],
+> and the unprocessed suffix A[i:n] still equals A0[i:n].
+
+Permutation means equal element multiplicities, not just equal sets. For an
+empty input the outer loop has no body and the empty result is already an
+ordered permutation. A singleton likewise requires no insertion.
 
 Conceptually:
 
@@ -869,13 +915,24 @@ Insert Next Element Correctly
 Larger Sorted Prefix
 ```
 
-The invariant grows with each iteration.
+The processed prefix grows with each iteration. Saving the next key, shifting
+only larger prefix elements, and putting the saved key into the gap preserves
+both ordering and multiplicities when the outer header is reached again.
+The array alone need not preserve multiplicities at every inner assignment:
+the saved key and gap are part of the intermediate state.
 
-At termination, the processed portion is the entire array.
+At outer-loop exit, the prefix is the entire array, so the result is ordered
+and preserves every original value and its multiplicity. Sortedness alone would
+be too weak: replacing `[2, 1]` with `[0, 0]` produces sorted output but does not
+sort the original values. This is why CLRS's sorting specification and invariant
+include the original elements.
 
-Therefore, the complete array is sorted.
-
-This type of reasoning will be developed in greater depth in the sorting module.
+The outer index advances and the inner index decreases through finite integer
+ranges. A full inner-loop proof is left to a separate detailed sorting review;
+this section gives the outer invariant and maintenance argument. The production
+[`InsertionSort.sort`](../../src/main/java/org/anaalvarezdev/algorithms/sorting/InsertionSort.java)
+already documents an ordered permutation; this correction aligns the teaching
+example with that existing contract.
 
 ---
 
@@ -1101,8 +1158,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 Loop invariants and correctness reasoning form an important part of the
 systematic analysis of algorithms throughout the book and provide the principal
@@ -1118,3 +1174,8 @@ docs/00-project/10-references.md
 More formal treatment may be supported by works such as Dijkstra's
 *A Discipline of Programming* and Gries's *The Science of Programming* when
 additional depth is appropriate.
+
+For this review, the directly consulted source is the supplied **Third Edition
+(2009)**, not the fourth-edition text. The [review record](documentation-review.md)
+identifies verified sections/pages and separates textbook concepts from this
+repository's contract, testing and engineering conventions.

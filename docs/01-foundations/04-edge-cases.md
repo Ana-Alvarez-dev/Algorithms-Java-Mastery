@@ -89,8 +89,11 @@ studied later in the repository.
 
 # What Is an Edge Case?
 
-An **edge case** is a valid problem instance located at or near an important
-boundary of the specified input domain.
+In this module, an **edge case** means a valid problem instance located at or
+near an important boundary of the specified input domain or of the algorithm's
+reasoning. Software-testing discussions sometimes use the term more broadly,
+including invalid inputs; the validity classification here is a local convention,
+not a universal naming rule.
 
 Such cases are often more likely to reveal incorrect assumptions than ordinary
 inputs.
@@ -700,7 +703,11 @@ docs/16-testing/
 
 # Edge Cases and Invalid-Input Testing
 
-Invalid inputs may also require tests, but they belong to a different category.
+Inputs outside the mathematical result domain may also require tests when the
+public API defines rejection behaviour. For example, an empty array has no
+maximum element under the stated mathematical problem, while its exception can
+still be an expected outcome of a Java API test. Calling it invalid for the
+maximum result does not exempt documented exception behaviour from verification.
 
 Conceptually:
 
@@ -1052,8 +1059,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The systematic analysis of valid inputs, boundary conditions, correctness, and
 algorithm behaviour provides the principal academic context for this document.
@@ -1067,3 +1073,8 @@ docs/00-project/10-references.md
 
 Complementary references may be introduced when a topic requires additional
 formal treatment of software contracts, boundary analysis, or testing theory.
+
+For this review, the directly consulted source is the supplied **Third Edition
+(2009)**, not the fourth-edition text. The [review record](documentation-review.md)
+identifies verified sections/pages and separates textbook concepts from this
+repository's contract, testing and engineering conventions.

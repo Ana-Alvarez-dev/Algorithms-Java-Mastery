@@ -413,14 +413,27 @@ Determine the largest value contained in the input array.
 
 Preconditions
 
-- The input satisfies the declared array contract.
-- The array contains at least one element.
+- The input reference is non-null.
+- Its length n is at least one.
+- No other actor modifies the array during the call.
 
-Postconditions
+Entry-state notation
 
-- The returned value belongs to the input array.
-- Every element in the input array is less than or equal to the returned value.
+- A0 denotes a mathematical snapshot of the input contents at entry.
+  This is proof notation; the implementation need not allocate a copy.
+
+Postconditions on normal return r
+
+- There exists k with 0 <= k < n such that r = A0[k].
+- For every j with 0 <= j < n, A0[j] <= r.
+- The input contents equal A0: this API does not modify the array.
 ```
+
+The first two postconditions define the maximum of the original values. Either
+alone is too weak: `3` is an upper bound for `[1, 2]` but is not an input element;
+`1` occurs in that input but is not an upper bound. Referring to A0 also prevents
+an implementation from changing the array to manufacture a passing result.
+The final clause is a frame condition describing which state must be preserved.
 
 Notice that this contract says nothing about the algorithmic strategy.
 
@@ -641,7 +654,8 @@ Representative Inputs
 
 Postcondition
 
-Returned value is greater than or equal to every input element.
+Returned value occurs in the original input and is greater than or equal to
+every original input element. The input contents are unchanged.
 ```
 
 Later, JUnit Jupiter and AssertJ can provide executable verification of selected
@@ -692,6 +706,20 @@ the maximum algorithm returns 9.
 ```
 
 Both forms of verification may be useful, but they answer different questions.
+Testing the rejection policy is itself behavioural testing of the public API;
+these categories describe different obligations, not disjoint kinds of tests.
+
+For example, [`FindMaximum.find`](../../src/main/java/org/anaalvarezdev/algorithms/arrays/FindMaximum.java)
+currently dereferences the supplied array directly. Null input therefore causes
+`NullPointerException`; empty input causes `ArrayIndexOutOfBoundsException` at
+index zero. Its [existing tests](../../src/test/java/org/anaalvarezdev/algorithms/arrays/FindMaximumTest.java)
+assert those outcomes. There is no explicit validation step in that method.
+The mathematical maximum postconditions apply to non-null, non-empty input;
+the documented exception outcomes are separate public implementation behaviour.
+By contrast, the binary-search APIs in Searching assume sortedness without
+scanning to validate it.
+A documented precondition must not be presented as a runtime check unless the
+implementation actually performs that check.
 
 ---
 
@@ -880,7 +908,8 @@ This describes internal state.
 Better:
 
 ```text
-The returned value is greater than or equal to every value in the input.
+The returned value occurs in the original input and is greater than or equal
+to every original input value; the input is unchanged.
 ```
 
 This describes observable behaviour.
@@ -961,8 +990,7 @@ This document is inspired primarily by:
 > **Introduction to Algorithms**
 >
 > Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein  
-> Fourth Edition  
-> MIT Press
+> Project bibliography: Fourth Edition (2022), MIT Press.
 
 The systematic use of specifications and correctness conditions throughout the
 study of algorithms provides the principal academic context for this document.
@@ -977,3 +1005,8 @@ docs/00-project/10-references.md
 
 Individual documents may introduce specialised references when greater
 formalisation is required.
+
+For this review, the directly consulted source is the supplied **Third Edition
+(2009)**, not the fourth-edition text. The [review record](documentation-review.md)
+identifies verified sections/pages and separates textbook concepts from this
+repository's contract, testing and engineering conventions.
