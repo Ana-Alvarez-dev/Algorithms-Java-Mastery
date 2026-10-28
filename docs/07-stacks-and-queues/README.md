@@ -1,5 +1,12 @@
 # Stacks and Queues
 
+> **Ordered documentation review — 2026-10-28:** the
+> [review report](documentation-review.md) records scoped SQ01-SQ10 corrections,
+> actual Java 21 test execution and benchmark discovery. The
+> [contract and proof map](implementation-contracts.md) links the current APIs,
+> representation invariants, sequence arguments and Java tests. Earlier timing
+> measurements keep their original source/runtime and uncertainty.
+
 ## Algorithms Java Mastery
 
 This module studies **stacks**, **queues**, and **double-ended queues** as

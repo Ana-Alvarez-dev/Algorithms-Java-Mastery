@@ -1,5 +1,11 @@
 # Queue Implementations
 
+> Selected scope: growing `CircularArrayQueue`, private-node `LinkedQueue`
+> and `TwoStackQueue`. The ring stores `head` and `size`, deriving the rear;
+> the two-stack queue can transfer during **peek as well as dequeue**.
+> See the [contract and proof map](implementation-contracts.md) for these
+> representation-specific invariants and the amortised sequence argument.
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -516,7 +522,11 @@ Therefore:
 After index 5 comes index 0.
 ```
 
-The learner should understand the idea rather than memorise formulas.
+For the selected ring, capacity c is positive and a logical offset satisfies
+0 <= offset < c whenever it is mapped to a slot. Mathematically the slot is
+(head + offset) mod c. The Java helper compares offset with c - head, then
+uses head + offset or offset - (c - head), avoiding an overflowing sum.
+This helper is not a modulo function for arbitrary offsets.
 
 ---
 
@@ -576,7 +586,10 @@ Examples include:
 - reserved position;
 - separate state variable.
 
-Within this repository, the preferred conceptual model uses:
+CLRS Third Edition uses a spare slot and a next-insertion tail; the selected
+Java ring instead caches head and size, derives the rear and uses all c slots.
+Empty has size=0 (canonical head=0), and full has size=c. Matching head and
+next-insertion positions alone cannot distinguish them. The selected model uses:
 
 ```text
 size
@@ -897,7 +910,7 @@ size
 
 | Operation | Linear Array | Circular Array | Linked Queue |
 |-----------|--------------:|---------------:|-------------:|
-| enqueue | O(1) | O(1) | O(1) |
+| enqueue | O(1) if space remains | O(1) amortised; O(n) when growing | O(1) pointer work |
 | dequeue | O(n) if shifting | O(1) | O(1) |
 | peek | O(1) | O(1) | O(1) |
 | resize | — | O(n) | Not required |
@@ -936,10 +949,13 @@ However, linked nodes require additional references and object overhead.
 
 Advantages:
 
-- excellent cache locality;
-- no per-node overhead;
-- efficient memory usage;
-- constant-time operations.
+- one backing array of references rather than separate queue nodes;
+- reusable slots with retained capacity;
+- constant ordinary endpoints and amortised constant enqueue with growth.
+
+Reference-array locality motivates a hypothesis; element objects may be
+elsewhere in the heap. This representation alone establishes no timing ranking
+or portable byte count. The historical JMH rotation excludes array growth.
 
 Limitations:
 
@@ -961,8 +977,11 @@ Limitations:
 
 - node allocation;
 - additional references;
-- weaker cache locality;
-- greater memory overhead.
+- dependent link traversal;
+- node/link storage whose byte cost depends on the JVM.
+
+LinkedQueue.clear drops head/tail in constant owner work. Array clears visit
+live slots and retain capacity; none of these operations promises immediate GC.
 
 ---
 

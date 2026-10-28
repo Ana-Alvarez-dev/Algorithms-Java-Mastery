@@ -1,5 +1,12 @@
 # Deque Fundamentals
 
+> The selected `BoundedArrayDeque<E>` uses a positive, fixed capacity and an
+> explicit size, so **every slot is usable**, including capacity one. Non-null
+> insertion when full returns false through `offerFirst/Last` and throws
+> `IllegalStateException` through `addFirst/Last`. Null is rejected first, even
+> when full. Removal/inspection have throwing and null-sentinel pairs.
+> See the [contract and proof map](implementation-contracts.md).
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -1245,7 +1252,10 @@ The operation is correct because:
 
 ## 22. Expected Complexity
 
-The fundamental deque operations are expected to execute in constant time.
+For the selected fixed-capacity ring, the table gives deterministic worst-case
+endpoint work, including full/empty checks. It does not describe every Deque
+implementation or bound allocation/GC latency. A growing-array insertion has
+the separate amortised bound below; the ADT alone supplies no time guarantee.
 
 | Operation | Expected time |
 |---|---:|
@@ -1503,7 +1513,7 @@ A deque restricts direct structural operations to its ends.
 | Removal positions | Potentially arbitrary | Front or rear |
 | Indexed access | Often supported | Not central |
 | Access policy | General | Double-ended |
-| Expected end-operation cost | Implementation-dependent | O(1) |
+| End-operation cost | Implementation-dependent | Implementation-dependent; O(1) for the selected bounded ring |
 
 The restriction provides a clearer contract and enables specialised
 implementations.

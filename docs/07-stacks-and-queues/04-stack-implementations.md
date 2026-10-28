@@ -1,5 +1,11 @@
 # Stack Implementations
 
+> Selected scope: `ArrayStack` grows geometrically and **does not shrink**;
+> `LinkedStack` uses private head-linked nodes. Fixed-capacity stacks and the
+> shrinking policy below are design alternatives, not implemented classes.
+> Array construction costs Theta(c) reference initialisation for capacity c;
+> clear retains that capacity. See the [contract and proof map](implementation-contracts.md).
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -1048,8 +1054,13 @@ one size update
 
 A small number of pushes also copy existing elements.
 
-The expensive operations are sufficiently infrequent that the average cost per
-operation over the full sequence remains bounded by a constant.
+For m pushes starting empty at fixed initial capacity, copied old capacities
+form a geometric series bounded by O(m). Array allocation/initialisation is
+linear in each new capacity and has the same aggregate bound. Including an
+arbitrary initial capacity c0 gives O(c0 + m) total construction-plus-push work.
+This is a worst-case bound over a sequence, without a random-input assumption.
+It does not assign a constant latency to each push or to an arbitrary suffix
+starting just before a resize.
 
 This does not mean every push is O(1).
 
@@ -1063,6 +1074,9 @@ Amortised push = O(1)
 ---
 
 ## 23. Shrinking Strategy
+
+This is an optional alternative. The current ArrayStack never shrinks on pop
+or clear; its space is Theta(capacity), even after it becomes empty.
 
 A dynamic stack may reduce its capacity when many positions are unused.
 
@@ -2237,7 +2251,8 @@ A linked stack may be appropriate when:
 - elements should grow one node at a time;
 - node-based representation is educationally relevant;
 - no array resizing is desired;
-- the structure must integrate with existing linked nodes.
+- the design calls for private node storage; the selected LinkedStack does not
+  accept or expose caller-owned nodes.
 
 A fixed-capacity array may be appropriate when:
 

@@ -46,6 +46,14 @@ verification and clarifies one source Javadoc. Executable Java/tests and the
 historical 30-configuration timing record are unchanged; later modules are not
 reclassified as re-reviewed by this follow-up.
 
+A **2026-10-28 ordered Stacks and Queues documentation review**, based on main
+`6db7b24a9660ac9fd44ce42f941f8307bc2c2d22` (PR #104 merge), follows
+[separately](../07-stacks-and-queues/documentation-review.md). Scoped SQ01-SQ10
+corrections and the contract/proof map clarify endpoint policies, ring capacity,
+two-stack amortisation and current algorithm invariants. Actual Java 21 tests
+pass (710 overall, 80 module); only Markdown changes. Historical measurements
+retain their source/runtime. Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

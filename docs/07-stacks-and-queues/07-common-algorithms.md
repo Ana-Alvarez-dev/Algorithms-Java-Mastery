@@ -1,5 +1,12 @@
 # Common Algorithms Using Stacks and Queues
 
+> The [contract and proof map](implementation-contracts.md) derives the five
+> current Java algorithms: delimiter scanning, checked postfix evaluation,
+> next-greater **indices**, sliding-window maxima and destructive queue reversal.
+> For next-greater, equality is not greater; for sliding windows, a newer equal
+> candidate replaces the older one. Total linear work follows from each index
+> entering/leaving once, even though one loop step may remove many candidates.
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -225,7 +232,7 @@ A queue preserves the correct visiting order.
 Complexity:
 
 ```text
-Time : O(V + E)
+Time : O(V + E) with adjacency lists and each reachable vertex enqueued once
 ```
 
 where:
@@ -253,7 +260,9 @@ Task B
 Task C
 ```
 
-Tasks are processed in arrival order.
+A FIFO scheduling policy processes tasks in arrival order. Priority, deadline
+and fairness policies need other rules; this module does not implement a
+concurrent scheduler or blocking producer-consumer queue.
 
 ---
 

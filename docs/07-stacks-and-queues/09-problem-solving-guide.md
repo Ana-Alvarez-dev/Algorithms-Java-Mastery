@@ -1,5 +1,11 @@
 # Problem Solving Guide
 
+> Translate a pattern into an exact contract before implementation: specify
+> null/empty/full behaviour, index versus value outputs, tie policy and mutation.
+> Arrival-order queues do not supply priority scheduling or thread safety.
+> Use the [contract map](implementation-contracts.md) to connect those decisions
+> to the current Java tests rather than inferring guarantees from a type name.
+
 > Executable scope, API contracts, pseudocode, traces, tests and JMH protocol:
 > [Implementation and benchmark guide](implementation-and-benchmark-guide.md).
 
@@ -114,7 +120,7 @@ Typical problems:
 | Level-order traversal | Queue |
 | Sliding window | Deque |
 | Undo operations | Stack |
-| Scheduling tasks | Queue |
+| Scheduling tasks strictly by arrival | FIFO queue |
 
 ---
 
@@ -126,7 +132,8 @@ Typical mistakes include:
 
 - using a stack when FIFO behaviour is required;
 - implementing queues with inefficient element shifting;
-- using a deque when only one end is ever accessed;
+- assuming that using Deque for one-ended stack access is a mistake; it is the
+  standard Java stack abstraction, while a smaller custom interface may suffice;
 - ignoring the algorithm's access pattern.
 
 Always let the problem determine the data structure.

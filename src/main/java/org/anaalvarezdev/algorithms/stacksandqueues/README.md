@@ -32,5 +32,11 @@ complete both templates' Result and Interpretation sections: 20 configurations,
 source `804f69f32b0da715ed41f390034523890c24bca5`. Interpretation is preliminary;
 eleven errors reach at least 25% of their means. Smoke scores are excluded.
 
+The [2026-10-28 documentation review](../../../../../../../docs/07-stacks-and-queues/documentation-review.md)
+and [contract/proof map](../../../../../../../docs/07-stacks-and-queues/implementation-contracts.md)
+record the current scope and actual Java 21 verification separately: **710**
+repository tests, including **80** module invocations, passed. Benchmark packaging
+and discovery are harness checks, not a new timing experiment.
+
 The [project traceability review](../../../../../../../docs/00-project/11-traceability-review.md)
 records the current chain and unresolved earlier-module limitations.
