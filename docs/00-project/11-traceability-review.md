@@ -24,6 +24,13 @@ technical claims against all thirteen Arrays classes, their tests and JMH
 bodies, and adds an applied contract map. One source Javadoc is clarified;
 executable Java, tests, fixtures and historical research data remain unchanged.
 
+A **2026-10-28 ordered Searching documentation review**, based on main
+`af63005fa6ac23c68de9c20d062443a67821db47` (PR #101 merge), follows
+[separately](../04-searching/documentation-review.md#ordered-documentation-review-follow-up-2026-10-28).
+It adds scoped S09-S16 clarifications and an applied contract/proof map while
+preserving S01-S08 history. Only Markdown changes; source, tests, JMH fixtures
+and the historical 65-row measurement record are unchanged.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

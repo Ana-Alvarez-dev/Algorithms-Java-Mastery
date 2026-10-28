@@ -410,6 +410,23 @@ First / Last / Lower-Bound Result
 
 ---
 
+# Applied Boundary Proofs and Sentinel Results
+
+The [contract map](implementation-contracts.md#boundary-search-invariants)
+formalises the candidate-plus-active-interval invariant for first/last matches
+and both excluded partitions for the actual half-open lower bound. Equality
+alone on sorted values is generally false...true...false; the lower-bound
+predicate is A[i]>=target, which has a single transition.
+
+A lower-bound result n is a valid insertion position but not an element index.
+Check result<n before dereferencing it. The method returns a position and does
+not allocate capacity, shift elements or insert a value. For a general value
+interval [a,b], derive the end from the first value strictly greater than b; replacing it with
+lowerBound(b+1) in int arithmetic fails at Integer.MAX_VALUE. A generic upper-
+bound API is an extension, not an additional current implementation.
+
+---
+
 # Engineering Perspective
 
 Experienced software engineers rarely begin by selecting an algorithm.

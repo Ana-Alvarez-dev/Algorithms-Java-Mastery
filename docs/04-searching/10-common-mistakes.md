@@ -120,7 +120,12 @@ The preferred implementation is:
 int middle = low + (high - low) / 2;
 ```
 
-This formulation avoids integer overflow while producing the same result.
+Under the current non-negative array-interval bounds, it computes the intended
+floor midpoint without overflowing. It need not equal the overflowed old
+expression, and it is not a general guarantee for arbitrary int endpoints. For
+low=2,147,483,645 and high=2,147,483,646, the old sum wraps negative while the
+intended midpoint is 2,147,483,645. No giant array allocation is needed to check
+that arithmetic counterexample.
 
 ---
 
@@ -335,6 +340,22 @@ SearchRange
 ```
 
 The requested output determines the algorithmic variant.
+
+---
+
+# Additional Mistakes — Sentinels and Numeric Widening
+
+SearchInsertPosition may return n; accessing array[n] is invalid even though
+that insertion result is correct. Arrays.binarySearch uses a different absent-
+key encoding from this repository's -1; do not treat every negative value as an
+existing index or compare only with -1.
+
+Do not obtain an int upper bound by adding one to Integer.MAX_VALUE. For nearest
+values, use Math.abs((long) value-target), not (long)Math.abs(value-target):
+the int subtraction or int absolute value may already have overflowed. The
+[contract map](implementation-contracts.md) records concrete counterexamples and
+the safe distance range. These cautions describe current contracts/extensions;
+they do not add validation or new APIs.
 
 ---
 

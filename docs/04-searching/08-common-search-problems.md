@@ -91,11 +91,19 @@ Examples:
 - Duplicate transaction identifiers.
 - Repeated product codes.
 
-Possible solutions include:
+Possible strategies must identify the complete duplicate-detection task:
 
-- Linear Search
-- Sorting followed by searching
-- Hash-based searching
+- Repeated scans for earlier equal values: Θ(n²) worst case; one ordinary
+  membership query is insufficient to detect all duplicate pairs.
+- Sorting and an adjacent scan: include the chosen sort's cost and mutation or
+  copy policy; the scan itself is linear.
+- Tracking previously seen values with hashing: expected O(n) total time
+  under suitable expected/amortized hash-operation assumptions; all-unique
+  input attains expected Theta(n) work and worst-case linear additional storage.
+
+These are teaching strategies, not a new duplicate-detector class in Searching.
+RemoveDuplicatesSorted in Arrays instead compacts an already sorted array and
+returns a logical prefix length; it is not a non-mutating duplicate detector.
 
 ---
 
@@ -305,7 +313,9 @@ src/test/java/org/anaalvarezdev/algorithms/searching/SearchRangeTest.java
 Complexity:
 
 ```text
-Θ(log n) + Θ(log n) = Θ(log n)
+First boundary search; if absent, return {-1,-1} immediately.
+Otherwise, search the last boundary and return {first,last}.
+Total time: Θ(1+log(n+1)); fresh two-int result: Θ(1) storage.
 ```
 
 No additional JMH benchmark is required because the method composes already
@@ -351,8 +361,11 @@ Complexity: best Theta(1) for empty/minimum fast paths, worst
 Theta(log(n+1)) across at most two lower bounds, O(1) auxiliary space. The
 original exact-midpoint early-return argument no longer describes this code.
 
-Distance comparison uses a wider numeric representation so that extreme integer
-values do not cause overflow during absolute-distance calculation.
+Distance comparison widens an operand before subtraction. For any two int
+values, the true difference lies between -(2^32-1) and 2^32-1, so its absolute
+value fits long and cannot be Long.MIN_VALUE. Casting an already overflowed int
+difference to long would be too late. The [applied proof](implementation-contracts.md#nearest-value-composition)
+justifies both nearest value and first copy, with no new implementation change.
 
 No dedicated benchmark is added because the dominant search process remains the
 same logarithmic interval reduction already studied experimentally.

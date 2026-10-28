@@ -15,8 +15,9 @@ complexity explanations, and implementation traceability.
 This review covers the module README and all eleven numbered documents. It
 compares their claims with production code, tests, three JMH benchmark classes,
 and the [first Searching benchmark record](../17-benchmarking/results/searching/README.md).
-The findings below describe the reviewed snapshot; they are proposed follow-up
-work, not corrections already applied by this report.
+The original findings describe that reviewed snapshot and originally proposed
+follow-up work. Dated sections below distinguish later applied corrections
+from the historical defects, execution results and measurements.
 
 ## Module 16 Follow-up (2026-10-27)
 
@@ -58,6 +59,109 @@ The [closing traceability review](../00-project/12-closing-traceability-review.m
 records hosted evidence, source inventory and continuing research limitations.
 No new performance run, Java implementation change or claim of universal
 academic completion is introduced by these edits.
+
+## Ordered Documentation Review Follow-up (2026-10-28)
+
+Reviewed from main **af63005fa6ac23c68de9c20d062443a67821db47**, the PR #101
+merge of the [Arrays review](../03-arrays/documentation-review.md). This pass
+reads the eleven numbered Searching notes, both module/package READMEs, all
+eight production classes, nine test classes plus their fixture helper, three
+JMH classes and the existing research record. It examines technical contracts,
+selected proofs, probability models, finite-width arithmetic and source
+correspondence. It is not an exhaustive editorial or formal proof audit.
+
+S01's code/regression correction and the scoped S02-S08 resolutions above are
+retained. Additional findings S09-S16 clarify remaining statements and add
+applied proofs; their identifiers do not reopen those historical defects.
+The new [contract map](implementation-contracts.md) connects all eight current
+operations to actual results, failures, mutation, tests and cost models.
+Only Markdown changes. Production Java, tests, benchmark bodies/defaults,
+POM, scripts, CI and historical measurements/provenance remain unchanged.
+
+### Sources inspected for this follow-up
+
+The supplied **CLRS Third Edition (2009)** was consulted directly:
+
+| Passage | Printed page | One-based PDF page | Use |
+|---|---:|---:|---|
+| Exercise 2.1-3 | 22 | 43 | Sequence search, index-or-NIL specification and requested invariant proof |
+| Exercise 2.3-5 | 39 | 60 | Ordered midpoint elimination and requested logarithmic worst-case argument |
+
+These are exercises, not supplied solutions for this repository's zero-based
+contracts or proof variants. First/last/lower-bound invariants, closest-value
+tie rules and exact probe/frame counts are repository derivations. The preferred
+Fourth Edition (2022) bibliography is distinct from the consulted third edition;
+fourth-edition pagination is not claimed.
+
+Versioned official sources checked are the
+[Java SE 21 Arrays API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Arrays.html)
+for absent-key/duplicate policies,
+[JLS section 15.18.2](https://docs.oracle.com/javase/specs/jls/se21/html/jls-15.html#jls-15.18.2)
+for numeric promotion/finite-width addition and subtraction, and
+[Math.abs](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Math.html#abs(long))
+for the minimum-value absolute-value caveat. The midpoint/domain and int-input
+distance bounds are explicit mathematical arguments, not timing observations.
+
+### Findings and applied corrections
+
+| ID | Evidence / gap | Applied correction |
+|---|---|---|
+| S09 | Linear Search's own Average Case still said only “common models”; the growth table called binary midpoint probes comparisons. | The linear note derives the unique-uniform-success and absence-mixture counts. Complexity distinguishes equality comparisons, midpoint probes and guards, with 2p-1 / 2p core value-comparison counts. |
+| S10 | Boundary reasoning recorded a valid match but did not fully establish its extremal index; the lower bound lacked a central two-partition proof. | The contract map states candidate-plus-active-match invariants for first/last, both lower-bound excluded partitions, variants and empty-exit postconditions. Patterns distinguish the monotone threshold predicate from equality. |
+| S11 | Midpoint advice promised overflow avoidance without its endpoint domain; wider distances lacked an explicit range argument. | Binary Search and Mistakes state the non-negative valid-array bounds. The map proves int-input distances fit long, shows why casting after overflow is too late, and guards the MAX_VALUE+1 upper-bound extension. No implementation changes. |
+| S12 | Recursive explanation treated an empty base case as a termination guarantee on its own; the recurrence omitted base/rounding and the step lacked an explicit induction hypothesis. | Recursive Binary Search adds strict-size progress, induction on smaller intervals, W(0) and the attained floor(m/2) worst continuation. It separates non-empty probes, the empty helper call, wrapper and logical stack from JVM bytes/availability. |
+| S13 | Some summaries still implied one universal search result; insertion sentinel n, library absence encoding and fixed endpoint results needed applied examples. | Fundamentals, Problem Definition, Problems and Interview Notes distinguish the postconditions and link the API map. SearchInsertPosition returns a position without insertion; SearchRange skips the last search when absent and returns only two indices. |
+| S14 | Workload advice omitted a concrete total-cost model and the fact that sorting changes index meaning and can violate non-mutation. | Complexity compares q worst-case scans with an explicitly assumed comparison sort plus q searches. The original-index example identifies separate indexing/storage and duplicate-policy obligations; no timing crossover is inferred. |
+| S15 | A single Linear Search appeared as a duplicate-detection strategy without the complete task; one guide sentence claimed tests confirm the specification universally. | Problems separates repeated scans, sort-plus-adjacency and expected hash assumptions. Guide distinguishes executed cases from a proof, links existing closest-value regressions and adds applied review questions. |
+| S16 | Ordered review navigation and historical/current evidence needed a new dated boundary. | Both READMEs and the project audit link this follow-up and its contract map. S01-S08 history and the 65 recorded means/errors remain intact. Current fixed-target JMH source is not evidence for unmeasured variants or recovered execution metadata. |
+
+### Independent bounded verification
+
+A temporary Python model checks mathematical translations of the eight
+operations against direct linear/index oracles, including preserved invariants
+and decreasing intervals. It is independent of the project's Java execution;
+no model script, JSON, log or CSV is added to the repository.
+
+| Check | Bounded domain | Outcome |
+|---|---|---|
+| Eight operation results, interval invariants and input preservation in the models | 792 sorted arrays, lengths 0..7, values {-2,-1,0,1,2}; 8712 target cases including int extremes | Pass; first/last, lower bound, equality endpoints, nearest distance/index, any-match and recursive midpoint sequences agree with oracles |
+| Unordered first-match scan | 364 arrays, lengths 0..5, values {-1,0,1}; 1820 target cases | Pass; exact r+1 / n comparison counts |
+| Core maximum, boundary min/max probes and uniform-success count controls | 257 sizes 0..256; 66306 target/gap cases | Pass; core maximum is n's bit length, boundary counts satisfy the stated bounds, linear expectation sum and binary shallow-level capacity agree |
+| Large endpoint arithmetic | Nine limits, including 2^30, 2^30+1 and MAX_VALUE; no giant allocation | Pass; rightmost probe count, safe update ranges, wrapped old midpoint and MAX_VALUE+1 counterexamples |
+| Numeric / contract controls | Full-width int distance, int abs minimum, sentinel n, sorting/original index and unsorted invariant | Pass; incorrect numeric/order assumptions are exposed; the unsorted-input invariant rejection is expected |
+| Current default JMH source correspondence | Five sizes, four methods and scenario counts totalling 65 cells | Pass; binary MIDDLE is one probe and differs from linear MIDDLE at each even default size; binary LAST attains the core maximum |
+
+These finite checks complement the stated invariants and derivations; they
+are not universal proofs inferred from samples or tests of Java exception,
+allocation or concurrency behaviour. No Java compilation, JUnit/Maven suite,
+coverage or timed JMH execution was performed in this pass. The available host
+runtime is JDK 17; the earlier Java 21 hosted evidence remains separately dated.
+The existing 101 Searching invocations are not reported as newly re-executed.
+
+### Final audit and empirical boundary
+
+The final path audit checks **289 Markdown files / 1028 relative file targets**
+with **zero missing destinations**. All **eight newly introduced local heading
+targets** resolve. Fenced-code balance and `git diff --check` pass. This does
+not claim validation of every inherited external URL or heading fragment.
+The change boundary is **sixteen Markdown files only**; the repository inventory
+remains **100 production Java files / 115 JMH methods**. Test, benchmark-result,
+build and CI paths are outside the changed file set. These checks do not
+constitute a Java 21 execution.
+
+The [first 65-row measurement record](../17-benchmarking/results/searching/README.md)
+retains all reported means/errors and missing run-header, iteration, effective
+settings and exact execution-source limitations. Current source has three JMH
+classes/four methods; their fixed trial targets, MIDDLE difference, below-minimum
+ABSENT target and excluded setup are inspected source properties. They do not
+measure boundary/closest-value variants, stack occupancy or a sorting crossover.
+No new artifact hash or performance ranking is supplied by this review.
+
+Next in the ordered documentation pass is **05 - Sorting**, preserving its
+existing implementation, tests and research history. Later modules are not
+declared re-reviewed by this change. The following original method, findings
+and verification sections remain the historical 2026-10-09 record, read with
+the dated resolutions above.
 
 ## Method and Sources
 

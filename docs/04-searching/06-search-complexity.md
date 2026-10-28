@@ -52,7 +52,7 @@ Binary Search
 
 ↓
 
-Approximately twenty comparisons.
+Up to twenty midpoint probes at n=1,000,000 for the implemented inclusive search.
 ```
 
 The difference becomes increasingly important as collections continue to grow.
@@ -117,7 +117,10 @@ Rather than measuring execution time in seconds, complexity measures the relatio
 
 The best case represents the minimum amount of work required.
 
-For searching algorithms, this occurs when the desired element is located immediately.
+For LinearSearch this occurs at its first position; for ordinary BinarySearch
+it occurs at its initial midpoint. FirstOccurrence, LastOccurrence and
+SearchInsertPosition keep narrowing to a boundary even after an equality, so
+they do not inherit that ordinary binary-search early-return best case.
 
 Example:
 
@@ -201,12 +204,19 @@ O(log n)
 
 The difference between linear and logarithmic growth becomes more significant as the collection increases.
 
-| Elements | Linear Search | Binary Search |
+| Elements | Linear Search equality comparisons | Binary Search midpoint probes |
 |----------:|--------------:|--------------:|
-| 10 | up to 10 comparisons | up to 4 comparisons |
-| 100 | up to 100 comparisons | up to 7 comparisons |
-| 1,000 | up to 1,000 comparisons | up to 10 comparisons |
-| 1,000,000 | up to 1,000,000 comparisons | up to 20 comparisons |
+| 10 | up to 10 | up to 4 |
+| 100 | up to 100 | up to 7 |
+| 1,000 | up to 1,000 | up to 10 |
+| 1,000,000 | up to 1,000,000 | up to 20 |
+
+A failed binary probe performs an equality check and an ordering check; guard
+checks are separate. For p probes, successful core search performs 2p-1 such
+value comparisons, and unsuccessful core search 2p. First/last/lower-bound
+variants have different code paths. The [applied map](implementation-contracts.md)
+gives their actual contracts and counts; this table is not a primitive-operation
+or timing comparison.
 
 Although both algorithms solve the same problem, Binary Search scales much more efficiently.
 
@@ -337,6 +347,24 @@ Maintaining sorted order after every insertion or deletion may cost more than th
 ## Frequently Queried Collections
 
 Binary Search becomes highly advantageous when many searches are performed over relatively stable data.
+
+---
+
+# Preprocessing, Workloads and Original Positions
+
+For n>=2, q>=1 searches over stable data, q worst-case full scans cost Θ(qn).
+Assuming a comparison sort costing Θ(n log n), sorting once and then making
+q worst-case ordinary binary searches costs Θ(n log n+q log(n+1)). Sorting,
+copying/index construction and order-preserving updates are separate work.
+Expected scan work instead uses the workload's success/first-position model;
+these asymptotic expressions do not supply a timing crossover or guarantee that
+sorting wins for a particular q.
+
+Sorting also changes the meaning of a position: [9,1,9] has its first 9 at
+original index 0, while [1,9,9] has it at sorted index 1. Sorting the caller's
+input can violate the non-mutation contract. An index of (value,originalIndex)
+pairs and an explicit duplicate policy would be a separate representation with
+construction/storage costs. None of the eight current methods sorts or inserts.
 
 ---
 
