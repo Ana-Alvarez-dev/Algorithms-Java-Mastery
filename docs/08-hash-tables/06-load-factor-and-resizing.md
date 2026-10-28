@@ -1,5 +1,11 @@
 # Load Factor and Resizing
 
+> Selected thresholds: chaining grows before a new mapping exceeds 3c/4;
+> probing grows before live size exceeds c/2, otherwise cleans at used slots
+> >=3c/4. Equal-key replacement returns before either test. Cleanup keeps c;
+> deletion does not shrink it. The [contract map](implementation-contracts.md)
+> derives these exact transitions and the expected-amortised cleanup argument.
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -72,7 +78,10 @@ More Collisions
 Lower Performance
 ```
 
-A low load factor allows keys to be distributed more evenly, reducing the number of comparisons required during search operations.
+Lower occupancy leaves more available slots/bucket capacity under a suitable
+distribution. It does not change the hash function or guarantee even placement.
+For probing use both live n/c and used u/c; for chaining n/c may exceed one in
+the general design, though the selected policy keeps it at most 0.75.
 
 ---
 
@@ -127,7 +136,10 @@ not separate keys with identical complete hashes; that collision class persists.
 
 Simply copying elements into a larger table is **not sufficient**.
 
-Because the table size changes, the computed indices also change.
+When capacity changes, some bucket indices may change; others may remain the
+same. Current implementations reuse cached spread hashes and apply the new
+mask rather than calling each stored key's hashCode again. Same-capacity
+probing cleanup rebuilds placement without changing the mask.
 
 Each element must therefore be processed again.
 
@@ -243,4 +255,7 @@ After completing this document, the learner should understand that:
 - higher load factors generally increase the number of collisions;
 - resizing expands the table to preserve efficient performance;
 - rehashing recomputes the storage position of every element after resizing;
-- although resizing requires **O(n)** time, insertions remain **O(1)** on average because resizing occurs only occasionally.
+- chained relinking costs Theta(c+n), while probing reinsertion can cost O(c+n²);
+- expected amortised O(1) insertion needs hashing assumptions, geometric growth
+  and, for this probing table, separated live/used thresholds; infrequency alone
+  does not prove that bound.

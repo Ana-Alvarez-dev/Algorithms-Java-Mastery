@@ -1,5 +1,10 @@
 # Open Addressing
 
+> Current Java uses **linear probing** and parallel key/value/hash/state
+> arrays. EMPTY ends absence search; DELETED does not. Put first searches for an
+> existing equal key, then reuses a nonoccupied slot. Quadratic/double probing
+> remain alternatives. See the [contract and proof map](implementation-contracts.md).
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -7,7 +12,11 @@
 
 **Open Addressing** is a collision resolution strategy in which every element is stored directly inside the hash table itself. Unlike Separate Chaining, no external linked lists or auxiliary collections are used. When a collision occurs, the algorithm searches for another available position according to a predefined probing strategy.
 
-This approach keeps all data within the table, improving memory locality and reducing the need for additional memory structures. However, as the table becomes more populated, finding free positions becomes increasingly difficult, making performance highly dependent on the table's load factor.
+The selected representation stores key/value references, cached hashes and
+markers in arrays; key and value objects can live elsewhere in the heap. It
+avoids per-entry chain nodes, but locality, byte footprint and timing require
+their own measurements. Probe cost depends on clustering and used-slot load,
+including tombstones, rather than live occupancy alone.
 
 This document introduces the principles of Open Addressing and the most common probing techniques used in hash tables.
 
@@ -205,7 +214,11 @@ Element Found
 
 Deletion is more complex than in Separate Chaining because simply removing an element may interrupt the probing sequence.
 
-Many implementations use **special marker values** (often called *deleted* or *tombstones*) instead of immediately clearing the position.
+The selected table clears the removed key/value/hash and retains a DELETED
+state marker. Replacing it by EMPTY could hide a later key in the same probe
+path. When inserting, stopping at the first tombstone before ruling out an
+existing key farther along would create duplicate mappings. Both searches are
+bounded by capacity probes; step-one wrap visits every slot.
 
 ---
 
@@ -213,10 +226,10 @@ Many implementations use **special marker values** (often called *deleted* or *t
 
 Open Addressing offers several benefits:
 
-- all elements remain inside the table;
+- entry references and metadata remain in the table arrays;
 - no additional linked structures are required;
-- better cache locality;
-- lower memory overhead;
+- adjacent-slot probing offers a locality hypothesis to measure;
+- no per-entry chain node is required, while total footprint depends on layout;
 - efficient average performance when the table is lightly loaded.
 
 ---
@@ -257,8 +270,8 @@ and O(c+n²) collision-heavy rebuild bound.
 | Open Addressing | Separate Chaining |
 |-----------------|-------------------|
 | Stores all elements inside the table | Uses external chains |
-| Lower memory overhead | Additional node memory |
-| Better cache locality | Weaker cache locality |
+| Parallel arrays; no per-entry chain node | Bucket array plus nodes |
+| Adjacent slot scans | Dependent node traversal |
 | More complex deletion | Simpler deletion |
 | Sensitive to load factor | Less sensitive to load factor |
 

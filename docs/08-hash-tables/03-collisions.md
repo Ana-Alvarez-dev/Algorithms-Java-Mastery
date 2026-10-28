@@ -1,5 +1,13 @@
 # Collisions
 
+> Distinguish equal keys (one mapping, replaced by put), unequal keys with
+> the same complete hash, and unequal hashes sharing a masked home index.
+> Growth may split a shared bucket; it cannot split identical complete hashes.
+> Even **distinct homes** can form a long contiguous probe run: the current
+> [historical experiment](../17-benchmarking/results/hash-tables/README.md)
+> demonstrates that case. The [contract map](implementation-contracts.md)
+> derives the source-level search path without inferring hardware causes.
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -104,7 +112,8 @@ This is a collision.
 
 # 5. Are Collisions a Problem?
 
-Collisions are expected in every practical hash table.
+Collision handling is necessary for general-purpose tables. This does not
+mean that every concrete stored set or benchmark fixture must have a collision.
 
 A collision does **not** indicate that the hash function is incorrect.
 

@@ -54,6 +54,15 @@ two-stack amortisation and current algorithm invariants. Actual Java 21 tests
 pass (710 overall, 80 module); only Markdown changes. Historical measurements
 retain their source/runtime. Later modules are not declared re-reviewed.
 
+A **2026-10-28 ordered Hash Tables documentation review**, based on main
+`60ec9de663589f37bfa81c6d3b1fcd82176bcdaf` (PR #105 merge), follows
+[separately](../08-hash-tables/documentation-review.md). Scoped HT01-HT10
+corrections and a contract/proof map distinguish equality, cached spreading,
+probe paths, live/used load, conditional expected costs and amortised rebuilding.
+Actual Java 21 tests pass (710 overall, 47 module). Only Markdown changes;
+historical timings retain their source/runtime, and later modules are not
+reclassified as re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

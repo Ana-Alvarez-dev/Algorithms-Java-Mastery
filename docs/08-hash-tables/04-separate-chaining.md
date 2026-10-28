@@ -1,5 +1,11 @@
 # Separate Chaining
 
+> Selected Java contract: put searches for an equal key **before** inserting
+> at the head or growing; remove searches by key and maintains a predecessor.
+> These public operations include lookup, unlike constant local insertion of a
+> known-absent node or deletion given a doubly linked node handle.
+> See the [contract and proof map](implementation-contracts.md).
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -70,7 +76,9 @@ Insert into the corresponding chain
 
 If the chain is empty, the new element becomes its first node.
 
-If the chain already contains elements, the new element is added to the collection.
+If an equal key already exists, the selected put replaces its value, returns
+the old value and retains the stored key reference and size. Otherwise it may
+grow before adding a fresh node at the bucket head. No caller-owned node is accepted.
 
 ---
 
@@ -140,7 +148,7 @@ Linked lists are traditionally used because they provide:
 
 - dynamic growth;
 - efficient insertion;
-- no need for contiguous memory.
+- no need for one contiguous array of entry records; a bucket array is still required.
 
 Conceptually:
 
@@ -162,7 +170,8 @@ Separate Chaining offers several important benefits:
 
 - simple implementation;
 - handles collisions naturally;
-- table never becomes completely full;
+- chains are not limited to one entry per bucket; allocation and implementation
+  capacity still impose limits, and the selected table grows beyond live load 0.75;
 - deletion is straightforward;
 - supports dynamic growth of individual chains.
 
@@ -185,13 +194,16 @@ Performance depends heavily on keeping chains relatively short.
 
 # 9. Complexity Analysis
 
-Assuming a good hash function and a reasonable load factor:
+For current key-based operations, expected search work is O(1+n/c) under
+simple uniform hashing, with constant hash/equality cost. At bounded live load
+this is O(1). The insertion average below is **expected amortised**, including
+geometric growth; an individual growing put scans Theta(c+n) rebuild work.
 
-| Operation | Average Case | Worst Case |
+| Operation | Conditional expected / amortised | Collision worst case |
 |-----------|-------------:|-----------:|
-| Search | O(1) | O(n) |
-| Insert | O(1) | O(n) |
-| Delete | O(1) | O(n) |
+| Search | O(1) | O(n+1) |
+| Put, including replacement search | O(1) expected amortised | O(c+n) with growth; O(n+1) without growth |
+| Delete by key | O(1) | O(n+1) |
 
 The worst case occurs when many elements are stored in the same chain.
 

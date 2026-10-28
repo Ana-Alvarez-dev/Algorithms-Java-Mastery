@@ -1,5 +1,11 @@
 # Hashing Fundamentals
 
+> Current Java scope: two non-null `HashTable<K,V>` implementations, not the
+> full Map interface. Hashing selects a **candidate bucket/home**; collision
+> resolution and key equality still decide whether a mapping is present.
+> See the [contract and proof map](implementation-contracts.md) for current
+> APIs, preservation arguments, Java tests and measurement limits.
+
 > Selected implementations, contracts, pseudocode, traces, correctness, tests
 > and JMH protocol: [Implementation guide](implementation-and-benchmark-guide.md).
 
@@ -86,7 +92,9 @@ Index 42
 Student Record
 ```
 
-The location is computed directly, eliminating the need for sequential traversal in the average case.
+Computing a candidate location avoids scanning the entire collection in the
+well-distributed model. A chain or probe path may still be searched; a computed
+index does not establish that the key exists or that its lookup is worst-case constant.
 
 ---
 
@@ -281,5 +289,6 @@ After completing this document, the learner should understand that:
 - hash tables provide associative rather than sequential access;
 - a hash table consists of keys, a hash function, and an underlying array;
 - efficient hashing depends on distributing keys uniformly;
-- hashing enables average constant-time search, insertion, and deletion;
+- expected constant lookup requires a suitable hash model and bounded load;
+- resizing insertion needs a separate amortised sequence argument;
 - understanding hashing fundamentals is essential before studying hash functions and collision resolution techniques.
