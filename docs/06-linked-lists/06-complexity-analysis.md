@@ -6,9 +6,9 @@ The study of data structures is incomplete without analysing the computational
 cost of the operations they support.
 
 A linked list may provide excellent performance for some operations while being
-less efficient for others. These differences arise not from the programming
-language or implementation details, but from the structural organisation of the
-data itself.
+less efficient for others. These differences depend on the representation and
+algorithm, including cached endpoints/size, traversal direction, validation and
+ownership choices. A structure's name alone does not determine all costs.
 
 Understanding computational complexity allows software engineers to predict how
 algorithms behave as the amount of data grows and to select the most
@@ -141,7 +141,7 @@ common operations.
 | Delete the head | O(1) |
 | Delete after a known predecessor | O(1) |
 | Reverse the list | O(n) |
-| Count elements | O(n) |
+| Count elements by traversal | O(n); current cached size() is Theta(1) |
 
 \*Assuming only a head reference is maintained.
 
@@ -263,6 +263,28 @@ neighbouring nodes.
 Every node participates in the transformation.
 
 Consequently, reversal performs work proportional to the number of elements.
+
+---
+
+# Current Position, Callback and Validation Models
+
+Let i be a valid index and n the receiver size. Singly/circular get/set use
+Theta(1+i); doubly get/set/remove use Theta(1+min(i,n-1-i)). A middle lookup is
+therefore linear for each linked topology, although the doubly path can be
+shorter. Constant endpoint access is a different method/workload.
+
+indexOf uses Objects.equals on successive values. Assume constant-cost equality
+only when appropriate; otherwise add the actual equality-call work. Reversal,
+iteration and snapshots take Theta(1+n) own work including empty control.
+appendAll costs Theta(1+m) for m source values; split has constant boundary
+cases and a representation-specific lookup. clear is a constant ownership reset,
+not a full-node traversal or a guarantee of immediate heap reclamation.
+
+Public standalone chain methods include cycle/order validation in their bounds.
+mergeSorted on lengths n,m takes Theta(1+n+m), even if one input is empty,
+because the non-empty chain is validated. A constant-time final link attachment
+is not the total public-call cost. The [applied map](implementation-contracts.md)
+gives the assumptions and loop arguments; these are counts, not timing results.
 
 ---
 

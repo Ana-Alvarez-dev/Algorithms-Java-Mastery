@@ -5,10 +5,11 @@
 The **Linked Lists** module introduces one of the fundamental dynamic data
 structures studied throughout **Algorithms Java Mastery**.
 
-Unlike arrays, linked lists do not store elements in contiguous memory
-locations. Instead, each element maintains explicit references that connect it
-to one or more neighbouring elements, allowing the structure to grow and shrink
-dynamically during execution.
+Arrays provide indexed positions; linked lists represent logical order through
+references between node objects. Classical contiguous storage is a model, not
+a portable Java object-layout guarantee. Node relationships allow structural
+growth/shrinkage without shifting every remaining element, while locating a
+position can still require traversal.
 
 This different memory organisation leads to distinct computational properties,
 trade-offs, and engineering decisions.
@@ -282,7 +283,9 @@ documents.
 ├── 09-problem-solving-guide.md
 ├── 10-common-mistakes.md
 ├── 11-interview-notes.md
-└── implementation-and-benchmark-guide.md
+├── implementation-and-benchmark-guide.md
+├── implementation-contracts.md
+└── documentation-review.md
 ```
 
 The sequence progresses from conceptual understanding to implementation,
@@ -601,6 +604,23 @@ The complete project bibliography is maintained in:
 ```text
 docs/00-project/10-references.md
 ```
+
+---
+
+# Applied Documentation Review (2026-10-28)
+
+The [contract/proof map](implementation-contracts.md) connects the provided
+containers, shared interface and standalone node algorithms to ownership,
+results, errors, invariants, exact locating costs and existing tests. The
+[dated review](documentation-review.md) records scoped LL01-LL10 corrections,
+supplied CLRS Third Edition passages, versioned Java 21 references and actual
+Java execution. The Fourth Edition bibliography remains distinct from the
+consulted edition.
+
+The 30 historical timing means/errors keep their JDK 21.0.9/source provenance.
+New functional tests and harness discovery are not new timing measurements.
+The appendAll Javadoc clarification changes comments only; implementation
+behaviour, tests, fixture definitions and historical research data are preserved.
 
 ---
 

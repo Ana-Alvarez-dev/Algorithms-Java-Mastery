@@ -38,6 +38,14 @@ corrections and a current contract/proof map. Only Markdown changes; Java,
 tests, JMH fixtures and the historical 48-configuration JDK 25 record are
 unchanged. Later modules are not declared re-reviewed by this follow-up.
 
+A **2026-10-28 ordered Linked Lists documentation review**, based on main
+`20e7f2823fc0e9e620029177fceb111961e80811` (PR #103 merge), follows
+[separately](../06-linked-lists/documentation-review.md). It adds scoped
+LL01-LL10 corrections and a current contract/proof map, records actual Java 21
+verification and clarifies one source Javadoc. Executable Java/tests and the
+historical 30-configuration timing record are unchanged; later modules are not
+reclassified as re-reviewed by this follow-up.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

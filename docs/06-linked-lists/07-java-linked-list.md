@@ -223,8 +223,10 @@ Collection
 
 `LinkedList` is one implementation of the `List` interface.
 
-Because it implements interfaces rather than defining new behaviour, it can be
-used interchangeably with other `List` implementations when appropriate.
+The Java SE 21 class implements both List and Deque and permits null values.
+Sharing List does not make cost, mutation, iterator or null policies identical
+across implementations. The repository's LinkedSequence extends only Iterable;
+it is not a drop-in List/Deque implementation.
 
 ---
 
@@ -302,18 +304,37 @@ Engineers should avoid selecting `LinkedList` simply because it is available.
 
 Instead, the decision should be guided by application requirements.
 
-`LinkedList` is generally appropriate when:
-
-- frequent insertions occur;
-- frequent deletions occur;
-- sequential traversal dominates;
-- queue or deque behaviour is required.
+Evaluate the complete workload: constant endpoint or positioned-iterator
+changes differ from repeated indexed lookup or remove(Object), which first
+searches. Frequent changes alone do not establish that LinkedList is faster,
+and sequential traversal is not intrinsically faster on linked storage.
+Use the documented operation contracts and measured workload rather than a
+universal data-structure ranking.
 
 `ArrayList` is generally preferable when:
 
 - indexed access dominates;
 - memory efficiency is important;
 - cache locality improves performance.
+
+---
+
+# Iterator, Empty-Value and Snapshot Boundaries
+
+The custom iterators check structural changes in hasNext/next and reject
+remove. Nonstructural set can affect a value not yet read; the iterator is
+not a snapshot. Empty clear, reverse at size<2 and splitOff(size) do not
+invalidate it, whereas a nontrivial reversal does even if all values are equal.
+Exhaustion throws NoSuchElementException. Fail-fast checks are not thread safety.
+
+The custom getFirst/removeFirst throw on empty, so a returned null can be a
+stored value. JDK LinkedList additionally has peek/poll methods that return
+null on empty; those are not extra methods of the custom interface. toList
+is a separate mutable snapshot of value references: editing its slots does
+not edit the container, but mutable element objects are shared.
+Consult the [Java SE 21 LinkedList](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedList.html)
+and [Iterator](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Iterator.html)
+contracts and the [current map](implementation-contracts.md).
 
 ---
 
@@ -348,8 +369,8 @@ Representative scenarios include:
 - generic type behaviour;
 - edge cases.
 
-Testing confirms that the implementation satisfies its specification while
-preserving structural correctness.
+Tests supply evidence for the Java executions exercised; they complement
+invariant/progress arguments rather than establish every possible execution.
 
 ---
 

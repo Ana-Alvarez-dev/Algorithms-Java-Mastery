@@ -164,7 +164,8 @@ public interface LinkedSequence<E> extends Iterable<E> {
 
     /**
      * Appends a snapshot of another sequence, allocating new destination nodes.
-     * The source is unchanged; self-append duplicates the original values once.
+     * A distinct source is unchanged. For self-append, source and receiver are
+     * the same object; that receiver gains its original values exactly once.
      *
      * @param other the sequence to copy; must not be null
      */

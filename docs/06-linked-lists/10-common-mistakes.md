@@ -362,6 +362,25 @@ Testing should verify both functionality and structural integrity.
 
 ---
 
+# Applied Mistakes — Ownership, No-Ops and Validation
+
+Do not read "source unchanged" as a promise for appendAll(this): the receiver
+and source are the same object and its original values are duplicated once.
+An independent snapshot or split container does not deep-copy application
+objects. Capture the returned head after destructive standalone node changes.
+
+Do not assume every reverse invalidates an iterator: size<2 is a no-op here;
+nontrivial reverse is structural even for equal values. clear resets this
+container's ownership in constant time; invalidated iterators may still retain
+nodes, so immediate reclamation is not a postcondition. A circular container
+is valid by design; a cycle in an acyclic chain algorithm is rejected.
+
+A successful link splice does not remove its preceding lookup/validation cost.
+The [current contract map](implementation-contracts.md) records these distinctions
+and the existing Java tests that exercise them.
+
+---
+
 # Debugging Strategies
 
 When a linked-list algorithm fails, systematic debugging is often more effective

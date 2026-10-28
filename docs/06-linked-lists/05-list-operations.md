@@ -316,6 +316,23 @@ Splitting is commonly used in divide-and-conquer algorithms such as Merge Sort.
 
 ---
 
+# Actual Copying Append and Transferring Split
+
+Concatenation can mean different ownership operations. The current appendAll
+first takes other.toList(), then allocates a destination node for each captured
+value. For distinct source/receiver, the source structure is unchanged. If
+other==this, the receiver becomes its original values followed by those same
+values once; the source aliases that changed receiver. This is not constant-time
+node splicing. Elements are shallow references, not deep copies.
+
+splitOff(i) transfers original suffix nodes into a new same-topology container.
+It creates disjoint node ownership, while element objects can still be shared.
+The receiver retains [0,i), the result [i,n). A boundary lookup may be linear,
+but i=0 and i=n are constant-time cases in the provided implementations.
+See the [ownership and cost map](implementation-contracts.md#position-and-ownership-costs).
+
+---
+
 # Complexity Analysis
 
 The computational complexity of linked-list operations depends on whether the
@@ -379,7 +396,7 @@ following properties:
 - no references are unintentionally lost;
 - traversal reaches every node exactly once (except in circular lists);
 - head and tail references remain consistent;
-- structural modifications preserve logical ordering.
+- the resulting logical order follows the operation contract; reverse deliberately changes it.
 
 Maintaining these invariants is fundamental to algorithm correctness.
 

@@ -155,8 +155,8 @@ Node
  Next
 ```
 
-This additional reference increases memory consumption while improving
-navigation flexibility.
+This adds a reference field while enabling backward navigation. The difference
+in Java object bytes depends on runtime layout and alignment.
 
 ---
 
@@ -249,9 +249,11 @@ The computational complexity of the principal operations is shown below.
 | Insert after known node | O(1) |
 | Delete known node | O(1) |
 
-The additional predecessor reference does not reduce traversal complexity.
-
-Its principal benefit is simplifying structural modification.
+The worst indexed-access bound remains linear, but the current nodeAt chooses
+the nearer endpoint: get/set/remove at valid i use Theta(1+min(i,n-1-i)) work.
+Endpoint removal is constant. An interior indexed insertion still pays to find
+its node before the constant local link update. These private nodes are not
+public handles; the known-node table does not bypass that locating cost.
 
 ---
 
@@ -263,11 +265,23 @@ Its principal benefit is simplifying structural modification.
 | Forward traversal | Yes | Yes |
 | Backward traversal | No | Yes |
 | Delete known node | Requires predecessor | Direct |
-| Memory usage | Lower | Higher |
+| Shallow object byte size | JVM-dependent | JVM-dependent |
 
 Neither representation is universally preferable.
 
 The selection depends on application requirements.
+
+---
+
+# Metadata and Memory Accounting
+
+The current representation maintains cached endpoints/size and reciprocal
+links, including head.previous=null and tail.next=null when non-empty.
+An extra previous field is an additional reference in the logical model, not
+a portable extra byte count: alignment, headers and reference encoding depend
+on the JVM. Both topologies retain Theta(n) nodes; memory-size and cache claims
+need their own evidence. The [contract map](implementation-contracts.md)
+records the indexed, split, reverse and backward-iterator boundaries.
 
 ---
 

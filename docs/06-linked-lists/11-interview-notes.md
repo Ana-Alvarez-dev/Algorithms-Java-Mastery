@@ -22,6 +22,18 @@ source/test traceability and empirical scope.
 | Does a fail-fast iterator make a mutable list thread-safe? | No; invalidation detects structural misuse and is not synchronization |
 | Can a passing benchmark prove correctness or complexity? | No; use contracts, preservation/termination reasoning, and separate tests |
 
+## Current Review Questions
+
+Explain why getLast differs from get(size-1) on the singly implementation.
+Give the self-append result and distinguish copied nodes from shared values.
+State why splitOff(size) and singleton reverse keep iterators valid. For a
+validated merge with one empty input, include the non-empty validation scan.
+Explain the shared-tail identity criterion and why a returned merged head
+consumes the old independent-chain interpretation.
+
+The [contract/proof map](implementation-contracts.md) and [dated review](documentation-review.md)
+connect these arguments to current Java 21 execution, with no new timing claims.
+
 ## Worked Reference Trace
 
 Start with `[A, B, C]` and insert `X` at position 1:

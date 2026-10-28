@@ -273,6 +273,24 @@ These invariants guarantee that the circular structure remains valid.
 
 ---
 
+# Empty, Singleton and Finite-Iteration Cases
+
+The implemented ring has no sentinel node. Empty means head=tail=null and
+size=0. A singleton has head=tail and head.next=head. For size>0, exactly size
+distinct nodes form one ring and tail.next=head; this excludes a smaller
+accidental cycle or unreachable owned suffix. Circular iteration captures a
+remaining count and consumes it to zero, so a complete iterator pass is finite.
+It is not an indefinitely rotating scheduler API. Structural changes invalidate
+the iterator; set may change a value that a later visit reads.
+
+Reverse redirects exactly size links and exchanges logical endpoints. An
+interior split closes two rings; splitting at zero transfers the whole ring,
+while splitting at size returns an empty ring without changing the receiver.
+These are container invariants, distinct from cycle rejection in the standalone
+acyclic algorithms. See the [applied proof](implementation-contracts.md#container-invariants-and-boundary-repairs).
+
+---
+
 # Java Perspective
 
 Within this repository, circular linked lists are implemented manually to
