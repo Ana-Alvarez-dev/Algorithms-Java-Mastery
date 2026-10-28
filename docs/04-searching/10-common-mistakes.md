@@ -170,7 +170,11 @@ Searching every element in a sorted collection using Linear Search.
 
 The result is correct.
 
-The algorithm selection is poor.
+This is not automatically poor selection. For small inputs, a first-position
+biased workload or one query that would otherwise require sorting, a scan can
+be appropriate. For many queries over already ordered indexed data, binary
+search has logarithmic worst-case query work. Include preprocessing, updates,
+expected target positions and representation costs before selecting a method.
 
 Software engineering requires balancing correctness and performance.
 

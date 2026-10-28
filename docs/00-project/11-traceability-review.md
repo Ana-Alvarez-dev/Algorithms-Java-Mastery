@@ -136,7 +136,7 @@ helpers. The matrix includes selected algorithms through module 15 and cross-cut
 | Testing | 0 new production files | 16 added in Searching, not additive | 0 new | [Regression/coverage guide](../16-testing/implementation-and-verification-guide.md), [baseline/red/green evidence](../16-testing/verification-report.md); coverage profile and fixture validity, no separate production package |
 | Benchmarking | 0 new production files | 13 additional under -Pbenchmark only | 0 new; 115 existing methods in 40 classes | [Applied guide](../17-benchmarking/implementation-and-benchmark-guide.md), [local verification](../17-benchmarking/verification-report.md); five-cell author output retained, source inferred from supplied reflog; original jar absent, historical data unchanged |
 | Linux Environment | 0 new Java files; 2 Bash scripts | 20 shell subprocess cases, separate from JUnit | 0 new; environment/artifact preflight | [Applied guide](../18-linux-environment/implementation-and-verification-guide.md), [local checks](../18-linux-environment/verification-report.md); wrapper executable/LF, real Linux JDK 21 builds; author WSL availability unclaimed |
-| CI/CD | 0 new Java files; 1 workflow | 20 shell cases, 710 coverage / 723 package JUnit invocations locally; not additive | Discovery only, no timing gate | [Applied guide](../19-ci-cd/implementation-and-verification-guide.md), [validation and hosted status](../19-ci-cd/verification-report.md); two jobs, source/artifact retention; first hosted run pending |
+| CI/CD | 0 new Java files; 1 workflow | 20 shell cases, 710 coverage / 723 package JUnit invocations locally; not additive | Discovery only, no timing gate | [Applied guide](../19-ci-cd/implementation-and-verification-guide.md), [validation and hosted status](../19-ci-cd/verification-report.md); two jobs; PR/main hosted success, inspected artifacts and source identities |
 
 There are **710 passing normal-suite tests** and **723 under -Pbenchmark**
 (the same 710 plus thirteen fixture checks). The normal count compares with **694** before
@@ -197,9 +197,9 @@ Lists used JDK 21. Those environments are kept distinct.
 
 No `.github/workflows` files were versioned in the reviewed base trees through
 module 18. Module 19 now adds the actual two-job Maven CI definition, addressing
-that source-level gap. Its first hosted execution remains pending. Local builds,
-actionlint and command checks remain local verification; no passing hosted CI
-result or branch-protection enforcement is inferred from them.
+that source-level gap. The subsequent [hosted record](../19-ci-cd/first-hosted-run.md)
+now confirms successful PR/main runs and inspected artifacts. Local checks
+remain local evidence; branch-protection enforcement is not inferred from CI.
 
 ## Stacks and Queues Review Decisions
 
@@ -692,7 +692,7 @@ Reviewed on **2026-10-27** from Linux merge `a0e174d` (PR #96). The actual
 [Maven CI workflow](../../.github/workflows/maven-ci.yml) addresses the earlier
 source-level workflow gap. The [guide](../19-ci-cd/implementation-and-verification-guide.md)
 and [report](../19-ci-cd/verification-report.md) separate implemented automation,
-local command validation and the pending first hosted run.
+local command validation and the subsequently observed hosted executions.
 
 Main pushes, main-target pull requests and manual dispatch select two Linux/
 Temurin-21 jobs. Verify runs preflight, twenty shell cases and coverage-enabled
@@ -710,11 +710,29 @@ Observed counts are **20 shell cases**, **710 coverage-enabled JUnit invocations
 and **723 benchmark-profile invocations**, with reports, provenance and discovery
 checks passing. Production Java, tests, POM, prior scripts and historical data
 are unchanged; repeated builds do not increase unique test counts. Hosted
-checkout/setup/cache/uploads are not claimed to have run locally. **First hosted
-run: pending**, to be documented with its URL/attempt, actual checked SHA and
-conclusions after the author opens the PR. This reaches the existing numbered
-sequence through 19; the next step is observed CI and a closing traceability
-review. The unavailable original aggregation jar hash remains unavailable.
+checkout/setup/cache/uploads were not run by that local harness. The subsequent
+[initial hosted record](../19-ci-cd/first-hosted-run.md) now confirms PR #97 and
+main success. Main checkout 0d0ade1 and PR synthetic checkout 659cdb7 share tree
+6334460b94457ed63c914cf55b61a6d65d0dff4d. Downloaded XML confirms 710/723 passing
+JUnit invocations; the package jar digest matches its provenance and job log.
+The two main jobs selected different Java 21 patches/images, explicitly retained.
+The [closing review](12-closing-traceability-review.md) reconciles selected scope
+and applies Searching S02-S08 documentation corrections. The unavailable
+original aggregation jar hash remains unavailable; repository enforcement and
+unmeasured research cells remain separate limits.
+
+## Closing Follow-up
+
+The [closing traceability review](12-closing-traceability-review.md) records the
+100-source-file / 710-normal-test / 115-method inventory against hosted artifacts,
+with thirteen additional package-profile cases and twenty separate shell cases.
+Both hosted job conclusions are observed for merged main, with a clean actual
+checkout and independently matched archive/jar identities. Scoped Searching
+S02-S08 documentation actions are now applied and linked to current source and
+analytical models; S01 retains its separate module 16 code/regression history.
+No Java, test, POM, workflow or historical numerical record is changed by this
+follow-up. The selected milestone is closed with explicit research, coverage,
+source-attribution and enforcement limits, rather than claiming universal proof.
 
 ## Evidence Policy and Next Action
 

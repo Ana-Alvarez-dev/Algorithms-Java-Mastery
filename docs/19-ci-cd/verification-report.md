@@ -6,10 +6,11 @@ The contribution adds [.github/workflows/maven-ci.yml](../../.github/workflows/m
 and applies the nine CI/CD notes. Production Java, tests, POM, Linux scripts and
 all historical research datasets remain unchanged.
 
-**Hosted GitHub Actions execution: pending.** No successful hosted run, run URL,
-cache restoration, upload or branch-protection enforcement is claimed by this
-record. The author creates the PR normally; its observed checks will supply the
-next evidence item.
+**Hosted follow-up now observed:** PR run 40606662517 and merged-main run
+40606676206 both succeeded. The [hosted record](first-hosted-run.md) retains
+actual checkouts, per-job runtimes, downloaded artifacts and integrity checks.
+The local results below remain the original implementation-time verification;
+branch-protection enforcement and cache hit/speedup are not inferred.
 
 ## Implemented checks
 
@@ -50,8 +51,8 @@ transport/namespace workarounds, not repository or workflow settings. The harnes
 used explicit **local-only** GitHub-context placeholders (local://verification,
 local-only run ID, local-command-check event) solely to exercise provenance
 formatting. They are not a real Actions run. Official setup/cache/upload services
-were not exercised. The actual hosted JDK patch/image/service behaviour remains
-pending observed platform execution.
+were not exercised by that harness. Their later observed hosted execution is
+recorded separately in the linked follow-up, including runtime/image differences.
 
 | Check | Observed local outcome |
 |---|---|
@@ -96,12 +97,12 @@ No historical unavailable artifact hash is replaced.
 
 | Field | Current status |
 |---|---|
-| Run URL / run attempt | Pending author-created PR / observed run |
-| Event / actual checkout SHA | Pending hosted record; PR may check a synthetic merge |
-| Verify conclusion | Pending |
-| Benchmark-package conclusion | Pending |
-| Hosted runtime / image details | Pending |
-| Retained artifact IDs / jar SHA-256 | Pending |
+| Run URL / run attempt | [Main 40606676206](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/runs/40606676206), attempt 1; PR run also recorded in follow-up |
+| Event / actual checkout SHA | main push: 0d0ade1f67ffd79db26c06be48a0bf13fdda724a; PR checked synthetic merge 659cdb7 |
+| Verify conclusion | success; 710 JUnit invocations and 20 shell cases |
+| Benchmark-package conclusion | success; 723 JUnit invocations, capture and discovery |
+| Hosted runtime / image details | main verify: Temurin 21.0.12.1/image 20261012.334.1; package: Temurin 21.0.13/image 20261025.353.1 |
+| Retained artifact IDs / jar SHA-256 | reports 12781895048; package 12781725315; independently verified jar digest and archive digests in hosted record |
 | Branch-protection enforcement | Not changed by this contribution |
 
 After the PR is opened, inspect both named jobs and retain their actual source,
@@ -110,8 +111,9 @@ success are not substituted for a successful hosted run. If GitHub settings,
 network, actions, permissions or uploads fail, record the observed failing step
 and fix it through a reviewed change.
 
-The prior missing-workflow finding is addressed at **source implementation**
-level. Passing hosted automation and required-check enforcement remain separate
-claims. No deployment, percentage/performance gate or new JSON/log/CSV evidence
-file is added to Git. The next step is observed CI and a closing traceability
-review of the existing numbered modules through 19.
+The prior missing-workflow finding is addressed at source level, and the
+initial hosted jobs are now observed passing. Required-check enforcement and
+any subsequent commit/run remain separate claims. No deployment, percentage/performance gate or new JSON/log/CSV evidence
+file is added to Git. The [closing traceability review](../00-project/12-closing-traceability-review.md)
+records the existing numbered modules through 19, scoped Searching documentation
+corrections and the historical/provenance limitations that remain.

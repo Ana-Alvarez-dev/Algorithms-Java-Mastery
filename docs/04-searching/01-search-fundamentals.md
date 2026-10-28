@@ -4,7 +4,7 @@
 
 Searching is one of the most fundamental operations in Computer Science.
 
-Every software system stores, retrieves, filters or locates information. Whether searching for a user in a database, finding a product in an online store, locating a file in a file system or querying an index, every operation ultimately solves the same computational problem:
+Exact-match search in many systems asks the following existence/location question:
 
 > **Given a collection of data, determine whether a target element exists and, if so, identify its location.**
 
@@ -43,7 +43,7 @@ Depending on the algorithm, the result may include:
 - multiple matching elements;
 - confirmation that no matching element exists.
 
-Searching therefore transforms a collection of information into useful knowledge.
+The repository also implements lower-bound, range-endpoint and nearest-value questions; they are specified separately in the [concrete contract table](02-search-problem-definition.md#concrete-repository-contracts). Exact matching is one search contract rather than a universal description of all retrieval tasks.
 
 ---
 

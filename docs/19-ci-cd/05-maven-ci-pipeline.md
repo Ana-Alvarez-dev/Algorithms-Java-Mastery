@@ -6,8 +6,8 @@ Coverage executes the existing 710 normal-suite JUnit invocations under the JaCo
 
 The jobs do not combine coverage and benchmark profiles. Each clean build recreates target; the coverage reports are uploaded before another job packages a different artifact set. Maven dependency cache reuse does not certify compiled output, so clean remains explicit.
 
-A network/dependency/plugin failure is a build failure requiring investigation, not a reason to bypass checks or use an old jar. The local run-block verification used a temporary transport configuration and OpenJDK 21; the hosted Temurin setup itself still needs its first observed run.
+A network/dependency/plugin failure is a build failure requiring investigation, not a reason to bypass checks or use an old jar. The local run-block verification used a temporary transport configuration and OpenJDK 21; the hosted record now separately confirms setup and passing jobs, including two different Java 21 patches on main.
 
 ## Applied workflow and evidence
 
-See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the pending first hosted execution.
+See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).

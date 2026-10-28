@@ -35,6 +35,30 @@ executable behaviour is unchanged. S02-S08 and the original review/results are
 not reclassified as resolved by this focused correction. The sections below
 retain the original pre-fix counterexamples and historical verification.
 
+## Closing Documentation Follow-up (2026-10-27)
+
+The following scoped corrections are now applied against source
+`0d0ade1f67ffd79db26c06be48a0bf13fdda724a`. Production Java and tests are unchanged.
+The original findings below remain a review of the 2026-10-09 snapshot; they
+must be read with these resolution follow-ups rather than as current defects.
+
+| ID | Applied correction | Verification |
+|---|---|---|
+| S02 | Concrete eight-operation contract table; sequence semantics; null/order/mutation policies | Read all eight current public APIs and source preconditions; hosted XML retains 101 Searching invocations |
+| S03 | Ten halvings distinguished from eleven probes at n=1024; safe midpoint pseudocode | Explicit last-target midpoint trace and floor(log2(n))+1 bound |
+| S04 | Uniform-success probability models and linear mixture formula; recursive stack bound qualified as worst case | Direct expected-count derivation and initial-midpoint countermodel |
+| S05 | Single-transition predicate and boundary invariant; generic API remains an extension | Ordered-value partitions separated from alternating status examples |
+| S06 | O(log n+k) enumeration and Θ(k) materialised output distinguished from fixed endpoints | Current SearchRange source returns a two-int array; interval/equality semantics separated |
+| S07 | Canonical Searching production/test/JMH paths; first occurrence, -1, null and non-mutation explicit | Referenced paths exist and match the source contract |
+| S08 | Implemented versus extension status; checked versus assumed preconditions; workload-aware selection and non-identical timings | README, recursive comparison and common-mistakes text aligned |
+
+These close the specific S02-S08 documentation actions from this review. S01's
+code fix and its regression evidence remain the separate module 16 change.
+The [closing traceability review](../00-project/12-closing-traceability-review.md)
+records hosted evidence, source inventory and continuing research limitations.
+No new performance run, Java implementation change or claim of universal
+academic completion is introduced by these edits.
+
 ## Method and Sources
 
 The review used four distinct forms of evidence:
@@ -333,7 +357,7 @@ counterexamples were separate executable probes, absent from the committed suite
 No new performance experiment was executed for this review. The numerical
 observations above come from the previously recorded author-supplied summary.
 
-## Recommended Correction Order and Acceptance Criteria
+## Historical Correction Order and Current Acceptance Status
 
 1. **S01 completed by module 16:** preserve the nearest-index tie policy, add
    regressions/oracles and update the proof/costs; see the follow-up above.
@@ -346,7 +370,8 @@ observations above come from the previously recorded author-supplied summary.
 5. **Continue empirical research:** connect `06-search-complexity.md` to the
    existing evidence, retain all uncertainty, and store any future run separately.
 
-The module can continue into research discussion now, provided these open
-remaining findings stay visible. S01 is corrected; broader alignment still
-requires the specification corrections; a successful test run alone is not evidence that
-those documentation guarantees have been satisfied.
+The original correction order is retained as review history. S01's code fix
+was completed by module 16, and the closing follow-up above applies the specific
+S02-S08 documentation corrections. Continued empirical research still retains
+its original uncertainty/provenance limits. Passing tests alone did not close
+the documentation findings; source/contract and analytical corrections did.

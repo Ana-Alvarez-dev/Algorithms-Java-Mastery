@@ -120,6 +120,15 @@ Sequential traversal.
 
 # Boundary Problems
 
+Binary boundary search requires a single-transition predicate, for example
+false...false,true...true in the indexed order. The boundary invariant keeps
+all positions before low false, all positions at/after high true, and the
+unknown boundary in [low,high]. An appointment/failure status can alternate;
+ordering by an unrelated field does not establish this property. Without a
+monotonic predicate or appropriate index, scanning may be necessary.
+The implemented FirstOccurrence, LastOccurrence and SearchInsertPosition search
+ordered value partitions; they are not generic predicate-search APIs.
+
 The objective is to locate the first or last element satisfying a condition.
 
 Examples include:
@@ -134,6 +143,14 @@ These problems frequently use modified Binary Search algorithms.
 ---
 
 # Range Problems
+
+For k matching values in a sorted array, locating endpoints and enumerating
+matches costs O(log n+k) time. Materialising k values needs Θ(k) output space;
+streaming them need not retain that output. SearchRange returns only the two
+inclusive equality endpoints in a fixed-size array, with logarithmic worst-case
+search work and Θ(1) output space. An interval [a,b] uses the first value >=a
+and first value >b, whereas equality endpoints concern one target. Sorting or
+index construction is separate work and is not free preprocessing.
 
 Many software systems retrieve every element belonging to an interval.
 
