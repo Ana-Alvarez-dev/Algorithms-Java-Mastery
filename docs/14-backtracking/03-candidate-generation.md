@@ -1,5 +1,14 @@
 # Candidate Generation
 
+## What canonical means for each contract
+
+The [source/proof map](implementation-contracts.md) proves why used equal
+permutation copies must form an initial segment of their sorted equal block.
+That canonical index representation removes duplicate value rows without
+removing a value choice. Combinations instead use a distinct 0..n-1 universe.
+SubsetSum keeps equal-valued positions independently selectable; value
+deduplication or symmetry reduction cannot be borrowed across these APIs.
+
 Candidate generation defines which children can follow a partial construction.
 It must cover every required solution and avoid unwanted equivalent paths.
 Constraint checks alone cannot repair a missing candidate.

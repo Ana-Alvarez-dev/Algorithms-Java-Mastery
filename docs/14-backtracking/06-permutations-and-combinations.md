@@ -1,5 +1,15 @@
 # Permutations and Combinations
 
+## Counts, output rows and accepted empty cases
+
+The [applied map](implementation-contracts.md) proves both the prefix-tree
+ledger and the retained-row bound, including the one empty row at n=0/k=0.
+Counts are primitive results; materialisation copies outer/inner lists and
+each chosen value. The n<=9 enumeration and n<=10 permutation-count caps
+are independent of numeric overflow and are checked before preparing a clone.
+Frequency counting still explores prefixes; it does not replace search with
+a multinomial formula or DP cache.
+
 Permutations distinguish value order; combinations ignore the order in which
 distinct members were selected. The Java contracts choose canonical output
 orders so repeated calls are deterministic.

@@ -1,5 +1,17 @@
 # Backtracking: Implementation and Benchmark Guide
 
+## Ordered Documentation Review
+
+The [2026-10-29 review](documentation-review.md), based on main
+`df79799f8d8412df840c6e9f5cd1588a35f0fe5c` (PR #111 Greedy-review merge),
+checks the nine notes, all four production files, four test sources and five JMH
+sources (four benchmark classes plus BacktrackingInputs). Its
+[contract/proof map](implementation-contracts.md) derives helper restoration,
+canonical paths, exact call/candidate ledgers and output bounds. Fresh Java 21
+execution passes **710 repository tests, including 27 here**; packaging and
+discovery are checked separately. Original build, smoke/probe/doclint and
+author timing claims below retain their original dates/provenance.
+
 ## Selected Scope and Evidence Chain
 
 This contribution starts from main
@@ -133,7 +145,8 @@ Logical call counts can be derived independently of wall time:
 | 18 / 18 | 1 | 19 | 262,144 |
 
 These count source helper invocations, not JVM frames/instructions or profiler
-events. Loop and branch implementation effects remain part of future timing.
+events. Loop and branch implementation effects remain part of the separately
+recorded complete timed workflows, without isolated attribution.
 
 ## N-Queens: Conflict State and Available Bits
 
@@ -345,7 +358,9 @@ git pull --ff-only origin main
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar -l ".*backtracking.*"
 ```
 
-Expect **672 tests**, BUILD SUCCESS and **eight listed methods**. Use the
+Expect BUILD SUCCESS and **eight listed methods**. The original 2026-10-26
+verification reported 672 tests; the ordered review passes 710. Read actual
+Surefire totals for the checkout under test. Use the
 author-verified explicit JDK 21 path or adapt it to the installation. Maven
 release=21 selects bytecode compatibility, not the executable launching JMH;
 packaging builds/tests the jar but does not execute controlled measurement.

@@ -1,5 +1,15 @@
 # Constraint Validation
 
+## Helper return obligations
+
+The [applied map](implementation-contracts.md) states the relevant parent state
+on normal return. Permutations restore used flags or multiplicities; queen
+flags restore all three occupancy entries after each child. Deeper path slots
+can remain overwritten because only the live prefix belongs to the invariant.
+Combinations pass from/remaining by value; masks and subset sums also carry
+child scalar state by value. Immutable output rows are copied before siblings
+can overwrite the working path; caller arrays are never working paths.
+
 A constraint check describes which partial constructions remain legal. A
 pruning predicate additionally needs a reason why a rejected state cannot
 extend to a required solution. Failure to satisfy the final goal yet is not

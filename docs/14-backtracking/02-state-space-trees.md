@@ -1,5 +1,14 @@
 # State-Space Trees
 
+## Visited tree, conceptual completion and root count
+
+The [applied map](implementation-contracts.md) counts helper invocations,
+including the root and terminal calls. In the visited SubsetSum decision tree,
+sum==target is a successful terminal even before index==length: excluding all
+remaining positions supplies a full mathematical subset. Unvisited alternative
+witnesses are intentionally omitted. This is distinct from enumerating a full
+binary position tree or materialising every solution.
+
 A state-space tree models a search: the root is the empty construction, an
 edge is a decision, and a node is a partial state. Complete solutions are
 successful leaves; rejected or exhausted states can be unsuccessful leaves.
