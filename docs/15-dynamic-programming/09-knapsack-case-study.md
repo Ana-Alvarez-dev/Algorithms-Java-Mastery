@@ -1,5 +1,15 @@
 # 0/1 Knapsack Case Study
 
+## Safe arithmetic and deterministic selection
+
+The [contract/proof map](implementation-contracts.md) shows that total value
+is at most 256*MAX_INT, safely long, while selected weight stays within the
+validated capacity. A strict row improvement can only occur when taking
+that item is feasible. Omitting the largest remaining index on a tie
+minimises the conceptual numeric mask by induction; it does not minimise
+weight, item count or lexicographic index-list order. The shared grid bound
+is checked before every variant, including empty/rolling cases.
+
 Choose a subset of original item positions, using each at most once, with total
 weight <=C and maximum value. Empty subset is allowed; capacity need not be
 filled. This differs from fractional, unbounded and exact-weight knapsack.

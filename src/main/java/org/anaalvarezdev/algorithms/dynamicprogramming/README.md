@@ -28,3 +28,9 @@ Knapsack rolling point means are lower throughout; LCS depends on shape, and
 overlapping intervals limit exact rankings. Units stay per row in Markdown
 without JSON/log. Dense setup, pseudopolynomial capacity and omitted witnesses
 remain explicit; state ledgers are not timing attribution and smoke is separate.
+
+The [ordered documentation review](../../../../../../../docs/15-dynamic-programming/documentation-review.md)
+records fresh Java 21 execution: **710 repository tests, including 22 here**.
+The [contract/proof map](../../../../../../../docs/15-dynamic-programming/implementation-contracts.md)
+derives recurrence completeness, row versions, exact witness ties, dense setup
+and output costs. This pass changes Markdown only.

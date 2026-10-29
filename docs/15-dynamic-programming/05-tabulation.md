@@ -1,5 +1,14 @@
 # Tabulation
 
+## Versioned row invariants
+
+The [applied proof](implementation-contracts.md) names each read version.
+Descending knapsack capacity leaves row[c-weight] on the previous item prefix
+because weights are positive. LCS instead needs current left, previous above
+and saved previous diagonal while moving left-to-right. Shorter-column
+transposition is used only by the length API; reconstruction retains the
+original first/second orientation and its tie rule.
+
 Tabulation evaluates states in an order that satisfies their dependencies.
 The selected loops are iterative, so they avoid recursive search frames;
 their arrays and retained outputs still require explicit resource bounds.

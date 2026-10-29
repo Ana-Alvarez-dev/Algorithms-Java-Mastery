@@ -1,5 +1,14 @@
 # Common Mistakes
 
+## Dated verification and proof boundary
+
+The [ordered review](documentation-review.md) records fresh Java 21 tests
+and discovery separately from the original build, smoke/probe/doclint and
+author experiment. The [contract/proof map](implementation-contracts.md)
+connects sufficient keys, nonnegative sentinels, row versions, arithmetic,
+validation and witness ties to actual source/tests. Preserve the literal
+uncertainty markers and per-row units; a source state count is not a profile.
+
 | Mistake | Consequence | Selected correction |
 |---|---|---|
 | Caching only capacity or one LCS prefix | Different residual problems share a key | Include both relevant state coordinates |

@@ -1,5 +1,14 @@
 # Overlapping Subproblems
 
+## Requests, expansions and fixed context
+
+The [applied ledger](implementation-contracts.md) distinguishes expanded
+nonbase states R, helper calls/cache hits and full grid G. These recurrences
+have at most two outgoing requests per expansion, so helper calls are at most
+1+2R; base returns need not be cached. Per-call keys are sufficient only while
+the input context remains fixed. Input preservation does not create a
+concurrent-mutation snapshot of caller arrays.
+
 Two calls overlap when they ask the same residual question under the same
 fixed input. A state key must include every value that changes that answer.
 Reusing a result from a different residual problem is a correctness error.

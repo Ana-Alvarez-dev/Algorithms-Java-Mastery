@@ -1,5 +1,13 @@
 # Memoisation
 
+## Per-call dense storage and zero-valued answers
+
+The [source map](implementation-contracts.md) records G=(n+1)(C+1) knapsack
+cells or G=(m+1)(k+1) LCS cells, including empty boundaries. Each public memo
+call fills the dense grid with -1 before any base/lookup return. A cached zero
+is known, not missing. The abstract grid/call ledger does not measure physical
+zeroing instructions, allocated bytes, GC behaviour or a reused warm cache.
+
 Memoisation evaluates a well-founded recursive recurrence with per-state
 storage. A cache hit avoids re-expanding the state, not the lookup itself.
 Input context must remain fixed for the cache's lifetime.

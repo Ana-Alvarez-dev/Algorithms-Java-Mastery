@@ -1,5 +1,14 @@
 # Fibonacci Case Study
 
+## Exact work and reused domains
+
+The [source map](implementation-contracts.md) links the reused Recursion
+class rather than a new copy. All three selected methods perform max(n-1,0)
+recurrence additions; at n>=2 memo makes 2n-1 helper calls including cache
+hits. Fresh arrays/fill, table writes and scalar iteration still differ.
+No method computes an unused F(93) after F(92), and invalid n is rejected
+before allocation. These are logical counts, not generated-code measurements.
+
 F(0)=0, F(1)=1 and F(n)=F(n-1)+F(n-2). This is exact value computation, not
 an optimisation objective. It demonstrates repeated subproblems and storage
 trade-offs without introducing an unnecessary choice rule.

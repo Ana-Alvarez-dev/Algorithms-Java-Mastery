@@ -117,6 +117,15 @@ verification passes 710 tests overall, including 27 module tests. Only Markdown
 changes; the 46-cell author run retains its source/runtime. Later modules are
 not declared re-reviewed.
 
+A **2026-10-29 ordered Dynamic Programming documentation review**, based on main
+`bbab550e82a7768bdce789e646dd16621fa8d539` (PR #112 merge), follows
+[separately](../15-dynamic-programming/documentation-review.md). Scoped DP01-DP10
+clarifications and a contract/proof map derive sufficient states, cache costs,
+row versions, knapsack mask ties and UTF-16 LCS witnesses. Actual Java 21
+verification passes 710 tests overall, including 22 module tests. Only Markdown
+changes; the 57-cell author run retains its source/runtime and per-row units.
+Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

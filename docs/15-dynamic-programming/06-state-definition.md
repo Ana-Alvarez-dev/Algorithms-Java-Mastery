@@ -1,5 +1,14 @@
 # State Definition
 
+## Shared domain and conceptual mask ordering
+
+The [contract map](implementation-contracts.md) states validation precedence,
+shared grid caps and ownership. The knapsack grid cap also applies to rolling
+values even though they allocate one row. The smallest numeric subset-mask
+rule is the mathematical sum of 2^index over selected positions; it is not
+a returned int/long mask or a 32/64-item restriction. The accepted item cap
+is 256, and the Selection record only freezes its list, not arbitrary semantics.
+
 A state must contain enough information to determine the residual answer under
 fixed input. Minimality helps storage, but sufficiency comes first. Removing a
 variable without proving equivalence can make cached answers incorrect.
