@@ -1,5 +1,14 @@
 # Complexity Analysis
 
+## Public work ledger and shared limits
+
+The [applied ledger](implementation-contracts.md) separates G initialised
+cells, R memo expansions, helper requests, full-table updates, rolling updates
+and reconstruction. TOO_HEAVY and diagonal-only memo traversal still pay G.
+Array-of-array row storage and zero-length axes are included. Full grids remain
+inside the shared educational domain; row compression does not silently
+widen accepted inputs or preserve the original witness policy for free.
+
 DP cost includes state preparation, expanded states, transitions, lookups,
 arithmetic and output. A state-count formula alone is not the complete public
 workflow. Dense memo storage must be counted even for unreachable states.

@@ -1,5 +1,15 @@
 # Dynamic Programming Fundamentals
 
+## Applied specification and ordered review
+
+The [contract/proof map](implementation-contracts.md) and
+[ordered review](documentation-review.md) connect state meaning, recurrence,
+versioned storage, witness policies and full public costs to the three Java
+classes and reused Recursion Fibonacci. A table is an implementation choice,
+not a correctness proof; each transition and reconstruction step needs its
+precondition and postcondition. Preparation and fresh invocation context remain
+part of both memoised and tabulated workflows.
+
 Dynamic Programming evaluates a recurrence over reusable states. Memoisation
 discovers states top down; tabulation evaluates them in a dependency-respecting
 order. Correctness starts with the state meaning and recurrence, not the cache.

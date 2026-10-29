@@ -1,5 +1,14 @@
 # Recurrence Design
 
+## Normal return and reconstruction invariants
+
+The [applied map](implementation-contracts.md) derives knapsack
+chosenValue+K(i,remaining)=originalOptimum during its backward trace. For LCS,
+the unfilled output length equals L(i,j); each matched diagonal consumes one
+unit, and a chosen mismatch predecessor preserves the score. Index measures
+decrease to the bases. These witness obligations are separate from computing
+the optimum and from choosing a cache layout.
+
 Define state meaning before writing equations. Then partition all feasible
 solutions into cases, prove each transition valid, and prove the cases complete.
 A decreasing measure or topological dependency order establishes termination.

@@ -1,5 +1,15 @@
 # Longest Common Subsequence
 
+## Unit semantics and reconstruction orientation
+
+The [applied map](implementation-contracts.md) connects UTF-16 code-unit
+semantics to the recurrence and char-array trace. Length is symmetric; the
+up-on-tie witness may change when inputs swap. A supplementary character can
+contribute two units, and a maximum unit subsequence can contain a lone
+surrogate. No normalisation, code-point/grapheme conversion or minimum-word
+ordering is implicit. The empty-axis cost includes preparation/outer loops,
+not just zero inner transitions.
+
 Find a longest sequence appearing in both inputs in order, with gaps allowed.
 This is an optimisation problem with possibly several witnesses. It differs
 from longest common substring, which requires contiguity.

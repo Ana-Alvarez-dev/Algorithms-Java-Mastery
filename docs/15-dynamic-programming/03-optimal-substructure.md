@@ -1,5 +1,14 @@
 # Optimal Substructure
 
+## Complete LCS cases and separate witness proofs
+
+The [proof map](implementation-contracts.md) supplies both directions for the
+matching-trailing-unit LCS recurrence: appending a match constructs a solution,
+and an optimum can be chosen to use those final units. On mismatch at least
+one trailing position can be omitted. Knapsack take/skip likewise covers
+every feasible subset. Deterministic witness ties are additional claims;
+optimal length/value alone does not establish them.
+
 For an optimisation recurrence, optimal substructure means the chosen residual
 solutions can be optimal for their correctly defined subproblems. A replacement
 argument shows why a worse residual could not belong to a global optimum.

@@ -37,15 +37,20 @@ retain a free witness. UTF-16 units differ from code points/graphemes.
 
 ## Verification and Measurement Status
 
-Normal/profile builds pass **694 repository tests**, including **22 new tests**
-(5 Fibonacci, 9 knapsack, 8 LCS). Independent exhaustive oracles, identities,
+The original 2026-10-26 normal/profile verification passed **694 repository
+tests**, including **22 module tests** (5 Fibonacci, 9 knapsack, 8 LCS).
+The [ordered review](documentation-review.md) passes **710 repository tests**,
+including the same 22 here, and adds an
+[applied contract/proof map](implementation-contracts.md). Independent exhaustive
+oracles, identities,
 boundaries, ties, exact sums and ownership complement the proof arguments.
 Three JMH templates contain **nine methods/57 defaults**: Fibonacci 9 in ns/op,
 knapsack 24 and LCS 24 in us/op. Each row's units must be retained. Full public
 value/length workflows are timed; plan/sequence generation is tested separately.
 
-Local discovery, complete short smoke/default reference probes and JavaDoc are
-harness/functional evidence. The
+The original discovery, short smoke/default reference probes and JavaDoc
+checks retain their 2026-10-26 provenance. Fresh packaging/discovery are
+recorded in the ordered review; these are harness/functional evidence. The
 [first research report](../17-benchmarking/results/dynamic-programming/README.md)
 now completes all three Result/Interpretation fields with **57 means/errors**,
 **570 measured** and **342 warmup averages**, completion **8 min 30 sec**.

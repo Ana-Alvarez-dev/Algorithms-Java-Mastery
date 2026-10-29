@@ -1,5 +1,17 @@
 # Dynamic Programming: Implementation and Benchmark Guide
 
+## Ordered Documentation Review
+
+The [2026-10-29 review](documentation-review.md), based on main
+`bbab550e82a7768bdce789e646dd16621fa8d539` (PR #112 Backtracking-review merge),
+checks all twelve notes, three production files, three test sources and four JMH
+sources, plus the reused Recursion Fibonacci. Its
+[contract/proof map](implementation-contracts.md)
+derives cache/request ledgers, row versions, recurrence completeness, witness
+ties and full public costs. Fresh Java 21 execution passes **710 repository
+tests, including 22 here**; packaging/discovery are checked separately.
+Original build, smoke/probe/doclint and author timings retain their dates.
+
 ## Scope and Design Before Implementation
 
 Base: main `da3db882a70e3cc59ee05491ee76d8d8c11b97ae`, PR #89 integrating
@@ -183,7 +195,7 @@ compression. DAG dependency order, well-founded recursion and a complete cache
 key are necessary; overlapping calls alone do not make an arbitrary recurrence
 correct or polynomial. Numeric states/output width and local transition work matter.
 
-## JMH Questions and Planned Evidence
+## JMH Questions and Recorded Evidence
 
 Three templates use one thread, 3 warmup / 5 measurement iterations of 500 ms,
 two forks and fresh per-invocation algorithm state. No cross-invocation cache.
@@ -211,7 +223,7 @@ F(40)=102,334,155, F(90)=2,880,067,194,370,816,120. Knapsack LIGHT gives 59
 for n=16 at either capacity, and 182/253 for n=64 at C=32/128; TOO_HEAVY
 gives zero. LCS IDENTICAL gives n, DISJOINT zero, SHIFTED n-1 at the even
 default lengths. RANDOM lengths are independently reference-checked by the
-probe; no future JMH return value or timing is invented from these expectations.
+original probe; no JMH return value or timing is inferred from these expectations.
 
 Only exact values/lengths are timed. Plan/sequence construction is verified
 separately; no output-generation throughput is claimed. Research Question,
@@ -284,7 +296,9 @@ git rev-parse HEAD
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar ".*dynamicprogramming.*" -foe true
 ```
 
-The expected discovery list has **nine methods**. Capture SHA before measurement
+The expected discovery list has **nine methods**. The original build reported
+694 tests; the ordered review passes 710. Read the actual Surefire totals for
+the checkout under test. Capture SHA before measurement
 and before pulling later result documentation. The explicit executable selects
 the actual runtime; Maven release=21 alone does not. Packaging builds/tests the
 jar and does not launch the controlled run. For separate runs use patterns
