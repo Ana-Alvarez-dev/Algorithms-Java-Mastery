@@ -46,6 +46,24 @@ settings were not changed or verified. Future PRs have their own observed checks
 Windows remains supported; installing WSL locally is not required for GitHub's
 hosted Linux jobs.
 
+## Ordered documentation review — 2026-10-29
+
+The [review record](documentation-review.md), based on main
+`ca756c1b3f50ed2ab476b68b12615eca4899784b` (PR #116), and
+[workflow/evidence map](workflow-contracts.md) connect CI01-CI12 to events,
+checkout identity, job conditions, actual gates, action metadata and artifact
+integrity. Fresh local validation passes actionlint, all six Bash run blocks,
+20 shell cases, 710 coverage tests and 723 benchmark-profile tests.
+
+**Current main observed:** [run 40877685400, attempt 1](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/runs/40877685400)
+completed with both jobs successful. Downloaded archives match API digests;
+JUnit XML confirms 710/723 zero-failure outcomes, and the contained jar matches
+its logged/provenance SHA-256. These are observations for that exact checkout;
+this documentation PR has its own later checks. The initial hosted record and
+research remain unchanged. This follow-up changes only Markdown. After
+integration, the [closing traceability review](../00-project/12-closing-traceability-review.md)
+reconciles the ordered reviews and continuing limits.
+
 ## Study notes
 
 | Note | Applied question |

@@ -156,6 +156,16 @@ real preflight, unchanged status/digest and JMH discovery. Only Markdown changes
 original runtime/build/hash and author research stay dated and unchanged.
 Module 19's existing workflow is recognised; its ordered review remains next.
 
+A **2026-10-29 ordered CI/CD documentation review**, based on main
+`ca756c1b3f50ed2ab476b68b12615eca4899784b` (PR #116 merge), follows
+[separately](../19-ci-cd/documentation-review.md). Scoped CI01-CI12 corrections
+and a workflow/evidence map distinguish events, source identity, whole-job
+conditions, gates, action runtimes and artifact retention/integrity. Fresh local
+checks pass six run blocks, 20 shell cases and 710/723 Java 21 invocations.
+Main run 40877685400 is independently observed successful, with downloaded
+archives/XML/provenance reconciled. Only Markdown changes; initial hosted and
+research records remain unchanged. Closing reconciliation follows integration.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

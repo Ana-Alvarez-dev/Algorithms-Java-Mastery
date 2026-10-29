@@ -1,5 +1,13 @@
 # CI/CD: Implementation and Verification Record
 
+**Historical implementation verification:** the original local runs and initial
+hosted follow-up below were recorded on 2026-10-27. The
+[2026-10-29 ordered review](documentation-review.md) adds fresh local command
+checks and independent inspection of main run 40877685400 at PR #116's merge.
+Its [workflow/evidence map](workflow-contracts.md) defines each guarantee.
+The initial hosted record, original hashes and prior observations stay dated
+and unchanged; none attests this documentation PR's later checks.
+
 Reviewed on **2026-10-27**, from main
 `a0e174db482164027b086a0ddb986bf136c38b4a` (PR #96, Linux Environment).
 The contribution adds [.github/workflows/maven-ci.yml](../../.github/workflows/maven-ci.yml)
@@ -117,3 +125,20 @@ any subsequent commit/run remain separate claims. No deployment, percentage/perf
 file is added to Git. The [closing traceability review](../00-project/12-closing-traceability-review.md)
 records the existing numbered modules through 19, scoped Searching documentation
 corrections and the historical/provenance limitations that remain.
+
+## Ordered Documentation Review — 2026-10-29
+
+The [follow-up review](documentation-review.md) checks all nine notes, guide,
+index and original evidence against PR #116's main. Actionlint 1.7.12 and all
+six extracted Bash run blocks pass. Actual local Java 21 execution passes 710
+coverage-enabled and 723 benchmark-profile invocations, plus twenty separate
+shell cases; source/artifact capture and selected discovery pass. These are
+command checks without simulating the Actions services.
+
+The same review observes actual main run 40877685400, attempt 1, with both jobs
+successful. Logs show clean checked source ca756c1; independently downloaded
+archives match API digests, confirm 710/723 test outcomes and coverage counters,
+and contain the jar matching its provenance/logged hash. The review retains
+exact run/job/artifact identities. Original hosted artifacts and historical
+benchmark evidence are unchanged. No required-check enforcement, new timed
+JMH experiment or future PR status is inferred.

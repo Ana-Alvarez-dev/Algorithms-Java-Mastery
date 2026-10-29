@@ -19,3 +19,15 @@ No JSON/log/new CSV evidence files are added to Git. GitHub's own job logs and d
 ## Applied workflow and evidence
 
 See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).
+
+## Ordered Review Clarification
+
+A passing workflow is independent of required-check/branch-protection settings,
+which this review does not inspect or change. Uploading some matching files is
+not a per-path completeness validator; a diagnostic-upload failure also affects
+the whole verify job. Keep the observed main run, original hosted runs, local
+checks and future documentation PR as separate source/attempt records.
+
+The [workflow and evidence map](workflow-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records CI01-CI12
+and fresh local/hosted verification.
