@@ -40,11 +40,16 @@ tests, primary sources and Windows execution commands.
 
 ## Verification and Measurement Status
 
-Normal tests and benchmark-profile clean package pass **672 repository tests**,
-including **27 new module tests**, on OpenJDK 21. Four JMH templates contain
+The original 2026-10-26 verification passed **672 repository tests**,
+including **27 module tests**, on OpenJDK 21. The
+[ordered review](documentation-review.md) passes **710 repository tests**,
+including the same 27 here, and supplies an
+[applied contract/proof map](implementation-contracts.md). Four JMH templates
+contain
 eight methods and **46 default cells** (12 permutation, 12 combination,
-6 queen, 16 subset). All complete short execution checks; an independent probe
-checks every default three times. JavaDoc passes doclint excluding missing tags.
+6 queen, 16 subset). The original verification completed short execution checks
+and an independent probe of every default three times; its JavaDoc check
+passed doclint excluding missing tags. Fresh discovery is recorded separately.
 
 The [first research report](../17-benchmarking/results/backtracking/README.md)
 now completes all four Result/Interpretation fields with **46 means/errors**,

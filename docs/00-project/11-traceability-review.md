@@ -108,6 +108,15 @@ heuristic limits. Actual Java 21 verification passes 710 tests overall,
 including 27 module tests. Only Markdown changes; the 40-cell author run
 retains its source/runtime. Later modules are not declared re-reviewed.
 
+A **2026-10-29 ordered Backtracking documentation review**, based on main
+`df79799f8d8412df840c6e9f5cd1588a35f0fe5c` (PR #111 merge), follows
+[separately](../14-backtracking/documentation-review.md). Scoped BT01-BT10
+clarifications and a contract/proof map derive restoration, canonical choices,
+combination calls, queen masks, signed bounds and output costs. Actual Java 21
+verification passes 710 tests overall, including 27 module tests. Only Markdown
+changes; the 46-cell author run retains its source/runtime. Later modules are
+not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

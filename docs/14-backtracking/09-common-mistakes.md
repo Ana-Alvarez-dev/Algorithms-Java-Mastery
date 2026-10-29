@@ -1,5 +1,15 @@
 # Common Mistakes
 
+## Review sequence and evidence date
+
+Use the [applied map](implementation-contracts.md) in this order: specify
+input/output/duplicates/empty cases and caps; write candidate rules and
+pseudocode; trace live prefixes and sibling restoration; prove soundness,
+completeness, uniqueness and termination; derive calls/local/output costs;
+then connect native Java tests and the selected JMH workflow. The
+[ordered review](documentation-review.md) separates fresh verification from
+the historical implementation, smoke/probe and author measurement records.
+
 Backtracking correctness depends on the contract and rejection rules, not just
 on using recursion. Review each of the following against a concrete trace.
 

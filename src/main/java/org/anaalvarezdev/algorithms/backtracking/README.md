@@ -28,3 +28,9 @@ warmup averages on JDK 21.0.9/JMH 1.37; author-reported source is `b62df1b`
 family and stopping rule; count timings omit enumeration and source counts
 do not isolate CPU/GC/allocation causes. The guide retains Java 21 commands.
 Evidence remains Markdown without JSON/log; smoke stays separate.
+
+The [ordered documentation review](../../../../../../../docs/14-backtracking/documentation-review.md)
+records fresh Java 21 execution: **710 repository tests, including 27 here**.
+The [contract/proof map](../../../../../../../docs/14-backtracking/implementation-contracts.md)
+derives helper restoration, canonical paths, exact call/candidate ledgers and
+output costs. This pass changes Markdown only.

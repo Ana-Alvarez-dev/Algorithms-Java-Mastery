@@ -1,5 +1,14 @@
 # Backtracking Fundamentals
 
+## Applied specification and review
+
+The [contract/proof map](implementation-contracts.md) and
+[ordered review](documentation-review.md) connect the four Java classes to
+helper preconditions, normal-return restoration, completeness, uniqueness,
+termination, costs and native tests. A decision witness may be a partial
+assignment whose undecided positions are all excluded; it need not reach the
+last input index. Counting/enumeration use their own completion rules.
+
 Backtracking builds a partial solution, explores a legal choice, and returns to
 the parent state before trying a sibling. Its search is commonly depth first.
 It can enumerate solutions, count them, or decide whether any solution exists;
@@ -25,7 +34,8 @@ is one solution; an empty subset witnesses target zero.
 
 ```text
 search(state):
-    if complete(state): report/count/return witness
+    if complete(state):
+        snapshot if enumerating; return the appropriate base count/decision
     for candidate in complete_candidates(state):
         if safe_to_extend(state, candidate):
             apply(candidate)

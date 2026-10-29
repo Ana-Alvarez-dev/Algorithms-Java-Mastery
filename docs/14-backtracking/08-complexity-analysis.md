@@ -1,5 +1,14 @@
 # Complexity Analysis
 
+## Explicit candidate and output ledgers
+
+The [applied map](implementation-contracts.md) derives n*I versus u*I
+permutation candidate checks on the same value-prefix tree, n*(V-Q) queen
+flag checks versus V-1 mask child iterations, and exact combination calls.
+Source checks are not emitted instructions or profiler events. It also gives
+a matching Theta((k+1)C(n,k)) materialisation bound for the selected pruned
+combination generator, rather than treating C(n,k) alone as its full cost.
+
 Analyse visited states, candidate checks, preprocessing and output separately.
 Exponential/factorial labels do not specify the actual work of a bounded
 implementation, and pruning is not guaranteed to eliminate most of a tree.

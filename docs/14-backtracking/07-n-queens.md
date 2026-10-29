@@ -1,5 +1,14 @@
 # N-Queens
 
+## Current-row masks and normal-return state
+
+The [contract/proof map](implementation-contracts.md) makes columns/left/right
+mean occupied columns and diagonal attacks **at the current row**. Child
+updates are ((left|bit)<<1)&full and (right|bit)>>>1; each new column increases
+popcount(columns), giving a decreasing n-popcount measure. The accepted
+0..12 domain is a work/output policy, not permission to extend Java shifts to
+arbitrary n. The empty full mask returns one before generating children.
+
 Place n queens on an n-by-n board with no shared row, column or diagonal.
 The selected contract enumerates or counts **ordinary placements**: rotations
 and reflections remain separate, rather than counting only fundamental classes.

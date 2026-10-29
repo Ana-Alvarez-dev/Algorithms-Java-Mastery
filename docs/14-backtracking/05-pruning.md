@@ -1,5 +1,14 @@
 # Pruning
 
+## Derived calls and complete-operation costs
+
+The [ledger derivations](implementation-contracts.md) explain the exact
+combination depth counts, include terminal/dead calls, and separate those
+counts from edge/candidate work. For SubsetSum even target zero validates the
+cap and prepares the bounded suffix arrays before its first successful helper
+call. Its one-call root success/rejection therefore still has O(n+1) complete
+work; no early mathematical witness bypasses public preparation.
+
 Pruning discards a partial branch using a justified impossibility condition.
 For complete enumeration/counting, it must retain every solution required by
 the contract. For optimisation, discarding a feasible branch instead requires
@@ -45,7 +54,7 @@ solutions from a full enumerator. Candidate ordering can affect that first hit;
 it does not alone reduce an unchanged complete counter's set of legal prefixes.
 
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md) provides correctness proofs and separates source node counts from
-future JMH timings. Next: [permutations and combinations](06-permutations-and-combinations.md).
+the separately recorded JMH timings. Next: [permutations and combinations](06-permutations-and-combinations.md).
 
 ## First Measured Controls
 
