@@ -2,6 +2,18 @@
 
 ## Algorithms Java Mastery
 
+
+**Current review closure (2026-10-29):** the
+[closing record](12-closing-traceability-review.md) reconciles the nineteen
+integrated subject reviews, source/test/benchmark inventory, current hosted
+verification and continuing evidence limits. The [project audit](11-traceability-review.md)
+retains the full dated progression.
+
+Project entry points: [English](../../README.md) · [Español](../../README.es.md).
+English is primary for code and technical documentation; the Spanish root
+README provides equivalent project navigation, commands and current facts.
+Update both root pages when their shared scope or execution guidance changes.
+
 Welcome to the foundational documentation of **Algorithms Java Mastery**.
 
 This directory establishes the academic, organisational, and engineering

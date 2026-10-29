@@ -1,833 +1,198 @@
-<h1 align="center">Algorithms Java Mastery</h1>
+# Algorithms Java Mastery
 
-<p align="center">
-  <strong>Algorithms, Data Structures, Correctness, Complexity and Java Engineering</strong>
-</p>
+[English](README.md) · [Español](README.es.md)
 
-<p align="center">
-  Academic study repository inspired primarily by <em>Introduction to Algorithms (CLRS)</em>,
-  developed through rigorous reasoning, Java 21, automated testing, JMH,
-  Linux, Maven and reproducible engineering practices.
-</p>
+An academic **Java 21** project connecting algorithms and data structures with
+formal specifications, correctness reasoning, complexity analysis, automated
+tests and selected performance experiments. It develops foundations relevant
+to backend engineering through executable, documented examples.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-21-informational" alt="Java 21">
-  <img src="https://img.shields.io/badge/Maven-Wrapper-informational" alt="Maven Wrapper">
-  <img src="https://img.shields.io/badge/JUnit-Jupiter-informational" alt="JUnit Jupiter">
-  <img src="https://img.shields.io/badge/AssertJ-Testing-informational" alt="AssertJ">
-  <img src="https://img.shields.io/badge/JMH-Benchmarking-informational" alt="JMH">
-  <img src="https://img.shields.io/badge/Linux-Engineering-informational" alt="Linux">
-  <img src="https://img.shields.io/badge/AI-Assisted%20Learning-transparent-informational" alt="AI Assisted Learning">
-</p>
+The main academic reference is *Introduction to Algorithms* (CLRS). Explanations,
+contracts and implementations are developed for this repository; inspected
+sources and edition-specific references are recorded in each review.
 
-<p align="center">
-  <a href="docs/00-project/README.md">Project Documentation</a>
-  ·
-  <a href="docs/01-foundations/README.md">Foundations</a>
-  ·
-  <a href="docs/02-complexity/README.md">Complexity</a>
-  ·
-  <a href="docs/03-arrays/README.md">Arrays</a>
-  ·
-  <a href="docs/04-searching/README.md">Searching</a>
-</p>
+## Current scope and evidence
 
----
+The selected implementation sequence and the ordered documentation reviews
+through **19 — CI/CD** are complete within their recorded scope. The
+[closing traceability review](docs/00-project/12-closing-traceability-review.md)
+reconciles the nineteen merged reviews, current source and hosted evidence.
 
-## Overview
+Verified snapshot: **2026-10-29**, at main `8d98012`.
 
-**Algorithms Java Mastery** is an academic and engineering repository for the
-systematic study of algorithms, data structures, correctness, asymptotic
-complexity, testing, benchmarking, and reproducible Java development.
-
-The project is inspired primarily by *Introduction to Algorithms* by
-Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.
-
-The repository does not reproduce the book. Instead, it transforms academic
-concepts into original explanations, formal specifications, correctness
-arguments, Java implementations, automated tests, empirical experiments, and
-engineering documentation.
-
-> **Java is the implementation language. Algorithmic reasoning is the subject.**
-
----
-
-## Project Status
-
-| Area | Status |
+| Evidence | Snapshot |
 |---|---|
-| Project architecture | Established |
-| Foundations | Documented |
-| Complexity | Documented |
-| Arrays | Documented + implemented + tested + selected JMH |
-| Searching | Documented + implemented + tested + selected JMH |
-| Sorting | Documented + implemented + tested + selected JMH |
-| Linked Lists through Greedy | Selected implementations, tests and initial measured research |
-| Backtracking | Documented + implemented + tested + initial 46-cell research |
-| Dynamic Programming | Documented + implemented + tested + initial 57-cell research |
-| Testing | Applied regression/oracle evidence + optional coverage; 710 normal tests pass |
-| Benchmarking | Applied protocol + 723 profile tests; first five-cell aggregation report, source inferred from reflog; original jar hash unavailable |
-| Linux environment | Applied preflight + 20 shell cases; Linux Java 21 builds verified |
-| CI/CD concepts | Applied to two-job Maven verification and package preparation |
-| GitHub Actions workflow | Observed PR/main success; 710 coverage / 723 package tests; artifacts inspected |
+| Production Java sources | 100 files across 13 algorithm packages |
+| Normal / coverage suite | 710 JUnit invocations |
+| Benchmark-profile suite | 723 invocations, including 13 fixture checks |
+| Linux shell contracts | 20 separate cases |
+| JMH registry | 115 methods in 40 classes |
+| Default parameter combinations | 803 cells; registration inventory, not 803 measured results |
+| Hosted verification | Both jobs passed in [run 40880667469](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/runs/40880667469) |
 
-The README is intentionally maintained as a **living project summary**. It is
-updated only when repository evidence changes.
+Repeated builds do not increase the distinct test inventory. Passing tests,
+coverage, mathematical arguments and timings provide different evidence;
+completion of the scoped review is not a universal correctness certification.
 
----
+## Study and engineering method
 
-## Core Principle
+1. Define the problem, input/output, preconditions and postconditions.
+2. Identify valid boundaries, rejection policies and mutation/ownership rules.
+3. Design the strategy and write language-independent pseudocode.
+4. Trace representative cases manually.
+5. Argue correctness and termination using invariants or induction.
+6. Analyse time, auxiliary space, output costs and model assumptions.
+7. Implement in Java and test the observable contract with JUnit and AssertJ.
+8. Add JMH only for a justified empirical question; retain settings and uncertainty.
+9. Link source, tests, experiments and technical conclusions.
 
-> **Understanding precedes implementation.**
+See the [study methodology](docs/00-project/03-study-methodology.md) and
+[project documentation](docs/00-project/README.md).
 
-Every relevant algorithm follows a traceable learning and engineering workflow:
+## Modules
 
-```text
-Academic Source
-        ↓
-Problem Understanding
-        ↓
-Formal Specification
-        ↓
-Preconditions / Postconditions
-        ↓
-Edge Cases
-        ↓
-Algorithmic Strategy
-        ↓
-Pseudocode
-        ↓
-Manual Trace
-        ↓
-Correctness Reasoning
-        ↓
-Termination
-        ↓
-Complexity Analysis
-        ↓
-Java Implementation
-        ↓
-JUnit + AssertJ
-        ↓
-JMH when justified
-        ↓
-Engineering Documentation
-```
-
-The repository deliberately separates concepts that are often confused:
-
-```text
-Correctness          ≠ Testing
-Complexity Analysis  ≠ Benchmarking
-Algorithm Design     ≠ Java Syntax
-Academic Source      ≠ Repository Documentation
-Implementation       ≠ Experimental Evidence
-```
-
----
-
-## Academic and Engineering Traceability
-
-```text
-CLRS / Academic References
-        ↓
-docs/<module>/
-        ↓
-Problem Specification
-        ↓
-Correctness Argument
-        ↓
-Complexity Analysis
-        ↓
-src/main/
-        ↓
-src/test/
-        ↓
-src/jmh/ when relevant
-        ↓
-Maven Verification
-        ↓
-Windows / Linux
-        ↓
-Continuous Integration when configured
-```
-
-Each layer has a distinct responsibility and should provide evidence for the
-next one.
-
----
-
-## Repository Structure
-
-```text
-Algorithms-Java-Mastery/
-│
-├── docs/
-│   ├── 00-project/
-│   ├── 01-foundations/
-│   ├── 02-complexity/
-│   ├── 03-arrays/
-│   ├── 04-searching/
-│   ├── 05-sorting/
-│   ├── 06-linked-lists/
-│   ├── 07-stacks-and-queues/
-│   ├── 08-hash-tables/
-│   ├── 09-trees/
-│   ├── 10-graphs/
-│   ├── 11-recursion/
-│   ├── 12-divide-and-conquer/
-│   ├── 13-greedy-algorithms/
-│   ├── 14-backtracking/
-│   ├── 15-dynamic-programming/
-│   ├── 16-testing/
-│   ├── 17-benchmarking/
-│   ├── 18-linux-environment/
-│   └── 19-ci-cd/
-│
-├── src/
-│   ├── main/java/
-│   ├── test/java/
-│   └── jmh/java/
-│
-├── pom.xml
-├── mvnw
-└── mvnw.cmd
-```
-
-### Source responsibilities
-
-| Path | Responsibility |
-|---|---|
-| `src/main/java` | Algorithm and data-structure implementations |
-| `src/test/java` | JUnit + AssertJ behavioural verification |
-| `src/jmh/java` | Controlled empirical performance experiments |
-
----
-
-## Documentation Roadmap
+Technical module documentation is in English.
 
 | Module | Focus |
 |---|---|
-| `00-project` | Project vision, methodology, architecture, standards, workflow, references |
-| `01-foundations` | Problem specification, correctness, invariants, edge cases |
-| `02-complexity` | O, Ω, Θ, time, space, best/average/worst-case reasoning |
-| `03-arrays` | Array fundamentals, operations, traversal, common algorithms |
-| `04-searching` | Linear, binary, recursive and boundary-search strategies |
-| `05-sorting` | Sorting algorithms and ordering strategies |
-| `06-linked-lists` | Linked structures and list operations |
-| `07-stacks-and-queues` | LIFO/FIFO structures and applications |
-| `08-hash-tables` | Hashing, collisions and efficient lookup |
-| `09-trees` | Hierarchical structures and tree operations |
-| `10-graphs` | Graph representations and graph algorithms |
-| `11-recursion` | Recursive reasoning and correctness |
-| `12-divide-and-conquer` | Divide, solve, combine and recurrences |
-| `13-greedy-algorithms` | Greedy choice and optimal substructure |
-| `14-backtracking` | Search-space exploration and pruning |
-| `15-dynamic-programming` | State, recurrence, memoization and tabulation |
-| `16-testing` | Automated testing methodology |
-| `17-benchmarking` | JMH and empirical performance analysis |
-| `18-linux-environment` | Terminal, permissions, processes, Java, Maven and Git |
-| `19-ci-cd` | Continuous Integration and automation concepts |
+| [00 — Project](docs/00-project/README.md) | Methodology, architecture, standards and traceability |
+| [01 — Foundations](docs/01-foundations/README.md) | Specifications, correctness, invariants and termination |
+| [02 — Complexity](docs/02-complexity/README.md) | O, Ω, Θ; time/space and cost models |
+| [03 — Arrays](docs/03-arrays/README.md) | Access, traversal, aggregation, updates and prefix sums |
+| [04 — Searching](docs/04-searching/README.md) | Linear/binary search, boundaries, ranges and nearest values |
+| [05 — Sorting](docs/05-sorting/README.md) | Elementary sorts, merge sort and quicksort |
+| [06 — Linked Lists](docs/06-linked-lists/README.md) | Singly, doubly and circular linked structures |
+| [07 — Stacks and Queues](docs/07-stacks-and-queues/README.md) | LIFO/FIFO/deque structures and applications |
+| [08 — Hash Tables](docs/08-hash-tables/README.md) | Chaining, probing, collisions and applications |
+| [09 — Trees](docs/09-trees/README.md) | BST, AVL, min-heaps, traversal and metrics |
+| [10 — Graphs](docs/10-graphs/README.md) | Representations, BFS/DFS, ordering, Dijkstra and Kruskal |
+| [11 — Recursion](docs/11-recursion/README.md) | Recursive contracts, exact arithmetic and iterative references |
+| [12 — Divide and Conquer](docs/12-divide-and-conquer/README.md) | Maximum subarray, inversions and selection |
+| [13 — Greedy](docs/13-greedy-algorithms/README.md) | Activities, interval partitioning, Huffman and coin-change counterexamples |
+| [14 — Backtracking](docs/14-backtracking/README.md) | Permutations, combinations, N-Queens and subset decisions |
+| [15 — Dynamic Programming](docs/15-dynamic-programming/README.md) | Fibonacci, 0/1 knapsack and UTF-16 LCS |
+| [16 — Testing](docs/16-testing/README.md) | Regression cases, independent oracles and coverage |
+| [17 — Benchmarking](docs/17-benchmarking/README.md) | JMH protocols, recorded results and interpretation |
+| [18 — Linux](docs/18-linux-environment/README.md) | Environment, Bash, permissions, processes, Java, Maven and Git |
+| [19 — CI/CD](docs/19-ci-cd/README.md) | Hosted verification, package preparation and artifact identity |
 
-Detailed project documentation begins at
-[`docs/00-project/README.md`](docs/00-project/README.md).
+## Source layout and tools
 
----
-
-## Current Java Implementation
-
-### Arrays
-
-The Arrays package currently includes implementations for:
-
-- indexed access and update;
-- traversal and aggregation;
-- minimum and maximum;
-- array reversal and copying;
-- insertion and deletion;
-- duplicate removal in sorted arrays;
-- prefix sums.
-
-```text
-src/main/java/org/anaalvarezdev/algorithms/arrays/
-```
-
-### Searching
-
-The Searching package currently includes:
-
-- `LinearSearch`;
-- `BinarySearch`;
-- `RecursiveBinarySearch`;
-- `FirstOccurrence`;
-- `LastOccurrence`;
-- `SearchInsertPosition`;
-- `SearchRange`;
-- `ClosestValueSearch`.
-
-```text
-src/main/java/org/anaalvarezdev/algorithms/searching/
-```
-
-Example trace:
-
-```text
-docs/04-searching/04-binary-search.md
-        ↓
-BinarySearch.java
-        ↓
-BinarySearchTest.java
-        ↓
-BinarySearchBenchmark.java
-```
-
-The project rule is:
-
-> **Benchmark when justified, not because a class exists.**
-
----
-
-## Current Module Evidence
-
-Sorting and Linked Lists also have Java implementations, tests, JMH templates
-and preliminary recorded results. Stacks and Queues now adds six containers,
-five application algorithms, 80 tests and ten JMH methods. Its
-[first reported results](docs/17-benchmarking/results/stacks-and-queues/README.md)
-preserve 20 configurations and the printed iteration values from JDK 21.0.9;
-interpretation remains preliminary and retains reported uncertainty.
-
-Hash Tables now adds separate-chaining and linear-probing implementations,
-four application algorithms, 47 tests and nine JMH methods. Its measured
-[first reported results](docs/17-benchmarking/results/hash-tables/README.md)
-cover 18 DISTINCT_HASH configurations, with errors, all printed iterations and
-a trace of probing reinsertion. Author-reported execution SHA: `03e6ed5`. Expected
-costs and worst-case collision/rebuild costs
-are distinguished in the implementation guide.
-
-- [Sorting scope and evidence](docs/05-sorting/implementation-and-benchmark-guide.md)
-- [Linked Lists scope and evidence](docs/06-linked-lists/implementation-and-benchmark-guide.md)
-- [Stacks and Queues scope, contracts and run commands](docs/07-stacks-and-queues/implementation-and-benchmark-guide.md)
-- [Hash Tables scope, contracts and run commands](docs/08-hash-tables/implementation-and-benchmark-guide.md)
-- [Trees scope, contracts and run commands](docs/09-trees/implementation-and-benchmark-guide.md)
-- [Graphs scope, contracts and run commands](docs/10-graphs/implementation-and-benchmark-guide.md)
-- [Recursion scope, contracts and run commands](docs/11-recursion/implementation-and-benchmark-guide.md)
-- [Divide and Conquer scope, contracts and run commands](docs/12-divide-and-conquer/implementation-and-benchmark-guide.md)
-- [Greedy scope, contracts and run commands](docs/13-greedy-algorithms/implementation-and-benchmark-guide.md)
-- [Backtracking scope, contracts and run commands](docs/14-backtracking/implementation-and-benchmark-guide.md)
-- [Dynamic Programming scope, contracts and run commands](docs/15-dynamic-programming/implementation-and-benchmark-guide.md)
-- [Testing contracts, regressions and coverage commands](docs/16-testing/implementation-and-verification-guide.md)
-- [Benchmarking protocol, fixture tests and exact execution commands](docs/17-benchmarking/implementation-and-benchmark-guide.md)
-- [Benchmarking local verification](docs/17-benchmarking/verification-report.md)
-- [Linux environment verification and commands](docs/18-linux-environment/implementation-and-verification-guide.md)
-- [Linux local verification](docs/18-linux-environment/verification-report.md)
-- [CI/CD workflow and verification guide](docs/19-ci-cd/implementation-and-verification-guide.md)
-- [CI/CD validation and hosted-run status](docs/19-ci-cd/verification-report.md)
-- [Initial hosted CI execution and artifact identities](docs/19-ci-cd/first-hosted-run.md)
-- [Closing traceability review and remaining limitations](docs/00-project/12-closing-traceability-review.md)
-- [Project traceability review and open findings](docs/00-project/11-traceability-review.md)
-
-The review distinguishes verified implementations from conceptual future work,
-passing tests from known contract gaps, and local builds from CI evidence.
-
-Trees adds an iterative unbalanced BST, AVL ordered int set, dynamic min-heap,
-standalone tree traversals/metrics and heap applications. Its 59 tests bring
-repository verification to 524 tests; twelve JMH methods have functional/harness
-evidence. The [first lookup results](docs/17-benchmarking/results/trees/README.md)
-retain all 24 cells with errors and printed iterations on JDK 21.0.9, including
-the sorted-BST path analysis. The author's reflog identifies execution source
-`c576cb7`. The separate [heap results](docs/17-benchmarking/results/trees/heap-first-run.md)
-add 24 cells from author-reported source `ce621c6`, also on JDK 21.0.9. Both
-initial subsets now retain all means/errors and printed iterations: 48 of 72
-default module cells. Uncertainty, source identities and smoke remain distinct.
-
-Graphs adds immutable list/matrix representations, BFS/iterative DFS, components,
-Kahn ordering, lazy-queue Dijkstra and Kruskal forest. Its 48 tests bring local
-verification to 572 tests. The [traversal results](docs/17-benchmarking/results/graphs/README.md)
-and [weighted results](docs/17-benchmarking/results/graphs/weighted-first-run.md)
-now retain all 32 default cells, every error and printed iteration on JDK 21.0.9.
-Author-reported source is `00fc9de`; interpretation keeps source work, timing
-uncertainty and separate algorithm outputs distinct. Evidence stays Markdown.
-
-Recursion adds seven bounded/exact algorithm examples and iterative references.
-Its 28 tests bring local repository verification to 600 tests. The guide defines
-numeric/work/output limits, induction, decreasing variants and recurrences,
-distinguishing total calls, depth, memo state, bit cost and retained output.
-The [Recursion research report](docs/17-benchmarking/results/recursion/README.md)
-now retains all 24 default cells, every error, 240 measured and 144 warmup
-averages on JDK 21.0.9/JMH 1.37. Author-reported source is `fe370a1` (PR #82).
-All three templates include preliminary interpretation; five errors reach 25%
-of their means. Smoke evidence stays separate and all evidence stays Markdown.
-
-Divide and Conquer adds canonical maximum subarray, strict inversion counting
-and duplicate-aware in-place order statistics, reusing existing Searching/Sorting
-cases. Its 18 tests bring local verification to **618 tests**. The guide links
-contracts, traces, invariants and corrected recurrence/partition models; six JMH
-methods define 48 defaults in microseconds/op. The
-[first research report](docs/17-benchmarking/results/divide-and-conquer/README.md)
-now retains all 48 means/errors, 480 measured and 288 warmup averages on JDK
-21.0.9/JMH 1.37, with author-reported source `507b253` (PR #84). Six wide-error
-cells and fixture-specific point rankings remain explicit. Master theorem
-conditions and the actual smaller-side Hoare Quicksort stack bound stay distinct
-from timing evidence. All three templates now include preliminary interpretation.
-
-Greedy adds shared half-open intervals, maximum-cardinality activity selection,
-minimum-room assignment, deterministic Huffman codes/exact costs, and compressed
-greedy change with explicit failure counterexamples. Its 27 tests bring local
-verification to **645 tests**. The guide links exchange/lower-bound arguments,
-invariants, ownership, work/output space and independent oracles. Five methods
-in three JMH templates define 40 defaults in microseconds/op; all pass functional
-probes and execution smoke. The
-[first Greedy report](docs/17-benchmarking/results/greedy/README.md) now retains
-all 40 means/errors, 400 measured and 240 warmup averages on JDK 21.0.9/JMH 1.37,
-using author-reported source `674ab35` (PR #86). All three templates include
-preliminary interpretation, with ten wide-error cells retained. Interval
-objectives, presorted preparation and cost-only Huffman work remain explicit.
-
-Backtracking adds unique permutations, increasing combinations, ordinary
-N-Queens and signed subset-sum decision. The guide connects all nine reviewed
-notes to contracts, traces, completeness/uniqueness and sound-pruning arguments,
-state restoration, output costs and independent test oracles. Normal/profile
-verification passes **672 tests**, including **27 new tests**. Eight JMH methods
-in four templates define **46 defaults** in microseconds/op; all pass execution
-checks and three-call reference probes. The
-[first Backtracking report](docs/17-benchmarking/results/backtracking/README.md)
-now completes all four Result/Interpretation fields with 46 means/errors,
-460 measured and 276 warmup averages on JDK 21.0.9/JMH 1.37, using author-reported
-source `b62df1b` (PR #88). Two errors reach 25%. Pruning loses on TWO combinations
-and early-witness subset controls by point mean; counts omit enumeration and
-source work ledgers remain distinct from timing causes. Smoke is excluded.
-
-Dynamic Programming adds full-table Fibonacci, exact 0/1 knapsack values/plans,
-and UTF-16 LCS lengths/sequences, reusing Recursion's memoised/rolling Fibonacci.
-All twelve notes link state/recurrence design, traces, induction, deterministic
-ties, dense-cache setup and rolling dependency invariants. Normal/profile checks
-pass **694 tests**, including **22 new tests**. Nine methods in three JMH templates
-define **57 defaults** (9 Fibonacci ns/op, 24 knapsack/24 LCS us/op); row units and
-value-only versus witness work remain explicit. The
-[first DP report](docs/17-benchmarking/results/dynamic-programming/README.md)
-now completes all three Result/Interpretation fields with 57 means/errors,
-570 measured and 342 warmup averages on JDK 21.0.9/JMH 1.37, author-reported
-source `d572651` (PR #90). Eleven errors reach 25%, largest 163.7% for Fibonacci
-table n=20; its literal CI marker remains. Knapsack rolling point means are
-lower throughout; LCS memo/rolling comparisons depend on shape. Source-state
-ledgers are not timing attribution; smoke and earlier reports remain separate.
-
-Testing now adds a real baseline/red/green chain: a 100%-covered nearest-value
-method still fails six new duplicate partitions; the corrected lowest-index
-implementation passes **710 tests**, including **16 new Searching invocations**.
-Independent linear/exhaustive/seeded/property checks and fresh fixtures support
-the contract. Optional `-Pcoverage` generates JaCoCo 0.8.13 HTML/XML under target;
-the [verification report](docs/16-testing/verification-report.md) retains actual
-before/after counters and their limits. Future aggregation data now fits int,
-while historical Arrays means stay unchanged. Corrected timing was pending
-at that stage; the later Benchmarking follow-up below records the supplied run.
-No new JMH family or CI status is claimed. This was the prerequisite for
-module **17 - Benchmarking**, applied below.
-
-Benchmarking now connects all ten notes to an executable five-size aggregation
-protocol. Thirteen profile-only fixture checks verify real prepared inputs with
-long/formula oracles, repeated calls and state preservation. Normal tests remain
-**710**; the benchmark-profile package passes **723**. Discovery retains 40 JMH
-classes / 115 methods; no additional algorithm or benchmark family is invented.
-The corrected aggregation uses two forks, 3/5 x 500 ms and one thread, with exact
-Java 21 commands, source/dirty-state/jar provenance and separate GC diagnostics.
-The [verification report](docs/17-benchmarking/verification-report.md) records
-functional checks and smoke, which are not research scores. The
-[corrected aggregation record](docs/17-benchmarking/results/arrays/aggregation-corrected-run.md)
-now records five supplied means/errors, 50 measured and 30 warmup averages,
-JDK 21.0.9/JMH 1.37 and 44-second completion. No error reaches the 25% flag;
-finite growth is compatible with a linear scan. The author's subsequent reflog
-supports `5eee0dc` as the inferred execution source before results merge
-`12f2973`. The original jar is absent, so its hash is unavailable. Execution-time
-dirty state, command/time and fresh machine metadata remain unknown. Historical results retain their limitations.
-Evidence stays Markdown with no new JSON/log/CSV files. Next is
-**18 - Linux Environment**, applied below; GitHub Actions was not yet implemented
-at that review. The later CI/CD contribution follows it below.
-
-Linux Environment now connects all ten notes to a read-only project preflight,
-with twenty offline subprocess cases for valid/invalid JDK selection, spaced
-paths, dirty state, optional/required artifacts and withheld option values.
-The wrapper is tracked executable and Linux launchers use scoped LF attributes.
-Local Linux/JDK 21 builds pass **710 normal / 723 profile JUnit tests**; the
-**20 shell cases are separate**. Discovery retains 115 methods in 40 classes.
-The [verification report](docs/18-linux-environment/verification-report.md)
-distinguishes actual Linux checks from fake-launcher shell fixtures. Windows
-remains supported and author WSL availability is not assumed. No old benchmark
-hash/source field is backfilled from a new build, and no Linux author timing
-or passing CI is claimed at that Linux review. It supplies the prerequisites for
-**19 - CI/CD**, applied below.
-
-CI/CD now provides [.github/workflows/maven-ci.yml](.github/workflows/maven-ci.yml)
-for main pushes, main-target PRs and manual dispatch. The two jobs use Linux and
-Java 21: tests/coverage first, then an uninstrumented benchmark package with
-identity capture and discovery. Official action SHAs are pinned, permissions
-are read-only, and diagnostics/package artifacts request seven-day retention.
-The [verification report](docs/19-ci-cd/verification-report.md) records actionlint
-and all six run blocks passing locally: twenty shell cases, 710 coverage tests,
-723 profile tests, generated reports and 115-method discovery. **The initial
-hosted runs are now observed passing**, recorded separately from those local checks.
-No deployment, benchmark timing gate or branch-protection change is introduced.
-The existing numbered sequence reaches module 19. The
-[hosted record](docs/19-ci-cd/first-hosted-run.md) now confirms both jobs for PR #97
-and merged main, with 710/723 passing JUnit invocations and inspected artifacts.
-Actual main checkout is `0d0ade1`; the PR checked synthetic merge `659cdb7`.
-The two main jobs used different Java 21 patches/images, recorded explicitly.
-
-The [closing review](docs/00-project/12-closing-traceability-review.md) reconciles
-100 production Java files, 115 JMH methods in 40 classes and per-module test
-counts. It also applies Searching S02-S08 documentation corrections: concrete
-contracts, exact probe counts, probability models, monotonicity, output costs,
-current paths and scope/status advice. Java/tests/workflow and historical
-numerical data are unchanged. This closes the selected engineering milestone
-with explicit research, coverage, provenance and repository-enforcement limits;
-it does not claim exhaustive proof or measurement of every possible extension.
-
-## Technology Stack
-
-| Technology | Responsibility |
+| Path | Responsibility |
 |---|---|
-| Java 21 | Implementation language |
-| Maven | Build and dependency management |
-| Maven Wrapper | Reproducible execution |
-| JUnit Jupiter | Automated tests |
-| AssertJ | Fluent assertions |
-| JMH | Microbenchmarking |
-| Git | Version control |
-| GitHub | Collaboration, branches and pull requests |
-| Linux | Professional command-line engineering environment |
-| GitHub Actions | Observed hosted verification and package retention |
-| Generative AI | Learning, review and engineering assistance under human validation |
+| `src/main/java` | Algorithms, data structures and supporting types |
+| `src/test/java` | Functional JUnit/AssertJ tests |
+| `src/jmh/java` | JMH benchmarks and trial fixtures |
+| `src/jmh-test/java` | Fixture tests active only with the benchmark profile |
+| `docs` | Specifications, proofs, analysis, reviews and research records |
+| `scripts/linux` | Environment preflight and shell contract checks |
+| `.github/workflows/maven-ci.yml` | Two-job Java 21 CI workflow |
 
----
+The [POM](pom.xml) selects Java release 21, JUnit Jupiter 5.12.2, AssertJ 3.27.3,
+JMH 1.37 and optional JaCoCo 0.8.13. The wrapper selects **Maven 3.9.11**;
+a global Maven installation is unnecessary. First use may download Maven and
+dependencies. Runtime selection and bytecode target are separate checks.
 
-## AI-Assisted Academic Engineering
+## Build and test
 
-Generative AI is used in this repository as a **learning and engineering
-assistant**, not as an academic authority, source of truth, or autonomous
-author.
+Use an installed **JDK 21**, with both `java` and `javac`, and align JAVA_HOME
+and PATH. Start at the repository root. Run commands as checkpoints and stop
+on failure. Windows remains supported; local WSL is not required for hosted CI.
 
-Its position in the workflow is:
-
-```text
-Academic Sources / Official Documentation
-                ↓
-Human Study and Reasoning
-                ↓
-AI-Assisted Explanation / Review / Alternatives
-                ↓
-Human Validation
-                ↓
-Implementation
-                ↓
-Tests / Benchmarks / Build Evidence
-                ↓
-Documented Engineering Conclusion
-```
-
-### How AI is used
-
-AI assistance may support:
-
-- explaining difficult concepts at different levels of depth;
-- comparing alternative algorithmic strategies;
-- questioning assumptions and identifying missing edge cases;
-- reviewing preconditions, postconditions and invariants;
-- suggesting additional test scenarios from an existing contract;
-- reviewing complexity arguments for internal consistency;
-- identifying documentation or traceability gaps;
-- improving technical writing and terminology;
-- supporting Java code review and maintainability analysis;
-- proposing benchmark questions before experiments are implemented;
-- helping maintain consistency across documentation, code, tests and JMH;
-- supporting bilingual technical learning when appropriate.
-
-### What AI does not replace
-
-AI output is not treated as evidence by itself.
-
-```text
-AI Explanation       ≠ Academic Reference
-AI-Generated Code    ≠ Verified Implementation
-AI Suggestion        ≠ Engineering Decision
-AI Complexity Claim  ≠ Mathematical Analysis
-AI Test Proposal     ≠ Correctness Proof
-AI Benchmark Comment ≠ Experimental Result
-```
-
-The learner remains responsible for understanding and validating every accepted
-change.
-
-### Validation policy
-
-AI-assisted contributions should be validated against the strongest applicable
-source:
-
-| Claim | Required validation |
-|---|---|
-| Algorithmic concept | Academic reference |
-| Java behaviour | Java / library documentation when relevant |
-| Correctness | Contract + formal reasoning |
-| Complexity | Asymptotic analysis |
-| Implementation | Code review + tests |
-| Performance | JMH measurement |
-| Build behaviour | Maven execution |
-| Repository state | Actual Git / GitHub evidence |
-
-### Academic integrity
-
-AI assistance is disclosed transparently because it forms part of the learning
-and engineering workflow.
-
-The repository follows these principles:
-
-- academic sources remain primary;
-- generated references are never trusted without verification;
-- code should not be accepted unless it can be explained by the learner;
-- AI-generated or AI-assisted reasoning must be independently reviewed;
-- tests and benchmarks must be executed rather than assumed;
-- institutional or course-specific AI policies take precedence for graded work;
-- responsibility for the final content remains human.
-
-This makes AI a **scaffolding and review layer**, not a substitute for
-understanding.
-
-### Why use AI here?
-
-Used carefully, AI can increase the quality of the learning loop by making
-review more frequent and interactive.
-
-Its main advantages in this repository are:
-
-```text
-Faster Feedback
-        +
-More Alternative Explanations
-        +
-Earlier Detection of Gaps
-        +
-Broader Test-Idea Generation
-        +
-Documentation Consistency
-        +
-Technical Communication Practice
-        ↓
-More Iterations of Human Reasoning
-```
-
-The intended benefit is not to remove intellectual work. It is to increase the
-number and quality of opportunities to reason, verify, compare and improve.
-
----
-
-## Build and Verify
-
-### Windows
+### Windows PowerShell
 
 ```powershell
-.\mvnw.cmd clean verify
+.\mvnw.cmd -version
+.\mvnw.cmd -DfailIfNoTests=true clean verify
 ```
 
-### Linux / macOS
+### Linux Bash
 
 ```bash
-./mvnw clean verify
+bash scripts/linux/check-environment.sh
+bash scripts/linux/test-check-environment.sh
+./mvnw -version
+./mvnw -DfailIfNoTests=true clean verify
 ```
 
-No global Maven installation is required when the Maven Wrapper is used.
+Maven must report Java 21. The normal suite has 710 invocations in the identified
+snapshot. Linux setup details are in the [environment guide](docs/18-linux-environment/implementation-and-verification-guide.md).
 
----
+## Coverage
 
-## Run Tests
-
-### Windows
+The optional profile generates HTML/XML under ignored `target/site/jacoco`.
 
 ```powershell
-.\mvnw.cmd test
+.\mvnw.cmd -DfailIfNoTests=true -Pcoverage clean verify
 ```
-
-### Linux / macOS
 
 ```bash
-./mvnw test
+./mvnw -DfailIfNoTests=true -Pcoverage clean verify
 ```
 
-Passing tests provide evidence for selected executions.
+Open `target/site/jacoco/index.html` after that build. Coverage reports execution;
+it does not prove assertion adequacy or all-path correctness. No percentage gate
+is configured. See the [Testing evidence](docs/16-testing/verification-report.md).
 
-They do not constitute a formal proof of algorithm correctness.
+## Benchmark preparation and discovery
 
----
-
-## Build JMH Benchmarks
-
-### Windows
+The benchmark profile runs 723 tests and creates `target/benchmarks.jar`.
+The commands below discover one method and its five sizes; they do not time it.
+JAVA_HOME must select the intended JDK 21.
 
 ```powershell
-.\mvnw.cmd -Pbenchmark clean package
+.\mvnw.cmd -DfailIfNoTests=true -Pbenchmark clean package
+& "$env:JAVA_HOME\bin\java.exe" -jar .\target\benchmarks.jar '^org\.anaalvarezdev\.algorithms\.arrays\.ArrayAggregationBenchmark\.sum$' -lp
 ```
-
-### Linux / macOS
 
 ```bash
-./mvnw -Pbenchmark clean package
+./mvnw -DfailIfNoTests=true -Pbenchmark clean package
+"$JAVA_HOME/bin/java" -jar target/benchmarks.jar '^org\.anaalvarezdev\.algorithms\.arrays\.ArrayAggregationBenchmark\.sum$' -lp
 ```
 
-The benchmark profile creates:
+Follow the [benchmark guide](docs/17-benchmarking/implementation-and-benchmark-guide.md)
+for a selected controlled run, source/state and jar-hash capture, effective
+settings and separate profiler diagnostics. A later `clean` removes earlier
+generated output, including the jar. Keep needed evidence before cleanup and
+run coverage separately from performance measurement.
 
-```text
-target/benchmarks.jar
-```
+## CI and evidence limits
 
-Run it with:
+[GitHub Actions](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/workflows/maven-ci.yml)
+runs tests/coverage first, then a separate uninstrumented benchmark package with
+provenance and discovery. It retains reports and package artifacts temporarily.
+The [workflow map](docs/19-ci-cd/workflow-contracts.md) distinguishes implemented
+gates from observed counts, uploads and repository enforcement settings.
 
-```bash
-java -jar target/benchmarks.jar
-```
+Research records retain their original units, runtime, source attribution and
+uncertainty. Some matrices cover subsets; old Arrays measurements have missing
+metadata and two invalid int-sum inputs. Sorting's JDK 25 record stays separate
+from Java 21. The corrected aggregation record retains its missing original
+jar hash. See the [results index](docs/17-benchmarking/README.md) and
+[closing limitations](docs/00-project/12-closing-traceability-review.md).
 
-Benchmark results are environment-dependent empirical measurements and must not
-be presented as mathematical proof of asymptotic complexity.
+## AI assistance, references and changes
 
----
+AI supports explanation, review, alternatives and technical writing. Academic
+sources and official documentation remain primary; accepted reasoning and code
+require human understanding and validation. Tests and measurements must be
+executed, and AI output is not evidence by itself. Course-specific policies
+apply to graded work.
 
-## Testing Philosophy
+Use the [central bibliography](docs/00-project/10-references.md),
+[engineering standards](docs/00-project/08-engineering-standards.md) and
+[development workflow](docs/00-project/09-development-workflow.md). Changes use
+focused branches and PRs, with contract/test evidence and preserved research
+history.
 
-Tests are derived from the documented contract.
+## Language policy and author
 
-Typical dimensions include:
+English is primary for code and technical documentation. This README and
+[README.es.md](README.es.md) provide equivalent project entry points; update
+both when shared scope, counters, commands or navigation change. Technical
+module files and Java identifiers keep their existing English names.
 
-```text
-Normal Case
-Boundary Case
-Empty Input
-Single Element
-Absent Result
-Duplicate Values
-Invalid Input
-Mutation / Non-Mutation Guarantee
-```
-
-```text
-Formal Correctness
-        ≠
-Automated Testing
-```
-
-Both are required, but they answer different questions.
-
----
-
-## Benchmarking Philosophy
-
-A benchmark begins with a research question.
-
-Examples:
-
-```text
-How does target position affect Linear Search execution time?
-
-How does Binary Search behave as n grows?
-
-What empirical differences appear between iterative and recursive Binary Search?
-```
-
-A benchmark is not added merely for file symmetry.
-
----
-
-## Cross-Platform Execution
-
-Equivalent verification entry points are:
-
-```text
-Windows
-.\mvnw.cmd clean verify
-
-Linux
-./mvnw clean verify
-```
-
-Linux has a dedicated module because terminal usage, permissions, processes,
-environment variables, Java tooling, Maven and Git are relevant backend
-engineering skills.
-
----
-
-## Development Workflow
-
-```text
-Study / Research
-        ↓
-Problem Specification
-        ↓
-Correctness
-        ↓
-Complexity
-        ↓
-Implementation
-        ↓
-Tests
-        ↓
-Benchmark when justified
-        ↓
-Local Maven Verification
-        ↓
-Git Branch
-        ↓
-Commit
-        ↓
-Pull Request
-```
-
-Conventional Commit-style messages are preferred:
-
-```text
-feat(searching): add iterative binary search
-test(searching): cover boundary search contracts
-docs(searching): align implementation traceability
-benchmark(searching): compare binary search variants
-```
-
----
-
-## Engineering Standards
-
-The repository values explicit contracts, meaningful names, focused classes,
-predictable package organisation, reproducible builds, selective benchmarking,
-incremental branches, pull requests, and traceability between theory and
-executable artefacts.
-
-See
-[`docs/00-project/08-engineering-standards.md`](docs/00-project/08-engineering-standards.md).
-
----
-
-## Academic References
-
-The principal academic reference is:
-
-**Cormen, Thomas H.; Leiserson, Charles E.; Rivest, Ronald L.; Stein, Clifford.  
-*Introduction to Algorithms*. MIT Press.**
-
-The project also uses recognised Computer Science literature and official
-technical documentation.
-
-The central bibliography is maintained in
-[`docs/00-project/10-references.md`](docs/00-project/10-references.md).
-
----
-
-## Author
-
-**Ana María Alvarez**
-
-Systems Engineering and Software Development student focused on backend
-engineering with Java.
+**Ana María Alvarez** — Systems Engineering and Software Development student,
+focused on backend engineering with Java.
 
 GitHub: [@Ana-Alvarez-dev](https://github.com/Ana-Alvarez-dev)
-
----
-
-## Final Principle
-
-> **An algorithm should be understood, specified, reasoned about, analysed,
-> implemented, tested, and experimentally evaluated before its engineering
-> conclusions are treated as established.**

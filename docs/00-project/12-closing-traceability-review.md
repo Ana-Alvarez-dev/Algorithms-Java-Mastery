@@ -1,5 +1,179 @@
 # Closing Traceability Review: Selected Scope Through Module 19
 
+## Ordered Review Closure — 2026-10-29
+
+Closure base: **`8d980122fc9e9ffcc9767789ff785542f723481b`**, main after PR #117.
+The ordered documentation reviews for **01 — Foundations through 19 — CI/CD**
+are integrated. This closes that selected review cycle and reconciles its
+navigation, source/test/benchmark inventory and observed hosted verification.
+The original 2026-10-27 engineering closure is retained below as dated history.
+
+“Closed” means the scoped corrections/clarifications recorded in each report
+are integrated. It is not a formal certification of every paragraph, input,
+textbook example or future extension. Earlier proof/model checks keep their
+original execution type and date; historical mathematical models are not
+relabelled as Java tests. This closure's native test evidence is the actual
+Temurin-21 CI run and downloaded JUnit XML described below.
+
+### Integrated review ledger
+
+| Subject | Scoped report | Merged PR | Recorded actions |
+|---|---|---|---|
+| 01 — Foundations | [Review](../01-foundations/documentation-review.md) | [#99](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/99) | F01-F08 |
+| 02 — Complexity | [Review](../02-complexity/documentation-review.md) | [#100](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/100) | C01-C10 |
+| 03 — Arrays | [Review](../03-arrays/documentation-review.md) | [#101](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/101) | A01-A11 |
+| 04 — Searching | [Review](../04-searching/documentation-review.md) | [#102](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/102) | S09-S16; S01-S08 history retained |
+| 05 — Sorting | [Review](../05-sorting/documentation-review.md) | [#103](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/103) | SO01-SO12 |
+| 06 — Linked Lists | [Review](../06-linked-lists/documentation-review.md) | [#104](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/104) | LL01-LL10 |
+| 07 — Stacks and Queues | [Review](../07-stacks-and-queues/documentation-review.md) | [#105](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/105) | SQ01-SQ10 |
+| 08 — Hash Tables | [Review](../08-hash-tables/documentation-review.md) | [#106](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/106) | HT01-HT10 |
+| 09 — Trees | [Review](../09-trees/documentation-review.md) | [#107](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/107) | TR01-TR12 |
+| 10 — Graphs | [Review](../10-graphs/documentation-review.md) | [#108](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/108) | GR01-GR12 |
+| 11 — Recursion | [Review](../11-recursion/documentation-review.md) | [#109](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/109) | RE01-RE12 |
+| 12 — Divide and Conquer | [Review](../12-divide-and-conquer/documentation-review.md) | [#110](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/110) | DC01-DC10 |
+| 13 — Greedy | [Review](../13-greedy-algorithms/documentation-review.md) | [#111](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/111) | GE01-GE12 |
+| 14 — Backtracking | [Review](../14-backtracking/documentation-review.md) | [#112](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/112) | BT01-BT10 |
+| 15 — Dynamic Programming | [Review](../15-dynamic-programming/documentation-review.md) | [#113](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/113) | DP01-DP10 |
+| 16 — Testing | [Review](../16-testing/documentation-review.md) | [#114](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/114) | TE01-TE10 |
+| 17 — Benchmarking | [Review](../17-benchmarking/documentation-review.md) | [#115](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/115) | BE01-BE12 |
+| 18 — Linux Environment | [Review](../18-linux-environment/documentation-review.md) | [#116](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/116) | LI01-LI12 |
+| 19 — CI/CD | [Review](../19-ci-cd/documentation-review.md) | [#117](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/117) | CI01-CI12 |
+
+The first-parent Git history confirms the nineteen merges #99 through #117 in
+this order. All nineteen reports and the current applied maps exist. The older
+Searching S01 code regression and S02-S08 documentation resolutions remain
+separate from the later S09-S16 clarification pass. No identifier is reopened,
+renumbered or converted into a universal correctness guarantee.
+
+### Reconciled current inventory
+
+| Evidence | Current identified scope |
+|---|---|
+| Production sources | 100 Java files across 13 algorithm packages, including interfaces/helpers |
+| Normal / coverage suite | 710 JUnit invocations across 89 suites |
+| Benchmark profile | 723 invocations across 90 suites: normal 710 plus 13 fixture cases |
+| Shell contract suite | 20 existing subprocess cases, counted separately from JUnit |
+| JMH registry | 115 methods in 40 classes |
+| Default parameter products | 803 cells; inventory, not 803 executed or independently validated experiments |
+| Coverage denominator | 135 analysed bytecode classes, distinct from 100 source files |
+
+All thirteen rows of the original per-package inventory retained below are
+recalculated against current source and current hosted normal-suite XML; their
+numbers remain unchanged. The thirteen fixture cases stay in benchmark-profile
+scope, not an additional production package or duplicated test count.
+Java 21 discovery of the downloaded current jar and a temporary Java metadata
+reader confirm the 115/40/803 registry products. This is discovery/arithmetic,
+not a timed performance run or a new algorithm test suite.
+
+### Current hosted source, tests and artifact identity
+
+[Maven CI run 40880667469](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/runs/40880667469),
+**attempt 1**, completes successfully for main push
+`8d980122fc9e9ffcc9767789ff785542f723481b`. Both job logs report that actual
+checkout and clean Git state. Run metadata spans **2026-10-29T13:18:05Z to
+13:19:30Z** (10:18:05 to 10:19:30 -03:00).
+
+| Field | Tests and coverage | Benchmark package |
+|---|---|---|
+| Job ID | 123471000000 | 123471332051 |
+| Job start/end UTC | 13:18:07 / 13:18:43 | 13:18:45 / 13:19:29 |
+| Runner image | ubuntu-24.04 / 20261025.353.1 | ubuntu-24.04 / 20261025.353.1 |
+| Runtime / compiler | Temurin 21.0.13+9-LTS / javac 21.0.13 | Temurin 21.0.13+9-LTS / javac 21.0.13 |
+| Maven | 3.9.11 | 3.9.11 |
+| JUnit invocations | 710 | 723 |
+| Failures / errors / skipped | 0 / 0 / 0 | 0 / 0 / 0 |
+| Maven duration | 23.312 s | 28.276 s |
+| Other observed evidence | 20 passing shell cases, HTML/XML coverage | Source/artifact capture, discovery and upload |
+
+Both downloaded archives independently match their API digests. Their JUnit XML
+confirms the suite counts, zero failure/error/skip totals and Temurin runtime.
+The package's inner jar hash agrees with ci-provenance.md and the hosted log;
+its registry contains 115 nonempty entries. API expired=false at inspection:
+
+| Artifact | ID | ZIP bytes | API expiry UTC |
+|---|---:|---:|---|
+| benchmark-package-8d980122fc9e9ffcc9767789ff785542f723481b-1 | 12900870490 | 3585442 | 2026-11-05T13:19:24Z |
+| verification-reports-8d980122fc9e9ffcc9767789ff785542f723481b-1 | 12899654025 | 644118 | 2026-11-05T13:18:40Z |
+
+Package ZIP SHA-256:
+`eef5f9e5992c122b88f0c48dfb19a5d5aeab11527ffe9ef696b18457548fc339`.
+Verification ZIP SHA-256:
+`0c29495ad54b48a8b102591383ed031c21233b13571d9e9d83f5993d97c7ffb2`.
+Contained jar SHA-256:
+`ef16c1a7b8f0a9ef15c8d80679aa7589f0b706e1fe296fb15af2fde90afd53de`.
+Coverage XML SHA-256:
+`cc8077b899eac408cf3f9b4599ea1b8a7e10327e3c6e43b643ce1893db694786`.
+
+The current coverage counters agree with the dated CI/CD review: instructions
+12631 covered / 115 missed; branches 1511 / 107; lines 2163 / 30; complexity
+1181 / 117; methods 478 / 10; classes 135 / 0. They are execution counters,
+not a proof or an enforced percentage threshold. Actual gate semantics remain
+in the [workflow map](../19-ci-cd/workflow-contracts.md).
+
+This evidence is hosted Java execution, independently inspected here; no extra
+local Maven/JUnit or timed JMH run is claimed by the closure. These run/archive/
+jar identities do not replace earlier ones or recover the absent author Windows
+aggregation jar. The future PR carrying this closure has its own checks.
+
+### Remaining limits and maintenance
+
+- Historical research keeps its original means, errors, units, source attribution
+  and missing fields. The original large ascending aggregation inputs remain
+  outside the int-sum domain; the later corrected run has a different payload
+  and an unavailable original jar hash. Sorting's JDK 25 measurements stay
+  separate from Java 21 evidence.
+- The 803 default cells are not one fully measured dataset. Reports cover their
+  stated subsets; unreported sizes/shapes remain unmeasured. No universal speed
+  ranking, CPU/cache cause or fitted asymptotic proof is inferred at closure.
+- The remaining missed coverage counters and finite test domains stay visible.
+  New cases should address meaningful contract obligations, not just a numeric
+  target. Earlier mathematical models and native Java tests keep separate roles.
+- Hosted JDK/image families can evolve and artifacts can expire. Repository
+  protection/required-check settings remain uninspected and unchanged. Passing
+  CI supplies no deployment or merge-enforcement configuration.
+- The central bibliography prefers CLRS Fourth Edition; supplied Third Edition
+  passages checked in earlier reviews retain their own edition/page locators.
+  This consolidation claims no new PDF/figure review or exhaustive proof audit.
+- Root CONTRIBUTING.md and CHANGELOG.md are still empty placeholders. They are
+  excluded from the claimed completed guides; development and engineering
+  standards are linked through the existing Project Documentation. Populating
+  those files is a separate maintainership follow-up.
+
+The project now provides two root entry points: **README.md** is the primary
+English project summary and **README.es.md** its Spanish counterpart. Code,
+identifiers, technical module paths and research records remain in English.
+Both entry points carry the same scope, commands, counters and evidence limits;
+changes to those shared facts should update both. This is bilingual project
+navigation, not a claim that every technical document is translated.
+
+### Change boundary and closing audit
+
+This contribution updates the closing/project navigation and root README,
+adds README.es.md, and changes only Markdown. No source, test, benchmark,
+profile, script, workflow, original hosted record or historical result is changed.
+The older long-form root milestone summaries remain recoverable in Git and in
+the linked module/research reports; the root pages now focus on current entry,
+execution and evidence navigation.
+
+Final current audit: **320 Markdown files / 1734 relative file targets / zero
+missing destinations**, with balanced code fences and passing `git diff --check`.
+The two root READMEs have identical link destinations and six identical command
+blocks; all twenty module entry links and shared counters are checked. Bash
+examples pass syntax checking, and the anchored selector discovers exactly one
+method/five sizes in the downloaded current jar. Windows examples retain the
+existing wrapper/PowerShell syntax; no new Windows execution is claimed. No new
+local heading-fragment link is introduced; external URLs and inherited anchors
+are not exhaustively audited. All five changed paths are Markdown. The original
+2026-10-27 closing body is preserved byte-for-byte below.
+
+The selected implementation and ordered documentation milestones through 19
+are closed with the above limits preserved. Further algorithms, research,
+translations or repository-governance work need their own scoped evidence.
+
+---
+
+## Original engineering closure — 2026-10-27
+
 Reviewed on **2026-10-27 (America/Buenos_Aires)** from main
 `0d0ade1f67ffd79db26c06be48a0bf13fdda724a`, the PR #97 merge. This is the closing
 engineering review of the repository's existing numbered sequence, not a claim
