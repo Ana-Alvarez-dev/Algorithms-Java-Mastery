@@ -134,10 +134,10 @@ aggregation jar. The future PR carrying this closure has its own checks.
 - The central bibliography prefers CLRS Fourth Edition; supplied Third Edition
   passages checked in earlier reviews retain their own edition/page locators.
   This consolidation claims no new PDF/figure review or exhaustive proof audit.
-- Root CONTRIBUTING.md and CHANGELOG.md are still empty placeholders. They are
-  excluded from the claimed completed guides; development and engineering
-  standards are linked through the existing Project Documentation. Populating
-  those files is a separate maintainership follow-up.
+- At the closure base, root CONTRIBUTING.md and CHANGELOG.md were empty
+  placeholders, excluded from the claimed completed guides. Development and
+  engineering standards were linked through the existing Project Documentation.
+  The dated maintainer-file follow-up below records their subsequent completion.
 
 The project now provides two root entry points: **README.md** is the primary
 English project summary and **README.es.md** its Spanish counterpart. Code,
@@ -169,6 +169,30 @@ are not exhaustively audited. All five changed paths are Markdown. The original
 The selected implementation and ordered documentation milestones through 19
 are closed with the above limits preserved. Further algorithms, research,
 translations or repository-governance work need their own scoped evidence.
+
+### Maintainer-file follow-up — 2026-10-29
+
+Based on main `548269f3aef07048fd2a860014a07b0a44d7c882` after PR #119,
+this documentation contribution resolves the two empty-file items identified
+above. [CONTRIBUTING.md](../../CONTRIBUTING.md) summarises the existing workflow,
+native Java 21 checks, language policy, generated-output boundary and academic/
+AI integrity. [CHANGELOG.md](../../CHANGELOG.md) records selected verified main
+merges from 2026-10-27 through PR #119, with proposed changes under Unreleased;
+it does not invent a published release from Maven's 1.0-SNAPSHOT identifier.
+Both root READMEs now link these guides.
+
+This five-Markdown-file follow-up changes no executable source, tests, POM,
+scripts, workflow or historical measurement. Validation covers relative file
+links, fenced blocks, matching root navigation/commands, historical merge/date
+references and the scoped diff. No new Maven/JUnit, Windows execution or timed
+JMH result is claimed. Original engineering closure text below stays unchanged.
+
+Follow-up audit: **320 Markdown files / 1752 relative file targets / zero missing
+destinations**; balanced fences, four new Bash blocks syntax-checked, both root
+selectors and their six shared command blocks preserved, and `git diff --check`
+passes. PR merge dates #91-#119 match the first-parent main history in
+America/Buenos_Aires. External URLs and inherited heading anchors are not
+exhaustively checked by this file-link audit.
 
 ---
 
