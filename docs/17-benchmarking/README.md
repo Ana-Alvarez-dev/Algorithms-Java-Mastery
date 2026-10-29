@@ -30,13 +30,24 @@ separate. For subsequent runs, retain complete console text;
 no JSON/log/new CSV exports are required. Coverage, timing and profiled runs
 have separate evidence boundaries. Next numbered module: **18 — Linux**.
 
+## Ordered documentation review — 2026-10-29
+
+The [review record](documentation-review.md), based on PR #114's merged main,
+and [experiment/evidence map](experiment-contracts.md) connect BE01-BE12 to
+operation normalisation, trial reuse, statistical units, diagnostic scope and
+source/artifact identity. Fresh Java 21 packaging passes **723 tests**, and
+metadata discovery yields **40 classes / 115 methods / 803 default parameter
+cells**. Discovery does not time those cells. Rounded author iterations are
+reconciled through the pinned JMH statistics in Java; their evidence is unchanged.
+This follow-up changes only Markdown. The next ordered review is **18 — Linux**.
+
 Understanding an algorithm's theoretical complexity is an essential part of Computer Science, but it is not sufficient for evaluating its real-world performance. Two algorithms with the same asymptotic complexity may exhibit significantly different execution times because of implementation details, compiler optimizations, memory behavior, and hardware characteristics.
 
-**Benchmarking** is the discipline of measuring software performance through controlled and reproducible experiments. Instead of reasoning only about asymptotic growth, benchmarking evaluates how algorithms behave during actual execution under realistic conditions.
+**Benchmarking** is the discipline of measuring software performance through controlled and reproducible experiments. Instead of reasoning only about asymptotic growth, benchmarking evaluates algorithms under explicitly chosen workloads and execution conditions. How well those conditions represent an intended application requires its own justification.
 
 In the Java ecosystem, reliable benchmarking requires a deep understanding of the **Java Virtual Machine (JVM)**, including **Just-In-Time (JIT) compilation**, **JVM warm-up**, **Garbage Collection (GC)**, and runtime optimizations. Measuring execution time using simple approaches—such as `System.nanoTime()` inside a loop—often produces misleading results because modern JVMs dynamically optimize running code.
 
-To address these challenges, Java developers use **JMH (Java Microbenchmark Harness)**, the official benchmarking framework developed by the OpenJDK team. JMH provides the tools necessary to design statistically sound benchmarks while minimizing measurement bias introduced by the runtime environment.
+To address these challenges, Java developers use **JMH (Java Microbenchmark Harness)**, the official benchmarking framework developed by the OpenJDK team. JMH provides measurement and execution facilities for Java microbenchmarks. Contract-valid inputs, appropriate controls and statistical interpretation remain the experiment designer's responsibility.
 
 This module introduces the theoretical and practical foundations of benchmarking, preparing the learner to design experiments, collect reliable performance data, interpret benchmark results, and evaluate Java algorithms using professional engineering practices.
 
@@ -236,33 +247,12 @@ Topics include:
 
 # Learning Progression
 
-This module follows the workflow used by professional performance engineers when evaluating Java software.
-
-```text
-Algorithm
-        ↓
-Complexity Analysis
-        ↓
-Empirical Measurement
-        ↓
-JVM Understanding
-        ↓
-JIT Compilation
-        ↓
-Garbage Collection
-        ↓
-JMH
-        ↓
-Benchmark Design
-        ↓
-Benchmark Configuration
-        ↓
-Result Interpretation
-        ↓
-Performance Evaluation
-```
-
-Each document builds upon the previous one, progressing from theoretical concepts to practical benchmarking methodology.
+Read the ten applied notes alongside the execution guide and evidence map.
+Define the valid workload and expected source costs, choose the timed operation
+and controls, test the fixture, then build/discover the intended subset.
+Capture source, artifact and environment before running the selected protocol.
+Retain warmup/fork sequences and uncertainty when interpreting observations;
+use separately identified diagnostics to investigate runtime mechanisms.
 
 ---
 
@@ -286,17 +276,17 @@ Automated Testing
 Benchmarking
 ```
 
-While previous modules demonstrate that an algorithm is **correct**, Benchmarking evaluates **how efficiently that algorithm performs under real execution conditions**.
+Previous modules provide contract-specific correctness arguments and finite tests. Benchmarking adds observations of selected implementations under specified workloads and execution settings.
 
 Testing answers:
 
-> **Does the implementation work correctly?**
+> **Do the asserted behaviours hold for the checked inputs?**
 
 Benchmarking answers:
 
-> **How efficiently does the implementation execute?**
+> **What performance does this selected workload exhibit under the recorded settings?**
 
-Together, they provide a complete engineering evaluation of software quality.
+These are complementary parts of engineering evaluation, each with its own scope and evidence.
 
 ---
 
@@ -311,7 +301,7 @@ Modern Java benchmarking commonly relies on:
 - GitHub Actions;
 - Java Flight Recorder (JFR) for advanced performance analysis.
 
-JMH provides statistically reliable measurements while accounting for JVM optimizations that invalidate naïve timing techniques.
+JMH helps organise warmup, repeated execution, result consumption and measurement. Its presence does not guarantee statistical validity, representative inputs or an intended generated-code mechanism.
 
 ---
 
@@ -321,7 +311,7 @@ Professional software engineers recognize that performance measurement requires 
 
 Before trusting benchmark results, they typically ask:
 
-- Has the JVM completed warm-up?
+- What do the warmup and measured sequences show about trends within and between forks?
 - Is the JIT compiler influencing execution?
 - Has Garbage Collection affected the measurements?
 - Are multiple iterations producing consistent results?
@@ -737,7 +727,7 @@ evidence to benchmark domains. The nearest-value duplicate defect is corrected
 with oracle/property tests; it has no distinct new timing question. Existing
 Searching/DP/Backtracking datasets retain their provenance.
 
-The future aggregation fixture now uses value[i]=i%100 at sizes 100..1,000,000,
+The corrected aggregation fixture uses value[i]=i%100 at sizes 100..1,000,000,
 with exact sums 4,950..49,500,000. A long/formula probe checks all five defaults,
 three calls each, preservation and size guards; five short smoke cells complete.
 These checks do not supply research scores. The [historical Arrays report](results/arrays/README.md)
@@ -760,8 +750,8 @@ After completing this module, the learner should understand that:
 - benchmarking measures the real execution performance of software through controlled experiments;
 - theoretical complexity analysis and empirical benchmarking provide complementary perspectives on algorithm efficiency;
 - JVM warm-up, JIT compilation, and Garbage Collection significantly influence Java performance measurements;
-- JMH is the standard framework for creating reliable Java microbenchmarks;
-- properly designed benchmarks require reproducible methodology and statistically meaningful execution;
+- JMH provides a Java microbenchmark harness whose results still depend on workload and experimental design;
+- a benchmark claim requires identified source/artifact, workload, effective settings and stated statistical limits;
 - benchmark parameters strongly affect measurement accuracy;
 - benchmark results must be interpreted carefully rather than accepted at face value;
 - professional software engineers use benchmarking to validate performance claims, compare implementations, and guide optimization decisions.

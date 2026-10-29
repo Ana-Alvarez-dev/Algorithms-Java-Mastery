@@ -1,5 +1,13 @@
 # Benchmarking: Implementation and Local Verification
 
+**Historical verification:** the local tests/smokes/profiler compatibility below
+were recorded on 2026-10-27. The [2026-10-29 ordered review](documentation-review.md)
+records fresh Java 21 packaging, discovery and numerical reconciliation
+separately, with an [applied experiment map](experiment-contracts.md). Module 19
+subsequently added a [workflow](../../.github/workflows/maven-ci.yml) and
+[hosted evidence](../19-ci-cd/first-hosted-run.md), superseding the original
+workflow-gap language. Historical timings, checks and provenance remain dated.
+
 Verified on **2026-10-27** from main
 `18a8ef53d4a1c4f1cd58c9caf22c72051be6b891` (PR #92, Testing).
 This identifies the starting source; the contribution changes the files described
@@ -127,3 +135,17 @@ The full supplied reflog and inference limits are retained in the result record.
 The follow-up changes only Markdown and the benchmark's research comment;
 executable Java, tests and POM are unchanged, so the 710/723 outcomes above
 remain prior verification rather than a newly claimed test execution.
+
+## Ordered Documentation Review — 2026-10-29
+
+The [follow-up](documentation-review.md) checks all ten notes, the index and this
+protocol/evidence chain against PR #114's main. Fresh Java 21 benchmark packaging
+executes 723 tests, with zero failures/errors/skips; discovery finds 115 methods
+in 40 classes and 803 default parameter cells. The selected controlled command
+is parsed with -lp without timing it. Profiler listing checks availability only.
+Java reconciliation of the 50 retained measurement averages through JMH 1.37's
+statistics agrees with printed mean/error, extrema, stdev and interval fields
+within 0.000591 ns/op. The
+30 warmup observations stay out of score statistics. No author run, fresh smoke,
+profiler measurement, coverage report or hosted outcome is inferred from these
+checks, and the original missing jar hash remains unavailable.

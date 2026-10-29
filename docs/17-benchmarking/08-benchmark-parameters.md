@@ -20,3 +20,15 @@ Record actual Java executable/version, options, Blackhole mode, source SHA, dirt
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+Iteration times are requested minima, so the forty-second nominal budget is
+not a wall-clock promise. The explicit controlled command is parsed and its
+five parameters discovered in fresh verification without executing that timing
+run. Effective headers and actual command retention matter because overrides
+can change annotations, normalisation, worker count or JVM options.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.

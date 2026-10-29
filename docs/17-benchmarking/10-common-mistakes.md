@@ -23,3 +23,16 @@ No new JSON/log/CSV files are required. Copy the complete console output into th
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+Keep observed, inferred and unavailable provenance explicit. A new jar hash
+cannot recover the author's absent original artifact, and a reflog is not a
+build/run attestation. The repository now has a Maven CI workflow and dated
+hosted checks; they do not turn CI duration into author performance or attest
+a future PR. Missing errors/counters stay unavailable, and repeated local
+builds do not create additional distinct tests.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.

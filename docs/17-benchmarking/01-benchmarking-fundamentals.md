@@ -13,3 +13,15 @@ Use the guide's discovery command before timing. Building `benchmarks.jar` does 
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+The measurement claim includes workload, operation, mode, unit, VM and source
+attribution. JMH supplies a harness; representative inputs, a valid contract
+and appropriate analysis remain design responsibilities. Current discovery
+contains 115 methods but 803 default parameter cells. Registration, successful
+packaging and a timing observation are distinct stages.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.

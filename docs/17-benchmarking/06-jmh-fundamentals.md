@@ -13,3 +13,15 @@ Normal `clean test` runs 710 production-contract invocations. The benchmark-prof
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+Full -lp discovery yields 40 classes, 115 methods and 803 default parameter
+cells; the selected aggregation method has five. Counting a registry does not
+execute or validate every cell. Profile packaging runs the 13 actual-fixture
+checks as part of 723 JUnit invocations; the fixture test class stays outside
+the executable jar. Use an explicit include selector when timing a subset.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.

@@ -13,3 +13,15 @@ Trial setup creates the array once per trial. The measured method repeatedly sca
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+There are ten fork trials across five configurations. Fresh JVM processes do
+not reset the host's thermal state, background load or all hardware state.
+Warmup and measured scans reuse each trial's array. Inspect per-fork sequences
+before treating pooled averages as stable; a fixed iteration count alone
+cannot establish stationarity or independent observations.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.

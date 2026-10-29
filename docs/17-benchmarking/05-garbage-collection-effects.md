@@ -13,3 +13,15 @@ The contract tests intentionally allocate clones and compute long oracles. They 
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+A profiler's observed bytes/time and bytes/operation have distinct denominators.
+JMH 1.37 preserves the MB/sec label while dividing bytes by 1024 squared; retain
+the literal reported units. An absent secondary metric is not a measured zero,
+and -lprof availability is not a profiled execution. Trial allocation outside
+the timed scan still contributes resident state and can affect the workload.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.

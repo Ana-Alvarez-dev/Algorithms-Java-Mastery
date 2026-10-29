@@ -13,3 +13,15 @@ CLRS, third edition, Chapters 2–3 supplies the algorithmic cost model; JMH sup
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+The n visits/additions are a source cost ledger, not a CPU instruction count.
+Score/n is descriptive normalisation over a complete scan, including amortised
+call/harness effects; a sub-nanosecond value does not measure an isolated
+addition's latency. A fixed deterministic payload at each size supports that
+selected workload, rather than a distribution-wide conclusion.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.
