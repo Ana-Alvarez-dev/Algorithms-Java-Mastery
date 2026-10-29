@@ -2,6 +2,15 @@
 
 ## Algorithms Java Mastery
 
+## Applied proof boundary
+
+The [applied map](implementation-contracts.md) separates theorem hypotheses
+from source facts. Full crossing/copy/merge scans establish tight linear local
+work for the two balanced algorithms; the basic theorem then gives the work
+bound. Canonical tie order, strict inversion counting, mutation and termination
+are separate proofs. The theorem supplies no allocation-rate, JVM-stack-byte
+or elapsed-time prediction.
+
 The [implementation guide](implementation-and-benchmark-guide.md) connects the
 theorem to the reviewed Java sources. This document uses the **basic three-case
 version** in CLRS Third Edition, Theorem 4.1, printed p. 94. Comparing vaguely

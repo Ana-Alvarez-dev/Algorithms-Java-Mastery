@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Boundary conventions and source trace
+
+The [applied map](implementation-contracts.md) uses inclusive regions for the
+existing Hoare sort, versus half-open regions for three-way QuickSelect.
+A Hoare boundary is neither a final pivot rank nor an equal-band endpoint.
+For [4,1,4,2,3] and global rank 2, selection first forms an equal band [3,5)
+for pivot 4, retains [0,3), then retains rank 2 after pivot 2 and returns 3.
+The global rank is not rebased when from changes. The discarded-region
+invariant establishes the inequalities across the whole array, not just
+inside the final active region.
+
 The [implementation guide](implementation-and-benchmark-guide.md) traces this
 case study to the existing `sorting.QuickSort`, its tests and Sorting research.
 There is no duplicate sort in the new package. This review distinguishes its

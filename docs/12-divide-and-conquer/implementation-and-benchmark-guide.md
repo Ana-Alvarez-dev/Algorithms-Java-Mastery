@@ -1,5 +1,17 @@
 # Divide and Conquer: Implementation and Benchmark Guide
 
+## Ordered Documentation Review
+
+The [2026-10-29 review](documentation-review.md), based on main
+`5fd81c44cd5df511bb6c553dcdad45b17c38a18d` (PR #109 Recursion-review merge),
+checks the nine notes against all three new Java classes, four test sources
+and four JMH sources (three benchmark classes plus TrialInputs). The
+[contract/proof map](implementation-contracts.md) connects them to reused
+Searching/Sorting cases. Fresh Java 21 verification passes **710 repository
+tests, including 18 here**; packaging/discovery are verified separately.
+Original verification, smoke/probe/doclint and author timings below keep their
+original dates and provenance.
+
 ## Selected Scope and Evidence Chain
 
 This contribution starts from main
@@ -288,7 +300,9 @@ git pull --ff-only origin main
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar -l ".*divideandconquer.*"
 ```
 
-Expect **618 tests**, BUILD SUCCESS and **six listed methods**. The explicit
+Expect BUILD SUCCESS and **six listed methods**. The original 2026-10-25 build
+reported 618 tests; the later ordered review passes 710. Read the actual
+Surefire totals for the checkout under test. The explicit
 Java path is the author's verified JDK 21 installation; adapt it elsewhere.
 Maven release=21 controls bytecode compatibility, not the executable launching
 JMH. Packaging builds/tests the jar; it does not perform the measurements.

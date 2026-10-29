@@ -20,9 +20,13 @@ Java evidence. Three new types cover canonical maximum subarray, strict
 inversion counting and duplicate-aware in-place rank selection. Existing
 Searching/Sorting cases are reused, with no duplicated algorithms.
 
-Eighteen new tests bring local verification to **618 passing tests**. Six JMH
-methods define **48 default cells**, in **microseconds/op**. All default cells
-pass independent return/nonmutation probes and short execution smoke. The
+The original 2026-10-25 verification added 18 tests within **618 repository
+tests**. The [current ordered review](documentation-review.md) verifies
+**710 tests**, including the same **18 module tests**, and supplies an
+[applied contract/proof map](implementation-contracts.md). Six JMH
+methods define **48 default cells**, in **microseconds/op**. The original
+2026-10-25 verification completed independent return/nonmutation probes and
+short execution smoke for all default cells. The
 [first research report](../17-benchmarking/results/divide-and-conquer/README.md)
 now completes all three Result/Interpretation fields with 48 means/errors,
 480 measured and 288 warmup averages on JDK 21.0.9/JMH 1.37. Author-reported
@@ -225,6 +229,10 @@ Conquer
         ↓
 Combine
         ↓
+Pseudocode and Manual Trace
+        ↓
+Correctness and Termination
+        ↓
 Recurrence Relation
         ↓
 Complexity Analysis
@@ -280,7 +288,7 @@ Common Java features used throughout this module include:
 - recursion;
 - helper methods;
 - index manipulation;
-- generic comparisons;
+- primitive int/long comparisons (a generic sorting API is not included);
 - auxiliary arrays (Merge Sort);
 - partition procedures (Quick Sort).
 

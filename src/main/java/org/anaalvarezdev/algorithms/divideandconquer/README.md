@@ -41,3 +41,9 @@ is `507b2537d3dedd3beb57900d3ee72d7858571c89` (PR #84). Six errors reach 25%
 of their means. All observations and workload limits stay intact in Markdown
 without JSON/log artifacts; smoke remains separate. Parallel algorithms,
 Strassen, randomised/worst-linear selection and later paradigms remain extensions.
+
+The [ordered documentation review](../../../../../../../docs/12-divide-and-conquer/documentation-review.md)
+records fresh Java 21 verification: **710 repository tests, including 18 here**.
+The [applied map](../../../../../../../docs/12-divide-and-conquer/implementation-contracts.md)
+connects APIs, canonical ties, cross-pair/partition invariants, work ledgers
+and research limits. This pass changes documentation only.
