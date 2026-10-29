@@ -13,3 +13,16 @@ The corrected aggregation template now records five supplied means/errors, 50 me
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+For this one-worker AverageTime design, k=10 pools five measured iteration
+scores from each of two forks. JMH 1.37 uses Student-t with k-1 degrees of
+freedom for the AVG mean-error estimate. This calculation does not establish
+independence or stationarity. AverageTime cannot supply per-call p95/p99 or a
+measured throughput distribution by inverting a mean. Rounded-record numeric
+reconciliation is a data check, separate from a fresh performance experiment.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.

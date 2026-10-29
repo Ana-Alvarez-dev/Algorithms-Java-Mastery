@@ -1,5 +1,21 @@
 # Benchmarking: Applied Protocol and Evidence Guide
 
+## Ordered Documentation Review — 2026-10-29
+
+The original protocol below starts from the Testing merge identified in its
+2026-10-27 scope. The [new review](documentation-review.md) checks it against
+main `93fb7ce12d1f24ef2a930dcc2b4d2bf187b654f8` (PR #114), with no executable
+changes. The [experiment map](experiment-contracts.md) adds the operation/stage
+ledger, fixture-proof limits, 40/115/803 registry inventory, mean/error model,
+controls and provenance statuses. Its 803 cells are parameter inventory,
+not a claim to have measured or independently validated every combination.
+
+The repository now has a [Maven CI workflow](../../.github/workflows/maven-ci.yml)
+and [dated hosted record](../19-ci-cd/first-hosted-run.md). Fresh checks here
+remain local. Later hosted evidence supersedes the original workflow-gap
+status, while the author's inferred source and missing original jar identity
+remain unresolved. The earlier report's smoke/profiler checks retain their dates.
+
 Reviewed on **2026-10-27**, from main
 `18a8ef53d4a1c4f1cd58c9caf22c72051be6b891` (PR #92, Testing).
 This is cross-cutting module **17**. It applies a controlled protocol to an
@@ -69,7 +85,9 @@ prove it or identify a specific CPU mechanism.
 is active only under `-Pbenchmark`. Five cases read sizes from the actual
 `@Param`; four cases cover 0/1/99/103, three reject unsupported sizes, and one
 checks fresh independent trial arrays: **13 invocations**. Reflection checks
-real private fixture fields without adding production accessors. Long-stream
+real private fixture fields without adding production accessors. The tests
+check range and aggregate sum; source inspection confirms that each position
+follows i%100 and that the size guard precedes allocation. Long-stream
 and closed-form sums must agree; three production calls must agree and preserve
 the input. These are functional checks, with no elapsed-time assertions.
 
@@ -80,8 +98,11 @@ are compiled as tests and excluded from the executable jar. The
 
 Each JMH invocation includes the production scan and Blackhole consumption.
 Trial setup, oracles, assertions, git commands and hashing are outside timing.
-One worker reuses its prepared array across invocations; no cold-cache, fresh
-request, concurrent or distribution-wide conclusion follows. Keep JaCoCo and
+One operation is one full scan under the selected default normalisation; no
+OperationsPerInvocation override is selected. Score/n is descriptive ns/element,
+not an isolated addition latency. One worker reuses its prepared array across
+invocations; no cold-cache, fresh-request, concurrent or distribution-wide
+conclusion follows. Keep JaCoCo and
 other agents out of the ordinary timing run. Run coverage in a separate clean
 build when needed; never combine `-Pcoverage,benchmark` for this protocol.
 
@@ -126,7 +147,9 @@ powercfg /getactivescheme
 An empty `git status --short` denotes a clean checkout; retain that fact explicitly
 when transcribing. A SHA labels source, while jar SHA-256 identifies artifact
 bytes; neither proves the other was actually executed without the run record.
-Do not edit code or rebuild the jar between capture and execution. Record power,
+A later clean deletes target, including the jar and reports. Capture needed
+evidence before cleanup; a rebuild cannot recover the old jar identity. Do not
+edit code or rebuild the jar between capture and execution. Record power,
 background load and thermal conditions; do not claim they were controlled when
 unknown. The timestamp is captured from the author's machine, not inferred from
 when the evidence is received.
@@ -140,6 +163,9 @@ Discover the **one exact method** and its parameters:
 Expected output includes `org.anaalvarezdev.algorithms.arrays.ArrayAggregationBenchmark.sum`
 and all five size values. If no method matches, inspect `-l` without a filter,
 the checkout and the successful build. Building a jar is not a JMH execution.
+Full -lp discovery currently has 803
+default parameter cells; choose and budget the intended subset before timing
+without assuming that the 115-method registry is 115 measurements.
 
 Optional smoke (all five sizes, **not research**):
 
@@ -154,7 +180,8 @@ Controlled author measurement, with all defaults made explicit:
 ```
 
 This is five configurations, fifty measured and thirty warmup iteration
-averages. The nominal timed phases total forty seconds, plus setup/startup.
+averages. The nominal timed phases total forty seconds, plus setup/startup; iteration
+times are requested minima, not a wall-clock guarantee.
 Each iteration invokes the algorithm many times; Cnt=10 per row is not ten
 individual algorithm calls. Retain the entire console: JMH/VM/options/Blackhole
 headers, parameters, both forks, warmup and measurement iterations, result
@@ -178,7 +205,9 @@ First list available profilers:
 If `gc` is supported, run the same controlled matrix with `-prof gc` appended.
 Keep it separate from ordinary timing, retain primary/secondary metrics and
 units, and record unsupported metrics explicitly. B/op is normalised allocation,
-not retained memory or an asymptotic-space proof. No profiler result is yet
+not retained memory or an asymptotic-space proof. Preserve MB/sec literally
+(the pinned implementation divides bytes by 1024 squared); an absent secondary
+metric is unavailable rather than an invented zero. No profiler result is yet
 recorded as author research. Local GC smoke only checks compatibility.
 
 ## Recording and interpretation rules
@@ -190,7 +219,11 @@ oracles, not observed return values printed by JMH. Describe drift, fork variati
 and wide errors before ranking or explaining growth.
 
 The printed ± value is the mean CI half-width at the stated level, not stdev or
-a per-call bound. A relative-width flag of 25% is only a review heuristic.
+a per-call bound. For this one-worker AVG result, JMH 1.37 pools the ten measured
+iteration scores and uses Student-t with nine degrees of freedom. That describes
+the calculation without establishing independence or stationarity. Retain fork
+groups; an AverageTime mean supplies no per-call p95/p99 distribution. A
+relative-width flag of 25% is only a review heuristic.
 Overlapping intervals do not prove equal performance. Cache/JIT/GC explanations
 remain hypotheses without suitable diagnostics. Source operation counts,
 functional coverage, elapsed time and profiler observations are separate claims.
@@ -199,7 +232,9 @@ Prior reports retain their exact source, runtime and limitations. See the
 [module index](README.md) for all existing datasets and each algorithm module's
 own timed-work contract. Sorting's copy baseline is not automatically subtractable;
 DP memoisation includes dense state setup even when few states are reached.
-No new JSON/log/CSV files, arbitrary coverage gates or CI claims are introduced.
+No new JSON/log/CSV files or arbitrary coverage gates are introduced. The
+existing CI package/discovery record stays separate from author performance
+and this review's local verification.
 
 ## Primary references
 

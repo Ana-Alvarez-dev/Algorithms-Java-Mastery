@@ -136,6 +136,16 @@ separate benchmark profile passes 723 including 13 fixture invocations. Only
 Markdown changes; the original red/green experiment and all timed results stay
 dated and unchanged. Later modules are not declared re-reviewed.
 
+A **2026-10-29 ordered Benchmarking documentation review**, based on main
+`93fb7ce12d1f24ef2a930dcc2b4d2bf187b654f8` (PR #114 merge), follows
+[separately](../17-benchmarking/documentation-review.md). Scoped BE01-BE12
+corrections and an experiment/evidence map distinguish timed operations,
+parameter cells, iteration statistics, fixture tests, diagnostics and provenance.
+Actual Java 21 packaging passes 723 tests; discovery finds 40 classes, 115 methods
+and 803 default parameter cells. Retained aggregation observations are reconciled
+in Java without a new timing run. Only Markdown changes; historical evidence
+retains its source/runtime and limits. Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

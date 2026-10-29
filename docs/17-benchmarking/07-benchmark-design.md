@@ -13,3 +13,16 @@ For a future factorial comparison, predeclare implementation × size × distribu
 ## Applied protocol and sources
 
 See the [implementation and benchmark guide](implementation-and-benchmark-guide.md) for contracts, proof/trace, executable commands and primary references. The [verification report](verification-report.md) separates local checks from the [first supplied aggregation run](results/arrays/aggregation-corrected-run.md), with execution source inferred from the supplied reflog and original jar SHA-256 unavailable.
+
+## Ordered Review Clarification
+
+The fixture checks establish range and aggregate sum, rather than verifying
+each position against i%100; the setup source supplies that pointwise guarantee.
+Source inspection also establishes the size guard before allocation. Repeated
+clones, dense memo setup and reuse belong to their respective timed-work
+contracts. Controls and a predeclared factorial matrix need matching outputs,
+settings and a repetition/order plan before causal effects can be discussed.
+
+The [experiment and evidence map](experiment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records BE01-BE12
+and fresh Java 21 verification.
