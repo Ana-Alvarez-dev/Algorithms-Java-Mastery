@@ -22,3 +22,16 @@ The preflight returns 2 on a failed check and 64 on an unsupported argument. Kee
 ## Applied verification
 
 The [implementation and verification guide](implementation-and-verification-guide.md) connects these concepts to script contracts, commands and primary sources. The [verification report](verification-report.md) distinguishes real Linux/JDK checks from injected shell fixtures, historical research and pending author execution.
+
+## Ordered Review Clarification
+
+Each command establishes its own observation. Preflight PASS does not execute
+Maven, tests or the artifact; -lp establishes registration/parameters without
+timing. A reported dirty tree is permitted, while clean status omits ignored
+output and is not an artifact attestation. Treat every nonzero command result
+as a failed checkpoint, even when its status is outside the script's explicit
+2/64 branches.
+
+The [script and evidence map](environment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records LI01-LI12
+and fresh shell/Java verification.

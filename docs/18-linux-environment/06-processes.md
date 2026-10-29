@@ -11,3 +11,15 @@ The preflight launches short Java/Javac version queries and metadata commands. I
 ## Applied verification
 
 The [implementation and verification guide](implementation-and-verification-guide.md) connects these concepts to script contracts, commands and primary sources. The [verification report](verification-report.md) distinguishes real Linux/JDK checks from injected shell fixtures, historical research and pending author execution.
+
+## Ordered Review Clarification
+
+Preflight Java/Javac version queries are real short subprocesses, while the
+shell suite substitutes launcher output for its failure cases. Neither is a
+JMH timed operation. Fresh forked JVMs share the surrounding host's conditions;
+process isolation alone does not establish stable load or frequency. Current
+verification packages and discovers benchmarks without a new timed Linux run.
+
+The [script and evidence map](environment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records LI01-LI12
+and fresh shell/Java verification.

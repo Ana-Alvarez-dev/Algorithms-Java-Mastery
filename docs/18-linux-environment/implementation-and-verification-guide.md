@@ -1,5 +1,20 @@
 # Linux Environment: Applied Implementation and Verification
 
+## Ordered Documentation Review — 2026-10-29
+
+The original contribution below starts from the 2026-10-27 source identified in
+its scope. The [new review](documentation-review.md) checks it against main
+`07539e468523e3f1a96a84949386907b1abeb67c` (PR #115), with no executable changes.
+The [script/evidence map](environment-contracts.md) makes interpreter/root,
+path/feature-version, explicit exits, metadata, permissions and artifact
+identity obligations concrete. Fresh shell checks and Java 21 packaging are
+recorded independently of the original builds and author Windows research.
+
+A [Maven CI workflow](../../.github/workflows/maven-ci.yml) and
+[dated hosted executions](../19-ci-cd/first-hosted-run.md) now reuse the Linux
+scripts. The earlier module's absence of a workflow is historical; local checks
+here do not attest a new hosted outcome. The next ordered review is CI/CD.
+
 Reviewed on **2026-10-27**, from main
 `5efd7f7b7cf5ddfa34a7380b01b6a7435299da8f` (PR #95, aggregation provenance).
 This cross-cutting module connects the existing Java repository to an inspectable
@@ -32,7 +47,10 @@ Invoke `bash scripts/linux/check-environment.sh` from any current directory,
 using the correct path to the script. Its repository root comes from the script's
 location and must agree with Git. Paths containing spaces are supported.
 Prerequisites are Linux Bash, Git, Java/Javac, readlink, sha256sum, date and uname,
-with a usable `JAVA_HOME` and PATH selecting the same JDK 21 executables.
+with a usable `JAVA_HOME` and PATH selecting the corresponding JDK 21
+executables. These are canonical-path and feature-version checks, rather than
+a vendor/patch equality policy. The protocol requires a Linux JDK; the script
+does not independently validate the VM's os.name or classify virtualisation.
 
 | Mode | Jar policy | Injected Java-option variables |
 |---|---|---|
@@ -53,8 +71,13 @@ on failure inspect them locally, especially if options contain private values.
 
 The preflight never installs software, edits configuration, downloads Maven,
 builds a project, executes a jar, discards local changes or writes evidence files.
-It launches Java/Javac metadata queries and reads the checkout/artifact. It does
-not require a clean working tree: it reports changes so they stay visible.
+It launches Java/Javac metadata queries and reads the checkout/artifact. The
+read-only observation compares reported Git status and artifact digest, not all
+external-program filesystem activity. It does not require a clean working tree:
+it reports changes so they stay visible.
+Ignored target output is absent from this Git status; a clean result is not a
+claim that no generated files exist. A nonempty file is hashed without archive/
+manifest validity checks; actual JMH discovery is a later step.
 `--require-benchmark` is an ordinary uninstrumented-protocol guard, not a detector
 for every possible agent or runtime modification. Intentional profiling remains
 separate. Maven's version/runtime is checked explicitly after preflight.
@@ -93,8 +116,9 @@ metadata, hashing and setup stay outside JMH timed work.
 
 ## Filesystem portability changes
 
-The wrapper content is unchanged; its tracked mode becomes **100755** from
-100644. Both new scripts are executable. `.gitattributes` requests LF for
+The original contribution left wrapper content unchanged and changed tracked
+mode from 100644 to **100755**. Both Linux scripts are executable. This ordered
+review changes none of those files or modes. `.gitattributes` requests LF for
 `/mvnw` and `/scripts/linux/*.sh` only. Java source, historical CSV and Windows
 mvnw.cmd are unchanged. No broad renormalisation is performed.
 
@@ -143,7 +167,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 bash scripts/linux/check-environment.sh
 ```
 
-Stop and correct the selection locally if the check fails. Once it passes:
+This derivation follows the compiler already selected; it does not choose or
+install version 21. Run the preflight as a child process rather than sourcing
+its shell options/exit calls. Stop and correct the selection locally if the
+check fails. Once it passes:
 
 ```bash
 bash scripts/linux/test-check-environment.sh
@@ -151,8 +178,11 @@ bash scripts/linux/test-check-environment.sh
 ./mvnw clean test
 ```
 
-Maven must report Java 21. Wrapper 3.9.11 may download its distribution or
-missing dependencies, unlike the preflight. Stop after any failed command;
+Maven must report Java 21. The wrapper configuration has wrapperVersion 3.3.4
+and selects Maven 3.9.11. First use may download that distribution or
+missing dependencies, unlike the preflight. Run each command as a separate
+checkpoint: a failed child does not stop an interactive shell from processing
+the next pasted line. Stop after any failed command;
 review proxy/network/cache setup without publishing credentials. The shell
 suite uses local fake launchers to test failure handling; the real JVM/build
 checks are separately recorded in the [verification report](verification-report.md).
@@ -197,4 +227,6 @@ These engineering references describe the environment; CLRS remains the
 algorithmic reasoning reference and is not used as authority for Bash/WSL APIs.
 The verifier is a focused project prerequisite check, not a general machine
 inventory, security audit, workload stabiliser or provenance attestation.
-No GitHub Actions workflow is added; implementation belongs to module 19.
+The original Linux contribution added no workflow. Module 19 subsequently
+implemented it and recorded hosted runs; those dated outcomes remain separate
+from current local verification and a future PR.

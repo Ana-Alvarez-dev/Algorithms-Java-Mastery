@@ -1,5 +1,13 @@
 # Linux Environment: Implementation and Local Verification
 
+**Historical verification:** the original builds, runtime and artifact hash
+below were recorded on 2026-10-27. The [2026-10-29 ordered review](documentation-review.md)
+records fresh Bash cases, real Java selection, profile packaging, artifact
+identity and discovery separately. Its [script/evidence map](environment-contracts.md)
+clarifies each guarantee. Module 19's [workflow](../../.github/workflows/maven-ci.yml)
+and [hosted record](../19-ci-cd/first-hosted-run.md) now exist; neither is a new
+hosted outcome established by this local review.
+
 Verified on **2026-10-27**, from main
 `5efd7f7b7cf5ddfa34a7380b01b6a7435299da8f` (PR #95, aggregation provenance),
 with this contribution present as working-tree changes. The preflight correctly
@@ -118,3 +126,16 @@ new JSON/log/CSV evidence file, coverage gate or GitHub Actions workflow is adde
 Local passing tests are not CI. The author may use the guide in an existing
 Linux/WSL environment when available; Windows support remains. The next numbered
 module is **19 — CI/CD**.
+
+## Ordered Documentation Review — 2026-10-29
+
+The [follow-up review](documentation-review.md) checks all ten notes and the
+source/evidence chain against PR #115's main. Both scripts pass Bash syntax
+checking; all 20 subprocess cases pass. A real Corretto JDK 21 preflight passes
+with optional jar absence, then the benchmark-profile build passes 723 JUnit
+invocations, including 13 fixture checks. Required-jar capture subsequently
+passes with Git status and artifact digest unchanged before/after inspection.
+Discovery retains 115 methods/40 classes and the exact five-size aggregation
+selector. These are current local observations, separate from the original
+710-test normal build and the author's Windows timings. No new timing,
+coverage report, author WSL execution or hosted status is inferred.

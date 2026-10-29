@@ -11,3 +11,16 @@ For WSL-based development, the guide explains a separate Linux-filesystem checko
 ## Applied verification
 
 The [implementation and verification guide](implementation-and-verification-guide.md) connects these concepts to script contracts, commands and primary sources. The [verification report](verification-report.md) distinguishes real Linux/JDK checks from injected shell fixtures, historical research and pending author execution.
+
+## Ordered Review Clarification
+
+The physical script-relative root and Git top level must agree under the
+expected repository layout. This avoids depending on the caller's current
+directory; it is not arbitrary script relocation or directory authenticity.
+Ignored target files can exist while Git reports clean. os-release is read as
+selected literal key/value lines, without shell evaluation or a general parser
+for every field.
+
+The [script and evidence map](environment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records LI01-LI12
+and fresh shell/Java verification.

@@ -11,3 +11,16 @@ Use permissions on the required project files rather than granting broad access.
 ## Applied verification
 
 The [implementation and verification guide](implementation-and-verification-guide.md) connects these concepts to script contracts, commands and primary sources. The [verification report](verification-report.md) distinguishes real Linux/JDK checks from injected shell fixtures, historical research and pending author execution.
+
+## Ordered Review Clarification
+
+Tracked 100755, executable bits in this checkout, LF attributes and actual
+line-ending bytes are separately inspected. Attributes request text conversion
+for the selected launchers; they neither set modes nor repair every existing
+filesystem/mount constraint. In current verification all three launchers are
+executable and contain no CR bytes. No new mode or attribute change is made by
+this documentation review.
+
+The [script and evidence map](environment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records LI01-LI12
+and fresh shell/Java verification.
