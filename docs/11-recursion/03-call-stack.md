@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Exact source trace and shared references
+
+For Factorial.recursive(3), product visits 3 -> 2 -> 1 -> 0 and returns
+1 -> 1 -> 2 -> 6: **four helper invocations/depth**, excluding the wrapper
+and validation. The diagrams ending at 1 illustrate another factorial base.
+Frames have separate local-variable slots, but copied reference values can
+refer to the same object: every ArraySum helper reads the same int[], and
+Fibonacci.cached shares one per-public-call memo array across its descendants.
+Separate frames do not clone inputs or make shared mutation safe. The
+[map](implementation-contracts.md) separates logical depth, total calls and heap storage.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
@@ -460,7 +471,9 @@ factorial(3)
 factorial(4)
 ```
 
-The stack naturally reverses the order of execution.
+For this single-branch factorial example, returns unwind the active path in
+reverse order. A branching traversal interleaves descent and return between
+siblings; its entire execution order is not simply reversed.
 
 ---
 
@@ -558,11 +571,9 @@ Example:
 factorial(5)
 ```
 
-Maximum depth:
-
-```text
-5
-```
+For a conceptual helper stopping at n=1, five active helper frames suffice.
+The implemented product stops at n=0 and has **six** for n=5. Depth here counts
+active helper invocations, including the root and base, excluding wrappers.
 
 A binary-tree traversal may have depth proportional to:
 

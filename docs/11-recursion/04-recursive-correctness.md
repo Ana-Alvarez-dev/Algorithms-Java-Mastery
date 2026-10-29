@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Strengthened hypotheses and runtime boundaries
+
+The [applied map](implementation-contracts.md) states an invariant for every
+helper, including accumulate(n,a)=a*n!, cached(k,memo) with only correct
+nonnegative entries, and transfer(n,from,to,spare,output) with legal peg state.
+These are strengthened specifications rather than unproved appeals to the
+public method. Partial correctness means the promised result if execution
+returns normally; total algorithmic correctness also proves termination.
+Resource-limited Java execution is a further concern, especially BigInteger
+output and materialised Hanoi. Tests check concrete executions, not all inputs.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
@@ -281,6 +292,10 @@ Sort(Left Half)
 +
 
 Sort(Right Half)
+
++
+
+Merge the sorted halves preserving every input occurrence
 ```
 
 Incorrect reduction:
@@ -319,7 +334,9 @@ Different Problem
 Different Meaning
 ```
 
-Recursive correctness depends on solving exactly the same problem at every level.
+Each recursive call must satisfy its stated helper precondition and return
+postcondition. Accumulators, changing peg roles and pair-index intervals can
+strengthen or generalise the public problem without breaking correctness.
 
 ---
 
@@ -420,7 +437,11 @@ Examples include:
 - natural numbers;
 - remaining array elements;
 - tree height;
-- graph depth.
+- the number of still-undiscovered vertices in a finite graph traversal.
+
+Graph path depth can increase and cycles can revisit vertices; depth alone is
+not a decreasing termination measure. Mark-before-recursing plus finite
+vertices and finite neighbour scans supplies the relevant progress argument.
 
 A well-founded ordering guarantees that infinite descending sequences cannot exist.
 

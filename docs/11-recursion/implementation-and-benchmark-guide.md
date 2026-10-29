@@ -1,5 +1,17 @@
 # Recursion: Implementation and Benchmark Guide
 
+## Ordered Documentation Review
+
+The [2026-10-28 review](documentation-review.md), based on main
+`6e8f87c1dcaae00d0d545d5ebb4ec539c48b33f7` (PR #108 Graphs review merge),
+checks selected passages against all seven production Java files, eight test
+sources and three JMH classes. Its [applied map](implementation-contracts.md)
+adds exact helper invariants/counts, ownership and cost-model boundaries.
+Fresh Java 21 verification passes 710 tests overall, including the same 28
+module tests; benchmark packaging and registration are checked separately.
+The original implementation, smoke/probe/doclint and author measurement
+claims below retain their original dates and provenance.
+
 ## Selected Scope and Traceability
 
 Package `org.anaalvarezdev.algorithms.recursion` mirrors main, test and JMH roots.
@@ -312,7 +324,9 @@ git pull --ff-only origin main
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar -l ".*recursion.*"
 ```
 
-Expect 600 tests, BUILD SUCCESS and eight listed methods. The explicit path is
+Expect BUILD SUCCESS and eight listed methods. The original build recorded above
+reported 600 tests; the ordered review reports 710 in the later repository.
+Use the actual Surefire totals for the revision under test. The explicit path is
 the author's verified Java 21 installation; adapt elsewhere. Maven release=21
 selects bytecode compatibility, not the Java executable launching JMH. Package
 builds tests/jar; it does not execute the performance measurement. Linux uses

@@ -284,18 +284,20 @@ for sufficiently deep recursion.
 
 ---
 
-# 13. Why Java Does Not Guarantee TCO
+# 13. Java Contract and Optimisation Boundary
 
-One reason is that Java preserves complete stack traces for:
+The JVM specification defines an abstract frame model and leaves internal
+optimisation choices to implementations. It supplies no portable promise that
+these tail-recursive methods use constant stack. This review does not infer a
+language-design motivation from debugging or stack traces. Diagnostics can
+interact with optimisation, but complete physical frame preservation is not
+established here.
 
-- debugging;
-- exception handling;
-- diagnostic tools;
-- profiling.
-
-Automatically removing stack frames would change the observable execution stack.
-
-For this reason, Java prioritizes predictable runtime behavior over mandatory tail-call optimization.
+For the actual accumulator, the invariant is a*n! relative to the requested
+answer. At n=0 return a; updating (n,a) to (n-1,a*n) preserves it. Both factorial
+helpers perform n products, including multiplication by one; the loop performs
+max(n-1,0). See the [source/proof map](implementation-contracts.md). Similar
+historical means do not demonstrate elimination or equal machine work.
 
 ---
 

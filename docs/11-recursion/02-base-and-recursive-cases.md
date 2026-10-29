@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Bases used by the executable helpers
+
+Factorial.product and accumulate stop at **n=0**, so a valid n starts n+1
+logical helper invocations. The illustrations that stop at factorial(1) use
+an alternative base convention; they are not exact traces of these helpers.
+Fibonacci stops at n<2; Power at exponent 0 or 1; ArraySum at range length
+0 or 1; Palindrome at pair-range length 0 or 1; GCD at second magnitude 0;
+Hanoi at disk count 0. See the [applied map](implementation-contracts.md).
+A mathematical decreasing measure proves termination under the algorithmic
+model; it does not promise enough JVM stack or heap for every accepted input.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
@@ -19,7 +30,9 @@ Every recursive algorithm is built upon two essential components:
 - the **base case**;
 - the **recursive case**.
 
-Together, these two elements define the complete behavior of the algorithm.
+The base and recursive cases describe the reduction. A complete public contract
+also specifies accepted inputs, validation, result meaning and ownership;
+resource failure is separate from mathematical termination.
 
 The base case determines **when recursion stops**, while the recursive case determines **how the problem is reduced** into progressively smaller instances.
 

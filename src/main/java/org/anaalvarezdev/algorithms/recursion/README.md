@@ -35,3 +35,9 @@ the PR #82 merge; runtime is JDK 21.0.9/JMH 1.37, in nanoseconds/op. Five errors
 reach 25% of their means. Work counts, depth, differing allocations and timing
 uncertainty stay distinct; this is not a tail-call-elimination or cache claim.
 The guide keeps smoke separate from Markdown research without JSON/log files.
+
+The [ordered documentation review](../../../../../../../docs/11-recursion/documentation-review.md)
+records fresh Java 21 verification: **710 repository tests, including 28 here**.
+The [contract/proof map](../../../../../../../docs/11-recursion/implementation-contracts.md)
+connects all seven utilities to helper invariants, exact counts and cost limits.
+This documentation pass changes no executable source or historical timings.

@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Applied work, depth and storage
+
+Use the [cost map](implementation-contracts.md) for the actual implementations.
+Naive Fibonacci has 2F(n+1)-1 total helper calls, not that many live frames.
+Nonempty balanced ArraySum has 2k-1 calls and logarithmic depth. Palindrome
+short-circuits left-to-right over mirrored pairs; a first mismatch takes a
+logarithmic descent recursively versus constant loop work. Hanoi retains
+2^n-1 moves in addition to linear depth. Power counts multiplications on
+growing BigInteger operands, not constant-time arithmetic. The fixed long/work
+caps bound these APIs; asymptotic families do not extend their numeric domains.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
@@ -496,9 +507,11 @@ Maximum Depth
 O(n)
 ```
 
-The total number of calls determines execution time.
-
-The maximum simultaneous calls determine stack memory.
+Total work is the sum of local work across calls, including variable-cost
+arithmetic, copying and allocation. Call count alone gives time only under a
+stated per-call bound. Maximum simultaneous frames determine the source stack
+component when per-frame state is bounded; live numeric objects, memo arrays
+and retained output require separate accounting.
 
 ---
 
@@ -520,7 +533,9 @@ Recursive Call
 Return
 ```
 
-Tail recursion often simplifies complexity analysis because each level performs constant work.
+Tail position specifies where a result is returned; it does not imply constant
+local work. An accumulator update may scan data or multiply growing integers.
+Analyse that work as well as the number of calls.
 
 Its optimization is discussed in the next document.
 
@@ -552,7 +567,9 @@ Problem
 Almost Entire Problem
 ```
 
-Balanced recursion generally produces smaller recursion depth and better performance.
+Balanced reduction can reduce depth. Total time still depends on branching,
+local work, short-circuiting and operand sizes; smaller depth alone establishes
+no performance ordering.
 
 ---
 

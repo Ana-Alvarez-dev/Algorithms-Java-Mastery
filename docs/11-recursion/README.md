@@ -19,8 +19,12 @@ This module provides a rigorous academic introduction to recursion while emphasi
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 connects the methodology to factorial, Fibonacci, BigInteger power, balanced
 long array sum, int-array palindrome, Euclidean GCD and materialised Hanoi.
-Seven production files and 28 module tests bring local verification to 600
-passing tests. Eight JMH methods cover 24 default cells in three classes.
+The original 2026-10-24 verification had seven production files and 28 module
+tests within 600 repository tests. The
+[current ordered review](documentation-review.md) verifies the same module
+against the later repository and supplies an
+[applied contract/proof map](implementation-contracts.md). Eight JMH methods
+cover 24 default cells in three classes.
 The [first research report](../17-benchmarking/results/recursion/README.md)
 completes all three Result/Interpretation fields using JDK 21.0.9/JMH 1.37 and
 author-reported source `fe370a1`. Every error, 240 measured and 144 warmup
