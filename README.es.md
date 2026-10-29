@@ -183,11 +183,23 @@ y los [límites del cierre](docs/00-project/12-closing-traceability-review.md).
 
 ## Asistencia de IA, referencias y cambios
 
-La IA apoya explicaciones, revisiones, alternativas y escritura técnica.
-Las fuentes académicas y la documentación oficial siguen siendo primarias;
-el razonamiento y el código aceptados requieren comprensión y validación humana.
-Las pruebas y las mediciones deben ejecutarse: una respuesta de IA no es
-evidencia por sí misma. En trabajos evaluados se aplican las reglas de la materia.
+Este es un **proyecto académico dirigido por su autora y desarrollado con
+asistencia de IA**. Ana María Alvarez definió su propósito, el enfoque basado
+en CLRS, las prioridades y la progresión, ejecutó pruebas/benchmarks locales y
+gestionó la integración mediante PR. ChatGPT/Codex asistió en la elaboración y
+generación de documentación, implementaciones Java, pruebas, configuración de
+benchmarks y builds, revisiones e interpretación de resultados. Esto reconoce
+una asistencia sustancial, sin atribuir una autoría completamente manual ni un
+dominio independiente de todos los temas.
+
+CLRS y la documentación oficial respaldan las afirmaciones técnicas; las
+adaptaciones a Java y las prácticas de ingeniería tienen sus propios contratos
+y evidencias. Una respuesta de IA no es una fuente autorizada ni evidencia de
+ejecución. Se conservan las comprobaciones realizadas y sus límites; el trabajo
+aceptado requiere comprensión y validación humana. La
+[metodología de estudio](docs/00-project/03-study-methodology.md) detalla las
+responsabilidades, la verificación y la continuidad del aprendizaje. En trabajos
+evaluados se aplican las reglas de la materia.
 
 Consultá la [bibliografía central](docs/00-project/10-references.md), los
 [estándares de ingeniería](docs/00-project/08-engineering-standards.md) y el

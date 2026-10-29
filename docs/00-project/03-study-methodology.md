@@ -34,6 +34,10 @@ Every module therefore contributes to the progressive development of analytical
 thinking, algorithmic reasoning, software engineering discipline, and the
 professional competencies expected from modern Java backend developers.
 
+The stages below describe learning expectations, not a certification that the
+author has independently mastered every topic. The AI-assisted development and
+verification responsibilities are recorded explicitly in section 12.
+
 ---
 
 # 1. Purpose
@@ -853,7 +857,77 @@ to every module throughout the repository.
 
 ---
 
-# 12. Conclusion
+# 12. Author Direction, AI Assistance and Verification
+
+## How this project was developed
+
+Algorithms Java Mastery is an author-directed academic project developed with
+substantial ChatGPT/Codex assistance. The following account distinguishes
+project direction, assisted production and recorded validation:
+
+| Role | Contribution and boundary |
+|---|---|
+| Ana María Alvarez, repository author and maintainer | Defined the academic purpose, CLRS-based focus, study sequence and priorities; guided iterative requests and corrections, ran local Java tests/benchmarks, supplied execution evidence and managed PR integration. This does not assert that every line was manually written or independently reviewed by the author. |
+| ChatGPT/Codex assistance | Helped draft and generate explanations, contracts, pseudocode, correctness/complexity arguments, Java implementations, tests, JMH fixtures/configuration, build/CI material, reviews and result interpretation. Generated proposals and reviews require scrutiny; they are not academic authority or proof of execution. |
+| Recorded verification | Native Java/JUnit/Maven executions, hosted CI, shell checks, inspection and mathematical arguments have the scope identified in their reports. Local author runs, agent-environment runs and hosted runs remain distinguishable. A generated command or proposed test is not an executed check. |
+
+The maintainer remains responsible for accepting contributions and their claims.
+This disclosure describes the observed collaboration; it does not invent exact
+AI-generated percentages, model-version provenance or a complete prompt archive.
+
+## Relationship to CLRS and other sources
+
+CLRS provides the primary academic foundation for algorithm design,
+specifications, invariants, induction, recurrences and asymptotic analysis.
+The repository adapts selected concepts to explicit Java 21 contracts and adds
+testing, benchmarking and engineering practices supported by their own sources.
+This is not an exhaustive reproduction, official implementation or certification
+of fidelity to the entire book.
+
+Use the [central bibliography](10-references.md) and the edition/page locators
+actually inspected in each review. The bibliography prefers the Fourth Edition;
+earlier checks against the supplied Third Edition retain that attribution.
+Do not relabel those passages as a Fourth Edition inspection or invent page
+references. No new textbook-content audit is claimed by this disclosure.
+Original explanation and responsible citation remain required.
+
+## Reviewing assisted work
+
+1. Check the claim against the stated contract and an inspected academic or
+   official source. Verify references and state assumptions before accepting it.
+2. Examine correctness, termination and cost arguments for the actual Java
+   implementation, including numeric representation and mutation rules.
+3. Validate executable behaviour with native Java tests and relevant independent
+   oracles. For defects, reproduce the failure and preserve a regression.
+4. Keep test, fixture, discovery and timing evidence distinct. Record actual
+   source/state, environment, settings, outcomes and unavailable fields rather
+   than inferring success from plausible-looking output.
+5. Review proposed experiments and conclusions against the measured domain,
+   uncertainty and comparison conditions; preserve historical limitations.
+6. Disclose material assistance and the checks actually performed in the PR,
+   following [CONTRIBUTING.md](../../CONTRIBUTING.md). Apply institutional rules
+   to any assessed submission.
+
+These are review obligations, not a retrospective assertion that every generated
+sentence received every check. Earlier finite mathematical models retain their
+original labels; they are not translated into claims of native Java execution.
+Passing tests, coverage or an AI review cannot establish correctness for all
+possible inputs or explain a processor-level timing mechanism.
+
+## Engineering completion and continuing learning
+
+The [closing record](12-closing-traceability-review.md) closes the selected
+implementation and documentation cycle through module 19, within its evidence
+limits. It does not certify the author's independent mastery of every topic.
+Continuing study can use the repository as an executable reference: explain a
+contract and invariant without assistance, trace a case, reconstruct a small
+implementation, justify its complexity and design a counterexample or test.
+Record progress from actual demonstrations rather than assuming mastery from
+the presence of generated files or a successful build.
+
+---
+
+# 13. Conclusion
 
 Algorithms Java Mastery adopts a structured methodology that combines
 Computer Science theory with modern Software Engineering practices.

@@ -14,6 +14,13 @@ English is primary for code and technical documentation; the Spanish root
 README provides equivalent project navigation, commands and current facts.
 Update both root pages when their shared scope or execution guidance changes.
 
+The [study methodology](03-study-methodology.md) records the author's direction,
+substantial AI assistance, verification responsibilities and continuing learning.
+The dated final follow-up in the closing record confirms PRs #118-#120 and the
+identified main CI; the final documentation contribution requires its own PR
+integration/checks. [CONTRIBUTING.md](../../CONTRIBUTING.md) and
+[CHANGELOG.md](../../CHANGELOG.md) are populated and linked from both root pages.
+
 Welcome to the foundational documentation of **Algorithms Java Mastery**.
 
 This directory establishes the academic, organisational, and engineering

@@ -175,11 +175,21 @@ jar hash. See the [results index](docs/17-benchmarking/README.md) and
 
 ## AI assistance, references and changes
 
-AI supports explanation, review, alternatives and technical writing. Academic
-sources and official documentation remain primary; accepted reasoning and code
-require human understanding and validation. Tests and measurements must be
-executed, and AI output is not evidence by itself. Course-specific policies
-apply to graded work.
+This is an **author-directed academic project developed with AI assistance**.
+Ana María Alvarez defined its purpose, CLRS-based approach, priorities and
+progression, ran local tests/benchmarks and managed PR integration. ChatGPT/Codex
+assisted with drafting and generating documentation, Java implementations,
+tests, benchmark/build configuration, reviews and interpretation of results.
+This acknowledges substantial assistance rather than implying entirely manual
+authorship or independent mastery of every topic.
+
+CLRS and official documentation support the technical claims; Java adaptations
+and engineering practices have their own contracts and evidence. AI output is
+not an authoritative source or execution evidence. Actual checks and their
+limits remain recorded, and accepted work requires human understanding and
+validation. See the [study methodology](docs/00-project/03-study-methodology.md)
+for responsibilities, verification and continuing study. Course-specific
+policies apply to graded work.
 
 Use the [central bibliography](docs/00-project/10-references.md),
 [engineering standards](docs/00-project/08-engineering-standards.md) and

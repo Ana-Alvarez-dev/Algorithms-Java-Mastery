@@ -194,6 +194,61 @@ passes. PR merge dates #91-#119 match the first-parent main history in
 America/Buenos_Aires. External URLs and inherited heading anchors are not
 exhaustively checked by this file-link audit.
 
+### Final scope and AI-disclosure follow-up — 2026-10-29
+
+Final follow-up base: main **`7dcb403791a8ed9c08333e84fd80b5424a19efd0`**,
+the merged [PR #120](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/120).
+The first-parent history confirms the integrated bilingual closure
+([PR #118](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/118)),
+centred language selectors
+([PR #119](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/119))
+and populated contribution/changelog guides (#120). The earlier Unreleased
+maintainer-guide entries are moved to their verified 2026-10-29 milestone;
+the new disclosure/closure changes remain under Unreleased until integration.
+
+The [study methodology](03-study-methodology.md), bibliography, contribution
+guide and equivalent root READMEs now identify the author-directed development
+with substantial ChatGPT/Codex assistance. The account includes generated Java,
+tests, configuration, documentation and reviews, alongside the author's scope,
+sequence, local execution and integration decisions. It distinguishes original
+academic sources, proposed work, actual checks and continuing learning, without
+claiming entirely manual authorship, complete CLRS fidelity or independent
+mastery of all topics. Edition-specific references and earlier validation types
+retain their recorded provenance.
+
+[Main CI run 40892574719](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/runs/40892574719),
+attempt 1, completed successfully for a push of the exact base above. Metadata
+spans **2026-10-29T14:32:57Z–14:34:07Z** (11:32:57–11:34:07 -03:00).
+Both job logs identify that source, Temurin 21.0.13+9-LTS and javac 21.0.13:
+
+| Observed job | ID | Log outcome |
+|---|---|---|
+| Java 21 tests and coverage | 123513024426 | 20 shell cases; 710 JUnit invocations; 0 failures/errors/skips; BUILD SUCCESS; coverage/report upload steps successful |
+| Java 21 benchmark package | 123513409445 | 723 JUnit invocations; 0 failures/errors/skips; BUILD SUCCESS; provenance/discovery/package upload steps successful |
+
+The package log reports jar SHA-256
+`3396788488ee87b7119da5f694920925a1472a6c2008a2f95802cb9fa9a619eb`.
+This follow-up inspected workflow metadata and decoded job logs; it did not
+download/hash this new jar independently or reparse this run's report XML.
+Earlier independently inspected archives retain their own source/run/hash
+identities above. No new local Java test or timed JMH run is claimed here.
+
+This contribution changes eight Markdown files only. Original engineering
+closure text, all executable/configuration files and historical measurements
+stay unchanged. The selected implementation/review cycle through module 19 is
+closed within the recorded limits; these final documentation changes still need
+their own PR integration and successful checks. That merge is the remaining
+integration step, not an assertion that it has already happened. Future study
+and extensions are separate from the completed scoped engineering cycle.
+
+Final documentation audit: **320 Markdown files / 1764 relative file targets /
+zero missing destinations**, balanced fences and passing `git diff --check`.
+Both root selectors, their six shared command blocks and equivalent navigation
+are preserved. The original engineering closure body is unchanged; PR #120's
+merge/date and the changelog transition are checked against first-parent Git
+history. External URLs and inherited heading anchors are not exhaustively
+checked by this file-link audit.
+
 ---
 
 ## Original engineering closure — 2026-10-27
