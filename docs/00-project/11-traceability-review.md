@@ -166,6 +166,17 @@ Main run 40877685400 is independently observed successful, with downloaded
 archives/XML/provenance reconciled. Only Markdown changes; initial hosted and
 research records remain unchanged. Closing reconciliation follows integration.
 
+A **2026-10-29 ordered-review closure**, based on main
+`8d980122fc9e9ffcc9767789ff785542f723481b` (PR #117 merge), follows in the
+[closing record](12-closing-traceability-review.md). First-parent history confirms
+all nineteen reviews, PRs #99-#117. Current source/hosted XML reconciles the
+100-file / 710-normal / 723-profile inventory; Java discovery confirms 115
+methods, forty classes and 803 parameter cells. Actual main run 40880667469 and
+its downloaded artifacts supply separately identified hosted evidence. Scoped
+review completion preserves every research/proof/enforcement limit. Root English
+and Spanish entry points share current facts; technical modules remain English.
+Only Markdown changes; this closure's PR has its own subsequent checks.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph
