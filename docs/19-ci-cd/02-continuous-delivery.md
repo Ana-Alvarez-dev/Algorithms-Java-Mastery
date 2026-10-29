@@ -11,3 +11,15 @@ A future deployment pipeline would need an actual delivery contract and target. 
 ## Applied workflow and evidence
 
 See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).
+
+## Ordered Review Clarification
+
+A successful CI package is retained build output. The upload's error setting
+means no matching files, rather than independently requiring every listed path.
+The observed archive does contain jar, provenance and JUnit XML; those bytes
+are inspected separately. Requested retention and actual API expiry are dated
+observations, with no release/deployment or permanent availability implied.
+
+The [workflow and evidence map](workflow-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records CI01-CI12
+and fresh local/hosted verification.

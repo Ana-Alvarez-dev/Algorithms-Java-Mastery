@@ -1,5 +1,16 @@
 # CI/CD: Applied Workflow and Verification Guide
 
+## Ordered Documentation Review — 2026-10-29
+
+The original implementation below starts from the 2026-10-27 Linux merge.
+The [new review](documentation-review.md) checks it against main
+`ca756c1b3f50ed2ab476b68b12615eca4899784b` (PR #116), with no executable changes.
+The [workflow map](workflow-contracts.md) explains event/checkout scope,
+whole-job dependencies, status functions, gate strength, runtime identities
+and upload completeness. New local run-block checks and downloaded main-run
+evidence are distinct from the original verification and this future PR.
+The initial [hosted record](first-hosted-run.md) stays unchanged.
+
 Reviewed on **2026-10-27**, from main
 `a0e174db482164027b086a0ddb986bf136c38b4a` (PR #96, Linux Environment).
 The executable definition is [.github/workflows/maven-ci.yml](../../.github/workflows/maven-ci.yml).
@@ -16,8 +27,9 @@ existing [Linux preflight](../18-linux-environment/implementation-and-verificati
 
 Successful output: tests/coverage and package jobs complete, expected coverage
 files exist, the benchmark jar is nonempty, selected discovery succeeds, and
-requested downloadable outputs are uploaded. Failure in prerequisite/build/test
-or discovery prevents a successful dependent package. Diagnostic upload after a
+matching downloadable outputs are uploaded. Upload selection itself does not
+independently validate every listed path when some files match. Failure in
+prerequisite/build/test or discovery prevents a successful dependent package. Diagnostic upload after a
 failed verification does not change the job's failure.
 
 The evidence chain remains contracts/proofs, Java, tests, selected environment,
@@ -36,7 +48,7 @@ No production Java, JUnit test, JMH method or POM change is introduced.
 | Permissions | contents: read; checkout persist-credentials: false |
 | Concurrency | Workflow + PR number/ref; cancel an older run for that group |
 | Runner / runtime | ubuntu-24.04; Temurin Java 21 |
-| Shell / Maven | Bash; batch mode and no transfer progress; wrapper 3.9.11 |
+| Shell / Maven | Bash; batch mode and no transfer progress; wrapper-selected Maven 3.9.11 |
 | Job timeout | 15 minutes each |
 | Job dependency | benchmark-package needs verify |
 | Dependency cache | Maven via setup-java; key inputs pom.xml and wrapper properties |
@@ -61,14 +73,16 @@ test -s target/site/jacoco/jacoco.xml
 
 This currently executes **710 JUnit invocations**, with JaCoCo 0.8.13 generating
 HTML/XML. Surefire's failIfNoTests property rejects an empty suite. There is no
-arbitrary coverage-percentage gate. The two nonempty-file checks catch missing
-expected reports. Compilation, tests and coverage do not prove complete
+arbitrary coverage-percentage or exact-test-count gate. The two nonempty-file
+checks catch missing expected reports. Compilation, tests and coverage do not prove complete
 behavioural correctness.
 
 The report-upload step runs if the job is not cancelled, including after a
-failure, retaining any JUnit TEST-*.xml and target/site/jacoco output. Missing
-partial files produce a warning; prior failure remains a failure. A failed
-verify job blocks the dependent package job through needs.
+failure, retaining any JUnit TEST-*.xml and target/site/jacoco output. No matching
+files produces a warning; partial matches do not validate each listed path.
+Prior failure remains a failure. A failed
+verify job blocks the dependent package job through needs, including a failure
+of the diagnostic-upload step after Maven passed.
 
 ### Job: Java 21 benchmark package
 
@@ -87,20 +101,24 @@ JUnit counts, and repeated suites are not new distinct repository tests.
 
 After success, the workflow writes ignored target/ci-provenance.md with run/
 attempt URL, event name/SHA, the preflight's actual checkout SHA/dirty state,
-UTC time, visible environment, Java/Javac selection and jar SHA-256, plus wrapper
-version. It prints the record to the job log. The script does not execute the
-jar while collecting identity. Hashing alone does not prove source linkage;
+UTC time, visible environment, Java/Javac selection and jar SHA-256, plus the
+wrapper-selected Maven version. It prints the record to the job log. The script
+does not execute the jar while collecting identity. Hashing alone does not prove source linkage;
 the adjacent successful package and unchanged source context supply that link.
 
 Discovery runs `java -jar target/benchmarks.jar -l`, then the anchored aggregation
 selector with `-lp`. The step requires the exact aggregation method and a size
-parameter in output. The current inventory is **115 methods / 40 classes**;
+parameter in output. The gate requires the method and parameter label, not
+every expected size value.
+The current inventory is **115 methods / 40 classes**;
 that global count is recorded rather than hard-coded as a growth-blocking gate.
 There is no timed JMH research or performance regression threshold in CI.
 
 Only after these steps succeed does upload retain benchmarks.jar,
 ci-provenance.md and package-job JUnit XML. Upload errors if no selected files
-exist; earlier checks separately require the jar and generated provenance.
+exist, without checking every individual requested path in a partial match.
+The preceding steps require the jar and generate provenance; current archive
+inspection separately confirms the full recorded output set.
 The archive's upload digest and the contained jar's SHA-256 are different
 identities. Upload is package retention, not publishing a release or deployment.
 
@@ -127,8 +145,10 @@ skipped. Cancellation supersedes an old run rather than relabelling it passed.
 
 The dependency edge and default failure propagation are the workflow's ordering
 argument. It does not execute a deployment before verification or certify an
-unobserved hosted run. Each job's identity record must refer to its actual
-checkout. On pull_request, GitHub's default checkout normally uses the synthetic
+unobserved hosted run. Each job's source attribution must refer to its actual
+checkout; the package job captures its dedicated provenance while verify logs
+its preflight identity. On pull_request, GitHub's default checkout normally uses
+the synthetic
 merge commit; that is not silently replaced with the PR branch head. Always
 inspect the actual run/attempt and source before documenting its conclusion.
 
@@ -147,8 +167,9 @@ java-version 21 selects that major version, and the actual version is recorded.
 | actions/upload-artifact | v7.0.2 | cf430e030ddbb5b0abf93d22962f4752f3646cd9 |
 
 Official tag refs and action.yml metadata were checked. These actions declare
-Node 24 and target a compatible hosted runner. Each used input was checked
-against the respective metadata. Updates need a reviewed replacement SHA and
+Node 24 for the action itself; project tests/compilation remain on Java 21. The
+observed hosted runner executes those actions successfully. Each used input
+was checked against the respective metadata. Updates need a reviewed replacement SHA and
 metadata validation rather than silently moving to an unrelated tag.
 
 ## Local checks versus hosted execution

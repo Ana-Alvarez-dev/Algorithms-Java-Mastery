@@ -11,3 +11,15 @@ Full SHA pins, read permissions, fresh checkouts and quoted runtime context cons
 ## Applied workflow and evidence
 
 See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).
+
+## Ordered Review Clarification
+
+The discovery gate requires the exact aggregation method line and the size
+parameter label. It does not enforce 115 global methods, forty classes or the
+complete five-value size set. Those are current observations. Actionlint and
+Bash syntax checks are review-time tools, not additional declared CI steps;
+ShellCheck/Pyflakes integrations remain outside the performed checks.
+
+The [workflow and evidence map](workflow-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records CI01-CI12
+and fresh local/hosted verification.

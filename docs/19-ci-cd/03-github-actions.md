@@ -6,8 +6,20 @@ Three official actions are pinned to reviewed full commit SHAs: checkout v7.0.1,
 
 The workflow token requests contents:read. Checkout disables persisted credentials. It uses pull_request, not a privileged pull_request_target execution, and references no deployment secrets. Runtime context values are printed through quoted environment expansions, not interpolated PR titles or branch text as shell code.
 
-Setup-java caches Maven dependencies using pom.xml and wrapper properties as key inputs. The workflow never caches target as verified build output. Newer runs for the same PR/ref can cancel older runs; a cancelled run remains cancelled, not passing. The first actual hosted execution must be reviewed separately from local validation.
+Setup-java caches Maven dependencies using pom.xml and wrapper properties as key inputs. The workflow never caches target as verified build output. Newer runs for the same PR/ref can cancel older runs; a cancelled run remains cancelled, not passing. Each actual hosted execution must be reviewed separately from local validation.
 
 ## Applied workflow and evidence
 
 See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).
+
+## Ordered Review Clarification
+
+The pinned actions declare Node 24 as their action runtime; the project still
+compiles/tests on Java 21. Fresh metadata checks validate six uses and all
+configured inputs at three pinned SHAs. PR-number/ref concurrency can supersede
+runs in a matching group, while distinct PR groups remain separate. Action pins
+and major-version/image selectors do not freeze the full environment.
+
+The [workflow and evidence map](workflow-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records CI01-CI12
+and fresh local/hosted verification.

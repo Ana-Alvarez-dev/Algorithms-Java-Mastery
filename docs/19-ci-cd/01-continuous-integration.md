@@ -11,3 +11,15 @@ The source-level workflow gap is addressed, and the [initial PR and main executi
 ## Applied workflow and evidence
 
 See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).
+
+## Ordered Review Clarification
+
+With no explicit PR types, the configured PR activity defaults are opened,
+synchronize and reopened; the main filter applies to the target branch. No path
+filter excludes documentation. Each run/attempt needs its own checked source:
+the newly observed main run is identified separately from the initial PR's
+synthetic merge and from this review's future PR.
+
+The [workflow and evidence map](workflow-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records CI01-CI12
+and fresh local/hosted verification.

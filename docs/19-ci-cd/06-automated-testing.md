@@ -11,3 +11,15 @@ A green workflow supports the tests it ran, not every undocumented behaviour. Hi
 ## Applied workflow and evidence
 
 See the [implementation and verification guide](implementation-and-verification-guide.md), [workflow](../../.github/workflows/maven-ci.yml) and [verification report](verification-report.md). They distinguish implemented checks, local command validation and the [observed initial hosted executions](first-hosted-run.md).
+
+## Ordered Review Clarification
+
+Repeated 710 and 723 executions do not create 1,433 distinct tests. The twenty
+shell cases use controlled launchers and keep their separate count. Fresh
+hosted JUnit XML confirms 89/90 suites and zero failures/errors/skips; fresh
+local Java execution is independently attributed. A green hosted conclusion
+supports that source/attempt, rather than a future PR or all behavioural paths.
+
+The [workflow and evidence map](workflow-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records CI01-CI12
+and fresh local/hosted verification.
