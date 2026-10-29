@@ -50,3 +50,9 @@ in Markdown without JSON/log. Smoke remains separate, presorted preparation is
 excluded for that API, room assignment solves a different objective, and Huffman
 cost timings omit codes. Matroids, weighted scheduling, knapsack, full codecs
 and later paradigms remain extensions.
+
+The [ordered documentation review](../../../../../../../docs/13-greedy-algorithms/documentation-review.md)
+records fresh Java 21 execution: **710 repository tests, including 27 here**.
+The [contract/proof map](../../../../../../../docs/13-greedy-algorithms/implementation-contracts.md)
+connects safe residual choices, room lower bounds, Huffman proof bases, exact
+costs and heuristic limits. This pass changes Markdown only.

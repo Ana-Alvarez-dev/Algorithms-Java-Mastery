@@ -5,6 +5,18 @@ for selected contracts, pseudocode, traces, proofs, Java, tests and evidence lim
 
 ## Algorithms Java Mastery
 
+## Applied objectives and guarantees
+
+The [contract/proof map](implementation-contracts.md) and
+[ordered review](documentation-review.md) connect these concepts to the five
+Java source files. A committed local choice may be provably safe for one
+objective and only a heuristic for another. Activity selection maximises count,
+room partitioning assigns every interval, and Huffman minimises prefix payload.
+CoinChange exposes payment/remainder without an arbitrary-system optimum or
+completeness guarantee. Strategy, syntax, memory use and measured speed are
+separate questions. Greedy does not imply online input: these public calls
+can sort or inspect the complete supplied batch before committing choices.
+
 The **Greedy Strategy** is one of the fundamental algorithm design paradigms in Computer Science. It constructs a solution incrementally by repeatedly making the **best possible decision at the current step**, without reconsidering previous choices.
 
 Unlike exhaustive search algorithms, which evaluate many possible solutions, or Dynamic Programming algorithms, which solve and reuse overlapping subproblems, Greedy algorithms focus exclusively on the information available at each decision point.
@@ -140,7 +152,7 @@ Examples include:
 - earliest finishing time;
 - highest priority;
 - lowest weight;
-- highest frequency.
+- the two smallest current subtree weights for Huffman merging.
 
 The quality of the algorithm depends on whether this criterion always produces safe decisions.
 
@@ -219,8 +231,8 @@ Although both paradigms simplify problems, they do so differently.
 |--------------------|-----------------|
 | Solves recursive subproblems | Makes immediate decisions |
 | Combines partial solutions | Builds one solution incrementally |
-| Recursive decomposition | Sequential decision making |
-| Multiple recursive branches | One decision at each step |
+| Decompose and solve the required children | Commit to a proved local choice, then reduce state |
+| Children may be evaluated sequentially or in parallel | May be implemented iteratively or recursively |
 
 The two paradigms solve optimization problems using fundamentally different approaches.
 
@@ -234,8 +246,8 @@ Greedy algorithms differ significantly from Dynamic Programming.
 |---------|---------------------|
 | Makes one local decision | Evaluates multiple possibilities |
 | Never revisits choices | Stores intermediate solutions |
-| Usually lower memory usage | Higher memory usage |
-| Simpler implementation | More complex implementation |
+| Memory depends on state and output, e.g. Huffman code strings | Memory depends on the chosen table/frontier/state compression |
+| Needs a safe-choice argument for the selected rule | Needs a valid recurrence/state and combination argument |
 
 Dynamic Programming is often used when Greedy decisions cannot guarantee optimality.
 
@@ -273,7 +285,9 @@ Choose Best Candidate
 Continue
 ```
 
-This significantly reduces computational work.
+A safe rule can avoid exploring alternatives. Complete work still includes
+validation, sorting, queue updates and materialised results; committing early
+alone establishes neither a speed bound nor an optimum.
 
 ---
 

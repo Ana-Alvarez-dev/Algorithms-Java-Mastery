@@ -5,6 +5,16 @@ for selected contracts, pseudocode, traces, proofs, Java, tests and evidence lim
 
 ## Algorithms Java Mastery
 
+## Rule, residual problem and evidence
+
+Use the [applied map](implementation-contracts.md) to check the safe rule
+before assuming optimality. CoinChange's payment invariant can hold while
+minimum count or completeness fails; conversely activity selection also admits
+a DP formulation without losing its proved greedy solution. Overlap of states
+alone does not disprove a greedy rule. Keep original-index room legality,
+Huffman internal/public bases, complete cost workflows and input/result
+ownership in the specification before interpreting timings.
+
 Greedy algorithms are often considered simple because they repeatedly make the **best local decision**. However, their apparent simplicity can be misleading.
 
 Unlike exhaustive search or Dynamic Programming, Greedy algorithms commit to decisions immediately and never reconsider them. If the selection criterion is incorrect or the problem does not satisfy the required mathematical properties, the algorithm may produce a solution that is efficient but **not optimal**.
@@ -273,18 +283,20 @@ Once a decision is made, execution continues with the remaining problem.
 
 # 14. Applying Greedy When Dynamic Programming Is Required
 
-Some optimization problems contain overlapping subproblems.
-
-Conceptually:
+Overlapping subproblems can make memoisation or tabulation useful when the
+chosen state model repeatedly solves them. Overlap alone is not evidence
+against a safe greedy rule. Conceptually:
 
 ```text
 Repeated
 Subproblems
 ```
 
-These problems often require Dynamic Programming rather than a Greedy strategy.
-
-Choosing Greedy in these situations usually produces incorrect solutions.
+First establish whether the proposed local rule is safe. A failed greedy rule
+may motivate an exact recurrence, but does not establish that dynamic
+programming is the only alternative or that a particular state is sufficient.
+Activity selection is an example with a valid greedy solution even though a
+DP formulation can be written.
 
 ---
 
@@ -358,15 +370,15 @@ These scenarios frequently reveal hidden implementation errors.
 Professional Greedy algorithm design follows a systematic workflow.
 
 ```text
-Understand Problem
+Specify Objective, Feasibility, Domains and Ownership
         ↓
-Verify Greedy Choice Property
+Choose Candidate Rule and Residual State
         ↓
-Verify Optimal Substructure
+Write Pseudocode and Trace Decisions
         ↓
-Choose Selection Rule
+Prove Safe Choice and Residual Optimality
         ↓
-Prove Correctness
+Prove Invariants, Final Result and Termination
         ↓
 Analyze Complexity
         ↓

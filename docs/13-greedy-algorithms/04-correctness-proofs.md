@@ -2,6 +2,15 @@
 
 ## Algorithms Java Mastery
 
+## Internal tree cost versus public singleton policy
+
+The [source/proof map](implementation-contracts.md) distinguishes the internal
+contracted Huffman tree from a separate public singleton call. When two leaves
+contract to one internal root, that mathematical root has depth zero and cost
+zero; expansion adds x+y. The public one-symbol API instead emits "0" and
+returns its frequency. Applying that public singleton cost inside the merge
+identity would double-count the two-symbol base. This does not alter the code.
+
 The [implementation guide](implementation-and-benchmark-guide.md) gives the
 selected contracts, pseudocode, traces, invariants and test mapping. A proof
 applies to a specified objective, input domain and algorithmic model; passing
@@ -55,7 +64,9 @@ optimality. Induction justifies repeated two-minimum merging and the sum-of-merg
 weights identity. The guide develops the two-queue invariant and deterministic
 tie rule used by the code.
 
-Empty alphabets cost zero. A singleton uses the explicit nonempty codeword "0"
+The contracted singleton root uses depth zero inside this tree proof; it is
+not a recursive call to the public singleton policy. Empty alphabets cost zero.
+A top-level singleton uses the explicit nonempty codeword "0"
 and costs its frequency; its special convention is not a zero-merge proof case.
 Prefix-code payload optimality does not imply minimal total compressed-file
 size after metadata or superiority to every other compression model.
