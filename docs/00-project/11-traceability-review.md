@@ -81,6 +81,15 @@ Java 21 verification passes 710 tests overall, including 48 module invocations.
 Only Markdown changes; the two author timing records retain their source/runtime.
 Later modules are not declared re-reviewed.
 
+A **2026-10-28 ordered Recursion documentation review**, based on main
+`6e8f87c1dcaae00d0d545d5ebb4ec539c48b33f7` (PR #108 merge), follows
+[separately](../11-recursion/documentation-review.md). Scoped RE01-RE12
+corrections and a contract/proof map clarify helper specifications, zero bases,
+shared references, work versus depth, BigInteger costs and materialised output.
+Actual Java 21 verification passes 710 tests overall, including 28 module tests.
+Only Markdown changes; the historical 24-cell run retains its source/runtime.
+Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

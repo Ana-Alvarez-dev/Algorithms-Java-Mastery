@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Branching is not a time bound
+
+The [applied map](implementation-contracts.md) distinguishes branching, reduction
+and result size. Binary recursion means **up to** two recursive calls per
+non-base invocation; Palindrome may skip its second half with &&. Its leaves
+compare mirrored pairs, not independently palindromic array halves. Power
+reuses one half-power, whereas two independently computed half-powers repeat
+work. For the same finite graph, an explicit stack of suspended neighbour
+iterators can preserve recursive preorder; the Graphs module supplies that
+implementation rather than a recursive production DFS here.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
@@ -103,7 +114,8 @@ Typical examples:
 
 # 4. Binary Recursion
 
-Binary recursion performs **two recursive calls** for each invocation.
+Binary recursion makes up to two recursive calls per non-base invocation.
+Base cases make none, and short-circuit conditions can skip a branch.
 
 Conceptually:
 
@@ -494,7 +506,8 @@ Examples include:
 - optimization problems;
 - combinatorial generation.
 
-The branching factor determines the size of the decision tree.
+Branching factor, reachable depth and pruning together determine the explored
+decision tree; repeated subproblems and memoisation can change the work further.
 
 ---
 

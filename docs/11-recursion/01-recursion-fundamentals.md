@@ -2,6 +2,15 @@
 
 ## Algorithms Java Mastery
 
+## Applied contract and proof map
+
+The [current contract/proof map](implementation-contracts.md) and
+[ordered documentation review](documentation-review.md) connect these concepts
+to the seven Java utilities. A recursive helper may strengthen the public
+problem with an accumulator, interval or peg parameters; its precise helper
+contract must be preserved. Smaller instances need not have exactly the public
+method signature. Source call structure does not establish a fixed JVM cost.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
@@ -455,11 +464,11 @@ For many problems involving trees or nested objects, recursion can significantly
 
 Recursion also introduces practical limitations.
 
-Each recursive call requires:
-
-- a new stack frame;
-- additional memory;
-- extra method invocation overhead.
+In the abstract execution model each invocation has a frame. For source-level
+space analysis, count the maximum simultaneously active frames and any arrays,
+large numeric values or retained output separately. JIT optimisation may change
+physical frames and machine work; no fixed invocation penalty follows from
+recursive syntax alone.
 
 Deep recursion may eventually produce:
 

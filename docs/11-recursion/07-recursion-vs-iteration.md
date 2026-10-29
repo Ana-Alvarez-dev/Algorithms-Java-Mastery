@@ -118,7 +118,7 @@ Execution is controlled by recursive calls instead of loop statements.
 Both recursion and iteration:
 
 - solve repetitive problems;
-- eventually terminate;
+- require a termination argument for a total-correctness claim;
 - can produce identical results;
 - may have equivalent asymptotic complexity;
 - require a stopping condition;
@@ -523,13 +523,14 @@ Although equivalent, one representation may be easier to understand than the oth
 
 # 20. Performance Considerations
 
-Iteration usually avoids:
-
-- repeated method invocation;
-- stack-frame creation;
-- recursion overhead.
-
-Consequently, iterative solutions often provide slightly better runtime performance in Java.
+The selected scalar loops avoid recursive source calls. Runtime differences
+depend on generated code, work, allocation, input and JVM settings. The
+[historical report](../17-benchmarking/results/recursion/README.md) records lower
+loop means on its selected grid, with uncertainty retained. This does not give
+a universal or necessarily small recursion penalty. Memoised Fibonacci includes
+a new array/fill; the factorial helpers perform one extra product at benchmark
+n values; ArraySum has a complete binary helper tree. These comparisons do not
+isolate invocation overhead.
 
 However, algorithm selection should prioritize correctness and clarity before micro-optimizations.
 

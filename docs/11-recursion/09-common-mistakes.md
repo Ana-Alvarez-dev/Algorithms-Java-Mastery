@@ -2,13 +2,24 @@
 
 ## Algorithms Java Mastery
 
+## Applied Java pitfalls
+
+The [source map](implementation-contracts.md) makes the boundaries concrete.
+Cast an int to long **before** abs for MIN_VALUE; ArraySum uses long throughout
+all partial sums; Fibonacci.iterative stops at F(92) without an unused F(93)
+update. A fresh memo per public call shares state among descendants but not
+among calls. Separate local reference slots do not copy an input array.
+BigInteger avoids primitive wraparound but still has range/resource limits,
+and logarithmic multiplication count does not bound output bits.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
 
 Recursion is one of the most elegant algorithmic techniques in Computer Science, but it is also one of the easiest to implement incorrectly.
 
-Unlike iterative algorithms, recursive algorithms depend on several conditions being satisfied simultaneously:
+Recursive algorithms require several conditions simultaneously. Iterative
+algorithms also need a correct specification, invariant and progress argument:
 
 - a correct base case;
 - a correct recursive case;
@@ -172,7 +183,9 @@ Different Problem
 
 Changing the meaning of the problem breaks recursive correctness.
 
-Every recursive invocation must preserve the original specification.
+Every recursive invocation must satisfy its helper specification. An accumulator
+may strengthen it: accumulate(n,a) returns a*n!, so updating a deliberately
+changes state while preserving the relation to the original answer.
 
 ---
 

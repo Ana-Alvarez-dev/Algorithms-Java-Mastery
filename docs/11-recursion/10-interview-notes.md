@@ -2,6 +2,21 @@
 
 ## Algorithms Java Mastery
 
+## Source-specific follow-up questions
+
+Use the [contract/proof map](implementation-contracts.md) to explain:
+
+- why factorial(3) has four product helper invocations with a zero base;
+- why naive Fibonacci has exponential calls but linear active depth;
+- why a first-pair Palindrome mismatch takes recursive logarithmic descent;
+- why Power has logarithmically many multiplications but variable bit cost;
+- why GCD casts before abs and may return 2147483648L;
+- why Hanoi has linear depth but exponential retained output;
+- why the historical 600-test build and the current suite are separate evidence.
+
+A complete answer states the accepted domain and helper invariant before
+using the recurrence or benchmark means.
+
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
 selected Java scope, contracts, proof arguments, recurrences, tests and JMH
 protocol. Conceptual examples below are not automatically executable evidence.
