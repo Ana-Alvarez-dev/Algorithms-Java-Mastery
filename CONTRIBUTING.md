@@ -160,7 +160,12 @@ See the [workflow contracts](docs/19-ci-cd/workflow-contracts.md).
 ## Academic integrity and AI assistance
 
 Use original explanations and responsible attribution; do not copy textbook
-content into the repository. AI may assist explanation, alternatives, review and
-writing, but accepted reasoning/code require human understanding and validation.
-Disclose material AI assistance in the PR and describe how it was checked.
-An AI response is not execution evidence. Follow any applicable course rules.
+content into the repository. AI may assist explanation, alternatives, code/test
+generation, engineering configuration, review and writing; accepted reasoning/
+code require human understanding and validation. The
+[study methodology](docs/00-project/03-study-methodology.md) records this
+repository's substantial AI assistance and the author's direction explicitly.
+Disclose material assistance in the PR, identify the affected work and describe
+the checks actually performed. Do not imply entirely manual authorship or checks
+that were not executed. An AI response is not an authoritative technical source
+or execution evidence. Follow any applicable course rules.

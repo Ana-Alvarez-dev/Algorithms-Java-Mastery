@@ -1476,6 +1476,12 @@ Important conclusions should be verified through academic or official sources.
 
 # Artificial Intelligence Assistance
 
+This repository was developed with substantial ChatGPT/Codex assistance under
+the author's direction. The [study methodology](03-study-methodology.md)
+records the actual roles, review obligations and learning/evidence limits.
+Assistance included documentation, Java implementations, tests, benchmark/build
+configuration, reviews and interpretation; it was broader than language editing.
+
 Artificial intelligence tools may support:
 
 - brainstorming;
@@ -1483,6 +1489,7 @@ Artificial intelligence tools may support:
 - language revision;
 - comparison of explanations;
 - generation of practice questions;
+- proposals and generation of code, tests and engineering configuration;
 - identification of topics requiring verification.
 
 AI-generated content is not considered an authoritative source.

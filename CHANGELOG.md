@@ -2,7 +2,7 @@
 
 Meaningful changes to Algorithms Java Mastery are summarised here. This is a
 selective retrospective of the engineering/review closure starting on
-2026-10-27, checked against main `548269f3aef07048fd2a860014a07b0a44d7c882`.
+2026-10-27, checked against main `7dcb403791a8ed9c08333e84fd80b5424a19efd0`.
 Earlier algorithm implementations and experiment records remain in
 [Git history](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/commits/main/)
 and the [traceability review](docs/00-project/11-traceability-review.md).
@@ -14,24 +14,26 @@ treated here as a published 1.0 release.
 
 ## Unreleased
 
-### Added
-
-- Populate [CONTRIBUTING.md](CONTRIBUTING.md) with the existing contribution
-  workflow, Java 21 validation, academic/AI integrity and experiment-evidence
-  requirements.
-- Establish this changelog with linked, verified historical milestones and
-  maintenance rules.
-
 ### Changed
 
-- Link the contribution guide and changelog from both root READMEs and record
-  the resolution of the two empty-file follow-ups in the closing review.
+- Expand the AI disclosure in both root READMEs, methodology, references and
+  contribution guide: author direction, generated work, CLRS attribution,
+  actual validation and continuing learning have distinct responsibilities.
+- Record the integrated maintainer guides and successful identified main CI in
+  the final scoped follow-up to the [closing review](docs/00-project/12-closing-traceability-review.md).
 
-These entries describe this contribution; its merge date and PR are not yet
-asserted. After integration, move them to the actual dated section and add the
-verified PR reference.
+These entries describe the final documentation contribution; its merge date
+and PR are not yet asserted. At integration, record the verified date/reference.
 
 ## 2026-10-29
+
+### Added
+
+- Populate [CONTRIBUTING.md](CONTRIBUTING.md) with contribution, validation,
+  academic/AI integrity and experiment-evidence requirements; establish this
+  changelog and link both guides from the root READMEs
+  ([PR #120](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/pull/120)).
+  Its merge also records the resolution of the two empty-file follow-ups.
 
 ### Changed
 
