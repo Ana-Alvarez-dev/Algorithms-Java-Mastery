@@ -2,6 +2,15 @@
 
 ## Algorithms Java Mastery
 
+## Complete public cost versus helper recurrence
+
+The [source ledger](implementation-contracts.md) writes the merge/crossing
+recurrence with floor/ceiling halves and constant bases. InversionCount also
+clones and allocates scratch once at the public boundary for n>=2; those
+linear costs are included in its complete n log n bound. Repeated length-n
+allocation at every node is not part of this implementation. A first equal
+band can end QuickSelect without any retained subproblem.
+
 The [implementation guide](implementation-and-benchmark-guide.md) maps these
 models to actual Java contracts, traces, correctness arguments, tests and JMH.
 A recurrence models source work on a stated input family. It is not a measured

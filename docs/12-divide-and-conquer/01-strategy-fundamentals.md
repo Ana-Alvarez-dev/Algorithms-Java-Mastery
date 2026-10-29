@@ -5,6 +5,16 @@ for the reviewed Java contracts, traces, correctness, tests and evidence limits.
 
 ## Algorithms Java Mastery
 
+## Applied scope and guarantees
+
+The [contract/proof map](implementation-contracts.md) and
+[ordered review](documentation-review.md) connect these principles to three
+utilities and the reused Searching/Sorting cases. Reduction supplies progress
+only when it reaches the bases; result correctness additionally needs valid
+subproblem contracts and combination. Smaller subproblems alone guarantee
+neither less total work nor a faster implementation. MaximumSubarray here
+has a linear reference alongside its balanced n log n form.
+
 **Divide and Conquer** is one of the most important algorithm design paradigms in Computer Science. Instead of solving a problem as a single task, this strategy recursively divides it into smaller, independent subproblems, solves each one separately, and combines their solutions to produce the final result.
 
 Unlike simple recursion, Divide and Conquer provides a systematic methodology for designing efficient algorithms. Many of the fastest and most influential algorithms—including **Binary Search**, **Merge Sort**, and **Quick Sort**—are based on this paradigm.
@@ -80,7 +90,9 @@ Simple Solutions
 Complete Solution
 ```
 
-Each recursive step reduces the complexity of the remaining work.
+Each recursive step reduces its child input sizes. Total work still includes
+all executed children, division and combination; smaller inputs alone do not
+prove a lower complexity for the complete computation.
 
 ---
 
@@ -378,7 +390,9 @@ Example:
 ...
 ```
 
-Rapid reduction leads to relatively small recursion depth and efficient execution.
+Repeated fixed-fraction reduction bounds the height of a decomposition tree.
+Total execution work also depends on branching and local costs; the actual
+Java stack can differ when a branch is processed iteratively.
 
 ---
 

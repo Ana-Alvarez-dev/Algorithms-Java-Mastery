@@ -5,6 +5,16 @@ for the reviewed Java contracts, traces, correctness, tests and evidence limits.
 
 ## Algorithms Java Mastery
 
+## Applied specification and test checklist
+
+Use the [contract/proof map](implementation-contracts.md) to check canonical
+nonempty maximum ranges, strict inversion pairs, zero-based duplicate ranks,
+validation before mutation, multiset preservation and exact long arithmetic.
+Check all-zero ties as well as negatives; verify the full selection partition
+and permutation, not only a returned value. Mathematical decomposition and
+finite exhaustive tests complement each other; shrinking input alone proves
+neither the postcondition nor sufficient JVM resources.
+
 The Divide and Conquer paradigm provides elegant and highly efficient solutions to many computational problems. However, its recursive nature and multi-stage execution process also introduce implementation challenges that are not present in simpler algorithms.
 
 Unlike ordinary recursive algorithms, Divide and Conquer solutions depend on the correctness of three interconnected stages:
@@ -197,7 +207,7 @@ Typical problems include:
 - placing elements on the wrong side of the pivot;
 - losing elements during swaps;
 - incorrect partition boundaries;
-- returning the wrong pivot position.
+- confusing a Hoare boundary, a final pivot position and three-way band endpoints.
 
 Incorrect partitioning invalidates every subsequent recursive call.
 
@@ -384,7 +394,10 @@ Worst case:
 O(n²)
 ```
 
-Engineering decisions should consider both scenarios.
+The expected Quicksort bound here uses uniformly random permutations of
+distinct keys; it is not an average over unspecified inputs or the four fixed
+benchmark shapes. Balanced partitions alone do not establish that expectation.
+Engineering decisions should consider the stated model and worst case.
 
 ---
 
@@ -495,7 +508,7 @@ Tracing recursive execution is generally more effective than modifying code with
 A disciplined Divide and Conquer workflow is:
 
 ```text
-Understand Problem
+Specify Inputs, Outputs and Ownership
         ↓
 Design Decomposition
         ↓
@@ -504,6 +517,10 @@ Define Base Case
 Verify Recursive Reduction
         ↓
 Design Combine Phase
+        ↓
+Write Pseudocode and Trace State
+        ↓
+Prove Preservation, Result and Termination
         ↓
 Write Recurrence
         ↓

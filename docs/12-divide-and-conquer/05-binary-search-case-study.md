@@ -5,6 +5,15 @@ for the reviewed Java contracts, traces, correctness, tests and evidence limits.
 
 ## Algorithms Java Mastery
 
+## Exact reused Java contract
+
+The [source map](implementation-contracts.md) links both existing search
+classes. They require a stable nondecreasing int[] with constant-time indexed
+access, return any matching duplicate index or -1, accept empty arrays and
+reject null. They neither sort nor scan to validate sortedness. Search is a
+one-branch reduction, with no slice copy; query distributions and preprocessing
+costs must accompany comparisons with sequential search.
+
 Binary Search is one of the simplest and most elegant applications of the **Divide and Conquer** paradigm.
 
 Rather than examining every element sequentially, Binary Search repeatedly divides the search space into two halves. At each step, one half is immediately discarded because it cannot contain the desired value.
@@ -183,7 +192,8 @@ Right Index
 Target Not Found
 ```
 
-These base cases guarantee termination.
+These are stopping conditions. Termination also requires every unsuccessful
+step to exclude the middle index and strictly shrink the active interval.
 
 ---
 
@@ -251,14 +261,17 @@ The algorithm safely eliminates half of the remaining search space after every c
 
 # 10. Correctness
 
-Binary Search is correct because:
+Maintain: if the target occurs in the original input and has not been
+returned, all its possible positions remain inside the inclusive active
+interval [low,high]. Initially that interval contains the whole array.
+If target<array[middle], sortedness excludes middle and every larger index;
+if target>array[middle], it excludes middle and every smaller index. The
+corresponding update preserves all possible matches. Equality returns a valid
+index; an empty interval plus the invariant proves absence.
 
-- the search interval always remains sorted;
-- every recursive call preserves the original problem;
-- the search space becomes smaller;
-- the base cases are eventually reached.
-
-Correctness follows directly from recursive reduction.
+The measure high-low+1 on nonempty intervals strictly decreases. This proves
+progress separately from preservation and the base results. Sortedness alone
+or shrinking an interval without preserving candidates would be insufficient.
 
 ---
 
@@ -370,7 +383,10 @@ No recursive calls are required.
 | Worst-case time | O(n) | O(log n) |
 | Additional space (iterative) | O(1) | O(1) |
 
-Binary Search is significantly more efficient for large sorted datasets.
+For the stated random-access array, binary search has a logarithmic worst
+comparison bound versus linear scanning. A specific first-element query can
+favour linear search, and preprocessing an unsorted input has its own cost.
+A different access structure needs a different cost model.
 
 ---
 

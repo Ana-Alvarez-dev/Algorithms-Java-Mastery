@@ -90,6 +90,15 @@ Actual Java 21 verification passes 710 tests overall, including 28 module tests.
 Only Markdown changes; the historical 24-cell run retains its source/runtime.
 Later modules are not declared re-reviewed.
 
+A **2026-10-29 ordered Divide and Conquer documentation review**, based on main
+`5fd81c44cd5df511bb6c553dcdad45b17c38a18d` (PR #109 merge), follows
+[separately](../12-divide-and-conquer/documentation-review.md). Scoped DC01-DC10
+corrections and a contract/proof map connect canonical maximum ranges, strict
+inversions and three-way selection with reused Searching/Sorting cases.
+Actual Java 21 verification passes 710 tests overall, including 18 module tests.
+Only Markdown changes; the 48-cell author run retains its source/runtime.
+Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

@@ -5,6 +5,15 @@ for the reviewed Java contracts, traces, correctness, tests and evidence limits.
 
 ## Algorithms Java Mastery
 
+## Executed phases and storage
+
+The [applied map](implementation-contracts.md) distinguishes range division
+from physical array copying. MaximumSubarray shares one read-only input;
+InversionCount works on a private clone plus one reusable scratch array;
+QuickSelect permutes its supplied array and retains only one strict band.
+The divide/conquer/combine description is an algorithm model, not a requirement
+for two recursive Java calls or parallel execution.
+
 The defining characteristic of the **Divide and Conquer** paradigm is its systematic problem-solving process. Rather than treating recursion as a simple implementation technique, Divide and Conquer organizes algorithm design into three well-defined stages:
 
 - **Divide**
@@ -149,9 +158,11 @@ Example:
 1
 ```
 
-Although recursion still functions correctly, recursion depth increases significantly.
-
-Unbalanced decomposition often leads to poorer performance.
+Unbalanced decomposition can increase the full recursive problem tree height.
+The source stack follows only nested calls: this repository's QuickSort calls
+the smaller side and loops over the larger, retaining logarithmic stack depth
+even with quadratic work. QuickSelect uses no recursive calls at all.
+Decomposition alone does not prove functional correctness or a stack bound.
 
 Quick Sort illustrates both balanced and unbalanced recursive decomposition depending on pivot selection.
 
@@ -386,7 +397,9 @@ Although this module focuses on sequential algorithms, the idea becomes importan
 
 # 16. Recursive Execution Flow
 
-The execution proceeds through two recursive phases.
+A single active path descends and then returns. Sequential branching execution
+interleaves those actions: the left subtree can complete before the right
+subtree starts. There is no single global descent followed by a global ascent.
 
 Descending:
 

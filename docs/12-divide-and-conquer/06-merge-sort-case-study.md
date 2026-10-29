@@ -5,6 +5,16 @@ for the reviewed Java contracts, traces, correctness, tests and evidence limits.
 
 ## Algorithms Java Mastery
 
+## Concrete sort and inversion extension
+
+The reused Sorting.MergeSort sorts ascending in the same int[]; no descending
+option, linked-list sort, external-file pipeline or generic record sort is
+implemented here. Such applications below describe other adaptations. The
+[map](implementation-contracts.md) states the sorted-prefix/multiset invariant
+and explains InversionCount's private copy and strict cross-pair ledger.
+Choosing left on equality supports the stable-merge proof; equal primitive
+values alone cannot expose an identity-stability test.
+
 Merge Sort is one of the classical applications of the **Divide and Conquer** paradigm. Unlike simpler recursive algorithms, Merge Sort repeatedly divides a collection into smaller independent subproblems, recursively sorts each subproblem, and finally combines the partial solutions into one completely ordered sequence.
 
 Unlike Quick Sort, whose efficiency depends on pivot selection, Merge Sort always divides the input into two nearly equal halves. This balanced decomposition guarantees a predictable running time of **Θ(n log n)** regardless of the initial order of the data.
@@ -36,7 +46,8 @@ Given:
 
 Produce:
 
-- the same elements arranged in ascending or descending order.
+- the same int elements arranged in ascending order in the supplied array
+  for the reused Java implementation; descending order is a separate variant.
 
 Conceptually:
 
@@ -230,13 +241,14 @@ This process continues until all elements have been copied.
 
 # 9. Correctness
 
-Merge Sort is correct because:
-
-- every recursive call sorts a smaller subarray;
-- recursion eventually reaches the base case;
-- the merge operation combines two sorted sequences into one sorted sequence.
-
-Correctness propagates upward through the recursive calls.
+Induction supplies two sorted halves with their original multiplicities.
+During merging, the destination prefix is sorted and contains exactly the
+consumed items; every remaining item is at least its last value. Emitting the
+smaller available head preserves this invariant, and copying the remainder
+when one half is exhausted preserves coverage. At completion, the range is
+sorted and its full multiset is preserved. Cursor progress and strictly smaller
+recursive ranges prove termination. The auxiliary copy keeps unread heads
+available while the input range is overwritten.
 
 ---
 

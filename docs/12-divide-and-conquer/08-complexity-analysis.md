@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Source work ledger and observable results
+
+The [contract/proof map](implementation-contracts.md) derives the shared
+full-scan ledger L(0)=L(1)=0 and L(n)=L(floor(n/2))+L(ceil(n/2))+n. It counts
+crossing item visits, or one merge write pass, without assigning time shares.
+MaximumSubarray's canonical ties, InversionCount's strict duplicate policy and
+QuickSelect's in-place rank partition are different observable contracts.
+Total source constructions, reachable logical live state and measured heap
+occupancy remain distinct. A clone in a benchmark belongs to that workflow
+even when the production selector uses constant auxiliary state.
+
 The [implementation guide](implementation-and-benchmark-guide.md) supplies
 the contracts, traces, invariants, tests and timing protocol behind this table.
 Let n be input length. Primitive int/long arithmetic is word work; bounds
