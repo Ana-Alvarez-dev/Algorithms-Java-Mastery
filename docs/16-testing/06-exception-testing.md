@@ -18,3 +18,16 @@ fixture probe checks those guards and default sums. This does not add a timing
 question or make an exception a measured performance result. JaCoCo branch
 counters do not represent exception handling; an exception contract still needs
 its own assertion. See the [implementation and verification guide](implementation-and-verification-guide.md). Next: [edge cases](07-edge-case-testing.md).
+
+## Ordered Review Clarification
+
+The existing null test isolates ClosestValueSearch.search(null,10) and checks
+its explicit message. It does not promise rejection of unsorted input. The
+benchmark-profile fixture tests check three unsupported sizes and their stable
+message; source inspection, separately, establishes that the guard precedes
+allocation. A thrown exception alone is not an allocation measurement, nor is
+a JaCoCo branch percentage evidence that an exception contract was asserted.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

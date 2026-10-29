@@ -126,6 +126,16 @@ verification passes 710 tests overall, including 22 module tests. Only Markdown
 changes; the 57-cell author run retains its source/runtime and per-row units.
 Later modules are not declared re-reviewed.
 
+A **2026-10-29 ordered Testing documentation review**, based on main
+`cb6855da09f963097953ae958f62e1827ae861b8` (PR #113 merge), follows
+[separately](../16-testing/documentation-review.md). Scoped TE01-TE10 corrections
+and an applied evidence map distinguish oracle domains, ownership, invocation
+counts and coverage gates; current aggregation and CI evidence replace stale
+pending status. Actual Java 21 coverage verification passes 710 tests; the
+separate benchmark profile passes 723 including 13 fixture invocations. Only
+Markdown changes; the original red/green experiment and all timed results stay
+dated and unchanged. Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

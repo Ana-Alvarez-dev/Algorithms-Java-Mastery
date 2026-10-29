@@ -25,3 +25,16 @@ used invalid int-sum cases at its two largest sizes. New modulo-100 data has
 valid prefixes/results for all defaults; its historical means are unchanged
 and cannot be reused as measurements of the new fixture. The [implementation and verification guide](implementation-and-verification-guide.md) defines
 both evidence boundaries. Next: [property thinking](08-property-based-thinking.md).
+
+## Ordered Review Clarification
+
+The finite sorted domain has C(n+4,4) arrays at length n. Summing n=0..7 gives
+C(12,5)=792, then 792*11=8,712 oracle queries within one JUnit invocation. The
+benchmark-only fixture tests additionally check valid sizes 0,1,99,103 to cover
+empty input and incomplete modulo-100 cycles, as well as all five @Param
+sizes. Boundary evidence is tied to each API's domain; it does not enlarge
+that domain or certify every untested fixture.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

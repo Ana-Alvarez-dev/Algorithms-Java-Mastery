@@ -22,3 +22,16 @@ mocking, end-to-end tests and a test pyramid are contextual techniques, not
 implemented layers claimed by this repository. The [implementation and verification guide](implementation-and-verification-guide.md) and
 [verification report](verification-report.md) connect local evidence to source.
 Next: [test design](02-test-design.md).
+
+## Ordered Review Clarification
+
+The evidence chain is contract -> input partition -> independent expected result
+-> executable assertion -> observed outcome. A green test can still contain a
+weak oracle or omit a valid partition. The old red/green experiment is dated
+2026-10-27; this ordered review checks the current corrected source separately.
+Module 16 applies these techniques across existing algorithm packages and has
+no separate production Testing package.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

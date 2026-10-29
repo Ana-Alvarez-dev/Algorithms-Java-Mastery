@@ -22,3 +22,16 @@ More rows are not automatically more coverage or better assertions. Include
 partitions that expose plausible faults and preserve failure descriptions. The
 [implementation and verification guide](implementation-and-verification-guide.md) links the actual source, full suite and pre-fix diagnostics. Next:
 [exception testing](06-exception-testing.md).
+
+## Ordered Review Clarification
+
+The regression class has five annotated methods but 12+4=16 invocations. The
+benchmark-only ArrayAggregationFixtureTest has four annotated methods but
+5+4+3+1=13 invocations: default sizes, partial/empty cycles, invalid sizes and
+trial independence. A large loop inside either class remains part of its
+containing invocation. Keep these counts separate from generated inputs,
+assertion counts and repeated builds.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

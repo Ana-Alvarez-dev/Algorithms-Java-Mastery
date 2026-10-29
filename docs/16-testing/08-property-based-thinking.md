@@ -22,3 +22,16 @@ to a named case. Agreement between similar implementations can share a bug;
 independent reference logic and proof arguments remain necessary. The [implementation and verification guide](implementation-and-verification-guide.md)
 connects the properties to the actual tests. Next:
 [test-data builders](09-test-data-builders.md).
+
+## Ordered Review Clarification
+
+The selected metamorphic test has 45 targets and 135 production calls: base,
+translated and positively scaled for each. On these bounded values, translation
+preserves distance and multiplication by 3 scales every distance equally,
+preserving both minimisers and their indices. Seeded arrays sample an eight-
+entry pool including extremes; they are not uniform samples of all sorted int
+arrays. Preserve an actual failing input as well as its seed when debugging.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.
