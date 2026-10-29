@@ -1,5 +1,10 @@
 # Graph Fundamentals
 
+> Current Java scope fixes vertices to 0..V-1 and constructs immutable graphs;
+> it is not a mutable graph service or multigraph API. Source traversals,
+> undirected partitions, DAG order, shortest paths and spanning forests have
+> different result contracts. See the [contract and proof map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -8,7 +13,9 @@ examples and conceptual extensions below are not automatically implemented.
 
 Graphs are one of the most general and powerful data structures in Computer Science. While arrays, linked lists, trees, stacks, and queues model specific relationships between elements, graphs can represent **any set of objects together with the relationships that exist among them**.
 
-Many computational problems involve entities that are interconnected rather than organized sequentially or hierarchically. Social networks connect people, transportation systems connect cities, communication networks connect computers, and software projects connect modules through dependencies. These scenarios cannot be efficiently modeled using linear or tree-based structures alone.
+Many computational problems involve entities that are interconnected rather than organized sequentially or hierarchically. Social networks connect people, transportation systems connect cities, communication networks connect computers, and software projects connect modules through dependencies. These relationships need a graph model. Arrays/lists can still encode that
+model through indices and adjacency; the graph abstraction does not require
+a particular physical collection or provide efficiency by itself.
 
 Graphs provide a mathematical and computational framework for representing these relationships and for designing algorithms that analyze connectivity, reachability, optimization, and navigation.
 

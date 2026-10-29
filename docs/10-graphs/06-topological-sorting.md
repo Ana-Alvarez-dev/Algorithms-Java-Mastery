@@ -1,5 +1,10 @@
 # Topological Sorting
 
+> Current Kahn state is local and covers **all** vertices, including isolated
+> vertices and disconnected cycles. Empty Optional reports a cycle; a present
+> empty array is a valid empty DAG. Ascending FIFO roots/neighbours ensure
+> repeatability, not a smallest-choice priority rule. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -11,7 +16,7 @@ examples and conceptual extensions below are not automatically implemented.
 The executable API rejects undirected input and uses local indegrees. A present
 empty array means an empty DAG; empty Optional means a cycle anywhere, including
 a disconnected self-loop. FIFO zero-indegree processing is deterministic but
-not lexicographically minimal. Requiring a priority queue for lexicographic
+not guaranteed lexicographically minimal. Requiring a priority queue for lexicographic
 selection would change both the contract and queue costs. No partial result is
 returned as a valid order when a cycle remains.
 

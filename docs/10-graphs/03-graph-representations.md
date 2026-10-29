@@ -1,5 +1,10 @@
 # Graph Representations
 
+> Generic mutable tables below are design alternatives: current IntGraph has
+> no add/remove API. Sorted list hasEdge uses binary search; public neighbours
+> makes a defensive copy via two iterator scans, while internal algorithm scans
+> allocate no row snapshot. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -418,7 +423,10 @@ null
 special constant
 ```
 
-The correct choice depends on whether zero is a valid edge weight.
+The correct choice depends on whether zero is a valid edge weight. Current
+AdjacencyMatrixGraph is **unweighted boolean** storage, not this conceptual
+weighted matrix. WeightedGraph stores explicit immutable Edge records; weight
+zero is present, and a missing edge is absence of a record.
 
 ---
 
@@ -481,6 +489,9 @@ This can be inefficient for sparse graphs.
 ---
 
 # 16. Adjacency Matrix Complexity
+
+This table describes a hypothetical mutable matrix. The selected immutable
+AdjacencyMatrixGraph exposes only queries after construction.
 
 | Operation | Complexity |
 |---|---:|
@@ -643,6 +654,11 @@ The representation must therefore consider both graph-level and collection-level
 ---
 
 # 22. Adjacency List Complexity
+
+This is a generic mutable/reference-returning model. For the actual sorted
+immutable rows, hasEdge costs O(1+log(d+1)), neighbours costs Theta(d+1) and
+returns an independent array; d is stored row length. Constructors normalise
+with ordered sets, so construction is not an append-only O(V+M) build.
 
 | Operation | Complexity |
 |---|---:|

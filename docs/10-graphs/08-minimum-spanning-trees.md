@@ -1,5 +1,11 @@
 # Minimum Spanning Trees
 
+> Current Kruskal scans every canonical edge after sorting, without the early
+> stop in the conceptual connected-MST pseudocode below. It returns a forest
+> and component count for disconnected input, retaining isolated vertices.
+> Tie order is deterministic but optimum forests need not be unique.
+> See the [contract and proof map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -687,6 +693,10 @@ which grows so slowly that it behaves almost like constant time for practical in
 
 # 21. Kruskal Pseudocode
 
+This connected-MST variant stops at V-1 selected edges. The current Java
+minimumSpanningForest instead processes the complete sorted edge list and
+returns a valid minimum forest rather than treating disconnection as failure.
+
 ```text
 KRUSKAL(graph)
 
@@ -730,13 +740,12 @@ Union-Find operations require approximately:
 O(E α(V))
 ```
 
-Therefore, the sorting step dominates.
-
-Overall complexity:
-
-```text
-O(E log E)
-```
+For current Java, also count singleton-set initialisation and the full edge
+scan: O(V + E log(E+1) + E log(V+1)) is the conservative bound derived from
+union by size with path halving. Classical stronger amortised union/find
+analysis is separate. The edge-only O(E log E) simplification needs conditions
+that absorb V, such as connected nontrivial input; isolated vertices do not
+disappear from a forest computation.
 
 Since:
 

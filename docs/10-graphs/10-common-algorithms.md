@@ -1,5 +1,10 @@
 # Common Algorithms
 
+> Current source APIs implement BFS/DFS source reachability, undirected
+> components, Kahn DAG order, Dijkstra and Kruskal forest. Alternative algorithms
+> below are conceptual; test oracles are not production implementations.
+> Exact result/validation contracts and Java evidence are [mapped here](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -984,10 +989,10 @@ Verify:
 
 Verify:
 
-- all vertices are connected;
-- no cycle exists;
-- exactly `V - 1` edges are selected;
-- total weight is minimal.
+- on connected input, all vertices are connected and exactly V-1 edges are selected;
+- for the current forest API, each original component is spanned, including isolates;
+- no cycle exists and selected edge count equals V minus returned component count;
+- total weight is minimal for that required connectivity partition.
 
 This approach produces stronger tests than checking one incidental output order.
 

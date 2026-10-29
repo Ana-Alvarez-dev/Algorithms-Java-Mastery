@@ -27,8 +27,8 @@ missing tags. These checks do not provide author research timings.
 
 Unweighted duplicates collapse, weighted duplicate pairs are rejected. Source
 searches need a valid vertex, whereas empty components/empty DAG/empty forest
-are defined. Ascending neighbours stabilise traversal order; Kahn is FIFO, not
-lexicographically minimal. Dijkstra rejects negative edges globally; Kruskal
+are defined. Ascending neighbours stabilise traversal order; Kahn is FIFO, with no
+lexicographically minimal guarantee. Dijkstra rejects negative edges globally; Kruskal
 accepts them and returns a forest on disconnected input. Both weighted result
 costs use long. Public snapshots/lists cannot mutate graph or result state.
 
@@ -45,3 +45,9 @@ actual runtime is JDK 21.0.9/JMH 1.37. All means/errors, 320 measurement and
 192 warmup averages remain in separate Markdown reports without JSON/log.
 Five cells have error at least 25% of the mean; these and workload limitations
 remain visible. All current default cells are measured, not all possible graphs.
+
+The [2026-10-28 documentation review](../../../../../../../docs/10-graphs/documentation-review.md)
+and [contract/proof map](../../../../../../../docs/10-graphs/implementation-contracts.md)
+record fresh Java 21 verification: **710 repository tests**, including **48 Graphs
+invocations**, passed. Packaging and discovery verified all six benchmark methods
+and both parameter sets, without adding timing or coverage results.

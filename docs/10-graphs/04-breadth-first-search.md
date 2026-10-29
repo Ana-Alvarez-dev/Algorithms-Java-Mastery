@@ -1,5 +1,10 @@
 # Breadth-First Search
 
+> Current Result exposes distanceTo, order and pathTo: distance -1 and empty
+> path mean unreachable; the source has distance 0 and path [source]. Queries
+> validate IDs and return independent arrays. An empty graph has no valid source.
+> Mark-before-enqueue and layer arguments are mapped to Java [here](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -480,7 +485,8 @@ After BFS completes from a source vertex:
 - each reachable vertex has been processed according to BFS order;
 - vertices are visited in nondecreasing distance from the source;
 - the queue is empty;
-- the visited structure contains the reachable component.
+- the visited structure contains exactly the source-reachable set; in a
+  directed graph this is not necessarily a strongly connected component.
 
 If predecessor information is stored, BFS also produces a traversal tree rooted at the source.
 
@@ -520,7 +526,9 @@ BFS is correct for reachability because it begins at the source and expands only
 
 Therefore, every discovered vertex is reachable.
 
-It is complete for the source component because whenever a reachable vertex is processed, all its unvisited neighbours are discovered.
+It reaches the entire source-reachable set because every processed vertex
+examines its outgoing neighbours. On directed input, reachability need not
+be symmetric and does not define an undirected component or SCC partition.
 
 Repeated expansion eventually reaches every vertex connected to the source.
 

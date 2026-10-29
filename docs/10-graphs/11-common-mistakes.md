@@ -1,5 +1,11 @@
 # Common Mistakes
 
+> Current boundaries: a loop is one stored neighbour but two undirected degree
+> incidences; unweighted duplicates collapse while weighted duplicate pairs fail;
+> source DFS is not a cycle detector; empty DAG is not cycle failure; and a
+> minimum forest need not connect different original components. See the
+> [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -635,7 +641,11 @@ Is the current distance finite?
 
 The implementation should also consider whether valid path totals can exceed the chosen numeric type.
 
-Using `long` reduces risk compared with `int`, but it does not remove it.
+Using long alone is not a general overflow proof. For current nonnegative int
+weights and int vertex count, a shortest simple path needs at most V-1 edges;
+a relaxed candidate is at most V*Integer.MAX_VALUE, which fits in long. Only
+finite queued distances are relaxed, so Long.MAX_VALUE is never added as a
+real path length. Kruskal sums at most max(0,V-1) signed int weights, also within long.
 
 ---
 

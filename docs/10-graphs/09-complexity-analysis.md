@@ -1,5 +1,11 @@
 # Complexity Analysis
 
+> The [contract and proof map](implementation-contracts.md) distinguishes
+> actual immutable-query costs from the generic mutable tables below. Let M
+> count supplied edge records, E logical edges, A stored entries and R reached
+> vertices. Defensive snapshots, V initialisation and lazy queue entries are
+> included; algorithm work and input representation storage are separate.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -241,7 +247,7 @@ O(V + E)
 | Add edge | O(1)* |
 | Remove edge | O(degree(v)) |
 | Check whether an edge exists | O(degree(v)) |
-| Retrieve neighbours | O(1)** |
+| Retrieve neighbours | O(1)** for a direct reference; current defensive copy Theta(d+1) |
 | Iterate over neighbours | O(degree(v)) |
 | Space | O(V + E) |
 
@@ -578,11 +584,16 @@ Union-Find operations with path compression and union by rank or size require ap
 O(E α(V))
 ```
 
-Since sorting dominates:
+Including current set initialisation and a conservative logarithmic find bound:
 
 ```text
-Overall Time = O(E log E)
+O(V + E log(E+1) + E log(V+1))
 ```
+
+The familiar O(E log E) simplification assumes V is absorbed, typically for
+connected nontrivial input. For a forest with E=0, creating V singleton sets
+still takes Theta(V+1). The stronger alpha(V) amortised analysis above is not
+needed for the direct bound used by this implementation.
 
 Additional space:
 
