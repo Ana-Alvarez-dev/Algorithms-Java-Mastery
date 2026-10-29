@@ -11,3 +11,16 @@ Locale and encoding are context: the script records LANG, LC_ALL and Java file.e
 ## Applied verification
 
 The [implementation and verification guide](implementation-and-verification-guide.md) connects these concepts to script contracts, commands and primary sources. The [verification report](verification-report.md) distinguishes real Linux/JDK checks from injected shell fixtures, historical research and pending author execution.
+
+## Ordered Review Clarification
+
+The three guarded option variables are a finite protocol check. They do not
+cover every Maven/JMH configuration or explicit VM argument. Required-jar mode
+rejects nonempty values before its Java metadata queries; environment-only mode
+may continue if those queries work. LANG/LC_ALL/file.encoding are context, not
+a complete locale inventory. The verifier neither silently clears options nor
+edits the caller's persistent environment.
+
+The [script and evidence map](environment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records LI01-LI12
+and fresh shell/Java verification.

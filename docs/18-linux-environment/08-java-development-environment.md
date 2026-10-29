@@ -11,3 +11,16 @@ Use `./mvnw -version` after preflight to verify Maven's actual Java runtime. The
 ## Applied verification
 
 The [implementation and verification guide](implementation-and-verification-guide.md) connects these concepts to script contracts, commands and primary sources. The [verification report](verification-report.md) distinguishes real Linux/JDK checks from injected shell fixtures, historical research and pending author execution.
+
+## Ordered Review Clarification
+
+The script compares canonical paths and feature version 21; it does not enforce
+identical vendor or exact patch versions. It checks Linux uname but does not
+separately validate the VM's os.name. A Linux JDK is therefore a protocol
+requirement whose selection remains explicit. Deriving JAVA_HOME from javac
+follows the compiler already selected; it does not install or choose Java 21.
+Maven's actual runtime remains a separate ./mvnw -version observation.
+
+The [script and evidence map](environment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records LI01-LI12
+and fresh shell/Java verification.

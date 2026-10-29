@@ -146,6 +146,16 @@ and 803 default parameter cells. Retained aggregation observations are reconcile
 in Java without a new timing run. Only Markdown changes; historical evidence
 retains its source/runtime and limits. Later modules are not declared re-reviewed.
 
+A **2026-10-29 ordered Linux Environment documentation review**, based on main
+`07539e468523e3f1a96a84949386907b1abeb67c` (PR #115 merge), follows
+[separately](../18-linux-environment/documentation-review.md). Scoped LI01-LI12
+corrections and a script/evidence map distinguish interpreter/root checks,
+path/feature versions, failure statuses, permissions, option guards and artifact
+identity. Actual verification passes 20 shell cases and 723 Java 21 tests, with
+real preflight, unchanged status/digest and JMH discovery. Only Markdown changes;
+original runtime/build/hash and author research stay dated and unchanged.
+Module 19's existing workflow is recognised; its ordered review remains next.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

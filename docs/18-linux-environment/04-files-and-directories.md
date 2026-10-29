@@ -11,3 +11,16 @@ Two files with the same name may contain different bytes. `sha256sum target/benc
 ## Applied verification
 
 The [implementation and verification guide](implementation-and-verification-guide.md) connects these concepts to script contracts, commands and primary sources. The [verification report](verification-report.md) distinguishes real Linux/JDK checks from injected shell fixtures, historical research and pending author execution.
+
+## Ordered Review Clarification
+
+The preflight performs metadata subprocesses and repository/artifact inspection;
+its read-only check compares Git status and jar digest, rather than auditing
+every external-program filesystem effect. The shell suite has a different
+footprint: it creates its own temporary Git tree and fake launchers, with EXIT
+cleanup. The artifact fixture deliberately contains arbitrary bytes to test
+identity reporting without implying JAR format validity.
+
+The [script and evidence map](environment-contracts.md) gives the applied
+boundaries. The [documentation review](documentation-review.md) records LI01-LI12
+and fresh shell/Java verification.
