@@ -1,5 +1,11 @@
 # Shortest Paths
 
+> The selected Dijkstra rejects negative edges **globally**, including outside
+> source reachability. A stale queued distance is skipped; only strict
+> improvement changes a parent. OptionalLong.empty means unreachable, while
+> zero is a valid distance. The [contract map](implementation-contracts.md)
+> derives queue/storage bounds, zero-cycle parent safety and long arithmetic.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -515,6 +521,11 @@ This strategy preserves correctness while avoiding the need to modify an existin
 ---
 
 # 15. Dijkstra Complexity
+
+For current lazy entries, include O(V) arrays, O(E) global validation and up
+to O(E) queued improvements: O(V+E+E log(E+1)) time and O(V+E) additional
+state. An indexed-heap O(V) queue bound cannot be assigned to this queue.
+The conventional alternatives below require their own queue/input assumptions.
 
 With an adjacency list and binary heap:
 

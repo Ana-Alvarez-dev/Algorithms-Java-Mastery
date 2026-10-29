@@ -1,5 +1,10 @@
 # Graphs
 
+> **Ordered documentation review — 2026-10-28:** the [review report](documentation-review.md)
+> records scoped GR01-GR12 corrections and actual Java 21 verification.
+> The [contract and proof map](implementation-contracts.md) links source/result
+> policies, invariants, complexity, tests and the two historical timing reports.
+
 ## Algorithms Java Mastery
 
 Graphs are among the most expressive and versatile data structures in Computer Science. While trees model hierarchical relationships and linked lists represent linear sequences, graphs provide a general framework for representing **arbitrary relationships between objects**.
@@ -109,8 +114,9 @@ After completing this module, the learner should be able to:
 The [implementation and benchmark guide](implementation-and-benchmark-guide.md)
 connects the methodology to immutable list/matrix graphs, source BFS and
 iterative DFS, undirected components, FIFO Kahn ordering, lazy-queue Dijkstra
-and Kruskal minimum spanning forest. Twelve production files and 48 module tests
-bring local repository verification to 572 passing tests. Six JMH methods have
+and Kruskal minimum spanning forest. The original 2026-10-20 UTC build passed
+572 repository tests, including 48 module invocations across twelve production
+files; the dated review above records fresh verification against current main. Six JMH methods have
 harness evidence. The [traversal report](../17-benchmarking/results/graphs/README.md)
 and [weighted report](../17-benchmarking/results/graphs/weighted-first-run.md)
 now complete both templates with all 32 default cells, errors and printed

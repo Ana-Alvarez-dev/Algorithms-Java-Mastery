@@ -1,5 +1,10 @@
 # Graphs: Implementation and Benchmark Guide
 
+> **2026-10-28 ordered follow-up:** see the [review report](documentation-review.md)
+> and [contract/proof map](implementation-contracts.md). Fresh Java 21 test,
+> package and registration evidence is separate from the original build,
+> smoke/probes and 2026-10-24 author measurements below. No new timing is added.
+
 ## Selected Scope and Traceability
 
 Package `org.anaalvarezdev.algorithms.graphs` mirrors main, test and JMH roots.
@@ -361,8 +366,9 @@ git pull --ff-only origin main
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar -l ".*graphs.*"
 ```
 
-Expect 572 tests and BUILD SUCCESS, then six listed methods. Package builds tests
-and jar; it does not measure performance. The explicit Java path is the author's
+Require BUILD SUCCESS and six listed methods. The original module build had
+572 repository tests; the dated follow-up records the current test total.
+Package builds tests and jar; it does not measure performance. The explicit Java path is the author's
 verified JDK 21 installation. Check actual Maven/JMH runtimes separately;
 `release=21` does not choose the runtime. Linux uses `bash mvnw` with JDK 21.
 

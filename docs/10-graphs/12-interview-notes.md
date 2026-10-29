@@ -1,5 +1,11 @@
 # Interview Notes
 
+> Answer against the selected contract: source reachability versus full graph,
+> immutable sorted rows versus generic mutable lists, FIFO Kahn versus smallest
+> ready vertex, lazy Dijkstra versus indexed decrease-key, and forest versus MST.
+> The [contract/proof map](implementation-contracts.md) supplies code/test links
+> and bounds including isolated-vertex initialisation and output state.
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -827,7 +833,10 @@ O(α(V)) amortized
 
 per operation.
 
-This behaves almost like constant time for practical inputs, but the formal bound should remain explicit.
+This is a stronger amortised theorem, not a constant per-call guarantee. The
+current package uses union by size with path halving; its direct proof uses
+O(log(V+1)) worst-case finds and includes O(V) singleton construction. The
+forest bound is O(V + E log(E+1) + E log(V+1)), so E=0 does not remove V work.
 
 ---
 

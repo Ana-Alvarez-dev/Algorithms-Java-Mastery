@@ -72,6 +72,15 @@ Java 21 verification passes 710 tests overall, including 59 module invocations.
 Only Markdown changes; both historical timing subsets retain their source
 identities. Later modules are not declared re-reviewed.
 
+A **2026-10-28 ordered Graphs documentation review**, based on main
+`809deace4c37ba91bf45621265446644dd3392bf` (PR #107 merge), follows
+[separately](../10-graphs/documentation-review.md). Scoped GR01-GR12 corrections
+and a contract/proof map clarify immutable graph policies, source reachability,
+FIFO Kahn, lazy Dijkstra, long totals and disconnected Kruskal forests. Actual
+Java 21 verification passes 710 tests overall, including 48 module invocations.
+Only Markdown changes; the two author timing records retain their source/runtime.
+Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

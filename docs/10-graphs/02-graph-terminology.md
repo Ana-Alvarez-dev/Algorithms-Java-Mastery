@@ -1,5 +1,11 @@
 # Graph Terminology
 
+> Counting conventions matter: E is logical edges and A is stored adjacency
+> entries. An undirected nonloop contributes two entries, but a loop appears
+> once in the selected row and once in edgeCount. Mathematical undirected degree
+> counts a loop twice, so neighbours(v).length is not that degree when loops
+> occur. See the [contract map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -297,7 +303,10 @@ degree(B) = 1
 degree(D) = 1
 ```
 
-A self-loop may require special consideration because it connects a vertex to itself.
+Under the usual undirected degree convention, a loop contributes two incidences.
+A directed loop contributes one to each of in-degree and out-degree. The selected
+Java adjacency row stores a loop once; row length and undirected degree therefore
+need not agree. Logical edgeCount counts that loop once.
 
 ---
 

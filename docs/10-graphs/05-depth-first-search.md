@@ -1,5 +1,10 @@
 # Depth-First Search
 
+> Current DFS returns discovery order only, not finish times, a cycle witness
+> or a full forest. A visited flag alone cannot classify directed edges as back
+> edges. Iterator frames preserve recursive neighbour progress with O(V) state;
+> see the [contract and proof map](implementation-contracts.md).
+
 ## Algorithms Java Mastery
 
 The [implementation guide](implementation-and-benchmark-guide.md) defines the
@@ -413,7 +418,10 @@ DEPTH-FIRST-SEARCH(graph, source)
                     push neighbour onto stack
 ```
 
-This implementation makes the stack behaviour visible rather than relying on recursion.
+This push-all/mark-on-pop illustration can hold duplicate pending vertices
+and O(E) stack entries; reverse push order affects its output. It is not the
+selected Java implementation, whose suspended neighbour iterators keep one
+active frame per discovered path vertex and match recursive preorder.
 
 ---
 
