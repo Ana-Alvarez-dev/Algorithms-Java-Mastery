@@ -195,6 +195,10 @@ Consultá la [bibliografía central](docs/00-project/10-references.md), los
 se trabajan en ramas y PR concretos, con evidencia de contratos y pruebas,
 preservando la historia experimental.
 
+Consultá [CONTRIBUTING.md](CONTRIBUTING.md) para conocer los pasos de contribución
+y los requisitos de verificación. [CHANGELOG.md](CHANGELOG.md) resume los cambios
+relevantes y enlaza su historia y evidencia. Ambos documentos técnicos están en inglés.
+
 ## Política de idioma y autora
 
 El inglés es el idioma principal del código y de la documentación técnica.

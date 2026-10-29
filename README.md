@@ -187,6 +187,10 @@ Use the [central bibliography](docs/00-project/10-references.md),
 focused branches and PRs, with contract/test evidence and preserved research
 history.
 
+For contribution steps and verification requirements, see
+[CONTRIBUTING.md](CONTRIBUTING.md). [CHANGELOG.md](CHANGELOG.md) summarises
+meaningful changes with links to their history and evidence.
+
 ## Language policy and author
 
 English is primary for code and technical documentation. This README and
