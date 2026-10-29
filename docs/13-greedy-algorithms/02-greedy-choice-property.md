@@ -5,6 +5,15 @@ for selected contracts, pseudocode, traces, proofs, Java, tests and evidence lim
 
 ## Algorithms Java Mastery
 
+## Existential choice and valid continuation
+
+The [applied map](implementation-contracts.md) states each safe rule with its
+objective and residual state. The claim is that **some optimum** contains the
+chosen action, not every optimum and not every possible continuation. A safe
+first choice still needs correct feasible choices afterwards. For Huffman the
+action is merging the two minimum current subtree weights, not choosing the
+single most frequent symbol.
+
 The **Greedy Choice Property** is the fundamental characteristic that distinguishes optimization problems that can be solved using a Greedy algorithm from those that require more sophisticated approaches.
 
 The central idea is simple:
@@ -60,7 +69,7 @@ Examples include:
 
 - earliest finishing activity;
 - smallest edge weight;
-- highest frequency;
+- the two minimum current subtree weights for Huffman merging;
 - shortest available distance.
 
 The decision depends only on the current state of the problem.
@@ -162,7 +171,10 @@ No backtracking is required.
 
 # 9. Decision Independence
 
-The Greedy Choice Property implies that the first decision is independent of future decisions.
+The selected first action can be justified without first solving the residual
+optimisation problem. Its proof depends on the current state and may use an
+exchange with a complete optimum; this is not statistical or feasibility
+independence from subsequent choices.
 
 Conceptually:
 
@@ -172,9 +184,10 @@ Current Choice
 Future Choices
 ```
 
-The quality of later decisions does not invalidate the initial choice.
-
-This independence is one reason Greedy algorithms are efficient.
+There remains at least one optimal continuation after that safe action.
+An arbitrary incompatible or suboptimal continuation can still spoil the final
+answer. Correctness requires the residual specification, safe choices on later
+states, and termination; the first choice alone supplies none of those.
 
 ---
 
@@ -382,4 +395,3 @@ After completing this document, the learner should understand that:
 - correctness requires both the Greedy Choice Property and Optimal Substructure;
 - formal reasoning is necessary before applying a Greedy strategy;
 - understanding this property prepares the learner for correctness proofs and classical Greedy optimization algorithms.
-- 

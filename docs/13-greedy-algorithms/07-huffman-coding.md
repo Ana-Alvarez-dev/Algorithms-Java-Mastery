@@ -2,6 +2,17 @@
 
 ## Algorithms Java Mastery
 
+## Proof bases, ties and materialisation
+
+The [applied map](implementation-contracts.md) separates internal zero-depth
+contracted roots from the public nonempty singleton code. For two weights x,y,
+internal contraction gives zero and expansion x+y; calling the public
+one-symbol cost would instead return x+y before expansion. The source does
+not make that recursive public call. Deterministic subtree ties select an
+optimal codebook; they do not implement a canonical Huffman length format.
+String construction and exact cost arithmetic are counted separately from
+queue comparisons and cost-only benchmarks.
+
 The [implementation guide](implementation-and-benchmark-guide.md) maps this
 case study to deterministic HuffmanCoding, its proof, exact-cost APIs, tests
 and JMH. The objective is an optimal **binary prefix-code weighted payload
@@ -44,7 +55,8 @@ minimum weights into maximum-depth sibling leaves without increasing cost.
 Contracting that pair reduces the alphabet; expanding an optimum for the
 contracted tree adds their summed weight. A better contracted solution would
 contradict original optimality. Induction justifies the algorithm and the
-sum-of-merge-weights identity for n>=2. The guide provides the detailed argument
+sum-of-merge-weights identity for n>=2, using zero-depth roots within the
+contracted-tree proof. The guide provides the detailed argument
 and the separate singleton convention.
 
 ## Cost-Only Variants

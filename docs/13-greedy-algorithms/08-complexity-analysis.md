@@ -2,6 +2,16 @@
 
 ## Algorithms Java Mastery
 
+## Logical state, string work and operation ledgers
+
+The [applied map](implementation-contracts.md) proves the two-queue
+nondecreasing-weight invariant and accounts for full-tree traversal prefixes
+within O(n+L) character/state bounds. Total Node/Frame creation is not measured
+allocation or peak heap occupancy. Repeated heap offers, snapshots, public
+validation and immutable results remain part of their complete operations.
+A defensive immutable snapshot can reuse a suitable existing immutable list;
+no fixed allocation count is inferred from List.copyOf.
+
 The [implementation guide](implementation-and-benchmark-guide.md) supplies the
 contracts, traces, proofs, source ledgers, tests and measurement protocol.
 Let n be interval/symbol count, k selected intervals, r allocated rooms,

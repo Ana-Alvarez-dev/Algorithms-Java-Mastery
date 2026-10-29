@@ -2,6 +2,15 @@
 
 ## Algorithms Java Mastery
 
+## Endpoint, tie and ownership details
+
+See the [applied map](implementation-contracts.md) for the exact scan invariant
+and validation order. The residual condition is start **>=** chosen.finish,
+including touching endpoints. Equal records have no exposed identity tie.
+selectSorted requires finish-then-start order and rejects all null elements
+before its order scan; the algorithm is not silently sorting that input.
+Snapshot semantics do not promise a newly allocated collection identity.
+
 The [implementation guide](implementation-and-benchmark-guide.md) connects this
 problem to ActivitySelection, Interval, exhaustive tests and JMH. The objective
 is the **maximum number** of compatible nonempty intervals on one resource.
@@ -19,7 +28,7 @@ The immutable output contains original Interval values in selection order.
 
 Replacing the first interval of an optimum by an earliest-finishing one cannot
 invalidate later intervals. An optimum with that first choice therefore exists.
-The suffix is an identical problem over intervals starting after it; induction
+The suffix is an identical problem over intervals starting at or after its finish; induction
 proves the cardinality result. See the guide for the scan invariant and manual
 tie/endpoint trace. Earliest start, shortest duration or greatest local profit
 are different rules and do not inherit this proof.

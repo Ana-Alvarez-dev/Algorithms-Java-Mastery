@@ -2,6 +2,16 @@
 
 ## Algorithms Java Mastery
 
+## Applied heap and assignment invariant
+
+The [contract/proof map](implementation-contracts.md) ties room availability
+to legal original-position assignments and peak overlap. The heap contains one
+entry per allocated room, not only occupied rooms, so its size is not the
+current active-interval count. Reuse takes the minimum (finish,id), not the
+smallest currently free id. At a new allocation the overlap lower bound matches
+the new room count, which proves optimality; a feasible assignment alone would
+not prove the minimum.
+
 The [implementation guide](implementation-and-benchmark-guide.md) distinguishes
 two objectives that are often confused. Classical unweighted interval scheduling
 is the **same mathematical selection problem** as activity selection; it is

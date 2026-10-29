@@ -24,10 +24,13 @@ invariants, complexity, Java and tests. Five production files implement shared
 half-open Interval, activity selection, minimum-room partitioning, deterministic
 Huffman codes/exact costs and an explicitly limited greedy-change heuristic.
 
-Twenty-seven new tests bring local verification to **645 passing tests**.
+The original 2026-10-26 verification added 27 tests within **645 repository
+tests**. The [ordered review](documentation-review.md) verifies **710 tests**,
+including the same **27 module tests**, and adds a
+[contract/proof map](implementation-contracts.md).
 Five JMH methods define **40 default cells** in three classes, using
-**microseconds/op**. All defaults pass functional reference probes and short
-execution smoke. The [first research report](../17-benchmarking/results/greedy/README.md)
+**microseconds/op**. The original 2026-10-26 verification completed functional
+reference probes and short execution smoke for all defaults. The [first research report](../17-benchmarking/results/greedy/README.md)
 now completes all three Result/Interpretation fields with 40 means/errors,
 400 measured and 240 warmup averages on JDK 21.0.9/JMH 1.37. Author-reported
 source is `674ab35` (PR #86). Ten errors reach 25% of their means; every value
@@ -224,7 +227,9 @@ Verify Greedy Choice Property
         ↓
 Verify Optimal Substructure
         ↓
-Prove Correctness
+Pseudocode and Manual Trace
+        ↓
+Prove Invariants, Result and Termination
         ↓
 Analyze Complexity
         ↓

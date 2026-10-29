@@ -1,11 +1,22 @@
 # Greedy Algorithms: Implementation and Benchmark Guide
 
+## Ordered Documentation Review
+
+The [2026-10-29 review](documentation-review.md), based on main
+`0bc276ff49a5cd6ae265f2c4968d2c507ad3e1d7` (PR #110 Divide and Conquer-review
+merge), checks the nine notes, five production files, six test sources and
+four JMH sources. The [applied map](implementation-contracts.md) connects
+contracts, residual specifications, exchange/lower-bound proofs, exact ledgers
+and research limits. Fresh Java 21 execution passes **710 repository tests,
+including 27 here**; packaging and discovery are checked separately. Original
+implementation, smoke/probe/doclint and timing claims retain their dates.
+
 ## Scope and Traceability
 
 This contribution starts from main
 **`9f65e53437bb7200f658a65f6fb795c20266f85c`**, the merge of Divide and Conquer
 research through PR #85. Its [48 recorded cells](../17-benchmarking/results/divide-and-conquer/README.md)
-remain separate from this module's future measurements.
+remain separate from this module's recorded measurements.
 
 The package `org.anaalvarezdev.algorithms.greedy` mirrors main/test/JMH roots.
 There are **five production files**, **27 executed module tests**, and **five
@@ -65,8 +76,11 @@ unpaid. `complete()` means remaining==0, **not minimum coin count**. Quantities
 are compressed: amount Integer.MAX_VALUE with coin 1 needs one CoinUse entry,
 not billions of objects. A nonzero remainder does not prove unrepresentability.
 
-No comparator subtracts endpoints or symbols. Huffman subtree sums fit long:
-at most Integer.MAX_VALUE positive int weights sum to less than 2^62. Weighted
+No comparator subtracts endpoints or symbols. Huffman array-method subtree
+sums fit long: at most Integer.MAX_VALUE positive int weights sum to less than
+2^62. For the map API, unique int symbols bound the alphabet by 2^32; even
+2^32*(2^31-1) is below 2^63, so its subtree weights also fit long.
+These are mathematical bounds, not promises of feasible JVM resources. Weighted
 path cost includes an additional depth factor, so it is accumulated exactly
 with BigInteger rather than assuming long suffices for every theoretical array.
 BigInteger bit arithmetic is distinct from queue-comparison counts.
@@ -153,6 +167,12 @@ the two minima are siblings. Contracting them into weight x+y reduces the
 alphabet by one; expanding an optimum adds exactly x+y to weighted path cost.
 If the contracted tree were suboptimal, replacing it would improve the original,
 a contradiction. Induction gives optimality; arbitrary safe ties remain optimal.
+
+The contracted-tree cost uses leaf depth zero if contraction leaves only one
+root. In particular, for two original symbols, expansion adds x+y to zero.
+This internal base is distinct from calling the public singleton API, which
+uses one bit and costs its frequency. No public recursive call is made by
+these iterative implementations.
 
 This also proves the merge-cost identity **for n>=2**: weighted path length is
 the sum of all n-1 merged weights. Singleton cost uses the separate one-bit
@@ -325,7 +345,9 @@ git pull --ff-only origin main
 & "C:\Program Files\Java\jdk-21\bin\java.exe" -jar target\benchmarks.jar -l ".*greedy.*"
 ```
 
-Expect **645 tests**, BUILD SUCCESS and **five listed methods**. Use the explicit
+Expect BUILD SUCCESS and **five listed methods**. The original 2026-10-26
+verification reported 645 tests; the later ordered review passes 710. Read
+the actual Surefire totals for the checkout under test. Use the explicit
 author-verified JDK 21 path or adapt it to the installed JDK. Maven release=21
 controls bytecode compatibility, not which executable launches JMH. Packaging
 builds/tests the jar; it does not execute performance measurements.
@@ -372,5 +394,5 @@ singleton Huffman codes, opaque symbols, BigInteger cost, cost-only variants
 and compressed greedy change are explicit repository choices, not verbatim
 book code. Huffman optimises a prefix-code payload model, not every compressor;
 greedy change is explicitly a heuristic on arbitrary denominations. Mathematical
-properties, Java correctness, finite tests and future empirical data remain
+properties, Java correctness, finite tests and recorded empirical data remain
 distinct links of the traceability chain.

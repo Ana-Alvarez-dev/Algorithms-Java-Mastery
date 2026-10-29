@@ -99,6 +99,15 @@ Actual Java 21 verification passes 710 tests overall, including 18 module tests.
 Only Markdown changes; the 48-cell author run retains its source/runtime.
 Later modules are not declared re-reviewed.
 
+A **2026-10-29 ordered Greedy documentation review**, based on main
+`0bc276ff49a5cd6ae265f2c4968d2c507ad3e1d7` (PR #110 merge), follows
+[separately](../13-greedy-algorithms/documentation-review.md). Scoped GE01-GE12
+corrections and a contract/proof map distinguish safe choices and optimal
+residuals, room overlap bounds, internal/public Huffman bases and change
+heuristic limits. Actual Java 21 verification passes 710 tests overall,
+including 27 module tests. Only Markdown changes; the 40-cell author run
+retains its source/runtime. Later modules are not declared re-reviewed.
+
 This review checks the evidence chain for the executable modules and the
 progression through **19 — CI/CD**. It is a source/evidence inventory,
 contract spot-check and build verification, not a claim that every paragraph

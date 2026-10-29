@@ -5,6 +5,14 @@ for selected contracts, pseudocode, traces, proofs, Java, tests and evidence lim
 
 ## Algorithms Java Mastery
 
+## Residual state is part of the claim
+
+The [contract/proof map](implementation-contracts.md) makes the chosen action,
+feasibility and residual state explicit. Optimal substructure is a replacement
+argument within a specified decomposition: improving a compatible residual
+solution would improve the corresponding whole. It does not make an arbitrary
+first choice safe.
+
 **Optimal Substructure** is one of the two fundamental mathematical properties required by many optimization problems that can be solved efficiently using Greedy algorithms or Dynamic Programming.
 
 A problem exhibits Optimal Substructure when an optimal solution to the original problem can be constructed from optimal solutions to its smaller subproblems.
@@ -61,7 +69,10 @@ Suboptimal Subproblem
 Suboptimal Final Solution
 ```
 
-The quality of the final solution depends on the quality of every intermediate solution.
+The replacement must preserve feasibility, boundary conditions and the already
+fixed decisions. Without those conditions, individually optimal pieces may
+conflict or omit a better first choice. The property is not permission to
+combine arbitrary optimal answers to independently invented subproblems.
 
 ---
 
@@ -134,15 +145,12 @@ Subproblem A
 Subproblem B
 ```
 
-If one subproblem is solved incorrectly, the complete solution cannot be optimal.
-
-Therefore:
-
-```text
-Optimal Parts
-        ↓
-Optimal Whole
-```
+For a fixed compatible decomposition, a suboptimal residual would allow an
+improvement by replacement. However, optimally completing a bad first choice
+can remain globally suboptimal. With coins {1,3,4} and amount 6, fixing coin 4
+and optimally paying the residual 2 gives three coins; choosing 3+3 uses two.
+Thus an optimal residual is not itself a proof that the fixed first choice
+belongs to a global optimum.
 
 ---
 
@@ -150,7 +158,7 @@ Optimal Whole
 
 The **Activity Selection Problem** exhibits Optimal Substructure.
 
-After selecting one compatible activity:
+After selecting a **proved safe earliest-finishing** activity:
 
 ```text
 Choose Activity
@@ -184,9 +192,9 @@ Each recursive reduction preserves the optimization objective.
 
 # 10. Divide and Conquer
 
-Many Divide and Conquer algorithms also exhibit Optimal Substructure.
-
-Example:
+Divide and Conquer uses correct subproblem specifications and combination.
+That is related reasoning, but a sorting postcondition is not by itself an
+optimisation objective with an optimal-substructure theorem. For example:
 
 ```text
 Merge Sort
@@ -202,9 +210,11 @@ Sort Right Half
 Merge
 ```
 
-However, Divide and Conquer does not rely on the Greedy Choice Property.
-
-It solves every subproblem independently before combining them.
+Sorting both halves and merging proves order and multiset preservation; it
+does not establish that this is an optimal sorting algorithm by any cost
+measure. Some divide-and-conquer optimisation problems do have optimal
+substructure, but it must be proved for the chosen objective/state. One-branch
+decrease-and-conquer cases need not execute every hypothetical child.
 
 ---
 
@@ -269,13 +279,15 @@ be divided?
 ```
 
 ```text
-Does solving every
-subproblem optimally
-produce the optimal
-overall solution?
+Does replacing a residual
+by a better feasible solution
+improve the corresponding whole
+under the fixed boundary state?
 ```
 
-If the answer is yes, Optimal Substructure is present.
+Make that replacement implication precise for the chosen objective/state.
+A separate safe-choice or search argument still determines which first
+action or decomposition yields a global optimum.
 
 ---
 
@@ -339,9 +351,11 @@ It is also fundamental to:
 |----------|:--------------------:|:----------------------:|
 | Greedy | Yes | Yes |
 | Dynamic Programming | Yes | Not Required |
-| Divide and Conquer | Usually Yes | No |
+| Divide and Conquer | Depends on whether an optimisation objective is specified | Not required |
 
-This comparison highlights why different paradigms are appropriate for different classes of problems.
+These rows describe exact optimal algorithms under their proved models, not
+every heuristic using a greedy-looking rule. CoinChange on arbitrary systems
+retains its separate non-optimal/incomplete contract.
 
 ---
 
@@ -364,4 +378,3 @@ After completing this document, the learner should understand that:
 - Optimal Substructure alone does not guarantee that a Greedy algorithm is correct;
 - recognizing this property helps determine the most appropriate algorithmic paradigm;
 - understanding Optimal Substructure prepares the learner for formal correctness proofs and advanced optimization techniques.
-- 
