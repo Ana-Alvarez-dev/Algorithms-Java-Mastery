@@ -1,6 +1,8 @@
-# Algorithms Java Mastery
+<p align="center">
+  <strong>English</strong> | <a href="README.es.md">Español</a>
+</p>
 
-[English](README.md) · [Español](README.es.md)
+# Algorithms Java Mastery
 
 An academic **Java 21** project connecting algorithms and data structures with
 formal specifications, correctness reasoning, complexity analysis, automated
