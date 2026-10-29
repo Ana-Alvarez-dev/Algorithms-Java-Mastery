@@ -24,3 +24,16 @@ being in range is too weak: an earlier equal value may still be required.
 Performance assertions such as 'must finish within X ns' do not belong in these
 functional tests. The [implementation and verification guide](implementation-and-verification-guide.md) gives partitions, trace and acceptance evidence.
 Next: [JUnit Jupiter](03-junit-jupiter.md).
+
+## Ordered Review Clarification
+
+For the linear reference, the prefix invariant is minimum distance with the
+first index attaining it. Replacing only on strictly smaller distance preserves
+the tie rule; widening before subtraction makes the full int domain safe.
+Distance-only agreement would accept the six historical wrong duplicate indices.
+Test construction, expected-answer logic and production binary-search control
+flow remain separate responsibilities.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

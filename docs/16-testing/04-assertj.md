@@ -25,3 +25,16 @@ message; there is no need to duplicate that test just to demonstrate syntax.
 
 The [implementation and verification guide](implementation-and-verification-guide.md) maps assertions to contracts and the verification report. Next:
 [parameterised tests](05-parameterized-tests.md).
+
+## Ordered Review Clarification
+
+A terminal assertion is required: assertThat(actual) alone makes no comparison.
+Attach as(...) before isEqualTo/containsExactly so a failure can retain the
+description. Exact array content includes order and multiplicity; merely
+checking size or membership would weaken the preservation obligation. The
+fixture test's reflection is for inspecting its private JMH setup, rather than
+a general recommendation to test production implementation details.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

@@ -18,3 +18,16 @@ Avoid a general builder framework for four scalar/array fields. Keep defaults
 valid and visible, named case data reviewable, and assertion/oracle logic outside
 construction. The [implementation and verification guide](implementation-and-verification-guide.md) links the helper and the regression class. Next:
 [coverage](10-test-coverage.md).
+
+## Ordered Review Clarification
+
+Copying addresses aliasing, not semantic validation. The default expected -1
+is suitable for empty input, but the builder does not reject a nonempty case
+whose caller forgot to set an expectation. It remains mutable, test-only and
+without a thread-safety guarantee. The record's array copies do not supply deep
+array equality through generated equals; content assertions remain explicit.
+The isolation test checks the three actual copy boundaries.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

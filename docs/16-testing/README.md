@@ -4,7 +4,7 @@ Module 16 applies contract-driven verification to the repository's real code.
 It follows [Dynamic Programming](../15-dynamic-programming/README.md) and precedes
 [Benchmarking](../17-benchmarking/README.md).
 
-## Executable Contribution
+## Original Executable Contribution — 2026-10-27
 
 - Correct lowest-index duplicate ties in ClosestValueSearch by reusing lower bounds.
 - Add twelve named parameterised cases and four oracle/property/isolation tests.
@@ -17,9 +17,16 @@ defines contracts, partitions, pseudocode/trace, proof, costs, fixtures, sources
 and Windows commands. The [verification report](verification-report.md) records
 the baseline/red/green chain and actual coverage counters. The old search had
 100% instruction/branch/line coverage but failed six of twelve new named cases.
-The full corrected suite has **710 tests**, including **16 new Searching
-invocations**; these are counted once in the algorithm package, not as a second
-production Testing package. Coverage percentages are not correctness proofs.
+The normal and coverage-only suites have **710 tests**, including **16 Searching
+regression invocations**; these are counted once in the algorithm package, not
+as a second production Testing package. The benchmark profile adds **13 fixture
+invocations**, for **723**. Coverage percentages are not correctness proofs.
+
+The **2026-10-29 ordered documentation review** adds an
+[applied evidence map](test-contracts.md) and a [review record](documentation-review.md).
+They connect TE01-TE10 to the actual Java sources, oracle argument, finite
+domains, fixture ownership, profile counts and fresh coverage. This follow-up
+changes only Markdown.
 
 ## Study Sequence
 
@@ -44,8 +51,11 @@ Start-Process .\target\site\jacoco\index.html
 ```
 
 Maven must run on Java 21. Full commands and source/runtime capture are in the
-guide. Coverage instrumentation and JMH measurements remain separate. The five
-corrected aggregation defaults need a new author run before Result/Interpretation
-can be completed; historical Arrays means stay unchanged. No new benchmark
-family is added merely to time tests, and no CI status is inferred. Evidence
-is Markdown; generated HTML/XML stay local without versioned JSON/log/new CSV.
+guide. Coverage instrumentation and JMH measurements remain separate. The
+[corrected aggregation run](../17-benchmarking/results/arrays/aggregation-corrected-run.md)
+is now recorded with its own provenance limits; historical Arrays means stay
+unchanged. The [CI workflow](../../.github/workflows/maven-ci.yml) and
+[dated hosted record](../19-ci-cd/first-hosted-run.md) are later contributions,
+separate from this review's local checks. No new benchmark family is added merely
+to time tests. Evidence is Markdown; generated HTML/XML remain unversioned,
+without new JSON/log/CSV exports. The next ordered review is **17 — Benchmarking**.

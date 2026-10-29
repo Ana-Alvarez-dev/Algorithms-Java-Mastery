@@ -27,3 +27,17 @@ Generated target files stay local and ignored. Markdown records the evidence;
 no JSON/log/new CSV is versioned. Use missed areas to ask meaningful contract
 questions, not to add assertions that merely mirror the implementation. The
 [implementation and verification guide](implementation-and-verification-guide.md) provides protocol and limits. Next: [common mistakes](11-common-mistakes.md).
+
+## Ordered Review Clarification
+
+Report generation and a percentage gate are separate mechanisms. This POM
+binds prepare-agent/report, with no JaCoCo check goal or threshold. A covered
+line can contain unexecuted instructions; constructors/filtering also make
+135 analysed classes different from 100 production source files. The current
+coverage-only run excludes benchmark sources and fixture tests. Its actual
+counters and XML hash are recorded in the dated documentation review, without
+replacing the original baseline snapshots.
+
+The [applied evidence map](test-contracts.md) connects this clarification to
+the actual source, domains and profile scope. The [documentation review](documentation-review.md)
+records TE01-TE10 and the fresh Java 21 outcomes.

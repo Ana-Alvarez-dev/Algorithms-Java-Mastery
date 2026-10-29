@@ -1,5 +1,21 @@
 # Testing: Implementation and Verification Guide
 
+## Ordered Review Follow-up — 2026-10-29
+
+The original contribution below started from PR #91 on 2026-10-27. The
+[current documentation review](documentation-review.md), based on main
+`cb6855da09f963097953ae958f62e1827ae861b8` (PR #113), adds the
+[applied evidence map](test-contracts.md): independent oracle argument, finite
+input counts, fixture ownership, 710/723 profile scopes and coverage semantics.
+Source, tests, POM and workflow are unchanged by this review.
+
+The corrected aggregation experiment is [already recorded](../17-benchmarking/results/arrays/aggregation-corrected-run.md),
+with qualified source attribution and no original jar hash. A
+[Maven CI workflow](../../.github/workflows/maven-ci.yml) and
+[dated hosted executions](../19-ci-cd/first-hosted-run.md) also exist now.
+Those later records supersede pending-run/workflow-gap language in the original
+snapshot; they do not attest a future PR or change the old measurements.
+
 ## Selected Scope and Source
 
 This module starts from main `8bacc90f00e4ad7dc998743d06be65ff7f5c04aa`,
@@ -98,7 +114,7 @@ int. The old trial fixture used values 0..n-1 and violated that domain at
 100,000 and 1,000,000. Its [historical means](../17-benchmarking/results/arrays/README.md)
 are not corrected or relabelled by changing a fixture now.
 
-The future fixture uses **value[i]=i%100**, with an explicit size cap 0..1,000,000
+The corrected fixture uses **value[i]=i%100**, with an explicit size cap 0..1,000,000
 before allocation. Default sizes are multiples of 100, so expected sums are:
 
 | Size | Exact sum |
@@ -111,9 +127,10 @@ before allocation. Default sizes are multiples of 100, so expected sums are:
 
 Every prefix is nonnegative and <=49,500,000, so int accumulation is safe.
 Trial generation remains outside timing. Validate every default against an
-independent long sum and formula before using its timings. Corrected Result/
-Interpretation require a **separate future author run**; smoke is only a harness
-check. Five old means and their missing errors/runtime/source stay historical.
+independent long sum and formula before using its timings. The [subsequent corrected run](../17-benchmarking/results/arrays/aggregation-corrected-run.md)
+records its own Result/Interpretation, complete supplied headers and uncertainty;
+smoke remains only a harness check. The five old means and their missing
+errors/runtime/source stay historical. The original jar hash is still unavailable.
 
 ## Coverage Profile and Evidence Boundaries
 
@@ -137,10 +154,11 @@ incorrect assertion or missing duplicate partition. The nearest-value regression
 provides a concrete example, to be quantified by actual baseline counters.
 No metric is a correctness proof, mutation score or path-coverage claim.
 
-Coverage, regression diagnostics and fixture checks will be recorded in the
-[verification report](verification-report.md), as local evidence. No GitHub
-Actions workflow is added or passing CI inferred. JMH scores, coverage and unit
-test pass counts answer different questions.
+Coverage, regression diagnostics and fixture checks are recorded in the original
+[verification report](verification-report.md), as dated local evidence. Module 16
+added no GitHub Actions workflow; module 19 subsequently did. The fresh
+[review](documentation-review.md) keeps local outcomes separate from those hosted
+records. JMH scores, coverage and unit test pass counts answer different questions.
 
 ## Windows Reproduction After PR Integration
 
@@ -157,10 +175,14 @@ Start-Process .\target\site\jacoco\index.html
 
 The XML is target/site/jacoco/jacoco.xml. HTML/XML are local generated reports;
 commit the concise Markdown record, not target, JSON/log or a new CSV export.
-Capture source SHA when sharing local verification. Compare reports only when
+A later clean removes earlier target reports and the benchmark jar. Capture
+needed report evidence before cleanup, and hash the actual jar before it is
+removed. Capture source SHA and working-tree state when sharing verification.
+The benchmark profile also runs 13 fixture invocations, for 723 total, whereas
+coverage-only runs 710. Compare reports only when
 the compiled source, suite, compiler, tool version and scope are identified.
 
-To measure the corrected aggregation fixture later, use a separate clean build:
+To collect another corrected aggregation run, use a separate clean build:
 
 ```powershell
 .\mvnw.cmd -Pbenchmark clean package

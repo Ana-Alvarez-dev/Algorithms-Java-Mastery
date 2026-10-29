@@ -1,5 +1,13 @@
 # Testing: Baseline, Regression and Verification Report
 
+**Historical experiment:** the baseline/red/green observations below were
+recorded on 2026-10-27. The [2026-10-29 ordered review](documentation-review.md)
+records fresh 710/723 Java executions and coverage separately. Subsequent
+[aggregation results](../17-benchmarking/results/arrays/aggregation-corrected-run.md)
+and [hosted CI evidence](../19-ci-cd/first-hosted-run.md) supersede the pending
+items in this dated snapshot; the original counters, hashes and failures remain
+unchanged.
+
 Verification date: **2026-10-27**, America/Buenos_Aires. Base main is
 **`8bacc90f00e4ad7dc998743d06be65ff7f5c04aa`**, PR #91 integrating DP research.
 This is local functional/coverage evidence, not a user performance run or CI.
@@ -200,3 +208,15 @@ These are artifact hashes, not Git source or jar hashes. Generated XML/HTML/
 execution data stay under ignored target; temporary red diagnostics stay local.
 No raw JSON/log/new CSV is versioned. The guide contains the Windows commands
 to reproduce test and coverage verification after feature PR integration.
+
+## Ordered Documentation Review — 2026-10-29
+
+The [follow-up review](documentation-review.md), based on PR #113's merged main,
+checks all eleven notes and this original evidence chain against current source.
+The [applied map](test-contracts.md) separates the 16 regression invocations,
+8,712 finite oracle queries, 13 benchmark-only fixture invocations and coverage
+counters. Fresh coverage-only verification runs 710 tests; a separate clean
+benchmark package runs 723. The old red run is retained, not rerun here.
+Current coverage counters agree with the corrected snapshot above, with a new
+session-specific XML hash. No historical hash or missing original jar identity
+is replaced, and no new research timing or hosted outcome is inferred.
