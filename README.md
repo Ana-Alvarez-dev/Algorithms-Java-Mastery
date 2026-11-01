@@ -89,6 +89,7 @@ Technical module documentation is in English.
 | `docs` | Specifications, proofs, analysis, reviews and research records |
 | `scripts/linux` | Environment preflight and shell contract checks |
 | `.github/workflows/maven-ci.yml` | Two-job Java 21 CI workflow |
+| [`.github/workflows/secret-scanning.yml`](.github/workflows/secret-scanning.yml) | Automated Gitleaks secret scanning on pull requests and main pushes |
 
 The [POM](pom.xml) selects Java release 21, JUnit Jupiter 5.12.2, AssertJ 3.27.3,
 JMH 1.37 and optional JaCoCo 0.8.13. The wrapper selects **Maven 3.9.11**;
@@ -165,6 +166,14 @@ runs tests/coverage first, then a separate uninstrumented benchmark package with
 provenance and discovery. It retains reports and package artifacts temporarily.
 The [workflow map](docs/19-ci-cd/workflow-contracts.md) distinguishes implemented
 gates from observed counts, uploads and repository enforcement settings.
+
+
+The separate [Gitleaks secret-scanning workflow](.github/workflows/secret-scanning.yml)
+checks Git history for potential exposed credentials on pull requests, main
+pushes and manual dispatch. The [secret-scanning guide](docs/19-ci-cd/secret-scanning.md)
+records local audit observations, the response procedure and detection limits.
+The [PR #122 hosted scan](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/runs/41363666543)
+completed successfully; this does not guarantee that every secret is detected.
 
 Research records retain their original units, runtime, source attribution and
 uncertainty. Some matrices cover subsets; old Arrays measurements have missing
