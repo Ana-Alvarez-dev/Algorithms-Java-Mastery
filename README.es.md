@@ -90,6 +90,7 @@ La documentación técnica de los módulos está en inglés.
 | `docs` | Especificaciones, pruebas de correctitud, análisis, revisiones e investigaciones |
 | `scripts/linux` | Chequeo del entorno y pruebas de contratos de shell |
 | `.github/workflows/maven-ci.yml` | Workflow de CI con dos jobs y Java 21 |
+| [`.github/workflows/secret-scanning.yml`](.github/workflows/secret-scanning.yml) | Análisis automatizado de posibles secretos con Gitleaks en pull requests y cambios a main |
 
 El [POM](pom.xml) configura Java release 21, JUnit Jupiter 5.12.2, AssertJ 3.27.3,
 JMH 1.37 y JaCoCo 0.8.13 opcional. El wrapper selecciona **Maven 3.9.11**;
@@ -172,6 +173,14 @@ sin instrumentación de cobertura, con procedencia y descubrimiento. Conserva
 informes y paquetes de forma temporal. El [mapa del workflow](docs/19-ci-cd/workflow-contracts.md)
 distingue los controles implementados de los recuentos observados, las subidas
 de archivos y las reglas de protección del repositorio.
+
+
+El [workflow independiente de Gitleaks](.github/workflows/secret-scanning.yml)
+analiza el historial Git para detectar posibles credenciales expuestas en pull
+requests, cambios a main y ejecuciones manuales. La [guía de análisis de secretos](docs/19-ci-cd/secret-scanning.md)
+documenta las auditorías locales, la respuesta ante hallazgos y las limitaciones.
+El [análisis del PR #122](https://github.com/Ana-Alvarez-dev/Algorithms-Java-Mastery/actions/runs/41363666543)
+finalizó correctamente; esto no garantiza la detección de todos los secretos.
 
 Las investigaciones conservan sus unidades, runtime, atribución del código e
 incertidumbre originales. Algunas matrices cubren subconjuntos; las mediciones
