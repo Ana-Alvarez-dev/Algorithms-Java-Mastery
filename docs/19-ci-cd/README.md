@@ -78,6 +78,13 @@ reconciles the ordered reviews and continuing limits.
 | [08 — Build artifacts](08-build-artifacts.md) | How are source, run attempt, jar bytes and retained reports connected? |
 | [09 — Common mistakes](09-common-mistakes.md) | Which failure/provenance shortcuts should be avoided? |
 
+## Secret scanning — added 2026-11-01
+
+- [Secret-scanning guide](secret-scanning.md): Gitleaks usage, two user-observed local scans (136 commits; no findings), incident response and limitations.
+- [Secret-scanning workflow](../../.github/workflows/secret-scanning.yml): independent read-only Git history scan for PRs, main pushes and manual dispatch.
+
+The two local scans are observations reported from Windows PowerShell, not hosted CI results. Hosted execution of the new workflow must be verified separately before it can be described as passing. The existing Maven CI workflow and its previously recorded evidence remain unchanged.
+
 ## Evidence boundaries
 
 CI artifacts live in generated output/Actions retention; important observations
